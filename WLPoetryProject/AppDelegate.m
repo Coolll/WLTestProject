@@ -56,7 +56,7 @@
         [self loadFirstLoadView];
         
     }
-    
+    NSLog(@"在DevBranch添加");
     return YES;
 }
 - (void)loadFirstLoadView
