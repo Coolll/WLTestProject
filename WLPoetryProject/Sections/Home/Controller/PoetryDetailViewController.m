@@ -34,6 +34,7 @@
     UIImageView *mainImageView = [[UIImageView alloc]init];
     mainImageView.image = [UIImage imageNamed:@"poetryBack.jpg"];
     [self.view addSubview:mainImageView];
+    
     //元素的布局
 //    [mainImageView mas_makeConstraints:^(MASConstraintMaker *make) {
 //

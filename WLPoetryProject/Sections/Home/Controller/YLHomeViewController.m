@@ -56,7 +56,7 @@
         NSData *JSONData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"testPoetry" ofType:@"json"]];
         //转为dic
         NSDictionary *poetryDic = [NSJSONSerialization JSONObjectWithData:JSONData options:NSJSONReadingAllowFragments error:nil];
-        NSLog(@"dic:%@",poetryDic);
+//        NSLog(@"dic:%@",poetryDic);
         //获取到诗词列表
         NSArray *poetryArr = [poetryDic objectForKey:@"poetryList"];
         
