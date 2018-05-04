@@ -17,11 +17,6 @@
  *  导航栏标题
  **/
 @property (nonatomic,copy) NSString *titleForNavi;
-/**
- *  导航栏图片
- **/
-@property (nonatomic,copy) NSString *imageForNavi;
-
 
 /**
  *  是否展示返回按钮，默认yes
@@ -35,6 +30,9 @@
 - (void)showAlert:(NSString*)content;
 
 - (void)backAction:(UIButton*)sender;
+
+//全屏状态下，移除navi，添加返回按钮，需要最后调用，保证返回按钮不被遮挡
+- (void)addBackButtonForFullScreen;
 
 
 @end

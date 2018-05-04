@@ -39,6 +39,8 @@
     
 }
 
+#pragma mark - 初始化导航栏
+
 - (void)loadCustomNavi
 {
     self.naviView = [[UIView alloc]init];
@@ -67,11 +69,11 @@
         }];
     }
     
+    //返回按钮
     self.backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.backButton.backgroundColor = NavigationColor;
     [self.backButton addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.naviView addSubview:self.backButton];
-    //元素的布局
     [self.backButton mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.equalTo(self.naviView.mas_left).offset(0);
@@ -81,6 +83,7 @@
         
     }];
     
+    //返回的图片
     CGFloat backW = 8;
     CGFloat backH = 16;
     self.backImageView = [[UIImageView alloc]init];
@@ -97,9 +100,10 @@
         
     }];
     
-    
+    //导航栏标题
     self.naviTitleLabel = [[UILabel alloc]init];
     self.naviTitleLabel.textAlignment = NSTextAlignmentCenter;
+    self.naviTitleLabel.font = [UIFont systemFontOfSize:16.f];
     [self.naviView addSubview:self.naviTitleLabel];
     //元素的布局
     [self.naviTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -110,10 +114,11 @@
     }];
 }
 
+#pragma mark - 属性设置与点击事件
 
 - (void)backAction:(UIButton*)sender
 {
-
+    
 }
 
 - (void)setIsShowBack:(BOOL)isShowBack
@@ -130,6 +135,87 @@
     _titleForNavi = titleForNavi;
     self.naviTitleLabel.text = titleForNavi;
 }
+
+#pragma mark - 添加全屏返回按钮
+
+- (void)addBackButtonForFullScreen
+{
+    self.naviView.hidden = YES;
+    CGFloat backWidth = 30;//返回箭头的宽度
+    CGFloat leftSpace = 20;//箭头左侧间距
+    CGFloat bottomSpace = 10;//箭头底部间距
+    CGFloat touchOffset = 15;//箭头触摸区域超出的offset
+    
+    //圆形背景
+    UIView *backView = [[UIView alloc]init];
+    backView.backgroundColor = NavigationColor;
+    backView.layer.cornerRadius = backWidth/2;
+    [self.view addSubview:backView];
+    //元素的布局
+    [backView mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.equalTo(self.view.mas_left).offset(leftSpace);
+        make.bottom.equalTo(self.naviView.mas_bottom).offset(-bottomSpace);
+        make.width.mas_equalTo(backWidth);
+        make.height.mas_equalTo(backWidth);
+        
+    }];
+    
+    CGFloat backW = 8;
+    CGFloat backH = 16;
+    //返回图片
+    UIImageView *backImageView = [[UIImageView alloc]init];
+    backImageView.backgroundColor = NavigationColor;
+    backImageView.image = [UIImage imageNamed:@"nav_back"];
+    [backView addSubview:backImageView];
+    [backImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.equalTo(backView.mas_left).offset((backWidth-backW)/2);
+        make.top.equalTo(backView.mas_top).offset((backWidth-backH)/2);
+        make.width.mas_equalTo(backW);
+        make.height.mas_equalTo(backH);
+        
+    }];
+    
+    //点击响应的按钮
+    UIButton *clearBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [clearBtn addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
+    clearBtn.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:clearBtn];
+    //元素的布局
+    [clearBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.equalTo(self.view.mas_left).offset(leftSpace-touchOffset);
+        make.bottom.equalTo(self.naviView.mas_bottom).offset(-bottomSpace+touchOffset);
+        make.width.mas_equalTo(backWidth+touchOffset*2);
+        make.height.mas_equalTo(backWidth+touchOffset*2);
+    }];
+    
+    //如果没有标题，则不创建
+    if (![self.titleForNavi isKindOfClass:[NSString class]] || self.titleForNavi.length < 1) {
+        return;
+    }
+    
+    UILabel *titleLabel = [[UILabel alloc]init];
+    titleLabel.font = [UIFont systemFontOfSize:18.f];
+    titleLabel.text = self.titleForNavi;
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    [self.view addSubview:titleLabel];
+    
+    CGFloat titleW = PhoneScreen_WIDTH-(leftSpace+backWidth+10)*2;
+    CGFloat titleHeight = [WLPublicTool heightForTextString:self.titleForNavi width:titleW fontSize:18.f];
+    
+    //元素的布局
+    [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.equalTo(self.naviView.mas_bottom).offset(-30);
+        make.centerX.equalTo(self.naviView.mas_centerX);
+        make.width.mas_equalTo(titleW);
+        make.height.mas_equalTo(titleHeight);
+        
+    }];
+}
+
 #pragma mark - 菊花Delegate
 
 - (void)hideHUD
@@ -143,11 +229,8 @@
     self.progressHUD = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
     
     self.progressHUD.mode = MBProgressHUDModeText;
-    // Move to bottm center.
     self.progressHUD.offset = CGPointMake(0.f, 0);
     [self.progressHUD hideAnimated:YES afterDelay:1.5f];
-
-    
     self.progressHUD.detailsLabel.text = NSLocalizedString(text, @"HUD message title");
 
 }
