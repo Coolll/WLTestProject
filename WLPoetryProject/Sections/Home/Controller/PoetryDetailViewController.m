@@ -23,35 +23,35 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     self.titleForNavi = self.dataModel.name;
-    self.imageForNavi = @"clearNavi";
     [self loadCustomView];
+    
+    [self addBackButtonForFullScreen];
 }
 
 - (void)loadCustomView
 {
-    
     
     UIImageView *mainImageView = [[UIImageView alloc]init];
     mainImageView.image = [UIImage imageNamed:@"poetryBack.jpg"];
     [self.view addSubview:mainImageView];
     
     //元素的布局
+    [mainImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+
+        make.left.equalTo(self.view.mas_left).offset(0);
+        make.top.equalTo(self.view.mas_top).offset(0);
+        make.bottom.equalTo(self.view.mas_bottom).offset(0);
+        make.right.equalTo(self.view.mas_right).offset(0);
+
+    }];
 //    [mainImageView mas_makeConstraints:^(MASConstraintMaker *make) {
 //
 //        make.left.equalTo(self.view.mas_left).offset(0);
-//        make.top.equalTo(self.view.mas_top).offset(0);
+//        make.top.equalTo(self.naviView.mas_bottom).offset(0);
 //        make.bottom.equalTo(self.view.mas_bottom).offset(0);
 //        make.right.equalTo(self.view.mas_right).offset(0);
 //
 //    }];
-    [mainImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.equalTo(self.view.mas_left).offset(0);
-        make.top.equalTo(self.naviView.mas_bottom).offset(0);
-        make.bottom.equalTo(self.view.mas_bottom).offset(0);
-        make.right.equalTo(self.view.mas_right).offset(0);
-        
-    }];
 //    [self.view bringSubviewToFront:self.naviView];
 }
 
