@@ -26,6 +26,4 @@
 @property (nullable, nonatomic, copy) NSString *analysesInfo;//赏析信息
 @property (nullable, nonatomic, copy) NSString *backgroundInfo;//创作背景信息
 
-- (void)loadFirstLineString;
-
 @end

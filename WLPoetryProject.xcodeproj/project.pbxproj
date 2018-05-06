@@ -124,6 +124,8 @@
 		0795690B20726D0B0097C26D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0795690A20726D0B0097C26D /* main.m */; };
 		0795691520726D0B0097C26D /* WLPoetryProjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0795691420726D0B0097C26D /* WLPoetryProjectTests.m */; };
 		0795692020726D0B0097C26D /* WLPoetryProjectUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0795691F20726D0B0097C26D /* WLPoetryProjectUITests.m */; };
+		079BC505209D42BB00E0DF85 /* WLPoetryContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 079BC504209D42BB00E0DF85 /* WLPoetryContentCell.m */; };
+		079BC508209EEF6800E0DF85 /* AppConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 079BC507209EEF6800E0DF85 /* AppConfig.m */; };
 		07A43A382092126600D92242 /* mainBack.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 07A43A372092126600D92242 /* mainBack.jpg */; };
 		07A43A3A209215F800D92242 /* poetryBack.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 07A43A39209215F800D92242 /* poetryBack.jpg */; };
 		07A9229B208628DB00BE5929 /* WLCoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A9229A208628DB00BE5929 /* WLCoreDataHelper.m */; };
@@ -422,6 +424,10 @@
 		0795691B20726D0B0097C26D /* WLPoetryProjectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WLPoetryProjectUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0795691F20726D0B0097C26D /* WLPoetryProjectUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLPoetryProjectUITests.m; sourceTree = "<group>"; };
 		0795692120726D0B0097C26D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		079BC503209D42BB00E0DF85 /* WLPoetryContentCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLPoetryContentCell.h; sourceTree = "<group>"; };
+		079BC504209D42BB00E0DF85 /* WLPoetryContentCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLPoetryContentCell.m; sourceTree = "<group>"; };
+		079BC506209EEF6800E0DF85 /* AppConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppConfig.h; sourceTree = "<group>"; };
+		079BC507209EEF6800E0DF85 /* AppConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppConfig.m; sourceTree = "<group>"; };
 		07A43A372092126600D92242 /* mainBack.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = mainBack.jpg; sourceTree = "<group>"; };
 		07A43A39209215F800D92242 /* poetryBack.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = poetryBack.jpg; sourceTree = "<group>"; };
 		07A92299208628DB00BE5929 /* WLCoreDataHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLCoreDataHelper.h; sourceTree = "<group>"; };
@@ -740,6 +746,8 @@
 				075679D9207A02EB0018B9E7 /* WLPublicTool.h */,
 				075679DA207A02EB0018B9E7 /* WLPublicTool.m */,
 				07567B90207A03310018B9E7 /* WLPrefixHeader.h */,
+				079BC506209EEF6800E0DF85 /* AppConfig.h */,
+				079BC507209EEF6800E0DF85 /* AppConfig.m */,
 			);
 			path = PublicFiles;
 			sourceTree = "<group>";
@@ -1043,6 +1051,8 @@
 			children = (
 				07CFF23E208B0AEE00849C20 /* WLPoetryListCell.h */,
 				07CFF23F208B0AEE00849C20 /* WLPoetryListCell.m */,
+				079BC503209D42BB00E0DF85 /* WLPoetryContentCell.h */,
+				079BC504209D42BB00E0DF85 /* WLPoetryContentCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1343,6 +1353,7 @@
 				07567B1D207A02EB0018B9E7 /* MJRefreshNormalHeader.m in Sources */,
 				0765C6B1207CE47E0085EB3A /* MASLayoutConstraint.m in Sources */,
 				0765C704207CE6E20085EB3A /* SDWebImageDownloaderOperation.m in Sources */,
+				079BC505209D42BB00E0DF85 /* WLPoetryContentCell.m in Sources */,
 				0765C709207CE6E20085EB3A /* SDWebImagePrefetcher.m in Sources */,
 				07567B1B207A02EB0018B9E7 /* MJRefreshBackStateFooter.m in Sources */,
 				07567B25207A02EC0018B9E7 /* SBJson4Parser.m in Sources */,
@@ -1352,6 +1363,7 @@
 				07567B13207A02EB0018B9E7 /* MJRefreshComponent.m in Sources */,
 				07567B2B207A02EC0018B9E7 /* SBJson4Writer.m in Sources */,
 				0765C703207CE6E20085EB3A /* SDWebImageDownloader.m in Sources */,
+				079BC508209EEF6800E0DF85 /* AppConfig.m in Sources */,
 				07567B23207A02EC0018B9E7 /* UIScrollView+MJRefresh.m in Sources */,
 				0765C710207CE6E20085EB3A /* UIImage+WebP.m in Sources */,
 				07567B22207A02EC0018B9E7 /* UIScrollView+MJExtension.m in Sources */,

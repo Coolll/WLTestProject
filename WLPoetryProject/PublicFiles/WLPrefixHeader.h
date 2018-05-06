@@ -18,5 +18,5 @@
 #import "WLRequestHelper.h"
 #import "UserInformation.h"
 #import "WLSaveLocalHelper.h"
-
+#import "AppConfig.h"
 #endif /* WLPrefixHeader_h */

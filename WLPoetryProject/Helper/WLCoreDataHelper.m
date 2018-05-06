@@ -184,7 +184,6 @@
 //查询全部的诗词信息
 -(NSArray*)fetchAllPoetry
 {
-    
     NSArray *fetchArray = [self fetchDataWithTableName:@"Poetry" withPredicate:nil];
     
     return fetchArray;

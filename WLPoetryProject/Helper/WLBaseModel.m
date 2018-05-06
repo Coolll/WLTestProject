@@ -25,7 +25,14 @@
         
     }
     
+    [self loadFirstLineString];
+
     return self;
+}
+
+- (void)loadFirstLineString
+{
+    
 }
 
 - (void)setValue:(id)value forKey:(NSString *)key
