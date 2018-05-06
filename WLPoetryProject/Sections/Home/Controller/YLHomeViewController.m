@@ -65,7 +65,6 @@
         for (int i = 0; i<poetryArr.count; i++) {
             NSDictionary *itemDic = [poetryArr objectAtIndex:i];
             PoetryModel *model = [[PoetryModel alloc]initModelWithDictionary:itemDic];
-            [model loadFirstLineString];
             [modelArray addObject:model];
         }
         

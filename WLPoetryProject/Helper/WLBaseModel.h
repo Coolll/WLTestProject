@@ -11,5 +11,6 @@
 @interface WLBaseModel : NSObject
 
 - (instancetype)initModelWithDictionary:(NSDictionary*)dic;
+- (void)loadFirstLineString;
 
 @end

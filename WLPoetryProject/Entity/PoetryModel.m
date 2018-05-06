@@ -20,6 +20,8 @@
             
             self.firstLineString = [NSString stringWithFormat:@"%@。",[[self.content componentsSeparatedByString:@"。"]firstObject]];
             
+        }else{
+            self.firstLineString = @"";
         }
     }
 }

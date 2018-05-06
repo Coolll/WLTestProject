@@ -23,6 +23,11 @@
  **/
 @property (nonatomic,assign) BOOL isShowBack;
 
+/**
+ *  全屏状态下，标题label
+ **/
+@property (nonatomic,strong) UILabel *titleFullLabel;
+
 
 
 - (void)showHUDWithText:(NSString *)text;
@@ -33,6 +38,10 @@
 
 //全屏状态下，移除navi，添加返回按钮，需要最后调用，保证返回按钮不被遮挡
 - (void)addBackButtonForFullScreen;
+
+
+//全屏状态下，移除navi，添加标题，需要在设置titleForNavi后调用
+- (void)addFullTitleLabel;
 
 
 @end
