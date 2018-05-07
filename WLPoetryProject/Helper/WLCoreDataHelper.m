@@ -91,6 +91,7 @@
     poetry.analysesInfo = model.analysesInfo;
     poetry.backgroundInfo = model.backgroundInfo;
     poetry.firstLineString = model.firstLineString;
+    poetry.mainClass = model.mainClass;
     
     __block  NSError *error = nil;
     
@@ -188,7 +189,15 @@
     
     return fetchArray;
 }
-
+//查询某个大类的诗词，比如小学一年级的诗词，传1即可
+-(NSArray*)fetchPoetryWithMainClass:(NSString*)mainClass
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"mainClass == %@",mainClass];
+    
+    NSArray *fetchArray = [self fetchDataWithTableName:@"Poetry" withPredicate:predicate];
+    
+    return fetchArray;
+}
 //根据来源查询诗词的信息
 - (Poetry*)fetchPoetryWithSource:(NSString*)source
 {

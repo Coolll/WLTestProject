@@ -2,7 +2,7 @@
 //  Poetry+CoreDataProperties.h
 //  WLPoetryProject
 //
-//  Created by 龙培 on 2018/4/21.
+//  Created by 龙培 on 2018/5/7.
 //  Copyright © 2018年 龙培. All rights reserved.
 //
 //
@@ -23,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, copy) NSString *backImageName;
 @property (nullable, nonatomic, copy) NSString *classInfo;
 @property (nullable, nonatomic, copy) NSString *content;
+@property (nullable, nonatomic, copy) NSString *firstLineString;
 @property (nullable, nonatomic, copy) NSString *isLike;
 @property (nullable, nonatomic, copy) NSString *isRecited;
 @property (nullable, nonatomic, copy) NSString *isShowed;
@@ -30,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, copy) NSString *poetryID;
 @property (nullable, nonatomic, copy) NSString *source;
 @property (nullable, nonatomic, copy) NSString *transferInfo;
-@property (nullable, nonatomic, copy) NSString *firstLineString;
+@property (nullable, nonatomic, copy) NSString *mainClass;
 
 @end
 

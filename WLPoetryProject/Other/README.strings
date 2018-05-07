@@ -22,7 +22,10 @@
 //@property (nullable, nonatomic, copy) NSString *analysesInfo;//赏析信息
 //@property (nullable, nonatomic, copy) NSString *backgroundInfo;//创作背景信息
 //@property (nullable, nonatomic, copy) NSString *firstLineString;//第一句诗词内容
+//@property (nullable, nonatomic, copy) NSString *mainClass;//主分类，1为小学一年级
 
 
-//classInfo  1为写春天
+//classInfo  1为写春天 2写月亮 101为写景
+//source  1为古诗三百首 2为唐诗三百首 10为早教古诗100首
+//mainClass;//主分类，1为小学一年级
 

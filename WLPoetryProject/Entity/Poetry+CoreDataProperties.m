@@ -2,7 +2,7 @@
 //  Poetry+CoreDataProperties.m
 //  WLPoetryProject
 //
-//  Created by 龙培 on 2018/4/21.
+//  Created by 龙培 on 2018/5/7.
 //  Copyright © 2018年 龙培. All rights reserved.
 //
 //
@@ -22,6 +22,7 @@
 @dynamic backImageName;
 @dynamic classInfo;
 @dynamic content;
+@dynamic firstLineString;
 @dynamic isLike;
 @dynamic isRecited;
 @dynamic isShowed;
@@ -29,6 +30,6 @@
 @dynamic poetryID;
 @dynamic source;
 @dynamic transferInfo;
-@dynamic firstLineString;
+@dynamic mainClass;
 
 @end

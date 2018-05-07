@@ -19,11 +19,12 @@
 @property (nullable, nonatomic, copy) NSString *isRecited;//是否背诵
 @property (nullable, nonatomic, copy) NSString *isShowed;//是否随机展示了
 @property (nullable, nonatomic, copy) NSString *addtionInfo;//标注信息
-@property (nullable, nonatomic, copy) NSString *classInfo;//分类信息
+@property (nullable, nonatomic, copy) NSString *classInfo;//诗词内容分类
 @property (nullable, nonatomic, copy) NSString *poetryID;//诗词ID
 @property (nullable, nonatomic, copy) NSString *source;//来源
 @property (nullable, nonatomic, copy) NSString *transferInfo;//翻译信息
 @property (nullable, nonatomic, copy) NSString *analysesInfo;//赏析信息
 @property (nullable, nonatomic, copy) NSString *backgroundInfo;//创作背景信息
+@property (nullable, nonatomic, copy) NSString *mainClass;//主分类，1为小学一年级
 
 @end

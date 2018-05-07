@@ -49,31 +49,8 @@ static const CGFloat touchFullOffset = 15;//箭头触摸区域超出的offset �
 
 - (void)loadCustomNavi
 {
-    self.naviView = [[UIView alloc]init];
-    self.naviView.backgroundColor = NavigationColor;
-    [self.view addSubview:self.naviView];
     
-    if (@available(iOS 11.0, *)) {
-        //元素的布局
-        [self.naviView mas_makeConstraints:^(MASConstraintMaker *make) {
-            
-            make.left.equalTo(self.view.mas_safeAreaLayoutGuideLeft).offset(0);
-            make.top.equalTo(self.view.mas_top).offset(0);
-            make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideTop).offset(44);
-            make.right.equalTo(self.view.mas_right).offset(0);
-            
-        }];
-    }else{
-        //元素的布局
-        [self.naviView mas_makeConstraints:^(MASConstraintMaker *make) {
-            
-            make.left.equalTo(self.view.mas_left).offset(0);
-            make.top.equalTo(self.view.mas_top).offset(0);
-            make.right.equalTo(self.view.mas_right).offset(0);
-            make.height.mas_equalTo(64);
-            
-        }];
-    }
+    self.naviView.backgroundColor = NavigationColor;
     
     //返回按钮
     self.backButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -107,17 +84,7 @@ static const CGFloat touchFullOffset = 15;//箭头触摸区域超出的offset �
     }];
     
     //导航栏标题
-    self.naviTitleLabel = [[UILabel alloc]init];
-    self.naviTitleLabel.textAlignment = NSTextAlignmentCenter;
-    self.naviTitleLabel.font = [UIFont systemFontOfSize:16.f];
-    [self.naviView addSubview:self.naviTitleLabel];
-    //元素的布局
-    [self.naviTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.naviView.mas_bottom).offset(-10);
-        make.width.mas_equalTo(PhoneScreen_WIDTH-100);
-        make.height.mas_equalTo(25);
-        make.centerX.equalTo(self.naviView.mas_centerX);
-    }];
+    self.naviTitleLabel.backgroundColor = NavigationColor;
 }
 
 #pragma mark - 属性设置与点击事件
@@ -147,10 +114,6 @@ static const CGFloat touchFullOffset = 15;//箭头触摸区域超出的offset �
 - (void)addBackButtonForFullScreen
 {
     self.naviView.hidden = YES;
-//    CGFloat backWidth = 30;//返回箭头的宽度
-//    CGFloat leftSpace = 20;//箭头左侧间距
-//    CGFloat bottomSpace = 10;//箭头底部间距
-//    CGFloat touchOffset = 15;//箭头触摸区域超出的offset
     
     //圆形背景
     UIView *backView = [[UIView alloc]init];
@@ -270,6 +233,56 @@ static const CGFloat touchFullOffset = 15;//箭头触摸区域超出的offset �
     }
     return _progressHUD;
 }
+#pragma mark 导航栏标题
 
+- (UILabel*)naviTitleLabel
+{
+    if (!_naviTitleLabel) {
+        _naviTitleLabel = [[UILabel alloc]init];
+        _naviTitleLabel.textAlignment = NSTextAlignmentCenter;
+        _naviTitleLabel.font = [UIFont systemFontOfSize:16.f];
+        [self.naviView addSubview:_naviTitleLabel];
+        //元素的布局
+        [_naviTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.equalTo(self.naviView.mas_bottom).offset(-10);
+            make.width.mas_equalTo(PhoneScreen_WIDTH-100);
+            make.height.mas_equalTo(25);
+            make.centerX.equalTo(self.naviView.mas_centerX);
+        }];
+    }
+    return _naviTitleLabel;
+}
+
+- (UIView*)naviView
+{
+    if (!_naviView) {
+        
+        _naviView = [[UIView alloc]init];
+        [self.view addSubview:_naviView];
+        
+        if (@available(iOS 11.0, *)) {
+            //元素的布局
+            [_naviView mas_makeConstraints:^(MASConstraintMaker *make) {
+                
+                make.left.equalTo(self.view.mas_safeAreaLayoutGuideLeft).offset(0);
+                make.top.equalTo(self.view.mas_top).offset(0);
+                make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideTop).offset(44);
+                make.right.equalTo(self.view.mas_right).offset(0);
+                
+            }];
+        }else{
+            //元素的布局
+            [_naviView mas_makeConstraints:^(MASConstraintMaker *make) {
+                
+                make.left.equalTo(self.view.mas_left).offset(0);
+                make.top.equalTo(self.view.mas_top).offset(0);
+                make.right.equalTo(self.view.mas_right).offset(0);
+                make.height.mas_equalTo(64);
+                
+            }];
+        }
+    }
+    return _naviView;
+}
 
 @end
