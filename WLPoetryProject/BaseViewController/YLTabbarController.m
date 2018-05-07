@@ -10,6 +10,7 @@
 #import "BaseNavigationController.h"
 #import "YLHomeViewController.h"
 #import "YLAccountViewController.h"
+#import "WLPoetryTypeController.h"
 
 static const CGFloat iconWidth = 22;
 static const CGFloat textHeight = 15;
@@ -77,15 +78,20 @@ static const NSInteger buttonBaseTag = 2000;
     homeVC.isShowBack = NO;
     BaseNavigationController *homeNavi = [[BaseNavigationController alloc]initWithRootViewController:homeVC];
 
+    //诗词分类
+    WLPoetryTypeController *typeVC = [[WLPoetryTypeController alloc]init];
+    typeVC.view.backgroundColor = [UIColor whiteColor];
+    typeVC.isShowBack = NO;
+    BaseNavigationController *typeNavi = [[BaseNavigationController alloc]initWithRootViewController:typeVC];
     
-    //个人中心
+    //个人
     YLAccountViewController *accountVC = [[YLAccountViewController alloc]init];
-    BaseNavigationController *accountNavi = [[BaseNavigationController alloc]initWithRootViewController:accountVC];
     accountVC.isShowBack = NO;
     accountVC.view.backgroundColor = [UIColor whiteColor];
+    BaseNavigationController *accountNavi = [[BaseNavigationController alloc]initWithRootViewController:accountVC];
     
     
-    NSArray *viewControllers = [NSArray arrayWithObjects:homeNavi,accountNavi, nil];
+    NSArray *viewControllers = [NSArray arrayWithObjects:homeNavi,typeNavi,accountNavi, nil];
   
     self.viewControllers = viewControllers;
     
@@ -118,7 +124,7 @@ static const NSInteger buttonBaseTag = 2000;
     [self.tabBar addSubview:self.tabbarView];
     
     //图标个数
-    NSInteger itemCount = 2;
+    NSInteger itemCount = 3;
     //tabbar高度
     CGFloat tabbarH = self.tabbarView.frame.size.height;
     //单个宽度
@@ -201,13 +207,13 @@ static const NSInteger buttonBaseTag = 2000;
     if (index < self.viewControllers.count) {
         self.selectedIndex = index;
         
-        //当用户未登录，进入积分商城中登录，再返回扑客说的时候，需要更新数据，否则扑客说为未登录状态
-        if (index == 1) {
-            
-            BaseNavigationController *navi = self.viewControllers[index];\
-            YLAccountViewController *vc = navi.viewControllers.firstObject;
-            [vc refreshData];
-        }
+//        //当用户未登录，进入积分商城中登录，再返回扑客说的时候，需要更新数据，否则扑客说为未登录状态
+//        if (index == 1) {
+//            
+//            BaseNavigationController *navi = self.viewControllers[index];\
+//            YLAccountViewController *vc = navi.viewControllers.firstObject;
+//            [vc refreshData];
+//        }
     }
     
 
@@ -238,11 +244,11 @@ static const NSInteger buttonBaseTag = 2000;
         
         _normalImageArray = [NSMutableArray array];
         NSString *homeIcon = @"tabbarOne";
-//        NSString *pokerIcon = @"tabbarTwo";
+        NSString *typeIcon = @"tabbarTwo";
         NSString *accountIcon = @"tabbarThree";
         
         [_normalImageArray addObject:homeIcon];
-//        [_normalImageArray addObject:pokerIcon];
+        [_normalImageArray addObject:typeIcon];
         [_normalImageArray addObject:accountIcon];
     }
     
@@ -256,11 +262,11 @@ static const NSInteger buttonBaseTag = 2000;
         
         _selectedImageArray = [NSMutableArray array];
         NSString *homeIcon = @"tabbarOne_sel";
-//        NSString *pokerIcon = @"tabbarTwo_sel";
+        NSString *typeIcon = @"tabbarTwo_sel";
         NSString *accountIcon = @"tabbarThree_sel";
         
         [_selectedImageArray addObject:homeIcon];
-//        [_selectedImageArray addObject:pokerIcon];
+        [_selectedImageArray addObject:typeIcon];
         [_selectedImageArray addObject:accountIcon];
     }
     
@@ -275,7 +281,7 @@ static const NSInteger buttonBaseTag = 2000;
         _iconTextArray = [NSMutableArray array];
         
         [_iconTextArray addObject:@"诗词"];
-//        [_iconTextArray addObject:@"社交"];
+        [_iconTextArray addObject:@"分类"];
         [_iconTextArray addObject:@"我的"];
     }
     return _iconTextArray;

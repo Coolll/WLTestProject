@@ -12,12 +12,13 @@
         <attribute name="isLike" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="isRecited" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="isShowed" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mainClass" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="poetryID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="source" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="transferInfo" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Poetry" positionX="-63" positionY="-18" width="128" height="270"/>
+        <element name="Poetry" positionX="-63" positionY="-18" width="128" height="285"/>
     </elements>
 </model>

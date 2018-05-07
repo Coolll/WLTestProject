@@ -58,26 +58,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    self.automaticallyAdjustsScrollViewInsets = NO;
     self.view.backgroundColor = ViewBackgroundColor;
+    self.isShowBack = NO;
     [self loadCustomData];
 
     [self loadCustomView];
 
 }
 
-#pragma mark - 干掉导航栏横线
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc]init] forBarMetrics:UIBarMetricsDefault];
-    
-    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc]init]];
-    
-
-    
-}
 
 #pragma mark - 加载数据
 - (void)loadCustomData
@@ -221,6 +211,7 @@
     self.mainTableView.dataSource = self;
     self.mainTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.mainTableView.backgroundColor = [UIColor whiteColor];
+    self.mainTableView.scrollEnabled = NO;
     [self.view addSubview:self.mainTableView];
     
     //元素的布局

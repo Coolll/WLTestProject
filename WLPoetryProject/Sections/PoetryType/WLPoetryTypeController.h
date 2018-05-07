@@ -1,14 +1,13 @@
 //
-//  Poetry+CoreDataClass.m
+//  WLPoetryTypeController.h
 //  WLPoetryProject
 //
 //  Created by 龙培 on 2018/5/7.
 //  Copyright © 2018年 龙培. All rights reserved.
 //
-//
 
-#import "Poetry+CoreDataClass.h"
+#import "BaseViewController.h"
 
-@implementation Poetry
+@interface WLPoetryTypeController : BaseViewController
 
 @end

@@ -27,6 +27,9 @@ typedef void(^CoreDataResultBlock)(BOOL isSuccessful,NSError *error);
 //查询全部的诗词信息
 -(NSArray*)fetchAllPoetry;
 
+//查询某个大类的诗词，比如小学一年级的诗词，传1即可
+-(NSArray*)fetchPoetryWithMainClass:(NSString*)mainClass;
+
 //根据来源查询诗词的信息
 - (Poetry*)fetchPoetryWithSource:(NSString*)source;
 

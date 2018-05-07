@@ -1,19 +1,18 @@
 //
-//  YLHomeViewController.m
-//  YLPokerSpeak
+//  WLPoetryListController.m
+//  WLPoetryProject
 //
-//  Created by 龙培 on 17/8/1.
-//  Copyright © 2017年 龙培. All rights reserved.
+//  Created by 龙培 on 2018/5/7.
+//  Copyright © 2018年 龙培. All rights reserved.
 //
 
-#import "YLHomeViewController.h"
+#import "WLPoetryListController.h"
 #import "WLCoreDataHelper.h"
 #import "PoetryModel.h"
 #import "WLPoetryListCell.h"
 #import "PoetryDetailViewController.h"
 
-@interface YLHomeViewController ()<UITableViewDelegate,UITableViewDataSource>
-
+@interface WLPoetryListController ()<UITableViewDataSource,UITableViewDelegate>
 /**
  *  诗词列表
  **/
@@ -23,44 +22,53 @@
  *  诗词数据源
  **/
 @property (nonatomic,strong) NSArray *poetryArray;
-
 /**
  *  高度数组
  **/
 @property (nonatomic,strong) NSMutableArray *heightArray;
-
-
-
-
 @end
 
-@implementation YLHomeViewController
+@implementation WLPoetryListController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.automaticallyAdjustsScrollViewInsets = NO;
-    self.view.backgroundColor = ViewBackgroundColor;
-    self.titleForNavi = @"随机推荐";
-//    [self readSoure];
-    [self loadCustomData];
+    self.view.backgroundColor = [UIColor whiteColor];
+    
 }
 
+- (void)setSource:(PoetrySource)source
+{
+    _source = source;
+    switch (source) {
+        case PoetrySourceGradeOne:
+        {
+            
+            self.titleForNavi = @"小学一年级";
+
+            [self loadCustomData];
+        }
+            break;
+            
+        default:
+            break;
+    }
+}
 - (void)loadCustomData
 {
     self.heightArray = [NSMutableArray array];
     
-    self.poetryArray = [[WLCoreDataHelper shareHelper] fetchAllPoetry];
-
+    self.poetryArray = [[WLCoreDataHelper shareHelper] fetchPoetryWithMainClass:@"1"];
+    
     if (self.poetryArray.count == 0) {
         //从本地读取文件
-        NSData *JSONData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"testPoetry" ofType:@"json"]];
+        NSData *JSONData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"gradePoetry_1" ofType:@"json"]];
         //转为dic
         NSDictionary *poetryDic = [NSJSONSerialization JSONObjectWithData:JSONData options:NSJSONReadingAllowFragments error:nil];
-//        NSLog(@"dic:%@",poetryDic);
+        //        NSLog(@"dic:%@",poetryDic);
         //获取到诗词列表
         NSArray *poetryArr = [poetryDic objectForKey:@"poetryList"];
         NSString *poetryMainClass = [poetryDic objectForKey:@"mainClass"];
-
+        
         NSMutableArray *modelArray = [NSMutableArray array];
         //将诗词model化
         for (int i = 0; i<poetryArr.count; i++) {
@@ -82,7 +90,7 @@
         
         //直接展示数据
         [self loadCustomView];
-//        [[WLCoreDataHelper shareHelper] deleteAllPoetry];
+        //        [[WLCoreDataHelper shareHelper] deleteAllPoetry];
     }
     
     
@@ -93,41 +101,13 @@
 {
     dispatch_async(dispatch_get_main_queue(), ^{
         
-        self.poetryArray = [[WLCoreDataHelper shareHelper] fetchAllPoetry];
+        self.poetryArray = [[WLCoreDataHelper shareHelper] fetchPoetryWithMainClass:@"1"];
         [self loadCustomView];
     });
-   
+    
 }
 
-- (void)readSoure
-{
-    NSString *sourcePath = [[NSBundle mainBundle] pathForResource:@"file" ofType:@".txt"];
-    NSString *testSource = [NSString stringWithContentsOfFile:sourcePath encoding:NSUTF8StringEncoding error:nil];
-    
-    NSArray *poetryArr = [testSource componentsSeparatedByString:@"======"];
-    
-    NSMutableArray *modelArray = [NSMutableArray array];
-    for (int i = 0; i<poetryArr.count; i++) {
-        NSArray *items = [[NSString stringWithFormat:@"%@",[poetryArr objectAtIndex:i]] componentsSeparatedByString:@"&&&"];
-        PoetryModel *model = [[PoetryModel alloc]init];
-        model.name = [items objectAtIndex:0];
-        model.author = [items objectAtIndex:1];
-        model.content = [items objectAtIndex:2];
-        [modelArray addObject:model];
-    }
-    
-    [[WLCoreDataHelper shareHelper]saveInBackgroundWithPeotryModelArray:modelArray withResult:^(BOOL isSuccessful, NSError *error) {
-        if (isSuccessful) {
-            
-            
-        }
-    }];
-    
-    self.poetryArray = [[WLCoreDataHelper shareHelper] fetchAllPoetry];
-    
-    [self loadCustomView];
-    
-}
+
 
 #pragma mark - 加载视图
 - (void)loadCustomView
@@ -233,6 +213,12 @@
 
 
 
+#pragma mark - 点击事件
+
+- (void)backAction:(UIButton *)sender
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
