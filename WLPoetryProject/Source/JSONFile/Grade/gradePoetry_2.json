@@ -1,0 +1,137 @@
+{
+    "poetryList" : [
+                    {
+                    "name" : "赠刘景文",
+                    "author" : "苏轼",
+                    "content" : "荷尽已无擎雨盖，菊残犹有傲霜枝。一年好景君须记，正是橙黄橘绿时。",
+                    "addtionInfo" : "刘景文：刘季孙，字景文，工诗，时任两浙兵马都监，驻杭州。苏轼视他为国士，曾上表推荐，并以诗歌唱酬往来。荷尽：荷花枯萎，残败凋谢。擎：举，向上托。雨盖：旧称雨伞，诗中比喻荷叶舒展的样子。菊残：菊花凋谢。犹：仍然。傲霜：不怕霜冻寒冷，坚强不屈。君：原指古代君王，后泛指对男子的敬称，您。须记：一定要记住。正是：一作“最是”。橙黄橘绿时：指橙子发黄、橘子将黄犹绿的时候，指农历秋末冬初。",
+                    "classInfo" : "101",
+                    "poetryID" : "1",
+                    "source" : "1",
+                    "analysesInfo" : "",
+                    "transferInfo" : "",
+                    "backgroundInfo" : "",
+                    "backImageName" : "",
+                    "bgImageURL" : "",
+                    "placeHolder" : ""
+                    },{
+                    "name" : "山行",
+                    "author" : "杜牧",
+                    "content" : "远上寒山石径斜，白云深处有人家。停车坐爱枫林晚，霜叶红于二月花。",
+                    "addtionInfo" : "山行：在山中行走。远上：登上远处的。寒山：深秋季节的山。石径：石子的小路。斜：此字读xiá ，为倾斜的意思。深：另有版本作“生”。（“深”可理解为在云雾缭绕的的深处； “生”可理解为在形成白云的地方）车：轿子。坐：因为。霜叶：枫树的叶子经深秋寒霜之后变成了红色。枫林晚：傍晚时的枫树林。红于：比……更红，本文指霜叶红于二月花。",
+                    "classInfo" : "4",
+                    "poetryID" : "2",
+                    "source" : "10",
+                    "analysesInfo" : "",
+                    "transferInfo" : "",
+                    "backgroundInfo" : "",
+                    "backImageName" : "",
+                    "bgImageURL" : "",
+                    "placeHolder" : ""
+                    },{
+                    "name" : "回乡偶书二首·其一",
+                    "author" : "贺知章",
+                    "content" : "少小离家老大回，乡音无改鬓毛衰。儿童相见不相识，笑问客从何处来。",
+                    "addtionInfo" : "偶书：随便写的诗。偶：说明诗写作得很偶然，是随时有所见、有所感就写下来的。少小离家：贺知章三十七岁中进士，在此以前就离开家乡。老大：年纪大了。贺知章回乡时已年逾八十。乡音：家乡的口音。无改：没什么变化。一作“难改”。鬓毛：额角边靠近耳朵的头发。一作“面毛”。衰（cui）：减少，疏落。鬓毛衰：指鬓毛减少，疏落。相见：即看见我；相：带有指代性的副词。不相识：即不认识我。笑问：一本作“却问”，一本作“借问”。",
+                    "classInfo" : "6",
+                    "poetryID" : "3",
+                    "source" : "2",
+                    "analysesInfo" : "",
+                    "transferInfo" : "",
+                    "backgroundInfo" : "",
+                    "backImageName" : "",
+                    "bgImageURL" : "",
+                    "placeHolder" : ""
+                    },{
+                    "name" : "赠汪伦",
+                    "author" : "李白",
+                    "content" : "李白乘舟将欲行，忽闻岸上踏歌声。桃花潭水深千尺，不及汪伦送我情。",
+                    "addtionInfo" : "踏歌：民间的一种唱歌形式，一边唱歌，一边用脚踏地打拍子，可以边走边唱。桃花潭：在今安徽泾县西南一百里。《一统志》谓其深不可测。深千尺：诗人用潭水深千尺比喻汪伦与他的友情，运用了夸张的手法（潭深千尺不是实有其事）写深情厚谊，十分动人。不及：不如。汪伦：李白的朋友。",
+                    "classInfo" : "7",
+                    "poetryID" : "4",
+                    "source" : "10",
+                    "analysesInfo" : "",
+                    "transferInfo" : "",
+                    "backgroundInfo" : "",
+                    "backImageName" : "",
+                    "bgImageURL" : "",
+                    "placeHolder" : ""
+                    },{
+                    "name" : "草",
+                    "author" : "白居易",
+                    "content" : "离离原上草，一岁一枯荣。野火烧不尽，春风吹又生。远芳侵古道，晴翠接荒城。又送王孙去，萋萋满别情。",
+                    "addtionInfo" : "离离：青草茂盛的样子。一岁一枯荣：枯，枯萎。荣，茂盛。野草每年都会茂盛一次，枯萎一次。远芳侵古道：芳，指野草那浓郁的香气。远芳：草香远播。侵，侵占，长满。远处芬芳的野草一直长到古老的驿道上。晴翠：草原明丽翠绿。王孙：本指贵族后代，此指远方的友人。萋萋：形容草木长得茂盛的样子。",
+                    "classInfo" : "8",
+                    "poetryID" : "5",
+                    "source" : "2",
+                    "analysesInfo" : "",
+                    "transferInfo" : "",
+                    "backgroundInfo" : "",
+                    "backImageName" : "",
+                    "bgImageURL" : "",
+                    "placeHolder" : ""
+                    },{
+                    "name" : "宿新市徐公店",
+                    "author" : "杨万里",
+                    "content" : "篱落疏疏一径深，树头花落未成阴。儿童急走追黄蝶，飞入菜花无处寻。",
+                    "addtionInfo" : "篱：篱笆。疏疏：稀疏。径：小路。阴：树叶茂盛浓密而形成的树荫。急走：奔跑。",
+                    "classInfo" : "101",
+                    "poetryID" : "6",
+                    "source" : "1",
+                    "analysesInfo" : "",
+                    "transferInfo" : "",
+                    "backgroundInfo" : "",
+                    "backImageName" : "",
+                    "bgImageURL" : "",
+                    "placeHolder" : ""
+                    },{
+                    "name" : "望庐山瀑布",
+                    "author" : "李白",
+                    "content" : "日照香炉生紫烟，遥看瀑布挂前川。飞流直下三千尺，疑是银河落九天。",
+                    "addtionInfo" : "香炉：指香炉峰。紫烟：指日光透过云雾，远望如紫色的烟云。孟浩然《彭蠡湖中望庐山》：“香炉初上日，瀑布喷成虹。”“日照”二句：一作“庐山上与星斗连，日照香炉生紫烟”。遥看：从远处看。挂：悬挂。前川：一作“长川”。川：河流，这里指瀑布。直：笔直。三千尺：形容山高。这里是夸张的说法，不是实指。疑：怀疑。银河：古人指银河系构成的带状星群。九天：一作“半天”。古人认为天有九重，九天是天的最高层，九重天，即天空最高处。此句极言瀑布落差之大。",
+                    "classInfo" : "101",
+                    "poetryID" : "7",
+                    "source" : "10",
+                    "analysesInfo" : "",
+                    "transferInfo" : "",
+                    "backgroundInfo" : "",
+                    "backImageName" : "",
+                    "bgImageURL" : "",
+                    "placeHolder" : ""
+                    },{
+                    "name" : "绝句",
+                    "author" : "杜甫",
+                    "content" : "两个黄鹂鸣翠柳，一行白鹭上青天。窗含西岭千秋雪，门泊东吴万里船。",
+                    "addtionInfo" : "西岭：西岭雪山。千秋雪：指西岭雪山上千年不化的积雪。泊：停泊。东吴：古时候吴国的领地，江苏省一带。万里船：不远万里开来的船只。",
+                    "classInfo" : "101",
+                    "poetryID" : "8",
+                    "source" : "10",
+                    "analysesInfo" : "",
+                    "transferInfo" : "",
+                    "backgroundInfo" : "",
+                    "backImageName" : "",
+                    "bgImageURL" : "",
+                    "placeHolder" : ""
+                    },{
+                    "name" : "敕勒歌",
+                    "author" : "乐府诗集",
+                    "content" : "敕勒川，阴山下。天似穹庐，笼盖四野。天苍苍，野茫茫。风吹草低见牛羊。",
+                    "addtionInfo" : "《敕勒歌》：敕勒（chì lè）：种族名，北齐时居住在朔州（今山西省北部）一带。敕勒川：川：平川、平原。敕勒族居住的地方，在现在的山西、内蒙一带。北魏时期把今河套平原至土默川一带称为敕勒川。阴山：在今内蒙古自治区北部。穹庐（qióng lú）：用毡布搭成的帐篷，即蒙古包。笼盖四野（yǎ）：笼盖，另有版本作“笼罩”（洪迈《容斋随笔》卷一和胡仔《苕溪渔隐丛话》后集卷三十一）；四野，草原的四面八方。天苍苍：苍苍：青色。苍，青，天苍苍，天蓝蓝的。茫茫：辽阔无边的样子。见（xiàn）：同“现”，显露。",
+                    "classInfo" : "102",
+                    "poetryID" : "9",
+                    "source" : "1",
+                    "analysesInfo" : "",
+                    "transferInfo" : "",
+                    "backgroundInfo" : "",
+                    "backImageName" : "",
+                    "bgImageURL" : "",
+                    "placeHolder" : ""
+                    }
+    
+    
+    ],
+    "type" : "poetry_gradeOne",
+    "baseID" : "1000",
+    "mainClass" : "2"
+}
+

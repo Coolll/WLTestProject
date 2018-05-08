@@ -25,7 +25,7 @@
 //@property (nullable, nonatomic, copy) NSString *mainClass;//主分类，1为小学一年级
 
 
-//classInfo  1为写春天 2写月亮 101为写景
+//classInfo  1为写春天 2写月亮 3夏天 4秋天 5冬天 6思乡 7离别 8咏物 101为写景 102民歌
 //source  1为古诗三百首 2为唐诗三百首 10为早教古诗100首
-//mainClass;//主分类，1为小学一年级
+//mainClass;//主分类，1为小学一年级 2为小学二年级
 
