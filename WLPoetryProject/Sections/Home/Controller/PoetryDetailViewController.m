@@ -150,21 +150,6 @@ static const CGFloat topSpace = 24;//诗句与标题的上间距
                     [self.dataArray addObject:subString];
                 }
                 
-//                for (NSString *partString in partArr) {
-//
-//                    NSArray *exclamationArr = [self dealExclamationWithOrigin:partString];
-//
-//                    for (NSString *exclamString in exclamationArr) {
-//
-//                        NSArray *questionArr = [self dealQuestionWithOrigin:exclamString];
-//
-//                        for (NSString *questionString in questionArr) {
-//                            [self.dataArray addObject:questionString];
-//                        }
-//                    }
-//                }
-                
-                
                 
                 
                 //非空诗句添加到数组中
@@ -224,7 +209,7 @@ static const CGFloat topSpace = 24;//诗句与标题的上间距
 {
     NSMutableArray *arr = [NSMutableArray array];
 
-    //是否包含感叹号
+    //当前句子是否包含感叹号
     BOOL isContainExclamation = [contentString containsString:@"！"];
 
     
@@ -259,7 +244,7 @@ static const CGFloat topSpace = 24;//诗句与标题的上间距
 {
     NSMutableArray *arr = [NSMutableArray array];
     
-    //是否包含问号
+    //当前句子是否包含问号
     BOOL isContainExclamation = [contentString containsString:@"？"];
     
     
@@ -293,7 +278,7 @@ static const CGFloat topSpace = 24;//诗句与标题的上间距
 {
     NSMutableArray *arr = [NSMutableArray array];
     
-    //是否包含冒号号
+    //当前句子是否包含冒号号
     BOOL isContainExclamation = [contentString containsString:@"："];
     
     
@@ -329,7 +314,7 @@ static const CGFloat topSpace = 24;//诗句与标题的上间距
 {
     NSMutableArray *arr = [NSMutableArray array];
     
-    //是否包含分号
+    //当前句子是否包含分号
     BOOL isContainExclamation = [contentString containsString:@"；"];
     
     
