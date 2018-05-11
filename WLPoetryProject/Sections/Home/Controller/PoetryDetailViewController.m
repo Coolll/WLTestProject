@@ -150,19 +150,7 @@ static const CGFloat topSpace = 24;//诗句与标题的上间距
                     [self.dataArray addObject:subString];
                 }
                 
-//                for (NSString *partString in partArr) {
-//
-//                    NSArray *exclamationArr = [self dealExclamationWithOrigin:partString];
-//
-//                    for (NSString *exclamString in exclamationArr) {
-//
-//                        NSArray *questionArr = [self dealQuestionWithOrigin:exclamString];
-//
-//                        for (NSString *questionString in questionArr) {
-//                            [self.dataArray addObject:questionString];
-//                        }
-//                    }
-//                }
+
                 
                 
                 
