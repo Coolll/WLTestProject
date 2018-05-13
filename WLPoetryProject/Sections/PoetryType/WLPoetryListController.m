@@ -26,6 +26,19 @@
  *  高度数组
  **/
 @property (nonatomic,strong) NSMutableArray *heightArray;
+
+/**
+ *  当前类型 本地json文件名
+ **/
+@property (nonatomic,copy) NSString *jsonName;
+/**
+ *  当前类型 的mainClass
+ **/
+@property (nonatomic,copy) NSString *mainClass;
+
+
+
+
 @end
 
 @implementation WLPoetryListController
@@ -43,25 +56,126 @@
         case PoetrySourceGradeOne:
         {
             
-            self.titleForNavi = @"小学一年级";
-
-            [self loadCustomData];
+            self.titleForNavi = @"一年级";
+            self.jsonName = @"gradePoetry_1";
+            self.mainClass = @"1";
+        }
+            break;
+        case PoetrySourceGradeTwo:
+        {
+            
+            self.titleForNavi = @"二年级";
+            self.jsonName = @"gradePoetry_2";
+            self.mainClass = @"2";
         }
             break;
             
+        case PoetrySourceGradeThree:
+        {
+            
+            self.titleForNavi = @"三年级";
+            self.jsonName = @"gradePoetry_3";
+            self.mainClass = @"3";
+        }
+            break;
+            
+        case PoetrySourceGradeFour:
+        {
+            
+            self.titleForNavi = @"四年级";
+            self.jsonName = @"gradePoetry_4";
+            self.mainClass = @"4";
+        }
+            break;
+            
+        case PoetrySourceGradeFive:
+        {
+            
+            self.titleForNavi = @"五年级";
+            self.jsonName = @"gradePoetry_5";
+            self.mainClass = @"5";
+        }
+            break;
+            
+        case PoetrySourceGradeSix:
+        {
+            
+            self.titleForNavi = @"六年级";
+            self.jsonName = @"gradePoetry_6";
+            self.mainClass = @"6";
+        }
+            break;
+        case PoetrySourceGradeSevenOne:
+        {
+            
+            self.titleForNavi = @"七年级上";
+            self.jsonName = @"gradePoetry_7_one";
+            self.mainClass = @"7";
+        }
+            break;
+            
+        case PoetrySourceGradeSevenTwo:
+        {
+            
+            self.titleForNavi = @"七年级下";
+            self.jsonName = @"gradePoetry_7_two";
+            self.mainClass = @"7.5";
+        }
+            break;
+            
+        case PoetrySourceGradeEightOne:
+        {
+            
+            self.titleForNavi = @"八年级上";
+            self.jsonName = @"gradePoetry_8_one";
+            self.mainClass = @"8";
+        }
+            break;
+            
+        case PoetrySourceGradeEightTwo:
+        {
+            
+            self.titleForNavi = @"八年级下";
+            self.jsonName = @"gradePoetry_8_two";
+            self.mainClass = @"8.5";
+        }
+            break;
+            
+        case PoetrySourceGradeNineOne:
+        {
+            
+            self.titleForNavi = @"九年级上";
+            self.jsonName = @"gradePoetry_9_one";
+            self.mainClass = @"9";
+        }
+            break;
+            
+        case PoetrySourceGradeNineTwo:
+        {
+            
+            self.titleForNavi = @"九年级下";
+            self.jsonName = @"gradePoetry_9_two";
+            self.mainClass = @"9.5";
+        }
+            break;
+            
+        
         default:
             break;
     }
+    
+    [self loadCustomData];
+
 }
 - (void)loadCustomData
 {
     self.heightArray = [NSMutableArray array];
     
-    self.poetryArray = [[WLCoreDataHelper shareHelper] fetchPoetryWithMainClass:@"1"];
+    self.poetryArray = [[WLCoreDataHelper shareHelper] fetchPoetryWithMainClass:self.mainClass];
     
     if (self.poetryArray.count == 0) {
         //从本地读取文件
-        NSData *JSONData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"gradePoetry_1" ofType:@"json"]];
+        NSData *JSONData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:self.jsonName ofType:@"json"]];
         //转为dic
         NSDictionary *poetryDic = [NSJSONSerialization JSONObjectWithData:JSONData options:NSJSONReadingAllowFragments error:nil];
         //        NSLog(@"dic:%@",poetryDic);
@@ -101,7 +215,7 @@
 {
     dispatch_async(dispatch_get_main_queue(), ^{
         
-        self.poetryArray = [[WLCoreDataHelper shareHelper] fetchPoetryWithMainClass:@"1"];
+        self.poetryArray = [[WLCoreDataHelper shareHelper] fetchPoetryWithMainClass:self.mainClass];
         [self loadCustomView];
     });
     
@@ -120,7 +234,7 @@
         
         make.left.equalTo(self.view.mas_left).offset(0);
         make.top.equalTo(self.naviView.mas_bottom).offset(0);
-        make.bottom.equalTo(self.view.mas_bottom).offset(-49);
+        make.bottom.equalTo(self.view.mas_bottom).offset(0);
         make.right.equalTo(self.view.mas_right).offset(0);
         
     }];
@@ -137,7 +251,7 @@
         
         make.left.equalTo(self.view.mas_left).offset(0);
         make.top.equalTo(self.naviView.mas_bottom).offset(0);
-        make.bottom.equalTo(self.view.mas_bottom).offset(-49);
+        make.bottom.equalTo(self.view.mas_bottom).offset(0);
         make.right.equalTo(self.view.mas_right).offset(0);
         
     }];
@@ -189,11 +303,11 @@
     WLPoetryListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WLPoetryListCell"];;
     if (!cell) {
         cell = [[WLPoetryListCell alloc]initWithFrame:CGRectMake(0, 0, PhoneScreen_WIDTH, 125)];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.backgroundColor = [UIColor clearColor];
     }
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.backgroundColor = [UIColor clearColor];
-    cell.dataModel = model;
     
+    cell.dataModel = model;
     return cell;
 }
 

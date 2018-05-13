@@ -1,0 +1,23 @@
+{
+    "poetryList" : [
+                    {
+                    "name" : "<##>",
+                    "author" : "<##>",
+                    "content" : "<##>",
+                    "addtionInfo" : "<##>",
+                    "classInfo" : "<##>",
+                    "poetryID" : "<##>",
+                    "source" : "2",
+                    "analysesInfo" : "",
+                    "transferInfo" : "",
+                    "backgroundInfo" : "",
+                    "backImageName" : "",
+                    "bgImageURL" : "",
+                    "placeHolder" : ""
+                    }
+    
+	],
+    "type" : "poetry_gradeOne",
+    "baseID" : "1000",
+    "mainClass" : "0"
+}
