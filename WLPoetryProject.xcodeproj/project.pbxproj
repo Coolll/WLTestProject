@@ -36,6 +36,8 @@
 		0721702B2087843A002A1628 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 072170272087843A002A1628 /* Info.plist */; };
 		0721702C2087843A002A1628 /* README.strings in Resources */ = {isa = PBXBuildFile; fileRef = 072170282087843A002A1628 /* README.strings */; };
 		0721702D2087843A002A1628 /* WLPoetryProject.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 072170292087843A002A1628 /* WLPoetryProject.xcdatamodeld */; };
+		073D7F6A20A7E23D002BCEA7 /* tangPoetry_empty.json in Resources */ = {isa = PBXBuildFile; fileRef = 073D7F6920A7E23D002BCEA7 /* tangPoetry_empty.json */; };
+		073D7F6C20A7E259002BCEA7 /* tangPoetry_one.json in Resources */ = {isa = PBXBuildFile; fileRef = 073D7F6B20A7E259002BCEA7 /* tangPoetry_one.json */; };
 		07567A9D207A02EB0018B9E7 /* BaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 075678D1207A02EA0018B9E7 /* BaseNavigationController.m */; };
 		07567A9E207A02EB0018B9E7 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 075678D3207A02EA0018B9E7 /* BaseViewController.m */; };
 		07567AA0207A02EB0018B9E7 /* YLTabbarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 075678D7207A02EA0018B9E7 /* YLTabbarController.m */; };
@@ -245,6 +247,8 @@
 		072170272087843A002A1628 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		072170282087843A002A1628 /* README.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = README.strings; sourceTree = "<group>"; };
 		0721702A2087843A002A1628 /* WLPoetryProject.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WLPoetryProject.xcdatamodel; sourceTree = "<group>"; };
+		073D7F6920A7E23D002BCEA7 /* tangPoetry_empty.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tangPoetry_empty.json; sourceTree = "<group>"; };
+		073D7F6B20A7E259002BCEA7 /* tangPoetry_one.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tangPoetry_one.json; sourceTree = "<group>"; };
 		075678D0207A02EA0018B9E7 /* BaseNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseNavigationController.h; sourceTree = "<group>"; };
 		075678D1207A02EA0018B9E7 /* BaseNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseNavigationController.m; sourceTree = "<group>"; };
 		075678D2207A02EA0018B9E7 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
@@ -606,6 +610,15 @@
 				072170292087843A002A1628 /* WLPoetryProject.xcdatamodeld */,
 			);
 			path = Other;
+			sourceTree = "<group>";
+		};
+		073D7F6820A7E23D002BCEA7 /* TangPoetry */ = {
+			isa = PBXGroup;
+			children = (
+				073D7F6B20A7E259002BCEA7 /* tangPoetry_one.json */,
+				073D7F6920A7E23D002BCEA7 /* tangPoetry_empty.json */,
+			);
+			path = TangPoetry;
 			sourceTree = "<group>";
 		};
 		075678CF207A02EA0018B9E7 /* BaseViewController */ = {
@@ -1211,6 +1224,7 @@
 		07F73C60208ACDC100F7D8B3 /* JSONFile */ = {
 			isa = PBXGroup;
 			children = (
+				073D7F6820A7E23D002BCEA7 /* TangPoetry */,
 				0716099E20A1C15400904C69 /* Grade */,
 				07F73C61208ACDC100F7D8B3 /* testPoetry.json */,
 			);
@@ -1365,6 +1379,7 @@
 				07A43A3A209215F800D92242 /* poetryBack.jpg in Resources */,
 				07F73C09208ACD9A00F7D8B3 /* nav_back@2x.png in Resources */,
 				07F73C1E208ACD9A00F7D8B3 /* setting@3x.png in Resources */,
+				073D7F6C20A7E259002BCEA7 /* tangPoetry_one.json in Resources */,
 				07F73C15208ACD9A00F7D8B3 /* contact@2x.png in Resources */,
 				07F73C26208ACD9A00F7D8B3 /* lineImage@3x.png in Resources */,
 				07F73C04208ACD9A00F7D8B3 /* select_circle@2x.png in Resources */,
@@ -1389,6 +1404,7 @@
 				071609AB20A1C15400904C69 /* gradePoetry_3.json in Resources */,
 				071609AD20A1C15400904C69 /* gradePoetry_5.json in Resources */,
 				07F73C13208ACD9A00F7D8B3 /* about@2x.png in Resources */,
+				073D7F6A20A7E23D002BCEA7 /* tangPoetry_empty.json in Resources */,
 				071609AE20A1C15400904C69 /* gradePoetry_6.json in Resources */,
 				07F73C62208ACDC100F7D8B3 /* testPoetry.json in Resources */,
 				0765C6AD207CE47E0085EB3A /* Info.plist in Resources */,

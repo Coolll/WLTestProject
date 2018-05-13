@@ -9,7 +9,18 @@
 #import "BaseViewController.h"
 typedef NS_ENUM(NSInteger , PoetrySource) {
     PoetrySourceGradeOne,
-    PoetrySourceGradeTwo
+    PoetrySourceGradeTwo,
+    PoetrySourceGradeThree,
+    PoetrySourceGradeFour,
+    PoetrySourceGradeFive,
+    PoetrySourceGradeSix,
+    PoetrySourceGradeSevenOne,
+    PoetrySourceGradeSevenTwo,
+    PoetrySourceGradeEightOne,
+    PoetrySourceGradeEightTwo,
+    PoetrySourceGradeNineOne,
+    PoetrySourceGradeNineTwo,
+    PoetrySourceRecommend
 };
 
 @interface WLPoetryListController : BaseViewController

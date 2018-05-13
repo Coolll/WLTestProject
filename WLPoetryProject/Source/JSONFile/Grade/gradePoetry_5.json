@@ -116,7 +116,7 @@
     
     ],
     "type" : "poetry_gradeOne",
-    "baseID" : "1000",
-    "mainClass" : "0"
+    "baseID" : "5000",
+    "mainClass" : "5"
 }
 

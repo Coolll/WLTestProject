@@ -35,7 +35,18 @@
 {
     self.typeSectionArray = [NSMutableArray array];
     [self.typeSectionArray addObject:@"一年级"];
-    
+    [self.typeSectionArray addObject:@"二年级"];
+    [self.typeSectionArray addObject:@"三年级"];
+    [self.typeSectionArray addObject:@"四年级"];
+    [self.typeSectionArray addObject:@"五年级"];
+    [self.typeSectionArray addObject:@"六年级"];
+    [self.typeSectionArray addObject:@"七年级上"];
+    [self.typeSectionArray addObject:@"七年级下"];
+    [self.typeSectionArray addObject:@"八年级上"];
+    [self.typeSectionArray addObject:@"八年级下"];
+    [self.typeSectionArray addObject:@"九年级上"];
+    [self.typeSectionArray addObject:@"九年级下"];
+
 }
 
 #pragma mark - 加载视图
@@ -59,6 +70,7 @@
     self.mainTableView.dataSource = self;
     self.mainTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.mainTableView.backgroundColor = [UIColor clearColor];
+    self.mainTableView.showsVerticalScrollIndicator = NO;
     [self.view addSubview:self.mainTableView];
     
     //元素的布局
@@ -126,12 +138,41 @@
     if (indexPath.row < self.typeSectionArray.count) {
         
         WLPoetryListController *listVC = [[WLPoetryListController alloc]init];
-        listVC.source = PoetrySourceGradeOne;
+        listVC.source = [self dealSourceWithIndex:indexPath.row];
         listVC.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:listVC animated:YES];
     }
 }
 
+- (PoetrySource)dealSourceWithIndex:(NSInteger)index
+{
+    if (index == 0) {
+        return PoetrySourceGradeOne;
+    }else if (index == 1){
+        return PoetrySourceGradeTwo;
+    }else if (index == 2){
+        return PoetrySourceGradeThree;
+    }else if (index == 3){
+        return PoetrySourceGradeFour;
+    }else if (index == 4){
+        return PoetrySourceGradeFive;
+    }else if (index == 5){
+        return PoetrySourceGradeSix;
+    }else if (index == 6){
+        return PoetrySourceGradeSevenOne;
+    }else if (index == 7){
+        return PoetrySourceGradeSevenTwo;
+    }else if (index == 8){
+        return PoetrySourceGradeEightOne;
+    }else if (index == 9){
+        return PoetrySourceGradeEightTwo;
+    }else if (index == 10){
+        return PoetrySourceGradeNineOne;
+    }else if (index == 11){
+        return PoetrySourceGradeNineTwo;
+    }
+    return PoetrySourceRecommend;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
