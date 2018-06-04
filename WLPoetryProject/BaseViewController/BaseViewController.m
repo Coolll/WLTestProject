@@ -87,11 +87,29 @@ static const CGFloat touchFullOffset = 15;//箭头触摸区域超出的offset �
     self.naviTitleLabel.backgroundColor = NavigationColor;
 }
 
+- (void)setNaviColor:(UIColor *)naviColor
+{
+    _naviColor = naviColor;
+    if ([naviColor isKindOfClass:[UIColor class]]) {
+        self.naviView.backgroundColor = naviColor;
+        self.backButton.backgroundColor = naviColor;
+        self.backImageView.backgroundColor = naviColor;
+        self.naviTitleLabel.backgroundColor = naviColor;
+        
+    }
+}
 #pragma mark - 属性设置与点击事件
 
 - (void)backAction:(UIButton*)sender
 {
     
+}
+
+- (void)removeAllNaviItems
+{
+    for (UIView *view in self.naviView.subviews) {
+        [view removeFromSuperview];
+    }
 }
 
 - (void)setIsShowBack:(BOOL)isShowBack
@@ -174,11 +192,12 @@ static const CGFloat touchFullOffset = 15;//箭头触摸区域超出的offset �
     self.titleFullLabel = [[UILabel alloc]init];
     self.titleFullLabel.font = [AppConfig config].titleFont;
     self.titleFullLabel.text = self.titleForNavi;
+    self.titleFullLabel.numberOfLines = 0;
     self.titleFullLabel.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:self.titleFullLabel];
     
     CGFloat titleW = PhoneScreen_WIDTH-(leftFullSpace+backFullWidth+10)*2;
-    CGFloat titleHeight = [WLPublicTool heightForTextString:self.titleForNavi width:titleW fontSize:self.titleFullLabel.font.pointSize];
+    CGFloat titleHeight = [WLPublicTool heightForTextString:self.titleForNavi width:titleW fontSize:self.titleFullLabel.font.pointSize]+2;
     
     //元素的布局
     [self.titleFullLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -241,6 +260,7 @@ static const CGFloat touchFullOffset = 15;//箭头触摸区域超出的offset �
         _naviTitleLabel = [[UILabel alloc]init];
         _naviTitleLabel.textAlignment = NSTextAlignmentCenter;
         _naviTitleLabel.font = [UIFont systemFontOfSize:16.f];
+        _naviTitleLabel.numberOfLines = 0;
         [self.naviView addSubview:_naviTitleLabel];
         //元素的布局
         [_naviTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {

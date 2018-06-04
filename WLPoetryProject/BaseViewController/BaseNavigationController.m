@@ -25,7 +25,6 @@
 
     self.navigationBar.hidden = YES;
     
-    
 }
 
 - (void)backAction:(UIButton*)sender

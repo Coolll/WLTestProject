@@ -20,6 +20,23 @@ typedef NS_ENUM(NSInteger , PoetrySource) {
     PoetrySourceGradeEightTwo,
     PoetrySourceGradeNineOne,
     PoetrySourceGradeNineTwo,
+    PoetrySourceTangOne,
+    PoetrySourceTangTwo,
+    PoetrySourceTangThree,
+    PoetrySourceTangFour,
+    PoetrySourceTangFive,
+    PoetrySourceTangSix,
+    PoetrySourceTangSeven,
+    PoetrySourceSongOne,
+    PoetrySourceSongTwo,
+    PoetrySourceSongThree,
+    PoetrySourceSongFour,
+    PoetrySourceSongFive,
+    PoetrySourceSongSix,
+    PoetrySourceSongSeven,
+    PoetrySourceSongEight,
+    PoetrySourceSongNine,
+    PoetrySourceSongTen,
     PoetrySourceRecommend
 };
 

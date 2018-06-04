@@ -382,6 +382,6 @@
     
 	],
     "type" : "poetry_gradeOne",
-    "baseID" : "1000",
-    "mainClass" : "0"
+    "baseID" : "16000",
+    "mainClass" : "19"
 }
