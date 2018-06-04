@@ -158,7 +158,161 @@
             self.mainClass = @"9.5";
         }
             break;
+        case PoetrySourceTangOne:
+        {
             
+            self.titleForNavi = @"唐诗·一";
+            self.jsonName = @"tangPoetry_one";
+            self.mainClass = @"10";
+        }
+        break;
+
+        case PoetrySourceTangTwo:
+        {
+            
+            self.titleForNavi = @"唐诗·二";
+            self.jsonName = @"tangPoetry_two";
+            self.mainClass = @"11";
+        }
+        break;
+        
+        case PoetrySourceTangThree:
+        {
+            
+            self.titleForNavi = @"唐诗·三";
+            self.jsonName = @"tangPoetry_three";
+            self.mainClass = @"12";
+        }
+        break;
+        
+        case PoetrySourceTangFour:
+        {
+            
+            self.titleForNavi = @"唐诗·四";
+            self.jsonName = @"tangPoetry_four";
+            self.mainClass = @"13";
+        }
+        break;
+        
+        case PoetrySourceTangFive:
+        {
+            
+            self.titleForNavi = @"唐诗·五";
+            self.jsonName = @"tangPoetry_five";
+            self.mainClass = @"14";
+        }
+        break;
+        
+        case PoetrySourceTangSix:
+        {
+            
+            self.titleForNavi = @"唐诗·六";
+            self.jsonName = @"tangPoetry_six";
+            self.mainClass = @"15";
+        }
+        break;
+        
+        case PoetrySourceTangSeven:
+        {
+            
+            self.titleForNavi = @"唐诗·七";
+            self.jsonName = @"tangPoetry_seven";
+            self.mainClass = @"16";
+        }
+        break;
+        
+        case PoetrySourceSongOne:
+        {
+            
+            self.titleForNavi = @"宋词·一";
+            self.jsonName = @"songPoetry_one";
+            self.mainClass = @"17";
+        }
+        break;
+        
+        
+        case PoetrySourceSongTwo:
+        {
+            
+            self.titleForNavi = @"宋词·二";
+            self.jsonName = @"songPoetry_two";
+            self.mainClass = @"18";
+        }
+        break;
+        
+        case PoetrySourceSongThree:
+        {
+            
+            self.titleForNavi = @"宋词·三";
+            self.jsonName = @"songPoetry_three";
+            self.mainClass = @"19";
+        }
+        break;
+        
+        case PoetrySourceSongFour:
+        {
+            
+            self.titleForNavi = @"宋词·四";
+            self.jsonName = @"songPoetry_four";
+            self.mainClass = @"20";
+        }
+        break;
+        
+        case PoetrySourceSongFive:
+        {
+            
+            self.titleForNavi = @"宋词·五";
+            self.jsonName = @"songPoetry_five";
+            self.mainClass = @"21";
+        }
+        break;
+        
+        case PoetrySourceSongSix:
+        {
+            
+            self.titleForNavi = @"宋词·六";
+            self.jsonName = @"songPoetry_six";
+            self.mainClass = @"22";
+        }
+        break;
+        
+        case PoetrySourceSongSeven:
+        {
+            
+            self.titleForNavi = @"宋词·七";
+            self.jsonName = @"songPoetry_seven";
+            self.mainClass = @"23";
+        }
+        break;
+        
+        case PoetrySourceSongEight:
+        {
+            
+            self.titleForNavi = @"宋词·八";
+            self.jsonName = @"songPoetry_eight";
+            self.mainClass = @"24";
+        }
+        break;
+        
+        case PoetrySourceSongNine:
+        {
+            
+            self.titleForNavi = @"宋词·九";
+            self.jsonName = @"songPoetry_nine";
+            self.mainClass = @"25";
+        }
+        break;
+        
+        case PoetrySourceSongTen:
+        {
+            
+            self.titleForNavi = @"宋词·十";
+            self.jsonName = @"songPoetry_ten";
+            self.mainClass = @"26";
+        }
+        break;
+        
+        
         
         default:
             break;

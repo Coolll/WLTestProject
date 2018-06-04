@@ -28,6 +28,12 @@
  **/
 @property (nonatomic,strong) UILabel *titleFullLabel;
 
+/**
+ *  导航栏的颜色
+ **/
+@property (nonatomic,strong) UIColor *naviColor;
+
+
 
 
 - (void)showHUDWithText:(NSString *)text;
@@ -35,6 +41,9 @@
 - (void)showAlert:(NSString*)content;
 
 - (void)backAction:(UIButton*)sender;
+
+//移除掉所有导航栏的元素，当自定义导航栏时使用
+- (void)removeAllNaviItems;
 
 //全屏状态下，移除navi，添加返回按钮，需要最后调用，保证返回按钮不被遮挡
 - (void)addBackButtonForFullScreen;

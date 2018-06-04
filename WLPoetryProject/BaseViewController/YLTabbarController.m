@@ -118,8 +118,9 @@ static const NSInteger buttonBaseTag = 2000;
 //自定义tabbar
 - (void)loadTabbarView
 {
+    UIColor *tabbarColor = RGBCOLOR(240, 245, 250, 1.0);
+    
     self.tabbarView = [[UIView alloc]initWithFrame:self.tabBar.bounds];
-//    self.tabbarView.backgroundColor = [UIColor whiteColor];
     self.tabbarView.backgroundColor = RGBCOLOR(201, 219, 226, 1.0);
     [self.tabBar addSubview:self.tabbarView];
     
@@ -136,7 +137,7 @@ static const NSInteger buttonBaseTag = 2000;
         UIButton *itemBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         itemBtn.frame = CGRectMake(i*itemWidth, 0, itemWidth, tabbarH);
         itemBtn.tag = i+buttonBaseTag;
-        itemBtn.backgroundColor = [UIColor whiteColor];
+        itemBtn.backgroundColor = tabbarColor;
         [itemBtn addTarget:self action:@selector(selectItemAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.tabbarView addSubview:itemBtn];
         
