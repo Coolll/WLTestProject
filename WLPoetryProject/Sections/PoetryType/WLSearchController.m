@@ -7,13 +7,29 @@
 //
 
 #import "WLSearchController.h"
+#import "WLCoreDataHelper.h"
+#import "WLPoetryListCell.h"
+#import "PoetryDetailViewController.h"
 
-@interface WLSearchController ()
+@interface WLSearchController ()<UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource>
 /**
  *  搜索输入框
  **/
 @property (nonatomic,strong) UITextField *searchTextField;
 
+/**
+ *  诗词列表
+ **/
+@property (nonatomic,strong) UITableView *mainTableView;
+
+/**
+ *  诗词数据源
+ **/
+@property (nonatomic,strong) NSArray *poetryArray;
+/**
+ *  高度数组
+ **/
+@property (nonatomic,strong) NSMutableArray *heightArray;
 
 @end
 
@@ -62,6 +78,8 @@
     self.searchTextField = [[UITextField alloc]init];
     self.searchTextField.backgroundColor = RGBCOLOR(220, 220, 220, 1.0);
     self.searchTextField.placeholder = @"请输入搜索关键词";
+    self.searchTextField.returnKeyType = UIReturnKeySearch;
+    self.searchTextField.delegate = self;
     [searchBgView addSubview:self.searchTextField];
     //元素的布局
     [self.searchTextField mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -104,6 +122,128 @@
 
     });
 }
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    self.poetryArray = [[WLCoreDataHelper shareHelper] searchPoetryListWithKeyWord:textField.text];
+    [self loadCustomView];
+    [self.searchTextField resignFirstResponder];
+    return NO;
+}
+
+
+#pragma mark - 加载视图
+- (void)loadCustomView
+{
+    [self.mainTableView reloadData];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    if (section == 0) {
+        return self.poetryArray.count;
+    }
+    
+    return 1;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 0.01;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 0.01;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (self.heightArray.count > indexPath.row) {
+        return [[self.heightArray objectAtIndex:indexPath.row] floatValue];
+    }else{
+        if (self.poetryArray.count > indexPath.row) {
+            return [WLPoetryListCell heightForFirstLine:[self.poetryArray objectAtIndex:indexPath.row]];
+        }
+    }
+    
+    return 0.001;
+}
+
+- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    PoetryModel *model = [self.poetryArray objectAtIndex:indexPath.row];
+    
+    
+    WLPoetryListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WLPoetryListCell"];;
+    if (!cell) {
+        cell = [[WLPoetryListCell alloc]initWithFrame:CGRectMake(0, 0, PhoneScreen_WIDTH, 125)];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.backgroundColor = [UIColor clearColor];
+    }
+    
+    cell.dataModel = model;
+    return cell;
+}
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.row < self.poetryArray.count) {
+        
+        PoetryDetailViewController *detailVC = [[PoetryDetailViewController alloc]init];
+        detailVC.dataModel = self.poetryArray[indexPath.row];
+        detailVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:detailVC animated:YES];
+    }
+}
+
+
+- (UITableView*)mainTableView
+{
+    if (!_mainTableView) {
+        
+        UIImageView *mainBgView = [[UIImageView alloc]init];
+        mainBgView.image = [UIImage imageNamed:@"searchBg.jpg"];
+        [self.view addSubview:mainBgView];
+        //元素的布局
+        [mainBgView mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.left.equalTo(self.view.mas_left).offset(0);
+            make.top.equalTo(self.naviView.mas_bottom).offset(0);
+            make.bottom.equalTo(self.view.mas_bottom).offset(0);
+            make.right.equalTo(self.view.mas_right).offset(0);
+            
+        }];
+        
+        _mainTableView = [[UITableView alloc]init];
+        _mainTableView.delegate = self;
+        _mainTableView.dataSource = self;
+        _mainTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _mainTableView.backgroundColor = [UIColor clearColor];
+        [self.view addSubview:_mainTableView];
+        
+        //元素的布局
+        [_mainTableView mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.left.equalTo(self.view.mas_left).offset(0);
+            make.top.equalTo(self.naviView.mas_bottom).offset(0);
+            make.bottom.equalTo(self.view.mas_bottom).offset(0);
+            make.right.equalTo(self.view.mas_right).offset(0);
+            
+        }];
+
+    }
+    
+    return _mainTableView;
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

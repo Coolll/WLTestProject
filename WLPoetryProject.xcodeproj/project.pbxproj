@@ -41,6 +41,7 @@
 		07195C52208A3CCA00F791CE /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 070F3DD6207E333000EE3000 /* libsqlite3.tbd */; };
 		07195C54208A3CD400F791CE /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 07195C53208A3CD400F791CE /* libc++.tbd */; };
 		07195C56208A3CDD00F791CE /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07195C55208A3CDD00F791CE /* Photos.framework */; };
+		071DB82620C6BF6900BA0744 /* searchBg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 071DB82520C6BF6900BA0744 /* searchBg.jpg */; };
 		0721702B2087843A002A1628 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 072170272087843A002A1628 /* Info.plist */; };
 		0721702C2087843A002A1628 /* README.strings in Resources */ = {isa = PBXBuildFile; fileRef = 072170282087843A002A1628 /* README.strings */; };
 		0721702D2087843A002A1628 /* WLPoetryProject.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 072170292087843A002A1628 /* WLPoetryProject.xcdatamodeld */; };
@@ -272,6 +273,7 @@
 		07195C50208A3CC100F791CE /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
 		07195C53208A3CD400F791CE /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		07195C55208A3CDD00F791CE /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
+		071DB82520C6BF6900BA0744 /* searchBg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = searchBg.jpg; sourceTree = "<group>"; };
 		072170272087843A002A1628 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		072170282087843A002A1628 /* README.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = README.strings; sourceTree = "<group>"; };
 		0721702A2087843A002A1628 /* WLPoetryProject.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WLPoetryProject.xcdatamodel; sourceTree = "<group>"; };
@@ -1205,6 +1207,7 @@
 		07E4DFD620C55EEE009E1F6D /* Type */ = {
 			isa = PBXGroup;
 			children = (
+				071DB82520C6BF6900BA0744 /* searchBg.jpg */,
 				0715FF0920C56D3D0096C60E /* search_black.png */,
 				07E4DFD720C55F02009E1F6D /* search.png */,
 			);
@@ -1466,6 +1469,7 @@
 				07F73C1E208ACD9A00F7D8B3 /* setting@3x.png in Resources */,
 				073D7F6C20A7E259002BCEA7 /* tangPoetry_one.json in Resources */,
 				07F73C15208ACD9A00F7D8B3 /* contact@2x.png in Resources */,
+				071DB82620C6BF6900BA0744 /* searchBg.jpg in Resources */,
 				07F73C26208ACD9A00F7D8B3 /* lineImage@3x.png in Resources */,
 				07F73C04208ACD9A00F7D8B3 /* select_circle@2x.png in Resources */,
 				07F73C1A208ACD9A00F7D8B3 /* help@2x.png in Resources */,
