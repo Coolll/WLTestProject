@@ -42,4 +42,6 @@ typedef void(^CoreDataResultBlock)(BOOL isSuccessful,NSError *error);
 //根据ID 删除诗词的信息
 - (void)deletePoetryWithID:(NSString*)poetryID withResult:(CoreDataResultBlock)block;
 
+- (NSArray*)searchPoetryListWithKeyWord:(NSString*)keyWord;
+
 @end

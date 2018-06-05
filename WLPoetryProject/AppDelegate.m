@@ -12,7 +12,9 @@
 #import "BaseNavigationController.h"
 #import "YLHomeViewController.h"
 #import <BmobSDK/Bmob.h>
-
+#import "WLCoreDataHelper.h"
+#import "PoetryModel.h"
+#import "WLSaveLocalHelper.h"
 #define FIRSTOPENAPP  @"FirstLoadShuangrenduobao"
 
 @interface AppDelegate ()
@@ -20,6 +22,11 @@
  *  tabbar
  **/
 @property (nonatomic,strong) YLTabbarController *tabbarVC;
+/**
+ *  json是否读取的数组
+ **/
+@property (nonatomic,strong) NSMutableArray *jsonStateArr;
+
 
 @end
 
@@ -56,6 +63,8 @@
         [self loadFirstLoadView];
         
     }
+    
+    [self checkLocalData];//加载本地数据
     NSLog(@"在DevBranch添加");
     return YES;
 }
@@ -242,6 +251,114 @@
     }];
 }
 
+
+- (void)checkLocalData
+{
+    NSMutableArray *jsonList = [NSMutableArray array];
+    [jsonList addObject:@"gradePoetry_1"];
+    [jsonList addObject:@"gradePoetry_2"];
+    [jsonList addObject:@"gradePoetry_3"];
+    [jsonList addObject:@"gradePoetry_4"];
+    [jsonList addObject:@"gradePoetry_5"];
+    [jsonList addObject:@"gradePoetry_6"];
+    [jsonList addObject:@"gradePoetry_7_one"];
+    [jsonList addObject:@"gradePoetry_7_two"];
+    [jsonList addObject:@"gradePoetry_8_one"];
+    [jsonList addObject:@"gradePoetry_8_two"];
+    [jsonList addObject:@"gradePoetry_9_one"];
+    [jsonList addObject:@"gradePoetry_9_two"];
+    [jsonList addObject:@"tangPoetry_one"];
+    [jsonList addObject:@"tangPoetry_two"];
+    [jsonList addObject:@"tangPoetry_three"];
+    [jsonList addObject:@"tangPoetry_four"];
+    [jsonList addObject:@"tangPoetry_five"];
+    [jsonList addObject:@"tangPoetry_six"];
+    [jsonList addObject:@"tangPoetry_seven"];
+    [jsonList addObject:@"songPoetry_one"];
+    [jsonList addObject:@"songPoetry_two"];
+    [jsonList addObject:@"songPoetry_three"];
+    [jsonList addObject:@"songPoetry_four"];
+    [jsonList addObject:@"songPoetry_five"];
+    [jsonList addObject:@"songPoetry_six"];
+    [jsonList addObject:@"songPoetry_seven"];
+    [jsonList addObject:@"songPoetry_eight"];
+    [jsonList addObject:@"songPoetry_nine"];
+    [jsonList addObject:@"songPoetry_ten"];
+
+    NSArray *jsonStateArray = [WLSaveLocalHelper loadObjectForKey:@"PoetryJsonState"];
+    self.jsonStateArr = [NSMutableArray array];
+    
+    if (jsonStateArray && [jsonStateArray isKindOfClass:[NSArray class]] && jsonStateArray.count == jsonList.count ) {
+        
+        self.jsonStateArr = [jsonStateArray mutableCopy];
+        
+        for (int i = 0; i < jsonStateArray.count ;i++) {
+            NSString *state = jsonStateArray[i];
+            int time = 4*i;
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(time * NSEC_PER_SEC)), dispatch_get_global_queue(0, 0), ^{
+                if (![state isEqualToString:@"1"]) {
+                    [self readLocalFileWithName:jsonList[i] withIndex:i];
+                }
+                
+            });
+            
+        }
+        
+    }else{
+        
+        for (int i =0 ; i < jsonList.count; i++) {
+            [self.jsonStateArr addObject:@"0"];
+            
+        }
+        
+        for (int i = 0; i < self.jsonStateArr.count ;i++) {
+            NSString *state = self.jsonStateArr[i];
+            int time = 4*i;
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(time * NSEC_PER_SEC)), dispatch_get_global_queue(0, 0), ^{
+                if (![state isEqualToString:@"1"]) {
+                    [self readLocalFileWithName:jsonList[i] withIndex:i];
+                }
+                
+            });
+            
+        }
+
+        
+        
+    }
+}
+
+- (void)readLocalFileWithName:(NSString*)fileName withIndex:(NSInteger)jsonIndex
+{
+    //从本地读取文件
+    NSData *JSONData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:fileName ofType:@"json"]];
+    //转为dic
+    NSDictionary *poetryDic = [NSJSONSerialization JSONObjectWithData:JSONData options:NSJSONReadingAllowFragments error:nil];
+
+    //获取到诗词列表
+    NSArray *poetryArr = [poetryDic objectForKey:@"poetryList"];
+    NSString *poetryMainClass = [poetryDic objectForKey:@"mainClass"];
+    
+    NSMutableArray *modelArray = [NSMutableArray array];
+    //将诗词model化
+    for (int i = 0; i<poetryArr.count; i++) {
+        NSDictionary *itemDic = [poetryArr objectAtIndex:i];
+        PoetryModel *model = [[PoetryModel alloc]initModelWithDictionary:itemDic];
+        model.mainClass = poetryMainClass;
+        [modelArray addObject:model];
+    }
+    
+    //存储到本地数据库
+    [[WLCoreDataHelper shareHelper]saveInBackgroundWithPeotryModelArray:modelArray withResult:^(BOOL isSuccessful, NSError *error) {
+        if (isSuccessful) {
+            //存储成功后更新状态
+            [self.jsonStateArr replaceObjectAtIndex:jsonIndex withObject:@"1"];
+            [WLSaveLocalHelper saveObject:[self.jsonStateArr copy] forKey:@"PoetryJsonState"];
+            
+        }
+    }];
+
+}
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.

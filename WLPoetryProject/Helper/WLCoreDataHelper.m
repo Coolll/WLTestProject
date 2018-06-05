@@ -185,7 +185,8 @@
 //查询全部的诗词信息
 -(NSArray*)fetchAllPoetry
 {
-    NSArray *fetchArray = [self fetchDataWithTableName:@"Poetry" withPredicate:nil];
+    NSFetchRequest *request = [[NSFetchRequest alloc]init];
+    NSArray *fetchArray = [self fetchDataWithTableName:@"Poetry" withRequest:request withPredicate:nil];
     
     return fetchArray;
 }
@@ -193,8 +194,9 @@
 -(NSArray*)fetchPoetryWithMainClass:(NSString*)mainClass
 {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"mainClass == %@",mainClass];
-    
-    NSArray *fetchArray = [self fetchDataWithTableName:@"Poetry" withPredicate:predicate];
+    NSFetchRequest *request = [[NSFetchRequest alloc]init];
+
+    NSArray *fetchArray = [self fetchDataWithTableName:@"Poetry" withRequest:request withPredicate:predicate];
     
     return fetchArray;
 }
@@ -202,8 +204,9 @@
 - (Poetry*)fetchPoetryWithSource:(NSString*)source
 {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"source == %@",source];
-    
-    NSArray *fetchArray = [self fetchDataWithTableName:@"Poetry" withPredicate:predicate];
+    NSFetchRequest *request = [[NSFetchRequest alloc]init];
+
+    NSArray *fetchArray = [self fetchDataWithTableName:@"Poetry" withRequest:request withPredicate:predicate];
     
     Poetry *poetryEntity = nil;
     
@@ -218,19 +221,10 @@
 - (Poetry*)fetchPoetryWithID:(NSString*)idString
 {
     
-//    NSFetchRequest *request = [[NSFetchRequest alloc]init];
-//    NSEntityDescription *student = [NSEntityDescription entityForName:@"Student" inManagedObjectContext:self.appDelegate.managedObjectContext];
-//    [request setEntity:student];
-//
-//    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"studentID == %@",studentID];
-//    [request setPredicate:predicate];
-//
-//    NSError *error;
-//
-//    NSArray *fetchArray = [self.appDelegate.managedObjectContext executeFetchRequest:request error:&error];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"poetryID == %@",idString];
-    
-    NSArray *fetchArray = [self fetchDataWithTableName:@"Poetry" withPredicate:predicate];
+    NSFetchRequest *request = [[NSFetchRequest alloc]init];
+
+    NSArray *fetchArray = [self fetchDataWithTableName:@"Poetry" withRequest:request withPredicate:predicate];
     
     Poetry *poetryEntity = nil;
     
@@ -242,11 +236,10 @@
 }
 
 #pragma mark - 查询表中的数据
-- (NSArray *)fetchDataWithTableName:(NSString*)tableName withPredicate:(NSPredicate*)predicate
+- (NSArray *)fetchDataWithTableName:(NSString*)tableName withRequest:(NSFetchRequest*)request withPredicate:(NSPredicate*)predicate
 {
-    NSFetchRequest *request = [[NSFetchRequest alloc]init];
-    
     NSEntityDescription *entity = [NSEntityDescription entityForName:tableName inManagedObjectContext:self.appDelegate.managedObjectContext];
+
     [request setEntity:entity];
     
     if (predicate) {
@@ -259,6 +252,19 @@
     
     return fetchArray;
 }
+#pragma mark - 查询表中的数据
+- (NSArray*)searchPoetryListWithKeyWord:(NSString*)keyWord
+{
+    NSString *word = [NSString stringWithFormat:@"*%@*",keyWord];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"author like %@ || content like %@ || name like %@",word,word,word];
+    NSFetchRequest *request = [[NSFetchRequest alloc]init];
+    [request setFetchLimit:10];
+    NSArray *fetchArray = [self fetchDataWithTableName:@"Poetry" withRequest:request withPredicate:predicate];
+    
+    return fetchArray;
+}
+
 
 
 
