@@ -368,7 +368,7 @@
     listVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:listVC animated:YES];
     
-    //近期浏览的 超过三个，则移除掉最先访问的
+    //近期浏览的 超过三个，则移除掉最先访问的，把最近访问的放在前面
     [self.recentSectionArray insertObject:typeInfo atIndex:0];
     
     if (self.recentSectionArray.count >3) {
