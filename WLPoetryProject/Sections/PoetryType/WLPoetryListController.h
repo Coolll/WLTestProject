@@ -7,44 +7,9 @@
 //
 
 #import "BaseViewController.h"
-typedef NS_ENUM(NSInteger , PoetrySource) {
-    PoetrySourceGradeOne,
-    PoetrySourceGradeTwo,
-    PoetrySourceGradeThree,
-    PoetrySourceGradeFour,
-    PoetrySourceGradeFive,
-    PoetrySourceGradeSix,
-    PoetrySourceGradeSevenOne,
-    PoetrySourceGradeSevenTwo,
-    PoetrySourceGradeEightOne,
-    PoetrySourceGradeEightTwo,
-    PoetrySourceGradeNineOne,
-    PoetrySourceGradeNineTwo,
-    PoetrySourceTangOne,
-    PoetrySourceTangTwo,
-    PoetrySourceTangThree,
-    PoetrySourceTangFour,
-    PoetrySourceTangFive,
-    PoetrySourceTangSix,
-    PoetrySourceTangSeven,
-    PoetrySourceSongOne,
-    PoetrySourceSongTwo,
-    PoetrySourceSongThree,
-    PoetrySourceSongFour,
-    PoetrySourceSongFive,
-    PoetrySourceSongSix,
-    PoetrySourceSongSeven,
-    PoetrySourceSongEight,
-    PoetrySourceSongNine,
-    PoetrySourceSongTen,
-    PoetrySourceRecommend
-};
 
 @interface WLPoetryListController : BaseViewController
-/**
- *  诗词类型
- **/
-@property (nonatomic,assign) PoetrySource source;
+
 /**
  *  当前类型 本地json文件名
  **/
