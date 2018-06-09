@@ -45,6 +45,16 @@ typedef NS_ENUM(NSInteger , PoetrySource) {
  *  诗词类型
  **/
 @property (nonatomic,assign) PoetrySource source;
+/**
+ *  当前类型 本地json文件名
+ **/
+@property (nonatomic,copy) NSString *jsonName;
+/**
+ *  当前类型 的mainClass
+ **/
+@property (nonatomic,copy) NSString *mainClass;
+
+- (void)loadCustomData;
 
 
 @end

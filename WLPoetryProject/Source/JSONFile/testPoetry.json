@@ -158,7 +158,7 @@
                   "placeHolder" : ""
                   }
 	],
-    "type" : "des",
-    "baseID" : "4000",
-    "classInfo" : "1"
+    "type" : "command",
+    "baseID" : "0",
+    "mainClass" : "99"
 }

@@ -9,6 +9,7 @@
 #import "WLPoetryTypeController.h"
 #import "WLPoetryListController.h"
 #import "WLSearchController.h"
+#import "WLTypeListCell.h"
 
 @interface WLPoetryTypeController ()<UITableViewDelegate,UITableViewDataSource>
 /**
@@ -17,9 +18,22 @@
 @property (nonatomic,strong) UITableView *mainTableView;
 
 /**
- *  诗词数据源
+ *  年级 诗词数据源
  **/
-@property (nonatomic,strong) NSMutableArray *typeSectionArray;
+@property (nonatomic,strong) NSMutableArray *gradeSectionArray;
+/**
+ *  唐诗 诗词数据源
+ **/
+@property (nonatomic,strong) NSMutableArray *tangSectionArray;
+/**
+ *  宋词 诗词数据源
+ **/
+@property (nonatomic,strong) NSMutableArray *songSectionArray;
+/**
+ *  近期阅读的 诗词数据源
+ **/
+@property (nonatomic,strong) NSMutableArray *recentSectionArray;
+
 @end
 
 @implementation WLPoetryTypeController
@@ -77,46 +91,63 @@
 
 - (void)loadCustomData
 {
-    self.typeSectionArray = [NSMutableArray array];
-    [self.typeSectionArray addObject:@"一年级"];
-    [self.typeSectionArray addObject:@"二年级"];
-    [self.typeSectionArray addObject:@"三年级"];
-    [self.typeSectionArray addObject:@"四年级"];
-    [self.typeSectionArray addObject:@"五年级"];
-    [self.typeSectionArray addObject:@"六年级"];
-    [self.typeSectionArray addObject:@"七年级上"];
-    [self.typeSectionArray addObject:@"七年级下"];
-    [self.typeSectionArray addObject:@"八年级上"];
-    [self.typeSectionArray addObject:@"八年级下"];
-    [self.typeSectionArray addObject:@"九年级上"];
-    [self.typeSectionArray addObject:@"九年级下"];
-    [self.typeSectionArray addObject:@"唐诗·一"];
-    [self.typeSectionArray addObject:@"唐诗·二"];
-    [self.typeSectionArray addObject:@"唐诗·三"];
-    [self.typeSectionArray addObject:@"唐诗·四"];
-    [self.typeSectionArray addObject:@"唐诗·五"];
-    [self.typeSectionArray addObject:@"唐诗·六"];
-    [self.typeSectionArray addObject:@"唐诗·七"];
-    [self.typeSectionArray addObject:@"宋词·一"];
-    [self.typeSectionArray addObject:@"宋词·二"];
-    [self.typeSectionArray addObject:@"宋词·三"];
-    [self.typeSectionArray addObject:@"宋词·四"];
-    [self.typeSectionArray addObject:@"宋词·五"];
-    [self.typeSectionArray addObject:@"宋词·六"];
-    [self.typeSectionArray addObject:@"宋词·七"];
-    [self.typeSectionArray addObject:@"宋词·八"];
-    [self.typeSectionArray addObject:@"宋词·九"];
-    [self.typeSectionArray addObject:@"宋词·十"];
+    self.recentSectionArray = [NSMutableArray array];
 
+    NSArray *recentList = [WLSaveLocalHelper loadObjectForKey:@"recentSelectTypeList"];
+    if (!recentList) {
+        [WLSaveLocalHelper saveObject:[NSArray array] forKey:@"recentSelectTypeList"];
+    }else{
+        self.recentSectionArray = [recentList mutableCopy];
+    }
+    
+    [self readConfigureGrade];
+    [self readConfigureTang];
+    [self readConfigureSong];
+}
+
+- (void)readConfigureGrade
+{
+    //从本地读取文件
+    NSData *JSONData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"configureGrade" ofType:@"json"]];
+    //转为dic
+    NSDictionary *configureData = [NSJSONSerialization JSONObjectWithData:JSONData options:NSJSONReadingAllowFragments error:nil];
+    
+    //获取到年级的配置列表
+    NSArray *gradeArray = [configureData objectForKey:@"dataList"];
+    self.gradeSectionArray = [NSMutableArray arrayWithArray:gradeArray];
+}
+
+- (void)readConfigureTang
+{
+    //从本地读取文件
+    NSData *JSONData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"configureTang" ofType:@"json"]];
+    //转为dic
+    NSDictionary *configureData = [NSJSONSerialization JSONObjectWithData:JSONData options:NSJSONReadingAllowFragments error:nil];
+    
+    //获取到年级的配置列表
+    NSArray *gradeArray = [configureData objectForKey:@"dataList"];
+    self.tangSectionArray = [NSMutableArray arrayWithArray:gradeArray];
+}
+
+- (void)readConfigureSong
+{
+    //从本地读取文件
+    NSData *JSONData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"configureSong" ofType:@"json"]];
+    //转为dic
+    NSDictionary *configureData = [NSJSONSerialization JSONObjectWithData:JSONData options:NSJSONReadingAllowFragments error:nil];
+    
+    //获取到年级的配置列表
+    NSArray *gradeArray = [configureData objectForKey:@"dataList"];
+    self.songSectionArray = [NSMutableArray arrayWithArray:gradeArray];
 }
 
 #pragma mark - 加载视图
 - (void)loadCustomView
 {
-    UIImageView *mainBgView = [[UIImageView alloc]init];
-    mainBgView.image = [UIImage imageNamed:@"mainBgImage"];
+//    UIImageView *mainBgView = [[UIImageView alloc]init];
+//    mainBgView.image = [UIImage imageNamed:@"mainBgImage"];
 //    [self.view addSubview:mainBgView];
-    //元素的布局
+//    //元素的布局
 //    [mainBgView mas_makeConstraints:^(MASConstraintMaker *make) {
 //
 //        make.left.equalTo(self.view.mas_left).offset(0);
@@ -147,16 +178,49 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == 0) {
-        return self.typeSectionArray.count;
+    if (self.recentSectionArray && self.recentSectionArray.count > 0) {
+        
+        //如果近期阅读过，则把近期看的放在首位
+        if (section == 0) {
+            return self.recentSectionArray.count;
+            
+        }else if (section == 1){
+            return self.gradeSectionArray.count;
+            
+        }else if (section == 2){
+            return self.tangSectionArray.count;
+
+        }else if (section == 3){
+            return self.songSectionArray.count;
+
+        }
+    }else{
+        //如果无近期阅读记录，则年级、唐诗、宋词
+        if (section == 0) {
+            return self.gradeSectionArray.count;
+            
+        }else if (section == 1){
+            return self.tangSectionArray.count;
+            
+        }else if (section == 2){
+            return self.songSectionArray.count;
+            
+        }
+        
     }
+    
     
     return 1;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    if (self.recentSectionArray && self.recentSectionArray.count > 0) {
+        return 4;//近期、年级、唐诗、宋词
+    }else{
+        return 3;//年级、唐诗、宋词
+    }
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -166,26 +230,95 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 0.01;
+    return 40;
 }
+
+- (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *headerView = [[UIView alloc]init];
+    headerView.frame = CGRectMake(0, 0, PhoneScreen_WIDTH, 40);
+    headerView.backgroundColor = RGBCOLOR(235, 235, 235, 1.0);
+    
+    UILabel *sectionLabel = [[UILabel alloc]init];
+    sectionLabel.frame = CGRectMake(15, 0, PhoneScreen_WIDTH-30, 40);
+    sectionLabel.backgroundColor = RGBCOLOR(235, 235, 235, 1.0);
+    sectionLabel.font = [UIFont systemFontOfSize:16.f];
+    [headerView addSubview:sectionLabel];
+    
+    if (self.recentSectionArray && self.recentSectionArray.count > 0) {
+        
+        //如果近期阅读过，则把近期看的放在首位，然后年级、唐诗、宋词
+        if (section == 0) {
+            sectionLabel.text = @"推荐";
+        }else if (section ==1) {
+            sectionLabel.text = @"年级";
+        }else if (section == 2){
+            sectionLabel.text = @"唐诗";
+        }else if (section == 3){
+            sectionLabel.text = @"宋词";
+        }
+        
+    }else{
+        //如果无近期阅读记录，则年级、唐诗、宋词
+
+        if (section ==0) {
+            sectionLabel.text = @"年级";
+        }else if (section == 1){
+            sectionLabel.text = @"唐诗";
+        }else if (section == 2){
+            sectionLabel.text = @"宋词";
+        }
+    }
+    
+    
+    return headerView;
+}
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    
-    return 80;
+    return 100;
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WLPoetryTypeCell"];;
+    WLTypeListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WLTypeListCell"];;
     if (!cell) {
-        cell = [[UITableViewCell alloc]initWithFrame:CGRectMake(0, 0, PhoneScreen_WIDTH, 80)];
+        cell = [[WLTypeListCell alloc]init];
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.backgroundColor = [UIColor clearColor];
-    cell.textLabel.text = self.typeSectionArray[indexPath.row];
+    cell.backgroundColor = [UIColor whiteColor];
+    
+    NSInteger section = indexPath.section;
+    if (self.recentSectionArray && self.recentSectionArray.count > 0) {
+        //近期、年级、唐诗、宋词
+        if (section == 0) {
+            cell.typeString = [self.recentSectionArray[indexPath.row] objectForKey:@"mainTitle"];
+        }else if (section == 1){
+            cell.typeString = [self.gradeSectionArray[indexPath.row] objectForKey:@"mainTitle"];
+
+        }else if (section == 2){
+            cell.typeString = [self.tangSectionArray[indexPath.row]objectForKey:@"mainTitle"];
+
+        }else if (section == 3){
+            cell.typeString = [self.songSectionArray[indexPath.row]objectForKey:@"mainTitle"];
+
+        }
+        
+    }else{
+        //年级、唐诗、宋词
+        if (section == 0){
+            cell.typeString = [self.gradeSectionArray[indexPath.row]objectForKey:@"mainTitle"];
+            
+        }else if (section == 1){
+            cell.typeString = [self.tangSectionArray[indexPath.row]objectForKey:@"mainTitle"];
+            
+        }else if (section == 2){
+            cell.typeString = [self.songSectionArray[indexPath.row]objectForKey:@"mainTitle"];
+            
+        }
+    }
     
     return cell;
 }
@@ -194,78 +327,59 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (indexPath.row < self.typeSectionArray.count) {
-        
-        WLPoetryListController *listVC = [[WLPoetryListController alloc]init];
-        listVC.source = [self dealSourceWithIndex:indexPath.row];
-        listVC.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:listVC animated:YES];
+    NSInteger section = indexPath.section;
+    WLPoetryListController *listVC = [[WLPoetryListController alloc]init];
+    NSDictionary *typeInfo = [NSDictionary dictionary];
+
+    if (self.recentSectionArray && self.recentSectionArray.count > 0) {
+        //近期、年级、唐诗、宋词
+        if (section == 0) {
+            typeInfo = self.recentSectionArray[indexPath.row];
+        }else if (section == 1){
+            typeInfo = self.gradeSectionArray[indexPath.row];
+
+        }else if (section == 2){
+            typeInfo = self.tangSectionArray[indexPath.row];
+
+        }else if (section == 3){
+            typeInfo = self.songSectionArray[indexPath.row];
+
+        }
+
+    }else{
+        //年级、唐诗、宋词
+        if (section == 0){
+            typeInfo = self.gradeSectionArray[indexPath.row];
+
+        }else if (section == 1){
+            typeInfo = self.tangSectionArray[indexPath.row];
+
+        }else if (section == 2){
+            typeInfo = self.songSectionArray[indexPath.row];
+
+        }
     }
+
+    
+    listVC.titleForNavi = [typeInfo objectForKey:@"subTitle"];
+    listVC.jsonName = [typeInfo objectForKey:@"jsonName"];
+    listVC.mainClass = [typeInfo objectForKey:@"mainClass"];
+    [listVC loadCustomData];
+    listVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:listVC animated:YES];
+    
+    //近期浏览的 超过三个，则移除掉最先访问的
+    [self.recentSectionArray insertObject:typeInfo atIndex:0];
+    
+    if (self.recentSectionArray.count >3) {
+        [self.recentSectionArray removeLastObject];
+    }
+    
+    //更新到本地
+    [WLSaveLocalHelper saveObject:[self.recentSectionArray copy] forKey:@"recentSelectTypeList"];
+    [self.mainTableView reloadData];
 }
 
-- (PoetrySource)dealSourceWithIndex:(NSInteger)index
-{
-    if (index == 0) {
-        return PoetrySourceGradeOne;
-    }else if (index == 1){
-        return PoetrySourceGradeTwo;
-    }else if (index == 2){
-        return PoetrySourceGradeThree;
-    }else if (index == 3){
-        return PoetrySourceGradeFour;
-    }else if (index == 4){
-        return PoetrySourceGradeFive;
-    }else if (index == 5){
-        return PoetrySourceGradeSix;
-    }else if (index == 6){
-        return PoetrySourceGradeSevenOne;
-    }else if (index == 7){
-        return PoetrySourceGradeSevenTwo;
-    }else if (index == 8){
-        return PoetrySourceGradeEightOne;
-    }else if (index == 9){
-        return PoetrySourceGradeEightTwo;
-    }else if (index == 10){
-        return PoetrySourceGradeNineOne;
-    }else if (index == 11){
-        return PoetrySourceGradeNineTwo;
-    }else if (index == 12){
-        return PoetrySourceTangOne;
-    }else if (index == 13){
-        return PoetrySourceTangTwo;
-    }else if (index == 14){
-        return PoetrySourceTangThree;
-    }else if (index == 15){
-        return PoetrySourceTangFour;
-    }else if (index == 16){
-        return PoetrySourceTangFive;
-    }else if (index == 17){
-        return PoetrySourceTangSix;
-    }else if (index == 18){
-        return PoetrySourceTangSeven;
-    }else if (index == 19){
-        return PoetrySourceSongOne;
-    }else if (index == 20){
-        return PoetrySourceSongTwo;
-    }else if (index == 21){
-        return PoetrySourceSongThree;
-    }else if (index == 22){
-        return PoetrySourceSongFour;
-    }else if (index == 23){
-        return PoetrySourceSongFive;
-    }else if (index == 24){
-        return PoetrySourceSongSix;
-    }else if (index == 25){
-        return PoetrySourceSongSeven;
-    }else if (index == 26){
-        return PoetrySourceSongEight;
-    }else if (index == 27){
-        return PoetrySourceSongNine;
-    }else if (index == 28){
-        return PoetrySourceSongTen;
-    }
-    return PoetrySourceRecommend;
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

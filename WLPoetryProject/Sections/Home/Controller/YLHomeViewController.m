@@ -18,6 +18,11 @@
  *  诗词列表
  **/
 @property (nonatomic,strong) UITableView *mainTableView;
+/**
+ *  背景图片
+ **/
+@property (nonatomic,strong) UIImageView *mainBgView;
+
 
 /**
  *  诗词数据源
@@ -28,7 +33,10 @@
  *  高度数组
  **/
 @property (nonatomic,strong) NSMutableArray *heightArray;
-
+/**
+ *  json是否读取的数组
+ **/
+@property (nonatomic,strong) NSMutableArray *jsonStateArr;
 
 
 
@@ -41,22 +49,23 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.view.backgroundColor = ViewBackgroundColor;
     self.titleForNavi = @"随机推荐";
-//    [self readSoure];
     [self loadCustomData];
+    
+    [self checkLocalData];//加载本地数据
+
 }
 
 - (void)loadCustomData
 {
     self.heightArray = [NSMutableArray array];
     
-    self.poetryArray = [[WLCoreDataHelper shareHelper] fetchAllPoetry];
+    self.poetryArray = [[WLCoreDataHelper shareHelper] fetchPoetryWithMainClass:@"99"];
 
     if (self.poetryArray.count == 0) {
         //从本地读取文件
         NSData *JSONData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"testPoetry" ofType:@"json"]];
         //转为dic
         NSDictionary *poetryDic = [NSJSONSerialization JSONObjectWithData:JSONData options:NSJSONReadingAllowFragments error:nil];
-//        NSLog(@"dic:%@",poetryDic);
         //获取到诗词列表
         NSArray *poetryArr = [poetryDic objectForKey:@"poetryList"];
         NSString *poetryMainClass = [poetryDic objectForKey:@"mainClass"];
@@ -82,9 +91,7 @@
         
         //直接展示数据
         [self loadCustomView];
-//        [[WLCoreDataHelper shareHelper] deleteAllPoetry];
     }
-    
     
     
 }
@@ -93,7 +100,7 @@
 {
     dispatch_async(dispatch_get_main_queue(), ^{
         
-        self.poetryArray = [[WLCoreDataHelper shareHelper] fetchAllPoetry];
+        self.poetryArray = [[WLCoreDataHelper shareHelper] fetchPoetryWithMainClass:@"99"];
         [self loadCustomView];
     });
    
@@ -132,35 +139,12 @@
 #pragma mark - 加载视图
 - (void)loadCustomView
 {
-    UIImageView *mainBgView = [[UIImageView alloc]init];
-    mainBgView.image = [UIImage imageNamed:@"mainBgImage"];
-    [self.view addSubview:mainBgView];
-    //元素的布局
-    [mainBgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.equalTo(self.view.mas_left).offset(0);
-        make.top.equalTo(self.naviView.mas_bottom).offset(0);
-        make.bottom.equalTo(self.view.mas_bottom).offset(-49);
-        make.right.equalTo(self.view.mas_right).offset(0);
-        
-    }];
+    self.mainBgView.image = [UIImage imageNamed:@"mainBgImage.jpg"];
     
-    self.mainTableView = [[UITableView alloc]init];
-    self.mainTableView.delegate = self;
-    self.mainTableView.dataSource = self;
-    self.mainTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.mainTableView.backgroundColor = [UIColor clearColor];
-    [self.view addSubview:self.mainTableView];
     
-    //元素的布局
-    [self.mainTableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.equalTo(self.view.mas_left).offset(0);
-        make.top.equalTo(self.naviView.mas_bottom).offset(0);
-        make.bottom.equalTo(self.view.mas_bottom).offset(-49);
-        make.right.equalTo(self.view.mas_right).offset(0);
-        
-    }];
+    
+
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -233,7 +217,156 @@
 
 
 
+#pragma mark - 后台进程，添加所有的数据
+- (void)checkLocalData
+{
+    NSMutableArray *jsonList = [NSMutableArray array];
+    [jsonList addObject:@"gradePoetry_1"];
+    [jsonList addObject:@"gradePoetry_2"];
+    [jsonList addObject:@"gradePoetry_3"];
+    [jsonList addObject:@"gradePoetry_4"];
+    [jsonList addObject:@"gradePoetry_5"];
+    [jsonList addObject:@"gradePoetry_6"];
+    [jsonList addObject:@"gradePoetry_7_one"];
+    [jsonList addObject:@"gradePoetry_7_two"];
+    [jsonList addObject:@"gradePoetry_8_one"];
+    [jsonList addObject:@"gradePoetry_8_two"];
+    [jsonList addObject:@"gradePoetry_9_one"];
+    [jsonList addObject:@"gradePoetry_9_two"];
+    [jsonList addObject:@"tangPoetry_one"];
+    [jsonList addObject:@"tangPoetry_two"];
+    [jsonList addObject:@"tangPoetry_three"];
+    [jsonList addObject:@"tangPoetry_four"];
+    [jsonList addObject:@"tangPoetry_five"];
+    [jsonList addObject:@"tangPoetry_six"];
+    [jsonList addObject:@"tangPoetry_seven"];
+    [jsonList addObject:@"songPoetry_one"];
+    [jsonList addObject:@"songPoetry_two"];
+    [jsonList addObject:@"songPoetry_three"];
+    [jsonList addObject:@"songPoetry_four"];
+    [jsonList addObject:@"songPoetry_five"];
+    [jsonList addObject:@"songPoetry_six"];
+    [jsonList addObject:@"songPoetry_seven"];
+    [jsonList addObject:@"songPoetry_eight"];
+    [jsonList addObject:@"songPoetry_nine"];
+    [jsonList addObject:@"songPoetry_ten"];
+    
+    NSArray *jsonStateArray = [WLSaveLocalHelper loadObjectForKey:@"PoetryJsonState"];
+    self.jsonStateArr = [NSMutableArray array];
+    
+    if (jsonStateArray && [jsonStateArray isKindOfClass:[NSArray class]] && jsonStateArray.count == jsonList.count ) {
+        
+        self.jsonStateArr = [jsonStateArray mutableCopy];
+        
+        for (int i = 0; i < jsonStateArray.count ;i++) {
+            NSString *state = jsonStateArray[i];
+            int time = 4*i;
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(time * NSEC_PER_SEC)), dispatch_get_global_queue(0, 0), ^{
+                if (![state isEqualToString:@"1"]) {
+                    [self readLocalFileWithName:jsonList[i] withIndex:i];
+                }
+                
+            });
+            
+        }
+        
+    }else{
+        
+        for (int i =0 ; i < jsonList.count; i++) {
+            [self.jsonStateArr addObject:@"0"];
+            
+        }
+        
+        for (int i = 0; i < self.jsonStateArr.count ;i++) {
+            NSString *state = self.jsonStateArr[i];
+            int time = 4*i;
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(time * NSEC_PER_SEC)), dispatch_get_global_queue(0, 0), ^{
+                if (![state isEqualToString:@"1"]) {
+                                        [self readLocalFileWithName:jsonList[i] withIndex:i];
+                }
+                
+            });
+            
+        }
+        
+        
+        
+    }
+}
 
+- (void)readLocalFileWithName:(NSString*)fileName withIndex:(NSInteger)jsonIndex
+{
+    //从本地读取文件
+    NSData *JSONData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:fileName ofType:@"json"]];
+    //转为dic
+    NSDictionary *poetryDic = [NSJSONSerialization JSONObjectWithData:JSONData options:NSJSONReadingAllowFragments error:nil];
+    
+    //获取到诗词列表
+    NSArray *poetryArr = [poetryDic objectForKey:@"poetryList"];
+    NSString *poetryMainClass = [poetryDic objectForKey:@"mainClass"];
+    
+    NSMutableArray *modelArray = [NSMutableArray array];
+    //将诗词model化
+    for (int i = 0; i<poetryArr.count; i++) {
+        NSDictionary *itemDic = [poetryArr objectAtIndex:i];
+        PoetryModel *model = [[PoetryModel alloc]initModelWithDictionary:itemDic];
+        model.mainClass = poetryMainClass;
+        [modelArray addObject:model];
+    }
+    
+    //存储到本地数据库
+    [[WLCoreDataHelper shareHelper]saveInBackgroundWithPeotryModelArray:modelArray withResult:^(BOOL isSuccessful, NSError *error) {
+        if (isSuccessful) {
+            //存储成功后更新状态
+            [self.jsonStateArr replaceObjectAtIndex:jsonIndex withObject:@"1"];
+            [WLSaveLocalHelper saveObject:[self.jsonStateArr copy] forKey:@"PoetryJsonState"];
+            
+        }
+    }];
+    
+}
+
+- (UIImageView*)mainBgView
+{
+    if (!_mainBgView) {
+        _mainBgView = [[UIImageView alloc]init];
+        _mainBgView.alpha = 0.5;
+        [self.view addSubview:_mainBgView];
+        //元素的布局
+        [_mainBgView mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.left.equalTo(self.view.mas_left).offset(0);
+            make.top.equalTo(self.naviView.mas_bottom).offset(0);
+            make.bottom.equalTo(self.view.mas_bottom).offset(-49);
+            make.right.equalTo(self.view.mas_right).offset(0);
+            
+        }];
+    }
+    return _mainBgView;
+}
+
+- (UITableView*)mainTableView
+{
+    if (!_mainTableView) {
+        _mainTableView = [[UITableView alloc]init];
+        _mainTableView.delegate = self;
+        _mainTableView.dataSource = self;
+        _mainTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _mainTableView.backgroundColor = [UIColor clearColor];
+        [self.view addSubview:_mainTableView];
+        
+        //元素的布局
+        [_mainTableView mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.left.equalTo(self.view.mas_left).offset(0);
+            make.top.equalTo(self.naviView.mas_bottom).offset(0);
+            make.bottom.equalTo(self.view.mas_bottom).offset(-49);
+            make.right.equalTo(self.view.mas_right).offset(0);
+            
+        }];
+    }
+    return _mainTableView;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

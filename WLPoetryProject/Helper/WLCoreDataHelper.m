@@ -11,9 +11,9 @@
 //方法1中的子线程context
 @property (nonatomic,strong) NSManagedObjectContext *privateContext;
 //方法1中的主线程context
-@property (nonatomic,strong) NSManagedObjectContext *mainContext;
+//@property (nonatomic,strong) NSManagedObjectContext *mainContext;
 //方法1中的后台context
-@property (nonatomic,strong) NSManagedObjectContext *backgroundContext;
+//@property (nonatomic,strong) NSManagedObjectContext *backgroundContext;
 //数据库协调器
 @property (nonatomic, strong) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 //数据库模型
@@ -52,27 +52,45 @@
 
 - (void)saveInBackgroundWithPeotryModelArray:(NSArray*)array withResult:(CoreDataResultBlock)block
 {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
+    dispatch_async(dispatch_get_main_queue(), ^{
+    
         //子线程中的context，父context是mainContext
         //主线程中的context，父context是backgroundContext
         //后台context，该context做数据的增删改查
         
         
         for (int i =0 ; i < array.count; i++) {
-            
+        
+//            CGFloat time = 0.05*i;
             PoetryModel *model = array[i];
             
             Poetry *poetry = [NSEntityDescription insertNewObjectForEntityForName:@"Poetry" inManagedObjectContext:self.privateContext]
             ;
-            [self savePoetry:poetry withPoetryModel:model withResult:block];
+//            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(time * NSEC_PER_SEC)), dispatch_get_global_queue(0, 0), ^{
+                [self savePoetry:poetry withPoetryModel:model withResult:block];
 
+//            });
+        
         }
         
         
     });
     
 }
+
+//- (void)savePoetryWithTotal:(NSInteger)total withCurrent:(NSInteger)current withArray:(NSArray*)array withResult:(CoreDataResultBlock)block
+//{
+//    if (current < array.count) {
+//         withInnerBlock:^(BOOL isSuccessful) {
+//
+//            if (isSuccessful) {
+//                [self savePoetryWithTotal:total withCurrent:current+1 withArray:array withResult:block];
+//            }
+//        }];
+//    }
+//
+//
+//}
 
 - (void)savePoetry:(Poetry*)poetry withPoetryModel:(PoetryModel*)model withResult:(CoreDataResultBlock)block
 {
@@ -102,36 +120,47 @@
             if (block) {
                 block(NO,error);
             }
+            
+            
+        }else{
+            NSLog(@"成功");
+            if (block) {
+                block(YES,nil);
+            }
+            
         }
         
         //主线程context执行
-        [self.mainContext performBlock:^{
-            if (![self.mainContext save:&error]) {
-                NSLog(@"mainContext 错误:%@",error);
-                if (block) {
-                    block(NO,error);
-                }
-            }
-            
-            //后台context执行
-            [self.backgroundContext performBlock:^{
-                if (![self.backgroundContext save:&error]) {
-                    NSLog(@"backgroundContext 错误:%@",error);
-                    if (block) {
-                        block(NO,error);
-                    }
-                }else{
-                    NSLog(@"保存数据成功");
-                    if (block) {
-                        block(YES,nil);
-                    }
-                }
-            }];
-            
-            
-            
-        }];
-        
+//        [self.mainContext performBlock:^{
+//            if (![self.mainContext save:&error]) {
+//                NSLog(@"mainContext 错误:%@",error);
+//                if (block) {
+//                    block(NO,error);
+//                }
+//
+//            }
+//
+//            //后台context执行
+//            [self.backgroundContext performBlock:^{
+//                if (![self.backgroundContext save:&error]) {
+//                    NSLog(@"backgroundContext 错误:%@",error);
+//                    if (block) {
+//                        block(NO,error);
+//                    }
+//
+//                }else{
+//                    NSLog(@"成功");
+//                    if (block) {
+//                        block(YES,nil);
+//                    }
+//
+//                }
+//            }];
+//
+//
+//
+//        }];
+//
         
     }];
 }
@@ -274,32 +303,33 @@
 {
     if (!_privateContext) {
         _privateContext = [[NSManagedObjectContext alloc]initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-        _privateContext.parentContext = self.mainContext;
+        _privateContext.persistentStoreCoordinator = self.persistentStoreCoordinator;
+        
     }
     return _privateContext;
 }
 
-//主线程的context的父context是后台context
-- (NSManagedObjectContext*)mainContext
-{
-    if (!_mainContext) {
-        _mainContext = [[NSManagedObjectContext alloc]initWithConcurrencyType:NSMainQueueConcurrencyType];
-        _mainContext.parentContext = self.backgroundContext;
-    }
-
-    return _mainContext;
-}
-
-//设置后台context的数据库存储协调器
-- (NSManagedObjectContext*)backgroundContext
-{
-    if (!_backgroundContext) {
-        _backgroundContext = [[NSManagedObjectContext alloc]initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-        _backgroundContext.persistentStoreCoordinator = self.persistentStoreCoordinator;
-    }
-
-    return _backgroundContext;
-}
+////主线程的context的父context是后台context
+//- (NSManagedObjectContext*)mainContext
+//{
+//    if (!_mainContext) {
+//        _mainContext = [[NSManagedObjectContext alloc]initWithConcurrencyType:NSMainQueueConcurrencyType];
+//        _mainContext.parentContext = self.backgroundContext;
+//    }
+//
+//    return _mainContext;
+//}
+//
+////设置后台context的数据库存储协调器
+//- (NSManagedObjectContext*)backgroundContext
+//{
+//    if (!_backgroundContext) {
+//        _backgroundContext = [[NSManagedObjectContext alloc]initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+//        _backgroundContext.persistentStoreCoordinator = self.persistentStoreCoordinator;
+//    }
+//
+//    return _backgroundContext;
+//}
 
 //初始化数据存储协调器
 - (NSPersistentStoreCoordinator*)persistentStoreCoordinator

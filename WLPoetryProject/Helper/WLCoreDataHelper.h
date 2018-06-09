@@ -13,6 +13,7 @@
 #import "Poetry+CoreDataProperties.h"
 
 typedef void(^CoreDataResultBlock)(BOOL isSuccessful,NSError *error);
+typedef void(^CoreDataInnerBlock)(BOOL isSuccessful);
 
 @interface WLCoreDataHelper : NSObject
 //新生成的实体类会编译报错，说文件重复，去Build Phase中移除该类即可

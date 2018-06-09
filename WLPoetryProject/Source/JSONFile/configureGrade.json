@@ -1,0 +1,66 @@
+{
+  "dataList" : [
+                {
+                "mainTitle" : "一年级",
+                "subTitle" : "一年级",
+                "jsonName" : "gradePoetry_1",
+                "mainClass" : "1"
+                },{
+                "mainTitle" : "二年级",
+                "subTitle" : "二年级",
+                "jsonName" : "gradePoetry_2",
+                "mainClass" : "2"
+                },{
+                "mainTitle" : "三年级",
+                "subTitle" : "三年级",
+                "jsonName" : "gradePoetry_3",
+                "mainClass" : "3"
+                },{
+                "mainTitle" : "四年级",
+                "subTitle" : "四年级",
+                "jsonName" : "gradePoetry_4",
+                "mainClass" : "4"
+                },{
+                "mainTitle" : "五年级",
+                "subTitle" : "五年级",
+                "jsonName" : "gradePoetry_5",
+                "mainClass" : "5"
+                },{
+                "mainTitle" : "六年级",
+                "subTitle" : "六年级",
+                "jsonName" : "gradePoetry_6",
+                "mainClass" : "6"
+                },{
+                "mainTitle" : "七年级上",
+                "subTitle" : "七年级",
+                "jsonName" : "gradePoetry_7_one",
+                "mainClass" : "7"
+                },{
+                "mainTitle" : "七年级下",
+                "subTitle" : "七年级",
+                "jsonName" : "gradePoetry_7_two",
+                "mainClass" : "7.5"
+                },{
+                "mainTitle" : "八年级上",
+                "subTitle" : "八年级",
+                "jsonName" : "gradePoetry_8_one",
+                "mainClass" : "8"
+                },{
+                "mainTitle" : "八年级下",
+                "subTitle" : "八年级",
+                "jsonName" : "gradePoetry_8_two",
+                "mainClass" : "8.5"
+                },{
+                "mainTitle" : "九年级上",
+                "subTitle" : "九年级",
+                "jsonName" : "gradePoetry_9_one",
+                "mainClass" : "9"
+                },{
+                "mainTitle" : "九年级下",
+                "subTitle" : "九年级",
+                "jsonName" : "gradePoetry_9_two",
+                "mainClass" : "9.5"
+                }
+	]
+    
+}

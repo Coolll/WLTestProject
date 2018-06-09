@@ -258,6 +258,7 @@ static const CGFloat touchFullOffset = 15;//箭头触摸区域超出的offset �
 {
     if (!_naviTitleLabel) {
         _naviTitleLabel = [[UILabel alloc]init];
+        _naviTitleLabel.textColor = [UIColor whiteColor];
         _naviTitleLabel.textAlignment = NSTextAlignmentCenter;
         _naviTitleLabel.font = [UIFont systemFontOfSize:16.f];
         _naviTitleLabel.numberOfLines = 0;
