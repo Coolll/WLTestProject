@@ -165,12 +165,28 @@
 		07A922B120862EB100BE5929 /* PoetryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A922B020862EB100BE5929 /* PoetryModel.m */; };
 		07B6E7AB20A07B2E000998E3 /* WLPoetryListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07B6E7AA20A07B2E000998E3 /* WLPoetryListController.m */; };
 		07CFF240208B0AEE00849C20 /* WLPoetryListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 07CFF23F208B0AEE00849C20 /* WLPoetryListCell.m */; };
+		07D3800F20CD5E2200CF2A6E /* classEleven.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 07D37FFF20CD5E2200CF2A6E /* classEleven.jpg */; };
+		07D3801020CD5E2200CF2A6E /* classFive.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 07D3800020CD5E2200CF2A6E /* classFive.jpg */; };
+		07D3801120CD5E2200CF2A6E /* classFour.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 07D3800120CD5E2200CF2A6E /* classFour.jpg */; };
+		07D3801220CD5E2200CF2A6E /* classFourteen.png in Resources */ = {isa = PBXBuildFile; fileRef = 07D3800220CD5E2200CF2A6E /* classFourteen.png */; };
+		07D3801320CD5E2200CF2A6E /* classNine.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 07D3800320CD5E2200CF2A6E /* classNine.jpg */; };
+		07D3801420CD5E2200CF2A6E /* classOne.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 07D3800420CD5E2200CF2A6E /* classOne.jpg */; };
+		07D3801520CD5E2200CF2A6E /* classSeven.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 07D3800520CD5E2200CF2A6E /* classSeven.jpg */; };
+		07D3801620CD5E2200CF2A6E /* classSix.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 07D3800620CD5E2200CF2A6E /* classSix.jpg */; };
+		07D3801820CD5E2200CF2A6E /* classTen.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 07D3800820CD5E2200CF2A6E /* classTen.jpg */; };
+		07D3801920CD5E2200CF2A6E /* classThirtyOne.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 07D3800920CD5E2200CF2A6E /* classThirtyOne.jpg */; };
+		07D3801A20CD5E2200CF2A6E /* classThirtySeven.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 07D3800A20CD5E2200CF2A6E /* classThirtySeven.jpg */; };
+		07D3801B20CD5E2200CF2A6E /* classThirtyTwo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 07D3800B20CD5E2200CF2A6E /* classThirtyTwo.jpg */; };
+		07D3801C20CD5E2200CF2A6E /* classThree.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 07D3800C20CD5E2200CF2A6E /* classThree.jpg */; };
+		07D3801D20CD5E2200CF2A6E /* classTwelve.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 07D3800D20CD5E2200CF2A6E /* classTwelve.jpg */; };
+		07D3801E20CD5E2200CF2A6E /* classTwo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 07D3800E20CD5E2200CF2A6E /* classTwo.jpg */; };
+		07D3802020CD619A00CF2A6E /* classSixteen.png in Resources */ = {isa = PBXBuildFile; fileRef = 07D3801F20CD619A00CF2A6E /* classSixteen.png */; };
+		07D3802220CD637700CF2A6E /* mainBgImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 07D3802120CD637700CF2A6E /* mainBgImage.jpg */; };
 		07E06D9520A06A1C00093DCC /* WLPoetryTypeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07E06D9420A06A1C00093DCC /* WLPoetryTypeController.m */; };
 		07E06D9820A06C9300093DCC /* tabbarTwo_sel.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E06D9620A06C9300093DCC /* tabbarTwo_sel.png */; };
 		07E06D9920A06C9300093DCC /* tabbarTwo.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E06D9720A06C9300093DCC /* tabbarTwo.png */; };
 		07E4DFD820C55F03009E1F6D /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E4DFD720C55F02009E1F6D /* search.png */; };
 		07E7C30F20CC090F007CA827 /* WLTypeListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 07E7C30E20CC090F007CA827 /* WLTypeListCell.m */; };
-		07E7C31220CC09E3007CA827 /* typeIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E7C31020CC09E3007CA827 /* typeIcon.png */; };
 		07E7C31320CC09E3007CA827 /* typeBgImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E7C31120CC09E3007CA827 /* typeBgImage.png */; };
 		07E7C31520CC1AB5007CA827 /* configureGrade.json in Resources */ = {isa = PBXBuildFile; fileRef = 07E7C31420CC1AB5007CA827 /* configureGrade.json */; };
 		07E7C31820CC1DA7007CA827 /* configureSong.json in Resources */ = {isa = PBXBuildFile; fileRef = 07E7C31620CC1DA7007CA827 /* configureSong.json */; };
@@ -201,13 +217,12 @@
 		07F73C25208ACD9A00F7D8B3 /* lineImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07F73BC4208ACD9A00F7D8B3 /* lineImage@2x.png */; };
 		07F73C26208ACD9A00F7D8B3 /* lineImage@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07F73BC5208ACD9A00F7D8B3 /* lineImage@3x.png */; };
 		07F73C27208ACD9A00F7D8B3 /* main_more.png in Resources */ = {isa = PBXBuildFile; fileRef = 07F73BC6208ACD9A00F7D8B3 /* main_more.png */; };
-		07F73C62208ACDC100F7D8B3 /* testPoetry.json in Resources */ = {isa = PBXBuildFile; fileRef = 07F73C61208ACDC100F7D8B3 /* testPoetry.json */; };
+		07F73C62208ACDC100F7D8B3 /* recommendPoetry.json in Resources */ = {isa = PBXBuildFile; fileRef = 07F73C61208ACDC100F7D8B3 /* recommendPoetry.json */; };
 		07F73C6B208AE21000F7D8B3 /* tabbarOne_sel.png in Resources */ = {isa = PBXBuildFile; fileRef = 07F73C67208AE21000F7D8B3 /* tabbarOne_sel.png */; };
 		07F73C74208AE84900F7D8B3 /* tabbarOne.png in Resources */ = {isa = PBXBuildFile; fileRef = 07F73C71208AE84900F7D8B3 /* tabbarOne.png */; };
 		07F73C75208AE84900F7D8B3 /* tabbarThree.png in Resources */ = {isa = PBXBuildFile; fileRef = 07F73C72208AE84900F7D8B3 /* tabbarThree.png */; };
 		07F73C76208AE84900F7D8B3 /* tabbarThree_sel.png in Resources */ = {isa = PBXBuildFile; fileRef = 07F73C73208AE84900F7D8B3 /* tabbarThree_sel.png */; };
 		07F73C82208AF51D00F7D8B3 /* YLHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07F73C81208AF51D00F7D8B3 /* YLHomeViewController.m */; };
-		07F83A3420C829CA00655634 /* mainBgImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 07F83A3320C829CA00655634 /* mainBgImage.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -520,6 +535,23 @@
 		07B6E7AF20A0820F000998E3 /* Poetry+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Poetry+CoreDataProperties.m"; sourceTree = "<group>"; };
 		07CFF23E208B0AEE00849C20 /* WLPoetryListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLPoetryListCell.h; sourceTree = "<group>"; };
 		07CFF23F208B0AEE00849C20 /* WLPoetryListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLPoetryListCell.m; sourceTree = "<group>"; };
+		07D37FFF20CD5E2200CF2A6E /* classEleven.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = classEleven.jpg; sourceTree = "<group>"; };
+		07D3800020CD5E2200CF2A6E /* classFive.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = classFive.jpg; sourceTree = "<group>"; };
+		07D3800120CD5E2200CF2A6E /* classFour.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = classFour.jpg; sourceTree = "<group>"; };
+		07D3800220CD5E2200CF2A6E /* classFourteen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = classFourteen.png; sourceTree = "<group>"; };
+		07D3800320CD5E2200CF2A6E /* classNine.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = classNine.jpg; sourceTree = "<group>"; };
+		07D3800420CD5E2200CF2A6E /* classOne.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = classOne.jpg; sourceTree = "<group>"; };
+		07D3800520CD5E2200CF2A6E /* classSeven.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = classSeven.jpg; sourceTree = "<group>"; };
+		07D3800620CD5E2200CF2A6E /* classSix.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = classSix.jpg; sourceTree = "<group>"; };
+		07D3800820CD5E2200CF2A6E /* classTen.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = classTen.jpg; sourceTree = "<group>"; };
+		07D3800920CD5E2200CF2A6E /* classThirtyOne.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = classThirtyOne.jpg; sourceTree = "<group>"; };
+		07D3800A20CD5E2200CF2A6E /* classThirtySeven.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = classThirtySeven.jpg; sourceTree = "<group>"; };
+		07D3800B20CD5E2200CF2A6E /* classThirtyTwo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = classThirtyTwo.jpg; sourceTree = "<group>"; };
+		07D3800C20CD5E2200CF2A6E /* classThree.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = classThree.jpg; sourceTree = "<group>"; };
+		07D3800D20CD5E2200CF2A6E /* classTwelve.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = classTwelve.jpg; sourceTree = "<group>"; };
+		07D3800E20CD5E2200CF2A6E /* classTwo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = classTwo.jpg; sourceTree = "<group>"; };
+		07D3801F20CD619A00CF2A6E /* classSixteen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = classSixteen.png; sourceTree = "<group>"; };
+		07D3802120CD637700CF2A6E /* mainBgImage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = mainBgImage.jpg; sourceTree = "<group>"; };
 		07E06D9320A06A1C00093DCC /* WLPoetryTypeController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLPoetryTypeController.h; sourceTree = "<group>"; };
 		07E06D9420A06A1C00093DCC /* WLPoetryTypeController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLPoetryTypeController.m; sourceTree = "<group>"; };
 		07E06D9620A06C9300093DCC /* tabbarTwo_sel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbarTwo_sel.png; sourceTree = "<group>"; };
@@ -527,7 +559,6 @@
 		07E4DFD720C55F02009E1F6D /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search.png; sourceTree = "<group>"; };
 		07E7C30D20CC090F007CA827 /* WLTypeListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLTypeListCell.h; sourceTree = "<group>"; };
 		07E7C30E20CC090F007CA827 /* WLTypeListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLTypeListCell.m; sourceTree = "<group>"; };
-		07E7C31020CC09E3007CA827 /* typeIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = typeIcon.png; sourceTree = "<group>"; };
 		07E7C31120CC09E3007CA827 /* typeBgImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = typeBgImage.png; sourceTree = "<group>"; };
 		07E7C31420CC1AB5007CA827 /* configureGrade.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = configureGrade.json; sourceTree = "<group>"; };
 		07E7C31620CC1DA7007CA827 /* configureSong.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = configureSong.json; sourceTree = "<group>"; };
@@ -558,14 +589,13 @@
 		07F73BC4208ACD9A00F7D8B3 /* lineImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lineImage@2x.png"; sourceTree = "<group>"; };
 		07F73BC5208ACD9A00F7D8B3 /* lineImage@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lineImage@3x.png"; sourceTree = "<group>"; };
 		07F73BC6208ACD9A00F7D8B3 /* main_more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = main_more.png; sourceTree = "<group>"; };
-		07F73C61208ACDC100F7D8B3 /* testPoetry.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = testPoetry.json; sourceTree = "<group>"; };
+		07F73C61208ACDC100F7D8B3 /* recommendPoetry.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = recommendPoetry.json; sourceTree = "<group>"; };
 		07F73C67208AE21000F7D8B3 /* tabbarOne_sel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbarOne_sel.png; sourceTree = "<group>"; };
 		07F73C71208AE84900F7D8B3 /* tabbarOne.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbarOne.png; sourceTree = "<group>"; };
 		07F73C72208AE84900F7D8B3 /* tabbarThree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbarThree.png; sourceTree = "<group>"; };
 		07F73C73208AE84900F7D8B3 /* tabbarThree_sel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbarThree_sel.png; sourceTree = "<group>"; };
 		07F73C80208AF51D00F7D8B3 /* YLHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLHomeViewController.h; sourceTree = "<group>"; };
 		07F73C81208AF51D00F7D8B3 /* YLHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLHomeViewController.m; sourceTree = "<group>"; };
-		07F83A3320C829CA00655634 /* mainBgImage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = mainBgImage.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1202,6 +1232,29 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		07D37FFE20CD5E2200CF2A6E /* PoetryBgImages */ = {
+			isa = PBXGroup;
+			children = (
+				07D3801F20CD619A00CF2A6E /* classSixteen.png */,
+				07D37FFF20CD5E2200CF2A6E /* classEleven.jpg */,
+				07D3800020CD5E2200CF2A6E /* classFive.jpg */,
+				07D3800120CD5E2200CF2A6E /* classFour.jpg */,
+				07D3800220CD5E2200CF2A6E /* classFourteen.png */,
+				07D3800320CD5E2200CF2A6E /* classNine.jpg */,
+				07D3800420CD5E2200CF2A6E /* classOne.jpg */,
+				07D3800520CD5E2200CF2A6E /* classSeven.jpg */,
+				07D3800620CD5E2200CF2A6E /* classSix.jpg */,
+				07D3800820CD5E2200CF2A6E /* classTen.jpg */,
+				07D3800920CD5E2200CF2A6E /* classThirtyOne.jpg */,
+				07D3800A20CD5E2200CF2A6E /* classThirtySeven.jpg */,
+				07D3800B20CD5E2200CF2A6E /* classThirtyTwo.jpg */,
+				07D3800C20CD5E2200CF2A6E /* classThree.jpg */,
+				07D3800D20CD5E2200CF2A6E /* classTwelve.jpg */,
+				07D3800E20CD5E2200CF2A6E /* classTwo.jpg */,
+			);
+			path = PoetryBgImages;
+			sourceTree = "<group>";
+		};
 		07E06D9220A06A0200093DCC /* PoetryType */ = {
 			isa = PBXGroup;
 			children = (
@@ -1220,7 +1273,6 @@
 			isa = PBXGroup;
 			children = (
 				07E7C31120CC09E3007CA827 /* typeBgImage.png */,
-				07E7C31020CC09E3007CA827 /* typeIcon.png */,
 				071DB82520C6BF6900BA0744 /* searchBg.jpg */,
 				0715FF0920C56D3D0096C60E /* search_black.png */,
 				07E4DFD720C55F02009E1F6D /* search.png */,
@@ -1264,6 +1316,8 @@
 		07F73BA1208ACD9A00F7D8B3 /* ShareResoure */ = {
 			isa = PBXGroup;
 			children = (
+				07D3802120CD637700CF2A6E /* mainBgImage.jpg */,
+				07D37FFE20CD5E2200CF2A6E /* PoetryBgImages */,
 				07F73BA2208ACD9A00F7D8B3 /* leadOne.png */,
 				07F73BA3208ACD9A00F7D8B3 /* leadThree.png */,
 				07F73BA4208ACD9A00F7D8B3 /* leadTwo.png */,
@@ -1310,7 +1364,6 @@
 		07F73BBD208ACD9A00F7D8B3 /* 首页image */ = {
 			isa = PBXGroup;
 			children = (
-				07F83A3320C829CA00655634 /* mainBgImage.jpg */,
 				0766E5FA2098A9F500CADCF4 /* clearNavi.png */,
 				07A43A39209215F800D92242 /* poetryBack.jpg */,
 				07F73BC4208ACD9A00F7D8B3 /* lineImage@2x.png */,
@@ -1326,7 +1379,7 @@
 				0785075420B2EDB30030CD98 /* SongPoetry */,
 				073D7F6820A7E23D002BCEA7 /* TangPoetry */,
 				0716099E20A1C15400904C69 /* Grade */,
-				07F73C61208ACDC100F7D8B3 /* testPoetry.json */,
+				07F73C61208ACDC100F7D8B3 /* recommendPoetry.json */,
 				07E7C31420CC1AB5007CA827 /* configureGrade.json */,
 				07E7C31A20CC1DB7007CA827 /* configureTang.json */,
 				07E7C31620CC1DA7007CA827 /* configureSong.json */,
@@ -1455,7 +1508,10 @@
 				07E7C31820CC1DA7007CA827 /* configureSong.json in Resources */,
 				07F73C08208ACD9A00F7D8B3 /* leadTwo.png in Resources */,
 				07F73C07208ACD9A00F7D8B3 /* leadThree.png in Resources */,
+				07D3801B20CD5E2200CF2A6E /* classThirtyTwo.jpg in Resources */,
+				07D3801420CD5E2200CF2A6E /* classOne.jpg in Resources */,
 				0785076320B2EFF20030CD98 /* songPoetry_five.json in Resources */,
+				07D3801020CD5E2200CF2A6E /* classFive.jpg in Resources */,
 				071609AC20A1C15400904C69 /* gradePoetry_4.json in Resources */,
 				07F73C75208AE84900F7D8B3 /* tabbarThree.png in Resources */,
 				00FD14C520A95A2D0018D649 /* tangPoetry_four.json in Resources */,
@@ -1463,11 +1519,14 @@
 				0785076620B2EFF20030CD98 /* songPoetry_eight.json in Resources */,
 				07F73C74208AE84900F7D8B3 /* tabbarOne.png in Resources */,
 				071609B220A1C15400904C69 /* gradePoetry_empty.json in Resources */,
+				07D3801620CD5E2200CF2A6E /* classSix.jpg in Resources */,
 				07F73C1B208ACD9A00F7D8B3 /* help@3x.png in Resources */,
 				07F73C0A208ACD9A00F7D8B3 /* nav_back@3x.png in Resources */,
 				0721702C2087843A002A1628 /* README.strings in Resources */,
 				0795690820726D0B0097C26D /* LaunchScreen.storyboard in Resources */,
+				07D3802020CD619A00CF2A6E /* classSixteen.png in Resources */,
 				07F73C06208ACD9A00F7D8B3 /* leadOne.png in Resources */,
+				07D3802220CD637700CF2A6E /* mainBgImage.jpg in Resources */,
 				07E06D9920A06C9300093DCC /* tabbarTwo.png in Resources */,
 				07E7C31520CC1AB5007CA827 /* configureGrade.json in Resources */,
 				000110A920A44BD2001B2B55 /* gradePoetry_9_one.json in Resources */,
@@ -1475,6 +1534,8 @@
 				0785076A20B2EFF20030CD98 /* songPoetry_six.json in Resources */,
 				00FD14C320A95A2D0018D649 /* tangPoetry_five.json in Resources */,
 				07F73C6B208AE21000F7D8B3 /* tabbarOne_sel.png in Resources */,
+				07D3801E20CD5E2200CF2A6E /* classTwo.jpg in Resources */,
+				07D3801220CD5E2200CF2A6E /* classFourteen.png in Resources */,
 				071609A920A1C15400904C69 /* gradePoetry_1.json in Resources */,
 				07F73C1D208ACD9A00F7D8B3 /* setting@2x.png in Resources */,
 				07F73C17208ACD9A00F7D8B3 /* editImage.png in Resources */,
@@ -1485,20 +1546,26 @@
 				00FD14C020A95A2D0018D649 /* tangPoetry_six.json in Resources */,
 				00FD14C120A95A2D0018D649 /* tangPoetry_three.json in Resources */,
 				000110AC20A44BD2001B2B55 /* gradePoetry_7_one.json in Resources */,
+				07D3801920CD5E2200CF2A6E /* classThirtyOne.jpg in Resources */,
+				07D3801A20CD5E2200CF2A6E /* classThirtySeven.jpg in Resources */,
 				0785076720B2EFF20030CD98 /* songPoetry_two.json in Resources */,
 				07F73C76208AE84900F7D8B3 /* tabbarThree_sel.png in Resources */,
 				00FD14C220A95A2D0018D649 /* tangPoetry_two.json in Resources */,
+				07D3801C20CD5E2200CF2A6E /* classThree.jpg in Resources */,
 				07F73C16208ACD9A00F7D8B3 /* contact@3x.png in Resources */,
 				07F73C1C208ACD9A00F7D8B3 /* myArrow.png in Resources */,
 				07A43A3A209215F800D92242 /* poetryBack.jpg in Resources */,
 				07F73C09208ACD9A00F7D8B3 /* nav_back@2x.png in Resources */,
+				07D3801520CD5E2200CF2A6E /* classSeven.jpg in Resources */,
 				07F73C1E208ACD9A00F7D8B3 /* setting@3x.png in Resources */,
 				073D7F6C20A7E259002BCEA7 /* tangPoetry_one.json in Resources */,
+				07D3801120CD5E2200CF2A6E /* classFour.jpg in Resources */,
+				07D3801820CD5E2200CF2A6E /* classTen.jpg in Resources */,
 				07F73C15208ACD9A00F7D8B3 /* contact@2x.png in Resources */,
 				071DB82620C6BF6900BA0744 /* searchBg.jpg in Resources */,
-				07F83A3420C829CA00655634 /* mainBgImage.jpg in Resources */,
 				07F73C26208ACD9A00F7D8B3 /* lineImage@3x.png in Resources */,
 				07F73C04208ACD9A00F7D8B3 /* select_circle@2x.png in Resources */,
+				07D3801D20CD5E2200CF2A6E /* classTwelve.jpg in Resources */,
 				07F73C1A208ACD9A00F7D8B3 /* help@2x.png in Resources */,
 				07F73C27208ACD9A00F7D8B3 /* main_more.png in Resources */,
 				0785075720B2EDB30030CD98 /* songPoetry_empty.json in Resources */,
@@ -1522,15 +1589,16 @@
 				000110AB20A44BD2001B2B55 /* gradePoetry_9_two.json in Resources */,
 				0785075820B2EDB30030CD98 /* songPoetry_one.json in Resources */,
 				07E06D9820A06C9300093DCC /* tabbarTwo_sel.png in Resources */,
+				07D3800F20CD5E2200CF2A6E /* classEleven.jpg in Resources */,
 				000110A720A44BD2001B2B55 /* gradePoetry_8_two.json in Resources */,
+				07D3801320CD5E2200CF2A6E /* classNine.jpg in Resources */,
 				0785076820B2EFF20030CD98 /* songPoetry_four.json in Resources */,
 				0721702B2087843A002A1628 /* Info.plist in Resources */,
 				071609AB20A1C15400904C69 /* gradePoetry_3.json in Resources */,
 				071609AD20A1C15400904C69 /* gradePoetry_5.json in Resources */,
-				07E7C31220CC09E3007CA827 /* typeIcon.png in Resources */,
 				07F73C13208ACD9A00F7D8B3 /* about@2x.png in Resources */,
 				071609AE20A1C15400904C69 /* gradePoetry_6.json in Resources */,
-				07F73C62208ACDC100F7D8B3 /* testPoetry.json in Resources */,
+				07F73C62208ACDC100F7D8B3 /* recommendPoetry.json in Resources */,
 				0765C6AD207CE47E0085EB3A /* Info.plist in Resources */,
 				07E7C31B20CC1DB7007CA827 /* configureTang.json in Resources */,
 				0785076420B2EFF20030CD98 /* songPoetry_seven.json in Resources */,

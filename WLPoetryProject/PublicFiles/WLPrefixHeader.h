@@ -9,6 +9,4 @@
 #ifndef WLPrefixHeader_h
 #define WLPrefixHeader_h
 
-
-
 #endif /* WLPrefixHeader_h */

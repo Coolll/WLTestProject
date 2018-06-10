@@ -10,7 +10,7 @@
 #import "WLPoetryContentCell.h"
 
 static const CGFloat leftSpace = 10;//诗句的左右间距
-static const CGFloat topSpace = 24;//诗句与标题的上间距
+static const CGFloat topSpace = 15;//诗句与标题的上间距
 
 @interface PoetryDetailViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -22,6 +22,11 @@ static const CGFloat topSpace = 24;//诗句与标题的上间距
  *  诗词句子
  **/
 @property (nonatomic,strong) NSMutableArray *dataArray;
+/**
+ *  作者
+ **/
+@property (nonatomic,strong) UILabel *authorLabel;
+
 
 
 
@@ -348,8 +353,16 @@ static const CGFloat topSpace = 24;//诗句与标题的上间距
 {
     //诗词主背景
     UIImageView *mainImageView = [[UIImageView alloc]init];
-    mainImageView.image = [UIImage imageNamed:@"poetryBack.jpg"];
     [self.view addSubview:mainImageView];
+    
+    NSString *imageName = [NSString stringWithFormat:@"%@",[[AppConfig config].bgImageInfo objectForKey:self.dataModel.classInfo]];
+    if (imageName.length > 0 && ![imageName isEqualToString:@"(null)"]) {
+        mainImageView.image = [UIImage imageNamed:imageName];
+    }else{
+        mainImageView.image = [UIImage imageNamed:@"poetryBack.jpg"];
+
+    }
+    
     
     //元素的布局
     [mainImageView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -365,6 +378,7 @@ static const CGFloat topSpace = 24;//诗句与标题的上间距
 
 - (void)loadContentTableView
 {
+    self.authorLabel.text = self.dataModel.author;
     self.mainTable.backgroundColor = [UIColor clearColor];
 }
 
@@ -428,7 +442,7 @@ static const CGFloat topSpace = 24;//诗句与标题的上间距
         [_mainTable mas_makeConstraints:^(MASConstraintMaker *make) {
             
             make.left.equalTo(self.view.mas_left).offset(leftSpace);
-            make.top.equalTo(self.titleFullLabel.mas_bottom).offset(topSpace);
+            make.top.equalTo(self.authorLabel.mas_bottom).offset(topSpace);
             make.bottom.equalTo(self.view.mas_bottom).offset(-topSpace);
             make.right.equalTo(self.view.mas_right).offset(-leftSpace);
             
@@ -437,6 +451,26 @@ static const CGFloat topSpace = 24;//诗句与标题的上间距
     return _mainTable;
 }
 
+- (UILabel *)authorLabel
+{
+    if (!_authorLabel) {
+        _authorLabel = [[UILabel alloc]init];
+        _authorLabel.textAlignment = NSTextAlignmentCenter;
+        _authorLabel.textColor = RGBCOLOR(60, 60, 60, 1.0);
+        _authorLabel.font = [UIFont boldSystemFontOfSize:18.f];
+        [self.view addSubview:_authorLabel];
+        //元素的布局
+        [_authorLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.left.equalTo(self.view.mas_left).offset(leftSpace);
+            make.top.equalTo(self.titleFullLabel.mas_bottom).offset(topSpace);
+            make.right.equalTo(self.view.mas_right).offset(-leftSpace);
+            make.height.mas_equalTo(24);
+            
+        }];
+    }
+    return _authorLabel;
+}
 
 
 @end
