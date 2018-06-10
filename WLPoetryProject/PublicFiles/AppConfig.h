@@ -26,6 +26,11 @@
  **/
 @property (nonatomic,strong) UIFont *itemFont;
 
+/**
+ *  诗词类别与诗词背景图片的对应info
+ **/
+@property (nonatomic,strong) NSMutableDictionary *bgImageInfo;
+
 
 
 

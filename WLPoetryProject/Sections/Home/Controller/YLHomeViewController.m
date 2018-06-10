@@ -63,7 +63,7 @@
 
     if (self.poetryArray.count == 0) {
         //从本地读取文件
-        NSData *JSONData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"testPoetry" ofType:@"json"]];
+        NSData *JSONData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"recommendPoetry" ofType:@"json"]];
         //转为dic
         NSDictionary *poetryDic = [NSJSONSerialization JSONObjectWithData:JSONData options:NSJSONReadingAllowFragments error:nil];
         //获取到诗词列表
