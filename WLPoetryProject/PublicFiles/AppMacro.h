@@ -14,7 +14,7 @@
 #define RGBCOLOR(r,g,b,_alpha) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:_alpha]
 
 #define TabbarTextNormalColor RGBCOLOR(180,180,180,1.0)
-#define TabbarTextSelectColor RGBCOLOR(81,81,81,1.0)
+#define TabbarTextSelectColor RGBCOLOR(66,130,191,1.0)
 #define NavigationColor RGBCOLOR(66, 130, 191, 1.0)
 #define ViewBackgroundColor RGBCOLOR(240, 240, 240, 1.0)
 #define RequestFailed @"请稍后重试"
