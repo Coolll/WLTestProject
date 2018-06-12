@@ -77,10 +77,19 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = ViewBackgroundColor;
-    self.title = @"登录";
-    
+    self.titleForNavi = @"登录";
+    self.isShowBack = YES;
     [self loadCustomData];
     [self loadCustomView];
+    
+    
+    UIImageView *view = [[UIImageView alloc]init];
+    view.image = [UIImage imageNamed:@"1125*2436"];
+    view.frame = CGRectMake(100, 100, 100, 200);
+    [self.view addSubview:view];
+    
+    
+    
 }
 
 #pragma mark - 初始化数据
@@ -91,21 +100,39 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
     
     self.leftTime = 0;
 }
+- (void)backAction:(UIButton*)sender
+{
+    [self.navigationController popViewControllerAnimated:YES];
+
+}
 
 #pragma mark - 加载视图
 
 - (void)loadCustomView
 {
-    CGFloat topSpace = 25;
+    CGFloat topSpace = 30;
     CGFloat leftSpace = 22;
     CGFloat inputH = 50;
+    
+    UIView *contentView = [[UIView alloc]init];
+    contentView.backgroundColor = ViewBackgroundColor;
+    [self.view addSubview:contentView];
+    //元素的布局
+    [contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.equalTo(self.view.mas_left).offset(0);
+        make.top.equalTo(self.naviView.mas_bottom).offset(0);
+        make.bottom.equalTo(self.view.mas_bottom).offset(0);
+        make.right.equalTo(self.view.mas_right).offset(0);
+        
+    }];
     
     self.phoneTextField = [[WLCustomTextView alloc]initWithFrame:CGRectMake(leftSpace, topSpace, PhoneScreen_WIDTH-leftSpace*2, inputH)];
     self.phoneTextField.backgroundColor = [UIColor whiteColor];
     self.phoneTextField.placeHolderString = @"请输入手机号";
     self.phoneTextField.leftSpace = 10;
     self.phoneTextField.keyboardType = UIKeyboardTypeNumberPad;
-    [self.view addSubview:self.phoneTextField];
+    [contentView addSubview:self.phoneTextField];
 
     
     [[WLPublicTool shareTool] addCornerForView:self.phoneTextField withTopLeft:YES withTopRight:YES withBottomLeft:NO withBottomRight:NO withCornerRadius:5.0];
@@ -113,14 +140,14 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
     CGFloat lineH = 0.7;
     UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(leftSpace, topSpace+inputH, self.phoneTextField.frame.size.width, lineH)];
     lineView.backgroundColor = RGBCOLOR(161, 165, 166, 1.0);
-    [self.view addSubview:lineView];
+    [contentView addSubview:lineView];
 
     self.codeTextField = [[WLCustomTextView alloc]initWithFrame:CGRectMake(leftSpace, topSpace+inputH+lineH, self.phoneTextField.frame.size.width, inputH)];
     self.codeTextField.placeHolderString = @"输入验证码";
     self.codeTextField.leftSpace = 10;
     self.codeTextField.keyboardType = UIKeyboardTypeNumberPad;
     self.codeTextField.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:self.codeTextField];
+    [contentView addSubview:self.codeTextField];
     
     [[WLPublicTool shareTool] addCornerForView:self.codeTextField withTopLeft:NO withTopRight:NO withBottomLeft:YES withBottomRight:YES withCornerRadius:5.0];
     
@@ -128,14 +155,13 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
     self.rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     self.rightBtn.backgroundColor = [UIColor whiteColor];
     [self.rightBtn addTarget:self action:@selector(getCheckCode:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:self.rightBtn];
+    [contentView addSubview:self.rightBtn];
     
     [self.rightBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.top.equalTo(self.view.mas_top).offset(topSpace);
+        make.top.equalTo(self.phoneTextField.mas_top).offset(0);
         make.bottom.equalTo(self.phoneTextField.mas_bottom).offset(0);
         make.right.equalTo(self.view.mas_right).offset(-leftSpace);
-        make.height.mas_equalTo(inputH);
         make.width.mas_equalTo(80);
     }];
     
@@ -147,7 +173,7 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
     self.getCodeLabel.textColor = NavigationColor;
     self.getCodeLabel.font = [UIFont systemFontOfSize:10.0];
     self.getCodeLabel.layer.cornerRadius = 5.0;
-    [self.view addSubview:self.getCodeLabel];
+    [contentView addSubview:self.getCodeLabel];
     
     CGFloat codeH = 23;
     CGFloat codeTop = (inputH-codeH)/2;
@@ -169,7 +195,7 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
     self.loginBtn.titleLabel.font = [UIFont systemFontOfSize:14.0];
     [self.loginBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.loginBtn addTarget:self action:@selector(loginAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:self.loginBtn];
+    [contentView addSubview:self.loginBtn];
     
     [self.loginBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -178,7 +204,6 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
         make.right.equalTo(self.view.mas_right).offset(-leftSpace);
         make.height.mas_equalTo(btnHeight);
     }];
-    
     
     
   
@@ -194,7 +219,7 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
     self.selectImageView = [[UIImageView alloc]init];
     self.selectImageView.image = self.isAgree ? [UIImage imageNamed:@"select_circle"]:[UIImage imageNamed:@"normal_circle"];
     self.selectImageView.userInteractionEnabled = YES;
-    [self.view addSubview:self.selectImageView];
+    [contentView addSubview:self.selectImageView];
     [self.selectImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.equalTo(self.view.mas_left).offset(selectLeft);
@@ -212,7 +237,7 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
     UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     backBtn.backgroundColor = RGBCOLOR(238, 241, 245, 1.0);
     [backBtn addTarget:self action:@selector(touchTheUserDelegate:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:backBtn];
+    [contentView addSubview:backBtn];
     
     [backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -228,7 +253,7 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
     [contentLabel setText:@"注册并登录代表您同意扑克说用户协议"];
     contentLabel.font = [UIFont systemFontOfSize:10.0];
     contentLabel.textAlignment = NSTextAlignmentLeft;
-    [self.view addSubview:contentLabel];
+    [contentView addSubview:contentLabel];
     
     [contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         

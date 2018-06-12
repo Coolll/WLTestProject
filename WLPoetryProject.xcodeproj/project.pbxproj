@@ -932,17 +932,9 @@
 			isa = PBXGroup;
 			children = (
 				07567A6B207A02EB0018B9E7 /* ViewController */,
-				07567A63207A02EB0018B9E7 /* Model */,
 				07567A64207A02EB0018B9E7 /* View */,
 			);
 			path = Login;
-			sourceTree = "<group>";
-		};
-		07567A63207A02EB0018B9E7 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		07567A64207A02EB0018B9E7 /* View */ = {
@@ -979,7 +971,6 @@
 			isa = PBXGroup;
 			children = (
 				07567A70207A02EB0018B9E7 /* Controller */,
-				07567A73207A02EB0018B9E7 /* Model */,
 				07567A74207A02EB0018B9E7 /* View */,
 			);
 			path = MyAccountFirstVC;
@@ -992,13 +983,6 @@
 				07567A72207A02EB0018B9E7 /* YLAccountViewController.m */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		07567A73207A02EB0018B9E7 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		07567A74207A02EB0018B9E7 /* View */ = {

@@ -42,8 +42,8 @@ static const CGFloat touchFullOffset = 15;//箭头触摸区域超出的offset �
     [super viewDidLoad];
 
     [self loadCustomNavi];
-    
 }
+
 
 #pragma mark - 初始化导航栏
 

@@ -352,9 +352,14 @@
         _mainTableView.delegate = self;
         _mainTableView.dataSource = self;
         _mainTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        _mainTableView.backgroundColor = [UIColor clearColor];
+        _mainTableView.backgroundColor = [UIColor whiteColor];
         [self.view addSubview:_mainTableView];
         
+//        if (@available(iOS 11.0, *)) {
+//            _mainTableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+//        }else {
+//            self.automaticallyAdjustsScrollViewInsets = NO;
+//        }
         //元素的布局
         [_mainTableView mas_makeConstraints:^(MASConstraintMaker *make) {
             

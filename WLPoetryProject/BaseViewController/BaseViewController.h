@@ -36,10 +36,13 @@
 
 
 
+
+
 - (void)showHUDWithText:(NSString *)text;
 
 - (void)showAlert:(NSString*)content;
 
+//需要复写该方法
 - (void)backAction:(UIButton*)sender;
 
 //移除掉所有导航栏的元素，当自定义导航栏时使用
