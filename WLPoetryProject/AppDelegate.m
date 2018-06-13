@@ -15,6 +15,8 @@
 #import "WLCoreDataHelper.h"
 #import "PoetryModel.h"
 #import "WLSaveLocalHelper.h"
+#import "LaunchController.h"
+
 #define FIRSTOPENAPP  @"FirstLoadShuangrenduobao"
 
 @interface AppDelegate ()
@@ -60,33 +62,22 @@
         
     }
     
-    CGSize viewSize =self.window.bounds.size;
-    NSString*viewOrientation =@"Portrait";//横屏请设置成 @"Landscape"
-    NSString*launchImage =nil;
-    NSArray* imagesDict = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"UILaunchImages"];
-    for(NSDictionary* dict in imagesDict) {
-        CGSize imageSize =CGSizeFromString(dict[@"UILaunchImageSize"]);
-        if(CGSizeEqualToSize(imageSize, viewSize) && [viewOrientation isEqualToString:dict[@"UILaunchImageOrientation"]]) {
-            launchImage = dict[@"UILaunchImageName"];
-        }
-    }
-    UIImageView*launchView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:launchImage]];
-    launchView.frame=self.window.bounds;
-    launchView.contentMode=UIViewContentModeScaleAspectFill;
-    [self.window addSubview:launchView];
-    [UIView animateWithDuration:5.0f delay:0.0f options:UIViewAnimationOptionBeginFromCurrentState
-                    animations:^{
-        launchView.layer.transform=CATransform3DScale(CATransform3DIdentity,1.2,1.2,1);
-    }
-    completion:^(BOOL finished) {
-        launchView.alpha=0.0f;
-        [launchView removeFromSuperview];
-    }];
-    
+    [self loadLaunchImage];
     
     NSLog(@"在DevBranch添加");
     return YES;
 }
+
+- (void)loadLaunchImage
+{
+    LaunchController *vc = [[LaunchController alloc]init];
+    
+    UIViewController *topVC = self.window.rootViewController;
+    
+    [topVC presentViewController:vc animated:NO completion:nil];
+    
+}
+
 - (void)loadFirstLoadView
 {
     LeadViewController *vc = [[LeadViewController alloc]init];

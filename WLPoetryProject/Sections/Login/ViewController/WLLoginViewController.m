@@ -17,12 +17,12 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
 /**
  *  手机号
  **/
-@property (nonatomic,strong) WLCustomTextView *phoneTextField;
+@property (nonatomic,strong) WLCustomTextView *nameTextField;
 
 /**
  *  验证码
  **/
-@property (nonatomic,strong) WLCustomTextView *codeTextField;
+@property (nonatomic,strong) WLCustomTextView *passwordTextField;
 
 /**
  *  获取验证码的label
@@ -45,29 +45,22 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
 @property (nonatomic,strong) WLUserAgreementView *agreeView;
 
 /**
- *  leftTime
- **/
-@property (nonatomic,assign) NSInteger leftTime;
-
-/**
- *  timer
- **/
-@property (nonatomic,strong) NSTimer *timer;
-
-/**
  *  按钮
  **/
 @property (nonatomic,strong) UIButton *loginBtn;
 /**
  *  获取验证码按钮
  **/
-@property (nonatomic,strong) UIButton *rightBtn;
+@property (nonatomic,strong) UIButton *randomBtn;
 
 /**
  *  登录成功返回信息
  **/
 @property (nonatomic,copy) LoginSuccessBlock successBlock;
-
+/**
+ *  名字
+ **/
+@property (nonatomic, copy) NSArray *randomNameArray;
 
 
 @end
@@ -82,14 +75,6 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
     [self loadCustomData];
     [self loadCustomView];
     
-    
-    UIImageView *view = [[UIImageView alloc]init];
-    view.image = [UIImage imageNamed:@"1125*2436"];
-    view.frame = CGRectMake(100, 100, 100, 200);
-    [self.view addSubview:view];
-    
-    
-    
 }
 
 #pragma mark - 初始化数据
@@ -97,13 +82,13 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
 - (void)loadCustomData
 {
     self.isAgree = YES;
-    
-    self.leftTime = 0;
+//    self.randomNameArray = @[@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",@"<##>",];
+
 }
+#pragma mark - 返回
 - (void)backAction:(UIButton*)sender
 {
     [self.navigationController popViewControllerAnimated:YES];
-
 }
 
 #pragma mark - 加载视图
@@ -127,40 +112,40 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
         
     }];
     
-    self.phoneTextField = [[WLCustomTextView alloc]initWithFrame:CGRectMake(leftSpace, topSpace, PhoneScreen_WIDTH-leftSpace*2, inputH)];
-    self.phoneTextField.backgroundColor = [UIColor whiteColor];
-    self.phoneTextField.placeHolderString = @"请输入手机号";
-    self.phoneTextField.leftSpace = 10;
-    self.phoneTextField.keyboardType = UIKeyboardTypeNumberPad;
-    [contentView addSubview:self.phoneTextField];
+    self.nameTextField = [[WLCustomTextView alloc]initWithFrame:CGRectMake(leftSpace, topSpace, PhoneScreen_WIDTH-leftSpace*2, inputH)];
+    self.nameTextField.backgroundColor = [UIColor whiteColor];
+    self.nameTextField.placeHolderString = @"请输入您的用户名";
+    self.nameTextField.leftSpace = 10;
+    self.nameTextField.keyboardType = UIKeyboardTypeNumberPad;
+    [contentView addSubview:self.nameTextField];
 
     
-    [[WLPublicTool shareTool] addCornerForView:self.phoneTextField withTopLeft:YES withTopRight:YES withBottomLeft:NO withBottomRight:NO withCornerRadius:5.0];
+    [[WLPublicTool shareTool] addCornerForView:self.nameTextField withTopLeft:YES withTopRight:YES withBottomLeft:NO withBottomRight:NO withCornerRadius:5.0];
     
     CGFloat lineH = 0.7;
-    UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(leftSpace, topSpace+inputH, self.phoneTextField.frame.size.width, lineH)];
+    UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(leftSpace, topSpace+inputH, self.nameTextField.frame.size.width, lineH)];
     lineView.backgroundColor = RGBCOLOR(161, 165, 166, 1.0);
     [contentView addSubview:lineView];
 
-    self.codeTextField = [[WLCustomTextView alloc]initWithFrame:CGRectMake(leftSpace, topSpace+inputH+lineH, self.phoneTextField.frame.size.width, inputH)];
-    self.codeTextField.placeHolderString = @"输入验证码";
-    self.codeTextField.leftSpace = 10;
-    self.codeTextField.keyboardType = UIKeyboardTypeNumberPad;
-    self.codeTextField.backgroundColor = [UIColor whiteColor];
-    [contentView addSubview:self.codeTextField];
+    self.passwordTextField = [[WLCustomTextView alloc]initWithFrame:CGRectMake(leftSpace, topSpace+inputH+lineH, self.nameTextField.frame.size.width, inputH)];
+    self.passwordTextField.placeHolderString = @"请输入您的密码";
+    self.passwordTextField.leftSpace = 10;
+    self.passwordTextField.keyboardType = UIKeyboardTypeNumberPad;
+    self.passwordTextField.backgroundColor = [UIColor whiteColor];
+    [contentView addSubview:self.passwordTextField];
     
-    [[WLPublicTool shareTool] addCornerForView:self.codeTextField withTopLeft:NO withTopRight:NO withBottomLeft:YES withBottomRight:YES withCornerRadius:5.0];
+    [[WLPublicTool shareTool] addCornerForView:self.passwordTextField withTopLeft:NO withTopRight:NO withBottomLeft:YES withBottomRight:YES withCornerRadius:5.0];
     
     //获取验证码按钮
-    self.rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.rightBtn.backgroundColor = [UIColor whiteColor];
-    [self.rightBtn addTarget:self action:@selector(getCheckCode:) forControlEvents:UIControlEventTouchUpInside];
-    [contentView addSubview:self.rightBtn];
+    self.randomBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.randomBtn.backgroundColor = [UIColor whiteColor];
+    [self.randomBtn addTarget:self action:@selector(getRandomName:) forControlEvents:UIControlEventTouchUpInside];
+    [contentView addSubview:self.randomBtn];
     
-    [self.rightBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.randomBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.top.equalTo(self.phoneTextField.mas_top).offset(0);
-        make.bottom.equalTo(self.phoneTextField.mas_bottom).offset(0);
+        make.top.equalTo(self.nameTextField.mas_top).offset(0);
+        make.bottom.equalTo(self.nameTextField.mas_bottom).offset(0);
         make.right.equalTo(self.view.mas_right).offset(-leftSpace);
         make.width.mas_equalTo(80);
     }];
@@ -168,7 +153,7 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
     self.getCodeLabel = [[UILabel alloc]init];
     self.getCodeLabel.layer.borderWidth = 1.0;
     self.getCodeLabel.layer.borderColor = NavigationColor.CGColor;
-    self.getCodeLabel.text = @"获取验证码";
+    self.getCodeLabel.text = @"随机设置";
     self.getCodeLabel.textAlignment = NSTextAlignmentCenter;
     self.getCodeLabel.textColor = NavigationColor;
     self.getCodeLabel.font = [UIFont systemFontOfSize:10.0];
@@ -180,9 +165,9 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
     CGFloat codeRight = 10;
     [self.getCodeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(self.rightBtn.mas_left).offset(0);
-        make.top.equalTo(self.phoneTextField.mas_top).offset(codeTop);
-        make.right.equalTo(self.phoneTextField.mas_right).offset(-codeRight);
+        make.left.equalTo(self.randomBtn.mas_left).offset(0);
+        make.top.equalTo(self.nameTextField.mas_top).offset(codeTop);
+        make.right.equalTo(self.nameTextField.mas_right).offset(-codeRight);
         make.height.mas_equalTo(codeH);
     }];
     
@@ -200,7 +185,7 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
     [self.loginBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.equalTo(self.view.mas_left).offset(leftSpace);
-        make.top.equalTo(self.codeTextField.mas_bottom).offset(topSpace);
+        make.top.equalTo(self.passwordTextField.mas_bottom).offset(topSpace);
         make.right.equalTo(self.view.mas_right).offset(-leftSpace);
         make.height.mas_equalTo(btnHeight);
     }];
@@ -210,7 +195,7 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
     CGFloat selectH = 14;
     CGFloat selectTop = 23;
     CGFloat contentH = 15;
-    CGFloat contentW = [self widthForTextString:@"注册并登录代表您同意扑克说用户协议" height:contentH fontSize:10.0];
+    CGFloat contentW = [self widthForTextString:@"注册并登录代表您同意诗词汇用户协议" height:contentH fontSize:10.0];
     CGFloat selectSpace = 4;
     CGFloat selectLeft = (PhoneScreen_WIDTH-selectH-selectSpace-contentW)/2;
     
@@ -250,7 +235,7 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
     UILabel *contentLabel = [[UILabel alloc]init];
     contentLabel.backgroundColor = RGBCOLOR(238, 241, 245, 1.0);
     [contentLabel setTextColor:NavigationColor];
-    [contentLabel setText:@"注册并登录代表您同意扑克说用户协议"];
+    [contentLabel setText:@"注册并登录代表您同意诗词汇用户协议"];
     contentLabel.font = [UIFont systemFontOfSize:10.0];
     contentLabel.textAlignment = NSTextAlignmentLeft;
     [contentView addSubview:contentLabel];
@@ -278,100 +263,10 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
 
 
 
-#pragma mark 开始倒计时
-- (void)startShowTime
-{
-    self.leftTime = 60;
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(refreshLeftTime) userInfo:nil repeats:YES];
-    
-    [self.timer fire];
-}
 
-- (void)endShowTime
+#pragma mark - 随机设置
+- (void)getRandomName:(UIButton*)sender
 {
-    [self.timer invalidate];
-    
-    self.getCodeLabel.text = @"获取验证码";
-    self.getCodeLabel.textColor = NavigationColor;
-//    self.getCodeLabel.userInteractionEnabled = YES;
-//    self.rightBtn.enabled = YES;
-    self.getCodeLabel.layer.borderColor = NavigationColor.CGColor;
-}
-#pragma mark 刷新label
-- (void)refreshLeftTime
-{
-    if (self.leftTime == 0) {
-        [self endShowTime];
-        return;
-    }
-    self.leftTime -= 1;
-    
-    NSString *string = [NSString stringWithFormat:@"%lds",(long)self.leftTime];
-    
-    self.getCodeLabel.text = string;
-    self.getCodeLabel.textColor = [UIColor lightGrayColor];
-//    self.getCodeLabel.userInteractionEnabled = NO;
-//    self.rightBtn.enabled = NO;
-    self.getCodeLabel.layer.borderColor = [UIColor lightGrayColor].CGColor;
-    
-}
-#pragma mark - 获取验证码
-
-- (void)getCheckCode:(UIButton*)sender
-{
-    
-    if (self.leftTime > 0) {
-        return;
-    }
-    
-    if (![self checkStringWithOrigin:self.phoneTextField.contentString]) {
-        
-        [self showHUDWithText:@"请检查手机号"];
-        return;
-    }
-    
-    if (self.phoneTextField.contentString.length != 11) {
-        
-        [self showHUDWithText:@"请检查手机号"];
-        return;
-    }
-    
-    
-    [self startShowTime];
-    NSLog(@"获取验证码");
-    
-    NSString *url = WL_BASE_URL(@"public/api/1.0/getCode");
-    NSDictionary *param = @{@"phone_":self.phoneTextField.contentString};
-    
-    [[NetworkCenter shareCenter] requestDataWithURL:url withParams:param withHttpType:POST_HttpType withProgress:nil withResult:^(id result) {
-        
-        NSLog(@"result:%@",result);
-        
-        NSString *codeString = [NSString stringWithFormat:@"%@",[result objectForKey:@"code"]];
-        
-        if ([codeString isEqualToString:@"1000"]) {
-            
-            NSDictionary *data = result[@"data"];
-            
-            NSString *checkString = [NSString stringWithFormat:@"%@",data[@"obj"]];
-            NSLog(@"CheckCode:%@",checkString);
-            
-        }else{
-            
-            NSString *errorString = [NSString stringWithFormat:@"%@",[result objectForKey:@"msg"]];
-            
-            [self showHUDWithText:errorString];
-            [self endShowTime];
-            
-        }
-        
-        
-    } withError:^(NSInteger errorCode, NSString *errorMsg) {
-        
-        [self endShowTime];
-        [self showHUDWithText:RequestFailed];
-        
-    } isSupportHUD:NO];
     
 }
 
@@ -381,13 +276,13 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
 {
     HidenKeybory;
     
-    if (![self checkStringWithOrigin:self.phoneTextField.contentString]) {
+    if (![self checkStringWithOrigin:self.nameTextField.contentString]) {
         
         [self showHUDWithText:@"请检查手机号"];
         return;
     }
     
-    if (self.phoneTextField.contentString.length != 11 ) {
+    if (self.nameTextField.contentString.length != 11 ) {
         
         [self showHUDWithText:@"请检查手机号"];
         return;
@@ -402,8 +297,8 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
 
     
     NSString *url = WL_BASE_URL(@"public/api/1.0/login");
-    NSDictionary *param = @{@"userName":self.phoneTextField.contentString,
-                            @"checkCode":self.codeTextField.contentString};
+    NSDictionary *param = @{@"userName":self.nameTextField.contentString,
+                            @"checkCode":self.passwordTextField.contentString};
 
     [[NetworkCenter shareCenter] requestDataWithURL:url withParams:param withHttpType:POST_HttpType withProgress:nil withResult:^(id result) {
         NSLog(@"Login:%@",result);
@@ -443,7 +338,6 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
             NSString *errorString = [NSString stringWithFormat:@"服务不可用"];
             
             [self showHUDWithText:errorString];
-            [self endShowTime];
             
         }
 
