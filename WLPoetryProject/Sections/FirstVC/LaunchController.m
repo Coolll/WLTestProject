@@ -112,7 +112,7 @@
     NSString *title = [NSString stringWithFormat:@"跳过 %ld",self.totalTime];
     [self.skipBtn setTitle:title forState:UIControlStateNormal];
     
-    if (self.totalTime == 1) {
+    if (self.totalTime == 0) {
         
         [self.skipBtn setTitle:@"跳过" forState:UIControlStateNormal];
         [self skipAction:nil];
