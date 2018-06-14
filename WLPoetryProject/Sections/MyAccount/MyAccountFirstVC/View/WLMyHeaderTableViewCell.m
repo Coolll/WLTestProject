@@ -88,7 +88,7 @@ typedef void(^EditBlock)(void);
     
     //头像
     self.headerImageView = [[UIImageView alloc]initWithFrame:CGRectMake(leftSpace, topSpace, imageW, imageH)];
-    self.headerImageView.image = [UIImage imageNamed:@"headerDefault"];
+    self.headerImageView.image = [UIImage imageNamed:@"headerUnlogin"];
     self.headerImageView.layer.cornerRadius = imageW/2;
     self.headerImageView.clipsToBounds = YES;
     self.headerImageView.backgroundColor = [UIColor whiteColor];

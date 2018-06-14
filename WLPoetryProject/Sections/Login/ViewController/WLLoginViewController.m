@@ -10,7 +10,21 @@
 #import "WLCustomTextView.h"
 #import "WLUserAgreementView.h"
 #import "WLSaveLocalHelper.h"
+#import "MBProgressHUD.h"
+#import <BmobSDK/Bmob.h>
 
+/*
+ #import "Masonry.h"
+ #import "UIImageView+WebCache.h"
+ #import "AppMacro.h"
+ #import "NetworkCenter.h"
+ #import "MJRefresh.h"
+ #import "WLPublicTool.h"
+ #import "WLRequestHelper.h"
+ #import "UserInformation.h"
+ #import "WLSaveLocalHelper.h"
+ #import "AppConfig.h"
+ */
 typedef void(^LoginSuccessBlock)(UserInformation *user);
 
 @interface WLLoginViewController ()
@@ -185,7 +199,7 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
     [self.loginBtn setTitle:@"登录" forState:UIControlStateNormal];
     self.loginBtn.titleLabel.font = [UIFont systemFontOfSize:14.0];
     [self.loginBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.loginBtn addTarget:self action:@selector(loginAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.loginBtn addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
     [contentView addSubview:self.loginBtn];
     
     [self.loginBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -288,17 +302,17 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
 
 
 #pragma mark - 用户登录
-- (void)loginAction:(UIButton*)sender
+- (void)buttonAction:(UIButton*)sender
 {
     HidenKeybory;
-    
+    self.nameTextField.contentString = @"刘备";
     if (self.nameTextField.contentString.length == 0) {
         
-        [self showHUDWithText:@"请检查用户名"];
+        [self showHUDWithText:@"用户名不可为空"];
         return;
     }
     
-    if (self.nameTextField.contentString.length != 8 ) {
+    if (self.passwordTextField.contentString.length != 8 ) {
         
         [self showHUDWithText:@"请输入八位数密码"];
         return;
@@ -310,6 +324,17 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
     [WLSaveLocalHelper saveObject:@"" forKey:LoginUserNameKey];
     [WLSaveLocalHelper saveObject:@"" forKey:LoginHeadImageKey];
 
+    MBProgressHUD *hud = [MBProgressHUD HUDForView:[UIApplication sharedApplication].keyWindow];
+    
+    if (!hud) {
+        hud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
+        
+        hud.label.text = @"正在处理...";
+    }
+    
+    [self registerAction];
+   
+    
     
     NSString *url = WL_BASE_URL(@"public/api/1.0/login");
     NSDictionary *param = @{@"userName":self.nameTextField.contentString,
@@ -363,7 +388,43 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
     
 }
 
+- (void)registerAction
+{
+    //登录
+    BmobUser *bUser = [[BmobUser alloc]init];
+    [bUser setUsername:self.nameTextField.contentString];//区分大小写
+    [bUser setPassword:self.passwordTextField.contentString];
+    [bUser setObject:@"" forKey:@"totalCount"];
+    [bUser setObject:@"" forKey:@"currentCount"];
+    [bUser setObject:@"" forKey:@"address"];
+    [bUser setObject:@"" forKey:@"accountValue"];
+    [bUser signUpInBackgroundWithBlock:^(BOOL isSuccessful, NSError *error) {
+        
+        if (isSuccessful) {
+            NSLog(@"用户成功注册");
+            [self loginAction];
+        }else{
+            NSLog(@"注册失败");
+            if (error.code == 202) {
+                //用户已注册
+                [self loginAction];
+            }
+        }
+    }];
+}
 
+- (void)loginAction
+{
+    NSLog(@"开始登录");
+    [BmobUser loginInbackgroundWithAccount:self.nameTextField.contentString andPassword:self.passwordTextField.contentString block:^(BmobUser *user, NSError *error) {
+        if (user) {
+            NSLog(@"登录user:%@",user);
+        }else{
+            NSLog(@"登录error:%@",error);
+        }
+    }];
+
+}
 
 - (NSString*)notNillValueWithKey:(NSString*)key withDic:(NSDictionary*)dic
 {
