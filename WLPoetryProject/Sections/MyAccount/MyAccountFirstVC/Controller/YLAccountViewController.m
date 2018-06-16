@@ -10,7 +10,7 @@
 #import "WLMyTableViewCell.h"
 #import "WLMyHeaderTableViewCell.h"
 #import "WLLoginViewController.h"
-
+#import "WLSettingController.h"
 
 @interface YLAccountViewController ()<UITableViewDelegate,UITableViewDataSource>
 /**
@@ -98,8 +98,8 @@
     }
 
     self.canPullData = YES;
-    self.itemsArray = [NSArray arrayWithObjects:@"帮助",@"设置",@"关于",@"联系客服", nil];
-    self.imageArray = [NSArray arrayWithObjects:@"help",@"setting",@"about",@"contact",nil];
+    self.itemsArray = [NSArray arrayWithObjects:@"我的收藏",@"设置",@"关于", nil];
+    self.imageArray = [NSArray arrayWithObjects:@"like",@"setting",@"about",nil];
 }
 
 - (void)refreshData
@@ -134,6 +134,7 @@
     if (self.mainTableView) {
         [self.mainTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
     }
+    
 }
 
 #pragma mark - 网络请求
@@ -257,7 +258,7 @@
         return 1;
     }
     
-    return 4;
+    return self.itemsArray.count;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -358,10 +359,27 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-   
+    if (indexPath.row == 1) {
+        WLSettingController *vc = [[WLSettingController alloc]init];
+        vc.hidesBottomBarWhenPushed = YES;
+        [vc refreshLoginState:^(BOOL isLogin) {
+            [self logoutAction:isLogin];
+        }];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
     
 }
 
+//从设置界面退出登录
+- (void)logoutAction:(BOOL)isLogin
+{
+    self.isLoginSuccess = isLogin;
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+       
+        [self.mainTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+    });
+}
 
 - (void)loginAction
 {
@@ -376,7 +394,6 @@
         self.userImageURL = user.userImgurl;
         
         self.isLoginSuccess = YES;
-        
         [self.mainTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
         
     }];

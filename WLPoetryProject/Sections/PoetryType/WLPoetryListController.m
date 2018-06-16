@@ -52,7 +52,8 @@
         NSData *JSONData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:self.jsonName ofType:@"json"]];
         //转为dic
         NSDictionary *poetryDic = [NSJSONSerialization JSONObjectWithData:JSONData options:NSJSONReadingAllowFragments error:nil];
-
+        NSInteger baseId = [[NSString stringWithFormat:@"%@",[poetryDic objectForKey:@"baseID"]]integerValue];
+        
         //获取到诗词列表
         NSArray *poetryArr = [poetryDic objectForKey:@"poetryList"];
         NSString *poetryMainClass = [poetryDic objectForKey:@"mainClass"];
@@ -63,8 +64,10 @@
             NSDictionary *itemDic = [poetryArr objectAtIndex:i];
             PoetryModel *model = [[PoetryModel alloc]initModelWithDictionary:itemDic];
             model.mainClass = poetryMainClass;
+            model.poetryID = [NSString stringWithFormat:@"%ld",[model.poetryID integerValue]+baseId];
             [modelArray addObject:model];
         }
+
         
         //存储到本地数据库
         [[WLCoreDataHelper shareHelper]saveInBackgroundWithPeotryModelArray:modelArray withResult:^(BOOL isSuccessful, NSError *error) {
@@ -197,8 +200,6 @@
         [self.navigationController pushViewController:detailVC animated:YES];
     }
 }
-
-
 
 
 #pragma mark - 点击事件

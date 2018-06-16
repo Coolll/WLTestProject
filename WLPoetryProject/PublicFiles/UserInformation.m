@@ -23,16 +23,16 @@
 - (void)refreshUserTokenWithDictionary:(NSDictionary*)dic
 {
     self.token = [self notNillValueWithKey:@"token" withDic:dic];
+    self.userName = [self notNillValueWithKey:@"userName" withDic:dic];
+    self.password = [self notNillValueWithKey:@"password" withDic:dic];
+    self.uid = [self notNillValueWithKey:@"userId" withDic:dic];
+
     self.ubalance = [self notNillValueWithKey:@"ubalance" withDic:dic];
-    self.uid = [self notNillValueWithKey:@"uid" withDic:dic];
     self.uphone = [self notNillValueWithKey:@"uphone" withDic:dic];
     self.userCreateTime = [self notNillValueWithKey:@"userCreateTime" withDic:dic];
-//    self.userImgurl = [self notNillValueWithKey:@"userImgurl" withDic:dic];
-    NSString *imagePath = [self notNillValueWithKey:@"userImgurl" withDic:dic];
-    NSString *fullPath = [NSString stringWithFormat:@"%@%@",UserHeadImageBase,imagePath];
-    self.userImgurl = fullPath;
+    self.userImgurl = [self notNillValueWithKey:@"userImgurl" withDic:dic];
     self.userIntegral = [self notNillValueWithKey:@"userIntegral" withDic:dic];
-    self.userName = [self notNillValueWithKey:@"userName" withDic:dic];
+    
     self.userState = [self notNillValueWithKey:@"userState" withDic:dic];
     self.userUpdateTime = [self notNillValueWithKey:@"userUpdateTime" withDic:dic];
     

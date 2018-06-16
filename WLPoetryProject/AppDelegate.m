@@ -55,17 +55,43 @@
     
     [self loadCustomTabbar];
     
-    NSString *isFirstLoad = [[NSUserDefaults standardUserDefaults]objectForKey:FIRSTOPENAPP];
-    
-    if (![isFirstLoad isEqualToString:@"1"]) {
-        [self loadFirstLoadView];
-        
-    }
+//    NSString *isFirstLoad = [[NSUserDefaults standardUserDefaults]objectForKey:FIRSTOPENAPP];
+//
+//    if (![isFirstLoad isEqualToString:@"1"]) {
+//        [self loadFirstLoadView];
+//
+//    }
     
     [self loadLaunchImage];
     
+    [self loadLikePoetryList];
     NSLog(@"在DevBranch添加");
     return YES;
+}
+
+- (void)loadLikePoetryList
+{
+//    id name = kUserName;
+//    id password = kUserPassword;
+//    if (!name) {
+//        name = @"";
+//    }
+//    if (!password) {
+//        password = @"";
+//    }
+//    NSString *lastUserName = [NSString stringWithFormat:@"%@",name];
+//    NSString *lastUserPsd = [NSString stringWithFormat:@"%@",password];
+    
+    BmobUser *user = [BmobUser currentUser];
+    if (user) {
+        NSLog(@"user:%@",user);
+        
+        NSString *userBmobId = user.objectId;
+        NSMutableArray *array = [NSMutableArray arrayWithArray:[user objectForKey:@"likePoetryIDList"]];
+        
+        
+    }
+    
 }
 
 - (void)loadLaunchImage

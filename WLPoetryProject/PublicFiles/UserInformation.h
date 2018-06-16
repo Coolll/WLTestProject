@@ -47,6 +47,10 @@
  *  用户名
  **/
 @property (nonatomic,copy) NSString *userName;
+/**
+ *  密码
+ **/
+@property (nonatomic,copy) NSString *password;
 
 /**
  *  状态
@@ -57,6 +61,12 @@
  *  更新时间
  **/
 @property (nonatomic,copy) NSString *userUpdateTime;
+
+/**
+ *  收藏诗词的列表
+ **/
+@property (nonatomic, strong) NSMutableArray *likePoetryList;
+
 
 + (instancetype)shareUser;
 

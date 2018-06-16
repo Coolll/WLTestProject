@@ -53,7 +53,6 @@
     }
     
     UIImageView*launchView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:launchImage]];
-    launchView.contentMode=UIViewContentModeScaleAspectFill;
     [self.view addSubview:launchView];
     
     //设置UI布局约束

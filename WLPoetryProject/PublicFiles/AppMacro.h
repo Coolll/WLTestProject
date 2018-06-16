@@ -62,9 +62,14 @@
 #define kUserName [WLSaveLocalHelper loadObjectForKey:LoginUserNameKey]
 #define LoginUserNameKey @"WLUserLoginUserName"
 
+#define kUserPassword [WLSaveLocalHelper loadObjectForKey:LoginUserPasswordKey]
+#define LoginUserPasswordKey @"WLUserLoginUserPassword"
 
 #define kUserHeadImage [WLSaveLocalHelper loadObjectForKey:LoginHeadImageKey]
 #define LoginHeadImageKey @"WLUserLoginUserHeadImage"
+
+#define kUserID [WLSaveLocalHelper loadObjectForKey:LoginUserIDKey]
+#define LoginUserIDKey @"WLUserLoginUserID"
 
 #define kUserBalance [WLSaveLocalHelper loadObjectForKey:LoginkUserBalanceKey]
 #define LoginkUserBalanceKey @"WLUserLoginUserBalance"

@@ -8,7 +8,7 @@
 
 #import "PoetryDetailViewController.h"
 #import "WLPoetryContentCell.h"
-
+#import <BmobSDK/Bmob.h>
 static const CGFloat leftSpace = 10;//诗句的左右间距
 static const CGFloat topSpace = 15;//诗句与标题的上间距
 
@@ -27,8 +27,14 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
  **/
 @property (nonatomic,strong) UILabel *authorLabel;
 
-
-
+/**
+ *  是否收藏的图片
+ **/
+@property (nonatomic, strong) UIImageView *likeImage;
+/**
+ *  是否收藏
+ **/
+@property (nonatomic, assign) BOOL isLike;
 
 @end
 
@@ -44,6 +50,28 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
     [self loadCustomData];//加载数据
     
     [self addBackButtonForFullScreen];//返回按钮，需要最后添加
+    
+    [self loadLikeButton];
+    
+}
+
+- (void)loadLikeData
+{
+    BmobUser *user = [BmobUser currentUser];
+    
+    if (user) {
+        
+    }
+    NSString *userBmobId = user.objectId;
+    NSMutableArray *array = [NSMutableArray arrayWithArray:[user objectForKey:@"likePoetryIDList"]];
+    
+    if ([userBmobId isEqualToString:userIDString]) {
+        [array addObject:self.dataModel.poetryID];
+        [user addObjectsFromArray:[array copy] forKey:@"likePoetryIDList"];
+        [user updateInBackgroundWithResultBlock:^(BOOL isSuccessful, NSError *error) {
+            NSLog(@"error %@",[error description]);
+        }];
+    }
 }
 #pragma mark - 初始化数据和视图
 
@@ -171,6 +199,7 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
     
     
 }
+
 
 - (NSArray*)dealPartWithOrigin:(NSString*)contentString
 {
@@ -380,6 +409,77 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
 {
     self.authorLabel.text = self.dataModel.author;
     self.mainTable.backgroundColor = [UIColor clearColor];
+}
+
+- (void)loadLikeButton
+{
+    self.likeImage = [[UIImageView alloc]init];
+    self.likeImage.image = [UIImage imageNamed:@"unlike"];
+    [self.view addSubview:self.likeImage];
+    
+    
+    
+    
+    
+    if (@available(iOS 11.0, *)) {
+        //元素的布局
+        [self.likeImage mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideTop).offset(35);
+            make.right.equalTo(self.view.mas_right).offset(-20);
+            make.width.mas_equalTo(20);//元素宽度
+            make.height.mas_equalTo(20);//元素高度
+            
+        }];
+    }else{
+        //设置UI布局约束
+        [self.likeImage mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.top.equalTo(self.view.mas_top).offset(24);//元素顶部约束
+            make.trailing.equalTo(self.view.mas_trailing).offset(-20);//元素右侧约束
+            make.width.mas_equalTo(20);//元素宽度
+            make.height.mas_equalTo(20);//元素高度
+        }];
+    }
+    
+    
+    UIButton *likeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    likeBtn.backgroundColor = [UIColor clearColor];
+    [likeBtn addTarget:self action:@selector(likeAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:likeBtn];
+    //设置UI布局约束
+    [likeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.equalTo(self.likeImage.mas_top).offset(-10);//元素顶部约束
+        make.trailing.equalTo(self.likeImage.mas_trailing).offset(10);//元素右侧约束
+        make.bottom.equalTo(self.likeImage.mas_bottom).offset(10);//元素底部约束
+        make.leading.equalTo(self.likeImage.mas_leading).offset(-10);
+    }];
+    
+    
+}
+
+- (void)likeAction:(UIButton*)sender
+{
+    id userId = kUserID;
+    if (!userId) {
+        userId = @"";
+    }
+    NSString *userIDString = [NSString stringWithFormat:@"%@",userId];
+    
+    BmobUser *user = [BmobUser currentUser];
+    
+    NSString *userBmobId = user.objectId;
+    NSMutableArray *array = [NSMutableArray arrayWithArray:[user objectForKey:@"likePoetryIDList"]];
+    
+    if ([userBmobId isEqualToString:userIDString]) {
+        [array addObject:self.dataModel.poetryID];
+        [user addObjectsFromArray:[array copy] forKey:@"likePoetryIDList"];
+        [user updateInBackgroundWithResultBlock:^(BOOL isSuccessful, NSError *error) {
+            NSLog(@"error %@",[error description]);
+        }];
+    }
+    
 }
 
 #pragma mark - TableView 代理
