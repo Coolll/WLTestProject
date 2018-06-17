@@ -69,7 +69,7 @@
     self.skipBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     self.skipBtn.layer.cornerRadius = 6;
     self.skipBtn.backgroundColor = RGBCOLOR(200, 200, 200, 1.0);
-    [self.skipBtn setTitle:[NSString stringWithFormat:@"跳过 %ld",self.totalTime] forState:UIControlStateNormal];
+    [self.skipBtn setTitle:[NSString stringWithFormat:@"跳过 %ld",(long)self.totalTime] forState:UIControlStateNormal];
     [self.skipBtn addTarget:self action:@selector(skipAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.skipBtn];
     
@@ -108,7 +108,7 @@
 
 - (void)timerAction
 {
-    NSString *title = [NSString stringWithFormat:@"跳过 %ld",self.totalTime];
+    NSString *title = [NSString stringWithFormat:@"跳过 %ld",(long)self.totalTime];
     [self.skipBtn setTitle:title forState:UIControlStateNormal];
     
     if (self.totalTime == 0) {

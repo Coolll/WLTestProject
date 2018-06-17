@@ -15,6 +15,12 @@
 		000110AC20A44BD2001B2B55 /* gradePoetry_7_one.json in Resources */ = {isa = PBXBuildFile; fileRef = 000110A620A44BD2001B2B55 /* gradePoetry_7_one.json */; };
 		003EBE1620D0F00A00DD7815 /* LeadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 003EBE1520D0F00A00DD7815 /* LeadViewController.m */; };
 		003EBE1920D0F04500DD7815 /* LaunchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 003EBE1820D0F04500DD7815 /* LaunchController.m */; };
+		00BBFA0E20D6291400BB86D9 /* WLFontController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BBFA0D20D6291400BB86D9 /* WLFontController.m */; };
+		00BBFA1120D6524500BB86D9 /* WLFeedbackController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BBFA1020D6524500BB86D9 /* WLFeedbackController.m */; };
+		00BBFA1420D65B8F00BB86D9 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BBFA1320D65B8F00BB86D9 /* AboutViewController.m */; };
+		00BBFA1620D65C8B00BB86D9 /* poetryIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 00BBFA1520D65C8B00BB86D9 /* poetryIcon.png */; };
+		00BBFA1820D6709A00BB86D9 /* classOHTen.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 00BBFA1720D6709A00BB86D9 /* classOHTen.jpg */; };
+		00EC603E20D5E84E002B6C85 /* WLLikeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00EC603D20D5E84E002B6C85 /* WLLikeController.m */; };
 		00F9516120D4B2A10039D7C5 /* WLSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F9516020D4B2A10039D7C5 /* WLSettingController.m */; };
 		00F9516420D4BA590039D7C5 /* WLSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F9516320D4BA590039D7C5 /* WLSettingCell.m */; };
 		00F9516620D4D1D80039D7C5 /* settingArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 00F9516520D4D1D80039D7C5 /* settingArrow.png */; };
@@ -23,8 +29,8 @@
 		00F9517020D4D8090039D7C5 /* about@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 00F9516E20D4D8090039D7C5 /* about@2x.png */; };
 		00F9517320D4EA650039D7C5 /* check_box.png in Resources */ = {isa = PBXBuildFile; fileRef = 00F9517120D4EA650039D7C5 /* check_box.png */; };
 		00F9517420D4EA650039D7C5 /* check_box_sel.png in Resources */ = {isa = PBXBuildFile; fileRef = 00F9517220D4EA650039D7C5 /* check_box_sel.png */; };
-		00F9517720D4FF940039D7C5 /* like.png in Resources */ = {isa = PBXBuildFile; fileRef = 00F9517520D4FF940039D7C5 /* like.png */; };
-		00F9517820D4FF940039D7C5 /* unlike.png in Resources */ = {isa = PBXBuildFile; fileRef = 00F9517620D4FF940039D7C5 /* unlike.png */; };
+		00F9517720D4FF940039D7C5 /* likePoetry.png in Resources */ = {isa = PBXBuildFile; fileRef = 00F9517520D4FF940039D7C5 /* likePoetry.png */; };
+		00F9517820D4FF940039D7C5 /* unlikePoetry.png in Resources */ = {isa = PBXBuildFile; fileRef = 00F9517620D4FF940039D7C5 /* unlikePoetry.png */; };
 		00FD14C020A95A2D0018D649 /* tangPoetry_six.json in Resources */ = {isa = PBXBuildFile; fileRef = 00FD14BA20A95A2C0018D649 /* tangPoetry_six.json */; };
 		00FD14C120A95A2D0018D649 /* tangPoetry_three.json in Resources */ = {isa = PBXBuildFile; fileRef = 00FD14BB20A95A2C0018D649 /* tangPoetry_three.json */; };
 		00FD14C220A95A2D0018D649 /* tangPoetry_two.json in Resources */ = {isa = PBXBuildFile; fileRef = 00FD14BC20A95A2C0018D649 /* tangPoetry_two.json */; };
@@ -89,13 +95,6 @@
 		07567B22207A02EC0018B9E7 /* UIScrollView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 07567996207A02EB0018B9E7 /* UIScrollView+MJExtension.m */; };
 		07567B23207A02EC0018B9E7 /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 07567998207A02EB0018B9E7 /* UIScrollView+MJRefresh.m */; };
 		07567B24207A02EC0018B9E7 /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 0756799A207A02EB0018B9E7 /* UIView+MJExtension.m */; };
-		07567B25207A02EC0018B9E7 /* SBJson4Parser.m in Sources */ = {isa = PBXBuildFile; fileRef = 0756799E207A02EB0018B9E7 /* SBJson4Parser.m */; };
-		07567B26207A02EC0018B9E7 /* SBJson4StreamParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 075679A0207A02EB0018B9E7 /* SBJson4StreamParser.m */; };
-		07567B27207A02EC0018B9E7 /* SBJson4StreamParserState.m in Sources */ = {isa = PBXBuildFile; fileRef = 075679A2207A02EB0018B9E7 /* SBJson4StreamParserState.m */; };
-		07567B28207A02EC0018B9E7 /* SBJson4StreamTokeniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 075679A4207A02EB0018B9E7 /* SBJson4StreamTokeniser.m */; };
-		07567B29207A02EC0018B9E7 /* SBJson4StreamWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 075679A6207A02EB0018B9E7 /* SBJson4StreamWriter.m */; };
-		07567B2A207A02EC0018B9E7 /* SBJson4StreamWriterState.m in Sources */ = {isa = PBXBuildFile; fileRef = 075679A8207A02EB0018B9E7 /* SBJson4StreamWriterState.m */; };
-		07567B2B207A02EC0018B9E7 /* SBJson4Writer.m in Sources */ = {isa = PBXBuildFile; fileRef = 075679AA207A02EB0018B9E7 /* SBJson4Writer.m */; };
 		07567B40207A02EC0018B9E7 /* UserInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 075679D8207A02EB0018B9E7 /* UserInformation.m */; };
 		07567B41207A02EC0018B9E7 /* WLPublicTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 075679DA207A02EB0018B9E7 /* WLPublicTool.m */; };
 		07567B7C207A02EC0018B9E7 /* WLCustomTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 07567A66207A02EB0018B9E7 /* WLCustomTextView.m */; };
@@ -105,7 +104,6 @@
 		07567B80207A02EC0018B9E7 /* YLAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07567A72207A02EB0018B9E7 /* YLAccountViewController.m */; };
 		07567B81207A02EC0018B9E7 /* WLMyHeaderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 07567A76207A02EB0018B9E7 /* WLMyHeaderTableViewCell.m */; };
 		07567B82207A02EC0018B9E7 /* WLMyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 07567A78207A02EB0018B9E7 /* WLMyTableViewCell.m */; };
-		07567B8C207A02EC0018B9E7 /* NetworkCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 07567A96207A02EB0018B9E7 /* NetworkCenter.m */; };
 		07567B8D207A02EC0018B9E7 /* WLBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 07567A98207A02EB0018B9E7 /* WLBaseModel.m */; };
 		07567B8E207A02EC0018B9E7 /* WLRequestHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 07567A9A207A02EB0018B9E7 /* WLRequestHelper.m */; };
 		07567B8F207A02EC0018B9E7 /* WLSaveLocalHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 07567A9C207A02EB0018B9E7 /* WLSaveLocalHelper.m */; };
@@ -214,9 +212,6 @@
 		07F73C03208ACD9A00F7D8B3 /* normal_circle@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07F73B9E208ACD9A00F7D8B3 /* normal_circle@3x.png */; };
 		07F73C04208ACD9A00F7D8B3 /* select_circle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07F73B9F208ACD9A00F7D8B3 /* select_circle@2x.png */; };
 		07F73C05208ACD9A00F7D8B3 /* select_circle@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07F73BA0208ACD9A00F7D8B3 /* select_circle@3x.png */; };
-		07F73C06208ACD9A00F7D8B3 /* leadOne.png in Resources */ = {isa = PBXBuildFile; fileRef = 07F73BA2208ACD9A00F7D8B3 /* leadOne.png */; };
-		07F73C07208ACD9A00F7D8B3 /* leadThree.png in Resources */ = {isa = PBXBuildFile; fileRef = 07F73BA3208ACD9A00F7D8B3 /* leadThree.png */; };
-		07F73C08208ACD9A00F7D8B3 /* leadTwo.png in Resources */ = {isa = PBXBuildFile; fileRef = 07F73BA4208ACD9A00F7D8B3 /* leadTwo.png */; };
 		07F73C09208ACD9A00F7D8B3 /* nav_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07F73BA5208ACD9A00F7D8B3 /* nav_back@2x.png */; };
 		07F73C0A208ACD9A00F7D8B3 /* nav_back@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07F73BA6208ACD9A00F7D8B3 /* nav_back@3x.png */; };
 		07F73C0B208ACD9A00F7D8B3 /* tabbarLine@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07F73BA8208ACD9A00F7D8B3 /* tabbarLine@2x.png */; };
@@ -270,6 +265,16 @@
 		003EBE1520D0F00A00DD7815 /* LeadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeadViewController.m; sourceTree = "<group>"; };
 		003EBE1720D0F04500DD7815 /* LaunchController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LaunchController.h; sourceTree = "<group>"; };
 		003EBE1820D0F04500DD7815 /* LaunchController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LaunchController.m; sourceTree = "<group>"; };
+		00BBFA0C20D6291400BB86D9 /* WLFontController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLFontController.h; sourceTree = "<group>"; };
+		00BBFA0D20D6291400BB86D9 /* WLFontController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLFontController.m; sourceTree = "<group>"; };
+		00BBFA0F20D6524500BB86D9 /* WLFeedbackController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLFeedbackController.h; sourceTree = "<group>"; };
+		00BBFA1020D6524500BB86D9 /* WLFeedbackController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLFeedbackController.m; sourceTree = "<group>"; };
+		00BBFA1220D65B8F00BB86D9 /* AboutViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
+		00BBFA1320D65B8F00BB86D9 /* AboutViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
+		00BBFA1520D65C8B00BB86D9 /* poetryIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = poetryIcon.png; sourceTree = "<group>"; };
+		00BBFA1720D6709A00BB86D9 /* classOHTen.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = classOHTen.jpg; sourceTree = "<group>"; };
+		00EC603C20D5E84E002B6C85 /* WLLikeController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLLikeController.h; sourceTree = "<group>"; };
+		00EC603D20D5E84E002B6C85 /* WLLikeController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLLikeController.m; sourceTree = "<group>"; };
 		00F9515F20D4B2A10039D7C5 /* WLSettingController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLSettingController.h; sourceTree = "<group>"; };
 		00F9516020D4B2A10039D7C5 /* WLSettingController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLSettingController.m; sourceTree = "<group>"; };
 		00F9516220D4BA590039D7C5 /* WLSettingCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLSettingCell.h; sourceTree = "<group>"; };
@@ -280,8 +285,8 @@
 		00F9516E20D4D8090039D7C5 /* about@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "about@2x.png"; sourceTree = "<group>"; };
 		00F9517120D4EA650039D7C5 /* check_box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check_box.png; sourceTree = "<group>"; };
 		00F9517220D4EA650039D7C5 /* check_box_sel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check_box_sel.png; sourceTree = "<group>"; };
-		00F9517520D4FF940039D7C5 /* like.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = like.png; sourceTree = "<group>"; };
-		00F9517620D4FF940039D7C5 /* unlike.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unlike.png; sourceTree = "<group>"; };
+		00F9517520D4FF940039D7C5 /* likePoetry.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = likePoetry.png; sourceTree = "<group>"; };
+		00F9517620D4FF940039D7C5 /* unlikePoetry.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unlikePoetry.png; sourceTree = "<group>"; };
 		00FD14BA20A95A2C0018D649 /* tangPoetry_six.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tangPoetry_six.json; sourceTree = "<group>"; };
 		00FD14BB20A95A2C0018D649 /* tangPoetry_three.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tangPoetry_three.json; sourceTree = "<group>"; };
 		00FD14BC20A95A2C0018D649 /* tangPoetry_two.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tangPoetry_two.json; sourceTree = "<group>"; };
@@ -381,21 +386,6 @@
 		07567998207A02EB0018B9E7 /* UIScrollView+MJRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+MJRefresh.m"; sourceTree = "<group>"; };
 		07567999207A02EB0018B9E7 /* UIView+MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MJExtension.h"; sourceTree = "<group>"; };
 		0756799A207A02EB0018B9E7 /* UIView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MJExtension.m"; sourceTree = "<group>"; };
-		0756799C207A02EB0018B9E7 /* SBJson4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson4.h; sourceTree = "<group>"; };
-		0756799D207A02EB0018B9E7 /* SBJson4Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson4Parser.h; sourceTree = "<group>"; };
-		0756799E207A02EB0018B9E7 /* SBJson4Parser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJson4Parser.m; sourceTree = "<group>"; };
-		0756799F207A02EB0018B9E7 /* SBJson4StreamParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson4StreamParser.h; sourceTree = "<group>"; };
-		075679A0207A02EB0018B9E7 /* SBJson4StreamParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJson4StreamParser.m; sourceTree = "<group>"; };
-		075679A1207A02EB0018B9E7 /* SBJson4StreamParserState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson4StreamParserState.h; sourceTree = "<group>"; };
-		075679A2207A02EB0018B9E7 /* SBJson4StreamParserState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJson4StreamParserState.m; sourceTree = "<group>"; };
-		075679A3207A02EB0018B9E7 /* SBJson4StreamTokeniser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson4StreamTokeniser.h; sourceTree = "<group>"; };
-		075679A4207A02EB0018B9E7 /* SBJson4StreamTokeniser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJson4StreamTokeniser.m; sourceTree = "<group>"; };
-		075679A5207A02EB0018B9E7 /* SBJson4StreamWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson4StreamWriter.h; sourceTree = "<group>"; };
-		075679A6207A02EB0018B9E7 /* SBJson4StreamWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJson4StreamWriter.m; sourceTree = "<group>"; };
-		075679A7207A02EB0018B9E7 /* SBJson4StreamWriterState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson4StreamWriterState.h; sourceTree = "<group>"; };
-		075679A8207A02EB0018B9E7 /* SBJson4StreamWriterState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJson4StreamWriterState.m; sourceTree = "<group>"; };
-		075679A9207A02EB0018B9E7 /* SBJson4Writer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson4Writer.h; sourceTree = "<group>"; };
-		075679AA207A02EB0018B9E7 /* SBJson4Writer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJson4Writer.m; sourceTree = "<group>"; };
 		075679D4207A02EB0018B9E7 /* AppMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppMacro.h; sourceTree = "<group>"; };
 		075679D7207A02EB0018B9E7 /* UserInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInformation.h; sourceTree = "<group>"; };
 		075679D8207A02EB0018B9E7 /* UserInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInformation.m; sourceTree = "<group>"; };
@@ -415,8 +405,6 @@
 		07567A76207A02EB0018B9E7 /* WLMyHeaderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLMyHeaderTableViewCell.m; sourceTree = "<group>"; };
 		07567A77207A02EB0018B9E7 /* WLMyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLMyTableViewCell.h; sourceTree = "<group>"; };
 		07567A78207A02EB0018B9E7 /* WLMyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLMyTableViewCell.m; sourceTree = "<group>"; };
-		07567A95207A02EB0018B9E7 /* NetworkCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkCenter.h; sourceTree = "<group>"; };
-		07567A96207A02EB0018B9E7 /* NetworkCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkCenter.m; sourceTree = "<group>"; };
 		07567A97207A02EB0018B9E7 /* WLBaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLBaseModel.h; sourceTree = "<group>"; };
 		07567A98207A02EB0018B9E7 /* WLBaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLBaseModel.m; sourceTree = "<group>"; };
 		07567A99207A02EB0018B9E7 /* WLRequestHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLRequestHelper.h; sourceTree = "<group>"; };
@@ -593,9 +581,6 @@
 		07F73B9E208ACD9A00F7D8B3 /* normal_circle@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "normal_circle@3x.png"; sourceTree = "<group>"; };
 		07F73B9F208ACD9A00F7D8B3 /* select_circle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "select_circle@2x.png"; sourceTree = "<group>"; };
 		07F73BA0208ACD9A00F7D8B3 /* select_circle@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "select_circle@3x.png"; sourceTree = "<group>"; };
-		07F73BA2208ACD9A00F7D8B3 /* leadOne.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leadOne.png; sourceTree = "<group>"; };
-		07F73BA3208ACD9A00F7D8B3 /* leadThree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leadThree.png; sourceTree = "<group>"; };
-		07F73BA4208ACD9A00F7D8B3 /* leadTwo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leadTwo.png; sourceTree = "<group>"; };
 		07F73BA5208ACD9A00F7D8B3 /* nav_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav_back@2x.png"; sourceTree = "<group>"; };
 		07F73BA6208ACD9A00F7D8B3 /* nav_back@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav_back@3x.png"; sourceTree = "<group>"; };
 		07F73BA8208ACD9A00F7D8B3 /* tabbarLine@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbarLine@2x.png"; sourceTree = "<group>"; };
@@ -760,7 +745,6 @@
 				0756793E207A02EB0018B9E7 /* AFNetworking */,
 				07567967207A02EB0018B9E7 /* MBProgress */,
 				0756796C207A02EB0018B9E7 /* MJRefresh */,
-				0756799B207A02EB0018B9E7 /* SBJson */,
 			);
 			path = ThirdPartClass;
 			sourceTree = "<group>";
@@ -891,28 +875,6 @@
 			path = Header;
 			sourceTree = "<group>";
 		};
-		0756799B207A02EB0018B9E7 /* SBJson */ = {
-			isa = PBXGroup;
-			children = (
-				0756799C207A02EB0018B9E7 /* SBJson4.h */,
-				0756799D207A02EB0018B9E7 /* SBJson4Parser.h */,
-				0756799E207A02EB0018B9E7 /* SBJson4Parser.m */,
-				0756799F207A02EB0018B9E7 /* SBJson4StreamParser.h */,
-				075679A0207A02EB0018B9E7 /* SBJson4StreamParser.m */,
-				075679A1207A02EB0018B9E7 /* SBJson4StreamParserState.h */,
-				075679A2207A02EB0018B9E7 /* SBJson4StreamParserState.m */,
-				075679A3207A02EB0018B9E7 /* SBJson4StreamTokeniser.h */,
-				075679A4207A02EB0018B9E7 /* SBJson4StreamTokeniser.m */,
-				075679A5207A02EB0018B9E7 /* SBJson4StreamWriter.h */,
-				075679A6207A02EB0018B9E7 /* SBJson4StreamWriter.m */,
-				075679A7207A02EB0018B9E7 /* SBJson4StreamWriterState.h */,
-				075679A8207A02EB0018B9E7 /* SBJson4StreamWriterState.m */,
-				075679A9207A02EB0018B9E7 /* SBJson4Writer.h */,
-				075679AA207A02EB0018B9E7 /* SBJson4Writer.m */,
-			);
-			path = SBJson;
-			sourceTree = "<group>";
-		};
 		075679D3207A02EB0018B9E7 /* PublicFiles */ = {
 			isa = PBXGroup;
 			children = (
@@ -1004,6 +966,14 @@
 				07567A72207A02EB0018B9E7 /* YLAccountViewController.m */,
 				00F9515F20D4B2A10039D7C5 /* WLSettingController.h */,
 				00F9516020D4B2A10039D7C5 /* WLSettingController.m */,
+				00EC603C20D5E84E002B6C85 /* WLLikeController.h */,
+				00EC603D20D5E84E002B6C85 /* WLLikeController.m */,
+				00BBFA0C20D6291400BB86D9 /* WLFontController.h */,
+				00BBFA0D20D6291400BB86D9 /* WLFontController.m */,
+				00BBFA0F20D6524500BB86D9 /* WLFeedbackController.h */,
+				00BBFA1020D6524500BB86D9 /* WLFeedbackController.m */,
+				00BBFA1220D65B8F00BB86D9 /* AboutViewController.h */,
+				00BBFA1320D65B8F00BB86D9 /* AboutViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1024,8 +994,6 @@
 		07567A94207A02EB0018B9E7 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
-				07567A95207A02EB0018B9E7 /* NetworkCenter.h */,
-				07567A96207A02EB0018B9E7 /* NetworkCenter.m */,
 				07567A97207A02EB0018B9E7 /* WLBaseModel.h */,
 				07567A98207A02EB0018B9E7 /* WLBaseModel.m */,
 				07567A99207A02EB0018B9E7 /* WLRequestHelper.h */,
@@ -1244,6 +1212,7 @@
 		07D37FFE20CD5E2200CF2A6E /* PoetryBgImages */ = {
 			isa = PBXGroup;
 			children = (
+				00BBFA1720D6709A00BB86D9 /* classOHTen.jpg */,
 				07D3801F20CD619A00CF2A6E /* classSixteen.png */,
 				07D37FFF20CD5E2200CF2A6E /* classEleven.jpg */,
 				07D3800020CD5E2200CF2A6E /* classFive.jpg */,
@@ -1355,13 +1324,11 @@
 		07F73BA1208ACD9A00F7D8B3 /* ShareResoure */ = {
 			isa = PBXGroup;
 			children = (
-				00F9517520D4FF940039D7C5 /* like.png */,
-				00F9517620D4FF940039D7C5 /* unlike.png */,
+				00BBFA1520D65C8B00BB86D9 /* poetryIcon.png */,
+				00F9517520D4FF940039D7C5 /* likePoetry.png */,
+				00F9517620D4FF940039D7C5 /* unlikePoetry.png */,
 				07D3802120CD637700CF2A6E /* mainBgImage.jpg */,
 				07D37FFE20CD5E2200CF2A6E /* PoetryBgImages */,
-				07F73BA2208ACD9A00F7D8B3 /* leadOne.png */,
-				07F73BA3208ACD9A00F7D8B3 /* leadThree.png */,
-				07F73BA4208ACD9A00F7D8B3 /* leadTwo.png */,
 				07F73BA5208ACD9A00F7D8B3 /* nav_back@2x.png */,
 				07F73BA6208ACD9A00F7D8B3 /* nav_back@3x.png */,
 			);
@@ -1476,7 +1443,7 @@
 				TargetAttributes = {
 					079568F420726D0B0097C26D = {
 						CreatedOnToolsVersion = 9.2;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 					0795690F20726D0B0097C26D = {
 						CreatedOnToolsVersion = 9.2;
@@ -1516,8 +1483,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				07E7C31820CC1DA7007CA827 /* configureSong.json in Resources */,
-				07F73C08208ACD9A00F7D8B3 /* leadTwo.png in Resources */,
-				07F73C07208ACD9A00F7D8B3 /* leadThree.png in Resources */,
 				07D3801B20CD5E2200CF2A6E /* classThirtyTwo.jpg in Resources */,
 				07D3801420CD5E2200CF2A6E /* classOne.jpg in Resources */,
 				0785076320B2EFF20030CD98 /* songPoetry_five.json in Resources */,
@@ -1531,14 +1496,13 @@
 				071609B220A1C15400904C69 /* gradePoetry_empty.json in Resources */,
 				00F9516C20D4D7190039D7C5 /* setting.png in Resources */,
 				07D3801620CD5E2200CF2A6E /* classSix.jpg in Resources */,
-				00F9517720D4FF940039D7C5 /* like.png in Resources */,
+				00F9517720D4FF940039D7C5 /* likePoetry.png in Resources */,
 				07F73C0A208ACD9A00F7D8B3 /* nav_back@3x.png in Resources */,
 				0721702C2087843A002A1628 /* README.strings in Resources */,
 				0795690820726D0B0097C26D /* LaunchScreen.storyboard in Resources */,
 				07F3E30B20D2C0FC00E7BAF7 /* defaultHeader.png in Resources */,
 				00F9517020D4D8090039D7C5 /* about@2x.png in Resources */,
 				07D3802020CD619A00CF2A6E /* classSixteen.png in Resources */,
-				07F73C06208ACD9A00F7D8B3 /* leadOne.png in Resources */,
 				07D3802220CD637700CF2A6E /* mainBgImage.jpg in Resources */,
 				07E06D9920A06C9300093DCC /* tabbarTwo.png in Resources */,
 				07E7C31520CC1AB5007CA827 /* configureGrade.json in Resources */,
@@ -1560,7 +1524,7 @@
 				07F3E31420D2C0FC00E7BAF7 /* clearNavi.png in Resources */,
 				07F3E31120D2C0FC00E7BAF7 /* myArrow.png in Resources */,
 				00FD14C020A95A2D0018D649 /* tangPoetry_six.json in Resources */,
-				00F9517820D4FF940039D7C5 /* unlike.png in Resources */,
+				00F9517820D4FF940039D7C5 /* unlikePoetry.png in Resources */,
 				00FD14C120A95A2D0018D649 /* tangPoetry_three.json in Resources */,
 				00F9517420D4EA650039D7C5 /* check_box_sel.png in Resources */,
 				000110AC20A44BD2001B2B55 /* gradePoetry_7_one.json in Resources */,
@@ -1569,6 +1533,7 @@
 				0785076720B2EFF20030CD98 /* songPoetry_two.json in Resources */,
 				07F73C76208AE84900F7D8B3 /* tabbarThree_sel.png in Resources */,
 				00FD14C220A95A2D0018D649 /* tangPoetry_two.json in Resources */,
+				00BBFA1820D6709A00BB86D9 /* classOHTen.jpg in Resources */,
 				07D3801C20CD5E2200CF2A6E /* classThree.jpg in Resources */,
 				07F73C09208ACD9A00F7D8B3 /* nav_back@2x.png in Resources */,
 				07D3801520CD5E2200CF2A6E /* classSeven.jpg in Resources */,
@@ -1595,6 +1560,7 @@
 				0795690520726D0B0097C26D /* Assets.xcassets in Resources */,
 				0795690020726D0B0097C26D /* Main.storyboard in Resources */,
 				071609AA20A1C15400904C69 /* gradePoetry_2.json in Resources */,
+				00BBFA1620D65C8B00BB86D9 /* poetryIcon.png in Resources */,
 				0785076920B2EFF20030CD98 /* songPoetry_ten.json in Resources */,
 				000110AB20A44BD2001B2B55 /* gradePoetry_9_two.json in Resources */,
 				0785075820B2EDB30030CD98 /* songPoetry_one.json in Resources */,
@@ -1638,12 +1604,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				07567B21207A02EC0018B9E7 /* NSBundle+MJRefresh.m in Sources */,
-				07567B27207A02EC0018B9E7 /* SBJson4StreamParserState.m in Sources */,
 				0765C707207CE6E20085EB3A /* SDWebImageImageIOCoder.m in Sources */,
 				07567B20207A02EC0018B9E7 /* MJRefreshConst.m in Sources */,
+				00BBFA1120D6524500BB86D9 /* WLFeedbackController.m in Sources */,
 				003EBE1620D0F00A00DD7815 /* LeadViewController.m in Sources */,
 				00F9516120D4B2A10039D7C5 /* WLSettingController.m in Sources */,
 				0765C6B2207CE47E0085EB3A /* MASViewAttribute.m in Sources */,
+				00BBFA0E20D6291400BB86D9 /* WLFontController.m in Sources */,
 				0765C6B7207CE47E0085EB3A /* ViewController+MASAdditions.m in Sources */,
 				0765C70C207CE6E20085EB3A /* UIButton+WebCache.m in Sources */,
 				0765C6B0207CE47E0085EB3A /* MASConstraintMaker.m in Sources */,
@@ -1667,13 +1634,11 @@
 				079BC505209D42BB00E0DF85 /* WLPoetryContentCell.m in Sources */,
 				0765C709207CE6E20085EB3A /* SDWebImagePrefetcher.m in Sources */,
 				07567B1B207A02EB0018B9E7 /* MJRefreshBackStateFooter.m in Sources */,
-				07567B25207A02EC0018B9E7 /* SBJson4Parser.m in Sources */,
 				0765C6B6207CE47E0085EB3A /* View+MASAdditions.m in Sources */,
 				07E06D9520A06A1C00093DCC /* WLPoetryTypeController.m in Sources */,
 				07567AFF207A02EB0018B9E7 /* AFNetworkReachabilityManager.m in Sources */,
 				07567B03207A02EB0018B9E7 /* AFURLSessionManager.m in Sources */,
 				07567B13207A02EB0018B9E7 /* MJRefreshComponent.m in Sources */,
-				07567B2B207A02EC0018B9E7 /* SBJson4Writer.m in Sources */,
 				0765C703207CE6E20085EB3A /* SDWebImageDownloader.m in Sources */,
 				079BC508209EEF6800E0DF85 /* AppConfig.m in Sources */,
 				07567B23207A02EC0018B9E7 /* UIScrollView+MJRefresh.m in Sources */,
@@ -1686,10 +1651,8 @@
 				0765C6FB207CE6E20085EB3A /* NSImage+WebCache.m in Sources */,
 				07567B10207A02EB0018B9E7 /* MyMBProgress.m in Sources */,
 				0765C712207CE6E20085EB3A /* UIImageView+WebCache.m in Sources */,
-				07567B29207A02EC0018B9E7 /* SBJson4StreamWriter.m in Sources */,
 				0765C70A207CE6E20085EB3A /* SDWebImageTransition.m in Sources */,
 				07567A9E207A02EB0018B9E7 /* BaseViewController.m in Sources */,
-				07567B8C207A02EC0018B9E7 /* NetworkCenter.m in Sources */,
 				0765C714207CE6E20085EB3A /* UIView+WebCacheOperation.m in Sources */,
 				07567B02207A02EB0018B9E7 /* AFURLResponseSerialization.m in Sources */,
 				07567B12207A02EB0018B9E7 /* MJRefreshBackFooter.m in Sources */,
@@ -1697,9 +1660,9 @@
 				0765C706207CE6E20085EB3A /* SDWebImageGIFCoder.m in Sources */,
 				07567B82207A02EC0018B9E7 /* WLMyTableViewCell.m in Sources */,
 				0765C6AE207CE47E0085EB3A /* MASCompositeConstraint.m in Sources */,
+				00BBFA1420D65B8F00BB86D9 /* AboutViewController.m in Sources */,
 				07A922B120862EB100BE5929 /* PoetryModel.m in Sources */,
 				07B6E7AB20A07B2E000998E3 /* WLPoetryListController.m in Sources */,
-				07567B26207A02EC0018B9E7 /* SBJson4StreamParser.m in Sources */,
 				07567AFE207A02EB0018B9E7 /* AFHTTPSessionManager.m in Sources */,
 				079568FA20726D0B0097C26D /* AppDelegate.m in Sources */,
 				0765C705207CE6E20085EB3A /* SDWebImageFrame.m in Sources */,
@@ -1717,7 +1680,6 @@
 				0765C6FC207CE6E20085EB3A /* SDAnimatedImageRep.m in Sources */,
 				07642A5E208E141900B084AE /* PoetryDetailViewController.m in Sources */,
 				07567B16207A02EB0018B9E7 /* MJRefreshAutoGifFooter.m in Sources */,
-				07567B28207A02EC0018B9E7 /* SBJson4StreamTokeniser.m in Sources */,
 				0795690B20726D0B0097C26D /* main.m in Sources */,
 				0765C70F207CE6E20085EB3A /* UIImage+MultiFormat.m in Sources */,
 				0765C6F8207CE6E20085EB3A /* MKAnnotationView+WebCache.m in Sources */,
@@ -1725,6 +1687,7 @@
 				07567B19207A02EB0018B9E7 /* MJRefreshBackGifFooter.m in Sources */,
 				07567B1C207A02EB0018B9E7 /* MJRefreshGifHeader.m in Sources */,
 				0765C6B3207CE47E0085EB3A /* MASViewConstraint.m in Sources */,
+				00EC603E20D5E84E002B6C85 /* WLLikeController.m in Sources */,
 				07567B00207A02EB0018B9E7 /* AFSecurityPolicy.m in Sources */,
 				0765C6FA207CE6E20085EB3A /* NSData+ImageContentType.m in Sources */,
 				0765C6FE207CE6E20085EB3A /* SDImageCacheConfig.m in Sources */,
@@ -1734,7 +1697,6 @@
 				07567B7C207A02EC0018B9E7 /* WLCustomTextView.m in Sources */,
 				0765C708207CE6E20085EB3A /* SDWebImageManager.m in Sources */,
 				0765C6B4207CE47E0085EB3A /* NSArray+MASAdditions.m in Sources */,
-				07567B2A207A02EC0018B9E7 /* SBJson4StreamWriterState.m in Sources */,
 				07567B11207A02EB0018B9E7 /* MJRefreshAutoFooter.m in Sources */,
 				07567B1A207A02EB0018B9E7 /* MJRefreshBackNormalFooter.m in Sources */,
 				07567B40207A02EC0018B9E7 /* UserInformation.m in Sources */,
@@ -1846,7 +1808,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1895,7 +1857,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -1908,7 +1870,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = EQK7HQ2C5P;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1922,8 +1884,8 @@
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wangqilong.wqlPoetryProject;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "6f48e83f-4b79-4fc5-9e1f-c9365ea4d809";
+				PROVISIONING_PROFILE_SPECIFIER = poetryDev;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1935,7 +1897,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = EQK7HQ2C5P;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1949,8 +1911,8 @@
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wangqilong.wqlPoetryProject;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "ba002daf-3295-448e-a73e-43577bef4d6c";
+				PROVISIONING_PROFILE_SPECIFIER = poetryDistribution;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

@@ -11,7 +11,6 @@
 #import "Masonry.h"
 #import "UIImageView+WebCache.h"
 #import "AppMacro.h"
-#import "NetworkCenter.h"
 #import "MJRefresh.h"
 #import "WLPublicTool.h"
 #import "WLRequestHelper.h"

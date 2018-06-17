@@ -16,7 +16,10 @@
  *  诗词的标题字体
  **/
 @property (nonatomic,strong) UIFont *titleFont;
-
+/**
+ *  诗词的标题字体
+ **/
+@property (nonatomic,strong) UIFont *authorFont;
 /**
  *  诗词的内容字体
  **/

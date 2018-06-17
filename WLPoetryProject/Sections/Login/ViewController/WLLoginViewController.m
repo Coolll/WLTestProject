@@ -377,7 +377,9 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
     NSInteger four = self.fourNameArray.count;
     NSInteger fourIndex = arc4random()%four;
     
-    NSString *name = [NSString stringWithFormat:@"%@丶%@",self.threeNameArray[threeIndex],self.fourNameArray[fourIndex]];
+    NSInteger count = 1000+arc4random()%8888;
+    
+    NSString *name = [NSString stringWithFormat:@"%@丶%@%ld",self.threeNameArray[threeIndex],self.fourNameArray[fourIndex],(long)count];
     self.nameTextField.contentString = name;
     
     self.passwordTextField.contentString = @"12345678";
@@ -408,7 +410,7 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
 - (void)buttonAction:(UIButton*)sender
 {
     HidenKeybory;
-    self.nameTextField.contentString = @"刘备";
+//    self.nameTextField.contentString = @"刘备";
     if (self.nameTextField.contentString.length == 0) {
         
         [self showHUDWithText:@"用户名不可为空"];
@@ -480,15 +482,24 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
         if (user) {
             NSLog(@"登录user:%@",user);
             
+            //更新基本信息
+            [[UserInformation shareUser] refreshUserInfoWithUser:user];
+            
+            
             NSDictionary *dataDic = [self responseDataWithUser:user];
             
-            [[UserInformation shareUser] refreshUserTokenWithDictionary:dataDic];
-            
             [WLSaveLocalHelper saveObject:[self notNillValueWithKey:@"token" withDic:dataDic] forKey:LoginTokenKey];
-            [WLSaveLocalHelper saveObject:[self notNillValueWithKey:@"userName" withDic:dataDic] forKey:LoginUserNameKey];
-            [WLSaveLocalHelper saveObject:self.passwordTextField.contentString forKey:LoginUserPasswordKey];
             [WLSaveLocalHelper saveObject:user.objectId forKey:LoginUserIDKey];
             [WLSaveLocalHelper saveObject:@"" forKey:LoginHeadImageKey];
+            
+            //需要记住密码，则保存，不需要，则保存空字符串
+            if (self.needSaveAccount) {
+                [WLSaveLocalHelper saveObject:[self notNillValueWithKey:@"userName" withDic:dataDic] forKey:LoginUserNameKey];
+                [WLSaveLocalHelper saveObject:self.passwordTextField.contentString forKey:LoginUserPasswordKey];
+            }else{
+                [WLSaveLocalHelper saveObject:@"" forKey:LoginUserNameKey];
+                [WLSaveLocalHelper saveObject:@"" forKey:LoginUserPasswordKey];
+            }
             
             
             dispatch_async(dispatch_get_main_queue(), ^{

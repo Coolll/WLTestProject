@@ -55,24 +55,31 @@
 
 #define HidenKeybory {[[[UIApplication sharedApplication] keyWindow] endEditing:YES];}
 
-
+//用户的token
 #define kUserToken [WLSaveLocalHelper loadObjectForKey:LoginTokenKey]
 #define LoginTokenKey @"WLUserLoginToken"
 
+//用户的登录名
 #define kUserName [WLSaveLocalHelper loadObjectForKey:LoginUserNameKey]
 #define LoginUserNameKey @"WLUserLoginUserName"
 
+//用户的密码
 #define kUserPassword [WLSaveLocalHelper loadObjectForKey:LoginUserPasswordKey]
 #define LoginUserPasswordKey @"WLUserLoginUserPassword"
 
+//用户的头像
 #define kUserHeadImage [WLSaveLocalHelper loadObjectForKey:LoginHeadImageKey]
 #define LoginHeadImageKey @"WLUserLoginUserHeadImage"
 
+//用户的userId
 #define kUserID [WLSaveLocalHelper loadObjectForKey:LoginUserIDKey]
 #define LoginUserIDKey @"WLUserLoginUserID"
 
-#define kUserBalance [WLSaveLocalHelper loadObjectForKey:LoginkUserBalanceKey]
-#define LoginkUserBalanceKey @"WLUserLoginUserBalance"
+//用户的本地设置，诸如诗词的字号
+#define kUserConfigure [WLSaveLocalHelper loadObjectForKey:UserPoetryConfigure]
+#define UserPoetryConfigure @"WLUserPoetryConfigure"
+
+
 
 #define kNotAlertUserUpdateVersion @"WLNotAlertUserUpdateVersion"
 

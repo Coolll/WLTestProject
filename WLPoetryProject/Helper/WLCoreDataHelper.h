@@ -34,8 +34,13 @@ typedef void(^CoreDataInnerBlock)(BOOL isSuccessful);
 //根据来源查询诗词的信息
 - (Poetry*)fetchPoetryWithSource:(NSString*)source;
 
+//根据id来查询诗词
+- (PoetryModel*)fetchPoetryModelWithID:(NSString*)idString;
+
+//- (PoetryModel*)fetchPoetryWithID:(NSString*)idString;
+
 //根据ID 更改诗词的信息
-- (void)updatePoetryWithID:(NSString*)poetryID withNewPoetry:(PoetryModel*)newPoetry withResult:(CoreDataResultBlock)block;
+//- (void)updatePoetryWithID:(NSString*)poetryID withNewPoetry:(PoetryModel*)newPoetry withResult:(CoreDataResultBlock)block;
 
 //删除全部诗词
 - (void)deleteAllPoetry;

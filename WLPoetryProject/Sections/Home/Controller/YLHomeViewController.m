@@ -312,7 +312,7 @@
         NSDictionary *itemDic = [poetryArr objectAtIndex:i];
         PoetryModel *model = [[PoetryModel alloc]initModelWithDictionary:itemDic];
         model.mainClass = poetryMainClass;
-        model.poetryID = [NSString stringWithFormat:@"%ld",[model.poetryID integerValue]+baseId];
+        model.poetryID = [NSString stringWithFormat:@"%d",[model.poetryID integerValue]+baseId];
         [modelArray addObject:model];
     }
     
@@ -333,6 +333,8 @@
     if (!_mainBgView) {
         _mainBgView = [[UIImageView alloc]init];
         _mainBgView.alpha = 0.5;
+        _mainBgView.contentMode = UIViewContentModeScaleAspectFill;
+        _mainBgView.clipsToBounds = YES;
         [self.view addSubview:_mainBgView];
         //元素的布局
         [_mainBgView mas_makeConstraints:^(MASConstraintMaker *make) {

@@ -20,6 +20,21 @@
 
 }
 
+- (void)refreshUserInfoWithUser:(BmobUser*)user
+{
+    self.userName = [NSString stringWithFormat:@"%@",[user objectForKey:@"username"]];
+    self.uid = [NSString stringWithFormat:@"%@",user.objectId];
+    self.token = [NSString stringWithFormat:@"%@",[user objectForKey:@"sessionToken"]];
+    self.password = [NSString stringWithFormat:@"%@",user.password];
+    
+    NSMutableArray *array = [NSMutableArray arrayWithArray:[user objectForKey:@"likePoetryIDList"]];
+    self.likePoetryList = [NSMutableArray arrayWithArray:array];
+    
+    
+    
+}
+
+
 - (void)refreshUserTokenWithDictionary:(NSDictionary*)dic
 {
     self.token = [self notNillValueWithKey:@"token" withDic:dic];

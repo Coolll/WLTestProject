@@ -35,7 +35,10 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
  *  是否收藏
  **/
 @property (nonatomic, assign) BOOL isLike;
-
+/**
+ *  喜欢的点击事件
+ **/
+@property (nonatomic, copy) LikeBlock likeBlock;
 @end
 
 @implementation PoetryDetailViewController
@@ -51,27 +54,57 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
     
     [self addBackButtonForFullScreen];//返回按钮，需要最后添加
     
-    [self loadLikeButton];
+    [self loadLikeData];
     
 }
 
 - (void)loadLikeData
 {
+    
+    id token = kUserToken;
+    if (!token) {
+        token = @"";
+    }
+    
+    NSString *tokenString = [NSString stringWithFormat:@"%@",token];
+    //如果本地没有token，那么就意味着用户没有登录，不需要去拿收藏列表,该数据为未收藏
+    if (tokenString.length == 0) {
+        self.isLike = NO;
+        [self loadLikeButton];
+        return;
+    }
+    
+    
     BmobUser *user = [BmobUser currentUser];
     
     if (user) {
         
+        NSMutableArray *array = [NSMutableArray arrayWithArray:[user objectForKey:@"likePoetryIDList"]];
+        
+        if (array.count == 0) {
+            self.isLike = NO;
+            [self loadLikeButton];
+            return;
+        }
+        
+        BOOL isContain = NO;
+        for (NSString *poetryIdString in array) {
+            //已经收藏了的诗词
+            if ([poetryIdString isEqualToString:self.dataModel.poetryID]) {
+                self.isLike = YES;
+                [self loadLikeButton];
+                return;
+            }
+        }
+        
+        if (!isContain) {
+            self.isLike = NO;
+            [self loadLikeButton];
+        }
+        
     }
-    NSString *userBmobId = user.objectId;
-    NSMutableArray *array = [NSMutableArray arrayWithArray:[user objectForKey:@"likePoetryIDList"]];
     
-    if ([userBmobId isEqualToString:userIDString]) {
-        [array addObject:self.dataModel.poetryID];
-        [user addObjectsFromArray:[array copy] forKey:@"likePoetryIDList"];
-        [user updateInBackgroundWithResultBlock:^(BOOL isSuccessful, NSError *error) {
-            NSLog(@"error %@",[error description]);
-        }];
-    }
+    
 }
 #pragma mark - 初始化数据和视图
 
@@ -411,10 +444,21 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
     self.mainTable.backgroundColor = [UIColor clearColor];
 }
 
+- (void)clickLikeWithBlock:(LikeBlock)block
+{
+    if (block) {
+        self.likeBlock = block;
+    }
+}
+
 - (void)loadLikeButton
 {
     self.likeImage = [[UIImageView alloc]init];
-    self.likeImage.image = [UIImage imageNamed:@"unlike"];
+    if (self.isLike) {
+        self.likeImage.image = [UIImage imageNamed:@"likePoetry"];
+    }else{
+        self.likeImage.image = [UIImage imageNamed:@"unlikePoetry"];
+    }
     [self.view addSubview:self.likeImage];
     
     
@@ -461,8 +505,22 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
 
 - (void)likeAction:(UIButton*)sender
 {
-    id userId = kUserID;
-    if (!userId) {
+    
+    id token = kUserToken;
+    if (!token) {
+        token = @"";
+    }
+    
+    NSString *tokenString = [NSString stringWithFormat:@"%@",token];
+    //如果本地没有token，那么就意味着用户没有登录，无法进行收藏
+    if (tokenString.length == 0) {
+        [self showHUDWithText:@"您尚未登录，请登录后重试"];
+        return;
+    }
+    
+    
+    NSString *userId = kUserID;
+    if (!userId || userId.length == 0) {
         userId = @"";
     }
     NSString *userIDString = [NSString stringWithFormat:@"%@",userId];
@@ -470,13 +528,40 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
     BmobUser *user = [BmobUser currentUser];
     
     NSString *userBmobId = user.objectId;
-    NSMutableArray *array = [NSMutableArray arrayWithArray:[user objectForKey:@"likePoetryIDList"]];
-    
+//    NSMutableArray *array = [NSMutableArray arrayWithArray:[user objectForKey:@"likePoetryIDList"]];
+    NSArray *array = [NSArray arrayWithObject:self.dataModel.poetryID];
     if ([userBmobId isEqualToString:userIDString]) {
-        [array addObject:self.dataModel.poetryID];
-        [user addObjectsFromArray:[array copy] forKey:@"likePoetryIDList"];
+        
+        if (self.isLike) {
+            //如果之前是喜欢，点击按钮，则移除
+//            [array removeObject:self.dataModel.poetryID];
+            [user removeObjectsInArray:[array copy] forKey:@"likePoetryIDList"];
+
+
+        }else{
+            //如果之前未喜欢，点击按钮，则收藏
+//            [array addObject:self.dataModel.poetryID];
+            [user addObjectsFromArray:[array copy] forKey:@"likePoetryIDList"];
+
+        }
+        
         [user updateInBackgroundWithResultBlock:^(BOOL isSuccessful, NSError *error) {
             NSLog(@"error %@",[error description]);
+            if (isSuccessful) {
+                self.isLike = !self.isLike;
+                
+                if (self.isLike) {
+                    self.likeImage.image = [UIImage imageNamed:@"likePoetry"];
+                }else{
+                    self.likeImage.image = [UIImage imageNamed:@"unlikePoetry"];
+                }
+                
+                //点击收藏/取消收藏后，我的收藏列表的数据需要更新
+                if (self.likeBlock) {
+                    self.likeBlock(self.isLike);
+                }
+                
+            }
         }];
     }
     
@@ -557,7 +642,7 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
         _authorLabel = [[UILabel alloc]init];
         _authorLabel.textAlignment = NSTextAlignmentCenter;
         _authorLabel.textColor = RGBCOLOR(60, 60, 60, 1.0);
-        _authorLabel.font = [UIFont boldSystemFontOfSize:18.f];
+        _authorLabel.font = [AppConfig config].authorFont;
         [self.view addSubview:_authorLabel];
         //元素的布局
         [_authorLabel mas_makeConstraints:^(MASConstraintMaker *make) {

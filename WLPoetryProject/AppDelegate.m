@@ -71,26 +71,44 @@
 
 - (void)loadLikePoetryList
 {
-//    id name = kUserName;
-//    id password = kUserPassword;
-//    if (!name) {
-//        name = @"";
-//    }
-//    if (!password) {
-//        password = @"";
-//    }
-//    NSString *lastUserName = [NSString stringWithFormat:@"%@",name];
-//    NSString *lastUserPsd = [NSString stringWithFormat:@"%@",password];
     
-    BmobUser *user = [BmobUser currentUser];
-    if (user) {
-        NSLog(@"user:%@",user);
-        
-        NSString *userBmobId = user.objectId;
-        NSMutableArray *array = [NSMutableArray arrayWithArray:[user objectForKey:@"likePoetryIDList"]];
-        
-        
+    id token = kUserToken;
+    if (!token) {
+        token = @"";
     }
+    
+    NSString *tokenString = [NSString stringWithFormat:@"%@",token];
+    //如果本地没有token，那么就意味着用户没有登录，不需要去拿收藏列表
+    if (tokenString.length == 0) {
+        return;
+    }
+    
+    
+    NSString *name = kUserName;
+    NSString *password = kUserPassword;
+    if (!name || name.length == 0) {
+        return;
+    }
+    
+    if (!password || password.length == 0) {
+        return;
+    }
+    
+    NSString *lastUserName = [NSString stringWithFormat:@"%@",name];
+    NSString *lastUserPsd = [NSString stringWithFormat:@"%@",password];
+    
+
+    [BmobUser loginInbackgroundWithAccount:lastUserName andPassword:lastUserPsd block:^(BmobUser *user, NSError *error) {
+        if (user) {
+            NSLog(@"登录user:%@",user);
+
+            [[UserInformation shareUser] refreshUserInfoWithUser:user];
+        }else{
+            NSLog(@"登录error:%@",error);
+        }
+    }];
+    
+   
     
 }
 

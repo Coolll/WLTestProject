@@ -9,6 +9,8 @@
 #import "WLSettingController.h"
 #import "WLSettingCell.h"
 #import <BmobSDK/Bmob.h>
+#import "WLFontController.h"
+#import "WLFeedbackController.h"
 
 @interface WLSettingController ()<UITableViewDelegate,UITableViewDataSource>
 /**
@@ -117,7 +119,6 @@
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    
     WLSettingCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WLSettingCell"];
     
     if (!cell) {
@@ -155,7 +156,24 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            //调整字体
+            WLFontController *fontVC = [[WLFontController alloc]init];
+            [self.navigationController pushViewController:fontVC animated:YES];
+            
+        }else if(indexPath.row == 1){
+            //空间清理
+            [self showHUDWithText:@"清理成功"];
+        }else if (indexPath.row == 2){
+            //意见反馈
+            WLFeedbackController *feedVc = [[WLFeedbackController alloc]init];
+            [self.navigationController pushViewController:feedVc animated:YES];
+        }
+    }
+    
     if (indexPath.section == 1) {
+        //退出登录
         [BmobUser logout];
         if (self.block) {
             self.block(NO);
@@ -171,6 +189,8 @@
     }
     
 }
+
+
 
 #pragma mark - 返回
 - (void)backAction:(UIButton*)sender
