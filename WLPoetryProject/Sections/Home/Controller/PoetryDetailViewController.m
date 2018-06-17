@@ -8,7 +8,7 @@
 
 #import "PoetryDetailViewController.h"
 #import "WLPoetryContentCell.h"
-
+#import <BmobSDK/Bmob.h>
 static const CGFloat leftSpace = 10;//诗句的左右间距
 static const CGFloat topSpace = 15;//诗句与标题的上间距
 
@@ -27,9 +27,18 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
  **/
 @property (nonatomic,strong) UILabel *authorLabel;
 
-
-
-
+/**
+ *  是否收藏的图片
+ **/
+@property (nonatomic, strong) UIImageView *likeImage;
+/**
+ *  是否收藏
+ **/
+@property (nonatomic, assign) BOOL isLike;
+/**
+ *  喜欢的点击事件
+ **/
+@property (nonatomic, copy) LikeBlock likeBlock;
 @end
 
 @implementation PoetryDetailViewController
@@ -44,6 +53,58 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
     [self loadCustomData];//加载数据
     
     [self addBackButtonForFullScreen];//返回按钮，需要最后添加
+    
+    [self loadLikeData];
+    
+}
+
+- (void)loadLikeData
+{
+    
+    id token = kUserToken;
+    if (!token) {
+        token = @"";
+    }
+    
+    NSString *tokenString = [NSString stringWithFormat:@"%@",token];
+    //如果本地没有token，那么就意味着用户没有登录，不需要去拿收藏列表,该数据为未收藏
+    if (tokenString.length == 0) {
+        self.isLike = NO;
+        [self loadLikeButton];
+        return;
+    }
+    
+    
+    BmobUser *user = [BmobUser currentUser];
+    
+    if (user) {
+        
+        NSMutableArray *array = [NSMutableArray arrayWithArray:[user objectForKey:@"likePoetryIDList"]];
+        
+        if (array.count == 0) {
+            self.isLike = NO;
+            [self loadLikeButton];
+            return;
+        }
+        
+        BOOL isContain = NO;
+        for (NSString *poetryIdString in array) {
+            //已经收藏了的诗词
+            if ([poetryIdString isEqualToString:self.dataModel.poetryID]) {
+                self.isLike = YES;
+                [self loadLikeButton];
+                return;
+            }
+        }
+        
+        if (!isContain) {
+            self.isLike = NO;
+            [self loadLikeButton];
+        }
+        
+    }
+    
+    
 }
 #pragma mark - 初始化数据和视图
 
@@ -171,6 +232,7 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
     
     
 }
+
 
 - (NSArray*)dealPartWithOrigin:(NSString*)contentString
 {
@@ -382,6 +444,129 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
     self.mainTable.backgroundColor = [UIColor clearColor];
 }
 
+- (void)clickLikeWithBlock:(LikeBlock)block
+{
+    if (block) {
+        self.likeBlock = block;
+    }
+}
+
+- (void)loadLikeButton
+{
+    self.likeImage = [[UIImageView alloc]init];
+    if (self.isLike) {
+        self.likeImage.image = [UIImage imageNamed:@"likePoetry"];
+    }else{
+        self.likeImage.image = [UIImage imageNamed:@"unlikePoetry"];
+    }
+    [self.view addSubview:self.likeImage];
+    
+    
+    
+    
+    
+    if (@available(iOS 11.0, *)) {
+        //元素的布局
+        [self.likeImage mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideTop).offset(35);
+            make.right.equalTo(self.view.mas_right).offset(-20);
+            make.width.mas_equalTo(20);//元素宽度
+            make.height.mas_equalTo(20);//元素高度
+            
+        }];
+    }else{
+        //设置UI布局约束
+        [self.likeImage mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.top.equalTo(self.view.mas_top).offset(24);//元素顶部约束
+            make.trailing.equalTo(self.view.mas_trailing).offset(-20);//元素右侧约束
+            make.width.mas_equalTo(20);//元素宽度
+            make.height.mas_equalTo(20);//元素高度
+        }];
+    }
+    
+    
+    UIButton *likeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    likeBtn.backgroundColor = [UIColor clearColor];
+    [likeBtn addTarget:self action:@selector(likeAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:likeBtn];
+    //设置UI布局约束
+    [likeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.equalTo(self.likeImage.mas_top).offset(-10);//元素顶部约束
+        make.trailing.equalTo(self.likeImage.mas_trailing).offset(10);//元素右侧约束
+        make.bottom.equalTo(self.likeImage.mas_bottom).offset(10);//元素底部约束
+        make.leading.equalTo(self.likeImage.mas_leading).offset(-10);
+    }];
+    
+    
+}
+
+- (void)likeAction:(UIButton*)sender
+{
+    
+    id token = kUserToken;
+    if (!token) {
+        token = @"";
+    }
+    
+    NSString *tokenString = [NSString stringWithFormat:@"%@",token];
+    //如果本地没有token，那么就意味着用户没有登录，无法进行收藏
+    if (tokenString.length == 0) {
+        [self showHUDWithText:@"您尚未登录，请登录后重试"];
+        return;
+    }
+    
+    
+    NSString *userId = kUserID;
+    if (!userId || userId.length == 0) {
+        userId = @"";
+    }
+    NSString *userIDString = [NSString stringWithFormat:@"%@",userId];
+    
+    BmobUser *user = [BmobUser currentUser];
+    
+    NSString *userBmobId = user.objectId;
+//    NSMutableArray *array = [NSMutableArray arrayWithArray:[user objectForKey:@"likePoetryIDList"]];
+    NSArray *array = [NSArray arrayWithObject:self.dataModel.poetryID];
+    if ([userBmobId isEqualToString:userIDString]) {
+        
+        if (self.isLike) {
+            //如果之前是喜欢，点击按钮，则移除
+//            [array removeObject:self.dataModel.poetryID];
+            [user removeObjectsInArray:[array copy] forKey:@"likePoetryIDList"];
+
+
+        }else{
+            //如果之前未喜欢，点击按钮，则收藏
+//            [array addObject:self.dataModel.poetryID];
+            [user addObjectsFromArray:[array copy] forKey:@"likePoetryIDList"];
+
+        }
+        
+        [user updateInBackgroundWithResultBlock:^(BOOL isSuccessful, NSError *error) {
+            NSLog(@"error %@",[error description]);
+            if (isSuccessful) {
+                self.isLike = !self.isLike;
+                
+                if (self.isLike) {
+                    self.likeImage.image = [UIImage imageNamed:@"likePoetry"];
+                }else{
+                    self.likeImage.image = [UIImage imageNamed:@"unlikePoetry"];
+                }
+                
+                //点击收藏/取消收藏后，我的收藏列表的数据需要更新
+                if (self.likeBlock) {
+                    self.likeBlock(self.isLike);
+                }
+                
+            }
+        }];
+    }
+    
+}
+
 #pragma mark - TableView 代理
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -457,7 +642,7 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
         _authorLabel = [[UILabel alloc]init];
         _authorLabel.textAlignment = NSTextAlignmentCenter;
         _authorLabel.textColor = RGBCOLOR(60, 60, 60, 1.0);
-        _authorLabel.font = [UIFont boldSystemFontOfSize:18.f];
+        _authorLabel.font = [AppConfig config].authorFont;
         [self.view addSubview:_authorLabel];
         //元素的布局
         [_authorLabel mas_makeConstraints:^(MASConstraintMaker *make) {

@@ -167,13 +167,13 @@
 #pragma mark - 改
 
 //根据ID 更改诗词的信息
-- (void)updatePoetryWithID:(NSString*)poetryID withNewPoetry:(PoetryModel*)newPoetry withResult:(CoreDataResultBlock)block
-{
-    Poetry *poetry = [self fetchPoetryWithID:poetryID];
-    
-    [self savePoetry:poetry withPoetryModel:newPoetry withResult:block];
-    
-}
+//- (void)updatePoetryWithID:(NSString*)poetryID withNewPoetry:(PoetryModel*)newPoetry withResult:(CoreDataResultBlock)block
+//{
+//    PoetryModel *poetry = [self fetchPoetryWithID:poetryID];
+//
+//    [self savePoetry:poetry withPoetryModel:newPoetry withResult:block];
+//
+//}
 #pragma mark - 删
 //删除全部诗词
 - (void)deleteAllPoetry
@@ -188,7 +188,7 @@
 //根据ID 删除诗词的信息
 - (void)deletePoetryWithID:(NSString*)poetryID withResult:(CoreDataResultBlock)block
 {
-    Poetry *poetry = [self fetchPoetryWithID:poetryID];
+    Poetry *poetry = [self fetchPoetryEntityWithID:poetryID];
 
     [self.appDelegate.managedObjectContext deleteObject:poetry];
     
@@ -247,12 +247,47 @@
     
 }
 //根据ID查询诗词的信息
-- (Poetry*)fetchPoetryWithID:(NSString*)idString
+- (PoetryModel*)fetchPoetryModelWithID:(NSString*)idString
 {
     
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"poetryID == %@",idString];
     NSFetchRequest *request = [[NSFetchRequest alloc]init];
 
+    NSArray *fetchArray = [self fetchDataWithTableName:@"Poetry" withRequest:request withPredicate:predicate];
+    
+    Poetry *poetryEntity = nil;
+    
+    if (fetchArray.count > 0) {
+        poetryEntity = [fetchArray firstObject];
+    }
+    
+    PoetryModel *model = [[PoetryModel alloc]init];
+    model.name = poetryEntity.name;
+    model.author = poetryEntity.author;
+    model.content = poetryEntity.content;
+    model.backImageName = poetryEntity.backImageName;
+    model.isLike = poetryEntity.isLike;
+    model.isRecited = poetryEntity.isRecited;
+    model.isShowed = poetryEntity.isShowed;
+    model.source = poetryEntity.source;
+    model.poetryID = poetryEntity.poetryID;
+    model.addtionInfo = poetryEntity.addtionInfo;
+    model.classInfo = poetryEntity.classInfo;
+    model.transferInfo = poetryEntity.transferInfo;
+    model.analysesInfo = poetryEntity.analysesInfo;
+    model.backgroundInfo = poetryEntity.backgroundInfo;
+    model.firstLineString = poetryEntity.firstLineString;
+    model.mainClass = poetryEntity.mainClass;
+    return model;
+}
+
+//根据ID查询诗词的信息
+- (Poetry*)fetchPoetryEntityWithID:(NSString*)idString
+{
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"poetryID == %@",idString];
+    NSFetchRequest *request = [[NSFetchRequest alloc]init];
+    
     NSArray *fetchArray = [self fetchDataWithTableName:@"Poetry" withRequest:request withPredicate:predicate];
     
     Poetry *poetryEntity = nil;

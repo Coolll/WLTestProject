@@ -178,6 +178,7 @@ static const CGFloat touchFullOffset = 15;//箭头触摸区域超出的offset �
         make.height.mas_equalTo(backFullWidth+touchFullOffset*2);
     }];
     
+
    
 }
 
@@ -214,6 +215,14 @@ static const CGFloat touchFullOffset = 15;//箭头触摸区域超出的offset �
 - (void)hideHUD
 {
     [self.progressHUD hideAnimated:YES];
+}
+
+- (void)showLoadingHUDWithText:(NSString*)text
+{
+    self.progressHUD = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
+    self.progressHUD.mode = MBProgressHUDModeText;
+    self.progressHUD.offset = CGPointMake(0.f, 0);
+    self.progressHUD.detailsLabel.text = NSLocalizedString(text, @"HUD message title");
 }
 
 - (void)showHUDWithText:(NSString *)text

@@ -36,6 +36,10 @@
 
 
 
+- (void)hideHUD;//隐藏loading
+
+- (void)showLoadingHUDWithText:(NSString*)text;//loading框
+
 
 
 - (void)showHUDWithText:(NSString *)text;

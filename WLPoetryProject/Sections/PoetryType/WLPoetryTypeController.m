@@ -249,7 +249,7 @@
         
         //如果近期阅读过，则把近期看的放在首位，然后年级、唐诗、宋词
         if (section == 0) {
-            sectionLabel.text = @"推荐";
+            sectionLabel.text = @"近期阅读";
         }else if (section ==1) {
             sectionLabel.text = @"年级";
         }else if (section == 2){
@@ -368,8 +368,21 @@
     listVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:listVC animated:YES];
     
-    //近期浏览的 超过三个，则移除掉最先访问的，把最近访问的放在前面
-    [self.recentSectionArray insertObject:typeInfo atIndex:0];
+    
+    BOOL isSameMainClass = NO;
+    for (NSDictionary *recentInfo in self.recentSectionArray) {
+        NSString *mainClass = [recentInfo objectForKey:@"mainClass"];
+        if ([mainClass isEqualToString:[typeInfo objectForKey:@"mainClass"]]) {
+            isSameMainClass = YES;
+        }
+    }
+    
+    if (!isSameMainClass) {
+        //如果之前没添加过
+        //近期浏览的 超过三个，则移除掉最先访问的，把最近访问的放在前面
+        [self.recentSectionArray insertObject:typeInfo atIndex:0];
+    }
+    
     
     if (self.recentSectionArray.count >3) {
         [self.recentSectionArray removeLastObject];

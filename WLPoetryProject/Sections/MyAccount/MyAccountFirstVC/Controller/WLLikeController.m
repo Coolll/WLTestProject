@@ -1,110 +1,112 @@
 //
-//  WLPoetryListController.m
+//  WLLikeController.m
 //  WLPoetryProject
 //
-//  Created by 龙培 on 2018/5/7.
+//  Created by chuchengpeng on 2018/6/17.
 //  Copyright © 2018年 龙培. All rights reserved.
 //
 
-#import "WLPoetryListController.h"
-#import "WLCoreDataHelper.h"
+#import "WLLikeController.h"
 #import "PoetryModel.h"
+#import "WLCoreDataHelper.h"
 #import "WLPoetryListCell.h"
 #import "PoetryDetailViewController.h"
-
-@interface WLPoetryListController ()<UITableViewDataSource,UITableViewDelegate>
+@interface WLLikeController ()<UITableViewDataSource,UITableViewDelegate>
 /**
  *  诗词列表
  **/
 @property (nonatomic,strong) UITableView *mainTableView;
-
 /**
- *  诗词数据源
+ *  数据源
  **/
-@property (nonatomic,strong) NSArray *poetryArray;
+@property (nonatomic, strong) NSMutableArray *modelArray;
 /**
  *  高度数组
  **/
 @property (nonatomic,strong) NSMutableArray *heightArray;
-
-
-
-
+/**
+ *  空的数据
+ **/
+@property (nonatomic, strong) UILabel *noLabel;
 
 @end
 
-@implementation WLPoetryListController
+@implementation WLLikeController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = ViewBackgroundColor;
+    self.titleForNavi = @"我的收藏";
 
+    [self loadLikeData];
+    
 }
 
-- (void)loadCustomData
+- (void)loadLikeData
 {
     self.heightArray = [NSMutableArray array];
+
     
-    self.poetryArray = [[WLCoreDataHelper shareHelper] fetchPoetryWithMainClass:self.mainClass];
+    self.modelArray = [NSMutableArray array];
     
-    if (self.poetryArray.count == 0) {
-        //从本地读取文件
-        NSData *JSONData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:self.jsonName ofType:@"json"]];
-        //转为dic
-        NSDictionary *poetryDic = [NSJSONSerialization JSONObjectWithData:JSONData options:NSJSONReadingAllowFragments error:nil];
-        NSInteger baseId = [[NSString stringWithFormat:@"%@",[poetryDic objectForKey:@"baseID"]]integerValue];
+    BmobUser *user = [BmobUser currentUser];
+    
+    if (user) {
         
-        //获取到诗词列表
-        NSArray *poetryArr = [poetryDic objectForKey:@"poetryList"];
-        NSString *poetryMainClass = [poetryDic objectForKey:@"mainClass"];
+        NSMutableArray *array = [NSMutableArray arrayWithArray:[user objectForKey:@"likePoetryIDList"]];
         
-        NSMutableArray *modelArray = [NSMutableArray array];
-        //将诗词model化
-        for (int i = 0; i<poetryArr.count; i++) {
-            NSDictionary *itemDic = [poetryArr objectAtIndex:i];
-            PoetryModel *model = [[PoetryModel alloc]initModelWithDictionary:itemDic];
-            model.mainClass = poetryMainClass;
-            model.poetryID = [NSString stringWithFormat:@"%ld",[model.poetryID integerValue]+baseId];
-            [modelArray addObject:model];
+        if (array.count == 0) {
+            [self loadEmptyLikeView];
+            return;
+        }else{
+            self.noLabel.hidden = YES;
         }
-
         
-        //存储到本地数据库
-        [[WLCoreDataHelper shareHelper]saveInBackgroundWithPeotryModelArray:modelArray withResult:^(BOOL isSuccessful, NSError *error) {
-            if (isSuccessful) {
-                //存储成功后读取然后展示
-                [self fetchPoetryAndShowView];
-                
-            }
-        }];
-    }else{
+        [self fetchPoetryWithIdArray:array];
         
-        //直接展示数据
-        [self loadCustomView];
-
+        
     }
     
-    
-    
 }
 
-- (void)fetchPoetryAndShowView
+
+- (void)loadEmptyLikeView
 {
-    dispatch_async(dispatch_get_main_queue(), ^{
+    self.noLabel = [[UILabel alloc]init];
+    self.noLabel.text = @"暂无收藏";//设置文本
+    self.noLabel.textColor = RGBCOLOR(200, 200, 200, 1.0);
+    self.noLabel.font = [UIFont boldSystemFontOfSize:20];//字号设置
+    self.noLabel.textAlignment = NSTextAlignmentCenter;
+    [self.view addSubview:self.noLabel];
+    //设置UI布局约束
+    [self.noLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        self.poetryArray = [[WLCoreDataHelper shareHelper] fetchPoetryWithMainClass:self.mainClass];
-        [self loadCustomView];
-    });
-    
+        make.top.equalTo(self.view.mas_top).offset((PhoneScreen_HEIGHT-40-64)/2);//元素顶部约束
+        make.leading.equalTo(self.view.mas_leading).offset(0);//元素左侧约束
+        make.trailing.equalTo(self.view.mas_trailing).offset(0);//元素右侧约束
+        make.height.mas_equalTo(40);//元素高度
+    }];
 }
 
+- (void)fetchPoetryWithIdArray:(NSArray*)array
+{
+    for (NSString *idString in array) {
+        
+        PoetryModel *model = [[WLCoreDataHelper shareHelper] fetchPoetryModelWithID:idString];
+        [self.modelArray addObject:model];
+    }
+    
+    [self loadCustomView];
+
+    
+}
 
 
 #pragma mark - 加载视图
 - (void)loadCustomView
 {
     UIImageView *mainBgView = [[UIImageView alloc]init];
-    mainBgView.image = [UIImage imageNamed:@"mainBgImage"];
+    mainBgView.image = [UIImage imageNamed:@"likeBgImage"];
     [self.view addSubview:mainBgView];
     //元素的布局
     [mainBgView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -137,7 +139,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (section == 0) {
-        return self.poetryArray.count;
+        return self.modelArray.count;
     }
     
     return 1;
@@ -163,8 +165,8 @@
     if (self.heightArray.count > indexPath.row) {
         return [[self.heightArray objectAtIndex:indexPath.row] floatValue];
     }else{
-        if (self.poetryArray.count > indexPath.row) {
-            return [WLPoetryListCell heightForFirstLine:[self.poetryArray objectAtIndex:indexPath.row]];
+        if (self.modelArray.count > indexPath.row) {
+            return [WLPoetryListCell heightForFirstLine:[self.modelArray objectAtIndex:indexPath.row]];
         }
     }
     
@@ -174,7 +176,7 @@
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    PoetryModel *model = [self.poetryArray objectAtIndex:indexPath.row];
+    PoetryModel *model = [self.modelArray objectAtIndex:indexPath.row];
     
     
     WLPoetryListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WLPoetryListCell"];;
@@ -192,10 +194,20 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (indexPath.row < self.poetryArray.count) {
+    if (indexPath.row < self.modelArray.count) {
         
         PoetryDetailViewController *detailVC = [[PoetryDetailViewController alloc]init];
-        detailVC.dataModel = self.poetryArray[indexPath.row];
+        detailVC.dataModel = self.modelArray[indexPath.row];
+        
+        [detailVC clickLikeWithBlock:^(BOOL isLike){
+            
+            
+            //可能需要删除
+            if (!isLike) {
+                [self.modelArray removeObjectAtIndex:indexPath.row];
+                [self.mainTableView reloadData];
+            }
+        }];
         detailVC.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:detailVC animated:YES];
     }

@@ -21,13 +21,42 @@
 
 - (UIFont*)titleFont
 {
-    UIFont *font = [UIFont systemFontOfSize:19];
+    
+    NSDictionary *configure = kUserConfigure;
+    NSInteger fontSize = 19;
+    if ([configure objectForKey:@"poetryTitleFont"]) {
+        NSString *fontString = [configure objectForKey:@"poetryTitleFont"];
+        fontSize = [fontString integerValue];
+    }
+    
+    UIFont *font = [UIFont systemFontOfSize:fontSize];
+    
+    return font;
+}
+
+- (UIFont*)authorFont
+{
+    NSDictionary *configure = kUserConfigure;
+    NSInteger fontSize = 16;
+    if ([configure objectForKey:@"poetryAuthorFont"]) {
+        NSString *fontString = [configure objectForKey:@"poetryAuthorFont"];
+        fontSize = [fontString integerValue];
+    }
+
+    UIFont *font = [UIFont systemFontOfSize:fontSize];
     return font;
 }
 
 - (UIFont*)contentFont
 {
-    UIFont *font = [UIFont systemFontOfSize:16];
+    NSDictionary *configure = kUserConfigure;
+    NSInteger fontSize = 16;
+    if ([configure objectForKey:@"poetryContentFont"]) {
+        NSString *fontString = [configure objectForKey:@"poetryContentFont"];
+        fontSize = [fontString integerValue];
+    }
+
+    UIFont *font = [UIFont systemFontOfSize:fontSize];
     return font;
 }
 
@@ -150,6 +179,7 @@
         [_bgImageInfo setObject:@"" forKey:@"107"];
         [_bgImageInfo setObject:@"" forKey:@"108"];
         [_bgImageInfo setObject:@"" forKey:@"109"];
+        [_bgImageInfo setObject:@"classOHTen.jpg" forKey:@"110"];
  }
     return _bgImageInfo;
 }

@@ -120,7 +120,7 @@ typedef void(^EditBlock)(void);
     self.subTitleLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.nameLabel.frame.origin.x, nameTop+nameH+nameSpace, self.nameLabel.frame.size.width, subTitleH)];
     self.subTitleLabel.hidden = YES;
     self.subTitleLabel.font = [UIFont systemFontOfSize:12.0];
-    self.subTitleLabel.text = @"1s登录，即可收藏德扑新闻";
+    self.subTitleLabel.text = @"极速登录，即可收藏诗词";
     self.subTitleLabel.textColor = [UIColor whiteColor];
     [self addSubview:self.subTitleLabel];
     
@@ -128,51 +128,51 @@ typedef void(^EditBlock)(void);
     
     
     //登录时的编辑资料
-    CGFloat editW = 70;
-    self.editLabel = [[UILabel alloc]init];
-    self.editLabel.font = [UIFont systemFontOfSize:14.0];
-    self.editLabel.hidden = YES;
-    self.editLabel.textColor = [UIColor whiteColor];
-    self.editLabel.text = @"编辑资料";
-    [self addSubview:self.editLabel];
-    [self.editLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.equalTo(self.nameLabel.mas_left).offset(0);
-        make.top.equalTo(self.nameLabel.mas_bottom).offset(nameSpace);
-        make.height.mas_equalTo(subTitleH);
-        make.width.mas_equalTo(editW);
-    }];
-    
-    
-    //登录时的编辑图片
-    CGFloat editImageWidth = 16;
-    CGFloat editImageHeight = 16;
-    self.editImageView = [[UIImageView alloc]init];
-    self.editImageView.image = [UIImage imageNamed:@"editImage"];
-    [self addSubview:self.editImageView];
-    
-    [self.editImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.equalTo(self.editLabel.mas_right).offset(0);
-        make.top.equalTo(self.editLabel.mas_top).offset(0);
-        make.height.mas_equalTo(editImageHeight);
-        make.width.mas_equalTo(editImageWidth);
-    }];
+//    CGFloat editW = 70;
+//    self.editLabel = [[UILabel alloc]init];
+//    self.editLabel.font = [UIFont systemFontOfSize:14.0];
+//    self.editLabel.hidden = YES;
+//    self.editLabel.textColor = [UIColor whiteColor];
+//    self.editLabel.text = @"编辑资料";
+//    [self addSubview:self.editLabel];
+//    [self.editLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//        make.left.equalTo(self.nameLabel.mas_left).offset(0);
+//        make.top.equalTo(self.nameLabel.mas_bottom).offset(nameSpace);
+//        make.height.mas_equalTo(subTitleH);
+//        make.width.mas_equalTo(editW);
+//    }];
+//
+//
+//    //登录时的编辑图片
+//    CGFloat editImageWidth = 16;
+//    CGFloat editImageHeight = 16;
+//    self.editImageView = [[UIImageView alloc]init];
+//    self.editImageView.image = [UIImage imageNamed:@"editImage"];
+//    [self addSubview:self.editImageView];
+//
+//    [self.editImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//        make.left.equalTo(self.editLabel.mas_right).offset(0);
+//        make.top.equalTo(self.editLabel.mas_top).offset(0);
+//        make.height.mas_equalTo(editImageHeight);
+//        make.width.mas_equalTo(editImageWidth);
+//    }];
 
-    CGFloat extentSpace = 15;
-    self.editButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.editButton addTarget:self action:@selector(editInformationAction:) forControlEvents:UIControlEventTouchUpInside];
-    self.editButton.backgroundColor = [UIColor clearColor];
-    [self addSubview:self.editButton];
-    
-    [self.editButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.equalTo(self.editImageView.mas_left).offset(-extentSpace);
-        make.top.equalTo(self.editImageView.mas_top).offset(-extentSpace);
-        make.bottom.equalTo(self.editImageView.mas_bottom).offset(extentSpace);
-        make.right.equalTo(self.editImageView.mas_right).offset(extentSpace);
-        
-    }];
+//    CGFloat extentSpace = 15;
+//    self.editButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [self.editButton addTarget:self action:@selector(editInformationAction:) forControlEvents:UIControlEventTouchUpInside];
+//    self.editButton.backgroundColor = [UIColor clearColor];
+//    [self addSubview:self.editButton];
+//
+//    [self.editButton mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//        make.left.equalTo(self.editImageView.mas_left).offset(-extentSpace);
+//        make.top.equalTo(self.editImageView.mas_top).offset(-extentSpace);
+//        make.bottom.equalTo(self.editImageView.mas_bottom).offset(extentSpace);
+//        make.right.equalTo(self.editImageView.mas_right).offset(extentSpace);
+//
+//    }];
     
 }
 
@@ -265,10 +265,16 @@ typedef void(^EditBlock)(void);
     _imageURL = imageURL;
     
     if (imageURL.length > 0 && _isLogin) {
-        [self.headerImageView sd_setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:[UIImage imageNamed:@"headerDefault"]];
+        [self.headerImageView sd_setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:[UIImage imageNamed:@"headerUnlogin"]];
 
     }else{
-        self.headerImageView.image = [UIImage imageNamed:@"headerDefault"];
+        if (self.isLogin) {
+            self.headerImageView.image = [UIImage imageNamed:@"defaultHeader"];
+
+        }else{
+            self.headerImageView.image = [UIImage imageNamed:@"headerUnlogin"];
+
+        }
     }
     
 }

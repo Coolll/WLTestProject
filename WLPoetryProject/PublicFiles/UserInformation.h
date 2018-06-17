@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+#import <BmobSDK/Bmob.h>
 @interface UserInformation : NSObject
 
 /**
@@ -47,6 +48,10 @@
  *  用户名
  **/
 @property (nonatomic,copy) NSString *userName;
+/**
+ *  密码
+ **/
+@property (nonatomic,copy) NSString *password;
 
 /**
  *  状态
@@ -58,10 +63,19 @@
  **/
 @property (nonatomic,copy) NSString *userUpdateTime;
 
+/**
+ *  收藏诗词的列表
+ **/
+@property (nonatomic, strong) NSMutableArray *likePoetryList;
+
+
 + (instancetype)shareUser;
 
 - (void)refreshUserTokenWithDictionary:(NSDictionary*)dic;
 
 - (void)refreshUserWithDictionary:(NSDictionary*)dic;
+
+- (void)refreshUserInfoWithUser:(BmobUser*)user;
+
 
 @end

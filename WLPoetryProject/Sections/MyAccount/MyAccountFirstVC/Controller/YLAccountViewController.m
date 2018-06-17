@@ -10,7 +10,9 @@
 #import "WLMyTableViewCell.h"
 #import "WLMyHeaderTableViewCell.h"
 #import "WLLoginViewController.h"
-
+#import "WLSettingController.h"
+#import "WLLikeController.h"
+#import "AboutViewController.h"
 
 @interface YLAccountViewController ()<UITableViewDelegate,UITableViewDataSource>
 /**
@@ -98,8 +100,8 @@
     }
 
     self.canPullData = YES;
-    self.itemsArray = [NSArray arrayWithObjects:@"帮助",@"设置",@"关于",@"联系客服", nil];
-    self.imageArray = [NSArray arrayWithObjects:@"help",@"setting",@"about",@"contact",nil];
+    self.itemsArray = [NSArray arrayWithObjects:@"我的收藏",@"设置",@"关于", nil];
+    self.imageArray = [NSArray arrayWithObjects:@"like",@"setting",@"about",nil];
 }
 
 - (void)refreshData
@@ -134,58 +136,11 @@
     if (self.mainTableView) {
         [self.mainTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
     }
+    
 }
 
 #pragma mark - 网络请求
 
-#pragma mark  获取用户信息
-- (void)requestUserInfo
-{
-    NSString *url = WL_BASE_URL(@"private/api/1.0/user");
-
-    NSDictionary *param = @{@"phone_":kUserName,@"token":kUserToken};
-    
-    [[NetworkCenter shareCenter] requestDataWithURL:url withParams:param withHttpType:POST_HttpType withProgress:nil withResult:^(id result) {
-        NSLog(@"result:%@",result);
-
-        NSString *codeString = [NSString stringWithFormat:@"%@",[result objectForKey:@"code"]];
-        
-        if ([codeString isEqualToString:@"1000"]) {
-            
-            NSDictionary *data = result[@"data"];
-            
-            [[UserInformation shareUser] refreshUserWithDictionary:data];
-
-            [WLSaveLocalHelper saveObject:[self notNillValueWithKey:@"userName" withDic:data] forKey:LoginUserNameKey];
-            
-            
-            NSString *imagePath = [self notNillValueWithKey:@"userImgurl" withDic:data];
-            NSString *fullPath = [NSString stringWithFormat:@"%@%@",UserHeadImageBase,imagePath];
-            [WLSaveLocalHelper saveObject:fullPath forKey:LoginHeadImageKey];
-            
-            self.userNameString = [data objectForKey:@"userName"];
-            self.userImageURL = fullPath;
-            
-            
-            [self.mainTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
-
-        }else{
-            
-            NSString *resultString = [NSString stringWithFormat:@"%@",result[@"msg"]];
-            if (resultString.length > 0) {
-                [self showHUDWithText:resultString];
-            }
-        }
-        
-        [self.mainTableView.mj_header endRefreshing];
-
-        
-    } withError:^(NSInteger errorCode, NSString *errorMsg) {
-        
-        [self.mainTableView.mj_header endRefreshing];
-        [self showHUDWithText:RequestFailed];
-    } isSupportHUD:NO];
-}
 
 
 #pragma mark 非零处理
@@ -235,7 +190,7 @@
         
         //用户下拉时，如果
         if (self.isLoginSuccess) {
-            [self requestUserInfo];
+//            [self requestUserInfo];
         }else{
             [self.mainTableView.mj_header endRefreshing];
         }
@@ -257,7 +212,7 @@
         return 1;
     }
     
-    return 4;
+    return self.itemsArray.count;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -358,10 +313,62 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-   
+    NSInteger section = indexPath.section;
+    if (section == 1) {
+        
+        if (indexPath.row == 0) {
+            //我的收藏
+            id token = kUserToken;
+            if (!token) {
+                token = @"";
+            }
+            
+            NSString *tokenString = [NSString stringWithFormat:@"%@",token];
+            //如果本地没有token，那么就意味着用户没有登录，不需要去拿收藏列表,该数据为未收藏
+            if (tokenString.length == 0) {
+                [self showHUDWithText:@"请先登录"];
+                return;
+            }
+            
+            
+            WLLikeController *likeVC = [[WLLikeController alloc]init];
+            likeVC.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:likeVC animated:YES];
+        }
+        
+        if (indexPath.row == 1) {
+            //设置
+            WLSettingController *vc = [[WLSettingController alloc]init];
+            vc.hidesBottomBarWhenPushed = YES;
+            [vc refreshLoginState:^(BOOL isLogin) {
+                [self logoutAction:isLogin];
+            }];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+        
+        if (indexPath.row == 2) {
+            //关于
+            AboutViewController *vc = [[AboutViewController alloc]init];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+        
+    }
+    
+    
     
 }
 
+//从设置界面退出登录
+- (void)logoutAction:(BOOL)isLogin
+{
+    self.isLoginSuccess = isLogin;
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+       
+        [self.mainTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+    });
+}
 
 - (void)loginAction
 {
@@ -376,7 +383,6 @@
         self.userImageURL = user.userImgurl;
         
         self.isLoginSuccess = YES;
-        
         [self.mainTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
         
     }];

@@ -55,17 +55,61 @@
     
     [self loadCustomTabbar];
     
-    NSString *isFirstLoad = [[NSUserDefaults standardUserDefaults]objectForKey:FIRSTOPENAPP];
-    
-    if (![isFirstLoad isEqualToString:@"1"]) {
-        [self loadFirstLoadView];
-        
-    }
+//    NSString *isFirstLoad = [[NSUserDefaults standardUserDefaults]objectForKey:FIRSTOPENAPP];
+//
+//    if (![isFirstLoad isEqualToString:@"1"]) {
+//        [self loadFirstLoadView];
+//
+//    }
     
     [self loadLaunchImage];
     
+    [self loadLikePoetryList];
     NSLog(@"在DevBranch添加");
     return YES;
+}
+
+- (void)loadLikePoetryList
+{
+    
+    id token = kUserToken;
+    if (!token) {
+        token = @"";
+    }
+    
+    NSString *tokenString = [NSString stringWithFormat:@"%@",token];
+    //如果本地没有token，那么就意味着用户没有登录，不需要去拿收藏列表
+    if (tokenString.length == 0) {
+        return;
+    }
+    
+    
+    NSString *name = kUserName;
+    NSString *password = kUserPassword;
+    if (!name || name.length == 0) {
+        return;
+    }
+    
+    if (!password || password.length == 0) {
+        return;
+    }
+    
+    NSString *lastUserName = [NSString stringWithFormat:@"%@",name];
+    NSString *lastUserPsd = [NSString stringWithFormat:@"%@",password];
+    
+
+    [BmobUser loginInbackgroundWithAccount:lastUserName andPassword:lastUserPsd block:^(BmobUser *user, NSError *error) {
+        if (user) {
+            NSLog(@"登录user:%@",user);
+
+            [[UserInformation shareUser] refreshUserInfoWithUser:user];
+        }else{
+            NSLog(@"登录error:%@",error);
+        }
+    }];
+    
+   
+    
 }
 
 - (void)loadLaunchImage

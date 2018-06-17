@@ -8,11 +8,15 @@
 
 #import "BaseViewController.h"
 #import "PoetryModel.h"
+
+typedef void(^LikeBlock) (BOOL isLike);
+
 @interface PoetryDetailViewController : BaseViewController
 /**
  *  数据
  **/
 @property (nonatomic,strong) PoetryModel *dataModel;
 
+- (void)clickLikeWithBlock:(LikeBlock)block;
 
 @end

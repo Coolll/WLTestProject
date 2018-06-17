@@ -80,7 +80,19 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
  **/
 @property (nonatomic, copy) NSArray *fourNameArray;
 
+/**
+ *  选中图片
+ **/
+@property (nonatomic, strong) UIImageView *checkBoxImageView;
 
+/**
+ *  是否需要保存帐号密码
+ **/
+@property (nonatomic, assign) BOOL needSaveAccount;
+/**
+ *  记住帐号密码
+ **/
+@property (nonatomic, strong) UILabel *saveTipLabel;
 @end
 
 @implementation WLLoginViewController
@@ -95,6 +107,7 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
     
 }
 
+
 #pragma mark - 初始化数据
 
 - (void)loadCustomData
@@ -103,7 +116,7 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
     self.fourNameArray = @[@"梦醒如初",@"夕夏余温",@"空城旧梦",@"浅唱蝶羽",@"流年之殇",@"浮生如梦",@"淡墨文竹",@"陌上烟雨",@"墨羽尘曦",@"雨和潇韵",@"半世流离",@"花开妍沫",@"半夏如烟",@"浅色夏至",@"蔷薇未开",@"踏光琉璃",@"绯色浮华",@"月色殇人",@"来日可期",@"半颗雨韵",@"紫色风铃",@"温风如酒",@"陌路人生",@"孤心木偶",@"笑迎冷风",@"凉城听暖",@"浅冬未晴",@"一顾辗转",@"余音未觉",@"听风而遇",@"南城少年",@"暮雪白头",@"云烟成雨",@"烟雨旧巷",@"清风疏影",@"折扇书生",@"北陌离歌",@"木槿何年",@"归人未归",@"月光倾城",@"清茶煨酒",@"笑靥如故",@"落雪倾城",@"青杉忆笙",@"薄荷微凉",@"落英纷飞",@"漫天花雨",@"墨染樱飞",@"烟雨霓裳",@"梦忆长安",@"清风伴酒",@"墨似流年",@"一指流花",@"倾城之殇",@"半世之泪",@"安之若素",@"宣墨公子",@"伊人旧梦",@"旧岛听风",@"清欢半世",@"青花忆尘",@"酒醉倚梦",@"听风吟月",@"琉璃岁月",@"半城烟沙",@"细雨斜风",@"夜半诗人",@"吹乱心海",@"鱼书雁信",@"空城少年",@"酒伴孤独",@"断桥微雨",@"千城盛雪",@"琴断朱弦",@"入骨相思",@"初雪未央"];
     self.threeNameArray = @[@"冷夜夕",@"蓑笠湿",@"离城梦",@"巴黎醉",@"水无忧",@"离人醉",@"君子傲",@"南风瑾",@"冷月魄",@"南笙离",@"格子秋",@"烟花碎",@"梦依旧",@"冰琉璃",@"清风渡",@"执风晚",@"九天雪",@"萧墨尘",@"十里寂",@"风净松",@"云熙然",@"凝残月",@"断秋风",@"暮成雪",@"安卿尘",@"峰无痕",@"三千寒",@"柳絮声",@"酒倦客",@"笑忘歌",@"故人叹",@"月光蓝",@"挽兰芝",@"秋意浓",@"红人馆",@"紫荆风",@"倾城泪",@"空心人",@"兰芝殇",@"莫言殇",@"离魂殇",@"叶枫下",@"听风起",@"葬风雪",@"凉槿花",@"安若琴",@"葬花吟",@"樱花飞",@"西风残",@"初相识",@"孤行者",@"淡如墨",@"雨潇潇",@"墨香袭",@"七堇年",@"听雨眠",@"洛拾忆",@"冷月处",@"相思醉",@"陌小言",@"葬昔夕",@"一帘梦",@"落红尘",@"伊慕雪",@"浮萍子",@"繁花落",@"无归期",@"醉笙情",@"苏墨染",@"赋流云",@"拂霓裳",@"花寒弦",@"空回眸",@"韶华负",@"阙惜花",@"梦若雨",@"往昔竹",@"梅花弱",@"琰未兮",@"培新雪",@"夏浅浅",@"等风人",@"心微凉",@"陌上桑",@"纸相思",@"路望断",@"红尘梦",@"思归人",@"日月明",@"南乔枝",@"饮长风",@"醉扶月",@"独念旧",@"青杉旧",@"紫精灵",@"百日醉",@"苍暮颜",@"长明灯",@"楚碧瑶",@"苍山林",@"桂花落",@"花锦瑟",@"借一世",@"惊鸿照",@"箜篌引",@"岚风殇",@"冷星魂",@"露海夜",@"惊楼兰",@"醉江山",@"寐年约",@"莫阑珊",@"千杯尽",@"青隐篱",@"清歌终"];
     
-
+    
 }
 #pragma mark - 返回
 - (void)backAction:(UIButton*)sender
@@ -156,7 +169,7 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
     
     [[WLPublicTool shareTool] addCornerForView:self.passwordTextField withTopLeft:NO withTopRight:NO withBottomLeft:YES withBottomRight:YES withCornerRadius:5.0];
     
-    //获取验证码按钮
+    //随即配置按钮
     self.randomBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     self.randomBtn.backgroundColor = [UIColor whiteColor];
     [self.randomBtn addTarget:self action:@selector(getRandomName:) forControlEvents:UIControlEventTouchUpInside];
@@ -192,6 +205,46 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
     }];
     
     
+    UIButton *saveBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    saveBtn.backgroundColor = ViewBackgroundColor;
+    [saveBtn addTarget:self action:@selector(changeSaveAccount:) forControlEvents:UIControlEventTouchUpInside];
+    [contentView addSubview:saveBtn];
+    //设置UI布局约束
+    [saveBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.equalTo(self.passwordTextField.mas_bottom).offset(15);//元素顶部约束
+        make.leading.equalTo(self.passwordTextField.mas_leading).offset(0);//元素左侧约束
+        make.trailing.equalTo(self.passwordTextField.mas_trailing).offset(0);//元素右侧约束
+        make.height.mas_equalTo(20);//元素高度
+    }];
+    
+    self.checkBoxImageView = [[UIImageView alloc]init];
+    [contentView addSubview:self.checkBoxImageView];
+    //设置UI布局约束
+    [self.checkBoxImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.equalTo(self.passwordTextField.mas_bottom).offset(15);//元素顶部约束
+        make.leading.equalTo(self.passwordTextField.mas_leading).offset(0);//元素左侧约束
+        make.width.mas_equalTo(20);//元素宽度
+        make.height.mas_equalTo(20);//元素高度
+    }];
+    
+    self.saveTipLabel = [[UILabel alloc]init];
+    self.saveTipLabel.text = @"记住帐号密码";//设置文本
+    self.saveTipLabel.textColor = RGBCOLOR(50, 50, 50, 1.0);
+    self.saveTipLabel.font = [UIFont systemFontOfSize:14];//字号设置
+    [contentView addSubview:self.saveTipLabel];
+    //设置UI布局约束
+    [self.saveTipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.equalTo(self.checkBoxImageView.mas_top).offset(0);//元素顶部约束
+        make.leading.equalTo(self.checkBoxImageView.mas_trailing).offset(10);//元素左侧约束
+        make.trailing.equalTo(self.passwordTextField.mas_trailing).offset(0);//元素右侧约束
+        make.bottom.equalTo(self.checkBoxImageView.mas_bottom).offset(0);//元素底部约束
+       
+    }];
+    
+    
     CGFloat btnHeight = 40;
     self.loginBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     self.loginBtn.layer.cornerRadius = 5.0f;
@@ -205,7 +258,7 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
     [self.loginBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.equalTo(self.view.mas_left).offset(leftSpace);
-        make.top.equalTo(self.passwordTextField.mas_bottom).offset(topSpace);
+        make.top.equalTo(self.checkBoxImageView.mas_bottom).offset(topSpace);
         make.right.equalTo(self.view.mas_right).offset(-leftSpace);
         make.height.mas_equalTo(btnHeight);
     }];
@@ -268,10 +321,41 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
         make.width.mas_equalTo(contentW);
     }];
     
-    
+    [self readLocalData];
     
 }
 
+
+- (void)readLocalData
+{
+    id localSave = [WLSaveLocalHelper loadObjectForKey:@"needSaveAccount"];
+    if (!localSave) {
+        localSave = @"";
+    }
+    NSString *string = [NSString stringWithFormat:@"%@",localSave];
+    if ([string isEqualToString:@"0"]) {
+        self.needSaveAccount = NO;
+        self.checkBoxImageView.image = [UIImage imageNamed:@"check_box"];
+
+    }else{
+        self.needSaveAccount = YES;
+        self.checkBoxImageView.image = [UIImage imageNamed:@"check_box_sel"];
+
+        id name = kUserName;
+        id password = kUserPassword;
+        if (!name) {
+            name = @"";
+        }
+        if (!password) {
+            password = @"";
+        }
+        NSString *lastUserName = [NSString stringWithFormat:@"%@",name];
+        NSString *lastUserPsd = [NSString stringWithFormat:@"%@",password];
+        self.nameTextField.contentString = lastUserName;
+        self.passwordTextField.contentString = lastUserPsd;
+        self.passwordTextField.mainTextField.secureTextEntry = YES;
+    }
+}
 #pragma mark 计算文本宽度
 - (CGFloat) widthForTextString:(NSString *)tStr height:(CGFloat)tHeight fontSize:(CGFloat)tSize{
     
@@ -293,19 +377,40 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
     NSInteger four = self.fourNameArray.count;
     NSInteger fourIndex = arc4random()%four;
     
-    NSString *name = [NSString stringWithFormat:@"%@丶%@",self.threeNameArray[threeIndex],self.fourNameArray[fourIndex]];
+    NSInteger count = 1000+arc4random()%8888;
+    
+    NSString *name = [NSString stringWithFormat:@"%@丶%@%ld",self.threeNameArray[threeIndex],self.fourNameArray[fourIndex],(long)count];
     self.nameTextField.contentString = name;
     
     self.passwordTextField.contentString = @"12345678";
-    
+    self.passwordTextField.mainTextField.secureTextEntry = NO;
+
 }
 
 
+- (void)changeSaveAccount:(UIButton*)sender
+{
+    if (self.needSaveAccount) {
+        self.needSaveAccount = NO;
+        [WLSaveLocalHelper saveObject:@"0" forKey:@"needSaveAccount"];
+        self.saveTipLabel.textColor = RGBCOLOR(150, 150, 150, 1.0);
+        self.checkBoxImageView.image = [UIImage imageNamed:@"check_box"];
+        
+    }else{
+        self.needSaveAccount = YES;
+        [WLSaveLocalHelper saveObject:@"1" forKey:@"needSaveAccount"];
+        self.saveTipLabel.textColor = RGBCOLOR(50, 50, 50, 1.0);
+        self.checkBoxImageView.image = [UIImage imageNamed:@"check_box_sel"];
+
+    }
+    
+    
+}
 #pragma mark - 用户登录
 - (void)buttonAction:(UIButton*)sender
 {
     HidenKeybory;
-    self.nameTextField.contentString = @"刘备";
+//    self.nameTextField.contentString = @"刘备";
     if (self.nameTextField.contentString.length == 0) {
         
         [self showHUDWithText:@"用户名不可为空"];
@@ -324,67 +429,20 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
     [WLSaveLocalHelper saveObject:@"" forKey:LoginUserNameKey];
     [WLSaveLocalHelper saveObject:@"" forKey:LoginHeadImageKey];
 
-    MBProgressHUD *hud = [MBProgressHUD HUDForView:[UIApplication sharedApplication].keyWindow];
+//    MBProgressHUD *hud = [MBProgressHUD HUDForView:[UIApplication sharedApplication].keyWindow];
+//
+//    if (!hud) {
+//        hud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
+//
+//        hud.label.text = @"正在处理...";
+//    }
     
-    if (!hud) {
-        hud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
-        
-        hud.label.text = @"正在处理...";
-    }
-    
+    [self showLoadingHUDWithText:@"正在登录..."];
+
     [self registerAction];
    
     
     
-    NSString *url = WL_BASE_URL(@"public/api/1.0/login");
-    NSDictionary *param = @{@"userName":self.nameTextField.contentString,
-                            @"checkCode":self.passwordTextField.contentString};
-
-    [[NetworkCenter shareCenter] requestDataWithURL:url withParams:param withHttpType:POST_HttpType withProgress:nil withResult:^(id result) {
-        NSLog(@"Login:%@",result);
-        NSString *codeString = [NSString stringWithFormat:@"%@",[result objectForKey:@"code"]];
-        
-        if ([codeString isEqualToString:@"1000"]) {
-            
-            NSDictionary *data = result[@"data"];
-            
-            [[UserInformation shareUser] refreshUserTokenWithDictionary:data];
-            
-            [WLSaveLocalHelper saveObject:[self notNillValueWithKey:@"token" withDic:data] forKey:LoginTokenKey];
-            [WLSaveLocalHelper saveObject:[self notNillValueWithKey:@"userName" withDic:data] forKey:LoginUserNameKey];
-
-            NSString *imagePath = [self notNillValueWithKey:@"userImgurl" withDic:data];
-            NSString *fullPath = [NSString stringWithFormat:@"%@%@",UserHeadImageBase,imagePath];
-            [WLSaveLocalHelper saveObject:fullPath forKey:LoginHeadImageKey];
-
-            [WLSaveLocalHelper saveObject:[self notNillValueWithKey:@"ubalance" withDic:data] forKey:LoginkUserBalanceKey];
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-               
-                if (self.successBlock) {
-                    self.successBlock([UserInformation shareUser]);
-                }
-                
-                [self.navigationController popViewControllerAnimated:YES];
-                
-            });
-            
-           
-
-            
-            
-        }else{
-            
-            NSString *errorString = [NSString stringWithFormat:@"服务不可用"];
-            
-            [self showHUDWithText:errorString];
-            
-        }
-
-        
-    } withError:^(NSInteger errorCode, NSString *errorMsg) {
-//        [self showHUDWithText:RequestFailed];
-    } isSupportHUD:YES];
     
 }
 
@@ -394,10 +452,10 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
     BmobUser *bUser = [[BmobUser alloc]init];
     [bUser setUsername:self.nameTextField.contentString];//区分大小写
     [bUser setPassword:self.passwordTextField.contentString];
-    [bUser setObject:@"" forKey:@"totalCount"];
-    [bUser setObject:@"" forKey:@"currentCount"];
-    [bUser setObject:@"" forKey:@"address"];
-    [bUser setObject:@"" forKey:@"accountValue"];
+//    [bUser setObject:@"" forKey:@"totalCount"];
+//    [bUser setObject:@"" forKey:@"currentCount"];
+//    [bUser setObject:@"" forKey:@"address"];
+//    [bUser setObject:@"" forKey:@"accountValue"];
     [bUser signUpInBackgroundWithBlock:^(BOOL isSuccessful, NSError *error) {
         
         if (isSuccessful) {
@@ -416,15 +474,51 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
 - (void)loginAction
 {
     NSLog(@"开始登录");
+    
     [BmobUser loginInbackgroundWithAccount:self.nameTextField.contentString andPassword:self.passwordTextField.contentString block:^(BmobUser *user, NSError *error) {
+        
+        [self hideHUD];
+        
         if (user) {
             NSLog(@"登录user:%@",user);
+            
+            //更新基本信息
+            [[UserInformation shareUser] refreshUserInfoWithUser:user];
+            
+            
+            NSDictionary *dataDic = [self responseDataWithUser:user];
+            
+            [WLSaveLocalHelper saveObject:[self notNillValueWithKey:@"token" withDic:dataDic] forKey:LoginTokenKey];
+            [WLSaveLocalHelper saveObject:user.objectId forKey:LoginUserIDKey];
+            [WLSaveLocalHelper saveObject:@"" forKey:LoginHeadImageKey];
+            
+            //需要记住密码，则保存，不需要，则保存空字符串
+            if (self.needSaveAccount) {
+                [WLSaveLocalHelper saveObject:[self notNillValueWithKey:@"userName" withDic:dataDic] forKey:LoginUserNameKey];
+                [WLSaveLocalHelper saveObject:self.passwordTextField.contentString forKey:LoginUserPasswordKey];
+            }else{
+                [WLSaveLocalHelper saveObject:@"" forKey:LoginUserNameKey];
+                [WLSaveLocalHelper saveObject:@"" forKey:LoginUserPasswordKey];
+            }
+            
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                if (self.successBlock) {
+                    self.successBlock([UserInformation shareUser]);
+                }
+                
+                [self.navigationController popViewControllerAnimated:YES];
+                
+            });
+            
         }else{
             NSLog(@"登录error:%@",error);
         }
     }];
 
 }
+
 
 - (NSString*)notNillValueWithKey:(NSString*)key withDic:(NSDictionary*)dic
 {
@@ -440,6 +534,20 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
     
 }
 
+- (NSDictionary*)responseDataWithUser:(BmobUser*)user
+{
+    NSMutableDictionary *dataDic = [NSMutableDictionary dictionary];
+    NSString *userName = [NSString stringWithFormat:@"%@",[user objectForKey:@"username"]];
+    NSString *userId = [NSString stringWithFormat:@"%@",user.objectId];
+    NSString *sessionToken = [NSString stringWithFormat:@"%@",[user objectForKey:@"sessionToken"]];
+
+    [dataDic setObject:userName forKey:@"userName"];
+    [dataDic setObject:userId forKey:@"userId"];
+    [dataDic setObject:self.passwordTextField.contentString forKey:@"password"];
+    [dataDic setObject:sessionToken forKey:@"token"];
+    
+    return dataDic;
+}
 
 
 #pragma mark - 底部的勾选图片点击

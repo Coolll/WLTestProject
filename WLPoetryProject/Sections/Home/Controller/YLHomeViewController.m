@@ -300,6 +300,7 @@
     NSData *JSONData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:fileName ofType:@"json"]];
     //转为dic
     NSDictionary *poetryDic = [NSJSONSerialization JSONObjectWithData:JSONData options:NSJSONReadingAllowFragments error:nil];
+    NSInteger baseId = [[NSString stringWithFormat:@"%@",[poetryDic objectForKey:@"baseID"]]integerValue];
     
     //获取到诗词列表
     NSArray *poetryArr = [poetryDic objectForKey:@"poetryList"];
@@ -311,6 +312,7 @@
         NSDictionary *itemDic = [poetryArr objectAtIndex:i];
         PoetryModel *model = [[PoetryModel alloc]initModelWithDictionary:itemDic];
         model.mainClass = poetryMainClass;
+        model.poetryID = [NSString stringWithFormat:@"%d",[model.poetryID integerValue]+baseId];
         [modelArray addObject:model];
     }
     
@@ -331,6 +333,8 @@
     if (!_mainBgView) {
         _mainBgView = [[UIImageView alloc]init];
         _mainBgView.alpha = 0.5;
+        _mainBgView.contentMode = UIViewContentModeScaleAspectFill;
+        _mainBgView.clipsToBounds = YES;
         [self.view addSubview:_mainBgView];
         //元素的布局
         [_mainBgView mas_makeConstraints:^(MASConstraintMaker *make) {
