@@ -149,7 +149,6 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
     self.nameTextField.backgroundColor = [UIColor whiteColor];
     self.nameTextField.placeHolderString = @"请输入您的用户名";
     self.nameTextField.leftSpace = 10;
-    self.nameTextField.keyboardType = UIKeyboardTypeNumberPad;
     [contentView addSubview:self.nameTextField];
 
     

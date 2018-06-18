@@ -312,7 +312,7 @@
         NSDictionary *itemDic = [poetryArr objectAtIndex:i];
         PoetryModel *model = [[PoetryModel alloc]initModelWithDictionary:itemDic];
         model.mainClass = poetryMainClass;
-        model.poetryID = [NSString stringWithFormat:@"%d",[model.poetryID integerValue]+baseId];
+        model.poetryID = [NSString stringWithFormat:@"%ld",[model.poetryID integerValue]+baseId];
         [modelArray addObject:model];
     }
     
