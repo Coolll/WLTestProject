@@ -64,7 +64,7 @@
             NSDictionary *itemDic = [poetryArr objectAtIndex:i];
             PoetryModel *model = [[PoetryModel alloc]initModelWithDictionary:itemDic];
             model.mainClass = poetryMainClass;
-            model.poetryID = [NSString stringWithFormat:@"%ld",[model.poetryID integerValue]+baseId];
+            model.poetryID = [NSString stringWithFormat:@"%ld",(long)([model.poetryID integerValue]+baseId)];
             [modelArray addObject:model];
         }
 
@@ -104,7 +104,7 @@
 - (void)loadCustomView
 {
     UIImageView *mainBgView = [[UIImageView alloc]init];
-    mainBgView.image = [UIImage imageNamed:@"mainBgImage"];
+    mainBgView.image = [UIImage imageNamed:@"searchBg.jpg"];
     [self.view addSubview:mainBgView];
     //元素的布局
     [mainBgView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -163,7 +163,10 @@
     if (self.heightArray.count > indexPath.row) {
         return [[self.heightArray objectAtIndex:indexPath.row] floatValue];
     }else{
-        if (self.poetryArray.count > indexPath.row) {
+        if (indexPath.row == self.poetryArray.count-1) {
+            return [WLPoetryListCell heightForLastCell:[self.poetryArray objectAtIndex:indexPath.row]];
+            
+        }else{
             return [WLPoetryListCell heightForFirstLine:[self.poetryArray objectAtIndex:indexPath.row]];
         }
     }
@@ -183,7 +186,9 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.backgroundColor = [UIColor clearColor];
     }
-    
+    if (indexPath.row == self.poetryArray.count-1) {
+        cell.isLast = YES;
+    }
     cell.dataModel = model;
     return cell;
 }

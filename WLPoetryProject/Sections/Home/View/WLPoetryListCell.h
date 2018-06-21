@@ -19,7 +19,13 @@
  *  线条颜色
  **/
 @property (nonatomic,strong) UIColor *lineColor;
+/**
+ *  是否为最后一行，需要调整间距
+ **/
+@property (nonatomic,assign) BOOL isLast;
+
 
 + (CGFloat)heightForFirstLine:(PoetryModel*)model;
++ (CGFloat)heightForLastCell:(PoetryModel*)model;
 
 @end
