@@ -139,11 +139,11 @@
 #pragma mark - 加载视图
 - (void)loadCustomView
 {
-    self.mainBgView.image = [UIImage imageNamed:@"mainBgImage.jpg"];
+//    self.mainBgView.image = [UIImage imageNamed:@"mainBgImage.jpg"];
     
-    self.mainTableView.backgroundColor = [UIColor clearColor];
-    
-    
+//    self.mainTableView.backgroundColor = [UIColor clearColor];
+    self.mainTableView.backgroundColor = RGBCOLOR(246, 246, 246, 1.0);
+
 
 }
 
@@ -177,7 +177,13 @@
         return [[self.heightArray objectAtIndex:indexPath.row] floatValue];
     }else{
         if (self.poetryArray.count > indexPath.row) {
-            return [WLPoetryListCell heightForFirstLine:[self.poetryArray objectAtIndex:indexPath.row]];
+            
+            if (indexPath.row == self.poetryArray.count-1) {
+                return [WLPoetryListCell heightForLastCell:[self.poetryArray objectAtIndex:indexPath.row]];
+
+            }else{
+                return [WLPoetryListCell heightForFirstLine:[self.poetryArray objectAtIndex:indexPath.row]];
+            }
         }
     }
     
@@ -196,6 +202,9 @@
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.backgroundColor = [UIColor clearColor];
+    if (indexPath.row == self.poetryArray.count-1) {
+        cell.isLast = YES;
+    }
     cell.dataModel = model;
     
     return cell;
@@ -312,7 +321,7 @@
         NSDictionary *itemDic = [poetryArr objectAtIndex:i];
         PoetryModel *model = [[PoetryModel alloc]initModelWithDictionary:itemDic];
         model.mainClass = poetryMainClass;
-        model.poetryID = [NSString stringWithFormat:@"%d",[model.poetryID integerValue]+baseId];
+        model.poetryID = [NSString stringWithFormat:@"%ld",(unsigned long)([model.poetryID integerValue]+baseId)];
         [modelArray addObject:model];
     }
     
@@ -356,7 +365,7 @@
         _mainTableView.delegate = self;
         _mainTableView.dataSource = self;
         _mainTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        _mainTableView.backgroundColor = [UIColor whiteColor];
+//        _mainTableView.backgroundColor = [UIColor whiteColor];
         [self.view addSubview:_mainTableView];
         
 //        if (@available(iOS 11.0, *)) {
