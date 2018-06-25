@@ -103,24 +103,24 @@
 #pragma mark - 加载视图
 - (void)loadCustomView
 {
-    UIImageView *mainBgView = [[UIImageView alloc]init];
-    mainBgView.image = [UIImage imageNamed:@"searchBg.jpg"];
-    [self.view addSubview:mainBgView];
-    //元素的布局
-    [mainBgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.equalTo(self.view.mas_left).offset(0);
-        make.top.equalTo(self.naviView.mas_bottom).offset(0);
-        make.bottom.equalTo(self.view.mas_bottom).offset(0);
-        make.right.equalTo(self.view.mas_right).offset(0);
-        
-    }];
+//    UIImageView *mainBgView = [[UIImageView alloc]init];
+//    mainBgView.image = [UIImage imageNamed:@"searchBg.jpg"];
+//    [self.view addSubview:mainBgView];
+//    //元素的布局
+//    [mainBgView mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//        make.left.equalTo(self.view.mas_left).offset(0);
+//        make.top.equalTo(self.naviView.mas_bottom).offset(0);
+//        make.bottom.equalTo(self.view.mas_bottom).offset(0);
+//        make.right.equalTo(self.view.mas_right).offset(0);
+//
+//    }];
     
     self.mainTableView = [[UITableView alloc]init];
     self.mainTableView.delegate = self;
     self.mainTableView.dataSource = self;
     self.mainTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.mainTableView.backgroundColor = [UIColor clearColor];
+    self.mainTableView.backgroundColor = RGBCOLOR(246, 246, 246, 1.0);
     [self.view addSubview:self.mainTableView];
     
     //元素的布局
@@ -160,14 +160,23 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    //如果有缓存的高度，则不计算了
     if (self.heightArray.count > indexPath.row) {
         return [[self.heightArray objectAtIndex:indexPath.row] floatValue];
     }else{
-        if (indexPath.row == self.poetryArray.count-1) {
-            return [WLPoetryListCell heightForLastCell:[self.poetryArray objectAtIndex:indexPath.row]];
+        //没有缓存的高度，则需要计算
+        if (self.poetryArray.count > indexPath.row) {
             
-        }else{
-            return [WLPoetryListCell heightForFirstLine:[self.poetryArray objectAtIndex:indexPath.row]];
+            if (indexPath.row == self.poetryArray.count-1) {
+                //最后一行需要调整一下间距
+                CGFloat cellHeight = [WLPoetryListCell heightForLastCell:[self.poetryArray objectAtIndex:indexPath.row]];
+                [self.heightArray addObject:[NSString stringWithFormat:@"%f",cellHeight]];
+                return cellHeight;
+            }else{
+                CGFloat cellHeight = [WLPoetryListCell heightForFirstLine:[self.poetryArray objectAtIndex:indexPath.row]];
+                [self.heightArray addObject:[NSString stringWithFormat:@"%f",cellHeight]];
+                return cellHeight;
+            }
         }
     }
     
@@ -176,20 +185,21 @@
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     PoetryModel *model = [self.poetryArray objectAtIndex:indexPath.row];
     
     
     WLPoetryListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WLPoetryListCell"];;
     if (!cell) {
         cell = [[WLPoetryListCell alloc]initWithFrame:CGRectMake(0, 0, PhoneScreen_WIDTH, 125)];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.backgroundColor = [UIColor clearColor];
     }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.backgroundColor = [UIColor clearColor];
+
     if (indexPath.row == self.poetryArray.count-1) {
         cell.isLast = YES;
     }
     cell.dataModel = model;
+    
     return cell;
 }
 

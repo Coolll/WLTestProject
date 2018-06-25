@@ -102,7 +102,7 @@ static const CGFloat touchFullOffset = 15;//箭头触摸区域超出的offset �
 
 - (void)backAction:(UIButton*)sender
 {
-    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)removeAllNaviItems

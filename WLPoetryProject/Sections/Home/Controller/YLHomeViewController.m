@@ -11,7 +11,8 @@
 #import "PoetryModel.h"
 #import "WLPoetryListCell.h"
 #import "PoetryDetailViewController.h"
-
+#import "WLImageCell.h"
+#import "WLImageController.h"
 @interface YLHomeViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 /**
@@ -149,7 +150,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == 0) {
+    if (section == 1) {
         return self.poetryArray.count;
     }
     
@@ -158,7 +159,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return 2;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -173,19 +174,39 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.heightArray.count > indexPath.row) {
-        return [[self.heightArray objectAtIndex:indexPath.row] floatValue];
-    }else{
-        if (self.poetryArray.count > indexPath.row) {
-            
-            if (indexPath.row == self.poetryArray.count-1) {
-                return [WLPoetryListCell heightForLastCell:[self.poetryArray objectAtIndex:indexPath.row]];
-
-            }else{
-                return [WLPoetryListCell heightForFirstLine:[self.poetryArray objectAtIndex:indexPath.row]];
+    NSInteger section = indexPath.section;
+    if (section == 0) {
+        //图片的高度
+        CGFloat imageW = PhoneScreen_WIDTH-30;
+        CGFloat imageH = imageW/2.88;//图片的比例是750：260
+        
+        return imageH+20;
+        
+        
+    }else if (section == 1){
+        
+        //如果有缓存的高度，则不计算了
+        if (self.heightArray.count > indexPath.row) {
+            return [[self.heightArray objectAtIndex:indexPath.row] floatValue];
+        }else{
+            //没有缓存的高度，则需要计算
+            if (self.poetryArray.count > indexPath.row) {
+                
+                if (indexPath.row == self.poetryArray.count-1) {
+                    //最后一行需要调整一下间距
+                    CGFloat cellHeight = [WLPoetryListCell heightForLastCell:[self.poetryArray objectAtIndex:indexPath.row]];
+                    [self.heightArray addObject:[NSString stringWithFormat:@"%f",cellHeight]];
+                    return cellHeight;
+                }else{
+                    CGFloat cellHeight = [WLPoetryListCell heightForFirstLine:[self.poetryArray objectAtIndex:indexPath.row]];
+                    [self.heightArray addObject:[NSString stringWithFormat:@"%f",cellHeight]];
+                    return cellHeight;
+                }
             }
         }
     }
+    
+    
     
     return 0.001;
 }
@@ -193,37 +214,71 @@
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    PoetryModel *model = [self.poetryArray objectAtIndex:indexPath.row];
-    
-    
-    WLPoetryListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WLPoetryListCell"];;
-    if (!cell) {
-        cell = [[WLPoetryListCell alloc]initWithFrame:CGRectMake(0, 0, PhoneScreen_WIDTH, 125)];
+    NSInteger section = indexPath.section;
+    if (section == 0) {
+        
+        WLImageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WLImageCell"];
+        if (!cell) {
+            cell = [[WLImageCell alloc]init];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.backgroundColor = [UIColor clearColor];
+        }
+        [cell touchImageWithBlock:^{
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self tapTheImage];
+            });
+        }];
+        
+        [cell loadCustomView];
+        return cell;
+        
+    }else if (section == 1){
+        PoetryModel *model = [self.poetryArray objectAtIndex:indexPath.row];
+        WLPoetryListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WLPoetryListCell"];;
+        if (!cell) {
+            cell = [[WLPoetryListCell alloc]initWithFrame:CGRectMake(0, 0, PhoneScreen_WIDTH, 125)];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.backgroundColor = [UIColor clearColor];
+        }
+        if (indexPath.row == self.poetryArray.count-1) {
+            cell.isLast = YES;
+        }
+        cell.dataModel = model;
+        return cell;
     }
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.backgroundColor = [UIColor clearColor];
-    if (indexPath.row == self.poetryArray.count-1) {
-        cell.isLast = YES;
-    }
-    cell.dataModel = model;
     
-    return cell;
+    
+    return [[UITableViewCell alloc]init];
+    
 }
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (indexPath.row < self.poetryArray.count) {
-        
-        PoetryDetailViewController *detailVC = [[PoetryDetailViewController alloc]init];
-        detailVC.dataModel = self.poetryArray[indexPath.row];
-        detailVC.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:detailVC animated:YES];
+    NSInteger section = indexPath.section;
+
+    if (section == 1) {
+        //选中诗词的时候，跳转到详情
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        if (indexPath.row < self.poetryArray.count) {
+            
+            PoetryDetailViewController *detailVC = [[PoetryDetailViewController alloc]init];
+            detailVC.dataModel = self.poetryArray[indexPath.row];
+            detailVC.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:detailVC animated:YES];
+        }
     }
+    
+   
 }
 
-
+- (void)tapTheImage
+{
+    WLImageController *vc = [[WLImageController alloc]init];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 
 #pragma mark - 后台进程，添加所有的数据
@@ -291,7 +346,7 @@
             int time = 4*i;
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(time * NSEC_PER_SEC)), dispatch_get_global_queue(0, 0), ^{
                 if (![state isEqualToString:@"1"]) {
-                                        [self readLocalFileWithName:jsonList[i] withIndex:i];
+                    [self readLocalFileWithName:jsonList[i] withIndex:i];
                 }
                 
             });
