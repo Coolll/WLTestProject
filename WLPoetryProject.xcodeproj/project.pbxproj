@@ -66,6 +66,7 @@
 		0721702B2087843A002A1628 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 072170272087843A002A1628 /* Info.plist */; };
 		0721702C2087843A002A1628 /* README.strings in Resources */ = {isa = PBXBuildFile; fileRef = 072170282087843A002A1628 /* README.strings */; };
 		0721702D2087843A002A1628 /* WLPoetryProject.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 072170292087843A002A1628 /* WLPoetryProject.xcdatamodeld */; };
+		073864F420E12D8B0005BE61 /* poetryContent.png in Resources */ = {isa = PBXBuildFile; fileRef = 073864F320E12D8B0005BE61 /* poetryContent.png */; };
 		073D7F6C20A7E259002BCEA7 /* tangPoetry_one.json in Resources */ = {isa = PBXBuildFile; fileRef = 073D7F6B20A7E259002BCEA7 /* tangPoetry_one.json */; };
 		07567A9D207A02EB0018B9E7 /* BaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 075678D1207A02EA0018B9E7 /* BaseNavigationController.m */; };
 		07567A9E207A02EB0018B9E7 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 075678D3207A02EA0018B9E7 /* BaseViewController.m */; };
@@ -330,6 +331,7 @@
 		072170272087843A002A1628 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		072170282087843A002A1628 /* README.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = README.strings; sourceTree = "<group>"; };
 		0721702A2087843A002A1628 /* WLPoetryProject.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WLPoetryProject.xcdatamodel; sourceTree = "<group>"; };
+		073864F320E12D8B0005BE61 /* poetryContent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = poetryContent.png; sourceTree = "<group>"; };
 		073D7F6B20A7E259002BCEA7 /* tangPoetry_one.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tangPoetry_one.json; sourceTree = "<group>"; };
 		075678D0207A02EA0018B9E7 /* BaseNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseNavigationController.h; sourceTree = "<group>"; };
 		075678D1207A02EA0018B9E7 /* BaseNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseNavigationController.m; sourceTree = "<group>"; };
@@ -707,6 +709,14 @@
 				072170292087843A002A1628 /* WLPoetryProject.xcdatamodeld */,
 			);
 			path = Other;
+			sourceTree = "<group>";
+		};
+		073864F220E12D8B0005BE61 /* ForImage */ = {
+			isa = PBXGroup;
+			children = (
+				073864F320E12D8B0005BE61 /* poetryContent.png */,
+			);
+			path = ForImage;
 			sourceTree = "<group>";
 		};
 		073D7F6820A7E23D002BCEA7 /* TangPoetry */ = {
@@ -1298,6 +1308,7 @@
 		07F3E30120D2C0FB00E7BAF7 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				073864F220E12D8B0005BE61 /* ForImage */,
 				00E2CB3D20E084FD00E44793 /* topImage.jpg */,
 				07F3E30220D2C0FB00E7BAF7 /* clearNavi.png */,
 				07F3E30320D2C0FB00E7BAF7 /* lineImage@2x.png */,
@@ -1552,6 +1563,7 @@
 				07F73C09208ACD9A00F7D8B3 /* nav_back@2x.png in Resources */,
 				07D3801520CD5E2200CF2A6E /* classSeven.jpg in Resources */,
 				07F3E30C20D2C0FC00E7BAF7 /* editImage.png in Resources */,
+				073864F420E12D8B0005BE61 /* poetryContent.png in Resources */,
 				073D7F6C20A7E259002BCEA7 /* tangPoetry_one.json in Resources */,
 				07D3801120CD5E2200CF2A6E /* classFour.jpg in Resources */,
 				00F9517320D4EA650039D7C5 /* check_box.png in Resources */,

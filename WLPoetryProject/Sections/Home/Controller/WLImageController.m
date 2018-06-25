@@ -6,6 +6,9 @@
 //  Copyright © 2018年 龙培. All rights reserved.
 //
 
+static const CGFloat itemWidth = 80;
+static const CGFloat imageW = 20;
+
 #import "WLImageController.h"
 
 @interface WLImageController ()
@@ -13,6 +16,14 @@
  *  图片
  **/
 @property (nonatomic, strong) UIImageView *mainImageView;
+
+/**
+ *  文本内容
+ **/
+@property (nonatomic,strong) UIView *poetryView;
+
+
+
 @end
 
 @implementation WLImageController
@@ -30,20 +41,7 @@
 
 - (void)loadCustomView
 {
-    UIButton *showBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    showBtn.backgroundColor = [UIColor orangeColor];
-    [self.mainImageView addSubview:showBtn];
-    
-    //设置UI布局约束
-//    [showBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//        
-//        make.top.equalTo(<#View#>.mas_top).offset(<#offset#>);//元素顶部约束
-//        make.leading.equalTo(<#View#>.mas_leading).offset(<#offset#>);//元素左侧约束
-//        make.trailing.equalTo(<#View#>.mas_trailing).offset(-<#offset#>);//元素右侧约束
-//        make.bottom.equalTo(<#View#>.mas_bottom).offset(-<#offset#>);//元素底部约束
-//        make.width.mas_equalTo(<#value#>);//元素宽度
-//        make.height.mas_equalTo(<#value#>);//元素高度
-//    }];
+    self.poetryView.backgroundColor = [UIColor clearColor];
 }
 
 - (void)loadMainBackImageView
@@ -64,6 +62,75 @@
     }];
     
 }
+
+- (void)loadPoetryContentAction:(UIButton*)sender
+{
+    NSLog(@"push to poetry content");
+
+}
+
+- (UIView*)poetryView
+{
+    if (!_poetryView) {
+        _poetryView = [[UIView alloc]init];
+//        _poetryView.userInteractionEnabled = YES;
+//        self.mainImageView.userInteractionEnabled = YES;
+        [self.mainImageView addSubview:_poetryView];
+        //元素的布局
+        [_poetryView mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.top.equalTo(self.titleFullLabel.mas_bottom).offset(20);
+            make.right.equalTo(self.view.mas_right).offset(-20);
+            make.width.mas_equalTo(itemWidth);
+            make.height.mas_equalTo(itemWidth);
+        }];
+        
+        UIImageView *poetryImage = [[UIImageView alloc]init];
+        poetryImage.image = [UIImage imageNamed:@"poetryContent"];
+        [_poetryView addSubview:poetryImage];
+        //元素的布局
+        [poetryImage mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.left.equalTo(_poetryView.mas_left).offset((itemWidth-imageW)/2);
+            make.top.equalTo(_poetryView.mas_top).offset(15);
+            make.width.mas_equalTo(imageW);
+            make.height.mas_equalTo(imageW);
+            
+        }];
+        
+        UILabel *tipLabel = [[UILabel alloc]init];
+        tipLabel.textAlignment = NSTextAlignmentCenter;
+        tipLabel.text = @"诗词内容";
+        tipLabel.font = [UIFont systemFontOfSize:14.f];
+        [_poetryView addSubview:tipLabel];
+        //元素的布局
+        [tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.left.equalTo(_poetryView.mas_left).offset(0);
+            make.top.equalTo(poetryImage.mas_bottom).offset(10);
+            make.right.equalTo(_poetryView.mas_right).offset(0);
+            make.height.mas_equalTo(20);
+            
+        }];
+        
+        UIButton *contentBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [contentBtn addTarget:self action:@selector(loadPoetryContentAction:) forControlEvents:UIControlEventTouchUpInside];
+        contentBtn.enabled = YES;
+        [_poetryView addSubview:contentBtn];
+        //元素的布局
+        [contentBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.left.equalTo(_poetryView.mas_left).offset(0);
+            make.top.equalTo(_poetryView.mas_top).offset(0);
+            make.bottom.equalTo(_poetryView.mas_bottom).offset(0);
+            make.right.equalTo(_poetryView.mas_right).offset(0);
+            
+        }];
+    }
+    return _poetryView;
+}
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

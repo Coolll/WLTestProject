@@ -180,7 +180,7 @@
         CGFloat imageW = PhoneScreen_WIDTH-30;
         CGFloat imageH = imageW/2.88;//图片的比例是750：260
         
-        return imageH+20;
+        return imageH+10;
         
         
     }else if (section == 1){

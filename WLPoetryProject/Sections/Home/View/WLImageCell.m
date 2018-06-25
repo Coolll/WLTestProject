@@ -24,7 +24,8 @@
 - (void)loadCustomView
 {
     UIImageView *topImageView = [[UIImageView alloc]init];
-    topImageView.layer.cornerRadius = 6.f;
+    topImageView.layer.cornerRadius = 8.f;
+    topImageView.clipsToBounds = YES;
     topImageView.image = [UIImage imageNamed:@"topImage.jpg"];
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(touchImageAction:)];
@@ -38,7 +39,7 @@
         make.top.equalTo(self.mas_top).offset(10);//元素顶部约束
         make.leading.equalTo(self.mas_leading).offset(15);//元素左侧约束
         make.trailing.equalTo(self.mas_trailing).offset(-15);//元素右侧约束
-        make.bottom.equalTo(self.mas_bottom).offset(-10);//元素底部约束
+        make.bottom.equalTo(self.mas_bottom).offset(0);//元素底部约束
         
     }];
     
