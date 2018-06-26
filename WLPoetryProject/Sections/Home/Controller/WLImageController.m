@@ -66,7 +66,7 @@ static const CGFloat imageW = 20;
 - (void)loadPoetryContentAction:(UIButton*)sender
 {
     NSLog(@"push to poetry content");
-
+    
 }
 
 - (UIView*)poetryView
