@@ -10,6 +10,8 @@ static const CGFloat itemWidth = 80;
 static const CGFloat imageW = 20;
 
 #import "WLImageController.h"
+#import <ShareSDK/ShareSDK.h>
+#import <ShareSDKUI/ShareSDK+SSUI.h>
 
 @interface WLImageController ()
 /**
@@ -66,6 +68,51 @@ static const CGFloat imageW = 20;
 - (void)loadPoetryContentAction:(UIButton*)sender
 {
     NSLog(@"push to poetry content");
+    [self shareAction];
+}
+
+//分享
+- (void)shareAction
+{
+    NSArray* imageArray = @[[UIImage imageNamed:@"classNine.jpg"]];
+    
+    if (imageArray) {
+        NSMutableDictionary *shareParams = [NSMutableDictionary dictionary];
+        [shareParams SSDKSetupShareParamsByText:@"题画"
+                                         images:imageArray
+                                            url:nil
+                                          title:@"梅花瘦"
+                                           type:SSDKContentTypeAuto];
+        [shareParams SSDKEnableUseClientShare];
+        
+        
+        [ShareSDK showShareActionSheet:nil customItems:nil shareParams:shareParams sheetConfiguration:nil onStateChanged:^(SSDKResponseState state, SSDKPlatformType platformType, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error, BOOL end) {
+            switch (state) {
+                case SSDKResponseStateSuccess:
+                {
+                    [self showHUDWithText:@"成功"];
+                    break;
+                }
+                case SSDKResponseStateFail:
+                {
+                    [self showHUDWithText:[NSString stringWithFormat:@"失败：%@",error]];
+                    break;
+                }
+                case SSDKResponseStateCancel:
+                {
+                    if (platformType != SSDKPlatformTypeUnknown) {
+                        [self showHUDWithText:@"取消分享"];
+                        
+                    }
+                    
+                }
+                    break;
+                default:
+                    break;
+            }
+        }];
+        
+    }
     
 }
 
@@ -73,8 +120,8 @@ static const CGFloat imageW = 20;
 {
     if (!_poetryView) {
         _poetryView = [[UIView alloc]init];
-//        _poetryView.userInteractionEnabled = YES;
-//        self.mainImageView.userInteractionEnabled = YES;
+        _poetryView.userInteractionEnabled = YES;
+        self.mainImageView.userInteractionEnabled = YES;
         [self.mainImageView addSubview:_poetryView];
         //元素的布局
         [_poetryView mas_makeConstraints:^(MASConstraintMaker *make) {
