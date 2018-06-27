@@ -8,6 +8,8 @@
 
 #import "BaseViewController.h"
 #import "MBProgressHUD.h"
+#import <ShareSDK/ShareSDK.h>
+#import <ShareSDKUI/ShareSDK+SSUI.h>
 
 static const CGFloat backFullWidth = 30;//返回箭头的宽度 全屏下
 static const CGFloat leftFullSpace = 20;//箭头左侧间距 全屏下
@@ -237,6 +239,49 @@ static const CGFloat touchFullOffset = 15;//箭头触摸区域超出的offset �
 
 }
 
+#pragma mark - 分享
+- (void)shareWithImageArray:(NSArray*)array
+{
+    
+    if (array && array.count > 0) {
+        NSMutableDictionary *shareParams = [NSMutableDictionary dictionary];
+        [shareParams SSDKSetupShareParamsByText:@"题画"
+                                         images:array
+                                            url:nil
+                                          title:@"梅花瘦"
+                                           type:SSDKContentTypeAuto];
+        [shareParams SSDKEnableUseClientShare];
+        
+        
+        [ShareSDK showShareActionSheet:nil customItems:nil shareParams:shareParams sheetConfiguration:nil onStateChanged:^(SSDKResponseState state, SSDKPlatformType platformType, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error, BOOL end) {
+            switch (state) {
+                case SSDKResponseStateSuccess:
+                {
+                    [self showHUDWithText:@"成功"];
+                    break;
+                }
+                case SSDKResponseStateFail:
+                {
+                    [self showHUDWithText:[NSString stringWithFormat:@"失败：%@",error]];
+                    break;
+                }
+                case SSDKResponseStateCancel:
+                {
+                    if (platformType != SSDKPlatformTypeUnknown) {
+                        [self showHUDWithText:@"取消分享"];
+                        
+                    }
+                    
+                }
+                    break;
+                default:
+                    break;
+            }
+        }];
+        
+    }
+    
+}
 
 #pragma mark - alerController
 - (void)showAlert:(NSString*)content

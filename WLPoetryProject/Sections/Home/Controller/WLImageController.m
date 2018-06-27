@@ -10,8 +10,8 @@ static const CGFloat itemWidth = 80;
 static const CGFloat imageW = 20;
 
 #import "WLImageController.h"
-#import <ShareSDK/ShareSDK.h>
-#import <ShareSDKUI/ShareSDK+SSUI.h>
+#import "WLImagePoetryController.h"
+
 
 @interface WLImageController ()
 /**
@@ -68,53 +68,16 @@ static const CGFloat imageW = 20;
 - (void)loadPoetryContentAction:(UIButton*)sender
 {
     NSLog(@"push to poetry content");
-    [self shareAction];
+    
+//    NSArray *imageArray = @[[UIImage imageNamed:@"classNine.jpg"]];
+//    [self shareWithImageArray:imageArray];
+    
+    WLImagePoetryController *vc = [[WLImagePoetryController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
-//分享
-- (void)shareAction
-{
-    NSArray* imageArray = @[[UIImage imageNamed:@"classNine.jpg"]];
-    
-    if (imageArray) {
-        NSMutableDictionary *shareParams = [NSMutableDictionary dictionary];
-        [shareParams SSDKSetupShareParamsByText:@"题画"
-                                         images:imageArray
-                                            url:nil
-                                          title:@"梅花瘦"
-                                           type:SSDKContentTypeAuto];
-        [shareParams SSDKEnableUseClientShare];
-        
-        
-        [ShareSDK showShareActionSheet:nil customItems:nil shareParams:shareParams sheetConfiguration:nil onStateChanged:^(SSDKResponseState state, SSDKPlatformType platformType, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error, BOOL end) {
-            switch (state) {
-                case SSDKResponseStateSuccess:
-                {
-                    [self showHUDWithText:@"成功"];
-                    break;
-                }
-                case SSDKResponseStateFail:
-                {
-                    [self showHUDWithText:[NSString stringWithFormat:@"失败：%@",error]];
-                    break;
-                }
-                case SSDKResponseStateCancel:
-                {
-                    if (platformType != SSDKPlatformTypeUnknown) {
-                        [self showHUDWithText:@"取消分享"];
-                        
-                    }
-                    
-                }
-                    break;
-                default:
-                    break;
-            }
-        }];
-        
-    }
-    
-}
+
+
 
 - (UIView*)poetryView
 {

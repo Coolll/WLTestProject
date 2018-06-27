@@ -40,8 +40,6 @@
 
 - (void)showLoadingHUDWithText:(NSString*)text;//loading框
 
-
-
 - (void)showHUDWithText:(NSString *)text;
 
 - (void)showAlert:(NSString*)content;
@@ -55,9 +53,11 @@
 //全屏状态下，移除navi，添加返回按钮，需要最后调用，保证返回按钮不被遮挡
 - (void)addBackButtonForFullScreen;
 
-
 //全屏状态下，移除navi，添加标题，需要在设置titleForNavi后调用
 - (void)addFullTitleLabel;
+
+//分享图片
+- (void)shareWithImageArray:(NSArray*)array;
 
 
 @end

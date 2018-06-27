@@ -16,6 +16,7 @@
 		003EBE1620D0F00A00DD7815 /* LeadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 003EBE1520D0F00A00DD7815 /* LeadViewController.m */; };
 		003EBE1920D0F04500DD7815 /* LaunchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 003EBE1820D0F04500DD7815 /* LaunchController.m */; };
 		00A38E2C20DCEDF700D4D653 /* WLImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A38E2B20DCEDF700D4D653 /* WLImageCell.m */; };
+		00B5D30B20E37D71001A71E4 /* WLImagePoetryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B5D30A20E37D71001A71E4 /* WLImagePoetryController.m */; };
 		00BBFA0E20D6291400BB86D9 /* WLFontController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BBFA0D20D6291400BB86D9 /* WLFontController.m */; };
 		00BBFA1120D6524500BB86D9 /* WLFeedbackController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BBFA1020D6524500BB86D9 /* WLFeedbackController.m */; };
 		00BBFA1420D65B8F00BB86D9 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BBFA1320D65B8F00BB86D9 /* AboutViewController.m */; };
@@ -290,6 +291,8 @@
 		003EBE1820D0F04500DD7815 /* LaunchController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LaunchController.m; sourceTree = "<group>"; };
 		00A38E2A20DCEDF700D4D653 /* WLImageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLImageCell.h; sourceTree = "<group>"; };
 		00A38E2B20DCEDF700D4D653 /* WLImageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLImageCell.m; sourceTree = "<group>"; };
+		00B5D30920E37D71001A71E4 /* WLImagePoetryController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLImagePoetryController.h; sourceTree = "<group>"; };
+		00B5D30A20E37D71001A71E4 /* WLImagePoetryController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLImagePoetryController.m; sourceTree = "<group>"; };
 		00BBFA0C20D6291400BB86D9 /* WLFontController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLFontController.h; sourceTree = "<group>"; };
 		00BBFA0D20D6291400BB86D9 /* WLFontController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLFontController.m; sourceTree = "<group>"; };
 		00BBFA0F20D6524500BB86D9 /* WLFeedbackController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLFeedbackController.h; sourceTree = "<group>"; };
@@ -1563,6 +1566,8 @@
 				07642A5D208E141900B084AE /* PoetryDetailViewController.m */,
 				00E2CB3A20E0818F00E44793 /* WLImageController.h */,
 				00E2CB3B20E0818F00E44793 /* WLImageController.m */,
+				00B5D30920E37D71001A71E4 /* WLImagePoetryController.h */,
+				00B5D30A20E37D71001A71E4 /* WLImagePoetryController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1834,6 +1839,7 @@
 				07567B1B207A02EB0018B9E7 /* MJRefreshBackStateFooter.m in Sources */,
 				0765C6B6207CE47E0085EB3A /* View+MASAdditions.m in Sources */,
 				07E06D9520A06A1C00093DCC /* WLPoetryTypeController.m in Sources */,
+				00B5D30B20E37D71001A71E4 /* WLImagePoetryController.m in Sources */,
 				07567AFF207A02EB0018B9E7 /* AFNetworkReachabilityManager.m in Sources */,
 				07567B03207A02EB0018B9E7 /* AFURLSessionManager.m in Sources */,
 				07567B13207A02EB0018B9E7 /* MJRefreshComponent.m in Sources */,
