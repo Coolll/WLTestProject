@@ -50,7 +50,6 @@
     
     [Bmob registerWithAppKey:@"40e18dd4c61c975bc10e42abc6293dd1"];
     
-    [self loadLaunchImage];
 
     
 //    [self addNewUser];
@@ -69,9 +68,16 @@
     self.window.backgroundColor = [UIColor whiteColor];
     
     [self.window makeKeyAndVisible];
+    [self loadLaunchImage];
+
+    
+    [self loadLikePoetryList];
+    
+    [self registShareSDK];
     
     [self loadCustomTabbar];
     
+
 //    NSString *isFirstLoad = [[NSUserDefaults standardUserDefaults]objectForKey:FIRSTOPENAPP];
 //
 //    if (![isFirstLoad isEqualToString:@"1"]) {
@@ -80,9 +86,7 @@
 //    }
     
     
-    [self loadLikePoetryList];
     
-    [self registShareSDK];
     
     NSLog(@"在DevBranch添加");
     return YES;
@@ -203,25 +207,17 @@
 
 - (void)loadLaunchImage
 {
+    
+    UIViewController *tempVC = [[UIViewController alloc]init];
+    self.window.rootViewController = tempVC;
+    
     LaunchController *vc = [[LaunchController alloc]init];
     
-    UIViewController *topVC = self.window.rootViewController;
-    
-    [topVC presentViewController:vc animated:NO completion:nil];
+    [tempVC presentViewController:vc animated:NO completion:nil];
     
 }
 
-- (void)loadFirstLoadView
-{
-    LeadViewController *vc = [[LeadViewController alloc]init];
-    
-    UIViewController *topVC = self.window.rootViewController;
-    
-    [topVC presentViewController:vc animated:NO completion:nil];
-    
-    [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:FIRSTOPENAPP];
-    
-}
+
 
 
 - (void)loadCustomTabbar
@@ -229,7 +225,6 @@
     self.tabbarVC = [[YLTabbarController alloc]init];
     
     self.window.rootViewController = self.tabbarVC;
-    
 }
 
 #pragma mark - 注册新用户
@@ -401,6 +396,17 @@
 }
 
 
+//- (void)loadFirstLoadView
+//{
+//    LeadViewController *vc = [[LeadViewController alloc]init];
+//
+//    UIViewController *topVC = self.window.rootViewController;
+//
+//    [topVC presentViewController:vc animated:NO completion:nil];
+//
+//    [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:FIRSTOPENAPP];
+//
+//}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

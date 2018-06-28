@@ -7,6 +7,7 @@
 //
 
 #import "WLImagePoetryController.h"
+#import "WLSearchController.h"
 
 @interface WLImagePoetryController ()
 /**
@@ -41,8 +42,13 @@
 {
     self.searchView.backgroundColor = [UIColor whiteColor];
     self.inputTextView.backgroundColor = [UIColor whiteColor];
-    self.finishBtn.backgroundColor = NavigationColor;
+    self.finishBtn.backgroundColor = RGBCOLOR(80, 175, 240, 1.0);
 
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    HidenKeybory;
 }
 
 - (void)finishAction:(UIButton*)sender
@@ -50,10 +56,18 @@
     NSLog(@"完成");
 }
 
+- (void)searchInList:(UITapGestureRecognizer*)tap
+{
+    NSLog(@"搜索");
+    WLSearchController *searchVC = [[WLSearchController alloc]init];
+    searchVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:searchVC animated:YES];
+}
 - (UIView*)searchView
 {
     if (!_searchView) {
         _searchView = [[UIView alloc]init];
+        _searchView.layer.cornerRadius = 4.f;
         [self.view addSubview:_searchView];
         //设置UI布局约束
         [_searchView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -63,6 +77,39 @@
             make.trailing.equalTo(self.view.mas_trailing).offset(-15);//元素右侧约束
             make.height.mas_equalTo(50);//元素高度
         }];
+        
+        CGFloat iconW = 18;
+        UIImageView *iconImageView = [[UIImageView alloc]init];
+        iconImageView.image = [UIImage imageNamed:@"searchInList"];
+        [_searchView addSubview:iconImageView];
+        //元素的布局
+        [iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.left.equalTo(_searchView.mas_left).offset(10);
+            make.top.equalTo(_searchView.mas_top).offset((50-iconW)/2);
+            make.width.mas_equalTo(iconW);
+            make.height.mas_equalTo(iconW);
+            
+        }];
+        
+        UILabel *tipLabel = [[UILabel alloc]init];
+        tipLabel.text = @"搜索诗词";
+        tipLabel.font = [UIFont systemFontOfSize:16.f];
+        [_searchView addSubview:tipLabel];
+        //元素的布局
+        [tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.left.equalTo(iconImageView.mas_right).offset(10);
+            make.top.equalTo(_searchView.mas_top).offset(0);
+            make.bottom.equalTo(_searchView.mas_bottom).offset(0);
+            make.right.equalTo(_searchView.mas_right).offset(-10);
+            
+        }];
+        
+        
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(searchInList:)];
+        [_searchView addGestureRecognizer:tap];
+        _searchView.userInteractionEnabled = YES;
     }
     return _searchView;
 }
@@ -72,6 +119,7 @@
         
         _inputTextView = [[UITextView alloc]init];
         _inputTextView.layer.cornerRadius = 4.f;
+        _inputTextView.font = [UIFont systemFontOfSize:18.f];
         [self.view addSubview:_inputTextView];
         
         //设置UI布局约束
@@ -89,9 +137,10 @@
 
 - (UIButton*)finishBtn
 {
-    if (_finishBtn) {
+    if (!_finishBtn) {
         _finishBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [_finishBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        _finishBtn.layer.cornerRadius = 6.f;
         [_finishBtn setTitle:@"完成" forState:UIControlStateNormal];
         [_finishBtn addTarget:self action:@selector(finishAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:_finishBtn];
@@ -100,19 +149,19 @@
             //设置UI布局约束
             [_finishBtn mas_makeConstraints:^(MASConstraintMaker *make) {
                 
-                make.top.equalTo(self.view.mas_safeAreaLayoutGuideBottom).offset(-49);//元素顶部约束
-                make.leading.equalTo(self.view.mas_leading).offset(0);//元素左侧约束
-                make.trailing.equalTo(self.view.mas_trailing).offset(0);//元素右侧约束
-                make.bottom.equalTo(self.view.mas_bottom).offset(0);//元素底部约束
+                make.top.equalTo(self.view.mas_safeAreaLayoutGuideBottom).offset(-69);//元素顶部约束
+                make.leading.equalTo(self.view.mas_leading).offset(15);//元素左侧约束
+                make.trailing.equalTo(self.view.mas_trailing).offset(-15);//元素右侧约束
+                make.bottom.equalTo(self.view.mas_bottom).offset(-20);//元素底部约束
             }];
         }else{
             //设置UI布局约束
             [_finishBtn mas_makeConstraints:^(MASConstraintMaker *make) {
                 
-                make.top.equalTo(self.view.mas_bottom).offset(-49);//元素顶部约束
-                make.leading.equalTo(self.view.mas_leading).offset(0);//元素左侧约束
-                make.trailing.equalTo(self.view.mas_trailing).offset(0);//元素右侧约束
-                make.bottom.equalTo(self.view.mas_bottom).offset(0);//元素底部约束
+                make.top.equalTo(self.view.mas_bottom).offset(-69);//元素顶部约束
+                make.leading.equalTo(self.view.mas_leading).offset(15);//元素左侧约束
+                make.trailing.equalTo(self.view.mas_trailing).offset(-15);//元素右侧约束
+                make.bottom.equalTo(self.view.mas_bottom).offset(-20);//元素底部约束
             }];
         }
         

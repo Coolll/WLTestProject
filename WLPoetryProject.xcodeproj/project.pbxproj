@@ -112,6 +112,7 @@
 		07567B8D207A02EC0018B9E7 /* WLBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 07567A98207A02EB0018B9E7 /* WLBaseModel.m */; };
 		07567B8E207A02EC0018B9E7 /* WLRequestHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 07567A9A207A02EB0018B9E7 /* WLRequestHelper.m */; };
 		07567B8F207A02EC0018B9E7 /* WLSaveLocalHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 07567A9C207A02EB0018B9E7 /* WLSaveLocalHelper.m */; };
+		075AFEB220E525BA005ADDB9 /* searchInList.png in Resources */ = {isa = PBXBuildFile; fileRef = 075AFEB120E525B9005ADDB9 /* searchInList.png */; };
 		07642A5E208E141900B084AE /* PoetryDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07642A5D208E141900B084AE /* PoetryDetailViewController.m */; };
 		0765C6AD207CE47E0085EB3A /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0765C693207CE47E0085EB3A /* Info.plist */; };
 		0765C6AE207CE47E0085EB3A /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 0765C695207CE47E0085EB3A /* MASCompositeConstraint.m */; };
@@ -444,6 +445,7 @@
 		07567A9B207A02EB0018B9E7 /* WLSaveLocalHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLSaveLocalHelper.h; sourceTree = "<group>"; };
 		07567A9C207A02EB0018B9E7 /* WLSaveLocalHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLSaveLocalHelper.m; sourceTree = "<group>"; };
 		07567B90207A03310018B9E7 /* WLPrefixHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLPrefixHeader.h; sourceTree = "<group>"; };
+		075AFEB120E525B9005ADDB9 /* searchInList.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = searchInList.png; sourceTree = "<group>"; };
 		07642A5C208E141900B084AE /* PoetryDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PoetryDetailViewController.h; sourceTree = "<group>"; };
 		07642A5D208E141900B084AE /* PoetryDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PoetryDetailViewController.m; sourceTree = "<group>"; };
 		0765C693207CE47E0085EB3A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -777,6 +779,7 @@
 		073864F220E12D8B0005BE61 /* ForImage */ = {
 			isa = PBXGroup;
 			children = (
+				075AFEB120E525B9005ADDB9 /* searchInList.png */,
 				073864F320E12D8B0005BE61 /* poetryContent.png */,
 			);
 			path = ForImage;
@@ -1739,6 +1742,7 @@
 				07D3801520CD5E2200CF2A6E /* classSeven.jpg in Resources */,
 				07F3E30C20D2C0FC00E7BAF7 /* editImage.png in Resources */,
 				073864F420E12D8B0005BE61 /* poetryContent.png in Resources */,
+				075AFEB220E525BA005ADDB9 /* searchInList.png in Resources */,
 				073D7F6C20A7E259002BCEA7 /* tangPoetry_one.json in Resources */,
 				07D3801120CD5E2200CF2A6E /* classFour.jpg in Resources */,
 				00F9517320D4EA650039D7C5 /* check_box.png in Resources */,
