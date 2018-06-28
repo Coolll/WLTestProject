@@ -50,6 +50,8 @@
     
     [Bmob registerWithAppKey:@"40e18dd4c61c975bc10e42abc6293dd1"];
     
+    [self loadLaunchImage];
+
     
 //    [self addNewUser];
     [self getCurrentUserState];
@@ -77,7 +79,6 @@
 //
 //    }
     
-    [self loadLaunchImage];
     
     [self loadLikePoetryList];
     
@@ -155,7 +156,6 @@
                  break;
          }
      }];
-    
     
 }
 - (void)loadLikePoetryList

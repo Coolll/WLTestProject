@@ -10,6 +10,14 @@
 
 @interface WLImagePoetryController ()
 /**
+ *  内容view
+ **/
+@property (nonatomic, strong) UIView *contentView;
+/**
+ *  搜索
+ **/
+@property (nonatomic, strong) UIView *searchView;
+/**
  *  输入框
  **/
 @property (nonatomic, strong) UITextView *inputTextView;
@@ -31,6 +39,7 @@
 
 - (void)loadCustomView
 {
+    self.searchView.backgroundColor = [UIColor whiteColor];
     self.inputTextView.backgroundColor = [UIColor whiteColor];
     self.finishBtn.backgroundColor = NavigationColor;
 
@@ -41,6 +50,22 @@
     NSLog(@"完成");
 }
 
+- (UIView*)searchView
+{
+    if (!_searchView) {
+        _searchView = [[UIView alloc]init];
+        [self.view addSubview:_searchView];
+        //设置UI布局约束
+        [_searchView mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.top.equalTo(self.naviView.mas_bottom).offset(20);//元素顶部约束
+            make.leading.equalTo(self.view.mas_leading).offset(15);//元素左侧约束
+            make.trailing.equalTo(self.view.mas_trailing).offset(-15);//元素右侧约束
+            make.height.mas_equalTo(50);//元素高度
+        }];
+    }
+    return _searchView;
+}
 - (UITextView*)inputTextView
 {
     if (!_inputTextView) {
@@ -52,7 +77,7 @@
         //设置UI布局约束
         [_inputTextView mas_makeConstraints:^(MASConstraintMaker *make) {
             
-            make.top.equalTo(self.naviView.mas_bottom).offset(20);//元素顶部约束
+            make.top.equalTo(self.searchView.mas_bottom).offset(20);//元素顶部约束
             make.leading.equalTo(self.naviView.mas_leading).offset(15);//元素左侧约束
             make.trailing.equalTo(self.naviView.mas_trailing).offset(-15);//元素右侧约束
             make.height.mas_equalTo(160);//元素高度
