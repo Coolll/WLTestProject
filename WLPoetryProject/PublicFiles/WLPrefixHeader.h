@@ -18,5 +18,6 @@
 #import "UserInformation.h"
 #import "WLSaveLocalHelper.h"
 #import "AppConfig.h"
+#import "PublicTool.h"
 
 #endif /* WLPrefixHeader_h */

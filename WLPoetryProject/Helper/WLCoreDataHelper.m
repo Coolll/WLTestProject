@@ -261,24 +261,8 @@
         poetryEntity = [fetchArray firstObject];
     }
     
-    PoetryModel *model = [[PoetryModel alloc]init];
-    model.name = poetryEntity.name;
-    model.author = poetryEntity.author;
-    model.content = poetryEntity.content;
-    model.backImageName = poetryEntity.backImageName;
-    model.isLike = poetryEntity.isLike;
-    model.isRecited = poetryEntity.isRecited;
-    model.isShowed = poetryEntity.isShowed;
-    model.source = poetryEntity.source;
-    model.poetryID = poetryEntity.poetryID;
-    model.addtionInfo = poetryEntity.addtionInfo;
-    model.classInfo = poetryEntity.classInfo;
-    model.transferInfo = poetryEntity.transferInfo;
-    model.analysesInfo = poetryEntity.analysesInfo;
-    model.backgroundInfo = poetryEntity.backgroundInfo;
-    model.firstLineString = poetryEntity.firstLineString;
-    model.mainClass = poetryEntity.mainClass;
-    return model;
+    
+    return [self transferModelWithEntity:poetryEntity];
 }
 
 //根据ID查询诗词的信息
@@ -299,6 +283,32 @@
     return poetryEntity;
 }
 
+
+- (PoetryModel*)transferModelWithEntity:(Poetry*)poetryEntity
+{
+    PoetryModel *model = [[PoetryModel alloc]init];
+
+    if (!poetryEntity) {
+        return model;
+    }
+    model.name = poetryEntity.name;
+    model.author = poetryEntity.author;
+    model.content = poetryEntity.content;
+    model.backImageName = poetryEntity.backImageName;
+    model.isLike = poetryEntity.isLike;
+    model.isRecited = poetryEntity.isRecited;
+    model.isShowed = poetryEntity.isShowed;
+    model.source = poetryEntity.source;
+    model.poetryID = poetryEntity.poetryID;
+    model.addtionInfo = poetryEntity.addtionInfo;
+    model.classInfo = poetryEntity.classInfo;
+    model.transferInfo = poetryEntity.transferInfo;
+    model.analysesInfo = poetryEntity.analysesInfo;
+    model.backgroundInfo = poetryEntity.backgroundInfo;
+    model.firstLineString = poetryEntity.firstLineString;
+    model.mainClass = poetryEntity.mainClass;
+    return model;
+}
 #pragma mark - 查询表中的数据
 - (NSArray *)fetchDataWithTableName:(NSString*)tableName withRequest:(NSFetchRequest*)request withPredicate:(NSPredicate*)predicate
 {
@@ -314,7 +324,14 @@
     
     NSArray *fetchArray = [self.appDelegate.managedObjectContext executeFetchRequest:request error:&error];
     
-    return fetchArray;
+    NSMutableArray *modelArray = [NSMutableArray array];
+    for (Poetry *poetry in fetchArray) {
+        
+        PoetryModel *model = [self transferModelWithEntity:poetry];
+        [modelArray addObject:model];
+    }
+    
+    return modelArray;
 }
 #pragma mark - 查询表中的数据
 - (NSArray*)searchPoetryListWithKeyWord:(NSString*)keyWord

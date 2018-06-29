@@ -15,6 +15,10 @@
 		000110AC20A44BD2001B2B55 /* gradePoetry_7_one.json in Resources */ = {isa = PBXBuildFile; fileRef = 000110A620A44BD2001B2B55 /* gradePoetry_7_one.json */; };
 		003EBE1620D0F00A00DD7815 /* LeadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 003EBE1520D0F00A00DD7815 /* LeadViewController.m */; };
 		003EBE1920D0F04500DD7815 /* LaunchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 003EBE1820D0F04500DD7815 /* LaunchController.m */; };
+		009A1B2920E6024C00C0A58D /* WLImageSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 009A1B2820E6024C00C0A58D /* WLImageSearchController.m */; };
+		009A1B2C20E618B900C0A58D /* WLPoetryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 009A1B2B20E618B900C0A58D /* WLPoetryView.m */; };
+		009A1B2F20E619AA00C0A58D /* PublicTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 009A1B2E20E619AA00C0A58D /* PublicTool.m */; };
+		009A1B3220E6208300C0A58D /* WLTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 009A1B3120E6208300C0A58D /* WLTextView.m */; };
 		00A38E2C20DCEDF700D4D653 /* WLImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A38E2B20DCEDF700D4D653 /* WLImageCell.m */; };
 		00B5D30B20E37D71001A71E4 /* WLImagePoetryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B5D30A20E37D71001A71E4 /* WLImagePoetryController.m */; };
 		00BBFA0E20D6291400BB86D9 /* WLFontController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BBFA0D20D6291400BB86D9 /* WLFontController.m */; };
@@ -290,6 +294,14 @@
 		003EBE1520D0F00A00DD7815 /* LeadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeadViewController.m; sourceTree = "<group>"; };
 		003EBE1720D0F04500DD7815 /* LaunchController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LaunchController.h; sourceTree = "<group>"; };
 		003EBE1820D0F04500DD7815 /* LaunchController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LaunchController.m; sourceTree = "<group>"; };
+		009A1B2720E6024C00C0A58D /* WLImageSearchController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLImageSearchController.h; sourceTree = "<group>"; };
+		009A1B2820E6024C00C0A58D /* WLImageSearchController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLImageSearchController.m; sourceTree = "<group>"; };
+		009A1B2A20E618B900C0A58D /* WLPoetryView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLPoetryView.h; sourceTree = "<group>"; };
+		009A1B2B20E618B900C0A58D /* WLPoetryView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLPoetryView.m; sourceTree = "<group>"; };
+		009A1B2D20E619AA00C0A58D /* PublicTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PublicTool.h; sourceTree = "<group>"; };
+		009A1B2E20E619AA00C0A58D /* PublicTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PublicTool.m; sourceTree = "<group>"; };
+		009A1B3020E6208300C0A58D /* WLTextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLTextView.h; sourceTree = "<group>"; };
+		009A1B3120E6208300C0A58D /* WLTextView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLTextView.m; sourceTree = "<group>"; };
 		00A38E2A20DCEDF700D4D653 /* WLImageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLImageCell.h; sourceTree = "<group>"; };
 		00A38E2B20DCEDF700D4D653 /* WLImageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLImageCell.m; sourceTree = "<group>"; };
 		00B5D30920E37D71001A71E4 /* WLImagePoetryController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLImagePoetryController.h; sourceTree = "<group>"; };
@@ -1087,6 +1099,8 @@
 				07567A9C207A02EB0018B9E7 /* WLSaveLocalHelper.m */,
 				07A92299208628DB00BE5929 /* WLCoreDataHelper.h */,
 				07A9229A208628DB00BE5929 /* WLCoreDataHelper.m */,
+				009A1B2D20E619AA00C0A58D /* PublicTool.h */,
+				009A1B2E20E619AA00C0A58D /* PublicTool.m */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -1292,6 +1306,10 @@
 				079BC504209D42BB00E0DF85 /* WLPoetryContentCell.m */,
 				00A38E2A20DCEDF700D4D653 /* WLImageCell.h */,
 				00A38E2B20DCEDF700D4D653 /* WLImageCell.m */,
+				009A1B2A20E618B900C0A58D /* WLPoetryView.h */,
+				009A1B2B20E618B900C0A58D /* WLPoetryView.m */,
+				009A1B3020E6208300C0A58D /* WLTextView.h */,
+				009A1B3120E6208300C0A58D /* WLTextView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1571,6 +1589,8 @@
 				00E2CB3B20E0818F00E44793 /* WLImageController.m */,
 				00B5D30920E37D71001A71E4 /* WLImagePoetryController.h */,
 				00B5D30A20E37D71001A71E4 /* WLImagePoetryController.m */,
+				009A1B2720E6024C00C0A58D /* WLImageSearchController.h */,
+				009A1B2820E6024C00C0A58D /* WLImageSearchController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1810,6 +1830,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				009A1B2920E6024C00C0A58D /* WLImageSearchController.m in Sources */,
 				07567B21207A02EC0018B9E7 /* NSBundle+MJRefresh.m in Sources */,
 				0765C707207CE6E20085EB3A /* SDWebImageImageIOCoder.m in Sources */,
 				07567B20207A02EC0018B9E7 /* MJRefreshConst.m in Sources */,
@@ -1839,12 +1860,14 @@
 				0765C6B1207CE47E0085EB3A /* MASLayoutConstraint.m in Sources */,
 				0765C704207CE6E20085EB3A /* SDWebImageDownloaderOperation.m in Sources */,
 				079BC505209D42BB00E0DF85 /* WLPoetryContentCell.m in Sources */,
+				009A1B2C20E618B900C0A58D /* WLPoetryView.m in Sources */,
 				0765C709207CE6E20085EB3A /* SDWebImagePrefetcher.m in Sources */,
 				07567B1B207A02EB0018B9E7 /* MJRefreshBackStateFooter.m in Sources */,
 				0765C6B6207CE47E0085EB3A /* View+MASAdditions.m in Sources */,
 				07E06D9520A06A1C00093DCC /* WLPoetryTypeController.m in Sources */,
 				00B5D30B20E37D71001A71E4 /* WLImagePoetryController.m in Sources */,
 				07567AFF207A02EB0018B9E7 /* AFNetworkReachabilityManager.m in Sources */,
+				009A1B2F20E619AA00C0A58D /* PublicTool.m in Sources */,
 				07567B03207A02EB0018B9E7 /* AFURLSessionManager.m in Sources */,
 				07567B13207A02EB0018B9E7 /* MJRefreshComponent.m in Sources */,
 				0765C703207CE6E20085EB3A /* SDWebImageDownloader.m in Sources */,
@@ -1899,6 +1922,7 @@
 				0765C6B3207CE47E0085EB3A /* MASViewConstraint.m in Sources */,
 				00EC603E20D5E84E002B6C85 /* WLLikeController.m in Sources */,
 				07567B00207A02EB0018B9E7 /* AFSecurityPolicy.m in Sources */,
+				009A1B3220E6208300C0A58D /* WLTextView.m in Sources */,
 				0765C6FA207CE6E20085EB3A /* NSData+ImageContentType.m in Sources */,
 				0765C6FE207CE6E20085EB3A /* SDImageCacheConfig.m in Sources */,
 				003EBE1920D0F04500DD7815 /* LaunchController.m in Sources */,
