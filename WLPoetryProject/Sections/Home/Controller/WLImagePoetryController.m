@@ -53,6 +53,14 @@
     self.finishBtn.backgroundColor = RGBCOLOR(80, 175, 240, 1.0);
 }
 
+- (void)setPoetryString:(NSString *)poetryString
+{
+    _poetryString = poetryString;
+    if (poetryString.length > 0) {
+        self.inputTextView.text = poetryString;
+
+    }
+}
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
@@ -73,6 +81,8 @@
     if (self.finishBlock) {
         self.finishBlock(self.inputTextView.text);
     }
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - 搜索诗词

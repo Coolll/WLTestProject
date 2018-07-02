@@ -29,6 +29,11 @@ static const CGFloat imageW = 20;
  *  诗词
  **/
 @property (nonatomic, strong) WLPoetryView *contentView;
+/**
+ *  诗词内容
+ **/
+@property (nonatomic,copy) NSString *originPoetry;
+
 
 @end
 
@@ -77,6 +82,7 @@ static const CGFloat imageW = 20;
 //    [self shareWithImageArray:imageArray];
     
     WLImagePoetryController *vc = [[WLImagePoetryController alloc]init];
+    vc.poetryString = self.originPoetry;
     [vc finishEditContentWithBlock:^(NSString *poetryContent) {
         [self loadPoetryContent:poetryContent];
     }];
@@ -87,6 +93,14 @@ static const CGFloat imageW = 20;
 #pragma mark - 完成的诗词内容
 - (void)loadPoetryContent:(NSString*)string
 {
+    if (self.contentView) {
+        for (UIView *subView in self.contentView.subviews) {
+            [subView removeFromSuperview];
+        }
+        [self.contentView removeFromSuperview];
+        self.contentView = nil;
+    }
+    self.originPoetry = string;
     self.contentView = [[WLPoetryView alloc]initWithContent:string];
     self.contentView.direction = PoetryDirectionHorizon;
     [self.mainImageView addSubview:self.contentView];

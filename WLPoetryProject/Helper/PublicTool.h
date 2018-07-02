@@ -14,4 +14,9 @@
 //将诗词按照，。！？分割
 - (NSArray*)poetrySeperateWithOrigin:(NSString*)originString;
 
+
++ (CGFloat)heightForTextString:(NSString*)vauleString width:(CGFloat)textWidth font:(UIFont*)textFont;
+
++ (CGFloat) widthForTextString:(NSString *)tStr height:(CGFloat)tHeight font:(UIFont*)textFont;
+
 @end

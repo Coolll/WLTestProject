@@ -20,6 +20,7 @@
 }
 
 
+#pragma mark - 文本分割
 
 - (NSArray*)poetrySeperateWithOrigin:(NSString*)originString
 {
@@ -328,5 +329,21 @@
     }
     
     return arr;
+}
+
+#pragma mark - 计算label高度
++ (CGFloat)heightForTextString:(NSString*)vauleString width:(CGFloat)textWidth font:(UIFont*)textFont
+{
+    NSDictionary *dict = @{NSFontAttributeName:textFont};
+    CGRect rect = [vauleString boundingRectWithSize:CGSizeMake(textWidth, MAXFLOAT) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin |NSStringDrawingTruncatesLastVisibleLine attributes:dict context:nil];
+    return rect.size.height+1;
+}
+
++ (CGFloat) widthForTextString:(NSString *)tStr height:(CGFloat)tHeight font:(UIFont*)textFont{
+    
+    NSDictionary *dict = @{NSFontAttributeName:textFont};
+    CGRect rect = [tStr boundingRectWithSize:CGSizeMake(MAXFLOAT, tHeight) options:NSStringDrawingTruncatesLastVisibleLine|NSStringDrawingUsesFontLeading|NSStringDrawingUsesLineFragmentOrigin attributes:dict context:nil];
+    return rect.size.width+5;
+    
 }
 @end

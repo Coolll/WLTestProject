@@ -10,6 +10,11 @@
 typedef void(^ImagePoetryFinishBlock) (NSString*poetryContent);
 
 @interface WLImagePoetryController : BaseViewController
+/**
+ *  原始诗词
+ **/
+@property (nonatomic,copy) NSString *poetryString;
+
 
 - (void)finishEditContentWithBlock:(ImagePoetryFinishBlock)block;
 
