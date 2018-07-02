@@ -11,6 +11,7 @@ static const CGFloat imageW = 20;
 
 #import "WLImageController.h"
 #import "WLImagePoetryController.h"
+#import "WLPoetryView.h"
 
 
 @interface WLImageController ()
@@ -24,7 +25,10 @@ static const CGFloat imageW = 20;
  **/
 @property (nonatomic,strong) UIView *poetryView;
 
-
+/**
+ *  诗词
+ **/
+@property (nonatomic, strong) WLPoetryView *contentView;
 
 @end
 
@@ -73,10 +77,29 @@ static const CGFloat imageW = 20;
 //    [self shareWithImageArray:imageArray];
     
     WLImagePoetryController *vc = [[WLImagePoetryController alloc]init];
+    [vc finishEditContentWithBlock:^(NSString *poetryContent) {
+        [self loadPoetryContent:poetryContent];
+    }];
     [self.navigationController pushViewController:vc animated:YES];
+    
 }
 
-
+#pragma mark - 完成的诗词内容
+- (void)loadPoetryContent:(NSString*)string
+{
+    self.contentView = [[WLPoetryView alloc]initWithContent:string];
+    self.contentView.direction = PoetryDirectionHorizon;
+    [self.mainImageView addSubview:self.contentView];
+    //设置UI布局约束
+    [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.equalTo(self.poetryView.mas_bottom).offset(10);//元素顶部约束
+        make.leading.equalTo(self.view.mas_leading).offset(0);//元素左侧约束
+        make.trailing.equalTo(self.view.mas_trailing).offset(0);//元素右侧约束
+        make.height.mas_equalTo(120);//元素高度
+    }];
+    
+}
 
 
 - (UIView*)poetryView

@@ -7,7 +7,10 @@
 //
 
 #import "BaseViewController.h"
+typedef void(^ImagePoetryFinishBlock) (NSString*poetryContent);
 
 @interface WLImagePoetryController : BaseViewController
+
+- (void)finishEditContentWithBlock:(ImagePoetryFinishBlock)block;
 
 @end
