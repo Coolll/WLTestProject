@@ -7,7 +7,16 @@
 //
 
 #import "BaseViewController.h"
+typedef NS_ENUM(NSInteger,PoetryDirection) {
+    PoetryDirectionHorizon,//水平排版
+    PoetryDirectionVerticalLeft,//垂直 从左侧开始第一句
+    PoetryDirectionVerticalRight//垂直 从右侧开始第一句
+};
 
 @interface WLImageController : BaseViewController
+/**
+ *  排版
+ **/
+@property (nonatomic, assign) PoetryDirection direction;
 
 @end

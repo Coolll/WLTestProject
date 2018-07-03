@@ -11,7 +11,7 @@ static const CGFloat imageW = 20;
 
 #import "WLImageController.h"
 #import "WLImagePoetryController.h"
-#import "WLPoetryView.h"
+#import "WLPoetryLabel.h"
 
 
 @interface WLImageController ()
@@ -26,14 +26,33 @@ static const CGFloat imageW = 20;
 @property (nonatomic,strong) UIView *poetryView;
 
 /**
- *  诗词
- **/
-@property (nonatomic, strong) WLPoetryView *contentView;
-/**
  *  诗词内容
  **/
 @property (nonatomic,copy) NSString *originPoetry;
+/**
+ *  数据源
+ **/
+@property (nonatomic, copy) NSArray *contentArray;
+/**
+ *  当前点击的index
+ **/
+@property (nonatomic, assign) NSInteger currentIndex;
 
+/**
+ *  开始的点，结束的点
+ **/
+@property (nonatomic, assign) CGPoint beginPoint,endPoint;
+
+/**
+ *  视图的左侧、顶部距离
+ **/
+@property (nonatomic, strong) NSMutableArray *leftArray;
+@property (nonatomic, strong) NSMutableArray *topArray;
+
+/**
+ *  上次的位置
+ **/
+@property (nonatomic, assign) CGFloat lastLeft,lastTop;
 
 @end
 
@@ -47,7 +66,15 @@ static const CGFloat imageW = 20;
     [self addFullTitleLabel];//诗词名字 添加背景之后调用，否则会被背景图遮住
     [self addBackButtonForFullScreen];//返回按钮，需要最后添加
     
+    [self loadCustomData];
     [self loadCustomView];
+}
+
+- (void)loadCustomData
+{
+    self.currentIndex = 0;
+    self.leftArray = [NSMutableArray array];
+    self.topArray = [NSMutableArray array];
 }
 
 - (void)loadCustomView
@@ -93,29 +120,184 @@ static const CGFloat imageW = 20;
 #pragma mark - 完成的诗词内容
 - (void)loadPoetryContent:(NSString*)string
 {
-    if (self.contentView) {
-        for (UIView *subView in self.contentView.subviews) {
+   
+    self.originPoetry = string;
+    
+    for (UIView *subView in self.view.subviews) {
+        if ([subView isKindOfClass:[WLPoetryLabel class]]) {
             [subView removeFromSuperview];
         }
-        [self.contentView removeFromSuperview];
-        self.contentView = nil;
     }
-    self.originPoetry = string;
-    self.contentView = [[WLPoetryView alloc]initWithContent:string];
-    self.contentView.direction = PoetryDirectionHorizon;
-    [self.mainImageView addSubview:self.contentView];
-    //设置UI布局约束
-    [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+    
+    [self.leftArray removeAllObjects];
+    [self.topArray removeAllObjects];
+    
+    self.contentArray = [[PublicTool tool]poetrySeperateWithOrigin:string];
+    self.direction = PoetryDirectionVerticalLeft;
+    [self loadPoetryContentView];
+}
+
+
+#pragma mark - 创建诗词内容视图
+- (void)loadPoetryContentView
+{
+    switch (self.direction) {
+            
+        case PoetryDirectionHorizon:
+        {
+            [self loadHorizonView];
+        }
+            break;
+            
+        case PoetryDirectionVerticalLeft:
+        {
+            [self loadVerticalLeftView];
+        }
+            break;
+            
+        case PoetryDirectionVerticalRight:
+        {
+            [self loadVerticalRightView];
+        }
+            break;
+            
+        default:
+            break;
+    }
+}
+
+
+- (void)loadHorizonView
+{
+    CGFloat topSpace = 20;
+    
+    for (int i =0; i< self.contentArray.count; i++) {
         
-        make.top.equalTo(self.poetryView.mas_bottom).offset(10);//元素顶部约束
-        make.leading.equalTo(self.view.mas_leading).offset(0);//元素左侧约束
-        make.trailing.equalTo(self.view.mas_trailing).offset(0);//元素右侧约束
-        make.height.mas_equalTo(120);//元素高度
-    }];
+        NSString *content = [NSString stringWithFormat:@"%@",self.contentArray[i]];
+        
+        WLPoetryLabel *contentLabel = [[WLPoetryLabel alloc]initWithContent:content];
+        contentLabel.font = [UIFont systemFontOfSize:14.f];
+        contentLabel.userInteractionEnabled = YES;
+        contentLabel.tag = 1000+i;
+        [self.view addSubview:contentLabel];
+        
+        CGFloat width = [PublicTool widthForTextString:content height:20 font:contentLabel.font];
+        CGFloat height = 20;
+        CGFloat itemSpace = 8;
+        //元素的布局
+        [contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.left.equalTo(self.view.mas_left).offset((PhoneScreen_WIDTH-width)/2).priority(500);
+            make.top.equalTo(self.titleFullLabel.mas_bottom).offset(topSpace).priority(100);
+            make.width.mas_equalTo(width);
+            make.height.mas_equalTo(height);
+            
+        }];
+        
+        [self.leftArray addObject:[NSString stringWithFormat:@"%f",(PhoneScreen_WIDTH-width)/2]];
+        [self.topArray addObject:[NSString stringWithFormat:@"%f",topSpace]];
+        
+        topSpace += height+itemSpace;
+    }
+    
+    
+}
+
+- (void)loadVerticalLeftView
+{
+    CGFloat leftSpace = 20;
+    
+    for (int i =0; i< self.contentArray.count; i++) {
+        
+        NSString *content = [NSString stringWithFormat:@"%@",self.contentArray[i]];
+        
+        WLPoetryLabel *contentLabel = [[WLPoetryLabel alloc]initWithContent:content];
+        contentLabel.font = [UIFont systemFontOfSize:14.f];
+        contentLabel.userInteractionEnabled = YES;
+        contentLabel.numberOfLines = 0;
+        contentLabel.tag = 1000+i;
+        [self.view addSubview:contentLabel];
+        
+        CGFloat width = 20;
+        CGFloat height = [PublicTool heightForTextString:content width:width font:contentLabel.font];
+        CGFloat itemSpace = 8;
+        CGFloat topSpace = 80;
+        //元素的布局
+        [contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.left.equalTo(self.view.mas_left).offset(leftSpace).priority(500);
+            make.top.equalTo(self.titleFullLabel.mas_bottom).offset(topSpace).priority(100);
+            make.width.mas_equalTo(width);
+            make.height.mas_equalTo(height);
+            
+        }];
+        
+        [self.leftArray addObject:[NSString stringWithFormat:@"%f",leftSpace]];
+        [self.topArray addObject:[NSString stringWithFormat:@"%f",topSpace]];
+        
+        leftSpace += width+itemSpace;
+    }
+    
+}
+
+- (void)loadVerticalRightView
+{
     
 }
 
 
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    id touchView = touches.anyObject.view;
+    if ([touchView isKindOfClass:[WLPoetryLabel class]]) {
+        NSLog(@"touchView:%@",touchView);
+        self.beginPoint = [touches.anyObject locationInView:self.view];
+        WLPoetryLabel *label = (WLPoetryLabel*)touchView;
+        self.currentIndex = label.tag;
+    }
+}
+
+- (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    if (self.currentIndex > 0) {
+        
+        WLPoetryLabel *label = [self.view viewWithTag:self.currentIndex];
+        CGFloat originLeft = [[self.leftArray objectAtIndex:self.currentIndex-1000] floatValue];
+        CGFloat originTop = [[self.topArray objectAtIndex:self.currentIndex-1000] floatValue];
+        CGPoint point = [touches.anyObject locationInView:self.view];
+        
+        CGFloat xOffset = point.x-self.beginPoint.x;
+        CGFloat yOffset = point.y-self.beginPoint.y;
+        
+        [label mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.view.mas_left).offset(originLeft+xOffset).priority(600);
+            make.top.equalTo(self.titleFullLabel.mas_bottom).offset(originTop+yOffset).priority(200);
+            self.lastTop = originTop+yOffset;
+            self.lastLeft = originLeft+xOffset;
+        }];
+        
+    }
+    
+}
+
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    NSInteger index = self.currentIndex-1000;
+    if (index < self.leftArray.count  && index < self.topArray.count) {
+        [self.leftArray replaceObjectAtIndex:self.currentIndex-1000 withObject:[NSString stringWithFormat:@"%f",self.lastLeft]];
+        [self.topArray replaceObjectAtIndex:self.currentIndex-1000 withObject:[NSString stringWithFormat:@"%f",self.lastTop]];
+    }
+   
+
+    self.currentIndex = 0;
+    
+}
+
+- (void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    self.currentIndex = 0;
+}
+#pragma mark - 属性
 - (UIView*)poetryView
 {
     if (!_poetryView) {

@@ -16,7 +16,7 @@
 		003EBE1620D0F00A00DD7815 /* LeadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 003EBE1520D0F00A00DD7815 /* LeadViewController.m */; };
 		003EBE1920D0F04500DD7815 /* LaunchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 003EBE1820D0F04500DD7815 /* LaunchController.m */; };
 		009A1B2920E6024C00C0A58D /* WLImageSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 009A1B2820E6024C00C0A58D /* WLImageSearchController.m */; };
-		009A1B2C20E618B900C0A58D /* WLPoetryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 009A1B2B20E618B900C0A58D /* WLPoetryView.m */; };
+		009A1B2C20E618B900C0A58D /* WLPoetryLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 009A1B2B20E618B900C0A58D /* WLPoetryLabel.m */; };
 		009A1B2F20E619AA00C0A58D /* PublicTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 009A1B2E20E619AA00C0A58D /* PublicTool.m */; };
 		009A1B3220E6208300C0A58D /* WLTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 009A1B3120E6208300C0A58D /* WLTextView.m */; };
 		00A38E2C20DCEDF700D4D653 /* WLImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A38E2B20DCEDF700D4D653 /* WLImageCell.m */; };
@@ -296,8 +296,8 @@
 		003EBE1820D0F04500DD7815 /* LaunchController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LaunchController.m; sourceTree = "<group>"; };
 		009A1B2720E6024C00C0A58D /* WLImageSearchController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLImageSearchController.h; sourceTree = "<group>"; };
 		009A1B2820E6024C00C0A58D /* WLImageSearchController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLImageSearchController.m; sourceTree = "<group>"; };
-		009A1B2A20E618B900C0A58D /* WLPoetryView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLPoetryView.h; sourceTree = "<group>"; };
-		009A1B2B20E618B900C0A58D /* WLPoetryView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLPoetryView.m; sourceTree = "<group>"; };
+		009A1B2A20E618B900C0A58D /* WLPoetryLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLPoetryLabel.h; sourceTree = "<group>"; };
+		009A1B2B20E618B900C0A58D /* WLPoetryLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLPoetryLabel.m; sourceTree = "<group>"; };
 		009A1B2D20E619AA00C0A58D /* PublicTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PublicTool.h; sourceTree = "<group>"; };
 		009A1B2E20E619AA00C0A58D /* PublicTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PublicTool.m; sourceTree = "<group>"; };
 		009A1B3020E6208300C0A58D /* WLTextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLTextView.h; sourceTree = "<group>"; };
@@ -1306,8 +1306,8 @@
 				079BC504209D42BB00E0DF85 /* WLPoetryContentCell.m */,
 				00A38E2A20DCEDF700D4D653 /* WLImageCell.h */,
 				00A38E2B20DCEDF700D4D653 /* WLImageCell.m */,
-				009A1B2A20E618B900C0A58D /* WLPoetryView.h */,
-				009A1B2B20E618B900C0A58D /* WLPoetryView.m */,
+				009A1B2A20E618B900C0A58D /* WLPoetryLabel.h */,
+				009A1B2B20E618B900C0A58D /* WLPoetryLabel.m */,
 				009A1B3020E6208300C0A58D /* WLTextView.h */,
 				009A1B3120E6208300C0A58D /* WLTextView.m */,
 			);
@@ -1860,7 +1860,7 @@
 				0765C6B1207CE47E0085EB3A /* MASLayoutConstraint.m in Sources */,
 				0765C704207CE6E20085EB3A /* SDWebImageDownloaderOperation.m in Sources */,
 				079BC505209D42BB00E0DF85 /* WLPoetryContentCell.m in Sources */,
-				009A1B2C20E618B900C0A58D /* WLPoetryView.m in Sources */,
+				009A1B2C20E618B900C0A58D /* WLPoetryLabel.m in Sources */,
 				0765C709207CE6E20085EB3A /* SDWebImagePrefetcher.m in Sources */,
 				07567B1B207A02EB0018B9E7 /* MJRefreshBackStateFooter.m in Sources */,
 				0765C6B6207CE47E0085EB3A /* View+MASAdditions.m in Sources */,

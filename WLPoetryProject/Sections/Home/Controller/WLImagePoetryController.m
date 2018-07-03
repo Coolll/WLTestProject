@@ -34,6 +34,11 @@
  *  诗词完成编辑时的block
  **/
 @property (nonatomic, copy) ImagePoetryFinishBlock finishBlock;
+
+/**
+ *  是否采取竖版
+ **/
+@property (nonatomic, strong) UIView *typeView;
 @end
 
 @implementation WLImagePoetryController
@@ -50,7 +55,9 @@
 {
     self.searchView.backgroundColor = [UIColor whiteColor];
     self.inputTextView.backgroundColor = [UIColor whiteColor];
+    self.typeView.backgroundColor = [UIColor whiteColor];
     self.finishBtn.backgroundColor = RGBCOLOR(80, 175, 240, 1.0);
+    
 }
 
 - (void)setPoetryString:(NSString *)poetryString
@@ -205,6 +212,24 @@
         }];
     }
     return _inputTextView;
+}
+
+- (UIView*)typeView
+{
+    if (!_typeView) {
+        _typeView = [[UIView alloc]init];
+        _typeView.layer.cornerRadius = 4.f;
+        [self.view addSubview:_typeView];
+        //设置UI布局约束
+        [_typeView mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.top.equalTo(_inputTextView.mas_bottom).offset(15);//元素顶部约束
+            make.leading.equalTo(_inputTextView.mas_leading).offset(0);//元素左侧约束
+            make.trailing.equalTo(_inputTextView.mas_trailing).offset(0);//元素右侧约束
+            make.height.mas_equalTo(30);//元素高度
+        }];
+    }
+    return _typeView;
 }
 
 #pragma mark 完成按钮
