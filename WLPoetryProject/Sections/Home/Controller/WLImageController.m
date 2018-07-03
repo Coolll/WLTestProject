@@ -110,15 +110,15 @@ static const CGFloat imageW = 20;
     
     WLImagePoetryController *vc = [[WLImagePoetryController alloc]init];
     vc.poetryString = self.originPoetry;
-    [vc finishEditContentWithBlock:^(NSString *poetryContent) {
-        [self loadPoetryContent:poetryContent];
+    [vc finishEditContentWithBlock:^(NSString *poetryContent,BOOL isVertical) {
+        [self loadPoetryContent:poetryContent withIsVertical:isVertical];
     }];
     [self.navigationController pushViewController:vc animated:YES];
     
 }
 
 #pragma mark - 完成的诗词内容
-- (void)loadPoetryContent:(NSString*)string
+- (void)loadPoetryContent:(NSString*)string withIsVertical:(BOOL)isVertical
 {
    
     self.originPoetry = string;
@@ -133,7 +133,11 @@ static const CGFloat imageW = 20;
     [self.topArray removeAllObjects];
     
     self.contentArray = [[PublicTool tool]poetrySeperateWithOrigin:string];
-    self.direction = PoetryDirectionVerticalLeft;
+    if (isVertical) {
+        self.direction = PoetryDirectionVerticalLeft;
+    }else{
+        self.direction = PoetryDirectionHorizon;
+    }
     [self loadPoetryContentView];
 }
 

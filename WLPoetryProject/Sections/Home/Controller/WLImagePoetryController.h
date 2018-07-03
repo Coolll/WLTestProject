@@ -7,13 +7,18 @@
 //
 
 #import "BaseViewController.h"
-typedef void(^ImagePoetryFinishBlock) (NSString*poetryContent);
+typedef void(^ImagePoetryFinishBlock) (NSString*poetryContent,BOOL isVertical);
 
 @interface WLImagePoetryController : BaseViewController
 /**
  *  原始诗词
  **/
 @property (nonatomic,copy) NSString *poetryString;
+/**
+ *  是否为垂直排版
+ **/
+@property (nonatomic,assign) BOOL isVertical;
+
 
 
 - (void)finishEditContentWithBlock:(ImagePoetryFinishBlock)block;
