@@ -68,6 +68,8 @@
     self.window.backgroundColor = [UIColor whiteColor];
     
     [self.window makeKeyAndVisible];
+//    [self loadCustomTabbar];
+
     [self loadLaunchImage];
 
     
@@ -75,8 +77,7 @@
     
     [self registShareSDK];
     
-    [self loadCustomTabbar];
-    
+
 
 //    NSString *isFirstLoad = [[NSUserDefaults standardUserDefaults]objectForKey:FIRSTOPENAPP];
 //
@@ -210,10 +211,11 @@
     
     UIViewController *tempVC = [[UIViewController alloc]init];
     self.window.rootViewController = tempVC;
-    
+//    UIViewController *tempVC = self.window.rootViewController;
     LaunchController *vc = [[LaunchController alloc]init];
     
     [tempVC presentViewController:vc animated:NO completion:nil];
+    
     
 }
 

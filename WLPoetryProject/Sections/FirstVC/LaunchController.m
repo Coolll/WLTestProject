@@ -7,7 +7,7 @@
 //
 
 #import "LaunchController.h"
-
+#import "AppDelegate.h"
 @interface LaunchController ()
 /**
  *  跳过按钮
@@ -125,6 +125,9 @@
 - (void)skipAction:(UIButton*)sender
 {
     [self dismissViewControllerAnimated:NO completion:nil];
+    AppDelegate *delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    [delegate loadCustomTabbar];
+    
 }
 
 

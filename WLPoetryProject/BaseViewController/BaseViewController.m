@@ -136,12 +136,12 @@ static const CGFloat touchFullOffset = 15;//箭头触摸区域超出的offset �
     self.naviView.hidden = YES;
     
     //圆形背景
-    UIView *backView = [[UIView alloc]init];
-    backView.backgroundColor = NavigationColor;
-    backView.layer.cornerRadius = backFullWidth/2;
-    [self.view addSubview:backView];
+    self.backView = [[UIView alloc]init];
+    self.backView.backgroundColor = NavigationColor;
+    self.backView.layer.cornerRadius = backFullWidth/2;
+    [self.view addSubview:self.backView];
     //元素的布局
-    [backView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.backView mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.equalTo(self.view.mas_left).offset(leftFullSpace);
         make.bottom.equalTo(self.naviView.mas_bottom).offset(-bottomFullSpace);
@@ -156,11 +156,11 @@ static const CGFloat touchFullOffset = 15;//箭头触摸区域超出的offset �
     UIImageView *backImageView = [[UIImageView alloc]init];
     backImageView.backgroundColor = NavigationColor;
     backImageView.image = [UIImage imageNamed:@"nav_back"];
-    [backView addSubview:backImageView];
+    [self.backView addSubview:backImageView];
     [backImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(backView.mas_left).offset((backFullWidth-backW)/2);
-        make.top.equalTo(backView.mas_top).offset((backFullWidth-backH)/2);
+        make.left.equalTo(self.backView.mas_left).offset((backFullWidth-backW)/2);
+        make.top.equalTo(self.backView.mas_top).offset((backFullWidth-backH)/2);
         make.width.mas_equalTo(backW);
         make.height.mas_equalTo(backH);
         

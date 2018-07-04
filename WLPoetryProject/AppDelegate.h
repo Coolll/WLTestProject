@@ -20,5 +20,7 @@
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
 
+- (void)loadCustomTabbar;
+
 @end
 

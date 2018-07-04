@@ -32,6 +32,11 @@
  *  导航栏的颜色
  **/
 @property (nonatomic,strong) UIColor *naviColor;
+/**
+ *  全屏 返回按钮
+ **/
+@property (nonatomic,strong) UIView *backView;
+
 
 
 

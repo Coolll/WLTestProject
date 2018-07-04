@@ -85,6 +85,7 @@ static const CGFloat imageW = 20;
 - (void)loadCustomView
 {
     self.poetryView.backgroundColor = [UIColor clearColor];
+    self.saveButton.backgroundColor = RGBCOLOR(140, 150, 160, 1.0);
 }
 
 - (void)loadMainBackImageView
@@ -314,10 +315,8 @@ static const CGFloat imageW = 20;
 
 - (void)saveAction:(UIButton*)sender
 {
-    self.isShowBack = NO;
-    self.poetryView.hidden = YES;
-    self.saveButton.hidden = YES;
     
+    [self hideOtherItem];
     UIImage *allImage = [self fullScreenShot];
     
     
@@ -325,6 +324,19 @@ static const CGFloat imageW = 20;
     
 }
 
+- (void)hideOtherItem
+{
+    self.backView.hidden = YES;
+    self.poetryView.hidden = YES;
+    self.saveButton.hidden = YES;
+}
+
+- (void)showOtherItem
+{
+    self.backView.hidden = NO;
+    self.poetryView.hidden = NO;
+    self.saveButton.hidden = NO;
+}
 - (void)saveImageToLocal:(UIImage*)image
 {
     
@@ -336,7 +348,7 @@ static const CGFloat imageW = 20;
         
         PHAssetCollectionChangeRequest *collectRequest = [PHAssetCollectionChangeRequest changeRequestForAssetCollection:collect];
         
-        PHObjectPlaceholder *placeHolder = [collectRequest placeholderForCreatedAssetCollection];
+        PHObjectPlaceholder *placeHolder = [request placeholderForCreatedAsset];
         
         [collectRequest addAssets:@[placeHolder]];
         
@@ -345,9 +357,11 @@ static const CGFloat imageW = 20;
         if (success) {
             NSLog(@"成功");
         }else{
-            NSLog(@"失败：%@",error);
+            NSLog(@"失败：%@",error.description);
         }
         
+        [self showOtherItem];
+
     }];
 }
 
@@ -443,18 +457,20 @@ static const CGFloat imageW = 20;
     if (!_saveButton) {
         _saveButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_saveButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        _saveButton.layer.cornerRadius = 40.f;
-        [_saveButton setTitle:@"完成" forState:UIControlStateNormal];
+        _saveButton.alpha = 0.6;
+        _saveButton.layer.cornerRadius = 20.f;
+        [_saveButton setTitle:@"保存题画" forState:UIControlStateNormal];
         [_saveButton addTarget:self action:@selector(saveAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.mainImageView addSubview:_saveButton];
         
+        CGFloat btnW = PhoneScreen_WIDTH*0.618;
         if (@available(iOS 11.0, *)) {
             //设置UI布局约束
             [_saveButton mas_makeConstraints:^(MASConstraintMaker *make) {
                 
                 make.top.equalTo(self.view.mas_safeAreaLayoutGuideBottom).offset(-69);//元素顶部约束
-                make.leading.equalTo(self.view.mas_leading).offset(15);//元素左侧约束
-                make.trailing.equalTo(self.view.mas_trailing).offset(-15);//元素右侧约束
+                make.leading.equalTo(self.view.mas_leading).offset((PhoneScreen_WIDTH-btnW)/2);//元素左侧约束
+                make.trailing.equalTo(self.view.mas_trailing).offset(-(PhoneScreen_WIDTH-btnW)/2);//元素右侧约束
                 make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom).offset(-20);//元素底部约束
             }];
         }else{
@@ -462,8 +478,8 @@ static const CGFloat imageW = 20;
             [_saveButton mas_makeConstraints:^(MASConstraintMaker *make) {
                 
                 make.top.equalTo(self.view.mas_bottom).offset(-69);//元素顶部约束
-                make.leading.equalTo(self.view.mas_leading).offset(15);//元素左侧约束
-                make.trailing.equalTo(self.view.mas_trailing).offset(-15);//元素右侧约束
+                make.leading.equalTo(self.view.mas_leading).offset((PhoneScreen_WIDTH-btnW)/2);//元素左侧约束
+                make.trailing.equalTo(self.view.mas_trailing).offset(-(PhoneScreen_WIDTH-btnW)/2);//元素右侧约束
                 make.bottom.equalTo(self.view.mas_bottom).offset(-20);//元素底部约束
             }];
         }
