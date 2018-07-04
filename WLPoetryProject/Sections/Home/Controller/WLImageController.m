@@ -12,6 +12,7 @@ static const CGFloat imageW = 20;
 #import "WLImageController.h"
 #import "WLImagePoetryController.h"
 #import "WLPoetryLabel.h"
+#import <Photos/Photos.h>
 
 
 @interface WLImageController ()
@@ -54,6 +55,10 @@ static const CGFloat imageW = 20;
  **/
 @property (nonatomic, assign) CGFloat lastLeft,lastTop;
 
+/**
+ *  保存按钮
+ **/
+@property (nonatomic, strong) UIButton *saveButton;
 @end
 
 @implementation WLImageController
@@ -110,6 +115,9 @@ static const CGFloat imageW = 20;
     
     WLImagePoetryController *vc = [[WLImagePoetryController alloc]init];
     vc.poetryString = self.originPoetry;
+    if (self.direction == PoetryDirectionHorizon) {
+        vc.isVertical = NO;
+    }
     [vc finishEditContentWithBlock:^(NSString *poetryContent,BOOL isVertical) {
         [self loadPoetryContent:poetryContent withIsVertical:isVertical];
     }];
@@ -138,6 +146,7 @@ static const CGFloat imageW = 20;
     }else{
         self.direction = PoetryDirectionHorizon;
     }
+    
     [self loadPoetryContentView];
 }
 
@@ -180,14 +189,14 @@ static const CGFloat imageW = 20;
         NSString *content = [NSString stringWithFormat:@"%@",self.contentArray[i]];
         
         WLPoetryLabel *contentLabel = [[WLPoetryLabel alloc]initWithContent:content];
-        contentLabel.font = [UIFont systemFontOfSize:14.f];
+        contentLabel.font = [UIFont systemFontOfSize:16.f];
         contentLabel.userInteractionEnabled = YES;
         contentLabel.tag = 1000+i;
         [self.view addSubview:contentLabel];
         
         CGFloat width = [PublicTool widthForTextString:content height:20 font:contentLabel.font];
-        CGFloat height = 20;
-        CGFloat itemSpace = 8;
+        CGFloat height = 28;
+        CGFloat itemSpace = 2;
         //元素的布局
         [contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             
@@ -216,15 +225,15 @@ static const CGFloat imageW = 20;
         NSString *content = [NSString stringWithFormat:@"%@",self.contentArray[i]];
         
         WLPoetryLabel *contentLabel = [[WLPoetryLabel alloc]initWithContent:content];
-        contentLabel.font = [UIFont systemFontOfSize:14.f];
+        contentLabel.font = [UIFont systemFontOfSize:16.f];
         contentLabel.userInteractionEnabled = YES;
         contentLabel.numberOfLines = 0;
         contentLabel.tag = 1000+i;
         [self.view addSubview:contentLabel];
         
-        CGFloat width = 20;
+        CGFloat width = 28;
         CGFloat height = [PublicTool heightForTextString:content width:width font:contentLabel.font];
-        CGFloat itemSpace = 8;
+        CGFloat itemSpace = 2;
         CGFloat topSpace = 80;
         //元素的布局
         [contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -254,7 +263,7 @@ static const CGFloat imageW = 20;
 {
     id touchView = touches.anyObject.view;
     if ([touchView isKindOfClass:[WLPoetryLabel class]]) {
-        NSLog(@"touchView:%@",touchView);
+        
         self.beginPoint = [touches.anyObject locationInView:self.view];
         WLPoetryLabel *label = (WLPoetryLabel*)touchView;
         self.currentIndex = label.tag;
@@ -287,6 +296,7 @@ static const CGFloat imageW = 20;
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     NSInteger index = self.currentIndex-1000;
+    //结束的时候，把位置信息更新了，否则下次移动的时候，位置不对了
     if (index < self.leftArray.count  && index < self.topArray.count) {
         [self.leftArray replaceObjectAtIndex:self.currentIndex-1000 withObject:[NSString stringWithFormat:@"%f",self.lastLeft]];
         [self.topArray replaceObjectAtIndex:self.currentIndex-1000 withObject:[NSString stringWithFormat:@"%f",self.lastTop]];
@@ -300,6 +310,71 @@ static const CGFloat imageW = 20;
 - (void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     self.currentIndex = 0;
+}
+
+- (void)saveAction:(UIButton*)sender
+{
+    self.isShowBack = NO;
+    self.poetryView.hidden = YES;
+    self.saveButton.hidden = YES;
+    
+    UIImage *allImage = [self fullScreenShot];
+    
+    
+    [self saveImageToLocal:allImage];
+    
+}
+
+- (void)saveImageToLocal:(UIImage*)image
+{
+    
+    [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
+        
+        PHAssetChangeRequest *request = [PHAssetChangeRequest creationRequestForAssetFromImage:image];
+        
+        PHAssetCollection *collect = [[PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeAlbum subtype:PHAssetCollectionSubtypeSmartAlbumUserLibrary options:nil] lastObject];
+        
+        PHAssetCollectionChangeRequest *collectRequest = [PHAssetCollectionChangeRequest changeRequestForAssetCollection:collect];
+        
+        PHObjectPlaceholder *placeHolder = [collectRequest placeholderForCreatedAssetCollection];
+        
+        [collectRequest addAssets:@[placeHolder]];
+        
+    } completionHandler:^(BOOL success, NSError * _Nullable error) {
+        
+        if (success) {
+            NSLog(@"成功");
+        }else{
+            NSLog(@"失败：%@",error);
+        }
+        
+    }];
+}
+
+//截取全屏 高效 支持Retina屏
+- (UIImage*)fullScreenShot
+{
+    CGSize imageSize = [[UIScreen mainScreen] bounds].size;
+    
+    UIGraphicsBeginImageContextWithOptions(imageSize, NO, 0);
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    for (UIWindow *window in [[UIApplication sharedApplication] windows]) {
+        if (![window respondsToSelector:@selector(screen)] || [window screen] == [UIScreen mainScreen]) {
+            CGContextSaveGState(context);
+            CGContextTranslateCTM(context, [window center].x, [window center].y);
+            CGContextConcatCTM(context, [window transform]);
+            CGContextTranslateCTM(context, -[window bounds].size.width*[[window layer] anchorPoint].x, -[window bounds].size.height*[[window layer] anchorPoint].y);
+            [[window layer] renderInContext:context];
+            CGContextRestoreGState(context);
+            
+        }
+    }
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+    
 }
 #pragma mark - 属性
 - (UIView*)poetryView
@@ -362,7 +437,43 @@ static const CGFloat imageW = 20;
     }
     return _poetryView;
 }
-
+#pragma mark 完成按钮
+- (UIButton*)saveButton
+{
+    if (!_saveButton) {
+        _saveButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_saveButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        _saveButton.layer.cornerRadius = 40.f;
+        [_saveButton setTitle:@"完成" forState:UIControlStateNormal];
+        [_saveButton addTarget:self action:@selector(saveAction:) forControlEvents:UIControlEventTouchUpInside];
+        [self.mainImageView addSubview:_saveButton];
+        
+        if (@available(iOS 11.0, *)) {
+            //设置UI布局约束
+            [_saveButton mas_makeConstraints:^(MASConstraintMaker *make) {
+                
+                make.top.equalTo(self.view.mas_safeAreaLayoutGuideBottom).offset(-69);//元素顶部约束
+                make.leading.equalTo(self.view.mas_leading).offset(15);//元素左侧约束
+                make.trailing.equalTo(self.view.mas_trailing).offset(-15);//元素右侧约束
+                make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom).offset(-20);//元素底部约束
+            }];
+        }else{
+            //设置UI布局约束
+            [_saveButton mas_makeConstraints:^(MASConstraintMaker *make) {
+                
+                make.top.equalTo(self.view.mas_bottom).offset(-69);//元素顶部约束
+                make.leading.equalTo(self.view.mas_leading).offset(15);//元素左侧约束
+                make.trailing.equalTo(self.view.mas_trailing).offset(-15);//元素右侧约束
+                make.bottom.equalTo(self.view.mas_bottom).offset(-20);//元素底部约束
+            }];
+        }
+        
+        
+    }
+    
+    return _saveButton;
+    
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

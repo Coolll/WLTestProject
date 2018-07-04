@@ -64,34 +64,30 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSLog(@"%@",NSStringFromSelector(_cmd));
 
-    
 }
 
 
 
 - (void)loadCustomData
 {
-    NSLog(@"%@",NSStringFromSelector(_cmd));
-
+    
     self.isVertical = YES;//默认垂直排版
 }
 
 - (void)loadCustomView
 {
-    NSLog(@"%@",NSStringFromSelector(_cmd));
-
+    
     self.searchView.backgroundColor = [UIColor whiteColor];
     self.inputTextView.backgroundColor = [UIColor whiteColor];
-//    self.typeView.backgroundColor = ViewBackgroundColor;
+    self.typeView.backgroundColor = ViewBackgroundColor;
     self.finishBtn.backgroundColor = RGBCOLOR(80, 175, 240, 1.0);
     
 }
 
 - (void)setIsVertical:(BOOL)isVertical
 {
-    NSLog(@"%@",NSStringFromSelector(_cmd));
+    
 
     _isVertical = isVertical;
     self.typeView.backgroundColor = ViewBackgroundColor;
@@ -105,7 +101,7 @@
 
 - (void)setPoetryString:(NSString *)poetryString
 {
-    NSLog(@"%@",NSStringFromSelector(_cmd));
+    
 
     _poetryString = poetryString;
     self.searchView.backgroundColor = [UIColor whiteColor];
@@ -117,15 +113,13 @@
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-    NSLog(@"%@",NSStringFromSelector(_cmd));
-
+    
     HidenKeybory;
 }
 
 
 - (void)finishAction:(UIButton*)sender
 {
-    NSLog(@"%@",NSStringFromSelector(_cmd));
 
     NSLog(@"完成");
     
@@ -145,8 +139,7 @@
 #pragma mark - 搜索诗词
 - (void)searchInList:(UITapGestureRecognizer*)tap
 {
-    NSLog(@"%@",NSStringFromSelector(_cmd));
-
+    
     if ([self.inputTextView isFirstResponder]) {
         [self.inputTextView resignFirstResponder];
     }
@@ -162,8 +155,7 @@
 
 - (void)finishEditContentWithBlock:(ImagePoetryFinishBlock)block
 {
-    NSLog(@"%@",NSStringFromSelector(_cmd));
-
+    
     if (block) {
         self.finishBlock = block;
     }
@@ -172,24 +164,19 @@
 #pragma mark - 从搜素的结果中选中后
 - (void)selSearchPoetry:(PoetryModel*)model
 {
-    NSLog(@"%@",NSStringFromSelector(_cmd));
-
     self.inputTextView.text = model.content;
 }
 
 #pragma mark - 点击排版按钮
 - (void)typeButtonAction:(UIButton*)sender
 {
-    NSLog(@"%@",NSStringFromSelector(_cmd));
-
     self.isVertical = !self.isVertical;
 }
 #pragma mark - Property属性
 #pragma mark 搜索诗词
 - (UIView*)searchView
 {
-    NSLog(@"%@",NSStringFromSelector(_cmd));
-
+    
     if (!_searchView) {
         _searchView = [[UIView alloc]init];
         _searchView.layer.cornerRadius = 4.f;
@@ -259,7 +246,6 @@
 #pragma mark 输入框，编辑框
 - (UITextView*)inputTextView
 {
-    NSLog(@"%@",NSStringFromSelector(_cmd));
 
     if (!_inputTextView) {
         
@@ -283,8 +269,7 @@
 
 - (UIView*)typeView
 {
-    NSLog(@"%@",NSStringFromSelector(_cmd));
-
+    
     if (!_typeView) {
         _typeView = [[UIView alloc]init];
         _typeView.layer.cornerRadius = 4.f;
@@ -297,7 +282,6 @@
             make.trailing.equalTo(self.inputTextView.mas_trailing).offset(0);//元素右侧约束
             make.height.mas_equalTo(30);//元素高度
         }];
-
 
 
         CGFloat imageW = 18;
@@ -345,7 +329,6 @@
 #pragma mark 完成按钮
 - (UIButton*)finishBtn
 {
-    NSLog(@"%@",NSStringFromSelector(_cmd));
 
     if (!_finishBtn) {
         _finishBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -380,20 +363,13 @@
     
     return _finishBtn;
     
+    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
