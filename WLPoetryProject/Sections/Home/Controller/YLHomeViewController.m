@@ -13,6 +13,8 @@
 #import "PoetryDetailViewController.h"
 #import "WLImageCell.h"
 #import "WLImageController.h"
+#import "WLImageListController.h"
+
 @interface YLHomeViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 /**
@@ -269,14 +271,14 @@
             [self.navigationController pushViewController:detailVC animated:YES];
         }
     }
-    
    
 }
 
 - (void)tapTheImage
 {
-    WLImageController *vc = [[WLImageController alloc]init];
+    WLImageListController *vc = [[WLImageListController alloc]init];
     vc.hidesBottomBarWhenPushed = YES;
+    
     [self.navigationController pushViewController:vc animated:YES];
 }
 

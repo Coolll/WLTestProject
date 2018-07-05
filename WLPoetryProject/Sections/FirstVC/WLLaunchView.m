@@ -1,14 +1,13 @@
 //
-//  LaunchController.m
+//  WLLaunchView.m
 //  WLPoetryProject
 //
-//  Created by chuchengpeng on 2018/6/13.
+//  Created by chuchengpeng on 2018/7/5.
 //  Copyright © 2018年 龙培. All rights reserved.
 //
 
-#import "LaunchController.h"
-#import "AppDelegate.h"
-@interface LaunchController ()
+#import "WLLaunchView.h"
+@interface WLLaunchView()
 /**
  *  跳过按钮
  **/
@@ -21,9 +20,9 @@
  *  倒计时总计
  **/
 @property (nonatomic, assign) NSInteger totalTime;
-@end
 
-@implementation LaunchController
+@end
+@implementation WLLaunchView
 
 - (instancetype)init
 {
@@ -37,12 +36,6 @@
     return self;
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-}
-
-
 - (void)loadCustomData
 {
     self.totalTime = 4;
@@ -51,28 +44,28 @@
 
 - (void)loadCustomImage{
     
-//    CGSize viewSize = [UIApplication sharedApplication].keyWindow.bounds.size;
-//    NSString*viewOrientation =@"Portrait";//横屏请设置成 @"Landscape"
-//    NSString*launchImage =nil;
-//    NSArray* imagesDict = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"UILaunchImages"];
-//    for(NSDictionary* dict in imagesDict) {
-//        CGSize imageSize =CGSizeFromString(dict[@"UILaunchImageSize"]);
-//        if(CGSizeEqualToSize(imageSize, viewSize) && [viewOrientation isEqualToString:dict[@"UILaunchImageOrientation"]]) {
-//            launchImage = dict[@"UILaunchImageName"];
-//        }
-//    }
+    //    CGSize viewSize = [UIApplication sharedApplication].keyWindow.bounds.size;
+    //    NSString*viewOrientation =@"Portrait";//横屏请设置成 @"Landscape"
+    //    NSString*launchImage =nil;
+    //    NSArray* imagesDict = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"UILaunchImages"];
+    //    for(NSDictionary* dict in imagesDict) {
+    //        CGSize imageSize =CGSizeFromString(dict[@"UILaunchImageSize"]);
+    //        if(CGSizeEqualToSize(imageSize, viewSize) && [viewOrientation isEqualToString:dict[@"UILaunchImageOrientation"]]) {
+    //            launchImage = dict[@"UILaunchImageName"];
+    //        }
+    //    }
     
     self.launchView = [[UIImageView alloc] init];
-    [self.view addSubview:self.launchView];
+    [self addSubview:self.launchView];
     
     //设置UI布局约束
     [self.launchView mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.top.equalTo(self.view.mas_top).offset(0);//元素顶部约束
-        make.leading.equalTo(self.view.mas_leading).offset(0);//元素左侧约束
-        make.trailing.equalTo(self.view.mas_trailing).offset(0);//元素右侧约束
-        make.bottom.equalTo(self.view.mas_bottom).offset(0);//元素底部约束
-
+        make.top.equalTo(self.mas_top).offset(0);//元素顶部约束
+        make.leading.equalTo(self.mas_leading).offset(0);//元素左侧约束
+        make.trailing.equalTo(self.mas_trailing).offset(0);//元素右侧约束
+        make.bottom.equalTo(self.mas_bottom).offset(0);//元素底部约束
+        
     }];
     
     
@@ -81,7 +74,7 @@
     self.skipBtn.backgroundColor = RGBCOLOR(200, 200, 200, 1.0);
     [self.skipBtn setTitle:[NSString stringWithFormat:@"跳过 %ld",(long)self.totalTime] forState:UIControlStateNormal];
     [self.skipBtn addTarget:self action:@selector(skipAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:self.skipBtn];
+    [self addSubview:self.skipBtn];
     
     
     CGFloat btnWidth = 80;
@@ -89,8 +82,8 @@
         //元素的布局
         [self.skipBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             
-            make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop).offset(40);
-            make.right.equalTo(self.view.mas_right).offset(-40);
+            make.top.equalTo(self.mas_safeAreaLayoutGuideTop).offset(40);
+            make.right.equalTo(self.mas_right).offset(-40);
             make.width.mas_equalTo(btnWidth);
             make.height.mas_equalTo(40);
         }];
@@ -98,8 +91,8 @@
         //元素的布局
         [self.skipBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             
-            make.top.equalTo(self.view.mas_top).offset(40);
-            make.right.equalTo(self.view.mas_right).offset(-40);
+            make.top.equalTo(self.mas_top).offset(40);
+            make.right.equalTo(self.mas_right).offset(-40);
             make.width.mas_equalTo(btnWidth);
             make.height.mas_equalTo(40);
             
@@ -143,26 +136,17 @@
 
 - (void)skipAction:(UIButton*)sender
 {
-    [self dismissViewControllerAnimated:NO completion:nil];
-    AppDelegate *delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-    [delegate loadCustomTabbar];
-    
+//    [self dismissViewControllerAnimated:NO completion:nil];
+//    AppDelegate *delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+//    [delegate loadCustomTabbar];
+
+    [UIView animateWithDuration:0.3 animations:^{
+        self.alpha = 0;
+    } completion:^(BOOL finished) {
+        [self removeFromSuperview];
+    }];
 }
 
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

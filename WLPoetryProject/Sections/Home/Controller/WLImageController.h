@@ -19,4 +19,12 @@ typedef NS_ENUM(NSInteger,PoetryDirection) {
  **/
 @property (nonatomic, assign) PoetryDirection direction;
 
+/**
+ *  背景图片名
+ **/
+@property (nonatomic, copy) NSString *imageName;
+
+- (void)configureUI;
+
+
 @end

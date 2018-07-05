@@ -67,12 +67,26 @@ static const CGFloat imageW = 20;
     [super viewDidLoad];
     self.titleForNavi = @"题画";
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    
+    
+}
+- (void)configureUI
+{
     [self loadMainBackImageView];//背景
     [self addFullTitleLabel];//诗词名字 添加背景之后调用，否则会被背景图遮住
     [self addBackButtonForFullScreen];//返回按钮，需要最后添加
     
     [self loadCustomData];
     [self loadCustomView];
+}
+
+- (void)setImageName:(NSString *)imageName
+{
+    _imageName = imageName;
+    if ([imageName isKindOfClass:[NSString class]] && imageName.length > 0) {
+        self.mainImageView.image = [UIImage imageNamed:imageName];
+    }
 }
 
 - (void)loadCustomData
@@ -92,7 +106,13 @@ static const CGFloat imageW = 20;
 {
     //诗词主背景
     self.mainImageView = [[UIImageView alloc]init];
-    self.mainImageView.image = [UIImage imageNamed:@"poetryBack.jpg"];
+    if ([self.imageName isKindOfClass:[NSString class]] && self.imageName.length > 0) {
+        self.mainImageView.image = [UIImage imageNamed:self.imageName];
+
+    }else{
+        self.mainImageView.image = [UIImage imageNamed:@"poetryBack.jpg"];
+
+    }
     [self.view addSubview:self.mainImageView];
     
     //元素的布局
@@ -312,7 +332,7 @@ static const CGFloat imageW = 20;
 {
     self.currentIndex = 0;
 }
-
+#pragma mark 保存
 - (void)saveAction:(UIButton*)sender
 {
     
@@ -333,9 +353,12 @@ static const CGFloat imageW = 20;
 
 - (void)showOtherItem
 {
-    self.backView.hidden = NO;
-    self.poetryView.hidden = NO;
-    self.saveButton.hidden = NO;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.backView.hidden = NO;
+        self.poetryView.hidden = NO;
+        self.saveButton.hidden = NO;
+    });
+    
 }
 - (void)saveImageToLocal:(UIImage*)image
 {

@@ -208,8 +208,9 @@
         
         PoetryModel *dataModel = self.poetryArray[indexPath.row];
 
-        [self showAlertWithModel:dataModel];
-        
+//        [self showAlertWithModel:dataModel];
+        [self sureUsePoetryWithModel:dataModel];
+
     }
     
 }

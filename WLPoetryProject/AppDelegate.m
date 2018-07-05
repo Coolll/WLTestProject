@@ -16,6 +16,7 @@
 #import "PoetryModel.h"
 #import "WLSaveLocalHelper.h"
 #import "LaunchController.h"
+#import "WLLaunchView.h"
 
 #import <ShareSDK/ShareSDK.h>
 #import <ShareSDKConnector/ShareSDKConnector.h>
@@ -68,9 +69,9 @@
     self.window.backgroundColor = [UIColor whiteColor];
     
     [self.window makeKeyAndVisible];
-//    [self loadCustomTabbar];
+    [self loadCustomTabbar];
 
-    [self loadLaunchImage];
+//    [self loadLaunchImage];
 
     
     [self loadLikePoetryList];
@@ -209,14 +210,37 @@
 - (void)loadLaunchImage
 {
     
-    UIViewController *tempVC = [[UIViewController alloc]init];
-    self.window.rootViewController = tempVC;
+    CGSize viewSize = [UIApplication sharedApplication].keyWindow.bounds.size;
+    NSString*viewOrientation =@"Portrait";//横屏请设置成 @"Landscape"
+    NSString*launchImage =nil;
+    NSArray* imagesDict = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"UILaunchImages"];
+    for(NSDictionary* dict in imagesDict) {
+        CGSize imageSize =CGSizeFromString(dict[@"UILaunchImageSize"]);
+        if(CGSizeEqualToSize(imageSize, viewSize) && [viewOrientation isEqualToString:dict[@"UILaunchImageOrientation"]]) {
+            launchImage = dict[@"UILaunchImageName"];
+        }
+    }
+    
+    
+//    UIViewController *tempVC = [[UIViewController alloc]init];
+    
+//    UINavigationController *navi = [[UINavigationController alloc]initWithRootViewController:tempVC];
+//    UIImageView *bgImage = [[UIImageView alloc]init];
+//    bgImage.frame = [UIScreen mainScreen].bounds;
+//    bgImage.image = [UIImage imageNamed:launchImage];
+//    [tempVC.view addSubview:bgImage];
+//    self.window.rootViewController = tempVC;
+    
 //    UIViewController *tempVC = self.window.rootViewController;
-    LaunchController *vc = [[LaunchController alloc]init];
+//    LaunchController *vc = [[LaunchController alloc]init];
+//    vc.bgImage = [UIImage imageNamed:launchImage];
+//    [tempVC presentViewController:vc animated:NO completion:nil];
+    WLLaunchView *view = [[WLLaunchView alloc]init];
+    view.frame = [UIScreen mainScreen].bounds;
+    view.bgImage = [UIImage imageNamed:launchImage];
+    [self.window addSubview:view];
     
-    [tempVC presentViewController:vc animated:NO completion:nil];
-    
-    
+    [self.window bringSubviewToFront:view];
 }
 
 
@@ -224,9 +248,13 @@
 
 - (void)loadCustomTabbar
 {
+    
     self.tabbarVC = [[YLTabbarController alloc]init];
     
     self.window.rootViewController = self.tabbarVC;
+    
+    [self loadLaunchImage];
+    
 }
 
 #pragma mark - 注册新用户

@@ -207,8 +207,37 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
     }];
     
     
+    UIImageView *shareImage = [[UIImageView alloc]init];
+    shareImage.image = [UIImage imageNamed:@"shareIcon"];
+    [self.view addSubview:shareImage];
+    //设置UI布局约束
+    [shareImage mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.equalTo(self.likeImage.mas_bottom).offset(20);//元素顶部约束
+        make.leading.equalTo(self.likeImage.mas_leading).offset(0);//元素左侧约束
+        make.width.mas_equalTo(20);//元素宽度
+        make.height.mas_equalTo(20);//元素高度
+    }];
+    
+    
+    
+    UIButton *shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    shareBtn.backgroundColor = [UIColor clearColor];
+    [shareBtn addTarget:self action:@selector(shareAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:shareBtn];
+    //设置UI布局约束
+    [shareBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.equalTo(shareImage.mas_top).offset(-10);//元素顶部约束
+        make.trailing.equalTo(shareImage.mas_trailing).offset(10);//元素右侧约束
+        make.bottom.equalTo(shareImage.mas_bottom).offset(10);//元素底部约束
+        make.leading.equalTo(shareImage.mas_leading).offset(-10);
+    }];
+    
+    
 }
 
+#pragma mark - 收藏
 - (void)likeAction:(UIButton*)sender
 {
     
@@ -270,6 +299,38 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
             }
         }];
     }
+    
+}
+
+- (void)shareAction:(UIButton*)sender
+{
+    UIImage *image =  [self fullScreenShot];
+    [self shareWithImageArray:@[image]];
+    
+}
+//截取全屏 高效 支持Retina屏
+- (UIImage*)fullScreenShot
+{
+    CGSize imageSize = [[UIScreen mainScreen] bounds].size;
+    
+    UIGraphicsBeginImageContextWithOptions(imageSize, NO, 0);
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    for (UIWindow *window in [[UIApplication sharedApplication] windows]) {
+        if (![window respondsToSelector:@selector(screen)] || [window screen] == [UIScreen mainScreen]) {
+            CGContextSaveGState(context);
+            CGContextTranslateCTM(context, [window center].x, [window center].y);
+            CGContextConcatCTM(context, [window transform]);
+            CGContextTranslateCTM(context, -[window bounds].size.width*[[window layer] anchorPoint].x, -[window bounds].size.height*[[window layer] anchorPoint].y);
+            [[window layer] renderInContext:context];
+            CGContextRestoreGState(context);
+            
+        }
+    }
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
     
 }
 

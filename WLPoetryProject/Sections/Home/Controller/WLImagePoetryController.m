@@ -298,7 +298,8 @@
         }];
 
         UILabel *tipLabel = [[UILabel alloc]init];
-        tipLabel.text = @"垂直排版";
+        tipLabel.text = @"题画内容 垂直排版";
+        tipLabel.font = [UIFont systemFontOfSize:14.f];//字号设置
         [_typeView addSubview:tipLabel];
         //元素的布局
         [tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
