@@ -262,7 +262,9 @@ static const CGFloat touchFullOffset = 15;//箭头触摸区域超出的offset �
                 }
                 case SSDKResponseStateFail:
                 {
-                    [self showHUDWithText:[NSString stringWithFormat:@"失败：%@",error]];
+                    [self showHUDWithText:[NSString stringWithFormat:@"分享失败"]];
+                    NSLog(@"error:%@",error);
+
                     break;
                 }
                 case SSDKResponseStateCancel:

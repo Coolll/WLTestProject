@@ -89,15 +89,30 @@ static const CGFloat nameHeight = 25;//名字、作者等信息的高度
             
         }];
     }else{
-        [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
-            
-            make.left.equalTo(self.mas_left).offset(leftSpace);
-            make.top.equalTo(self.mas_top).offset(topSpce*2);
-            make.bottom.equalTo(self.mas_bottom).offset(0);
-            make.right.equalTo(self.mas_right).offset(-leftSpace);
-            
-            
-        }];
+        
+        if (self.isFirst) {
+            //有 题画 诗词 顶部间距减小
+            [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
+                
+                make.left.equalTo(self.mas_left).offset(leftSpace);
+                make.top.equalTo(self.mas_top).offset(topSpce-5);
+                make.bottom.equalTo(self.mas_bottom).offset(0);
+                make.right.equalTo(self.mas_right).offset(-leftSpace);
+                
+                
+            }];
+        }else{
+            [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
+                
+                make.left.equalTo(self.mas_left).offset(leftSpace);
+                make.top.equalTo(self.mas_top).offset(topSpce*2);
+                make.bottom.equalTo(self.mas_bottom).offset(0);
+                make.right.equalTo(self.mas_right).offset(-leftSpace);
+                
+                
+            }];
+        }
+        
     }
     
 //    [self loadLineWithRadius:4 withTopSpace:topSpce withLeftSpace:leftSpace];

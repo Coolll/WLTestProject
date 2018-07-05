@@ -23,7 +23,10 @@
  *  是否为最后一行，需要调整间距
  **/
 @property (nonatomic,assign) BOOL isLast;
-
+/**
+ *  是否为第一行，需要调整间距
+ **/
+@property (nonatomic,assign) BOOL isFirst;
 
 + (CGFloat)heightForFirstLine:(PoetryModel*)model;
 + (CGFloat)heightForLastCell:(PoetryModel*)model;

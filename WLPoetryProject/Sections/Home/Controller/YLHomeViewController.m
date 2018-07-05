@@ -181,8 +181,8 @@
         //图片的高度
         CGFloat imageW = PhoneScreen_WIDTH-30;
         CGFloat imageH = imageW/2.88;//图片的比例是750：260
-        
-        return imageH+10;
+        //10 20 5 image 5 20
+        return imageH+60;
         
         
     }else if (section == 1){
@@ -201,6 +201,10 @@
                     return cellHeight;
                 }else{
                     CGFloat cellHeight = [WLPoetryListCell heightForFirstLine:[self.poetryArray objectAtIndex:indexPath.row]];
+                    
+                    if (indexPath.row == 0) {
+                        cellHeight -= 20;
+                    }
                     [self.heightArray addObject:[NSString stringWithFormat:@"%f",cellHeight]];
                     return cellHeight;
                 }
@@ -245,6 +249,9 @@
         }
         if (indexPath.row == self.poetryArray.count-1) {
             cell.isLast = YES;
+        }
+        if (indexPath.row == 0) {
+            cell.isFirst = YES;
         }
         cell.dataModel = model;
         return cell;
