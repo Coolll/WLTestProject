@@ -106,6 +106,7 @@ static const CGFloat imageW = 20;
 {
     //诗词主背景
     self.mainImageView = [[UIImageView alloc]init];
+    self.mainImageView.contentMode = UIViewContentModeScaleAspectFill;
     if ([self.imageName isKindOfClass:[NSString class]] && self.imageName.length > 0) {
         self.mainImageView.image = [UIImage imageNamed:self.imageName];
 
@@ -340,7 +341,11 @@ static const CGFloat imageW = 20;
     UIImage *allImage = [self fullScreenShot];
     
     
-    [self saveImageToLocal:allImage];
+//    [self saveImageToLocal:allImage];
+    [self saveImage:allImage withCollectionName:@"诗词汇" withCompletion:^(BOOL success, NSError *error) {
+        
+        [self showOtherItem];
+    }];
     
 }
 
@@ -360,33 +365,7 @@ static const CGFloat imageW = 20;
     });
     
 }
-- (void)saveImageToLocal:(UIImage*)image
-{
-    
-    [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
-        
-        PHAssetChangeRequest *request = [PHAssetChangeRequest creationRequestForAssetFromImage:image];
-        
-        PHAssetCollection *collect = [[PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeAlbum subtype:PHAssetCollectionSubtypeSmartAlbumUserLibrary options:nil] lastObject];
-        
-        PHAssetCollectionChangeRequest *collectRequest = [PHAssetCollectionChangeRequest changeRequestForAssetCollection:collect];
-        
-        PHObjectPlaceholder *placeHolder = [request placeholderForCreatedAsset];
-        
-        [collectRequest addAssets:@[placeHolder]];
-        
-    } completionHandler:^(BOOL success, NSError * _Nullable error) {
-        
-        if (success) {
-            NSLog(@"成功");
-        }else{
-            NSLog(@"失败：%@",error.description);
-        }
-        
-        [self showOtherItem];
 
-    }];
-}
 
 //截取全屏 高效 支持Retina屏
 - (UIImage*)fullScreenShot

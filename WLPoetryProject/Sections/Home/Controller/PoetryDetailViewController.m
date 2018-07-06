@@ -39,6 +39,11 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
  *  喜欢的点击事件
  **/
 @property (nonatomic, copy) LikeBlock likeBlock;
+
+/**
+ *  主图片背景
+ **/
+@property (nonatomic, strong) UIImageView *mainImageView;
 @end
 
 @implementation PoetryDetailViewController
@@ -116,25 +121,43 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
     
     [self loadContentTableView];
 
+    [self queryPoetryImageData];
 }
+
+- (void)queryPoetryImageData
+{
+    BmobQuery *query = [BmobQuery queryWithClassName:@"ImageList"];
+    //    [query whereKey:@"className" equalTo:@"8"];
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray *array, NSError *error) {
+        
+        if (array.count > 0) {
+            BmobObject *obc = [array firstObject];
+            NSString *url = [obc objectForKey:@"imageURL"];
+            NSLog(@"imageURL:%@",url);
+            [self.mainImageView sd_setImageWithURL:[NSURL URLWithString:url]];
+        }
+    }];
+}
+
 
 - (void)loadMainBackImageView
 {
     //诗词主背景
-    UIImageView *mainImageView = [[UIImageView alloc]init];
-    [self.view addSubview:mainImageView];
+    self.mainImageView = [[UIImageView alloc]init];
+    [self.view addSubview:self.mainImageView];
     
     NSString *imageName = [NSString stringWithFormat:@"%@",[[AppConfig config].bgImageInfo objectForKey:self.dataModel.classInfo]];
     if (imageName.length > 0 && ![imageName isEqualToString:@"(null)"]) {
-        mainImageView.image = [UIImage imageNamed:imageName];
+        self.mainImageView.image = [UIImage imageNamed:imageName];
     }else{
-        mainImageView.image = [UIImage imageNamed:@"poetryBack.jpg"];
+        self.mainImageView.image = [UIImage imageNamed:@"poetryBack.jpg"];
 
     }
     
     
     //元素的布局
-    [mainImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.mainImageView mas_makeConstraints:^(MASConstraintMaker *make) {
 
         make.left.equalTo(self.view.mas_left).offset(0);
         make.top.equalTo(self.view.mas_top).offset(0);
@@ -167,8 +190,6 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
         self.likeImage.image = [UIImage imageNamed:@"unlikePoetry"];
     }
     [self.view addSubview:self.likeImage];
-    
-    
     
     
     if (@available(iOS 11.0, *)) {

@@ -35,6 +35,7 @@
 @property (nonatomic,strong) NSMutableDictionary *bgImageInfo;
 
 
+- (void)loadAllClassImageInfo;
 
 
 @end

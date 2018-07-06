@@ -7,7 +7,7 @@
 //
 
 #import "PublicTool.h"
-
+#import <Photos/Photos.h>
 @implementation PublicTool
 
 + (PublicTool *)tool{
@@ -331,6 +331,7 @@
     return arr;
 }
 
+
 #pragma mark - 计算label高度
 + (CGFloat)heightForTextString:(NSString*)vauleString width:(CGFloat)textWidth font:(UIFont*)textFont
 {
@@ -338,7 +339,7 @@
     CGRect rect = [vauleString boundingRectWithSize:CGSizeMake(textWidth, MAXFLOAT) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin |NSStringDrawingTruncatesLastVisibleLine attributes:dict context:nil];
     return rect.size.height+1;
 }
-
+#pragma mark - 计算label的宽度
 + (CGFloat) widthForTextString:(NSString *)tStr height:(CGFloat)tHeight font:(UIFont*)textFont{
     
     NSDictionary *dict = @{NSFontAttributeName:textFont};

@@ -110,6 +110,7 @@
     poetry.backgroundInfo = model.backgroundInfo;
     poetry.firstLineString = model.firstLineString;
     poetry.mainClass = model.mainClass;
+    poetry.myPropertyForOne = model.myPropertyForOne;
     
     __block  NSError *error = nil;
     
@@ -307,6 +308,7 @@
     model.backgroundInfo = poetryEntity.backgroundInfo;
     model.firstLineString = poetryEntity.firstLineString;
     model.mainClass = poetryEntity.mainClass;
+    model.myPropertyForOne = poetryEntity.myPropertyForOne;
     return model;
 }
 #pragma mark - 查询表中的数据

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+typedef void(^SaveImageCompletionBlock) (BOOL success,NSError *error);
 
 @interface BaseViewController : UIViewController
 /**
@@ -63,6 +64,9 @@
 
 //分享图片
 - (void)shareWithImageArray:(NSArray*)array;
+
+//保存图片到本地的相册
+- (void)saveImage:(UIImage*)image withCollectionName:(NSString*)name withCompletion:(SaveImageCompletionBlock)block;
 
 
 @end

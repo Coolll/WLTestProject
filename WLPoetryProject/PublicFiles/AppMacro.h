@@ -80,7 +80,6 @@
 #define UserPoetryConfigure @"WLUserPoetryConfigure"
 
 
-
 #define kNotAlertUserUpdateVersion @"WLNotAlertUserUpdateVersion"
 
 

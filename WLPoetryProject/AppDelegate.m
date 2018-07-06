@@ -63,7 +63,7 @@
 //    [self updateNewDataToPoetry];
 //    [self deleteDataInPoetry];
    
-
+    [self queryPoetryImageData];
     self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     
     self.window.backgroundColor = [UIColor whiteColor];
@@ -371,6 +371,21 @@
     }];
 }
 
+- (void)queryPoetryImageData
+{
+    BmobQuery *query = [BmobQuery queryWithClassName:@"ImageList"];
+//    [query whereKey:@"className" equalTo:@"8"];
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray *array, NSError *error) {
+        
+        if (array.count > 0) {
+            BmobObject *obc = [array firstObject];
+            NSString *url = [obc objectForKey:@"imageURL"];
+            NSLog(@"imageURL:%@",url);
+        }
+    }];
+}
+
 #pragma mark - 根据某个表中，符合若干个字段的值来查询
 - (void)queryPoetryDataTwo
 {
@@ -500,7 +515,10 @@
     NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"WLPoetryProject.sqlite"];
     NSError *error = nil;
     NSString *failureReason = @"There was an error creating or loading the application's saved data.";
-    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
+    
+    NSDictionary *options = @{NSMigratePersistentStoresAutomaticallyOption:@(YES),NSInferMappingModelAutomaticallyOption:@(YES)};
+    
+    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:options error:&error]) {
         // Report any error we got.
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
         dict[NSLocalizedDescriptionKey] = @"Failed to initialize the application's saved data";

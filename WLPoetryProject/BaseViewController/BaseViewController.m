@@ -10,7 +10,7 @@
 #import "MBProgressHUD.h"
 #import <ShareSDK/ShareSDK.h>
 #import <ShareSDKUI/ShareSDK+SSUI.h>
-
+#import <Photos/Photos.h>
 static const CGFloat backFullWidth = 30;//返回箭头的宽度 全屏下
 static const CGFloat leftFullSpace = 20;//箭头左侧间距 全屏下
 static const CGFloat bottomFullSpace = 10;//箭头底部间距 全屏下
@@ -229,14 +229,17 @@ static const CGFloat touchFullOffset = 15;//箭头触摸区域超出的offset �
 
 - (void)showHUDWithText:(NSString *)text
 {
- 
-    self.progressHUD = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
-    
-    self.progressHUD.mode = MBProgressHUDModeText;
-    self.progressHUD.offset = CGPointMake(0.f, 0);
-    [self.progressHUD hideAnimated:YES afterDelay:1.5f];
-    self.progressHUD.detailsLabel.text = NSLocalizedString(text, @"HUD message title");
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.progressHUD = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
+        
+        self.progressHUD.mode = MBProgressHUDModeText;
+        self.progressHUD.offset = CGPointMake(0.f, 0);
+        [self.progressHUD hideAnimated:YES afterDelay:1.5f];
+        self.progressHUD.detailsLabel.text = NSLocalizedString(text, @"HUD message title");
 
+    });
+ 
+    
 }
 
 #pragma mark - 分享
@@ -285,6 +288,89 @@ static const CGFloat touchFullOffset = 15;//箭头触摸区域超出的offset �
     
 }
 
+#pragma mark - 保存图片到本地
+#pragma mark 授权判断
+- (void)saveImage:(UIImage*)image withCollectionName:(NSString*)name withCompletion:(SaveImageCompletionBlock)block
+{
+    //获取当前App的相册授权状态
+    PHAuthorizationStatus status = [PHPhotoLibrary authorizationStatus];
+    
+    if (status == PHAuthorizationStatusAuthorized) {
+        //已授权 则执行保存图片操作
+        [self saveAction:image toCollectionName:name withBlock:block];
+    }else if (status == PHAuthorizationStatusNotDetermined){
+        //未决定过，则弹出授权框
+        [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
+            
+            //用户点击了授权，则保存图片
+            if (status == PHAuthorizationStatusAuthorized) {
+                [self saveAction:image toCollectionName:name withBlock:block];
+            }
+            
+        }];
+    }else{
+        //未授权，则需要前往设置界面保存
+        [self showHUDWithText:@"请在设置界面授权访问相册～"];
+    }
+}
+
+#pragma mark 保存图片
+- (void)saveAction:(UIImage*)image toCollectionName:(NSString*)name withBlock:(SaveImageCompletionBlock)block
+{
+    //获取相片库对象
+    PHPhotoLibrary *library = [PHPhotoLibrary sharedPhotoLibrary];
+    
+    //调用perform方法
+    [library performChanges:^{
+        //创建一个相册变动请求
+        PHAssetCollectionChangeRequest *collectionRequest;
+        
+        //取出指定名称的相册
+        PHAssetCollection *assetCollection = [self getCurrentPhotoCollectionWithTitle:name];
+        
+        //判断相册是否存在
+        if (assetCollection) {
+            //存在，则使用当前的相册创建相册请求
+            collectionRequest = [PHAssetCollectionChangeRequest changeRequestForAssetCollection:assetCollection];
+            
+        }else{
+            //不存在，则创建一个新的相册请求
+            collectionRequest = [PHAssetCollectionChangeRequest creationRequestForAssetCollectionWithTitle:name];
+        }
+        
+        //根据传入的相片，创建相片变动请求
+        PHAssetChangeRequest *assetRequest = [PHAssetChangeRequest creationRequestForAssetFromImage:image];
+        
+        //创建一个占位对象
+        PHObjectPlaceholder *placeholder = [assetRequest placeholderForCreatedAsset];
+        
+        //将占位对象添加到相册请求中
+        [collectionRequest addAssets:@[placeholder]];
+        
+    } completionHandler:^(BOOL success, NSError * _Nullable error) {
+        
+        if (success) {
+            [self showHUDWithText:@"保存成功"];
+        }else{
+            [self showHUDWithText:@"保存失败"];
+        }
+        
+        if (block) {
+            block(success,error);
+        }
+    }];
+}
+
+- (PHAssetCollection*)getCurrentPhotoCollectionWithTitle:(NSString*)name
+{
+    PHFetchResult *result = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeAlbum subtype:PHAssetCollectionSubtypeAlbumRegular options:nil];
+    for (PHAssetCollection *assetCollection in result) {
+        if ([assetCollection.localizedTitle containsString:name]) {
+            return assetCollection;
+        }
+    }
+    return nil;
+}
 #pragma mark - alerController
 - (void)showAlert:(NSString*)content
 {

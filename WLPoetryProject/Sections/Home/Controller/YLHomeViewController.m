@@ -142,11 +142,8 @@
 #pragma mark - 加载视图
 - (void)loadCustomView
 {
-//    self.mainBgView.image = [UIImage imageNamed:@"mainBgImage.jpg"];
     
-//    self.mainTableView.backgroundColor = [UIColor clearColor];
     self.mainTableView.backgroundColor = RGBCOLOR(246, 246, 246, 1.0);
-
 
 }
 

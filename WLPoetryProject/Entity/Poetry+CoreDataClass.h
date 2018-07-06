@@ -2,7 +2,7 @@
 //  Poetry+CoreDataClass.h
 //  WLPoetryProject
 //
-//  Created by 龙培 on 2018/5/7.
+//  Created by chuchengpeng on 2018/7/6.
 //  Copyright © 2018年 龙培. All rights reserved.
 //
 //
