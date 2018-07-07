@@ -85,7 +85,8 @@ static const CGFloat imageW = 20;
 {
     _imageName = imageName;
     if ([imageName isKindOfClass:[NSString class]] && imageName.length > 0) {
-        self.mainImageView.image = [UIImage imageNamed:imageName];
+//        self.mainImageView.image = [UIImage imageNamed:imageName];
+        [self.mainImageView sd_setImageWithURL:[NSURL URLWithString:imageName]];
     }
 }
 
@@ -108,8 +109,8 @@ static const CGFloat imageW = 20;
     self.mainImageView = [[UIImageView alloc]init];
     self.mainImageView.contentMode = UIViewContentModeScaleAspectFill;
     if ([self.imageName isKindOfClass:[NSString class]] && self.imageName.length > 0) {
-        self.mainImageView.image = [UIImage imageNamed:self.imageName];
-
+//        self.mainImageView.image = [UIImage imageNamed:self.imageName];
+        [self.mainImageView sd_setImageWithURL:[NSURL URLWithString:self.imageName]];
     }else{
         self.mainImageView.image = [UIImage imageNamed:@"poetryBack.jpg"];
 
@@ -345,9 +346,45 @@ static const CGFloat imageW = 20;
     [self saveImage:allImage withCollectionName:@"诗词汇" withCompletion:^(BOOL success, NSError *error) {
         
         [self showOtherItem];
+        
+        [self showAlertWithImage:allImage withSuccess:success];
     }];
     
 }
+
+- (void)showAlertWithImage:(UIImage*)image withSuccess:(BOOL)success
+{
+    if (!image || ![image isKindOfClass:[UIImage class]]) {
+        return;
+    }
+    NSString *tipString = @"";
+    if (success) {
+        tipString = @"已保存到相册，是否分享给好友？";
+    }else{
+        tipString = @"未能保存到相册，您是否将题画分享给好友？";
+
+    }
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:tipString preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        NSLog(@"确定");
+        
+        [self shareWithImageArray:@[image]];
+    }];
+    
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"再看看" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+        NSLog(@"取消");
+    }];
+    
+    [alertController addAction:action];
+    [alertController addAction:cancel];
+    [self presentViewController:alertController animated:NO completion:nil];
+    
+}
+
+
 
 - (void)hideOtherItem
 {

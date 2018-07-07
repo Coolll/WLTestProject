@@ -121,13 +121,12 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
     
     [self loadContentTableView];
 
-    [self queryPoetryImageData];
+//    [self queryPoetryImageData];
 }
 
 - (void)queryPoetryImageData
 {
     BmobQuery *query = [BmobQuery queryWithClassName:@"ImageList"];
-    //    [query whereKey:@"className" equalTo:@"8"];
     
     [query findObjectsInBackgroundWithBlock:^(NSArray *array, NSError *error) {
         
@@ -149,7 +148,8 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
     
     NSString *imageName = [NSString stringWithFormat:@"%@",[[AppConfig config].bgImageInfo objectForKey:self.dataModel.classInfo]];
     if (imageName.length > 0 && ![imageName isEqualToString:@"(null)"]) {
-        self.mainImageView.image = [UIImage imageNamed:imageName];
+//        self.mainImageView.image = [UIImage imageNamed:imageName];
+        [self.mainImageView sd_setImageWithURL:[NSURL URLWithString:imageName]];
     }else{
         self.mainImageView.image = [UIImage imageNamed:@"poetryBack.jpg"];
 

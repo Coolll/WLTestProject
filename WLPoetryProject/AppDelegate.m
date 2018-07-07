@@ -63,7 +63,7 @@
 //    [self updateNewDataToPoetry];
 //    [self deleteDataInPoetry];
    
-    [self queryPoetryImageData];
+//    [self queryPoetryImageData];
     self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     
     self.window.backgroundColor = [UIColor whiteColor];
@@ -78,7 +78,7 @@
     
     [self registShareSDK];
     
-
+    [[AppConfig config] loadAllClassImageInfo];
 
 //    NSString *isFirstLoad = [[NSUserDefaults standardUserDefaults]objectForKey:FIRSTOPENAPP];
 //

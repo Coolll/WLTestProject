@@ -311,6 +311,9 @@ static const CGFloat touchFullOffset = 15;//箭头触摸区域超出的offset �
     }else{
         //未授权，则需要前往设置界面保存
         [self showHUDWithText:@"请在设置界面授权访问相册～"];
+        if (block) {
+            block(NO,nil);
+        }
     }
 }
 
@@ -350,7 +353,7 @@ static const CGFloat touchFullOffset = 15;//箭头触摸区域超出的offset �
     } completionHandler:^(BOOL success, NSError * _Nullable error) {
         
         if (success) {
-            [self showHUDWithText:@"保存成功"];
+//            [self showHUDWithText:@"保存成功"];
         }else{
             [self showHUDWithText:@"保存失败"];
         }
