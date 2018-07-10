@@ -8,6 +8,6 @@
 
 #import "BaseViewController.h"
 
-@interface WLPoetryTypeController : BaseViewController
+@interface WLCollectionMainController : BaseViewController
 
 @end

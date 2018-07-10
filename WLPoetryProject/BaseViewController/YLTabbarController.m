@@ -10,7 +10,7 @@
 #import "BaseNavigationController.h"
 #import "YLHomeViewController.h"
 #import "YLAccountViewController.h"
-#import "WLPoetryTypeController.h"
+#import "WLCollectionMainController.h"
 
 static const CGFloat iconWidth = 22;
 static const CGFloat textHeight = 15;
@@ -78,7 +78,7 @@ static const NSInteger buttonBaseTag = 2000;
     BaseNavigationController *homeNavi = [[BaseNavigationController alloc]initWithRootViewController:homeVC];
 
     //诗词分类
-    WLPoetryTypeController *typeVC = [[WLPoetryTypeController alloc]init];
+    WLCollectionMainController *typeVC = [[WLCollectionMainController alloc]init];
     typeVC.view.backgroundColor = [UIColor whiteColor];
     typeVC.isShowBack = NO;
     BaseNavigationController *typeNavi = [[BaseNavigationController alloc]initWithRootViewController:typeVC];

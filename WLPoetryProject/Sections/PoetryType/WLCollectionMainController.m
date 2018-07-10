@@ -6,12 +6,14 @@
 //  Copyright © 2018年 龙培. All rights reserved.
 //
 
-#import "WLPoetryTypeController.h"
+#import "WLCollectionMainController.h"
 #import "WLPoetryListController.h"
 #import "WLSearchController.h"
 #import "WLTypeListCell.h"
+#import "WLPoetryCollectionCell.h"
+#import "WLGradeTypeCell.h"
 
-@interface WLPoetryTypeController ()<UITableViewDelegate,UITableViewDataSource>
+@interface WLCollectionMainController ()<UITableViewDelegate,UITableViewDataSource>
 /**
  *  诗词列表
  **/
@@ -36,7 +38,7 @@
 
 @end
 
-@implementation WLPoetryTypeController
+@implementation WLCollectionMainController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -93,9 +95,9 @@
 {
     self.recentSectionArray = [NSMutableArray array];
 
-    NSArray *recentList = [WLSaveLocalHelper loadObjectForKey:@"recentSelectTypeList"];
+    NSArray *recentList = [WLSaveLocalHelper loadObjectForKey:@"recentSelectTypeInfo"];
     if (!recentList) {
-        [WLSaveLocalHelper saveObject:[NSArray array] forKey:@"recentSelectTypeList"];
+        [WLSaveLocalHelper saveObject:[NSArray array] forKey:@"recentSelectTypeInfo"];
     }else{
         self.recentSectionArray = [recentList mutableCopy];
     }
@@ -144,18 +146,6 @@
 #pragma mark - 加载视图
 - (void)loadCustomView
 {
-//    UIImageView *mainBgView = [[UIImageView alloc]init];
-//    mainBgView.image = [UIImage imageNamed:@"mainBgImage"];
-//    [self.view addSubview:mainBgView];
-//    //元素的布局
-//    [mainBgView mas_makeConstraints:^(MASConstraintMaker *make) {
-//
-//        make.left.equalTo(self.view.mas_left).offset(0);
-//        make.top.equalTo(self.naviView.mas_bottom).offset(0);
-//        make.bottom.equalTo(self.view.mas_bottom).offset(-49);
-//        make.right.equalTo(self.view.mas_right).offset(0);
-//
-//    }];
     
     self.mainTableView = [[UITableView alloc]init];
     self.mainTableView.delegate = self;
@@ -178,47 +168,15 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (self.recentSectionArray && self.recentSectionArray.count > 0) {
-        
-        //如果近期阅读过，则把近期看的放在首位
-        if (section == 0) {
-            return self.recentSectionArray.count;
-            
-        }else if (section == 1){
-            return self.gradeSectionArray.count;
-            
-        }else if (section == 2){
-            return self.tangSectionArray.count;
-
-        }else if (section == 3){
-            return self.songSectionArray.count;
-
-        }
-    }else{
-        //如果无近期阅读记录，则年级、唐诗、宋词
-        if (section == 0) {
-            return self.gradeSectionArray.count;
-            
-        }else if (section == 1){
-            return self.tangSectionArray.count;
-            
-        }else if (section == 2){
-            return self.songSectionArray.count;
-            
-        }
-        
-    }
-    
-    
     return 1;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     if (self.recentSectionArray && self.recentSectionArray.count > 0) {
-        return 4;//近期、年级、唐诗、宋词
+        return 3;//近期、年级、诗集
     }else{
-        return 3;//年级、唐诗、宋词
+        return 2;//年级、诗集
     }
     
 }
@@ -247,27 +205,23 @@
     
     if (self.recentSectionArray && self.recentSectionArray.count > 0) {
         
-        //如果近期阅读过，则把近期看的放在首位，然后年级、唐诗、宋词
-        if (section == 0) {
-            sectionLabel.text = @"近期阅读";
-        }else if (section ==1) {
+        //如果近期阅读过，则把近期看的放在首位，然后年级、诗集
+        if (section ==0) {
+            sectionLabel.text = @"浏览记录";
+        }else if (section == 1){
             sectionLabel.text = @"年级";
         }else if (section == 2){
-            sectionLabel.text = @"唐诗";
-        }else if (section == 3){
-            sectionLabel.text = @"宋词";
+            sectionLabel.text = @"诗集";
         }
         
     }else{
-        //如果无近期阅读记录，则年级、唐诗、宋词
-
-        if (section ==0) {
+        //如果无近期阅读记录，则年级、诗集
+        if (section == 0){
             sectionLabel.text = @"年级";
         }else if (section == 1){
-            sectionLabel.text = @"唐诗";
-        }else if (section == 2){
-            sectionLabel.text = @"宋词";
+            sectionLabel.text = @"诗集";
         }
+        
     }
     
     
@@ -283,44 +237,69 @@
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    WLTypeListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WLTypeListCell"];;
-    if (!cell) {
-        cell = [[WLTypeListCell alloc]init];
-    }
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.backgroundColor = [UIColor whiteColor];
     
     NSInteger section = indexPath.section;
+    
     if (self.recentSectionArray && self.recentSectionArray.count > 0) {
-        //近期、年级、唐诗、宋词
+        
+        //近期、年级、诗集
         if (section == 0) {
+            //近期
+            WLTypeListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WLTypeListCell"];;
+            if (!cell) {
+                cell = [[WLTypeListCell alloc]init];
+            }
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.backgroundColor = [UIColor whiteColor];
             cell.typeString = [self.recentSectionArray[indexPath.row] objectForKey:@"mainTitle"];
+            return cell;
         }else if (section == 1){
-            cell.typeString = [self.gradeSectionArray[indexPath.row] objectForKey:@"mainTitle"];
-
+            //年级
+            WLGradeTypeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WLGradeTypeCell"];
+            
+            if (!cell) {
+                cell = [[WLGradeTypeCell alloc]init];
+            }
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.backgroundColor = [UIColor whiteColor];
+            return cell;
         }else if (section == 2){
-            cell.typeString = [self.tangSectionArray[indexPath.row]objectForKey:@"mainTitle"];
-
-        }else if (section == 3){
-            cell.typeString = [self.songSectionArray[indexPath.row]objectForKey:@"mainTitle"];
-
+            //诗集
+            WLPoetryCollectionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WLPoetryCollectionCell"];
+            if (!cell) {
+                cell = [[WLPoetryCollectionCell alloc]init];
+            }
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.backgroundColor = [UIColor whiteColor];
+            return cell;
+            
         }
         
     }else{
-        //年级、唐诗、宋词
+        //年级、诗集
         if (section == 0){
-            cell.typeString = [self.gradeSectionArray[indexPath.row]objectForKey:@"mainTitle"];
+            WLGradeTypeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WLGradeTypeCell"];
             
+            if (!cell) {
+                cell = [[WLGradeTypeCell alloc]init];
+            }
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.backgroundColor = [UIColor whiteColor];
+            return cell;
         }else if (section == 1){
-            cell.typeString = [self.tangSectionArray[indexPath.row]objectForKey:@"mainTitle"];
-            
-        }else if (section == 2){
-            cell.typeString = [self.songSectionArray[indexPath.row]objectForKey:@"mainTitle"];
+            WLPoetryCollectionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WLPoetryCollectionCell"];
+            if (!cell) {
+                cell = [[WLPoetryCollectionCell alloc]init];
+            }
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.backgroundColor = [UIColor whiteColor];
+            return cell;
             
         }
+        
     }
     
-    return cell;
+    return [[UITableViewCell alloc]init];
 }
 
 

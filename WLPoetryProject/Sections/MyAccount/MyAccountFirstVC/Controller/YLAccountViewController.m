@@ -395,7 +395,6 @@
 {
     NSLog(@"VC点击头像:%@",isLogin?@"YES":@"NO");
     
-    
 }
 
 
