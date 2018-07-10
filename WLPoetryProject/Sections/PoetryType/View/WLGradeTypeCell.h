@@ -7,7 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+typedef void(^GradeClickBlock) (NSInteger index);
 
 @interface WLGradeTypeCell : UITableViewCell
+
+/**
+ *  标题
+ **/
+@property (nonatomic,copy) NSArray *booksArray;
+
+
+- (void)clickWithBlock:(GradeClickBlock)block;
+
+- (void)loadCustomView;
 
 @end

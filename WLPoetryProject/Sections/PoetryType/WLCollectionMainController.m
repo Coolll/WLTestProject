@@ -231,7 +231,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 100;
+    return 200;
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -262,6 +262,7 @@
             }
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.backgroundColor = [UIColor whiteColor];
+            [cell loadCustomView];
             return cell;
         }else if (section == 2){
             //诗集
@@ -285,6 +286,8 @@
             }
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.backgroundColor = [UIColor whiteColor];
+            cell.booksArray = @[@"中国风"];
+            [cell loadCustomView];
             return cell;
         }else if (section == 1){
             WLPoetryCollectionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WLPoetryCollectionCell"];

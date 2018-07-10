@@ -7,7 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+typedef void(^BookViewClickBlock) (NSInteger index);
 
 @interface WLBookView : UIView
+/**
+ *  book的index
+ **/
+@property (nonatomic,assign) NSInteger index;
+/**
+ *  标题
+ **/
+@property (nonatomic,copy) NSString *bookName;
+
+
+- (void)clickBookWithBlock:(BookViewClickBlock)block;
+
+- (void)loadCustomView;
 
 @end
