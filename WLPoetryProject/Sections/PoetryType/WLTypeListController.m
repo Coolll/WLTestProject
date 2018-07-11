@@ -29,7 +29,6 @@
     self.view.backgroundColor = ViewBackgroundColor;
     self.titleForNavi = @"诗词分类";
     [self loadCustomData];
-    [self loadCustomView];
 
 }
 
@@ -124,7 +123,7 @@
     if (self.typeDataArray && self.typeDataArray.count > 0) {
         
         if (indexPath.row < self.typeDataArray.count) {
-            cell.typeString = [self.typeDataArray[indexPath.row] objectForKey:@"mainTitle"];
+            cell.typeString = [self.typeDataArray[indexPath.row] objectForKey:@"subTitle"];
         }
         
     }

@@ -19,5 +19,8 @@ typedef void(^LastPoetryTypeBlock)(NSDictionary *info);
 
 //上次浏览记录
 - (void)loadLastSelectWithBlock:(LastPoetryTypeBlock)block;
+//加载视图
+- (void)loadCustomView;
+
 
 @end

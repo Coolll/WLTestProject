@@ -102,7 +102,7 @@
     }
     
     
-    self.gradeSectionArray = [NSArray arrayWithObjects:@"小学",@"初中", nil];
+    self.gradeSectionArray = [NSArray arrayWithObjects:@"小学",@"初中",@"高中", nil];
     self.collectionSectionArray = [NSArray arrayWithObjects:@"唐诗",@"宋词", nil];
 
 }
@@ -197,6 +197,11 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (self.recentSectionArray && self.recentSectionArray.count > 0) {
+        if (indexPath.section == 0) {
+            return 100;
+        }
+    }
     return 200;
 }
 
@@ -217,7 +222,7 @@
             }
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.backgroundColor = [UIColor whiteColor];
-            cell.typeString = [self.recentSectionArray[indexPath.row] objectForKey:@"mainTitle"];
+            cell.typeString = [self.recentSectionArray[indexPath.row] objectForKey:@"subTitle"];
             return cell;
         }else if (section == 1){
             //年级
@@ -318,40 +323,58 @@
 - (void)clickGradeWithIndex:(NSInteger)index
 {
     WLTypeListController *vc = [[WLTypeListController alloc]init];
+    NSArray *dataArray = nil;
+    
     if (index == 0) {
         //小学
-        NSArray *primaryArray = [self readConfigureWithFileName:@"configureGradePrimary"];
-        vc.typeDataArray = primaryArray;
-        vc.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:vc animated:YES];
-
-        
+        dataArray = [self readConfigureWithFileName:@"configureGradePrimary"];
+       
     }else if (index == 1){
         //初中
-        NSArray *juinorArray = [self readConfigureWithFileName:@"configureGradeJuinor"];
-        vc.typeDataArray = juinorArray;
-        vc.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:vc animated:YES];
+        dataArray = [self readConfigureWithFileName:@"configureGradeJuinor"];
+        
+    }else if (index == 2){
+        //高中
+        dataArray = [self readConfigureWithFileName:@"configureGradeSenior"];
+        
     }
+    
+    vc.typeDataArray = dataArray;
+    [vc loadCustomView];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+
+    [vc loadLastSelectWithBlock:^(NSDictionary *info) {
+        [self.recentSectionArray removeAllObjects];
+        [self.recentSectionArray addObject:info];
+        [self.mainTableView reloadData];
+    }];
 }
 
 - (void)clickCollectionWithIndex:(NSInteger)index
 {
     WLTypeListController *vc = [[WLTypeListController alloc]init];
-
+    NSArray *dataArray = nil;
     if (index == 0) {
         //唐诗
-        NSArray *tangArray = [self readConfigureWithFileName:@"configureTang"];
-        vc.typeDataArray = tangArray;
-        vc.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:vc animated:YES];
+        dataArray = [self readConfigureWithFileName:@"configureTang"];
+        
     }else if (index == 1){
         //宋词
-        NSArray *songArray = [self readConfigureWithFileName:@"configureSong"];
-        vc.typeDataArray = songArray;
-        vc.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:vc animated:YES];
+        dataArray = [self readConfigureWithFileName:@"configureSong"];
+       
     }
+    
+    vc.typeDataArray = dataArray;
+    [vc loadCustomView];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+    
+    [vc loadLastSelectWithBlock:^(NSDictionary *info) {
+        [self.recentSectionArray removeAllObjects];
+        [self.recentSectionArray addObject:info];
+        [self.mainTableView reloadData];
+    }];
 }
 
 - (NSArray*)readConfigureWithFileName:(NSString*)fileName

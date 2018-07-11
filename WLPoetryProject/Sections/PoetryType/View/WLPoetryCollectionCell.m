@@ -47,7 +47,7 @@
         itemWidth = 100;//固定元素的宽度
         CGFloat totalSpace = PhoneScreen_WIDTH-leftSpace*2-countEachLine*itemWidth;//排列固定列数的剩余宽度
         CGFloat addSpace = PhoneScreen_WIDTH-leftSpace*2-(countEachLine-1)*itemWidth;//排列固定列数-1的剩余宽度
-        itemHorizonSpace = totalSpace>0?(totalSpace/countEachLine):(addSpace/(countEachLine-1));//计算出元素的水平间距
+        itemHorizonSpace = totalSpace>0?(totalSpace/(countEachLine-1)):(addSpace/(countEachLine-2));//计算出元素的水平间距
     }
     for (int i =0 ; i< self.booksArray.count; i++) {
         

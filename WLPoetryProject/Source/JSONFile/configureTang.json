@@ -1,38 +1,38 @@
 {
   "dataList" : [
                 {
-                "mainTitle" : "唐诗·卷一",
-                "subTitle" : "唐诗",
+                "mainTitle" : "唐诗",
+                "subTitle" : "唐诗·卷一",
                 "jsonName" : "tangPoetry_one",
                 "mainClass" : "10"
                 },{
-                "mainTitle" : "唐诗·卷二",
-                "subTitle" : "唐诗",
+                "mainTitle" : "唐诗",
+                "subTitle" : "唐诗·卷二",
                 "jsonName" : "tangPoetry_two",
                 "mainClass" : "11"
                 },{
-                "mainTitle" : "唐诗·卷三",
-                "subTitle" : "唐诗",
+                "mainTitle" : "唐诗",
+                "subTitle" : "唐诗·卷三",
                 "jsonName" : "tangPoetry_three",
                 "mainClass" : "12"
                 },{
-                "mainTitle" : "唐诗·卷四",
-                "subTitle" : "唐诗",
+                "mainTitle" : "唐诗",
+                "subTitle" : "唐诗·卷四",
                 "jsonName" : "tangPoetry_four",
                 "mainClass" : "13"
                 },{
-                "mainTitle" : "唐诗·卷五",
-                "subTitle" : "唐诗",
+                "mainTitle" : "唐诗",
+                "subTitle" : "唐诗·卷五",
                 "jsonName" : "tangPoetry_five",
                 "mainClass" : "14"
                 },{
-                "mainTitle" : "唐诗·卷六",
-                "subTitle" : "唐诗",
+                "mainTitle" : "唐诗",
+                "subTitle" : "唐诗·卷六",
                 "jsonName" : "tangPoetry_six",
                 "mainClass" : "15"
                 },{
-                "mainTitle" : "唐诗·卷七",
-                "subTitle" : "唐诗",
+                "mainTitle" : "唐诗",
+                "subTitle" : "唐诗·卷七",
                 "jsonName" : "tangPoetry_seven",
                 "mainClass" : "16"
                 }

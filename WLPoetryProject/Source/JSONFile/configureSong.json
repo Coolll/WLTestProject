@@ -1,53 +1,53 @@
 {
   "dataList" : [
                 {
-                "mainTitle" : "宋词·卷一",
-                "subTitle" : "宋词",
+                "mainTitle" : "宋词",
+                "subTitle" : "宋词·卷一",
                 "jsonName" : "songPoetry_one",
                 "mainClass" : "17"
                 },{
-                "mainTitle" : "宋词·卷二",
-                "subTitle" : "宋词",
+                "mainTitle" : "宋词",
+                "subTitle" : "宋词·卷二",
                 "jsonName" : "songPoetry_two",
                 "mainClass" : "18"
                 },{
-                "mainTitle" : "宋词·卷三",
-                "subTitle" : "宋词",
+                "mainTitle" : "宋词",
+                "subTitle" : "宋词·卷三",
                 "jsonName" : "songPoetry_three",
                 "mainClass" : "19"
                 },{
-                "mainTitle" : "宋词·卷四",
-                "subTitle" : "宋词",
+                "mainTitle" : "宋词",
+                "subTitle" : "宋词·卷四",
                 "jsonName" : "songPoetry_four",
                 "mainClass" : "20"
                 },{
-                "mainTitle" : "宋词·卷五",
-                "subTitle" : "宋词",
+                "mainTitle" : "宋词",
+                "subTitle" : "宋词·卷五",
                 "jsonName" : "songPoetry_five",
                 "mainClass" : "21"
                 },{
-                "mainTitle" : "宋词·卷六",
-                "subTitle" : "宋词",
+                "mainTitle" : "宋词",
+                "subTitle" : "宋词·卷六",
                 "jsonName" : "songPoetry_six",
                 "mainClass" : "22"
                 },{
-                "mainTitle" : "宋词·卷七",
-                "subTitle" : "宋词",
+                "mainTitle" : "宋词",
+                "subTitle" : "宋词·卷七",
                 "jsonName" : "songPoetry_seven",
                 "mainClass" : "23"
                 },{
-                "mainTitle" : "宋词·卷八",
-                "subTitle" : "宋词",
+                "mainTitle" : "宋词",
+                "subTitle" : "宋词·卷八",
                 "jsonName" : "songPoetry_eight",
                 "mainClass" : "24"
                 },{
-                "mainTitle" : "宋词·卷九",
-                "subTitle" : "宋词",
+                "mainTitle" : "宋词",
+                "subTitle" : "宋词·卷九",
                 "jsonName" : "songPoetry_nine",
                 "mainClass" : "25"
                 },{
-                "mainTitle" : "宋词·卷十",
-                "subTitle" : "宋词",
+                "mainTitle" : "宋词",
+                "subTitle" : "宋词·卷十",
                 "jsonName" : "songPoetry_ten",
                 "mainClass" : "26"
                 }
