@@ -7,7 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+typedef void(^CollectionClickBlock) (NSInteger index);
 
 @interface WLPoetryCollectionCell : UITableViewCell
+/**
+ *  标题
+ **/
+@property (nonatomic,copy) NSArray *booksArray;
+
+
+- (void)clickWithBlock:(CollectionClickBlock)block;
+
+- (void)loadCustomView;
 
 @end

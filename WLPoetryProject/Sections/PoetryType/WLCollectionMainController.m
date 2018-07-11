@@ -12,6 +12,7 @@
 #import "WLTypeListCell.h"
 #import "WLPoetryCollectionCell.h"
 #import "WLGradeTypeCell.h"
+#import "WLTypeListController.h"
 
 @interface WLCollectionMainController ()<UITableViewDelegate,UITableViewDataSource>
 /**
@@ -22,15 +23,13 @@
 /**
  *  年级 诗词数据源
  **/
-@property (nonatomic,strong) NSMutableArray *gradeSectionArray;
+@property (nonatomic,copy) NSArray *gradeSectionArray;
+
 /**
- *  唐诗 诗词数据源
+ *  诗集 诗词数据源
  **/
-@property (nonatomic,strong) NSMutableArray *tangSectionArray;
-/**
- *  宋词 诗词数据源
- **/
-@property (nonatomic,strong) NSMutableArray *songSectionArray;
+@property (nonatomic,copy) NSArray *collectionSectionArray;
+
 /**
  *  近期阅读的 诗词数据源
  **/
@@ -102,46 +101,13 @@
         self.recentSectionArray = [recentList mutableCopy];
     }
     
-    [self readConfigureGrade];
-    [self readConfigureTang];
-    [self readConfigureSong];
+    
+    self.gradeSectionArray = [NSArray arrayWithObjects:@"小学",@"初中", nil];
+    self.collectionSectionArray = [NSArray arrayWithObjects:@"唐诗",@"宋词", nil];
+
 }
 
-- (void)readConfigureGrade
-{
-    //从本地读取文件
-    NSData *JSONData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"configureGrade" ofType:@"json"]];
-    //转为dic
-    NSDictionary *configureData = [NSJSONSerialization JSONObjectWithData:JSONData options:NSJSONReadingAllowFragments error:nil];
-    
-    //获取到年级的配置列表
-    NSArray *gradeArray = [configureData objectForKey:@"dataList"];
-    self.gradeSectionArray = [NSMutableArray arrayWithArray:gradeArray];
-}
 
-- (void)readConfigureTang
-{
-    //从本地读取文件
-    NSData *JSONData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"configureTang" ofType:@"json"]];
-    //转为dic
-    NSDictionary *configureData = [NSJSONSerialization JSONObjectWithData:JSONData options:NSJSONReadingAllowFragments error:nil];
-    
-    //获取到年级的配置列表
-    NSArray *gradeArray = [configureData objectForKey:@"dataList"];
-    self.tangSectionArray = [NSMutableArray arrayWithArray:gradeArray];
-}
-
-- (void)readConfigureSong
-{
-    //从本地读取文件
-    NSData *JSONData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"configureSong" ofType:@"json"]];
-    //转为dic
-    NSDictionary *configureData = [NSJSONSerialization JSONObjectWithData:JSONData options:NSJSONReadingAllowFragments error:nil];
-    
-    //获取到年级的配置列表
-    NSArray *gradeArray = [configureData objectForKey:@"dataList"];
-    self.songSectionArray = [NSMutableArray arrayWithArray:gradeArray];
-}
 
 #pragma mark - 加载视图
 - (void)loadCustomView
@@ -255,49 +221,21 @@
             return cell;
         }else if (section == 1){
             //年级
-            WLGradeTypeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WLGradeTypeCell"];
-            
-            if (!cell) {
-                cell = [[WLGradeTypeCell alloc]init];
-            }
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.backgroundColor = [UIColor whiteColor];
-            [cell loadCustomView];
-            return cell;
+            return [self cellForGradeAtIndexPath:indexPath withTable:tableView];
+
         }else if (section == 2){
             //诗集
-            WLPoetryCollectionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WLPoetryCollectionCell"];
-            if (!cell) {
-                cell = [[WLPoetryCollectionCell alloc]init];
-            }
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.backgroundColor = [UIColor whiteColor];
-            return cell;
+            return [self cellForCollectionAtIndexPath:indexPath withTable:tableView];
             
         }
         
     }else{
         //年级、诗集
         if (section == 0){
-            WLGradeTypeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WLGradeTypeCell"];
-            
-            if (!cell) {
-                cell = [[WLGradeTypeCell alloc]init];
-            }
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.backgroundColor = [UIColor whiteColor];
-            cell.booksArray = @[@"中国风"];
-            [cell loadCustomView];
-            return cell;
+            return [self cellForGradeAtIndexPath:indexPath withTable:tableView];
         }else if (section == 1){
-            WLPoetryCollectionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WLPoetryCollectionCell"];
-            if (!cell) {
-                cell = [[WLPoetryCollectionCell alloc]init];
-            }
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.backgroundColor = [UIColor whiteColor];
-            return cell;
-            
+            return [self cellForCollectionAtIndexPath:indexPath withTable:tableView];
+
         }
         
     }
@@ -305,6 +243,38 @@
     return [[UITableViewCell alloc]init];
 }
 
+- (WLGradeTypeCell*)cellForGradeAtIndexPath:(NSIndexPath *)indexPath withTable:(UITableView*)tableView
+{
+    WLGradeTypeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WLGradeTypeCell"];
+    
+    if (!cell) {
+        cell = [[WLGradeTypeCell alloc]init];
+    }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.backgroundColor = [UIColor whiteColor];
+    cell.booksArray = self.gradeSectionArray;
+    [cell clickWithBlock:^(NSInteger index) {
+        [self clickGradeWithIndex:index];
+    }];
+    [cell loadCustomView];
+    return cell;
+}
+
+- (WLPoetryCollectionCell*)cellForCollectionAtIndexPath:(NSIndexPath*)indexPath withTable:(UITableView*)tableView
+{
+    WLPoetryCollectionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WLPoetryCollectionCell"];
+    if (!cell) {
+        cell = [[WLPoetryCollectionCell alloc]init];
+    }
+    cell.booksArray = self.collectionSectionArray;
+    [cell clickWithBlock:^(NSInteger index) {
+        [self clickCollectionWithIndex:index];
+    }];
+    [cell loadCustomView];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.backgroundColor = [UIColor whiteColor];
+    return cell;
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -317,64 +287,84 @@
         //近期、年级、唐诗、宋词
         if (section == 0) {
             typeInfo = self.recentSectionArray[indexPath.row];
+            listVC.titleForNavi = [typeInfo objectForKey:@"subTitle"];
+            listVC.jsonName = [typeInfo objectForKey:@"jsonName"];
+            listVC.mainClass = [typeInfo objectForKey:@"mainClass"];
+            [listVC loadCustomData];
+            listVC.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:listVC animated:YES];
+
         }else if (section == 1){
-            typeInfo = self.gradeSectionArray[indexPath.row];
 
         }else if (section == 2){
-            typeInfo = self.tangSectionArray[indexPath.row];
-
-        }else if (section == 3){
-            typeInfo = self.songSectionArray[indexPath.row];
 
         }
 
     }else{
+        
         //年级、唐诗、宋词
         if (section == 0){
-            typeInfo = self.gradeSectionArray[indexPath.row];
 
         }else if (section == 1){
-            typeInfo = self.tangSectionArray[indexPath.row];
-
-        }else if (section == 2){
-            typeInfo = self.songSectionArray[indexPath.row];
 
         }
+        
     }
 
-    
-    listVC.titleForNavi = [typeInfo objectForKey:@"subTitle"];
-    listVC.jsonName = [typeInfo objectForKey:@"jsonName"];
-    listVC.mainClass = [typeInfo objectForKey:@"mainClass"];
-    [listVC loadCustomData];
-    listVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:listVC animated:YES];
-    
-    
-    BOOL isSameMainClass = NO;
-    for (NSDictionary *recentInfo in self.recentSectionArray) {
-        NSString *mainClass = [recentInfo objectForKey:@"mainClass"];
-        if ([mainClass isEqualToString:[typeInfo objectForKey:@"mainClass"]]) {
-            isSameMainClass = YES;
-        }
-    }
-    
-    if (!isSameMainClass) {
-        //如果之前没添加过
-        //近期浏览的 超过三个，则移除掉最先访问的，把最近访问的放在前面
-        [self.recentSectionArray insertObject:typeInfo atIndex:0];
-    }
-    
-    
-    if (self.recentSectionArray.count >3) {
-        [self.recentSectionArray removeLastObject];
-    }
-    
-    //更新到本地
-    [WLSaveLocalHelper saveObject:[self.recentSectionArray copy] forKey:@"recentSelectTypeList"];
-    [self.mainTableView reloadData];
+   
 }
 
+
+- (void)clickGradeWithIndex:(NSInteger)index
+{
+    WLTypeListController *vc = [[WLTypeListController alloc]init];
+    if (index == 0) {
+        //小学
+        NSArray *primaryArray = [self readConfigureWithFileName:@"configureGradePrimary"];
+        vc.typeDataArray = primaryArray;
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+
+        
+    }else if (index == 1){
+        //初中
+        NSArray *juinorArray = [self readConfigureWithFileName:@"configureGradeJuinor"];
+        vc.typeDataArray = juinorArray;
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+}
+
+- (void)clickCollectionWithIndex:(NSInteger)index
+{
+    WLTypeListController *vc = [[WLTypeListController alloc]init];
+
+    if (index == 0) {
+        //唐诗
+        NSArray *tangArray = [self readConfigureWithFileName:@"configureTang"];
+        vc.typeDataArray = tangArray;
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if (index == 1){
+        //宋词
+        NSArray *songArray = [self readConfigureWithFileName:@"configureSong"];
+        vc.typeDataArray = songArray;
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+}
+
+- (NSArray*)readConfigureWithFileName:(NSString*)fileName
+{
+    //从本地读取文件
+    NSData *JSONData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:fileName ofType:@"json"]];
+    //转为dic
+    NSDictionary *configureData = [NSJSONSerialization JSONObjectWithData:JSONData options:NSJSONReadingAllowFragments error:nil];
+    
+    //获取到年级的配置列表
+    NSArray *array = [configureData objectForKey:@"dataList"];
+    return array;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

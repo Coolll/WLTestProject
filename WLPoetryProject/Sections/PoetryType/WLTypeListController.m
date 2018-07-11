@@ -40,6 +40,16 @@
     }
 }
 
+- (void)setTypeDataArray:(NSArray *)typeDataArray
+{
+    _typeDataArray = typeDataArray;
+    
+    if (typeDataArray && typeDataArray.count > 0) {
+        NSDictionary *typeInfo = self.typeDataArray[0];
+        NSString *title = [NSString stringWithFormat:@"%@",[typeInfo objectForKey:@"mainTitle"]];
+        self.titleForNavi = title;
+    }
+}
 
 - (void)loadCustomData
 {

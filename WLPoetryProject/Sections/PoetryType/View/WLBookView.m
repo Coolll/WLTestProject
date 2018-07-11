@@ -34,10 +34,12 @@
 
 - (void)loadCustomView
 {
+    CGFloat cornerR = 6;
+    
     CGFloat leftSpace = 10;//书本与主视图左侧间距
     CGFloat topSpace = 10;//书本与主视图顶部间距
-    CGFloat labelHeight = 20;//底部的标题高度
-    CGFloat lineWidth = 6;//右侧分割线的宽度
+    CGFloat labelHeight = 0;//底部的标题高度
+    CGFloat lineWidth = 3;//右侧分割线的宽度
     
     //除去左右间距以及线条宽度剩余的宽度
     CGFloat totalWidthLeft = self.viewWidth-leftSpace*2-lineWidth;
@@ -58,7 +60,7 @@
     [self addSubview:leftMainView];
     
     //添加圆角
-    [[WLPublicTool shareTool] addCornerForView:leftMainView withTopLeft:YES withTopRight:NO withBottomLeft:YES withBottomRight:NO withCornerRadius:10];
+    [[WLPublicTool shareTool] addCornerForView:leftMainView withTopLeft:YES withTopRight:NO withBottomLeft:YES withBottomRight:NO withCornerRadius:cornerR];
     
     //书名的宽度
     CGFloat nameWidth = 20;
@@ -72,7 +74,7 @@
     CGFloat nameSpace = 5;
     
     //线条
-    UIView *nameBgView = [[UIView alloc]initWithFrame:CGRectMake(nameLeft-nameSpace, topSpace-nameSpace, nameWidth+nameSpace*2, nameHeight+nameSpace*2)];
+    UIView *nameBgView = [[UIView alloc]initWithFrame:CGRectMake(nameLeft-nameSpace, nameTop-nameSpace, nameWidth+nameSpace*2, nameHeight+nameSpace*2)];
     nameBgView.backgroundColor = bgColor;
     nameBgView.layer.cornerRadius = 4.f;
     nameBgView.layer.borderColor = [UIColor whiteColor].CGColor;
@@ -82,16 +84,64 @@
     //书名
     UILabel *nameLabel = [[UILabel alloc]init];
     nameLabel.frame = CGRectMake(nameLeft, nameTop, nameWidth, nameHeight);
-    nameLabel.font = [UIFont systemFontOfSize:14.f];
+    nameLabel.font = [UIFont systemFontOfSize:12.f];
     nameLabel.numberOfLines = 0;
+    nameLabel.textAlignment = NSTextAlignmentCenter;
     nameLabel.backgroundColor = [UIColor whiteColor];
     nameLabel.text = self.bookName;
     [leftMainView addSubview:nameLabel];
     
     
+    NSInteger rateOne = 1;
+    NSInteger rateTwo = 2;
+    NSInteger rateThree = 3;
+    CGFloat singleHeight = (totalHeightLeft-4*lineWidth)/(rateOne+rateTwo+rateThree+rateTwo+rateOne);
+    CGFloat xPosition = leftSpace+leftWidth+lineWidth;
     
+    
+    UIView *rightOneView = [[UIView alloc]initWithFrame:CGRectMake(xPosition, topSpace, rightWidth, singleHeight)];
+    rightOneView.backgroundColor = bgColor;
+    [self addSubview:rightOneView];
+    [[WLPublicTool shareTool] addCornerForView:rightOneView withTopLeft:NO withTopRight:YES withBottomLeft:NO withBottomRight:NO withCornerRadius:cornerR];
+    
+    UIView *rightTwoView = [[UIView alloc]initWithFrame:CGRectMake(xPosition, topSpace+singleHeight*rateOne+lineWidth, rightWidth, singleHeight*2)];
+    rightTwoView.backgroundColor = bgColor;
+    [self addSubview:rightTwoView];
+    
+    
+    UIView *rightThreeView = [[UIView alloc]initWithFrame:CGRectMake(xPosition, topSpace+singleHeight*(rateOne+rateTwo)+lineWidth*2, rightWidth, singleHeight*rateThree)];
+    rightThreeView.backgroundColor = bgColor;
+    [self addSubview:rightThreeView];
+    
+    UIView *rightFourView = [[UIView alloc]initWithFrame:CGRectMake(xPosition, topSpace+singleHeight*(rateOne+rateTwo+rateThree)+lineWidth*3, rightWidth, singleHeight*rateTwo)];
+    rightFourView.backgroundColor = bgColor;
+    [self addSubview:rightFourView];
+    
+    UIView *righgFiveView = [[UIView alloc]initWithFrame:CGRectMake(xPosition, topSpace+singleHeight*(rateOne+rateTwo+rateThree+rateTwo)+lineWidth*4, rightWidth, singleHeight*rateOne)];
+    righgFiveView.backgroundColor = bgColor;
+    [self addSubview:righgFiveView];
+    [[WLPublicTool shareTool]addCornerForView:righgFiveView withTopLeft:NO withTopRight:NO withBottomLeft:NO withBottomRight:YES withCornerRadius:cornerR];
+    
+    UILabel *bookLabel = [[UILabel alloc]init];
+    bookLabel.frame = CGRectMake(0, topSpace+totalHeightLeft, self.viewWidth, labelHeight);
+    bookLabel.textAlignment = NSTextAlignmentCenter;
+    bookLabel.text = self.bookName;
+    bookLabel.font = [UIFont systemFontOfSize:16.f];//字号设置
+    [self addSubview:bookLabel];
+    
+    
+    UIButton *clearBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    clearBtn.frame = CGRectMake(0, 0, self.viewWidth, self.viewHeight);
+    [clearBtn addTarget:self action:@selector(clickAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:clearBtn];
 }
 
+- (void)clickAction:(UIButton*)sender
+{
+    if (self.block) {
+        self.block(self.index);
+    }
+}
 - (void)clickBookWithBlock:(BookViewClickBlock)block
 {
     if (block) {

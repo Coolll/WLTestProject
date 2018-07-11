@@ -39,7 +39,7 @@
     CGFloat topSpace = 10;//顶部间距
     CGFloat itemHorizonSpace = 10;//元素水平间距
     CGFloat itemVerticalSpace = 10;//元素垂直间距
-    CGFloat itemHeight = 100;//单个元素的高度
+    CGFloat itemHeight = 150;//单个元素的高度
     CGFloat itemWidth = (PhoneScreen_WIDTH-leftSpace*2-itemHorizonSpace*(countEachLine-1))/countEachLine;//在固定元素水平间距时，元素的宽度
     
     bool staticWidth = YES;
@@ -56,7 +56,13 @@
         CGFloat xPosition = leftSpace+row*itemWidth+row*itemHorizonSpace;
         CGFloat yPosition = topSpace+line*itemHeight+line*itemVerticalSpace;
         WLBookView *view = [[WLBookView alloc]initWithFrame:CGRectMake(xPosition, yPosition, itemWidth, itemHeight)];
-        view.bookName = @"中国风";
+        view.index = i;
+        view.bookName = [NSString stringWithFormat:@"%@",[self.booksArray objectAtIndex:i]];
+        [view clickBookWithBlock:^(NSInteger index) {
+            if (self.clickBlock) {
+                self.clickBlock(index);
+            }
+        }];
         [view loadCustomView];
         [self addSubview:view];
         
