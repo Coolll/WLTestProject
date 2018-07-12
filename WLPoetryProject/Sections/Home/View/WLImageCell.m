@@ -24,7 +24,7 @@
 - (void)loadCustomView
 {
     UILabel *imageTipLabel = [[UILabel alloc]init];
-    imageTipLabel.text = @"开启·题画";
+    imageTipLabel.text = @"构建·题画";
     imageTipLabel.font = [UIFont systemFontOfSize:14.f];
     imageTipLabel.textColor = RGBCOLOR(100, 100, 100, 1.0);
     [self addSubview:imageTipLabel];
