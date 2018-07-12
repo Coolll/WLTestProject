@@ -173,7 +173,7 @@
         
         //如果近期阅读过，则把近期看的放在首位，然后年级、诗集
         if (section ==0) {
-            sectionLabel.text = @"浏览记录";
+            sectionLabel.text = @"近期浏览";
         }else if (section == 1){
             sectionLabel.text = @"年级";
         }else if (section == 2){
@@ -199,7 +199,7 @@
 {
     if (self.recentSectionArray && self.recentSectionArray.count > 0) {
         if (indexPath.section == 0) {
-            return 100;
+            return 60;
         }
     }
     return 200;
@@ -207,7 +207,6 @@
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     
     NSInteger section = indexPath.section;
     
@@ -222,7 +221,9 @@
             }
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.backgroundColor = [UIColor whiteColor];
+            cell.imageName = @"typeHistory";
             cell.typeString = [self.recentSectionArray[indexPath.row] objectForKey:@"subTitle"];
+            cell.needLine = NO;
             return cell;
         }else if (section == 1){
             //年级

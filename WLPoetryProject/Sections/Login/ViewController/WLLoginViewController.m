@@ -184,7 +184,7 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
     self.getCodeLabel = [[UILabel alloc]init];
     self.getCodeLabel.layer.borderWidth = 1.0;
     self.getCodeLabel.layer.borderColor = NavigationColor.CGColor;
-    self.getCodeLabel.text = @"随机设置";
+    self.getCodeLabel.text = @"快速设置";
     self.getCodeLabel.textAlignment = NSTextAlignmentCenter;
     self.getCodeLabel.textColor = NavigationColor;
     self.getCodeLabel.font = [UIFont systemFontOfSize:10.0];
@@ -347,11 +347,19 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
         if (!password) {
             password = @"";
         }
+        
         NSString *lastUserName = [NSString stringWithFormat:@"%@",name];
         NSString *lastUserPsd = [NSString stringWithFormat:@"%@",password];
-        self.nameTextField.contentString = lastUserName;
-        self.passwordTextField.contentString = lastUserPsd;
-        self.passwordTextField.mainTextField.secureTextEntry = YES;
+        
+        if (lastUserPsd.length > 0 && lastUserName.length > 0) {
+            self.nameTextField.contentString = lastUserName;
+            self.passwordTextField.contentString = lastUserPsd;
+            self.passwordTextField.mainTextField.secureTextEntry = YES;
+        }else if (lastUserPsd.length == 0 && lastUserName.length > 0){
+            self.nameTextField.contentString = lastUserName;
+            self.passwordTextField.mainTextField.secureTextEntry = YES;
+        }
+        
     }
 }
 #pragma mark 计算文本宽度
@@ -512,6 +520,9 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
             
         }else{
             NSLog(@"登录error:%@",error);
+            if (error.code == 101) {
+                [self showHUDWithText:@"账号或密码错误"];
+            }
         }
     }];
 

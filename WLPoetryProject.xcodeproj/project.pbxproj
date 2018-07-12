@@ -39,6 +39,10 @@
 		00BBFA1120D6524500BB86D9 /* WLFeedbackController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BBFA1020D6524500BB86D9 /* WLFeedbackController.m */; };
 		00BBFA1420D65B8F00BB86D9 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BBFA1320D65B8F00BB86D9 /* AboutViewController.m */; };
 		00BBFA1620D65C8B00BB86D9 /* poetryIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 00BBFA1520D65C8B00BB86D9 /* poetryIcon.png */; };
+		00D4F64120F743F300287FB0 /* WLHomePoetryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D4F64020F743F300287FB0 /* WLHomePoetryCell.m */; };
+		00D4F64320F7467800287FB0 /* homeAuthorBg.png in Resources */ = {isa = PBXBuildFile; fileRef = 00D4F64220F7467800287FB0 /* homeAuthorBg.png */; };
+		00DA247620F6FBCB00F97B79 /* bookType.png in Resources */ = {isa = PBXBuildFile; fileRef = 00DA247520F6FBCA00F97B79 /* bookType.png */; };
+		00DA247820F720BF00F97B79 /* typeHistory.png in Resources */ = {isa = PBXBuildFile; fileRef = 00DA247720F720BF00F97B79 /* typeHistory.png */; };
 		00E2CB3E20E084FD00E44793 /* topImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 00E2CB3D20E084FD00E44793 /* topImage.jpg */; };
 		00EC603E20D5E84E002B6C85 /* WLLikeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00EC603D20D5E84E002B6C85 /* WLLikeController.m */; };
 		00F9516120D4B2A10039D7C5 /* WLSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F9516020D4B2A10039D7C5 /* WLSettingController.m */; };
@@ -219,7 +223,6 @@
 		07E06D9920A06C9300093DCC /* tabbarTwo.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E06D9720A06C9300093DCC /* tabbarTwo.png */; };
 		07E4DFD820C55F03009E1F6D /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E4DFD720C55F02009E1F6D /* search.png */; };
 		07E7C30F20CC090F007CA827 /* WLTypeListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 07E7C30E20CC090F007CA827 /* WLTypeListCell.m */; };
-		07E7C31320CC09E3007CA827 /* typeBgImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E7C31120CC09E3007CA827 /* typeBgImage.png */; };
 		07E7C31820CC1DA7007CA827 /* configureSong.json in Resources */ = {isa = PBXBuildFile; fileRef = 07E7C31620CC1DA7007CA827 /* configureSong.json */; };
 		07E7C31B20CC1DB7007CA827 /* configureTang.json in Resources */ = {isa = PBXBuildFile; fileRef = 07E7C31A20CC1DB7007CA827 /* configureTang.json */; };
 		07F3E30B20D2C0FC00E7BAF7 /* defaultHeader.png in Resources */ = {isa = PBXBuildFile; fileRef = 07F3E2F820D2C0FB00E7BAF7 /* defaultHeader.png */; };
@@ -333,6 +336,11 @@
 		00BBFA1220D65B8F00BB86D9 /* AboutViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
 		00BBFA1320D65B8F00BB86D9 /* AboutViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		00BBFA1520D65C8B00BB86D9 /* poetryIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = poetryIcon.png; sourceTree = "<group>"; };
+		00D4F63F20F743F300287FB0 /* WLHomePoetryCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLHomePoetryCell.h; sourceTree = "<group>"; };
+		00D4F64020F743F300287FB0 /* WLHomePoetryCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLHomePoetryCell.m; sourceTree = "<group>"; };
+		00D4F64220F7467800287FB0 /* homeAuthorBg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = homeAuthorBg.png; sourceTree = "<group>"; };
+		00DA247520F6FBCA00F97B79 /* bookType.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bookType.png; sourceTree = "<group>"; };
+		00DA247720F720BF00F97B79 /* typeHistory.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = typeHistory.png; sourceTree = "<group>"; };
 		00E2CB3D20E084FD00E44793 /* topImage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = topImage.jpg; sourceTree = "<group>"; };
 		00EC603C20D5E84E002B6C85 /* WLLikeController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLLikeController.h; sourceTree = "<group>"; };
 		00EC603D20D5E84E002B6C85 /* WLLikeController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLLikeController.m; sourceTree = "<group>"; };
@@ -629,7 +637,6 @@
 		07E4DFD720C55F02009E1F6D /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search.png; sourceTree = "<group>"; };
 		07E7C30D20CC090F007CA827 /* WLTypeListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLTypeListCell.h; sourceTree = "<group>"; };
 		07E7C30E20CC090F007CA827 /* WLTypeListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLTypeListCell.m; sourceTree = "<group>"; };
-		07E7C31120CC09E3007CA827 /* typeBgImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = typeBgImage.png; sourceTree = "<group>"; };
 		07E7C31620CC1DA7007CA827 /* configureSong.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = configureSong.json; sourceTree = "<group>"; };
 		07E7C31A20CC1DB7007CA827 /* configureTang.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = configureTang.json; sourceTree = "<group>"; };
 		07F3E2F820D2C0FB00E7BAF7 /* defaultHeader.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = defaultHeader.png; sourceTree = "<group>"; };
@@ -1326,6 +1333,8 @@
 				009A1B2B20E618B900C0A58D /* WLPoetryLabel.m */,
 				009A1B3020E6208300C0A58D /* WLTextView.h */,
 				009A1B3120E6208300C0A58D /* WLTextView.m */,
+				00D4F63F20F743F300287FB0 /* WLHomePoetryCell.h */,
+				00D4F64020F743F300287FB0 /* WLHomePoetryCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1463,7 +1472,8 @@
 		07E4DFD620C55EEE009E1F6D /* Type */ = {
 			isa = PBXGroup;
 			children = (
-				07E7C31120CC09E3007CA827 /* typeBgImage.png */,
+				00DA247720F720BF00F97B79 /* typeHistory.png */,
+				00DA247520F6FBCA00F97B79 /* bookType.png */,
 				071DB82520C6BF6900BA0744 /* searchBg.jpg */,
 				0715FF0920C56D3D0096C60E /* search_black.png */,
 				07E4DFD720C55F02009E1F6D /* search.png */,
@@ -1508,6 +1518,7 @@
 			isa = PBXGroup;
 			children = (
 				073864F220E12D8B0005BE61 /* ForImage */,
+				00D4F64220F7467800287FB0 /* homeAuthorBg.png */,
 				00E2CB3D20E084FD00E44793 /* topImage.jpg */,
 				07F3E30220D2C0FB00E7BAF7 /* clearNavi.png */,
 				07F3E30320D2C0FB00E7BAF7 /* lineImage@2x.png */,
@@ -1719,12 +1730,15 @@
 				071609B220A1C15400904C69 /* gradePoetry_empty.json in Resources */,
 				00F9516C20D4D7190039D7C5 /* setting.png in Resources */,
 				00F9517720D4FF940039D7C5 /* likePoetry.png in Resources */,
+				00D4F64320F7467800287FB0 /* homeAuthorBg.png in Resources */,
 				07F73C0A208ACD9A00F7D8B3 /* nav_back@3x.png in Resources */,
 				0721702C2087843A002A1628 /* README.strings in Resources */,
 				0795690820726D0B0097C26D /* LaunchScreen.storyboard in Resources */,
 				07F3E30B20D2C0FC00E7BAF7 /* defaultHeader.png in Resources */,
 				00F9517020D4D8090039D7C5 /* about@2x.png in Resources */,
+				00DA247620F6FBCB00F97B79 /* bookType.png in Resources */,
 				07E06D9920A06C9300093DCC /* tabbarTwo.png in Resources */,
+				00DA247820F720BF00F97B79 /* typeHistory.png in Resources */,
 				000110A920A44BD2001B2B55 /* gradePoetry_9_one.json in Resources */,
 				000110A820A44BD2001B2B55 /* gradePoetry_7_two.json in Resources */,
 				0785076A20B2EFF20030CD98 /* songPoetry_six.json in Resources */,
@@ -1775,7 +1789,6 @@
 				07F3E31720D2C0FC00E7BAF7 /* main_more.png in Resources */,
 				0715FF0A20C56D3D0096C60E /* search_black.png in Resources */,
 				07F73C03208ACD9A00F7D8B3 /* normal_circle@3x.png in Resources */,
-				07E7C31320CC09E3007CA827 /* typeBgImage.png in Resources */,
 				075DF12C20F62FD20075E9D5 /* configureGradeSenior.json in Resources */,
 				07F73C0C208ACD9A00F7D8B3 /* tabbarLine@3x.png in Resources */,
 				0795690520726D0B0097C26D /* Assets.xcassets in Resources */,
@@ -1844,6 +1857,7 @@
 				0765C702207CE6E20085EB3A /* SDWebImageCompat.m in Sources */,
 				0765C6F9207CE6E20085EB3A /* NSButton+WebCache.m in Sources */,
 				0765C6FF207CE6E20085EB3A /* SDWebImageCoder.m in Sources */,
+				00D4F64120F743F300287FB0 /* WLHomePoetryCell.m in Sources */,
 				0765C70B207CE6E20085EB3A /* SDWebImageWebPCoder.m in Sources */,
 				0010F23020F4A84800F272EB /* WLPoetryCollectionCell.m in Sources */,
 				0765C713207CE6E20085EB3A /* UIView+WebCache.m in Sources */,

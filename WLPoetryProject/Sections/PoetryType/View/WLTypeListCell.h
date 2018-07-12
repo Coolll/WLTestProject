@@ -14,5 +14,13 @@
  **/
 @property (nonatomic,copy) NSString *typeString;
 
+/**
+ *  是否需要分割线，默认需要
+ **/
+@property (nonatomic, assign) BOOL needLine;
 
+/**
+ *  左侧的图标，默认是书，可以自己传入图片名
+ **/
+@property (nonatomic, copy) NSString *imageName;
 @end

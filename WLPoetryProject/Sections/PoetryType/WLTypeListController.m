@@ -107,7 +107,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 100;
+    return 60;
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -124,6 +124,10 @@
         
         if (indexPath.row < self.typeDataArray.count) {
             cell.typeString = [self.typeDataArray[indexPath.row] objectForKey:@"subTitle"];
+        }
+        
+        if (indexPath.row == self.typeDataArray.count-1) {
+            cell.needLine = NO;
         }
         
     }

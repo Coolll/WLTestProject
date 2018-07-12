@@ -9,7 +9,7 @@
 #import "YLHomeViewController.h"
 #import "WLCoreDataHelper.h"
 #import "PoetryModel.h"
-#import "WLPoetryListCell.h"
+#import "WLHomePoetryCell.h"
 #import "PoetryDetailViewController.h"
 #import "WLImageCell.h"
 #import "WLImageController.h"
@@ -51,11 +51,10 @@
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.view.backgroundColor = ViewBackgroundColor;
-    self.titleForNavi = @"随机推荐";
+    self.titleForNavi = @"热门推荐";
     [self loadCustomData];
     
     [self checkLocalData];//加载本地数据
-
 }
 
 - (void)loadCustomData
@@ -193,11 +192,11 @@
                 
                 if (indexPath.row == self.poetryArray.count-1) {
                     //最后一行需要调整一下间距
-                    CGFloat cellHeight = [WLPoetryListCell heightForLastCell:[self.poetryArray objectAtIndex:indexPath.row]];
+                    CGFloat cellHeight = [WLHomePoetryCell heightForLastCell:[self.poetryArray objectAtIndex:indexPath.row]];
                     [self.heightArray addObject:[NSString stringWithFormat:@"%f",cellHeight]];
                     return cellHeight;
                 }else{
-                    CGFloat cellHeight = [WLPoetryListCell heightForFirstLine:[self.poetryArray objectAtIndex:indexPath.row]];
+                    CGFloat cellHeight = [WLHomePoetryCell heightForFirstLine:[self.poetryArray objectAtIndex:indexPath.row]];
                     
                     if (indexPath.row == 0) {
                         cellHeight -= 20;
@@ -238,9 +237,9 @@
         
     }else if (section == 1){
         PoetryModel *model = [self.poetryArray objectAtIndex:indexPath.row];
-        WLPoetryListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WLPoetryListCell"];;
+        WLHomePoetryCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WLHomePoetryCell"];;
         if (!cell) {
-            cell = [[WLPoetryListCell alloc]initWithFrame:CGRectMake(0, 0, PhoneScreen_WIDTH, 125)];
+            cell = [[WLHomePoetryCell alloc]initWithFrame:CGRectMake(0, 0, PhoneScreen_WIDTH, 125)];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.backgroundColor = [UIColor clearColor];
         }

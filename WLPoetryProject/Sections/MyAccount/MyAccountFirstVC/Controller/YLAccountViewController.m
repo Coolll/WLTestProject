@@ -165,7 +165,7 @@
     self.mainTableView.delegate = self;
     self.mainTableView.dataSource = self;
     self.mainTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.mainTableView.backgroundColor = [UIColor whiteColor];
+    self.mainTableView.backgroundColor = RGBCOLOR(250, 250, 250, 1.0);
     self.mainTableView.scrollEnabled = NO;
     [self.view addSubview:self.mainTableView];
     
@@ -232,7 +232,6 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
     if (indexPath.section == 0) {
         return 125;
     }else if (indexPath.section == 1){
@@ -298,7 +297,10 @@
             cell.iconImageName = self.imageArray[indexPath.row];
         }
         
-        
+        if (indexPath.row == self.itemsArray.count-1) {
+            cell.needLine = NO;//最后一个不需要分割线
+            
+        }
         return cell;
         
     }
@@ -395,6 +397,9 @@
 {
     NSLog(@"VC点击头像:%@",isLogin?@"YES":@"NO");
     
+    if (!isLogin) {
+        [self loginAction];
+    }
 }
 
 

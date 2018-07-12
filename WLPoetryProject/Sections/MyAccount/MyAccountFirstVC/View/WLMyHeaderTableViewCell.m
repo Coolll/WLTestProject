@@ -122,8 +122,11 @@ typedef void(^EditBlock)(void);
     self.subTitleLabel.font = [UIFont systemFontOfSize:12.0];
     self.subTitleLabel.text = @"极速登录，即可收藏诗词";
     self.subTitleLabel.textColor = [UIColor whiteColor];
+    self.subTitleLabel.userInteractionEnabled = YES;
     [self addSubview:self.subTitleLabel];
     
+    UITapGestureRecognizer *subTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(loginAction:)];
+    [self.subTitleLabel addGestureRecognizer:subTap];
 
     
     

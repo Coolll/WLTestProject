@@ -71,7 +71,7 @@
     
     UILabel *infoLabel = [[UILabel alloc]init];
     infoLabel.font = [UIFont systemFontOfSize:14.f];//字号设置
-    infoLabel.text = @"  诗词汇是一款掌上诗词的应用。\n  诗词中，有宽广的视野、豁达的心态、理性的思维、美好的意境以及高雅的气质。进入诗词的世界中，你将会受益终身。";//设置文本
+    infoLabel.text = @"  诗词汇是一款掌上诗词的应用。\n  诗词中，有宽广的视野、豁达的心态、理性的思维、美好的意境以及高雅的气质。进入诗词的世界中，你将会受益终身。\n  在首页的题画模块，可以构建你心目中最美的画卷。如诗如画，生活本该如此。";//设置文本刘备刘备
     infoLabel.numberOfLines = 0;
     [self.view addSubview:infoLabel];
     //设置UI布局约束

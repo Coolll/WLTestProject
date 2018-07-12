@@ -24,7 +24,7 @@
 - (void)loadCustomView
 {
     UILabel *imageTipLabel = [[UILabel alloc]init];
-    imageTipLabel.text = @"题画";
+    imageTipLabel.text = @"开启·题画";
     imageTipLabel.font = [UIFont systemFontOfSize:14.f];
     imageTipLabel.textColor = RGBCOLOR(100, 100, 100, 1.0);
     [self addSubview:imageTipLabel];
@@ -57,8 +57,30 @@
         
     }];
     
+//    CGFloat imageH = (PhoneScreen_WIDTH-30)/2.88f;
+//    CGFloat labelH = 50;
+//    CGFloat labelW = 100;
+//    UILabel *startDrawLabel = [[UILabel alloc]init];
+//    startDrawLabel.textColor = [UIColor whiteColor];
+//    startDrawLabel.backgroundColor = RGBCOLOR(200, 210, 220, 1.0);
+//    startDrawLabel.alpha = 0.6;
+//    startDrawLabel.textAlignment = NSTextAlignmentCenter;
+//    startDrawLabel.layer.cornerRadius = 25.f;
+//    startDrawLabel.clipsToBounds = YES;
+//    startDrawLabel.font = [UIFont systemFontOfSize:14.f];//字号设置
+//    startDrawLabel.text = @"开始题画";//设置文本
+//    [topImageView addSubview:startDrawLabel];
+//    //设置UI布局约束
+//    [startDrawLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//        make.top.equalTo(topImageView.mas_top).offset((imageH-labelH)/2);//元素顶部约束
+//        make.leading.equalTo(topImageView.mas_leading).offset((PhoneScreen_WIDTH-30-labelW)/2);//元素左侧约束
+//        make.width.mas_equalTo(labelW);//元素宽度
+//        make.height.mas_equalTo(labelH);//元素高度
+//    }];
+    
     UILabel *poetryTipLabel = [[UILabel alloc]init];
-    poetryTipLabel.text = @"诗词";
+    poetryTipLabel.text = @"热门·诗词";
     poetryTipLabel.font = [UIFont systemFontOfSize:14.f];
     poetryTipLabel.textColor = RGBCOLOR(100, 100, 100, 1.0);
     [self addSubview:poetryTipLabel];

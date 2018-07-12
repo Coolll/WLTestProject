@@ -23,7 +23,10 @@
  *  视图高度
  **/
 @property (nonatomic,assign) CGFloat viewHeight;
-
+/**
+ *  分割线
+ **/
+@property (nonatomic, strong) UIImageView *lineView;
 
 
 @end
@@ -97,17 +100,25 @@
         make.width.mas_equalTo(imageW);
     }];
     
-    UIImageView *lineView = [[UIImageView alloc]init];
-    lineView.image = [UIImage imageNamed:@"lineImage"];
-    [self addSubview:lineView];
+    self.lineView = [[UIImageView alloc]init];
+    self.lineView.image = [UIImage imageNamed:@"lineImage"];
+    [self addSubview:self.lineView];
     
-    [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.equalTo(self.mas_left).offset(space);
         make.bottom.equalTo(self.mas_bottom).offset(-0.7);
-        make.right.equalTo(self.mas_right).offset(-space);
+        make.right.equalTo(self.mas_right).offset(0);
         make.height.mas_equalTo(0.7);
     }];
+}
+
+- (void)setNeedLine:(BOOL)needLine
+{
+    _needLine = needLine;
+    if (!needLine) {
+        self.lineView.hidden = YES;
+    }
 }
 
 - (void)setTitleString:(NSString *)titleString

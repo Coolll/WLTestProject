@@ -19,7 +19,10 @@
  *  图片
  **/
 @property (nonatomic,copy) NSString *iconImageName;
-
+/**
+ *  需要线条
+ **/
+@property (nonatomic, assign) BOOL needLine;
 
 
 @end
