@@ -9,6 +9,7 @@
 #import "UserInformation.h"
 
 @implementation UserInformation
+
 + (instancetype)shareUser
 {
     static UserInformation *user = nil;

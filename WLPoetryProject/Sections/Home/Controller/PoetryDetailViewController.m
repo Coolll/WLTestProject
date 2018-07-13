@@ -117,11 +117,10 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
 {
     self.dataArray = [NSArray array];
     
-    self.dataArray = [[PublicTool tool] poetrySeperateWithOrigin:self.dataModel.content];
+    self.dataArray = [[WLPublicTool shareTool] poetrySeperateWithOrigin:self.dataModel.content];
     
     [self loadContentTableView];
 
-//    [self queryPoetryImageData];
 }
 
 - (void)queryPoetryImageData

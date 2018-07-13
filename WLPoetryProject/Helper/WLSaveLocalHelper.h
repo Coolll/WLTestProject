@@ -11,7 +11,12 @@
 @interface WLSaveLocalHelper : NSObject
 
 + (void)saveObject:(id)value forKey:(NSString *)defaultName;
-
 + (id)loadObjectForKey:(NSString *)defaultName;
+
+
++ (void)saveCustomImageWithName:(NSString*)imageName;
++ (void)deleteCustomImageWithName:(NSString*)imageName;
++ (NSArray*)loadCustomImageArray;
+
 
 @end

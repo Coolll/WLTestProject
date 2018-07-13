@@ -13,7 +13,7 @@
 #import "WLSettingController.h"
 #import "WLLikeController.h"
 #import "AboutViewController.h"
-
+#import "WLCustomImageListController.h"
 @interface YLAccountViewController ()<UITableViewDelegate,UITableViewDataSource>
 /**
  *  主tableView
@@ -100,8 +100,8 @@
     }
 
     self.canPullData = YES;
-    self.itemsArray = [NSArray arrayWithObjects:@"我的收藏",@"设置",@"关于", nil];
-    self.imageArray = [NSArray arrayWithObjects:@"like",@"setting",@"about",nil];
+    self.itemsArray = [NSArray arrayWithObjects:@"我的题画",@"我的收藏",@"设置",@"关于", nil];
+    self.imageArray = [NSArray arrayWithObjects:@"customImage",@"like",@"setting",@"about",nil];
 }
 
 - (void)refreshData
@@ -319,6 +319,13 @@
     if (section == 1) {
         
         if (indexPath.row == 0) {
+            //我的题画
+            WLCustomImageListController *vc = [[WLCustomImageListController alloc]init];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+        
+        if (indexPath.row == 1) {
             //我的收藏
             id token = kUserToken;
             if (!token) {
@@ -338,7 +345,7 @@
             [self.navigationController pushViewController:likeVC animated:YES];
         }
         
-        if (indexPath.row == 1) {
+        if (indexPath.row == 2) {
             //设置
             WLSettingController *vc = [[WLSettingController alloc]init];
             vc.hidesBottomBarWhenPushed = YES;
@@ -348,7 +355,7 @@
             [self.navigationController pushViewController:vc animated:YES];
         }
         
-        if (indexPath.row == 2) {
+        if (indexPath.row == 3) {
             //关于
             AboutViewController *vc = [[AboutViewController alloc]init];
             vc.hidesBottomBarWhenPushed = YES;

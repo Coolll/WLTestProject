@@ -69,7 +69,6 @@ static const CGFloat imageW = 20;
     self.view.backgroundColor = [UIColor whiteColor];
     
     
-    
 }
 - (void)configureUI
 {
@@ -163,7 +162,7 @@ static const CGFloat imageW = 20;
     [self.leftArray removeAllObjects];
     [self.topArray removeAllObjects];
     
-    self.contentArray = [[PublicTool tool]poetrySeperateWithOrigin:string];
+    self.contentArray = [[WLPublicTool shareTool]poetrySeperateWithOrigin:string];
     if (isVertical) {
         self.direction = PoetryDirectionVerticalLeft;
     }else{
@@ -217,7 +216,7 @@ static const CGFloat imageW = 20;
         contentLabel.tag = 1000+i;
         [self.view addSubview:contentLabel];
         
-        CGFloat width = [PublicTool widthForTextString:content height:20 font:contentLabel.font];
+        CGFloat width = [WLPublicTool widthForTextString:content height:20 font:contentLabel.font];
         CGFloat height = 28;
         CGFloat itemSpace = 2;
         //元素的布局
@@ -255,7 +254,7 @@ static const CGFloat imageW = 20;
         [self.view addSubview:contentLabel];
         
         CGFloat width = 28;
-        CGFloat height = [PublicTool heightForTextString:content width:width font:contentLabel.font];
+        CGFloat height = [WLPublicTool heightForTextString:content width:width font:contentLabel.font];
         CGFloat itemSpace = 2;
         CGFloat topSpace = 80;
         //元素的布局
@@ -340,14 +339,15 @@ static const CGFloat imageW = 20;
     
     [self hideOtherItem];
     UIImage *allImage = [self fullScreenShot];
+    [[WLPublicTool shareTool] saveImageToLocalWithImage:allImage];//图片存储到本地
     
-    
-//    [self saveImageToLocal:allImage];
     [self saveImage:allImage withCollectionName:@"诗词汇" withCompletion:^(BOOL success, NSError *error) {
         
         [self showOtherItem];
         
-        [self showAlertWithImage:allImage withSuccess:success];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self showAlertWithImage:allImage withSuccess:success];
+        });
     }];
     
 }

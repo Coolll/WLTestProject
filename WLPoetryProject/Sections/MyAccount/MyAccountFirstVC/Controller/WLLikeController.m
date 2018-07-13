@@ -46,7 +46,6 @@
 {
     self.heightArray = [NSMutableArray array];
 
-    
     self.modelArray = [NSMutableArray array];
     
     BmobUser *user = [BmobUser currentUser];

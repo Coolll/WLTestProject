@@ -24,6 +24,9 @@
 		00150E8B20EF53DF001BE61D /* Poetry+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 00150E8820EF53DF001BE61D /* Poetry+CoreDataProperties.m */; };
 		003EBE1620D0F00A00DD7815 /* LeadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 003EBE1520D0F00A00DD7815 /* LeadViewController.m */; };
 		003EBE1920D0F04500DD7815 /* LaunchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 003EBE1820D0F04500DD7815 /* LaunchController.m */; };
+		00469AF320F893770068636F /* WLCustomImageListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00469AF220F893770068636F /* WLCustomImageListController.m */; };
+		00469AF620F8938D0068636F /* WLShowImageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00469AF520F8938D0068636F /* WLShowImageController.m */; };
+		00469AF820F89A200068636F /* customImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 00469AF720F89A200068636F /* customImage.png */; };
 		0073FD7520EE021A00FED6D6 /* WLLaunchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0073FD7420EE021A00FED6D6 /* WLLaunchView.m */; };
 		0073FD7720EE14A800FED6D6 /* shareIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0073FD7620EE14A700FED6D6 /* shareIcon.png */; };
 		007C7E2420F59EC800F360D6 /* configureGradeJuinor.json in Resources */ = {isa = PBXBuildFile; fileRef = 007C7E2220F59EC700F360D6 /* configureGradeJuinor.json */; };
@@ -32,7 +35,6 @@
 		007C7E2A20F5D57B00F360D6 /* gradePoetry_12.json in Resources */ = {isa = PBXBuildFile; fileRef = 007C7E2720F5D57B00F360D6 /* gradePoetry_12.json */; };
 		007C7E2B20F5D57B00F360D6 /* gradePoetry_10.json in Resources */ = {isa = PBXBuildFile; fileRef = 007C7E2820F5D57B00F360D6 /* gradePoetry_10.json */; };
 		009A1B2C20E618B900C0A58D /* WLPoetryLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 009A1B2B20E618B900C0A58D /* WLPoetryLabel.m */; };
-		009A1B2F20E619AA00C0A58D /* PublicTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 009A1B2E20E619AA00C0A58D /* PublicTool.m */; };
 		009A1B3220E6208300C0A58D /* WLTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 009A1B3120E6208300C0A58D /* WLTextView.m */; };
 		00A38E2C20DCEDF700D4D653 /* WLImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A38E2B20DCEDF700D4D653 /* WLImageCell.m */; };
 		00BBFA0E20D6291400BB86D9 /* WLFontController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BBFA0D20D6291400BB86D9 /* WLFontController.m */; };
@@ -313,6 +315,11 @@
 		003EBE1520D0F00A00DD7815 /* LeadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeadViewController.m; sourceTree = "<group>"; };
 		003EBE1720D0F04500DD7815 /* LaunchController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LaunchController.h; sourceTree = "<group>"; };
 		003EBE1820D0F04500DD7815 /* LaunchController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LaunchController.m; sourceTree = "<group>"; };
+		00469AF120F893770068636F /* WLCustomImageListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLCustomImageListController.h; sourceTree = "<group>"; };
+		00469AF220F893770068636F /* WLCustomImageListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLCustomImageListController.m; sourceTree = "<group>"; };
+		00469AF420F8938D0068636F /* WLShowImageController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLShowImageController.h; sourceTree = "<group>"; };
+		00469AF520F8938D0068636F /* WLShowImageController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLShowImageController.m; sourceTree = "<group>"; };
+		00469AF720F89A200068636F /* customImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = customImage.png; sourceTree = "<group>"; };
 		0073FD7320EE021A00FED6D6 /* WLLaunchView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLLaunchView.h; sourceTree = "<group>"; };
 		0073FD7420EE021A00FED6D6 /* WLLaunchView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLLaunchView.m; sourceTree = "<group>"; };
 		0073FD7620EE14A700FED6D6 /* shareIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shareIcon.png; sourceTree = "<group>"; };
@@ -323,8 +330,6 @@
 		007C7E2820F5D57B00F360D6 /* gradePoetry_10.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = gradePoetry_10.json; sourceTree = "<group>"; };
 		009A1B2A20E618B900C0A58D /* WLPoetryLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLPoetryLabel.h; sourceTree = "<group>"; };
 		009A1B2B20E618B900C0A58D /* WLPoetryLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLPoetryLabel.m; sourceTree = "<group>"; };
-		009A1B2D20E619AA00C0A58D /* PublicTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PublicTool.h; sourceTree = "<group>"; };
-		009A1B2E20E619AA00C0A58D /* PublicTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PublicTool.m; sourceTree = "<group>"; };
 		009A1B3020E6208300C0A58D /* WLTextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLTextView.h; sourceTree = "<group>"; };
 		009A1B3120E6208300C0A58D /* WLTextView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLTextView.m; sourceTree = "<group>"; };
 		00A38E2A20DCEDF700D4D653 /* WLImageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLImageCell.h; sourceTree = "<group>"; };
@@ -747,6 +752,17 @@
 			path = FirstVC;
 			sourceTree = "<group>";
 		};
+		00469AF020F893770068636F /* CustomImage */ = {
+			isa = PBXGroup;
+			children = (
+				00469AF120F893770068636F /* WLCustomImageListController.h */,
+				00469AF220F893770068636F /* WLCustomImageListController.m */,
+				00469AF420F8938D0068636F /* WLShowImageController.h */,
+				00469AF520F8938D0068636F /* WLShowImageController.m */,
+			);
+			path = CustomImage;
+			sourceTree = "<group>";
+		};
 		070F3DD5207E333000EE3000 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1082,6 +1098,7 @@
 		07567A70207A02EB0018B9E7 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				00469AF020F893770068636F /* CustomImage */,
 				07567A71207A02EB0018B9E7 /* YLAccountViewController.h */,
 				07567A72207A02EB0018B9E7 /* YLAccountViewController.m */,
 				00F9515F20D4B2A10039D7C5 /* WLSettingController.h */,
@@ -1122,8 +1139,6 @@
 				07567A9C207A02EB0018B9E7 /* WLSaveLocalHelper.m */,
 				07A92299208628DB00BE5929 /* WLCoreDataHelper.h */,
 				07A9229A208628DB00BE5929 /* WLCoreDataHelper.m */,
-				009A1B2D20E619AA00C0A58D /* PublicTool.h */,
-				009A1B2E20E619AA00C0A58D /* PublicTool.m */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -1499,6 +1514,7 @@
 		07F3E2F320D2C0FB00E7BAF7 /* My */ = {
 			isa = PBXGroup;
 			children = (
+				00469AF720F89A200068636F /* customImage.png */,
 				00F9517220D4EA650039D7C5 /* check_box_sel.png */,
 				00F9517120D4EA650039D7C5 /* check_box.png */,
 				00F9516E20D4D8090039D7C5 /* about@2x.png */,
@@ -1760,6 +1776,7 @@
 				0073FD7720EE14A800FED6D6 /* shareIcon.png in Resources */,
 				00F9517820D4FF940039D7C5 /* unlikePoetry.png in Resources */,
 				00FD14C120A95A2D0018D649 /* tangPoetry_three.json in Resources */,
+				00469AF820F89A200068636F /* customImage.png in Resources */,
 				00F9517420D4EA650039D7C5 /* check_box_sel.png in Resources */,
 				00E2CB3E20E084FD00E44793 /* topImage.jpg in Resources */,
 				000110AC20A44BD2001B2B55 /* gradePoetry_7_one.json in Resources */,
@@ -1856,6 +1873,7 @@
 				07567B8F207A02EC0018B9E7 /* WLSaveLocalHelper.m in Sources */,
 				0765C702207CE6E20085EB3A /* SDWebImageCompat.m in Sources */,
 				0765C6F9207CE6E20085EB3A /* NSButton+WebCache.m in Sources */,
+				00469AF320F893770068636F /* WLCustomImageListController.m in Sources */,
 				0765C6FF207CE6E20085EB3A /* SDWebImageCoder.m in Sources */,
 				00D4F64120F743F300287FB0 /* WLHomePoetryCell.m in Sources */,
 				0765C70B207CE6E20085EB3A /* SDWebImageWebPCoder.m in Sources */,
@@ -1873,7 +1891,6 @@
 				0765C6B6207CE47E0085EB3A /* View+MASAdditions.m in Sources */,
 				07E06D9520A06A1C00093DCC /* WLCollectionMainController.m in Sources */,
 				07567AFF207A02EB0018B9E7 /* AFNetworkReachabilityManager.m in Sources */,
-				009A1B2F20E619AA00C0A58D /* PublicTool.m in Sources */,
 				07567B03207A02EB0018B9E7 /* AFURLSessionManager.m in Sources */,
 				07567B13207A02EB0018B9E7 /* MJRefreshComponent.m in Sources */,
 				0765C703207CE6E20085EB3A /* SDWebImageDownloader.m in Sources */,
@@ -1938,6 +1955,7 @@
 				003EBE1920D0F04500DD7815 /* LaunchController.m in Sources */,
 				0010F22720F4966E00F272EB /* WLBookView.m in Sources */,
 				0721702D2087843A002A1628 /* WLPoetryProject.xcdatamodeld in Sources */,
+				00469AF620F8938D0068636F /* WLShowImageController.m in Sources */,
 				0765C70E207CE6E20085EB3A /* UIImage+GIF.m in Sources */,
 				07567B7C207A02EC0018B9E7 /* WLCustomTextView.m in Sources */,
 				0765C708207CE6E20085EB3A /* SDWebImageManager.m in Sources */,
