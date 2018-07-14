@@ -11,7 +11,7 @@
 #import <ShareSDK/ShareSDK.h>
 #import <ShareSDKUI/ShareSDK+SSUI.h>
 #import <Photos/Photos.h>
-static const CGFloat backFullWidth = 30;//返回箭头的宽度 全屏下
+static const CGFloat backFullWidth = 24;//返回箭头的宽度 全屏下
 static const CGFloat leftFullSpace = 20;//箭头左侧间距 全屏下
 static const CGFloat bottomFullSpace = 10;//箭头底部间距 全屏下
 static const CGFloat touchFullOffset = 15;//箭头触摸区域超出的offset 全屏下
@@ -144,14 +144,13 @@ static const CGFloat touchFullOffset = 15;//箭头触摸区域超出的offset �
     [self.backView mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.equalTo(self.view.mas_left).offset(leftFullSpace);
-        make.bottom.equalTo(self.naviView.mas_bottom).offset(-bottomFullSpace);
         make.width.mas_equalTo(backFullWidth);
         make.height.mas_equalTo(backFullWidth);
         
     }];
     
-    CGFloat backW = 8;
-    CGFloat backH = 16;
+    CGFloat backW = 7;
+    CGFloat backH = 14;
     //返回图片
     UIImageView *backImageView = [[UIImageView alloc]init];
     backImageView.backgroundColor = NavigationColor;
@@ -160,7 +159,6 @@ static const CGFloat touchFullOffset = 15;//箭头触摸区域超出的offset �
     [backImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.equalTo(self.backView.mas_left).offset((backFullWidth-backW)/2);
-        make.top.equalTo(self.backView.mas_top).offset((backFullWidth-backH)/2);
         make.width.mas_equalTo(backW);
         make.height.mas_equalTo(backH);
         
@@ -175,11 +173,36 @@ static const CGFloat touchFullOffset = 15;//箭头触摸区域超出的offset �
     [clearBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.equalTo(self.view.mas_left).offset(leftFullSpace-touchFullOffset);
-        make.bottom.equalTo(self.naviView.mas_bottom).offset(-bottomFullSpace+touchFullOffset);
         make.width.mas_equalTo(backFullWidth+touchFullOffset*2);
         make.height.mas_equalTo(backFullWidth+touchFullOffset*2);
     }];
     
+    
+    if (self.titleFullLabel) {
+        [self.backView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(self.titleFullLabel.mas_centerY);
+        }];
+        
+        [backImageView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(self.titleFullLabel.mas_centerY);
+        }];
+        [clearBtn mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(self.titleFullLabel.mas_centerY);
+        }];
+        
+    }else{
+        [self.backView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.bottom.equalTo(self.naviView.mas_bottom).offset(-bottomFullSpace);
+        }];
+        
+        [backImageView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.backView.mas_top).offset((backFullWidth-backH)/2);
+        }];
+        
+        [clearBtn mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.bottom.equalTo(self.naviView.mas_bottom).offset(-bottomFullSpace+touchFullOffset);
+        }];
+    }
 
    
 }

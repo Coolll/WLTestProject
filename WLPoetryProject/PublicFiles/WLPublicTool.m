@@ -410,6 +410,25 @@
     CGRect rect = [vauleString boundingRectWithSize:CGSizeMake(textWidth, MAXFLOAT) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin |NSStringDrawingTruncatesLastVisibleLine attributes:dict context:nil];
     return rect.size.height+1;
 }
+
+//计算label的高度方法（带有行间距）
++ (CGFloat)heightSpaceForTextString:(NSString*)vauleString width:(CGFloat)textWidth fontSize:(CGFloat)textSize space:(CGFloat)spaceLine
+{
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc]initWithString:vauleString];
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    [paragraphStyle setLineSpacing:spaceLine];//调整行间距
+    
+    [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [vauleString length])];
+    
+    [attributedString addAttribute:NSFontAttributeName
+                             value:[UIFont systemFontOfSize:textSize]
+                             range:NSMakeRange(0, [vauleString length])];
+    
+    CGRect rect = [attributedString boundingRectWithSize:CGSizeMake(textWidth, MAXFLOAT) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin |NSStringDrawingTruncatesLastVisibleLine context:nil];
+    
+    return rect.size.height ;
+}
+
 #pragma mark - 计算label的宽度
 + (CGFloat) widthForTextString:(NSString *)tStr height:(CGFloat)tHeight font:(UIFont*)textFont{
     

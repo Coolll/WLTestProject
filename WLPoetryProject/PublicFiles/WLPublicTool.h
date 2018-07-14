@@ -24,6 +24,9 @@
 - (NSArray*)poetrySeperateWithOrigin:(NSString*)originString;
 //高度计算，传入字体
 + (CGFloat)heightForTextString:(NSString*)vauleString width:(CGFloat)textWidth font:(UIFont*)textFont;
+//高度计算 带有行间距
++ (CGFloat)heightSpaceForTextString:(NSString*)vauleString width:(CGFloat)textWidth fontSize:(CGFloat)textSize space:(CGFloat)spaceLine;
+
 //宽度计算，传入字体
 + (CGFloat) widthForTextString:(NSString *)tStr height:(CGFloat)tHeight font:(UIFont*)textFont;
 

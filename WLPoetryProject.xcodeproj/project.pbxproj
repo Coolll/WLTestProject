@@ -20,7 +20,6 @@
 		0010F22720F4966E00F272EB /* WLBookView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0010F22620F4966E00F272EB /* WLBookView.m */; };
 		0010F22A20F4996500F272EB /* WLTypeListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0010F22920F4996500F272EB /* WLTypeListController.m */; };
 		0010F22D20F4A81C00F272EB /* WLGradeTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0010F22C20F4A81C00F272EB /* WLGradeTypeCell.m */; };
-		0010F23020F4A84800F272EB /* WLPoetryCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0010F22F20F4A84800F272EB /* WLPoetryCollectionCell.m */; };
 		00150E8B20EF53DF001BE61D /* Poetry+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 00150E8820EF53DF001BE61D /* Poetry+CoreDataProperties.m */; };
 		003EBE1620D0F00A00DD7815 /* LeadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 003EBE1520D0F00A00DD7815 /* LeadViewController.m */; };
 		003EBE1920D0F04500DD7815 /* LaunchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 003EBE1820D0F04500DD7815 /* LaunchController.m */; };
@@ -304,8 +303,6 @@
 		0010F22920F4996500F272EB /* WLTypeListController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLTypeListController.m; sourceTree = "<group>"; };
 		0010F22B20F4A81C00F272EB /* WLGradeTypeCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLGradeTypeCell.h; sourceTree = "<group>"; };
 		0010F22C20F4A81C00F272EB /* WLGradeTypeCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLGradeTypeCell.m; sourceTree = "<group>"; };
-		0010F22E20F4A84800F272EB /* WLPoetryCollectionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLPoetryCollectionCell.h; sourceTree = "<group>"; };
-		0010F22F20F4A84800F272EB /* WLPoetryCollectionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLPoetryCollectionCell.m; sourceTree = "<group>"; };
 		00150E7320EF5095001BE61D /* WLPoetryProject 1.0.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WLPoetryProject 1.0.xcdatamodel"; sourceTree = "<group>"; };
 		00150E8620EF53DF001BE61D /* Poetry+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Poetry+CoreDataProperties.h"; sourceTree = "<group>"; };
 		00150E8720EF53DF001BE61D /* Poetry+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Poetry+CoreDataClass.m"; sourceTree = "<group>"; };
@@ -1505,8 +1502,6 @@
 				0010F22620F4966E00F272EB /* WLBookView.m */,
 				0010F22B20F4A81C00F272EB /* WLGradeTypeCell.h */,
 				0010F22C20F4A81C00F272EB /* WLGradeTypeCell.m */,
-				0010F22E20F4A84800F272EB /* WLPoetryCollectionCell.h */,
-				0010F22F20F4A84800F272EB /* WLPoetryCollectionCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1877,7 +1872,6 @@
 				0765C6FF207CE6E20085EB3A /* SDWebImageCoder.m in Sources */,
 				00D4F64120F743F300287FB0 /* WLHomePoetryCell.m in Sources */,
 				0765C70B207CE6E20085EB3A /* SDWebImageWebPCoder.m in Sources */,
-				0010F23020F4A84800F272EB /* WLPoetryCollectionCell.m in Sources */,
 				0765C713207CE6E20085EB3A /* UIView+WebCache.m in Sources */,
 				07567B41207A02EC0018B9E7 /* WLPublicTool.m in Sources */,
 				07567B80207A02EC0018B9E7 /* YLAccountViewController.m in Sources */,

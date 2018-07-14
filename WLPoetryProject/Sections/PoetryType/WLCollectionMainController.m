@@ -10,7 +10,6 @@
 #import "WLPoetryListController.h"
 #import "WLSearchController.h"
 #import "WLTypeListCell.h"
-#import "WLPoetryCollectionCell.h"
 #import "WLGradeTypeCell.h"
 #import "WLTypeListController.h"
 
@@ -200,8 +199,21 @@
     if (self.recentSectionArray && self.recentSectionArray.count > 0) {
         if (indexPath.section == 0) {
             return 60;
+        }else if(indexPath.section == 1){
+            return [WLGradeTypeCell heightForTypeCellWithCount:self.gradeSectionArray.count];
+        }else if (indexPath.section == 2){
+            return [WLGradeTypeCell  heightForTypeCellWithCount:self.collectionSectionArray.count];
+        }
+    }else{
+        if(indexPath.section == 0){
+            return [WLGradeTypeCell heightForTypeCellWithCount:self.gradeSectionArray.count];
+        }else if (indexPath.section == 1){
+            return [WLGradeTypeCell  heightForTypeCellWithCount:self.collectionSectionArray.count];
         }
     }
+    
+    
+    
     return 200;
 }
 
@@ -266,11 +278,11 @@
     return cell;
 }
 
-- (WLPoetryCollectionCell*)cellForCollectionAtIndexPath:(NSIndexPath*)indexPath withTable:(UITableView*)tableView
+- (WLGradeTypeCell*)cellForCollectionAtIndexPath:(NSIndexPath*)indexPath withTable:(UITableView*)tableView
 {
-    WLPoetryCollectionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WLPoetryCollectionCell"];
+    WLGradeTypeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WLGradeTypeCell"];
     if (!cell) {
-        cell = [[WLPoetryCollectionCell alloc]init];
+        cell = [[WLGradeTypeCell alloc]init];
     }
     cell.booksArray = self.collectionSectionArray;
     [cell clickWithBlock:^(NSInteger index) {

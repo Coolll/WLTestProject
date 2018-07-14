@@ -71,16 +71,28 @@
     
     UILabel *infoLabel = [[UILabel alloc]init];
     infoLabel.font = [UIFont systemFontOfSize:14.f];//字号设置
-    infoLabel.text = @"  诗词汇是一款掌上诗词的应用。\n  诗词中，有宽广的视野、豁达的心态、理性的思维、美好的意境以及高雅的气质。进入诗词的世界中，你将会受益终身。\n  在首页的题画模块，可以构建你心目中最美的画卷。如诗如画，生活本该如此。";//设置文本刘备刘备
+    NSString *valueString = @"  诗词汇是一款掌上诗词的应用。\n  诗词中，有宽广的视野、豁达的心态、理性的思维、美好的意境以及高雅的气质。进入诗词的世界中，你将会受益终身。\n  在首页的题画模块，可以构建你心目中最美的画卷。如诗如画，生活本该如此。";//设置文本刘备刘备
     infoLabel.numberOfLines = 0;
     [self.view addSubview:infoLabel];
+    
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc]initWithString:valueString];
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    [paragraphStyle setLineSpacing:10];//调整行间距
+    
+    [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [valueString length])];
+    
+    [attributedString addAttribute:NSFontAttributeName
+                             value:[UIFont systemFontOfSize:14]
+                             range:NSMakeRange(0, [valueString length])];
+    infoLabel.attributedText = attributedString;
+    CGFloat height = [WLPublicTool heightSpaceForTextString:valueString width:(PhoneScreen_WIDTH-30) fontSize:14.f space:10]+4;
     //设置UI布局约束
     [infoLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.top.equalTo(versionLabel.mas_bottom).offset(10);//元素顶部约束
         make.leading.equalTo(self.view.mas_leading).offset(15);//元素左侧约束
         make.trailing.equalTo(self.view.mas_trailing).offset(-15);//元素右侧约束
-        make.height.mas_equalTo(80);//元素高度
+        make.height.mas_equalTo(height);//元素高度
     }];
     
 }

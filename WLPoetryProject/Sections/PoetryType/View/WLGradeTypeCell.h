@@ -21,4 +21,6 @@ typedef void(^GradeClickBlock) (NSInteger index);
 
 - (void)loadCustomView;
 
++ (CGFloat)heightForTypeCellWithCount:(NSInteger)count;
+
 @end

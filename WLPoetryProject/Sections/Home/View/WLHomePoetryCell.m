@@ -162,7 +162,7 @@ static const CGFloat nameHeight = 25;//名字、作者等信息的高度
     [self.authorImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.top.equalTo(self.bgView.mas_top).offset(10);//元素顶部约束
-        make.trailing.equalTo(self.bgView.mas_trailing).offset(-10);//元素左侧约束
+        make.trailing.equalTo(self.bgView.mas_trailing).offset(-10);//元素右侧侧约束
         make.width.mas_equalTo(40);//元素宽度
         make.height.mas_equalTo(40);//元素高度
     }];
@@ -201,7 +201,7 @@ static const CGFloat nameHeight = 25;//名字、作者等信息的高度
         
         make.left.equalTo(self.nameLabel.mas_left).offset(0);
         make.top.equalTo(self.authorLabel.mas_bottom).offset(itemSpace);
-        make.right.equalTo(self.nameLabel.mas_right).offset(0);
+        make.right.equalTo(self.bgView.mas_right).offset(-10);
         
     }];
     
