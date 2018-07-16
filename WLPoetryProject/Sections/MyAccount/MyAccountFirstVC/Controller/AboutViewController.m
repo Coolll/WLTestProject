@@ -55,6 +55,7 @@
     UILabel *versionLabel = [[UILabel alloc]init];
     versionLabel.textAlignment = NSTextAlignmentCenter;
     versionLabel.font = [UIFont systemFontOfSize:16.f];//字号设置
+    versionLabel.textColor = RGBCOLOR(43, 160, 240, 1.0);
     [self.view addSubview:versionLabel];
     
     NSString *appVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];//1.0.5
@@ -71,13 +72,13 @@
     
     UILabel *infoLabel = [[UILabel alloc]init];
     infoLabel.font = [UIFont systemFontOfSize:14.f];//字号设置
-    NSString *valueString = @"  诗词汇是一款掌上诗词的应用。\n  诗词中，有宽广的视野、豁达的心态、理性的思维、美好的意境以及高雅的气质。进入诗词的世界中，你将会受益终身。\n  在首页的题画模块，可以构建你心目中最美的画卷。如诗如画，生活本该如此。";//设置文本刘备刘备
+    NSString *valueString = @"  诗词汇是一款掌上诗词的应用。\n\n  在诗词世界中遨游，你能培养宽广的视野、豁达的胸怀、高雅的气质、谦卑的情操以及淡然的心态。进入诗词的世界中，你将会受益终身。\n\n  在首页的题画模块，可以构建你心目中最美的画卷。如诗如画，生活本该如此。\n\n  已矣乎！寓形宇内复几时？曷不委心任去留？胡为乎遑遑欲何之？富贵非吾愿，帝乡不可期。怀良辰以孤往，或植杖而耘耔。登东皋以舒啸，临清流而赋诗。聊乘化以归尽，乐夫天命复奚疑！";//设置文本
     infoLabel.numberOfLines = 0;
     [self.view addSubview:infoLabel];
     
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc]initWithString:valueString];
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-    [paragraphStyle setLineSpacing:10];//调整行间距
+    [paragraphStyle setLineSpacing:5];//调整行间距
     
     [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [valueString length])];
     
@@ -85,7 +86,7 @@
                              value:[UIFont systemFontOfSize:14]
                              range:NSMakeRange(0, [valueString length])];
     infoLabel.attributedText = attributedString;
-    CGFloat height = [WLPublicTool heightSpaceForTextString:valueString width:(PhoneScreen_WIDTH-30) fontSize:14.f space:10]+4;
+    CGFloat height = [WLPublicTool heightSpaceForTextString:valueString width:(PhoneScreen_WIDTH-30) fontSize:14.f space:5]+4;
     //设置UI布局约束
     [infoLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         

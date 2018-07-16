@@ -47,8 +47,8 @@
     self.inputTextView = [[UITextView alloc]init];
     self.inputTextView.backgroundColor = [UIColor whiteColor];
     self.inputTextView.layer.cornerRadius = 10.f;
-    self.inputTextView.layer.borderColor = RGBCOLOR(65, 160, 225, 1.0).CGColor;
-    self.inputTextView.layer.borderWidth = 1.f;
+//    self.inputTextView.layer.borderColor = RGBCOLOR(65, 160, 225, 1.0).CGColor;
+//    self.inputTextView.layer.borderWidth = 1.f;
     [self.view addSubview:self.inputTextView];
     //设置UI布局约束
     [self.inputTextView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -75,8 +75,8 @@
     
     self.contactTextView = [[UITextView alloc]init];
     self.contactTextView.layer.cornerRadius = 4.f;
-    self.contactTextView.layer.borderColor = RGBCOLOR(65, 160, 225, 1.0).CGColor;
-    self.contactTextView.layer.borderWidth = 0.8;
+//    self.contactTextView.layer.borderColor = RGBCOLOR(65, 160, 225, 1.0).CGColor;
+//    self.contactTextView.layer.borderWidth = 0.8;
     [self.view addSubview:self.contactTextView];
     //设置UI布局约束
     [self.contactTextView mas_makeConstraints:^(MASConstraintMaker *make) {

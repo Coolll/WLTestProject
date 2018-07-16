@@ -38,13 +38,18 @@ static const NSInteger cellCount = 3;
     self.titleForNavi = @"我的题画";
     
     [self loadCustomData];
-    [self loadCustomView];
     
 }
 
 - (void)loadCustomData
 {
     self.imageArray = [NSMutableArray arrayWithArray:[WLSaveLocalHelper loadCustomImageArray]];
+    if (self.imageArray.count == 0) {
+        [self loadEmptyLikeView];
+    }else{
+        [self loadCustomView];
+
+    }
 }
 
 - (void)loadEmptyLikeView

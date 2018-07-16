@@ -45,7 +45,7 @@
 
 - (void)loadCustomData
 {
-    self.itemsArray = [NSArray arrayWithObjects:@"字体大小",@"空间清理",@"意见反馈", nil];
+    self.itemsArray = [NSArray arrayWithObjects:@"权限设置",@"字体大小",@"空间清理",@"意见反馈", nil];
     self.imageArray = [NSArray arrayWithObjects:@"help",@"setting",@"about",@"contact",nil];
 }
 
@@ -158,14 +158,26 @@
     
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
+            //权限设置
+            NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+            if ([[UIApplication sharedApplication] canOpenURL:url]) {
+                if (@available(iOS 10.0, *)) {
+                    [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
+                } else {
+                    // Fallback on earlier versions
+                    [[UIApplication sharedApplication] openURL:url];
+
+                }
+            }
+        }else if (indexPath.row == 1) {
             //调整字体
             WLFontController *fontVC = [[WLFontController alloc]init];
             [self.navigationController pushViewController:fontVC animated:YES];
             
-        }else if(indexPath.row == 1){
+        }else if(indexPath.row == 2){
             //空间清理
             [self showHUDWithText:@"清理成功"];
-        }else if (indexPath.row == 2){
+        }else if (indexPath.row == 3){
             //意见反馈
             WLFeedbackController *feedVc = [[WLFeedbackController alloc]init];
             [self.navigationController pushViewController:feedVc animated:YES];

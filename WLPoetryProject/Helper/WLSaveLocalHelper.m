@@ -52,7 +52,7 @@
     if (localObject && [localObject isKindOfClass:[NSArray class]]) {
         return localObject;
     }
-    return nil;
+    return [NSArray array];
 }
 
 

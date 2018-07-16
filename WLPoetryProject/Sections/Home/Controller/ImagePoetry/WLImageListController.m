@@ -124,7 +124,6 @@ static const NSInteger cellCount = 3;
         flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
         
         _mainCollection = [[UICollectionView alloc]initWithFrame:CGRectZero collectionViewLayout:flowLayout];
-//        _mainCollection.collectionViewLayout = flowLayout;
         _mainCollection.delegate = self;
         _mainCollection.dataSource = self;
         [_mainCollection registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"WLImageCollectionViewCell"];

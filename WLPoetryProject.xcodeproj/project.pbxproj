@@ -33,6 +33,7 @@
 		007C7E2920F5D57B00F360D6 /* gradePoetry_11.json in Resources */ = {isa = PBXBuildFile; fileRef = 007C7E2620F5D57A00F360D6 /* gradePoetry_11.json */; };
 		007C7E2A20F5D57B00F360D6 /* gradePoetry_12.json in Resources */ = {isa = PBXBuildFile; fileRef = 007C7E2720F5D57B00F360D6 /* gradePoetry_12.json */; };
 		007C7E2B20F5D57B00F360D6 /* gradePoetry_10.json in Resources */ = {isa = PBXBuildFile; fileRef = 007C7E2820F5D57B00F360D6 /* gradePoetry_10.json */; };
+		008191A420FC94C200038D6F /* noImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 008191A320FC94C100038D6F /* noImage.png */; };
 		009A1B2C20E618B900C0A58D /* WLPoetryLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 009A1B2B20E618B900C0A58D /* WLPoetryLabel.m */; };
 		009A1B3220E6208300C0A58D /* WLTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 009A1B3120E6208300C0A58D /* WLTextView.m */; };
 		00A38E2C20DCEDF700D4D653 /* WLImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A38E2B20DCEDF700D4D653 /* WLImageCell.m */; };
@@ -325,6 +326,7 @@
 		007C7E2620F5D57A00F360D6 /* gradePoetry_11.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = gradePoetry_11.json; sourceTree = "<group>"; };
 		007C7E2720F5D57B00F360D6 /* gradePoetry_12.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = gradePoetry_12.json; sourceTree = "<group>"; };
 		007C7E2820F5D57B00F360D6 /* gradePoetry_10.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = gradePoetry_10.json; sourceTree = "<group>"; };
+		008191A320FC94C100038D6F /* noImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noImage.png; sourceTree = "<group>"; };
 		009A1B2A20E618B900C0A58D /* WLPoetryLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLPoetryLabel.h; sourceTree = "<group>"; };
 		009A1B2B20E618B900C0A58D /* WLPoetryLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLPoetryLabel.m; sourceTree = "<group>"; };
 		009A1B3020E6208300C0A58D /* WLTextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLTextView.h; sourceTree = "<group>"; };
@@ -1509,6 +1511,7 @@
 		07F3E2F320D2C0FB00E7BAF7 /* My */ = {
 			isa = PBXGroup;
 			children = (
+				008191A320FC94C100038D6F /* noImage.png */,
 				00469AF720F89A200068636F /* customImage.png */,
 				00F9517220D4EA650039D7C5 /* check_box_sel.png */,
 				00F9517120D4EA650039D7C5 /* check_box.png */,
@@ -1790,6 +1793,7 @@
 				07F73C04208ACD9A00F7D8B3 /* select_circle@2x.png in Resources */,
 				0785075720B2EDB30030CD98 /* songPoetry_empty.json in Resources */,
 				07F73C05208ACD9A00F7D8B3 /* select_circle@3x.png in Resources */,
+				008191A420FC94C200038D6F /* noImage.png in Resources */,
 				0785076220B2EFF20030CD98 /* songPoetry_nine.json in Resources */,
 				00FD14C420A95A2D0018D649 /* tangPoetry_seven.json in Resources */,
 				07DCF5B620E26D8B00F0D053 /* ShareSDK.bundle in Resources */,
