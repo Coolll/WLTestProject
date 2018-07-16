@@ -28,6 +28,12 @@ static const NSInteger cellCount = 3;
  **/
 @property (nonatomic, strong) UILabel *noLabel;
 
+/**
+ *  是否为编辑状态
+ **/
+@property (nonatomic,assign) BOOL isEditing;
+
+
 @end
 
 @implementation WLCustomImageListController
@@ -38,11 +44,49 @@ static const NSInteger cellCount = 3;
     self.titleForNavi = @"我的题画";
     
     [self loadCustomData];
-    
+    [self loadEditItem];
 }
+- (void)loadEditItem
+{
+    UIImageView *editImage = [[UIImageView alloc]init];
+    editImage.image = [UIImage imageNamed:@"editImage"];
+    [self.naviView addSubview:editImage];
+    //元素的布局
+    [editImage mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.bottom.equalTo(self.naviView.mas_bottom).offset(-10);
+        make.right.equalTo(self.naviView.mas_right).offset(-25);
+        make.width.mas_equalTo(20);
+        make.height.mas_equalTo(20);
+        
+    }];
+    
+    
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [btn addTarget:self action:@selector(editButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    [btn setBackgroundColor:[UIColor clearColor]];
+    [self.naviView addSubview:btn];
+    //元素的布局
+    [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.equalTo(editImage.mas_left).offset(-10);
+        make.top.equalTo(editImage.mas_top).offset(-10);
+        make.bottom.equalTo(self.naviView.mas_bottom).offset(0);
+        make.right.equalTo(self.naviView.mas_right).offset(0);
+        
+    }];
+}
+- (void)editButtonAction:(UIButton*)sender
+{
+    NSLog(@"编辑");
+    self.isEditing = YES;
+    [self.mainCollection reloadData];
+}
+
 
 - (void)loadCustomData
 {
+    self.isEditing = NO;
     self.imageArray = [NSMutableArray arrayWithArray:[WLSaveLocalHelper loadCustomImageArray]];
     if (self.imageArray.count == 0) {
         [self loadEmptyLikeView];
@@ -54,6 +98,24 @@ static const NSInteger cellCount = 3;
 
 - (void)loadEmptyLikeView
 {
+    
+    CGFloat imageH = 60;
+    CGFloat imageW = 60;
+    CGFloat labelH = 40;
+    CGFloat itemSpace = 10;
+    
+    UIImageView *noImageView = [[UIImageView alloc]init];
+    noImageView.image = [UIImage imageNamed:@"noImage"];
+    [self.view addSubview:noImageView];
+    //元素的布局
+    [noImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.equalTo(self.view.mas_left).offset((PhoneScreen_WIDTH-imageW)/2);
+        make.top.equalTo(self.view.mas_top).offset((PhoneScreen_HEIGHT-imageH-labelH-64-itemSpace)/2);
+        make.width.mas_equalTo(imageW);
+        make.height.mas_equalTo(imageH);
+    }];
+    
     self.noLabel = [[UILabel alloc]init];
     self.noLabel.text = @"暂无题画";//设置文本
     self.noLabel.textColor = RGBCOLOR(200, 200, 200, 1.0);
@@ -63,10 +125,10 @@ static const NSInteger cellCount = 3;
     //设置UI布局约束
     [self.noLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.top.equalTo(self.view.mas_top).offset((PhoneScreen_HEIGHT-40-64)/2);//元素顶部约束
+        make.top.equalTo(noImageView.mas_bottom).offset(itemSpace);//元素顶部约束
         make.leading.equalTo(self.view.mas_leading).offset(0);//元素左侧约束
         make.trailing.equalTo(self.view.mas_trailing).offset(0);//元素右侧约束
-        make.height.mas_equalTo(40);//元素高度
+        make.height.mas_equalTo(labelH);//元素高度
     }];
 }
 
@@ -102,7 +164,42 @@ static const NSInteger cellCount = 3;
     imageView.image = [[WLPublicTool shareTool] loadDocumentImageWithName:imageName];
     [cell addSubview:imageView];
     
+    if (self.isEditing) {
+        UIImageView *deleteImage = [[UIImageView alloc]init];
+        deleteImage.image = [UIImage imageNamed:@"deleteImage"];
+        [imageView addSubview:deleteImage];
+        //元素的布局
+        [deleteImage mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.top.equalTo(imageView.mas_top).offset(10);
+            make.right.equalTo(imageView.mas_right).offset(-10);
+            make.width.mas_equalTo(20);
+            make.height.mas_equalTo(20);
+            
+        }];
+        
+        UIButton *clearBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        imageView.userInteractionEnabled = YES;
+        [clearBtn addTarget:self action:@selector(deleteImageAction:) forControlEvents:UIControlEventTouchUpInside];
+        clearBtn.tag = 1000+indexPath.row;
+        [imageView addSubview:clearBtn];
+        //元素的布局
+        [clearBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.left.equalTo(deleteImage.mas_left).offset(-10);
+            make.top.equalTo(deleteImage.mas_top).offset(-10);
+            make.bottom.equalTo(deleteImage.mas_bottom).offset(10);
+            make.right.equalTo(deleteImage.mas_right).offset(10);
+            
+        }];
+    }
     return cell;
+}
+
+- (void)deleteImageAction:(UIButton*)sender
+{
+    NSInteger index = sender.tag-1000;
+    NSLog(@"index:%ld",index);
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath

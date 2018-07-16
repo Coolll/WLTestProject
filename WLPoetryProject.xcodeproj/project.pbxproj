@@ -136,6 +136,7 @@
 		07567B8F207A02EC0018B9E7 /* WLSaveLocalHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 07567A9C207A02EB0018B9E7 /* WLSaveLocalHelper.m */; };
 		075AFEB220E525BA005ADDB9 /* searchInList.png in Resources */ = {isa = PBXBuildFile; fileRef = 075AFEB120E525B9005ADDB9 /* searchInList.png */; };
 		075DF12C20F62FD20075E9D5 /* configureGradeSenior.json in Resources */ = {isa = PBXBuildFile; fileRef = 075DF12B20F62FD20075E9D5 /* configureGradeSenior.json */; };
+		07603EA420FCCC510074A5CB /* deleteImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 07603EA320FCCC510074A5CB /* deleteImage.png */; };
 		07642A5E208E141900B084AE /* PoetryDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07642A5D208E141900B084AE /* PoetryDetailViewController.m */; };
 		0765C6AD207CE47E0085EB3A /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0765C693207CE47E0085EB3A /* Info.plist */; };
 		0765C6AE207CE47E0085EB3A /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 0765C695207CE47E0085EB3A /* MASCompositeConstraint.m */; };
@@ -488,6 +489,7 @@
 		07567B90207A03310018B9E7 /* WLPrefixHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLPrefixHeader.h; sourceTree = "<group>"; };
 		075AFEB120E525B9005ADDB9 /* searchInList.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = searchInList.png; sourceTree = "<group>"; };
 		075DF12B20F62FD20075E9D5 /* configureGradeSenior.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = configureGradeSenior.json; sourceTree = "<group>"; };
+		07603EA320FCCC510074A5CB /* deleteImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = deleteImage.png; sourceTree = "<group>"; };
 		07642A5C208E141900B084AE /* PoetryDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PoetryDetailViewController.h; sourceTree = "<group>"; };
 		07642A5D208E141900B084AE /* PoetryDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PoetryDetailViewController.m; sourceTree = "<group>"; };
 		0765C693207CE47E0085EB3A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1511,6 +1513,7 @@
 		07F3E2F320D2C0FB00E7BAF7 /* My */ = {
 			isa = PBXGroup;
 			children = (
+				07603EA320FCCC510074A5CB /* deleteImage.png */,
 				008191A320FC94C100038D6F /* noImage.png */,
 				00469AF720F89A200068636F /* customImage.png */,
 				00F9517220D4EA650039D7C5 /* check_box_sel.png */,
@@ -1734,6 +1737,7 @@
 				007C7E2B20F5D57B00F360D6 /* gradePoetry_10.json in Resources */,
 				07E7C31820CC1DA7007CA827 /* configureSong.json in Resources */,
 				007C7E2920F5D57B00F360D6 /* gradePoetry_11.json in Resources */,
+				07603EA420FCCC510074A5CB /* deleteImage.png in Resources */,
 				0785076320B2EFF20030CD98 /* songPoetry_five.json in Resources */,
 				071609AC20A1C15400904C69 /* gradePoetry_4.json in Resources */,
 				07F73C75208AE84900F7D8B3 /* tabbarThree.png in Resources */,
