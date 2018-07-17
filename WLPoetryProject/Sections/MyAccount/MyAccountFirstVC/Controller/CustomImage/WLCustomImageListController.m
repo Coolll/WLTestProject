@@ -198,9 +198,17 @@ static const NSInteger cellCount = 3;
 
 - (void)deleteImageAction:(UIButton*)sender
 {
+    
     NSInteger index = sender.tag-1000;
     NSLog(@"index:%ld",index);
+    NSString *imageName = self.imageArray[index];
+
+    [[WLPublicTool shareTool] deleteImageWithName:imageName];
+    [WLSaveLocalHelper deleteCustomImageWithName:imageName];
+    [self.mainCollection reloadData];
 }
+
+
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {

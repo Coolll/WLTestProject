@@ -514,4 +514,24 @@
     return nil;
 }
 
+- (void)deleteImageWithName:(NSString*)imageName
+{
+    //读取沙盒路径图片
+    NSString *imagePath=[NSString stringWithFormat:@"%@/Documents/CustomImage/%@.png",NSHomeDirectory(),imageName];
+    BOOL res = [[NSFileManager defaultManager] removeItemAtPath:imagePath error:nil];
+    
+    if (res) {
+        NSLog(@"删除成功");
+    }else{
+        NSLog(@"删除失败");
+    }
+    
+    BOOL isExist = [[NSFileManager defaultManager]isExecutableFileAtPath:imagePath];
+    if (isExist) {
+        NSLog(@"文件存在");
+    }else{
+        NSLog(@"文件不存在");
+    }
+}
+
 @end

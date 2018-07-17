@@ -33,6 +33,7 @@
 //将图片保存到沙盒
 - (void)saveImageToLocalWithImage:(UIImage*)image;
 -(UIImage *)loadDocumentImageWithName:(NSString*)imageName;
+- (void)deleteImageWithName:(NSString*)imageName;
 
 @end
 

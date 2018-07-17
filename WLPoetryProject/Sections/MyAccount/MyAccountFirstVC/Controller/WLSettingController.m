@@ -31,6 +31,10 @@
  *  回调的block
  **/
 @property (nonatomic, copy) SettingBlock block;
+/**
+ *  文件大小
+ **/
+@property (nonatomic,assign) float countFileSize;
 @end
 
 @implementation WLSettingController
@@ -202,7 +206,40 @@
     
 }
 
+#pragma mark 清除缓存
 
+- (void)cleanTheDisk
+{
+    //找到缓存文件的保存路径
+    //NSHomeDirectory() 找到应用的沙盒路径
+    NSString *filePath=[NSHomeDirectory() stringByAppendingPathComponent:@"/Library/Caches/default/com.hackemist.SDWebImageCache.default"];
+    NSLog(@"文件路径：%@",filePath);
+    
+    //获取所有的缓存文件
+    //文件管理对象类NSFileManager，用它去管理我们的文件目录
+    NSFileManager *fileManager =[NSFileManager defaultManager];
+    //subpathsOfDirectoryAtPath 获取当前路径下所有子文件名
+    NSArray *fileArray=[fileManager subpathsOfDirectoryAtPath:filePath error:nil];
+    //计算所有缓存文件的大小
+    long long fileSize =0;//所有文件的总字节数
+    for (NSString *fileName in fileArray) {
+        //获得每一个缓存文件的路径
+        NSString *subFilePath =[filePath stringByAppendingPathComponent:fileName];
+        NSDictionary *attributes =[fileManager attributesOfItemAtPath:subFilePath error:nil];
+        //每一个子文件所占的大小
+        long long size =[attributes [NSFileSize]longLongValue];
+        fileSize +=size;
+    }
+    _countFileSize = fileSize/1000.f/1000.f;
+    
+    NSLog(@"countSize:%f",_countFileSize);
+    
+    [[SDImageCache sharedImageCache] clearDiskOnCompletion:^{
+        
+        [self showAlert:[NSString stringWithFormat:@"清除缓存%.2fM",self.countFileSize]];
+        
+    }];
+}
 
 #pragma mark - 返回
 - (void)backAction:(UIButton*)sender
