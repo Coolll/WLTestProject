@@ -33,4 +33,11 @@
  **/
 @property (nonatomic, strong) UIImageView *rightArrow;
 
+/**
+ *  右侧的label
+ **/
+@property (nonatomic,strong) UILabel *rightLabel;
+
+
+
 @end

@@ -51,6 +51,7 @@
 {
     self.itemsArray = [NSArray arrayWithObjects:@"权限设置",@"字体大小",@"空间清理",@"意见反馈", nil];
     self.imageArray = [NSArray arrayWithObjects:@"help",@"setting",@"about",@"contact",nil];
+    self.countFileSize = [self countTheDisk];
 }
 
 - (void)refreshLoginState:(SettingBlock)block
@@ -135,6 +136,9 @@
     if (indexPath.section == 0 && indexPath.row < self.itemsArray.count) {
         cell.titleString = self.itemsArray[indexPath.row];
         
+        if (indexPath.row == 2) {
+            cell.rightLabel.text = [NSString stringWithFormat:@"共%.2fM",self.countFileSize];
+        }
     }else if (indexPath.section == 1){
         
         cell.titleString = @"退出登录";
@@ -180,7 +184,7 @@
             
         }else if(indexPath.row == 2){
             //空间清理
-            [self showHUDWithText:@"清理成功"];
+            [self cleanTheDisk];
         }else if (indexPath.row == 3){
             //意见反馈
             WLFeedbackController *feedVc = [[WLFeedbackController alloc]init];
@@ -207,8 +211,7 @@
 }
 
 #pragma mark 清除缓存
-
-- (void)cleanTheDisk
+- (CGFloat)countTheDisk
 {
     //找到缓存文件的保存路径
     //NSHomeDirectory() 找到应用的沙盒路径
@@ -233,11 +236,17 @@
     _countFileSize = fileSize/1000.f/1000.f;
     
     NSLog(@"countSize:%f",_countFileSize);
+    return _countFileSize;
+}
+
+- (void)cleanTheDisk
+{
     
     [[SDImageCache sharedImageCache] clearDiskOnCompletion:^{
         
-        [self showAlert:[NSString stringWithFormat:@"清除缓存%.2fM",self.countFileSize]];
-        
+        self.countFileSize = 0;
+        [self showAlert:[NSString stringWithFormat:@"清除缓存成功！"]];
+        [self.mainTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:2 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
     }];
 }
 

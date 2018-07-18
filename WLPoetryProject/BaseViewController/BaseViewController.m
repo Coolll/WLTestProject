@@ -400,16 +400,19 @@ static const CGFloat touchFullOffset = 15;//箭头触摸区域超出的offset �
 #pragma mark - alerController
 - (void)showAlert:(NSString*)content
 {
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:content preferredStyle:UIAlertControllerStyleAlert];
-    
-    UIAlertAction *action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:content preferredStyle:UIAlertControllerStyleAlert];
         
-        NSLog(@"确定");
-    }];
+        UIAlertAction *action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            
+            NSLog(@"确定");
+        }];
+        
+        [alertController addAction:action];
+        
+        [self presentViewController:alertController animated:NO completion:nil];
+    });
     
-    [alertController addAction:action];
-    
-    [self presentViewController:alertController animated:NO completion:nil];
 }
 
 

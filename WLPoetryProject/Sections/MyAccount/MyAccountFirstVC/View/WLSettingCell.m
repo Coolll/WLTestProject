@@ -57,7 +57,7 @@
         make.left.equalTo(self.mas_left).offset(space);
         make.top.equalTo(self.mas_top).offset(0);
         make.bottom.equalTo(self.mas_bottom).offset(-1);
-        make.right.equalTo(self.mas_right).offset(-space);
+        make.right.equalTo(self.mas_centerX).offset(0);
         
     }];
     
@@ -73,11 +73,27 @@
     
     [self.rightArrow mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.top.equalTo(self.mas_top).offset(topSpace);
+        make.top.equalTo(self.mas_top).offset((self.viewHeight-imageH)/2);
         make.right.equalTo(self.mas_right).offset(-space-imageW);
         make.height.mas_equalTo(imageH);
         make.width.mas_equalTo(imageW);
     }];
+    
+    self.rightLabel = [[UILabel alloc]init];
+    self.rightLabel.font = [UIFont systemFontOfSize:14.f];
+    self.rightLabel.textColor = RGBCOLOR(150, 150, 150, 1.0);
+    self.rightLabel.textAlignment = NSTextAlignmentRight;
+    [self addSubview:self.rightLabel];
+    //元素的布局
+    [self.rightLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.equalTo(self.mas_centerX).offset(0);
+        make.top.equalTo(self.mas_top).offset(0);
+        make.bottom.equalTo(self.mas_bottom).offset(0);
+        make.right.equalTo(self.rightArrow.mas_left).offset(-4);
+        
+    }];
+    
     
     self.lineView = [[UIImageView alloc]init];
     self.lineView.image = [UIImage imageNamed:@"lineImage"];
