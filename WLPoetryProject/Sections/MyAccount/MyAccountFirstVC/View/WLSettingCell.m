@@ -65,7 +65,6 @@
     
     CGFloat imageW = 10;
     CGFloat imageH = 12;
-    CGFloat topSpace = (self.frame.size.height-imageH)/2;
     
     self.rightArrow = [[UIImageView alloc]init];
     self.rightArrow.image = [UIImage imageNamed:@"settingArrow"];

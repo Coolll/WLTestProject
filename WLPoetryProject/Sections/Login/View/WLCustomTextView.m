@@ -109,24 +109,7 @@ typedef void(^CustomTextBlock)(NSString *string);
 
 #pragma mark - textField代理
 
-//- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
-//{
-//    if (![text isEqualToString:@""]) {
-//        
-//        //输入只要不是删除键，则把自定义的placeHolder隐藏了
-//        self.placeHolderLabel.hidden = YES;
-//        
-//    }
-//    
-//    if ([text isEqualToString:@""] && range.location == 0 && range.length == 1 && textView.text.length == 0) {
-//        
-//        //输入删除键后，没有字符了，把自定义的placeHolder显示了
-//        self.placeHolderLabel.hidden = NO;
-//        
-//    }
-//
-//    return YES;
-//}
+
 
 
 #pragma mark - textField代理
@@ -139,7 +122,6 @@ typedef void(^CustomTextBlock)(NSString *string);
         //输入只要不是删除键，则把自定义的placeHolder隐藏了
         self.placeHolderLabel.hidden = YES;
         
-        
     }
     
     
@@ -149,6 +131,11 @@ typedef void(^CustomTextBlock)(NSString *string);
         //输入删除键后，没有字符了，把自定义的placeHolder显示了
         self.placeHolderLabel.hidden = NO;
         
+    }
+    
+    if (self.canInputLength > 0 && textField.text.length == self.canInputLength && ![string isEqualToString:@""]) {
+        //如果限制了输入长度，且原先的文本长度已经达到了限制长度，且输入的的不是删除键，则不允许输入内容
+        return NO;
     }
     
     return YES;

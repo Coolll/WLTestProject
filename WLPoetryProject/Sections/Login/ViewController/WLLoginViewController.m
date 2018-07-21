@@ -28,6 +28,12 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
 
 @interface WLLoginViewController ()
 /**
+ *  主内容View
+ **/
+@property (nonatomic,strong) UIView *contentView;
+
+
+/**
  *  手机号
  **/
 @property (nonatomic,strong) WLCustomTextView *nameTextField;
@@ -89,9 +95,25 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
  **/
 @property (nonatomic, assign) BOOL needSaveAccount;
 /**
+ *  是否需要显示密码
+ **/
+@property (nonatomic, assign) BOOL needShowPassword;
+
+/**
  *  记住帐号密码
  **/
 @property (nonatomic, strong) UILabel *saveTipLabel;
+/**
+ *  展示/隐藏 密码
+ **/
+@property (nonatomic,strong) UIImageView *showPwdImageView;
+/**
+ *  注册时提示密码错误的解释
+ **/
+@property (nonatomic,strong) UIView *errorTipView;
+
+
+
 @end
 
 @implementation WLLoginViewController
@@ -131,11 +153,11 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
     CGFloat leftSpace = 22;
     CGFloat inputH = 50;
     
-    UIView *contentView = [[UIView alloc]init];
-    contentView.backgroundColor = ViewBackgroundColor;
-    [self.view addSubview:contentView];
+    self.contentView = [[UIView alloc]init];
+    self.contentView.backgroundColor = ViewBackgroundColor;
+    [self.view addSubview:self.contentView];
     //元素的布局
-    [contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.equalTo(self.view.mas_left).offset(0);
         make.top.equalTo(self.naviView.mas_bottom).offset(0);
@@ -148,7 +170,7 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
     self.nameTextField.backgroundColor = [UIColor whiteColor];
     self.nameTextField.placeHolderString = @"请输入您的用户名";
     self.nameTextField.leftSpace = 10;
-    [contentView addSubview:self.nameTextField];
+    [self.contentView addSubview:self.nameTextField];
 
     
     [[WLPublicTool shareTool] addCornerForView:self.nameTextField withTopLeft:YES withTopRight:YES withBottomLeft:NO withBottomRight:NO withCornerRadius:5.0];
@@ -156,22 +178,23 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
     CGFloat lineH = 0.7;
     UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(leftSpace, topSpace+inputH, self.nameTextField.frame.size.width, lineH)];
     lineView.backgroundColor = RGBCOLOR(161, 165, 166, 1.0);
-    [contentView addSubview:lineView];
+    [self.contentView addSubview:lineView];
 
     self.passwordTextField = [[WLCustomTextView alloc]initWithFrame:CGRectMake(leftSpace, topSpace+inputH+lineH, self.nameTextField.frame.size.width, inputH)];
     self.passwordTextField.placeHolderString = @"请输入您的密码";
     self.passwordTextField.leftSpace = 10;
+    self.passwordTextField.canInputLength = 8;
     self.passwordTextField.keyboardType = UIKeyboardTypeNumberPad;
     self.passwordTextField.backgroundColor = [UIColor whiteColor];
-    [contentView addSubview:self.passwordTextField];
+    [self.contentView addSubview:self.passwordTextField];
     
     [[WLPublicTool shareTool] addCornerForView:self.passwordTextField withTopLeft:NO withTopRight:NO withBottomLeft:YES withBottomRight:YES withCornerRadius:5.0];
     
-    //随即配置按钮
+    //随机配置按钮
     self.randomBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     self.randomBtn.backgroundColor = [UIColor whiteColor];
     [self.randomBtn addTarget:self action:@selector(getRandomName:) forControlEvents:UIControlEventTouchUpInside];
-    [contentView addSubview:self.randomBtn];
+    [self.contentView addSubview:self.randomBtn];
     
     [self.randomBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -189,7 +212,7 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
     self.getCodeLabel.textColor = NavigationColor;
     self.getCodeLabel.font = [UIFont systemFontOfSize:10.0];
     self.getCodeLabel.layer.cornerRadius = 5.0;
-    [contentView addSubview:self.getCodeLabel];
+    [self.contentView addSubview:self.getCodeLabel];
     
     CGFloat codeH = 23;
     CGFloat codeTop = (inputH-codeH)/2;
@@ -203,21 +226,54 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
     }];
     
     
+    
+    //隐藏密码按钮
+    UIButton *showBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    showBtn.backgroundColor = [UIColor whiteColor];
+    [showBtn addTarget:self action:@selector(changePasswordAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.contentView addSubview:showBtn];
+    
+    [showBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.equalTo(self.passwordTextField.mas_top).offset(0);
+        make.bottom.equalTo(self.passwordTextField.mas_bottom).offset(0);
+        make.right.equalTo(self.view.mas_right).offset(-leftSpace);
+        make.width.mas_equalTo(100);
+    }];
+    
+    self.showPwdImageView = [[UIImageView alloc]init];
+    self.showPwdImageView.image = [UIImage imageNamed:@""];
+    self.showPwdImageView.backgroundColor = [UIColor whiteColor];
+    [self.contentView addSubview:self.showPwdImageView];
+    
+    CGFloat imageW = 20;
+    CGFloat imageH = 23;
+    CGFloat imageTop = (inputH-imageH)/2;
+    [self.showPwdImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.equalTo(self.passwordTextField.mas_top).offset(imageTop);
+        make.centerX.equalTo(self.getCodeLabel.mas_centerX);
+        make.width.mas_equalTo(imageW);
+        make.height.mas_equalTo(imageH);
+    }];
+    
+    
+    
     UIButton *saveBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     saveBtn.backgroundColor = ViewBackgroundColor;
     [saveBtn addTarget:self action:@selector(changeSaveAccount:) forControlEvents:UIControlEventTouchUpInside];
-    [contentView addSubview:saveBtn];
+    [self.contentView addSubview:saveBtn];
     //设置UI布局约束
     [saveBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.top.equalTo(self.passwordTextField.mas_bottom).offset(15);//元素顶部约束
+        make.top.equalTo(self.passwordTextField.mas_bottom).offset(10);//元素顶部约束
         make.leading.equalTo(self.passwordTextField.mas_leading).offset(0);//元素左侧约束
         make.trailing.equalTo(self.passwordTextField.mas_trailing).offset(0);//元素右侧约束
-        make.height.mas_equalTo(20);//元素高度
+        make.height.mas_equalTo(30);//元素高度
     }];
     
     self.checkBoxImageView = [[UIImageView alloc]init];
-    [contentView addSubview:self.checkBoxImageView];
+    [self.contentView addSubview:self.checkBoxImageView];
     //设置UI布局约束
     [self.checkBoxImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -231,7 +287,7 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
     self.saveTipLabel.text = @"记住帐号密码";//设置文本
     self.saveTipLabel.textColor = RGBCOLOR(50, 50, 50, 1.0);
     self.saveTipLabel.font = [UIFont systemFontOfSize:14];//字号设置
-    [contentView addSubview:self.saveTipLabel];
+    [self.contentView addSubview:self.saveTipLabel];
     //设置UI布局约束
     [self.saveTipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -251,7 +307,7 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
     self.loginBtn.titleLabel.font = [UIFont systemFontOfSize:14.0];
     [self.loginBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.loginBtn addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
-    [contentView addSubview:self.loginBtn];
+    [self.contentView addSubview:self.loginBtn];
     
     [self.loginBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -275,7 +331,7 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
     self.selectImageView = [[UIImageView alloc]init];
     self.selectImageView.image = self.isAgree ? [UIImage imageNamed:@"select_circle"]:[UIImage imageNamed:@"normal_circle"];
     self.selectImageView.userInteractionEnabled = YES;
-    [contentView addSubview:self.selectImageView];
+    [self.contentView addSubview:self.selectImageView];
     [self.selectImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.equalTo(self.view.mas_left).offset(selectLeft);
@@ -293,7 +349,7 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
     UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     backBtn.backgroundColor = RGBCOLOR(238, 241, 245, 1.0);
     [backBtn addTarget:self action:@selector(touchTheUserDelegate:) forControlEvents:UIControlEventTouchUpInside];
-    [contentView addSubview:backBtn];
+    [self.contentView addSubview:backBtn];
     
     [backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -309,7 +365,7 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
     [contentLabel setText:@"注册并登录代表您同意诗词汇用户协议"];
     contentLabel.font = [UIFont systemFontOfSize:10.0];
     contentLabel.textAlignment = NSTextAlignmentLeft;
-    [contentView addSubview:contentLabel];
+    [self.contentView addSubview:contentLabel];
     
     [contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -361,6 +417,25 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
         }
         
     }
+    
+    
+    //是否需要展示密码
+    id localShowPwd = [WLSaveLocalHelper loadObjectForKey:@"needShowPassword"];
+    if (!localShowPwd) {
+        localShowPwd = @"1";
+    }
+    NSString *showPwd = [NSString stringWithFormat:@"%@",localShowPwd];
+    if ([showPwd isEqualToString:@"1"]) {
+        self.needShowPassword = YES;
+        self.showPwdImageView.image = [UIImage imageNamed:@"showPassword"];
+        self.passwordTextField.mainTextField.secureTextEntry = NO;
+    }else{
+        self.needShowPassword = NO;
+        self.showPwdImageView.image = [UIImage imageNamed:@"hidePassword"];
+        self.passwordTextField.mainTextField.secureTextEntry = YES;
+
+    }
+    
 }
 #pragma mark 计算文本宽度
 - (CGFloat) widthForTextString:(NSString *)tStr height:(CGFloat)tHeight fontSize:(CGFloat)tSize{
@@ -389,7 +464,12 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
     self.nameTextField.contentString = name;
     
     self.passwordTextField.contentString = @"12345678";
+    
+    //随机设置的话，需要把密码展示给用户
     self.passwordTextField.mainTextField.secureTextEntry = NO;
+    self.needShowPassword = YES;
+    self.showPwdImageView.image = [UIImage imageNamed:@"showPassword"];
+    [WLSaveLocalHelper saveObject:@"1" forKey:@"needShowPassword"];
 
 }
 
@@ -410,7 +490,22 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
 
     }
     
-    
+}
+
+- (void)changePasswordAction:(UIButton*)sender
+{
+    if (self.needShowPassword) {
+        self.needShowPassword = NO;
+        [WLSaveLocalHelper saveObject:@"0" forKey:@"needShowPassword"];
+        self.showPwdImageView.image = [UIImage imageNamed:@"hidePassword"];
+        self.passwordTextField.mainTextField.secureTextEntry = YES;
+    }else{
+        self.needShowPassword = YES;
+        [WLSaveLocalHelper saveObject:@"1" forKey:@"needShowPassword"];
+        self.showPwdImageView.image = [UIImage imageNamed:@"showPassword"];
+        self.passwordTextField.mainTextField.secureTextEntry = NO;
+        
+    }
 }
 #pragma mark - 用户登录
 - (void)buttonAction:(UIButton*)sender
@@ -425,7 +520,7 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
     
     if (self.passwordTextField.contentString.length != 8 ) {
         
-        [self showHUDWithText:@"请输入八位数密码"];
+        [self showHUDWithText:@"密码为8位数字"];
         return;
     }
     
@@ -443,7 +538,7 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
 //        hud.label.text = @"正在处理...";
 //    }
     
-    [self showLoadingHUDWithText:@"正在登录..."];
+    [self showLoadingHUDWithText:@"校验账户信息..."];
 
     [self registerAction];
    
@@ -464,14 +559,19 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
 //    [bUser setObject:@"" forKey:@"accountValue"];
     [bUser signUpInBackgroundWithBlock:^(BOOL isSuccessful, NSError *error) {
         
+        [self hideHUD];
+
         if (isSuccessful) {
             NSLog(@"用户成功注册");
             [self loginAction];
+            [self showHUDWithText:@"注册成功，自动登录..."];
+
         }else{
             NSLog(@"注册失败");
             if (error.code == 202) {
                 //用户已注册
                 [self loginAction];
+                [self showHUDWithText:@"账户自动登录..."];
             }
         }
     }];
@@ -490,7 +590,6 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
             
             //更新基本信息
             [[UserInformation shareUser] refreshUserInfoWithUser:user];
-            
             
             NSDictionary *dataDic = [self responseDataWithUser:user];
             
@@ -522,13 +621,41 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
             NSLog(@"登录error:%@",error);
             if (error.code == 101) {
                 [self showHUDWithText:@"账号或密码错误"];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self showErrorTipView];
+                });
             }
         }
     }];
 
 }
 
+- (void)showErrorTipView
+{
+    self.errorTipView.hidden = NO;
+    [self.contentView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.equalTo(self.view.mas_left).offset(0);
+        make.top.equalTo(self.errorTipView.mas_bottom).offset(0);
+        make.bottom.equalTo(self.view.mas_bottom).offset(0);
+        make.right.equalTo(self.view.mas_right).offset(0);
+            
+    }];
+    
+}
 
+- (void)hideErrorTipAction:(UIButton*)sender
+{
+    self.errorTipView.hidden = YES;
+    [self.contentView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.equalTo(self.view.mas_left).offset(0);
+        make.top.equalTo(self.naviView.mas_bottom).offset(0);
+        make.bottom.equalTo(self.view.mas_bottom).offset(0);
+        make.right.equalTo(self.view.mas_right).offset(0);
+        
+    }];
+}
 - (NSString*)notNillValueWithKey:(NSString*)key withDic:(NSDictionary*)dic
 {
     id object = [dic objectForKey:key];
@@ -629,6 +756,77 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
     if (block) {
         self.successBlock = block;
     }
+}
+
+
+#pragma mark - 属性
+- (UIView*)errorTipView
+{
+    if (!_errorTipView) {
+        NSString *tipString = @"首次登录时账号会自动注册，若登录失败，建议您核对密码或修改用户名后重试~";
+        UIFont *font = [UIFont systemFontOfSize:12.f];
+        
+        CGFloat leftSpace = 22;
+        CGFloat rightSpace = 30;
+        
+        _errorTipView = [[UIView alloc]init];
+        _errorTipView.backgroundColor = RGBCOLOR(249, 72, 35, 1.0);
+        [self.view addSubview:_errorTipView];
+        CGFloat height = [WLPublicTool heightForTextString:tipString width:(PhoneScreen_WIDTH-leftSpace-rightSpace) font:font];
+        //元素的布局
+        [_errorTipView mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.left.equalTo(self.view.mas_left).offset(0);
+            make.top.equalTo(self.naviView.mas_bottom).offset(0);
+            make.right.equalTo(self.view.mas_right).offset(0);
+            make.height.mas_equalTo(height+10);
+            
+        }];
+        
+        UILabel *tipLabel = [[UILabel alloc]init];
+        tipLabel.text = tipString;
+        tipLabel.font = font;
+        tipLabel.numberOfLines = 0;
+        tipLabel.textColor = RGBCOLOR(255, 255, 255, 1.0);
+        [_errorTipView addSubview:tipLabel];
+        //元素的布局
+        [tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.left.equalTo(_errorTipView.mas_left).offset(leftSpace);
+            make.top.equalTo(_errorTipView.mas_top).offset(5);
+            make.right.equalTo(_errorTipView.mas_right).offset(-rightSpace);
+            make.height.mas_equalTo(height);
+            
+        }];
+        
+        UIImageView *closeImage = [[UIImageView alloc]init];
+        closeImage.image = [UIImage imageNamed:@"closeTip"];
+        [_errorTipView addSubview:closeImage];
+        //元素的布局
+        [closeImage mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.top.equalTo(_errorTipView.mas_top).offset((height-10)/2);
+            make.right.equalTo(_errorTipView.mas_right).offset(-5);
+            make.width.mas_equalTo(20);
+            make.height.mas_equalTo(20);
+            
+        }];
+        
+        UIButton *closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [closeButton addTarget:self action:@selector(hideErrorTipAction:) forControlEvents:UIControlEventTouchUpInside];
+        [_errorTipView addSubview:closeButton];
+        //元素的布局
+        [closeButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.left.equalTo(tipLabel.mas_right).offset(0);
+            make.top.equalTo(_errorTipView.mas_top).offset(0);
+            make.bottom.equalTo(_errorTipView.mas_bottom).offset(-0);
+            make.right.equalTo(_errorTipView.mas_right).offset(0);
+            
+        }];
+        
+    }
+    return _errorTipView;
 }
 
 

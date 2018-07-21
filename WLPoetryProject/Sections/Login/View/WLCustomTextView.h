@@ -42,11 +42,17 @@
  **/
 @property (nonatomic,assign) CGRect placeLabelFrame;
 
-
 /**
  *  输入框
  **/
 @property (nonatomic,strong) WLTextField *mainTextField;
+
+/**
+ *  限制输入的长度
+ **/
+@property (nonatomic,assign) NSInteger canInputLength;
+
+
 
 - (void)loadEndEditingText:(void(^)(NSString *contentString))block;
 

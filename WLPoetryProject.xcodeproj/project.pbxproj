@@ -63,6 +63,9 @@
 		00FD14C320A95A2D0018D649 /* tangPoetry_five.json in Resources */ = {isa = PBXBuildFile; fileRef = 00FD14BD20A95A2D0018D649 /* tangPoetry_five.json */; };
 		00FD14C420A95A2D0018D649 /* tangPoetry_seven.json in Resources */ = {isa = PBXBuildFile; fileRef = 00FD14BE20A95A2D0018D649 /* tangPoetry_seven.json */; };
 		00FD14C520A95A2D0018D649 /* tangPoetry_four.json in Resources */ = {isa = PBXBuildFile; fileRef = 00FD14BF20A95A2D0018D649 /* tangPoetry_four.json */; };
+		071571F72103564E005C53C4 /* hidePassword.png in Resources */ = {isa = PBXBuildFile; fileRef = 071571F52103564D005C53C4 /* hidePassword.png */; };
+		071571F82103564E005C53C4 /* showPassword.png in Resources */ = {isa = PBXBuildFile; fileRef = 071571F62103564E005C53C4 /* showPassword.png */; };
+		071571FA21038354005C53C4 /* closeTip.png in Resources */ = {isa = PBXBuildFile; fileRef = 071571F921038354005C53C4 /* closeTip.png */; };
 		0715FF0820C564790096C60E /* WLSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0715FF0720C564790096C60E /* WLSearchController.m */; };
 		0715FF0A20C56D3D0096C60E /* search_black.png in Resources */ = {isa = PBXBuildFile; fileRef = 0715FF0920C56D3D0096C60E /* search_black.png */; };
 		071609A920A1C15400904C69 /* gradePoetry_1.json in Resources */ = {isa = PBXBuildFile; fileRef = 0716099F20A1C15400904C69 /* gradePoetry_1.json */; };
@@ -371,6 +374,9 @@
 		070F3DD8207E333700EE3000 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		070F3DDA207E333E00EE3000 /* libobjc.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libobjc.tbd; path = usr/lib/libobjc.tbd; sourceTree = SDKROOT; };
 		070F3DDC207E334700EE3000 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		071571F52103564D005C53C4 /* hidePassword.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hidePassword.png; sourceTree = "<group>"; };
+		071571F62103564E005C53C4 /* showPassword.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = showPassword.png; sourceTree = "<group>"; };
+		071571F921038354005C53C4 /* closeTip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = closeTip.png; sourceTree = "<group>"; };
 		0715FF0620C564790096C60E /* WLSearchController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLSearchController.h; sourceTree = "<group>"; };
 		0715FF0720C564790096C60E /* WLSearchController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLSearchController.m; sourceTree = "<group>"; };
 		0715FF0920C56D3D0096C60E /* search_black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search_black.png; sourceTree = "<group>"; };
@@ -1562,6 +1568,9 @@
 		07F73B9C208ACD9A00F7D8B3 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				071571F921038354005C53C4 /* closeTip.png */,
+				071571F52103564D005C53C4 /* hidePassword.png */,
+				071571F62103564E005C53C4 /* showPassword.png */,
 				07F73B9D208ACD9A00F7D8B3 /* normal_circle@2x.png */,
 				07F73B9E208ACD9A00F7D8B3 /* normal_circle@3x.png */,
 				07F73B9F208ACD9A00F7D8B3 /* select_circle@2x.png */,
@@ -1782,10 +1791,12 @@
 				00F9517420D4EA650039D7C5 /* check_box_sel.png in Resources */,
 				00E2CB3E20E084FD00E44793 /* topImage.jpg in Resources */,
 				000110AC20A44BD2001B2B55 /* gradePoetry_7_one.json in Resources */,
+				071571F72103564E005C53C4 /* hidePassword.png in Resources */,
 				0785076720B2EFF20030CD98 /* songPoetry_two.json in Resources */,
 				07F73C76208AE84900F7D8B3 /* tabbarThree_sel.png in Resources */,
 				07DCF5B520E26D8B00F0D053 /* README.txt in Resources */,
 				00FD14C220A95A2D0018D649 /* tangPoetry_two.json in Resources */,
+				071571F82103564E005C53C4 /* showPassword.png in Resources */,
 				07F73C09208ACD9A00F7D8B3 /* nav_back@2x.png in Resources */,
 				07F3E30C20D2C0FC00E7BAF7 /* editImage.png in Resources */,
 				073864F420E12D8B0005BE61 /* poetryContent.png in Resources */,
@@ -1802,6 +1813,7 @@
 				00FD14C420A95A2D0018D649 /* tangPoetry_seven.json in Resources */,
 				07DCF5B620E26D8B00F0D053 /* ShareSDK.bundle in Resources */,
 				00F9516620D4D1D80039D7C5 /* settingArrow.png in Resources */,
+				071571FA21038354005C53C4 /* closeTip.png in Resources */,
 				000110AA20A44BD2001B2B55 /* gradePoetry_8_one.json in Resources */,
 				0785076520B2EFF20030CD98 /* songPoetry_three.json in Resources */,
 				007C7E2420F59EC800F360D6 /* configureGradeJuinor.json in Resources */,
