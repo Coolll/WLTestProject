@@ -7,7 +7,9 @@
 //
 
 #import "BaseViewController.h"
+typedef void(^ListSaveImageBlock) (void);
 
 @interface WLImageListController : BaseViewController
+- (void)saveImageWithBlock:(ListSaveImageBlock)block;
 
 @end

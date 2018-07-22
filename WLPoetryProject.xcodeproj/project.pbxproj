@@ -137,6 +137,7 @@
 		07567B8D207A02EC0018B9E7 /* WLBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 07567A98207A02EB0018B9E7 /* WLBaseModel.m */; };
 		07567B8E207A02EC0018B9E7 /* WLRequestHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 07567A9A207A02EB0018B9E7 /* WLRequestHelper.m */; };
 		07567B8F207A02EC0018B9E7 /* WLSaveLocalHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 07567A9C207A02EB0018B9E7 /* WLSaveLocalHelper.m */; };
+		075A97C721047D2600CBAFD7 /* addImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 075A97C621047D2600CBAFD7 /* addImage.png */; };
 		075AFEB220E525BA005ADDB9 /* searchInList.png in Resources */ = {isa = PBXBuildFile; fileRef = 075AFEB120E525B9005ADDB9 /* searchInList.png */; };
 		075DF12C20F62FD20075E9D5 /* configureGradeSenior.json in Resources */ = {isa = PBXBuildFile; fileRef = 075DF12B20F62FD20075E9D5 /* configureGradeSenior.json */; };
 		07603EA420FCCC510074A5CB /* deleteImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 07603EA320FCCC510074A5CB /* deleteImage.png */; };
@@ -493,6 +494,7 @@
 		07567A9B207A02EB0018B9E7 /* WLSaveLocalHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLSaveLocalHelper.h; sourceTree = "<group>"; };
 		07567A9C207A02EB0018B9E7 /* WLSaveLocalHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLSaveLocalHelper.m; sourceTree = "<group>"; };
 		07567B90207A03310018B9E7 /* WLPrefixHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLPrefixHeader.h; sourceTree = "<group>"; };
+		075A97C621047D2600CBAFD7 /* addImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addImage.png; sourceTree = "<group>"; };
 		075AFEB120E525B9005ADDB9 /* searchInList.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = searchInList.png; sourceTree = "<group>"; };
 		075DF12B20F62FD20075E9D5 /* configureGradeSenior.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = configureGradeSenior.json; sourceTree = "<group>"; };
 		07603EA320FCCC510074A5CB /* deleteImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = deleteImage.png; sourceTree = "<group>"; };
@@ -1519,6 +1521,7 @@
 		07F3E2F320D2C0FB00E7BAF7 /* My */ = {
 			isa = PBXGroup;
 			children = (
+				075A97C621047D2600CBAFD7 /* addImage.png */,
 				07603EA320FCCC510074A5CB /* deleteImage.png */,
 				008191A320FC94C100038D6F /* noImage.png */,
 				00469AF720F89A200068636F /* customImage.png */,
@@ -1789,6 +1792,7 @@
 				00FD14C120A95A2D0018D649 /* tangPoetry_three.json in Resources */,
 				00469AF820F89A200068636F /* customImage.png in Resources */,
 				00F9517420D4EA650039D7C5 /* check_box_sel.png in Resources */,
+				075A97C721047D2600CBAFD7 /* addImage.png in Resources */,
 				00E2CB3E20E084FD00E44793 /* topImage.jpg in Resources */,
 				000110AC20A44BD2001B2B55 /* gradePoetry_7_one.json in Resources */,
 				071571F72103564E005C53C4 /* hidePassword.png in Resources */,

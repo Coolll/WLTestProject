@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 typedef void(^SaveImageCompletionBlock) (BOOL success,NSError *error);
+typedef void(^AlertBlock)(BOOL sure);
 
 @interface BaseViewController : UIViewController
 /**
@@ -49,6 +50,7 @@ typedef void(^SaveImageCompletionBlock) (BOOL success,NSError *error);
 - (void)showHUDWithText:(NSString *)text;
 
 - (void)showAlert:(NSString*)content;
+- (void)showAlert:(NSString*)content withBlock:(AlertBlock)sureBlock;
 
 //需要复写该方法
 - (void)backAction:(UIButton*)sender;

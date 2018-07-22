@@ -12,6 +12,7 @@ typedef NS_ENUM(NSInteger,PoetryDirection) {
     PoetryDirectionVerticalLeft,//垂直 从左侧开始第一句
     PoetryDirectionVerticalRight//垂直 从右侧开始第一句
 };
+typedef void(^SaveImageBlock)(void);
 
 @interface WLImageController : BaseViewController
 /**
@@ -26,5 +27,6 @@ typedef NS_ENUM(NSInteger,PoetryDirection) {
 
 - (void)configureUI;
 
+- (void)saveImageWithBlock:(SaveImageBlock)block;
 
 @end

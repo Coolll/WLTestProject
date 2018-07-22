@@ -415,6 +415,33 @@ static const CGFloat touchFullOffset = 15;//箭头触摸区域超出的offset �
     
 }
 
+- (void)showAlert:(NSString*)content withBlock:(AlertBlock)sureBlock
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:content preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            NSLog(@"取消");
+            if (sureBlock) {
+                sureBlock(NO);
+            }
+            
+        }];
+        
+        UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+            NSLog(@"确定");
+            if (sureBlock) {
+                sureBlock(YES);
+            }
+            
+        }];
+        [alertController addAction:cancelAction];
+        [alertController addAction:sureAction];
+        [self presentViewController:alertController animated:NO completion:nil];
+    });
+}
+
 
 - (MBProgressHUD *)progressHUD{
     

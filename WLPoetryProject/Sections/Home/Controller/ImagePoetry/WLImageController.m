@@ -59,6 +59,12 @@ static const CGFloat imageW = 20;
  *  保存按钮
  **/
 @property (nonatomic, strong) UIButton *saveButton;
+/**
+ *  保存图片的block
+ **/
+@property (nonatomic,copy) SaveImageBlock saveBlock;
+
+
 @end
 
 @implementation WLImageController
@@ -333,6 +339,13 @@ static const CGFloat imageW = 20;
 {
     self.currentIndex = 0;
 }
+- (void)saveImageWithBlock:(SaveImageBlock)block
+{
+    if (block) {
+        self.saveBlock = block;
+    }
+}
+
 #pragma mark 保存
 - (void)saveAction:(UIButton*)sender
 {
@@ -346,6 +359,10 @@ static const CGFloat imageW = 20;
         [self showOtherItem];
         
         dispatch_async(dispatch_get_main_queue(), ^{
+            if (self.saveBlock) {
+                self.saveBlock();
+            }
+            
             [self showAlertWithImage:allImage withSuccess:success];
         });
     }];

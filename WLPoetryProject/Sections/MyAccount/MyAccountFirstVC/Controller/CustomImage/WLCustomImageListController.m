@@ -8,6 +8,7 @@
 
 #import "WLCustomImageListController.h"
 #import "WLShowImageController.h"
+#import "WLImageListController.h"
 
 static const CGFloat imageLeftSpace = 15;
 static const CGFloat imageItemSpace = 20;
@@ -27,11 +28,28 @@ static const NSInteger cellCount = 3;
  *  空的数据
  **/
 @property (nonatomic, strong) UILabel *noLabel;
+/**
+ *  空的图片
+ **/
+@property (nonatomic,strong) UIImageView *noImageView;
+
+
 
 /**
  *  是否为编辑状态
  **/
 @property (nonatomic,assign) BOOL isEditing;
+
+/**
+ *  编辑
+ **/
+@property (nonatomic,strong) UIImageView *editImage;
+/**
+ *  编辑按钮
+ **/
+@property (nonatomic,strong) UIButton *editBtn;
+
+
 
 
 @end
@@ -44,15 +62,16 @@ static const NSInteger cellCount = 3;
     self.titleForNavi = @"我的题画";
     
     [self loadCustomData];
-    [self loadEditItem];
 }
-- (void)loadEditItem
+//需要两个元素 新建与编辑
+- (void)loadTwoEditItem
 {
-    UIImageView *editImage = [[UIImageView alloc]init];
-    editImage.image = [UIImage imageNamed:@"editImage"];
-    [self.naviView addSubview:editImage];
+    
+    UIImageView *addImage = [[UIImageView alloc]init];
+    addImage.image = [UIImage imageNamed:@"addImage"];
+    [self.naviView addSubview:addImage];
     //元素的布局
-    [editImage mas_makeConstraints:^(MASConstraintMaker *make) {
+    [addImage mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.bottom.equalTo(self.naviView.mas_bottom).offset(-10);
         make.right.equalTo(self.naviView.mas_right).offset(-25);
@@ -63,37 +82,95 @@ static const NSInteger cellCount = 3;
     
     
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [btn addTarget:self action:@selector(editButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    [btn addTarget:self action:@selector(addButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [btn setBackgroundColor:[UIColor clearColor]];
     [self.naviView addSubview:btn];
     //元素的布局
     [btn mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(editImage.mas_left).offset(-10);
-        make.top.equalTo(editImage.mas_top).offset(-10);
+        make.left.equalTo(addImage.mas_left).offset(-5);
+        make.top.equalTo(addImage.mas_top).offset(-10);
         make.bottom.equalTo(self.naviView.mas_bottom).offset(0);
         make.right.equalTo(self.naviView.mas_right).offset(0);
         
     }];
+
+    
+    self.editImage = [[UIImageView alloc]init];
+    self.editImage.image = [UIImage imageNamed:@"editImage"];
+    [self.naviView addSubview:self.editImage];
+    //元素的布局
+    [self.editImage mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.bottom.equalTo(self.naviView.mas_bottom).offset(-10);
+        make.right.equalTo(btn.mas_left).offset(-12);
+        make.width.mas_equalTo(18);
+        make.height.mas_equalTo(18);
+        
+    }];
+    
+    
+    self.editBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.editBtn addTarget:self action:@selector(editButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.editBtn setBackgroundColor:[UIColor clearColor]];
+    [self.naviView addSubview:self.editBtn];
+    //元素的布局
+    [self.editBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.equalTo(self.editImage.mas_left).offset(-10);
+        make.top.equalTo(self.editImage.mas_top).offset(-10);
+        make.bottom.equalTo(self.naviView.mas_bottom).offset(0);
+        make.right.equalTo(self.editImage.mas_right).offset(5);
+        
+    }];
 }
+
+
+- (void)addButtonAction:(UIButton*)sender
+{
+    WLImageListController *vc = [[WLImageListController alloc]init];
+    vc.hidesBottomBarWhenPushed = YES;
+    [vc saveImageWithBlock:^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.imageArray removeAllObjects];
+            self.imageArray = [NSMutableArray arrayWithArray:[WLSaveLocalHelper loadCustomImageArray]];
+            
+            if (self.imageArray.count > 0) {
+                self.editImage.hidden = NO;
+                self.editBtn.hidden = NO;
+            }
+            self.mainCollection.backgroundColor = ViewBackgroundColor;
+            [self.mainCollection reloadData];
+            
+        });
+    }];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 - (void)editButtonAction:(UIButton*)sender
 {
     NSLog(@"编辑");
     self.isEditing = YES;
+    self.mainCollection.backgroundColor = ViewBackgroundColor;
     [self.mainCollection reloadData];
 }
 
 
 - (void)loadCustomData
 {
+    [self loadTwoEditItem];
     self.isEditing = NO;
     self.imageArray = [NSMutableArray arrayWithArray:[WLSaveLocalHelper loadCustomImageArray]];
+    [self loadEmptyLikeView];
+    
     if (self.imageArray.count == 0) {
-        [self loadEmptyLikeView];
+        self.editImage.hidden = YES;
+        self.editBtn.hidden = YES;
     }else{
         [self loadCustomView];
-
     }
+    
+    
 }
 
 - (void)loadEmptyLikeView
@@ -104,11 +181,11 @@ static const NSInteger cellCount = 3;
     CGFloat labelH = 40;
     CGFloat itemSpace = 10;
     
-    UIImageView *noImageView = [[UIImageView alloc]init];
-    noImageView.image = [UIImage imageNamed:@"noImage"];
-    [self.view addSubview:noImageView];
+    self.noImageView = [[UIImageView alloc]init];
+    self.noImageView.image = [UIImage imageNamed:@"noImage"];
+    [self.view addSubview:self.noImageView];
     //元素的布局
-    [noImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.noImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.equalTo(self.view.mas_left).offset((PhoneScreen_WIDTH-imageW)/2);
         make.top.equalTo(self.view.mas_top).offset((PhoneScreen_HEIGHT-imageH-labelH-64-itemSpace)/2);
@@ -125,7 +202,7 @@ static const NSInteger cellCount = 3;
     //设置UI布局约束
     [self.noLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.top.equalTo(noImageView.mas_bottom).offset(itemSpace);//元素顶部约束
+        make.top.equalTo(self.noImageView.mas_bottom).offset(itemSpace);//元素顶部约束
         make.leading.equalTo(self.view.mas_leading).offset(0);//元素左侧约束
         make.trailing.equalTo(self.view.mas_trailing).offset(0);//元素右侧约束
         make.height.mas_equalTo(labelH);//元素高度
@@ -199,14 +276,37 @@ static const NSInteger cellCount = 3;
 - (void)deleteImageAction:(UIButton*)sender
 {
     
-    NSInteger index = sender.tag-1000;
-    NSLog(@"index:%ld",index);
-    NSString *imageName = self.imageArray[index];
+    [self showAlert:@"是否删除此题画？" withBlock:^(BOOL sure) {
+       
+        if (sure) {
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                NSInteger index = sender.tag-1000;
+                NSLog(@"index:%ld",index);
+                NSString *imageName = self.imageArray[index];
+                
+                [[WLPublicTool shareTool] deleteImageWithName:imageName];
+                [WLSaveLocalHelper deleteCustomImageWithName:imageName];
+                [self.imageArray removeObjectAtIndex:index];
+                [self.mainCollection reloadData];
+                
+                if (self.imageArray.count == 0) {
+                    self.mainCollection.hidden = YES;
+                    self.editImage.hidden = YES;
+                    self.editBtn.hidden = YES;
+                }else{
+                    self.mainCollection.hidden = NO;
+                }
 
-    [[WLPublicTool shareTool] deleteImageWithName:imageName];
-    [WLSaveLocalHelper deleteCustomImageWithName:imageName];
-    [self.mainCollection reloadData];
+                
+            });
+        }
+    }];
+    
+    
 }
+
 
 
 

@@ -24,7 +24,10 @@ static const NSInteger cellCount = 3;
  **/
 @property (nonatomic, strong) NSMutableArray *imageArray;
 
-
+/**
+ *  保存图片的block
+ **/
+@property (nonatomic,copy) ListSaveImageBlock saveBlock;
 @end
 
 @implementation WLImageListController
@@ -63,6 +66,12 @@ static const NSInteger cellCount = 3;
 - (void)loadCustomView
 {
     self.mainCollection.backgroundColor = ViewBackgroundColor;
+}
+- (void)saveImageWithBlock:(ListSaveImageBlock)block
+{
+    if (block) {
+        self.saveBlock = block;
+    }
 }
 
 #pragma mark - UICollectionView  代理
@@ -103,6 +112,11 @@ static const NSInteger cellCount = 3;
     WLImageController *vc = [[WLImageController alloc]init];
     vc.imageName = imageName;
     [vc configureUI];
+    [vc saveImageWithBlock:^{
+        if (self.saveBlock) {
+            self.saveBlock();
+        }
+    }];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
