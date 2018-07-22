@@ -103,9 +103,9 @@ static const NSInteger cellCount = 3;
     [self.editImage mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.bottom.equalTo(self.naviView.mas_bottom).offset(-10);
-        make.right.equalTo(btn.mas_left).offset(-12);
-        make.width.mas_equalTo(18);
-        make.height.mas_equalTo(18);
+        make.right.equalTo(btn.mas_left).offset(-10);
+        make.width.mas_equalTo(20);
+        make.height.mas_equalTo(20);
         
     }];
     
