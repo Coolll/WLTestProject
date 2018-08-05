@@ -149,10 +149,16 @@ static const NSInteger cellCount = 3;
 
 - (void)editButtonAction:(UIButton*)sender
 {
-    NSLog(@"编辑");
-    self.isEditing = YES;
-    self.mainCollection.backgroundColor = ViewBackgroundColor;
-    [self.mainCollection reloadData];
+    if (self.isEditing) {
+        self.isEditing = NO;
+        self.mainCollection.backgroundColor = ViewBackgroundColor;
+        [self.mainCollection reloadData];
+    }else{
+        self.isEditing = YES;
+        self.mainCollection.backgroundColor = ViewBackgroundColor;
+        [self.mainCollection reloadData];
+    }
+    
 }
 
 

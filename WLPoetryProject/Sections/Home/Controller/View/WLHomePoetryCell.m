@@ -78,12 +78,7 @@ static const CGFloat nameHeight = 25;//名字、作者等信息的高度
 
 - (void)loadCellContentView
 {
-    self.bgView = [[UIView alloc]init];
-    self.bgView.layer.cornerRadius = 4.f;
-    //    self.bgView.layer.borderColor = RGBCOLOR(103, 172, 58, 1.0).CGColor;
-    //    self.bgView.layer.borderWidth = 0.8;
     self.bgView.backgroundColor = [UIColor whiteColor];
-    [self addSubview:self.bgView];
     //元素的布局
     if (self.isLast) {
         [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -102,7 +97,7 @@ static const CGFloat nameHeight = 25;//名字、作者等信息的高度
             [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
                 
                 make.left.equalTo(self.mas_left).offset(leftSpace);
-                make.top.equalTo(self.mas_top).offset(topSpce-5);
+                make.top.equalTo(self.mas_top).offset(topSpce-10);
                 make.bottom.equalTo(self.mas_bottom).offset(0);
                 make.right.equalTo(self.mas_right).offset(-leftSpace);
                 
@@ -123,32 +118,16 @@ static const CGFloat nameHeight = 25;//名字、作者等信息的高度
     }
     
     
-    self.nameLabel = [[UILabel alloc]init];
-    self.nameLabel.font = [UIFont boldSystemFontOfSize:16.f];
-    self.nameLabel.numberOfLines = 1;
+
     self.nameLabel.textColor = RGBCOLOR(60, 60, 60, 1.0);
-    [self.bgView addSubview:self.nameLabel];
     
-    self.authorLabel = [[UILabel alloc]init];
-    self.authorLabel.font = [UIFont systemFontOfSize:14.f];
-    self.nameLabel.textColor = RGBCOLOR(40, 40, 40, 1.0);
-    [self.bgView addSubview:self.authorLabel];
+    self.authorLabel.textColor = RGBCOLOR(40, 40, 40, 1.0);
     
-    self.authorImageView = [[UIImageView alloc]init];
     self.authorImageView.image = [UIImage imageNamed:@"homeAuthorBg"];
-    [self.bgView addSubview:self.authorImageView];
     
-    self.authorLastName = [[UILabel alloc]init];
-    self.authorLastName.font = [UIFont boldSystemFontOfSize:16.f];
     self.authorLastName.numberOfLines = 1;
-    self.authorLastName.textAlignment = NSTextAlignmentCenter;
-    [self.authorImageView addSubview:self.authorLastName];
     
-    self.contentLabel = [[UILabel alloc]init];
-    self.contentLabel.font = [UIFont systemFontOfSize:16.f];
     self.contentLabel.textColor = RGBCOLOR(20, 20, 20, 1.0);
-    self.contentLabel.numberOfLines = 0;
-    [self.bgView addSubview:self.contentLabel];
     
     [self loadViewLayouts];
 }
@@ -238,5 +217,66 @@ static const CGFloat nameHeight = 25;//名字、作者等信息的高度
     return otherHeight+firstLineHeight;//5为文本与底部横线的距离
 }
 
+- (UIView*)bgView
+{
+    if (!_bgView) {
+        _bgView = [[UIView alloc]init];
+        _bgView.layer.cornerRadius = 4.f;
+        [self addSubview:_bgView];
+    }
+    return _bgView;
+}
 
+- (UILabel *)nameLabel
+{
+    if (!_nameLabel) {
+        _nameLabel = [[UILabel alloc]init];
+        _nameLabel.font = [UIFont boldSystemFontOfSize:16.f];
+        _nameLabel.numberOfLines = 1;
+        [self.bgView addSubview:_nameLabel];
+    }
+    return _nameLabel;
+}
+- (UILabel *)authorLabel
+{
+    if (!_authorLabel) {
+        _authorLabel = [[UILabel alloc]init];
+        _authorLabel.font = [UIFont systemFontOfSize:14.f];
+        _authorLabel.numberOfLines = 1;
+        [self.bgView addSubview:_authorLabel];
+    }
+    return _authorLabel;
+}
+
+- (UIImageView*)authorImageView
+{
+    if (!_authorImageView) {
+        _authorImageView = [[UIImageView alloc]init];
+        [self.bgView addSubview:_authorImageView];
+        
+    }
+    return _authorImageView;
+}
+
+- (UILabel*)authorLastName
+{
+    if (!_authorLastName) {
+        _authorLastName = [[UILabel alloc]init];
+        _authorLastName.font = [UIFont boldSystemFontOfSize:16.f];
+        _authorLastName.textAlignment = NSTextAlignmentCenter;
+        [self.authorImageView addSubview:_authorLastName];
+    }
+    return _authorLastName;
+}
+
+- (UILabel *)contentLabel
+{
+    if (!_contentLabel) {
+        _contentLabel = [[UILabel alloc]init];
+        _contentLabel.font = [UIFont systemFontOfSize:16.f];
+        _contentLabel.numberOfLines = 0;
+        [self.bgView addSubview:_contentLabel];
+    }
+    return _contentLabel;
+}
 @end

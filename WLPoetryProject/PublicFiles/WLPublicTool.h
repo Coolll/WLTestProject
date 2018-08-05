@@ -11,6 +11,7 @@
 @interface WLPublicTool : NSObject
 
 + (WLPublicTool *)shareTool;
+- (void)addCornerForView:(UIView*)view withCornerRadius:(CGFloat)cornerR;
 //添加圆角
 - (void)addCornerForView:(UIView*)view withTopLeft:(BOOL)topLeft withTopRight:(BOOL)topRight withBottomLeft:(BOOL)bottomLeft withBottomRight:(BOOL)bottomRight withCornerRadius:(CGFloat)cornerR;
 

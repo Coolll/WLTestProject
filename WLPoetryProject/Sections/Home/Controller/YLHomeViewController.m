@@ -14,6 +14,7 @@
 #import "WLImageCell.h"
 #import "WLImageController.h"
 #import "WLImageListController.h"
+#import "WritePoetryController.h"
 
 @interface YLHomeViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -39,7 +40,7 @@
 /**
  *  json是否读取的数组
  **/
-@property (nonatomic,strong) NSMutableArray *jsonStateArr;
+@property (nonatomic,strong) NSMutableDictionary *jsonStateDic;
 
 
 
@@ -167,9 +168,83 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
+    if (section == 1) {
+        return 30;
+    }
     return 0.01;
 }
 
+- (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    if (section == 1) {
+        //第二个section为热门诗词
+        UIView *headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, PhoneScreen_WIDTH, 30)];
+        headerView.backgroundColor = RGBCOLOR(246, 246, 246, 1.0);
+        
+        UILabel *poetryTipLabel = [[UILabel alloc]init];
+        poetryTipLabel.text = @"热门·诗词";
+        poetryTipLabel.font = [UIFont systemFontOfSize:14.f];
+        poetryTipLabel.textColor = RGBCOLOR(100, 100, 100, 1.0);
+        [headerView addSubview:poetryTipLabel];
+        //元素的布局
+        [poetryTipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.left.equalTo(headerView.mas_left).offset(15);
+            make.top.equalTo(headerView.mas_top).offset(5);
+            make.right.equalTo(headerView.mas_right).offset(-15);
+            make.height.mas_equalTo(20);
+            
+        }];
+        
+        UIImageView *writeImage = [[UIImageView alloc]init];
+        writeImage.image = [UIImage imageNamed:@"writePoetry"];
+        [headerView addSubview:writeImage];
+        //元素的布局
+        [writeImage mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.top.equalTo(headerView.mas_top).offset(6);
+            make.right.equalTo(headerView.mas_right).offset(-60);
+            make.width.mas_equalTo(18);
+            make.height.mas_equalTo(18);
+            
+        }];
+        
+        UILabel *writeLabel = [[UILabel alloc]init];
+        writeLabel.text = @"创作";
+        writeLabel.font = [UIFont systemFontOfSize:14.f];
+        writeLabel.textColor = RGBCOLOR(100, 100, 100, 1.0);
+        [headerView addSubview:writeLabel];
+        //元素的布局
+        [writeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.left.equalTo(writeImage.mas_right).offset(5);
+            make.top.equalTo(headerView.mas_top).offset(0);
+            make.bottom.equalTo(headerView.mas_bottom).offset(0);
+            make.right.equalTo(headerView.mas_right).offset(-15);
+            
+        }];
+        
+        UIButton *writeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [writeBtn addTarget:self action:@selector(writePoetryAction:) forControlEvents:UIControlEventTouchUpInside];
+        [headerView addSubview:writeBtn];
+        //元素的布局
+        [writeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.left.equalTo(writeImage.mas_left).offset(-10);
+            make.top.equalTo(headerView.mas_top).offset(0);
+            make.bottom.equalTo(headerView.mas_bottom).offset(-0);
+            make.right.equalTo(headerView.mas_right).offset(0);
+           
+            
+        }];
+        
+        return headerView;
+        
+    }
+    
+    return nil;
+    
+}
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSInteger section = indexPath.section;
@@ -178,7 +253,7 @@
         CGFloat imageW = PhoneScreen_WIDTH-30;
         CGFloat imageH = imageW/2.88;//图片的比例是750：260
         //10 20 5 image 5 20
-        return imageH+60;
+        return imageH+40;
         
         
     }else if (section == 1){
@@ -199,7 +274,7 @@
                     CGFloat cellHeight = [WLHomePoetryCell heightForFirstLine:[self.poetryArray objectAtIndex:indexPath.row]];
                     
                     if (indexPath.row == 0) {
-                        cellHeight -= 20;
+                        cellHeight -= 25;
                     }
                     [self.heightArray addObject:[NSString stringWithFormat:@"%f",cellHeight]];
                     return cellHeight;
@@ -276,7 +351,14 @@
     }
    
 }
-
+#pragma mark - 点击事件
+- (void)writePoetryAction:(UIButton*)sender
+{
+    WritePoetryController *vc = [[WritePoetryController alloc]init];
+    vc.hidesBottomBarWhenPushed = YES;
+    
+    [self.navigationController pushViewController:vc animated:YES];
+}
 - (void)tapTheImage
 {
     WLImageListController *vc = [[WLImageListController alloc]init];
@@ -289,50 +371,22 @@
 #pragma mark - 后台进程，添加所有的数据
 - (void)checkLocalData
 {
-    NSMutableArray *jsonList = [NSMutableArray array];
-    [jsonList addObject:@"gradePoetry_1"];
-    [jsonList addObject:@"gradePoetry_2"];
-    [jsonList addObject:@"gradePoetry_3"];
-    [jsonList addObject:@"gradePoetry_4"];
-    [jsonList addObject:@"gradePoetry_5"];
-    [jsonList addObject:@"gradePoetry_6"];
-    [jsonList addObject:@"gradePoetry_7_one"];
-    [jsonList addObject:@"gradePoetry_7_two"];
-    [jsonList addObject:@"gradePoetry_8_one"];
-    [jsonList addObject:@"gradePoetry_8_two"];
-    [jsonList addObject:@"gradePoetry_9_one"];
-    [jsonList addObject:@"gradePoetry_9_two"];
-    [jsonList addObject:@"tangPoetry_one"];
-    [jsonList addObject:@"tangPoetry_two"];
-    [jsonList addObject:@"tangPoetry_three"];
-    [jsonList addObject:@"tangPoetry_four"];
-    [jsonList addObject:@"tangPoetry_five"];
-    [jsonList addObject:@"tangPoetry_six"];
-    [jsonList addObject:@"tangPoetry_seven"];
-    [jsonList addObject:@"songPoetry_one"];
-    [jsonList addObject:@"songPoetry_two"];
-    [jsonList addObject:@"songPoetry_three"];
-    [jsonList addObject:@"songPoetry_four"];
-    [jsonList addObject:@"songPoetry_five"];
-    [jsonList addObject:@"songPoetry_six"];
-    [jsonList addObject:@"songPoetry_seven"];
-    [jsonList addObject:@"songPoetry_eight"];
-    [jsonList addObject:@"songPoetry_nine"];
-    [jsonList addObject:@"songPoetry_ten"];
+    NSArray *jsonList = [NSArray array];
+    jsonList = [AppConfig config].allPoetryList;
     
-    NSArray *jsonStateArray = [WLSaveLocalHelper loadObjectForKey:@"PoetryJsonState"];
-    self.jsonStateArr = [NSMutableArray array];
+    NSDictionary *jsonStateDic = [WLSaveLocalHelper loadObjectForKey:@"PoetryJsonStateDic"];
+    self.jsonStateDic = [NSMutableDictionary dictionary];
     
-    if (jsonStateArray && [jsonStateArray isKindOfClass:[NSArray class]] && jsonStateArray.count == jsonList.count ) {
+    if (jsonStateDic && [jsonStateDic isKindOfClass:[NSDictionary class]] && jsonStateDic.allKeys.count == jsonList.count ) {
         
-        self.jsonStateArr = [jsonStateArray mutableCopy];
+        self.jsonStateDic = [jsonStateDic mutableCopy];
         
-        for (int i = 0; i < jsonStateArray.count ;i++) {
-            NSString *state = jsonStateArray[i];
+        for (int i = 0; i < jsonStateDic.allKeys.count ;i++) {
+            NSString *state = jsonStateDic.allValues[i];
             int time = 4*i;
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(time * NSEC_PER_SEC)), dispatch_get_global_queue(0, 0), ^{
                 if (![state isEqualToString:@"1"]) {
-                    [self readLocalFileWithName:jsonList[i] withIndex:i];
+                    [self readLocalFileWithName:jsonList[i] withKey:jsonStateDic.allKeys[i]];
                 }
                 
             });
@@ -342,16 +396,16 @@
     }else{
         
         for (int i =0 ; i < jsonList.count; i++) {
-            [self.jsonStateArr addObject:@"0"];
-            
+            NSString *key = [NSString stringWithFormat:@"%@",jsonList[i]];
+            [self.jsonStateDic setObject:@"0" forKey:key];
         }
         
-        for (int i = 0; i < self.jsonStateArr.count ;i++) {
-            NSString *state = self.jsonStateArr[i];
+        for (int i = 0; i < self.jsonStateDic.allValues.count ;i++) {
+            NSString *state = self.jsonStateDic.allValues[i];
             int time = 4*i;
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(time * NSEC_PER_SEC)), dispatch_get_global_queue(0, 0), ^{
                 if (![state isEqualToString:@"1"]) {
-                    [self readLocalFileWithName:jsonList[i] withIndex:i];
+                    [self readLocalFileWithName:jsonList[i] withKey:self.jsonStateDic.allKeys[i]];
                 }
                 
             });
@@ -363,7 +417,7 @@
     }
 }
 
-- (void)readLocalFileWithName:(NSString*)fileName withIndex:(NSInteger)jsonIndex
+- (void)readLocalFileWithName:(NSString*)fileName withKey:(NSString*)key
 {
     //从本地读取文件
     NSData *JSONData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:fileName ofType:@"json"]];
@@ -389,8 +443,8 @@
     [[WLCoreDataHelper shareHelper]saveInBackgroundWithPeotryModelArray:modelArray withResult:^(BOOL isSuccessful, NSError *error) {
         if (isSuccessful) {
             //存储成功后更新状态
-            [self.jsonStateArr replaceObjectAtIndex:jsonIndex withObject:@"1"];
-            [WLSaveLocalHelper saveObject:[self.jsonStateArr copy] forKey:@"PoetryJsonState"];
+            [self.jsonStateDic setObject:@"1" forKey:key];
+            [WLSaveLocalHelper saveObject:[self.jsonStateDic copy] forKey:@"PoetryJsonStateDic"];
             
         }
     }];
@@ -425,14 +479,9 @@
         _mainTableView.delegate = self;
         _mainTableView.dataSource = self;
         _mainTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-//        _mainTableView.backgroundColor = [UIColor whiteColor];
         [self.view addSubview:_mainTableView];
         
-//        if (@available(iOS 11.0, *)) {
-//            _mainTableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-//        }else {
-//            self.automaticallyAdjustsScrollViewInsets = NO;
-//        }
+
         //元素的布局
         [_mainTableView mas_makeConstraints:^(MASConstraintMaker *make) {
             

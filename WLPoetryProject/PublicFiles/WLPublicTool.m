@@ -20,6 +20,11 @@
 }
 
 #pragma mark - 画圆角
+- (void)addCornerForView:(UIView*)view withCornerRadius:(CGFloat)cornerR
+{
+    [self addCornerForView:view withTopLeft:YES withTopRight:YES withBottomLeft:YES withBottomRight:YES withCornerRadius:cornerR];
+}
+
 - (void)addCornerForView:(UIView*)view withTopLeft:(BOOL)topLeft withTopRight:(BOOL)topRight withBottomLeft:(BOOL)bottomLeft withBottomRight:(BOOL)bottomRight withCornerRadius:(CGFloat)cornerR
 {
     CGFloat viewWidth = view.frame.size.width;

@@ -34,6 +34,12 @@
  **/
 @property (nonatomic,strong) NSMutableDictionary *bgImageInfo;
 
+/**
+ *  全部的诗词数据
+ **/
+@property (nonatomic,strong) NSArray *allPoetryList;
+
+
 
 - (void)loadAllClassImageInfo;
 

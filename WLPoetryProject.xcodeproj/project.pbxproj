@@ -193,6 +193,9 @@
 		0785076820B2EFF20030CD98 /* songPoetry_four.json in Resources */ = {isa = PBXBuildFile; fileRef = 0785075F20B2EFF20030CD98 /* songPoetry_four.json */; };
 		0785076920B2EFF20030CD98 /* songPoetry_ten.json in Resources */ = {isa = PBXBuildFile; fileRef = 0785076020B2EFF20030CD98 /* songPoetry_ten.json */; };
 		0785076A20B2EFF20030CD98 /* songPoetry_six.json in Resources */ = {isa = PBXBuildFile; fileRef = 0785076120B2EFF20030CD98 /* songPoetry_six.json */; };
+		0791165C210C709600436964 /* allPoetryListConfigure.json in Resources */ = {isa = PBXBuildFile; fileRef = 0791165B210C709600436964 /* allPoetryListConfigure.json */; };
+		0791165E210CB8FC00436964 /* writePoetry.png in Resources */ = {isa = PBXBuildFile; fileRef = 0791165D210CB8FC00436964 /* writePoetry.png */; };
+		07911661210CBDA800436964 /* WritePoetryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07911660210CBDA800436964 /* WritePoetryController.m */; };
 		079568FA20726D0B0097C26D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 079568F920726D0B0097C26D /* AppDelegate.m */; };
 		0795690020726D0B0097C26D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 079568FE20726D0B0097C26D /* Main.storyboard */; };
 		0795690520726D0B0097C26D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0795690420726D0B0097C26D /* Assets.xcassets */; };
@@ -596,6 +599,10 @@
 		0785075F20B2EFF20030CD98 /* songPoetry_four.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = songPoetry_four.json; sourceTree = "<group>"; };
 		0785076020B2EFF20030CD98 /* songPoetry_ten.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = songPoetry_ten.json; sourceTree = "<group>"; };
 		0785076120B2EFF20030CD98 /* songPoetry_six.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = songPoetry_six.json; sourceTree = "<group>"; };
+		0791165B210C709600436964 /* allPoetryListConfigure.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = allPoetryListConfigure.json; sourceTree = "<group>"; };
+		0791165D210CB8FC00436964 /* writePoetry.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = writePoetry.png; sourceTree = "<group>"; };
+		0791165F210CBDA800436964 /* WritePoetryController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WritePoetryController.h; sourceTree = "<group>"; };
+		07911660210CBDA800436964 /* WritePoetryController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WritePoetryController.m; sourceTree = "<group>"; };
 		079568F520726D0B0097C26D /* WLPoetryProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WLPoetryProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		079568F820726D0B0097C26D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		079568F920726D0B0097C26D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -1051,7 +1058,6 @@
 			isa = PBXGroup;
 			children = (
 				07F73C7F208AF51D00F7D8B3 /* Controller */,
-				07CFF23D208B0A8900849C20 /* View */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1543,6 +1549,7 @@
 		07F3E30120D2C0FB00E7BAF7 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				0791165D210CB8FC00436964 /* writePoetry.png */,
 				073864F220E12D8B0005BE61 /* ForImage */,
 				00D4F64220F7467800287FB0 /* homeAuthorBg.png */,
 				00E2CB3D20E084FD00E44793 /* topImage.jpg */,
@@ -1623,6 +1630,7 @@
 				075DF12B20F62FD20075E9D5 /* configureGradeSenior.json */,
 				07E7C31A20CC1DB7007CA827 /* configureTang.json */,
 				07E7C31620CC1DA7007CA827 /* configureSong.json */,
+				0791165B210C709600436964 /* allPoetryListConfigure.json */,
 			);
 			path = JSONFile;
 			sourceTree = "<group>";
@@ -1634,6 +1642,9 @@
 				07F73C81208AF51D00F7D8B3 /* YLHomeViewController.m */,
 				07642A5C208E141900B084AE /* PoetryDetailViewController.h */,
 				07642A5D208E141900B084AE /* PoetryDetailViewController.m */,
+				0791165F210CBDA800436964 /* WritePoetryController.h */,
+				07911660210CBDA800436964 /* WritePoetryController.m */,
+				07CFF23D208B0A8900849C20 /* View */,
 				0010F21820F4911500F272EB /* ImagePoetry */,
 			);
 			path = Controller;
@@ -1752,9 +1763,11 @@
 				07603EA420FCCC510074A5CB /* deleteImage.png in Resources */,
 				0785076320B2EFF20030CD98 /* songPoetry_five.json in Resources */,
 				071609AC20A1C15400904C69 /* gradePoetry_4.json in Resources */,
+				0791165E210CB8FC00436964 /* writePoetry.png in Resources */,
 				07F73C75208AE84900F7D8B3 /* tabbarThree.png in Resources */,
 				00FD14C520A95A2D0018D649 /* tangPoetry_four.json in Resources */,
 				07E4DFD820C55F03009E1F6D /* search.png in Resources */,
+				0791165C210C709600436964 /* allPoetryListConfigure.json in Resources */,
 				0785076620B2EFF20030CD98 /* songPoetry_eight.json in Resources */,
 				07F73C74208AE84900F7D8B3 /* tabbarOne.png in Resources */,
 				071609B220A1C15400904C69 /* gradePoetry_empty.json in Resources */,
@@ -1976,6 +1989,7 @@
 				00469AF620F8938D0068636F /* WLShowImageController.m in Sources */,
 				0765C70E207CE6E20085EB3A /* UIImage+GIF.m in Sources */,
 				07567B7C207A02EC0018B9E7 /* WLCustomTextView.m in Sources */,
+				07911661210CBDA800436964 /* WritePoetryController.m in Sources */,
 				0765C708207CE6E20085EB3A /* SDWebImageManager.m in Sources */,
 				0010F22120F4911500F272EB /* WLImagePoetryController.m in Sources */,
 				0765C6B4207CE47E0085EB3A /* NSArray+MASAdditions.m in Sources */,
