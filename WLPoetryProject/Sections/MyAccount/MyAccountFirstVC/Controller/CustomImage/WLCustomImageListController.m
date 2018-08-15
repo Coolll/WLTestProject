@@ -50,8 +50,6 @@ static const NSInteger cellCount = 3;
 @property (nonatomic,strong) UIButton *editBtn;
 
 
-
-
 @end
 
 @implementation WLCustomImageListController

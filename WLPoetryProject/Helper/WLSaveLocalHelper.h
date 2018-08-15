@@ -18,5 +18,4 @@
 + (void)deleteCustomImageWithName:(NSString*)imageName;
 + (NSArray*)loadCustomImageArray;
 
-
 @end

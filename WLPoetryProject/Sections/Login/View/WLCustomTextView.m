@@ -19,13 +19,10 @@ typedef void(^CustomTextBlock)(NSString *string);
  **/
 @property (nonatomic,assign) CGRect viewFrame;
 
-
 /**
  *  文本
  **/
 @property (nonatomic,copy) CustomTextBlock block;
-
-
 
 
 @end
@@ -42,9 +39,30 @@ typedef void(^CustomTextBlock)(NSString *string);
         self.mainTextField = [[WLTextField alloc]init];
         self.mainTextField.delegate = self;
         self.mainTextField.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
-//        self.mainTextField.tintColor = [UIColor blackColor];
-        
         [self addSubview:self.mainTextField];
+    }
+    
+    return self;
+}
+
+- (instancetype)init
+{
+    self = [super init];
+    
+    if (self) {
+        
+        self.mainTextField = [[WLTextField alloc]init];
+        self.mainTextField.delegate = self;
+        [self addSubview:self.mainTextField];
+        
+        //设置UI布局约束
+        [self.mainTextField mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.top.equalTo(self.mas_top).offset(0);//元素顶部约束
+            make.leading.equalTo(self.mas_leading).offset(0);//元素左侧约束
+            make.trailing.equalTo(self.mas_trailing).offset(0);//元素右侧约束
+            make.bottom.equalTo(self.mas_bottom).offset(0);//元素底部约束
+        }];
     }
     
     return self;
@@ -65,9 +83,23 @@ typedef void(^CustomTextBlock)(NSString *string);
 {
     _leftSpace = leftSpace;
     
-    self.placeHolderLabel.frame = CGRectMake(leftSpace, self.placeHolderLabel.frame.origin.y, self.placeHolderLabel.frame.size.width-leftSpace, self.placeHolderLabel.frame.size.height);
+    if (self.mainTextField.frame.size.width) {
+        
+        self.placeHolderLabel.frame = CGRectMake(leftSpace, self.placeHolderLabel.frame.origin.y, self.placeHolderLabel.frame.size.width-leftSpace, self.placeHolderLabel.frame.size.height);
+        
+        self.mainTextField.frame = CGRectMake(leftSpace-2, self.mainTextField.frame.origin.y, self.mainTextField.frame.size.width-leftSpace, self.mainTextField.frame.size.height);
+    }else{
+        
+        [self.placeHolderLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.leading.equalTo(self.mas_leading).offset(leftSpace);
+        }];
+        
+        
+        [self.mainTextField mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.leading.equalTo(self.mas_leading).offset(leftSpace-2);
+        }];
+    }
     
-    self.mainTextField.frame = CGRectMake(leftSpace-2, self.mainTextField.frame.origin.y, self.mainTextField.frame.size.width-leftSpace, self.mainTextField.frame.size.height);
 
 }
 
@@ -88,11 +120,24 @@ typedef void(^CustomTextBlock)(NSString *string);
 {
     if (!_placeHolderLabel) {
         _placeHolderLabel = [[UILabel alloc]init];
-        _placeHolderLabel.frame = CGRectMake(0, 0, self.viewFrame.size.width, self.viewFrame.size.height);
         _placeHolderLabel.textColor = [UIColor lightGrayColor];
         _placeHolderLabel.backgroundColor = [UIColor whiteColor];
         _placeHolderLabel.font = [UIFont systemFontOfSize:14.0];
         [self addSubview:_placeHolderLabel];
+        
+        if (self.viewFrame.size.width > 0  && self.viewFrame.size.height > 0 ) {
+            _placeHolderLabel.frame = CGRectMake(0, 0, self.viewFrame.size.width, self.viewFrame.size.height);
+        }else{
+            //设置UI布局约束
+            [_placeHolderLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+                
+                make.top.equalTo(self.mas_top).offset(0);//元素顶部约束
+                make.leading.equalTo(self.mas_leading).offset(0);//元素左侧约束
+                make.trailing.equalTo(self.mas_trailing).offset(0);//元素右侧约束
+                make.bottom.equalTo(self.mas_bottom).offset(0);//元素底部约束
+            }];
+        }
+        
         
     }
     return _placeHolderLabel;
