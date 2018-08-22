@@ -61,58 +61,62 @@ static const CGFloat nameHeight = 25;//名字、作者等信息的高度
 - (void)setDataModel:(PoetryModel *)dataModel
 {
     _dataModel = dataModel;
-    [self loadCellContentView];
-
+    if (!_nameLabel || !_authorLabel || !_contentLabel) {
+        [self loadCellContentView];
+    }
+    self.frame = CGRectMake(0, 0, PhoneScreen_WIDTH, dataModel.heightForCell);
     
+    [self dealDifferentCell];
     self.nameLabel.text = dataModel.name;
     self.authorLabel.text = dataModel.author;
     self.contentLabel.text = dataModel.firstLineString;
 }
 
-- (void)loadCellContentView
+- (void)dealDifferentCell
 {
-    self.bgView = [[UIView alloc]init];
-    self.bgView.layer.cornerRadius = 4.f;
-    self.bgView.backgroundColor = [UIColor whiteColor];
-    [self addSubview:self.bgView];
     //元素的布局
     if (self.isLast) {
         
-        [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        [self.bgView mas_updateConstraints:^(MASConstraintMaker *make) {
             
             make.left.equalTo(self.mas_left).offset(leftSpace);
             make.top.equalTo(self.mas_top).offset(topSpce*2);
             make.bottom.equalTo(self.mas_bottom).offset(-topSpce*2);
             make.right.equalTo(self.mas_right).offset(-leftSpace);
             
-            
         }];
     }else{
         
         if (self.isFirst) {
             //有 题画 诗词 顶部间距减小
-            [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
+            [self.bgView mas_updateConstraints:^(MASConstraintMaker *make) {
                 
                 make.left.equalTo(self.mas_left).offset(leftSpace);
                 make.top.equalTo(self.mas_top).offset(topSpce-5);
                 make.bottom.equalTo(self.mas_bottom).offset(0);
                 make.right.equalTo(self.mas_right).offset(-leftSpace);
                 
-                
             }];
         }else{
-            [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
+            [self.bgView mas_updateConstraints:^(MASConstraintMaker *make) {
                 
                 make.left.equalTo(self.mas_left).offset(leftSpace);
                 make.top.equalTo(self.mas_top).offset(topSpce*2);
                 make.bottom.equalTo(self.mas_bottom).offset(0);
                 make.right.equalTo(self.mas_right).offset(-leftSpace);
                 
-                
             }];
         }
         
     }
+
+}
+- (void)loadCellContentView
+{
+    self.bgView = [[UIView alloc]init];
+    self.bgView.layer.cornerRadius = 4.f;
+    self.bgView.backgroundColor = [UIColor whiteColor];
+    [self addSubview:self.bgView];
     
     
     self.nameLabel.textColor = RGBCOLOR(60, 60, 60, 1.0);
@@ -179,7 +183,6 @@ static const CGFloat nameHeight = 25;//名字、作者等信息的高度
         make.left.equalTo(self.nameLabel.mas_left).offset(0);
         make.top.equalTo(self.authorLabel.mas_bottom).offset(itemSpace);
         make.right.equalTo(self.nameLabel.mas_right).offset(0);
-        
     }];
     
     

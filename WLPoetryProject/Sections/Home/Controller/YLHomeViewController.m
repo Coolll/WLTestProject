@@ -259,16 +259,19 @@
     }else if (section == 1){
         
         //如果有缓存的高度，则不计算了
-        if (self.heightArray.count > indexPath.row) {
-            return [[self.heightArray objectAtIndex:indexPath.row] floatValue];
-        }else{
+        
             //没有缓存的高度，则需要计算
             if (self.poetryArray.count > indexPath.row) {
+                PoetryModel *model = [self.poetryArray objectAtIndex:indexPath.row];
+                
+                if (model.heightForCell > 0) {
+                    return model.heightForCell;
+                }
                 
                 if (indexPath.row == self.poetryArray.count-1) {
                     //最后一行需要调整一下间距
                     CGFloat cellHeight = [WLHomePoetryCell heightForLastCell:[self.poetryArray objectAtIndex:indexPath.row]];
-                    [self.heightArray addObject:[NSString stringWithFormat:@"%f",cellHeight]];
+                    model.heightForCell = cellHeight;
                     return cellHeight;
                 }else{
                     CGFloat cellHeight = [WLHomePoetryCell heightForFirstLine:[self.poetryArray objectAtIndex:indexPath.row]];
@@ -276,11 +279,11 @@
                     if (indexPath.row == 0) {
                         cellHeight -= 25;
                     }
-                    [self.heightArray addObject:[NSString stringWithFormat:@"%f",cellHeight]];
+                    model.heightForCell = cellHeight;
                     return cellHeight;
                 }
             }
-        }
+
     }
     
     
@@ -314,15 +317,19 @@
         PoetryModel *model = [self.poetryArray objectAtIndex:indexPath.row];
         WLHomePoetryCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WLHomePoetryCell"];;
         if (!cell) {
-            cell = [[WLHomePoetryCell alloc]initWithFrame:CGRectMake(0, 0, PhoneScreen_WIDTH, 125)];
+            cell = [[WLHomePoetryCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"WLHomePoetryCell"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.backgroundColor = [UIColor clearColor];
         }
         if (indexPath.row == self.poetryArray.count-1) {
             cell.isLast = YES;
+        }else{
+            cell.isLast = NO;
         }
         if (indexPath.row == 0) {
             cell.isFirst = YES;
+        }else{
+            cell.isFirst = NO;
         }
         cell.dataModel = model;
         return cell;

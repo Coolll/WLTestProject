@@ -182,7 +182,7 @@
     
     WLPoetryListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WLPoetryListCell"];;
     if (!cell) {
-        cell = [[WLPoetryListCell alloc]initWithFrame:CGRectMake(0, 0, PhoneScreen_WIDTH, 125)];
+        cell = [[WLPoetryListCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"WLPoetryListCell"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.backgroundColor = [UIColor clearColor];
     }

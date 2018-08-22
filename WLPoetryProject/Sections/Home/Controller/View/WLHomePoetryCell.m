@@ -65,8 +65,11 @@ static const CGFloat nameHeight = 25;//名字、作者等信息的高度
 - (void)setDataModel:(PoetryModel *)dataModel
 {
     _dataModel = dataModel;
-    [self loadCellContentView];
-    
+    if (!_nameLabel || !_authorLabel ||!_contentLabel) {
+        [self loadCellContentView];
+    }
+    self.frame = CGRectMake(0, 0, PhoneScreen_WIDTH, dataModel.heightForCell);
+    [self dealBgViewLayout];
     
     self.nameLabel.text = dataModel.name;
     self.authorLabel.text = dataModel.author;
@@ -76,12 +79,11 @@ static const CGFloat nameHeight = 25;//名字、作者等信息的高度
     }
 }
 
-- (void)loadCellContentView
+- (void)dealBgViewLayout
 {
-    self.bgView.backgroundColor = [UIColor whiteColor];
     //元素的布局
     if (self.isLast) {
-        [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        [self.bgView mas_updateConstraints:^(MASConstraintMaker *make) {
             
             make.left.equalTo(self.mas_left).offset(leftSpace);
             make.top.equalTo(self.mas_top).offset(topSpce*2);
@@ -94,7 +96,7 @@ static const CGFloat nameHeight = 25;//名字、作者等信息的高度
         
         if (self.isFirst) {
             //有 题画 诗词 顶部间距减小
-            [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
+            [self.bgView mas_updateConstraints:^(MASConstraintMaker *make) {
                 
                 make.left.equalTo(self.mas_left).offset(leftSpace);
                 make.top.equalTo(self.mas_top).offset(topSpce-10);
@@ -104,7 +106,7 @@ static const CGFloat nameHeight = 25;//名字、作者等信息的高度
                 
             }];
         }else{
-            [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
+            [self.bgView mas_updateConstraints:^(MASConstraintMaker *make) {
                 
                 make.left.equalTo(self.mas_left).offset(leftSpace);
                 make.top.equalTo(self.mas_top).offset(topSpce*2);
@@ -116,6 +118,12 @@ static const CGFloat nameHeight = 25;//名字、作者等信息的高度
         }
         
     }
+    
+}
+
+- (void)loadCellContentView
+{
+    self.bgView.backgroundColor = [UIColor whiteColor];
     
     
 

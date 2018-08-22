@@ -115,7 +115,7 @@
     
     WLTypeListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WLTypeListCell"];;
     if (!cell) {
-        cell = [[WLTypeListCell alloc]init];
+        cell = [[WLTypeListCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"WLTypeListCell"];
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.backgroundColor = [UIColor whiteColor];

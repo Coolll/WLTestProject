@@ -22,10 +22,6 @@
  *  诗词数据源
  **/
 @property (nonatomic,strong) NSArray *poetryArray;
-/**
- *  高度数组
- **/
-@property (nonatomic,strong) NSMutableArray *heightArray;
 
 
 
@@ -43,9 +39,8 @@
 
 - (void)loadCustomData
 {
-    self.heightArray = [NSMutableArray array];
     
-    self.poetryArray = [[WLCoreDataHelper shareHelper] fetchPoetryWithMainClass:self.mainClass];
+    self.poetryArray = [NSArray arrayWithArray:[[WLCoreDataHelper shareHelper] fetchPoetryWithMainClass:self.mainClass]];
     
     if (self.poetryArray.count == 0) {
         //从本地读取文件
@@ -92,7 +87,7 @@
 {
     dispatch_async(dispatch_get_main_queue(), ^{
         
-        self.poetryArray = [[WLCoreDataHelper shareHelper] fetchPoetryWithMainClass:self.mainClass];
+        self.poetryArray = [NSArray arrayWithArray:[[WLCoreDataHelper shareHelper] fetchPoetryWithMainClass:self.mainClass]];
         [self loadCustomView];
     });
     
@@ -160,25 +155,32 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //如果有缓存的高度，则不计算了
-    if (self.heightArray.count > indexPath.row) {
-        return [[self.heightArray objectAtIndex:indexPath.row] floatValue];
-    }else{
-        //没有缓存的高度，则需要计算
+
+
         if (self.poetryArray.count > indexPath.row) {
+            PoetryModel *model = [self.poetryArray objectAtIndex:indexPath.row];
             
+            //如果有缓存的高度，则不计算了
+            if (model.heightForCell > 0) {
+                return model.heightForCell;
+            }
+            
+            //没有缓存的高度，则需要计算
             if (indexPath.row == self.poetryArray.count-1) {
                 //最后一行需要调整一下间距
                 CGFloat cellHeight = [WLPoetryListCell heightForLastCell:[self.poetryArray objectAtIndex:indexPath.row]];
-                [self.heightArray addObject:[NSString stringWithFormat:@"%f",cellHeight]];
+                model.heightForCell = cellHeight;
+
                 return cellHeight;
             }else{
                 CGFloat cellHeight = [WLPoetryListCell heightForFirstLine:[self.poetryArray objectAtIndex:indexPath.row]];
-                [self.heightArray addObject:[NSString stringWithFormat:@"%f",cellHeight]];
+                model.heightForCell = cellHeight;
+                NSLog(@"row:%ld 高度：%f",indexPath.row,cellHeight);
                 return cellHeight;
             }
+            
+            
         }
-    }
     
     return 0.001;
 }
@@ -189,14 +191,17 @@
     
     WLPoetryListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WLPoetryListCell"];;
     if (!cell) {
-        cell = [[WLPoetryListCell alloc]initWithFrame:CGRectMake(0, 0, PhoneScreen_WIDTH, 125)];
+        cell = [[WLPoetryListCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"WLPoetryListCell"];
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.backgroundColor = [UIColor clearColor];
-
+    
     if (indexPath.row == self.poetryArray.count-1) {
         cell.isLast = YES;
+    }else{
+        cell.isLast = NO;
     }
+    
     cell.dataModel = model;
     
     return cell;

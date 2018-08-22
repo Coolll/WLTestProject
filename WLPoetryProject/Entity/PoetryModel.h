@@ -27,4 +27,10 @@
 @property (nullable, nonatomic, copy) NSString *backgroundInfo;//创作背景信息
 @property (nullable, nonatomic, copy) NSString *mainClass;//主分类，1为小学一年级
 @property (nullable, nonatomic, copy) NSString *myPropertyForOne;//新增的一个属性
+/**
+ *  文本的高度
+ **/
+@property (nonatomic,assign) CGFloat heightForCell;
+
+
 @end
