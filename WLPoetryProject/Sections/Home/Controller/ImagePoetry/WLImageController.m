@@ -125,10 +125,10 @@ static const CGFloat imageW = 20;
     //元素的布局
     [self.mainImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(self.view.mas_left).offset(0);
+        make.leading.equalTo(self.view.mas_leading).offset(0);
         make.top.equalTo(self.view.mas_top).offset(0);
         make.bottom.equalTo(self.view.mas_bottom).offset(0);
-        make.right.equalTo(self.view.mas_right).offset(0);
+        make.trailing.equalTo(self.view.mas_trailing).offset(0);
         
     }];
     
@@ -228,7 +228,7 @@ static const CGFloat imageW = 20;
         //元素的布局
         [contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             
-            make.left.equalTo(self.view.mas_left).offset((PhoneScreen_WIDTH-width)/2).priority(500);
+            make.leading.equalTo(self.view.mas_leading).offset((PhoneScreen_WIDTH-width)/2).priority(500);
             make.top.equalTo(self.titleFullLabel.mas_bottom).offset(topSpace).priority(100);
             make.width.mas_equalTo(width);
             make.height.mas_equalTo(height);
@@ -266,7 +266,7 @@ static const CGFloat imageW = 20;
         //元素的布局
         [contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             
-            make.left.equalTo(self.view.mas_left).offset(leftSpace).priority(500);
+            make.leading.equalTo(self.view.mas_leading).offset(leftSpace).priority(500);
             make.top.equalTo(self.titleFullLabel.mas_bottom).offset(topSpace).priority(100);
             make.width.mas_equalTo(width);
             make.height.mas_equalTo(height);
@@ -311,7 +311,7 @@ static const CGFloat imageW = 20;
         CGFloat yOffset = point.y-self.beginPoint.y;
         
         [label mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.view.mas_left).offset(originLeft+xOffset).priority(600);
+            make.leading.equalTo(self.view.mas_leading).offset(originLeft+xOffset).priority(600);
             make.top.equalTo(self.titleFullLabel.mas_bottom).offset(originTop+yOffset).priority(200);
             self.lastTop = originTop+yOffset;
             self.lastLeft = originLeft+xOffset;
@@ -458,7 +458,7 @@ static const CGFloat imageW = 20;
         [_poetryView mas_makeConstraints:^(MASConstraintMaker *make) {
             
             make.top.equalTo(self.titleFullLabel.mas_bottom).offset(20);
-            make.right.equalTo(self.view.mas_right).offset(-20);
+            make.trailing.equalTo(self.view.mas_trailing).offset(-20);
             make.width.mas_equalTo(itemWidth);
             make.height.mas_equalTo(itemWidth);
         }];
@@ -469,7 +469,7 @@ static const CGFloat imageW = 20;
         //元素的布局
         [poetryImage mas_makeConstraints:^(MASConstraintMaker *make) {
             
-            make.left.equalTo(_poetryView.mas_left).offset((itemWidth-imageW)/2);
+            make.leading.equalTo(_poetryView.mas_leading).offset((itemWidth-imageW)/2);
             make.top.equalTo(_poetryView.mas_top).offset(15);
             make.width.mas_equalTo(imageW);
             make.height.mas_equalTo(imageW);
@@ -484,9 +484,9 @@ static const CGFloat imageW = 20;
         //元素的布局
         [tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             
-            make.left.equalTo(_poetryView.mas_left).offset(0);
+            make.leading.equalTo(_poetryView.mas_leading).offset(0);
             make.top.equalTo(poetryImage.mas_bottom).offset(10);
-            make.right.equalTo(_poetryView.mas_right).offset(0);
+            make.trailing.equalTo(_poetryView.mas_trailing).offset(0);
             make.height.mas_equalTo(20);
             
         }];
@@ -498,10 +498,10 @@ static const CGFloat imageW = 20;
         //元素的布局
         [contentBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             
-            make.left.equalTo(_poetryView.mas_left).offset(0);
+            make.leading.equalTo(_poetryView.mas_leading).offset(0);
             make.top.equalTo(_poetryView.mas_top).offset(0);
             make.bottom.equalTo(_poetryView.mas_bottom).offset(0);
-            make.right.equalTo(_poetryView.mas_right).offset(0);
+            make.trailing.equalTo(_poetryView.mas_trailing).offset(0);
             
         }];
     }

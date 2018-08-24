@@ -21,6 +21,11 @@ typedef void(^AlertBlock)(BOOL sure);
 @property (nonatomic,copy) NSString *titleForNavi;
 
 /**
+ *  存在导航栏时 标题label
+ **/
+@property (nonatomic,strong) UILabel *naviTitleLabel;
+
+/**
  *  是否展示返回按钮，默认yes
  **/
 @property (nonatomic,assign) BOOL isShowBack;

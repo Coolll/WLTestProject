@@ -1,17 +1,16 @@
 //
-//  WLCustomTextView.h
-//  YLPokerSpeak
+//  WLNewTextView.h
+//  WLPoetryProject
 //
-//  Created by 龙培 on 17/8/14.
-//  Copyright © 2017年 龙培. All rights reserved.
+//  Created by 变啦 on 2018/8/23.
+//  Copyright © 2018年 龙培. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-#import "WLTextField.h"
+#import "MyTextView.h"
 typedef void(^ReturnKeyBlock) (void);
 
-@interface WLCustomTextView : UIView
-
+@interface WLNewTextView : UIView
 /**
  *  文本
  **/
@@ -51,7 +50,7 @@ typedef void(^ReturnKeyBlock) (void);
 /**
  *  输入框
  **/
-@property (nonatomic,strong) WLTextField *mainTextField;
+@property (nonatomic,strong) MyTextView *mainTextView;
 
 /**
  *  限制输入的长度

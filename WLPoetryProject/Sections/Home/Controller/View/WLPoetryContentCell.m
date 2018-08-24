@@ -42,10 +42,10 @@
     //元素的布局
     [self.contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(self.contentView.mas_left).offset(10);
+        make.leading.equalTo(self.contentView.mas_leading).offset(10);
         make.top.equalTo(self.contentView.mas_top).offset(5);
         make.bottom.equalTo(self.contentView.mas_bottom).offset(-5);
-        make.right.equalTo(self.contentView.mas_right).offset(-10);
+        make.trailing.equalTo(self.contentView.mas_trailing).offset(-10);
         
     }];
 }

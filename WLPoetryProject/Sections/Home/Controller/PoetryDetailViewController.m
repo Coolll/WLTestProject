@@ -158,10 +158,10 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
     //元素的布局
     [self.mainImageView mas_makeConstraints:^(MASConstraintMaker *make) {
 
-        make.left.equalTo(self.view.mas_left).offset(0);
+        make.leading.equalTo(self.view.mas_leading).offset(0);
         make.top.equalTo(self.view.mas_top).offset(0);
         make.bottom.equalTo(self.view.mas_bottom).offset(0);
-        make.right.equalTo(self.view.mas_right).offset(0);
+        make.trailing.equalTo(self.view.mas_trailing).offset(0);
 
     }];
     
@@ -196,7 +196,7 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
         [self.likeImage mas_makeConstraints:^(MASConstraintMaker *make) {
             
             make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideTop).offset(35);
-            make.right.equalTo(self.view.mas_right).offset(-20);
+            make.trailing.equalTo(self.view.mas_trailing).offset(-20);
             make.width.mas_equalTo(20);//元素宽度
             make.height.mas_equalTo(20);//元素高度
             
@@ -413,10 +413,10 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
         //元素的布局
         [_mainTable mas_makeConstraints:^(MASConstraintMaker *make) {
             
-            make.left.equalTo(self.view.mas_left).offset(leftSpace);
+            make.leading.equalTo(self.view.mas_leading).offset(leftSpace);
             make.top.equalTo(self.authorLabel.mas_bottom).offset(topSpace);
             make.bottom.equalTo(self.view.mas_bottom).offset(-topSpace);
-            make.right.equalTo(self.view.mas_right).offset(-leftSpace);
+            make.trailing.equalTo(self.view.mas_trailing).offset(-leftSpace);
             
         }];
     }
@@ -434,9 +434,9 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
         //元素的布局
         [_authorLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             
-            make.left.equalTo(self.view.mas_left).offset(leftSpace);
+            make.leading.equalTo(self.view.mas_leading).offset(leftSpace);
             make.top.equalTo(self.titleFullLabel.mas_bottom).offset(topSpace);
-            make.right.equalTo(self.view.mas_right).offset(-leftSpace);
+            make.trailing.equalTo(self.view.mas_trailing).offset(-leftSpace);
             make.height.mas_equalTo(24);
             
         }];

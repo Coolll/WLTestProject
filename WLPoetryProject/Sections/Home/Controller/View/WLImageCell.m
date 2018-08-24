@@ -36,9 +36,9 @@
     //元素的布局
     [imageTipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(self.mas_left).offset(15);
+        make.leading.equalTo(self.mas_leading).offset(15);
         make.top.equalTo(self.mas_top).offset(10);
-        make.right.equalTo(self.mas_right).offset(-15);
+        make.trailing.equalTo(self.mas_trailing).offset(-15);
         make.height.mas_equalTo(20);
         
     }];

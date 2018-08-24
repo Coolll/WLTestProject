@@ -98,18 +98,7 @@
 #pragma mark - 加载视图
 - (void)loadCustomView
 {
-//    UIImageView *mainBgView = [[UIImageView alloc]init];
-//    mainBgView.image = [UIImage imageNamed:@"searchBg.jpg"];
-//    [self.view addSubview:mainBgView];
-//    //元素的布局
-//    [mainBgView mas_makeConstraints:^(MASConstraintMaker *make) {
-//
-//        make.left.equalTo(self.view.mas_left).offset(0);
-//        make.top.equalTo(self.naviView.mas_bottom).offset(0);
-//        make.bottom.equalTo(self.view.mas_bottom).offset(0);
-//        make.right.equalTo(self.view.mas_right).offset(0);
-//
-//    }];
+
     
     self.mainTableView = [[UITableView alloc]init];
     self.mainTableView.delegate = self;
@@ -121,10 +110,10 @@
     //元素的布局
     [self.mainTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(self.view.mas_left).offset(0);
+        make.leading.equalTo(self.view.mas_leading).offset(0);
         make.top.equalTo(self.naviView.mas_bottom).offset(0);
         make.bottom.equalTo(self.view.mas_bottom).offset(0);
-        make.right.equalTo(self.view.mas_right).offset(0);
+        make.trailing.equalTo(self.view.mas_trailing).offset(0);
         
     }];
 }

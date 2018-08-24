@@ -98,10 +98,10 @@
         //元素的布局
         [sureBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             
-            make.left.equalTo(self.view.mas_safeAreaLayoutGuideLeft).offset(0);
+            make.leading.equalTo(self.view.mas_safeAreaLayoutGuideLeft).offset(0);
             make.top.equalTo(self.view.mas_safeAreaLayoutGuideBottom).offset(-49);
             make.bottom.equalTo(self.view.mas_bottom).offset(0);
-            make.right.equalTo(self.view.mas_right).offset(0);
+            make.trailing.equalTo(self.view.mas_trailing).offset(0);
             
         }];
     }else{

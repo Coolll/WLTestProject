@@ -189,9 +189,9 @@
         //元素的布局
         [poetryTipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             
-            make.left.equalTo(headerView.mas_left).offset(15);
+            make.leading.equalTo(headerView.mas_leading).offset(15);
             make.top.equalTo(headerView.mas_top).offset(5);
-            make.right.equalTo(headerView.mas_right).offset(-15);
+            make.trailing.equalTo(headerView.mas_trailing).offset(-15);
             make.height.mas_equalTo(20);
             
         }];
@@ -203,7 +203,7 @@
         [writeImage mas_makeConstraints:^(MASConstraintMaker *make) {
             
             make.top.equalTo(headerView.mas_top).offset(6);
-            make.right.equalTo(headerView.mas_right).offset(-60);
+            make.trailing.equalTo(headerView.mas_trailing).offset(-60);
             make.width.mas_equalTo(18);
             make.height.mas_equalTo(18);
             
@@ -217,10 +217,10 @@
         //元素的布局
         [writeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             
-            make.left.equalTo(writeImage.mas_right).offset(5);
+            make.leading.equalTo(writeImage.mas_trailing).offset(5);
             make.top.equalTo(headerView.mas_top).offset(0);
             make.bottom.equalTo(headerView.mas_bottom).offset(0);
-            make.right.equalTo(headerView.mas_right).offset(-15);
+            make.trailing.equalTo(headerView.mas_trailing).offset(-15);
             
         }];
         
@@ -230,10 +230,10 @@
         //元素的布局
         [writeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             
-            make.left.equalTo(writeImage.mas_left).offset(-10);
+            make.leading.equalTo(writeImage.mas_leading).offset(-10);
             make.top.equalTo(headerView.mas_top).offset(0);
             make.bottom.equalTo(headerView.mas_bottom).offset(-0);
-            make.right.equalTo(headerView.mas_right).offset(0);
+            make.trailing.equalTo(headerView.mas_trailing).offset(0);
            
             
         }];
@@ -469,10 +469,10 @@
         //元素的布局
         [_mainBgView mas_makeConstraints:^(MASConstraintMaker *make) {
             
-            make.left.equalTo(self.view.mas_left).offset(0);
+            make.leading.equalTo(self.view.mas_leading).offset(0);
             make.top.equalTo(self.naviView.mas_bottom).offset(0);
             make.bottom.equalTo(self.view.mas_bottom).offset(-49);
-            make.right.equalTo(self.view.mas_right).offset(0);
+            make.trailing.equalTo(self.view.mas_trailing).offset(0);
             
         }];
     }
@@ -492,10 +492,10 @@
         //元素的布局
         [_mainTableView mas_makeConstraints:^(MASConstraintMaker *make) {
             
-            make.left.equalTo(self.view.mas_left).offset(0);
+            make.leading.equalTo(self.view.mas_leading).offset(0);
             make.top.equalTo(self.naviView.mas_bottom).offset(0);
             make.bottom.equalTo(self.view.mas_bottom).offset(-49);
-            make.right.equalTo(self.view.mas_right).offset(0);
+            make.trailing.equalTo(self.view.mas_trailing).offset(0);
             
         }];
     }

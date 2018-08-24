@@ -54,10 +54,10 @@
     
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(self.mas_left).offset(space);
+        make.leading.equalTo(self.mas_leading).offset(space);
         make.top.equalTo(self.mas_top).offset(0);
         make.bottom.equalTo(self.mas_bottom).offset(-1);
-        make.right.equalTo(self.mas_centerX).offset(0);
+        make.trailing.equalTo(self.mas_centerX).offset(0);
         
     }];
     
@@ -73,7 +73,7 @@
     [self.rightArrow mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.top.equalTo(self.mas_top).offset((self.viewHeight-imageH)/2);
-        make.right.equalTo(self.mas_right).offset(-space-imageW);
+        make.trailing.equalTo(self.mas_trailing).offset(-space-imageW);
         make.height.mas_equalTo(imageH);
         make.width.mas_equalTo(imageW);
     }];
@@ -86,10 +86,10 @@
     //元素的布局
     [self.rightLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(self.mas_centerX).offset(0);
+        make.leading.equalTo(self.mas_centerX).offset(0);
         make.top.equalTo(self.mas_top).offset(0);
         make.bottom.equalTo(self.mas_bottom).offset(0);
-        make.right.equalTo(self.rightArrow.mas_left).offset(-4);
+        make.trailing.equalTo(self.rightArrow.mas_leading).offset(-4);
         
     }];
     
@@ -100,9 +100,9 @@
     
     [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(self.mas_left).offset(space);
+        make.leading.equalTo(self.mas_leading).offset(space);
         make.bottom.equalTo(self.mas_bottom).offset(-0.7);
-        make.right.equalTo(self.mas_right).offset(-space);
+        make.trailing.equalTo(self.mas_trailing).offset(-space);
         make.height.mas_equalTo(0.7);
     }];
 }

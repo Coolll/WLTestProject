@@ -60,10 +60,6 @@
     self.uid = [self notNillValueWithKey:@"uid" withDic:dic];
     self.uphone = [self notNillValueWithKey:@"uphone" withDic:dic];
     self.userCreateTime = [self notNillValueWithKey:@"userCreateTime" withDic:dic];
-//    self.userImgurl = [self notNillValueWithKey:@"userImgurl" withDic:dic];
-    NSString *imagePath = [self notNillValueWithKey:@"userImgurl" withDic:dic];
-    NSString *fullPath = [NSString stringWithFormat:@"%@%@",UserHeadImageBase,imagePath];
-    self.userImgurl = fullPath;
     self.userIntegral = [self notNillValueWithKey:@"userIntegral" withDic:dic];
     self.userName = [self notNillValueWithKey:@"userName" withDic:dic];
     self.userState = [self notNillValueWithKey:@"userState" withDic:dic];

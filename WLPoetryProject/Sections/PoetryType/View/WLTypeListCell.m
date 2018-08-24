@@ -50,7 +50,7 @@
     //元素的布局
     [mainImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(self.contentView.mas_left).offset(15);
+        make.leading.equalTo(self.contentView.mas_leading).offset(15);
         make.top.equalTo(self.contentView.mas_top).offset(15);
         make.width.mas_equalTo(imageW);
         make.height.mas_equalTo(imageW);
@@ -71,10 +71,10 @@
     [contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         
 //        make.centerX.equalTo(mainImageView.mas_centerX);
-        make.left.equalTo(mainImageView.mas_right).offset(20);
+        make.leading.equalTo(mainImageView.mas_trailing).offset(20);
         make.top.equalTo(mainImageView.mas_top).offset(0);
         make.bottom.equalTo(mainImageView.mas_bottom).offset(0);
-        make.right.equalTo(self.contentView.mas_right).offset(-15);
+        make.trailing.equalTo(self.contentView.mas_trailing).offset(-15);
         
     }];
     

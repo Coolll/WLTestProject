@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14133" systemVersion="17F77" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14135" systemVersion="17E199" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
     <entity name="Poetry" representedClassName="Poetry" syncable="YES" codeGenerationType="class">
         <attribute name="addtionInfo" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="analysesInfo" optional="YES" attributeType="String" syncable="YES"/>
@@ -19,7 +19,17 @@
         <attribute name="source" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="transferInfo" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="UserCreation" representedClassName="UserCreation" syncable="YES" codeGenerationType="class">
+        <attribute name="authorID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="creationAuthor" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="creationContent" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="creationID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="creationTitle" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isLike" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isPost" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <elements>
         <element name="Poetry" positionX="-63" positionY="-18" width="128" height="300"/>
+        <element name="UserCreation" positionX="-63" positionY="108" width="128" height="150"/>
     </elements>
 </model>

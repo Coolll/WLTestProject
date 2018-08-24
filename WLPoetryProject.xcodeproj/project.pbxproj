@@ -259,6 +259,10 @@
 		07F73C75208AE84900F7D8B3 /* tabbarThree.png in Resources */ = {isa = PBXBuildFile; fileRef = 07F73C72208AE84900F7D8B3 /* tabbarThree.png */; };
 		07F73C76208AE84900F7D8B3 /* tabbarThree_sel.png in Resources */ = {isa = PBXBuildFile; fileRef = 07F73C73208AE84900F7D8B3 /* tabbarThree_sel.png */; };
 		07F73C82208AF51D00F7D8B3 /* YLHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07F73C81208AF51D00F7D8B3 /* YLHomeViewController.m */; };
+		3607C882212F9DC600298C6C /* MyTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3607C881212F9DC600298C6C /* MyTextView.m */; };
+		3607C885212FA20000298C6C /* UIButton+WLExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3607C884212FA20000298C6C /* UIButton+WLExtension.m */; };
+		3607C896212FE3BF00298C6C /* CreationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3607C895212FE3BF00298C6C /* CreationModel.m */; };
+		36B516F3212EC85500FD0FA8 /* WLNewTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B516F2212EC85500FD0FA8 /* WLNewTextView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -685,6 +689,18 @@
 		07F73C73208AE84900F7D8B3 /* tabbarThree_sel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbarThree_sel.png; sourceTree = "<group>"; };
 		07F73C80208AF51D00F7D8B3 /* YLHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLHomeViewController.h; sourceTree = "<group>"; };
 		07F73C81208AF51D00F7D8B3 /* YLHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLHomeViewController.m; sourceTree = "<group>"; };
+		3607C880212F9DC600298C6C /* MyTextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyTextView.h; sourceTree = "<group>"; };
+		3607C881212F9DC600298C6C /* MyTextView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyTextView.m; sourceTree = "<group>"; };
+		3607C883212FA20000298C6C /* UIButton+WLExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIButton+WLExtension.h"; sourceTree = "<group>"; };
+		3607C884212FA20000298C6C /* UIButton+WLExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIButton+WLExtension.m"; sourceTree = "<group>"; };
+		3607C88E212FE32700298C6C /* UserCreation+CoreDataProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UserCreation+CoreDataProperties.h"; sourceTree = "<group>"; };
+		3607C88F212FE32700298C6C /* UserCreation+CoreDataClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UserCreation+CoreDataClass.h"; sourceTree = "<group>"; };
+		3607C890212FE32700298C6C /* UserCreation+CoreDataClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UserCreation+CoreDataClass.m"; sourceTree = "<group>"; };
+		3607C891212FE32700298C6C /* UserCreation+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UserCreation+CoreDataProperties.m"; sourceTree = "<group>"; };
+		3607C894212FE3BF00298C6C /* CreationModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CreationModel.h; sourceTree = "<group>"; };
+		3607C895212FE3BF00298C6C /* CreationModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CreationModel.m; sourceTree = "<group>"; };
+		36B516F1212EC85500FD0FA8 /* WLNewTextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLNewTextView.h; sourceTree = "<group>"; };
+		36B516F2212EC85500FD0FA8 /* WLNewTextView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLNewTextView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1080,6 +1096,10 @@
 				07567A68207A02EB0018B9E7 /* WLTextField.m */,
 				07567A69207A02EB0018B9E7 /* WLUserAgreementView.h */,
 				07567A6A207A02EB0018B9E7 /* WLUserAgreementView.m */,
+				36B516F1212EC85500FD0FA8 /* WLNewTextView.h */,
+				36B516F2212EC85500FD0FA8 /* WLNewTextView.m */,
+				3607C880212F9DC600298C6C /* MyTextView.h */,
+				3607C881212F9DC600298C6C /* MyTextView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1340,12 +1360,18 @@
 		07A9229C2086293D00BE5929 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
+				3607C88E212FE32700298C6C /* UserCreation+CoreDataProperties.h */,
+				3607C891212FE32700298C6C /* UserCreation+CoreDataProperties.m */,
+				3607C88F212FE32700298C6C /* UserCreation+CoreDataClass.h */,
+				3607C890212FE32700298C6C /* UserCreation+CoreDataClass.m */,
 				00150E8920EF53DF001BE61D /* Poetry+CoreDataClass.h */,
 				00150E8720EF53DF001BE61D /* Poetry+CoreDataClass.m */,
 				00150E8620EF53DF001BE61D /* Poetry+CoreDataProperties.h */,
 				00150E8820EF53DF001BE61D /* Poetry+CoreDataProperties.m */,
 				07A922AF20862EB100BE5929 /* PoetryModel.h */,
 				07A922B020862EB100BE5929 /* PoetryModel.m */,
+				3607C894212FE3BF00298C6C /* CreationModel.h */,
+				3607C895212FE3BF00298C6C /* CreationModel.m */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -1365,6 +1391,8 @@
 				009A1B3120E6208300C0A58D /* WLTextView.m */,
 				00D4F63F20F743F300287FB0 /* WLHomePoetryCell.h */,
 				00D4F64020F743F300287FB0 /* WLHomePoetryCell.m */,
+				3607C883212FA20000298C6C /* UIButton+WLExtension.h */,
+				3607C884212FA20000298C6C /* UIButton+WLExtension.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1955,6 +1983,7 @@
 				079568FA20726D0B0097C26D /* AppDelegate.m in Sources */,
 				0765C705207CE6E20085EB3A /* SDWebImageFrame.m in Sources */,
 				07567AA0207A02EB0018B9E7 /* YLTabbarController.m in Sources */,
+				36B516F3212EC85500FD0FA8 /* WLNewTextView.m in Sources */,
 				07CFF240208B0AEE00849C20 /* WLPoetryListCell.m in Sources */,
 				07567B8D207A02EC0018B9E7 /* WLBaseModel.m in Sources */,
 				0765C711207CE6E20085EB3A /* UIImageView+HighlightedWebCache.m in Sources */,
@@ -1968,8 +1997,10 @@
 				0765C70D207CE6E20085EB3A /* UIImage+ForceDecode.m in Sources */,
 				07567B24207A02EC0018B9E7 /* UIView+MJExtension.m in Sources */,
 				0765C6FC207CE6E20085EB3A /* SDAnimatedImageRep.m in Sources */,
+				3607C882212F9DC600298C6C /* MyTextView.m in Sources */,
 				07642A5E208E141900B084AE /* PoetryDetailViewController.m in Sources */,
 				07567B16207A02EB0018B9E7 /* MJRefreshAutoGifFooter.m in Sources */,
+				3607C885212FA20000298C6C /* UIButton+WLExtension.m in Sources */,
 				0795690B20726D0B0097C26D /* main.m in Sources */,
 				00A38E2C20DCEDF700D4D653 /* WLImageCell.m in Sources */,
 				0765C70F207CE6E20085EB3A /* UIImage+MultiFormat.m in Sources */,
@@ -1986,6 +2017,7 @@
 				003EBE1920D0F04500DD7815 /* LaunchController.m in Sources */,
 				0010F22720F4966E00F272EB /* WLBookView.m in Sources */,
 				0721702D2087843A002A1628 /* WLPoetryProject.xcdatamodeld in Sources */,
+				3607C896212FE3BF00298C6C /* CreationModel.m in Sources */,
 				00469AF620F8938D0068636F /* WLShowImageController.m in Sources */,
 				0765C70E207CE6E20085EB3A /* UIImage+GIF.m in Sources */,
 				07567B7C207A02EC0018B9E7 /* WLCustomTextView.m in Sources */,
@@ -2192,7 +2224,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wangqilong.wqlPoetryProject;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6f48e83f-4b79-4fc5-9e1f-c9365ea4d809";
+				PROVISIONING_PROFILE = "c7ec008d-7243-45a4-b373-edbfe28e42ab";
 				PROVISIONING_PROFILE_SPECIFIER = poetryDev;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

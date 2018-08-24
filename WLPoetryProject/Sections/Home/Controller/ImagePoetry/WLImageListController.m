@@ -35,7 +35,7 @@ static const NSInteger cellCount = 3;
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = ViewBackgroundColor;
-    self.titleForNavi = @"选择题画";
+    self.titleForNavi = @"选择画卷";
     [self loadCustomData];
     [self loadCustomView];
 }
@@ -44,23 +44,6 @@ static const NSInteger cellCount = 3;
 {
     self.imageArray = [NSMutableArray arrayWithArray:[AppConfig config].bgImageInfo.allValues];
     
-//    [self.imageArray addObject:@"classOne.jpg"];
-//    [self.imageArray addObject:@"classTwo.jpg"];
-//    [self.imageArray addObject:@"classThree.jpg"];
-//    [self.imageArray addObject:@"classFour.jpg"];
-//    [self.imageArray addObject:@"classFive.jpg"];
-//    [self.imageArray addObject:@"classSix.jpg"];
-//    [self.imageArray addObject:@"classSeven.jpg"];
-//    [self.imageArray addObject:@"classNine.jpg"];
-//    [self.imageArray addObject:@"classTen.jpg"];
-//    [self.imageArray addObject:@"classEleven.jpg"];
-//    [self.imageArray addObject:@"classTwelve.jpg"];
-//    [self.imageArray addObject:@"classFourteen"];
-//    [self.imageArray addObject:@"classSixteen"];
-//    [self.imageArray addObject:@"classThirtyOne.jpg"];
-//    [self.imageArray addObject:@"classThirtyTwo.jpg"];
-//    [self.imageArray addObject:@"classThirtySeven.jpg"];
-//    [self.imageArray addObject:@"classOHTen.jpg"];
 }
 
 - (void)loadCustomView

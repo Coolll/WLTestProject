@@ -58,7 +58,7 @@
     [searchImage mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.bottom.equalTo(self.naviView.mas_bottom).offset(-10);
-        make.right.equalTo(self.naviView.mas_right).offset(-25);
+        make.trailing.equalTo(self.naviView.mas_trailing).offset(-25);
         make.width.mas_equalTo(20);
         make.height.mas_equalTo(20);
         
@@ -72,10 +72,10 @@
     //元素的布局
     [btn mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(searchImage.mas_left).offset(-10);
+        make.leading.equalTo(searchImage.mas_leading).offset(-10);
         make.top.equalTo(searchImage.mas_top).offset(-10);
         make.bottom.equalTo(self.naviView.mas_bottom).offset(0);
-        make.right.equalTo(self.naviView.mas_right).offset(0);
+        make.trailing.equalTo(self.naviView.mas_trailing).offset(0);
         
     }];
 }
@@ -123,10 +123,10 @@
     //元素的布局
     [self.mainTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(self.view.mas_left).offset(0);
+        make.leading.equalTo(self.view.mas_leading).offset(0);
         make.top.equalTo(self.naviView.mas_bottom).offset(0);
         make.bottom.equalTo(self.view.mas_bottom).offset(-49);
-        make.right.equalTo(self.view.mas_right).offset(0);
+        make.trailing.equalTo(self.view.mas_trailing).offset(0);
         
     }];
 }

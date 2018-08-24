@@ -8,6 +8,8 @@
 
 #import "WritePoetryController.h"
 #import "WLCustomTextView.h"
+#import "WLNewTextView.h"
+#import "UIButton+WLExtension.h"
 @interface WritePoetryController ()
 /**
  *  标题
@@ -20,7 +22,7 @@
 /**
  *  内容
  **/
-@property (nonatomic, strong) WLCustomTextView *contentTextView;
+@property (nonatomic, strong) WLNewTextView *contentTextView;
 
 @end
 
@@ -38,6 +40,29 @@
     self.titleTextView.placeHolderString = @"标题";
     self.nameTextView.placeHolderString = @"姓名";
     self.contentTextView.placeHolderString = @"内容";
+    [self loadRightSaveBtn];
+}
+
+- (void)loadRightSaveBtn
+{
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [btn addTouchEvent:UIControlEventTouchUpInside withAction:^(UIButton *sender) {
+        
+    }];
+    [btn setTitle:@"保存草稿" forState:UIControlStateNormal];
+    btn.titleLabel.font = [UIFont systemFontOfSize:12.f];
+    [self.naviView addSubview:btn];
+    
+    //元素的布局
+    [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.bottom.equalTo(self.naviView.mas_bottom).offset(-15);
+        make.trailing.equalTo(self.naviView.mas_trailing).offset(-15);
+        make.width.mas_equalTo(60);
+        make.height.mas_equalTo(20);
+        
+    }];
+    
 }
 
 #pragma mark - 点击事件
@@ -50,6 +75,12 @@
 {
     if (!_titleTextView) {
         _titleTextView = [[WLCustomTextView alloc]init];
+        _titleTextView.returnType = UIReturnKeyNext;
+        _titleTextView.mainTextField.font = [UIFont systemFontOfSize:16.f];
+        _titleTextView.mainTextField.textColor = RGBCOLOR(50, 50, 50, 1.0);
+        [_titleTextView loadReturnKeyAction:^{
+            [self.nameTextView.mainTextField becomeFirstResponder];
+        }];
         [self.view addSubview:_titleTextView];
         _titleTextView.leftSpace = 5;
         //设置UI布局约束
@@ -81,8 +112,15 @@
 {
     if (!_nameTextView) {
         _nameTextView = [[WLCustomTextView alloc]init];
+        _nameTextView.mainTextField.font = [UIFont systemFontOfSize:16.f];
+        _nameTextView.mainTextField.textColor = RGBCOLOR(50, 50, 50, 1.0);
         [self.view addSubview:_nameTextView];
+        _nameTextView.returnType = UIReturnKeyNext;
         _nameTextView.leftSpace = 5;
+        [_nameTextView loadReturnKeyAction:^{
+            [self.contentTextView.mainTextView becomeFirstResponder];
+        }];
+        
         //设置UI布局约束
         [_nameTextView mas_makeConstraints:^(MASConstraintMaker *make) {
             
@@ -107,10 +145,12 @@
     return _nameTextView;
 }
 
-- (WLCustomTextView*)contentTextView
+- (WLNewTextView*)contentTextView
 {
     if (!_contentTextView) {
-        _contentTextView = [[WLCustomTextView alloc]init];
+        _contentTextView = [[WLNewTextView alloc]init];
+        _contentTextView.mainTextView.font = [UIFont systemFontOfSize:16.f];
+        _contentTextView.mainTextView.textColor = RGBCOLOR(50, 50, 50, 1.0);
         [self.view addSubview:_contentTextView];
         _contentTextView.leftSpace = 5;
         
@@ -120,7 +160,7 @@
             make.top.equalTo(self.nameTextView.mas_bottom).offset(20);//元素顶部约束
             make.leading.equalTo(self.view.mas_leading).offset(10);//元素左侧约束
             make.trailing.equalTo(self.view.mas_trailing).offset(-10);//元素右侧约束
-            make.height.mas_equalTo(48);//元素高度
+            make.height.mas_equalTo(200);//元素高度
         }];
     }
     return _contentTextView;

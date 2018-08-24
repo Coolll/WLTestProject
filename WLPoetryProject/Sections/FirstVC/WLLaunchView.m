@@ -83,7 +83,7 @@
         [self.skipBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             
             make.top.equalTo(self.mas_safeAreaLayoutGuideTop).offset(40);
-            make.right.equalTo(self.mas_right).offset(-40);
+            make.trailing.equalTo(self.mas_trailing).offset(-40);
             make.width.mas_equalTo(btnWidth);
             make.height.mas_equalTo(40);
         }];
@@ -92,7 +92,7 @@
         [self.skipBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             
             make.top.equalTo(self.mas_top).offset(40);
-            make.right.equalTo(self.mas_right).offset(-40);
+            make.trailing.equalTo(self.mas_trailing).offset(-40);
             make.width.mas_equalTo(btnWidth);
             make.height.mas_equalTo(40);
             

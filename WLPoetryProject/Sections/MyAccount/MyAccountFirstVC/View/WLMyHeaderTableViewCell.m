@@ -130,52 +130,6 @@ typedef void(^EditBlock)(void);
 
     
     
-    //登录时的编辑资料
-//    CGFloat editW = 70;
-//    self.editLabel = [[UILabel alloc]init];
-//    self.editLabel.font = [UIFont systemFontOfSize:14.0];
-//    self.editLabel.hidden = YES;
-//    self.editLabel.textColor = [UIColor whiteColor];
-//    self.editLabel.text = @"编辑资料";
-//    [self addSubview:self.editLabel];
-//    [self.editLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-//
-//        make.left.equalTo(self.nameLabel.mas_left).offset(0);
-//        make.top.equalTo(self.nameLabel.mas_bottom).offset(nameSpace);
-//        make.height.mas_equalTo(subTitleH);
-//        make.width.mas_equalTo(editW);
-//    }];
-//
-//
-//    //登录时的编辑图片
-//    CGFloat editImageWidth = 16;
-//    CGFloat editImageHeight = 16;
-//    self.editImageView = [[UIImageView alloc]init];
-//    self.editImageView.image = [UIImage imageNamed:@"editImage"];
-//    [self addSubview:self.editImageView];
-//
-//    [self.editImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-//
-//        make.left.equalTo(self.editLabel.mas_right).offset(0);
-//        make.top.equalTo(self.editLabel.mas_top).offset(0);
-//        make.height.mas_equalTo(editImageHeight);
-//        make.width.mas_equalTo(editImageWidth);
-//    }];
-
-//    CGFloat extentSpace = 15;
-//    self.editButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//    [self.editButton addTarget:self action:@selector(editInformationAction:) forControlEvents:UIControlEventTouchUpInside];
-//    self.editButton.backgroundColor = [UIColor clearColor];
-//    [self addSubview:self.editButton];
-//
-//    [self.editButton mas_makeConstraints:^(MASConstraintMaker *make) {
-//
-//        make.left.equalTo(self.editImageView.mas_left).offset(-extentSpace);
-//        make.top.equalTo(self.editImageView.mas_top).offset(-extentSpace);
-//        make.bottom.equalTo(self.editImageView.mas_bottom).offset(extentSpace);
-//        make.right.equalTo(self.editImageView.mas_right).offset(extentSpace);
-//
-//    }];
     
 }
 

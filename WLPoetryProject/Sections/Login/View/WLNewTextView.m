@@ -1,15 +1,14 @@
 //
-//  WLCustomTextView.m
-//  YLPokerSpeak
+//  WLNewTextView.m
+//  WLPoetryProject
 //
-//  Created by 龙培 on 17/8/14.
-//  Copyright © 2017年 龙培. All rights reserved.
+//  Created by 变啦 on 2018/8/23.
+//  Copyright © 2018年 龙培. All rights reserved.
 //
 
-#import "WLCustomTextView.h"
-
+#import "WLNewTextView.h"
 typedef void(^CustomTextBlock)(NSString *string);
-@interface WLCustomTextView ()<UITextFieldDelegate>
+@interface WLNewTextView()<UITextViewDelegate>
 /**
  *  placeHoder
  **/
@@ -29,10 +28,8 @@ typedef void(^CustomTextBlock)(NSString *string);
 @property (nonatomic,copy) ReturnKeyBlock returnBlock;
 
 
-
 @end
-
-@implementation WLCustomTextView
+@implementation WLNewTextView
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -41,10 +38,11 @@ typedef void(^CustomTextBlock)(NSString *string);
     if (self) {
         
         self.viewFrame = frame;
-        self.mainTextField = [[WLTextField alloc]init];
-        self.mainTextField.delegate = self;
-        self.mainTextField.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
-        [self addSubview:self.mainTextField];
+        self.mainTextView = [[MyTextView alloc]init];
+        self.mainTextView.backgroundColor = [UIColor clearColor];
+        self.mainTextView.delegate = self;
+        self.mainTextView.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
+        [self addSubview:self.mainTextView];
     }
     
     return self;
@@ -56,12 +54,14 @@ typedef void(^CustomTextBlock)(NSString *string);
     
     if (self) {
         
-        self.mainTextField = [[WLTextField alloc]init];
-        self.mainTextField.delegate = self;
-        [self addSubview:self.mainTextField];
+        self.mainTextView = [[MyTextView alloc]init];
+        self.mainTextView.delegate = self;
+        self.mainTextView.backgroundColor = [UIColor clearColor];
+
+        [self addSubview:self.mainTextView];
         
         //设置UI布局约束
-        [self.mainTextField mas_makeConstraints:^(MASConstraintMaker *make) {
+        [self.mainTextView mas_makeConstraints:^(MASConstraintMaker *make) {
             
             make.top.equalTo(self.mas_top).offset(0);//元素顶部约束
             make.leading.equalTo(self.mas_leading).offset(0);//元素左侧约束
@@ -88,11 +88,11 @@ typedef void(^CustomTextBlock)(NSString *string);
 {
     _leftSpace = leftSpace;
     
-    if (self.mainTextField.frame.size.width) {
+    if (self.mainTextView.frame.size.width) {
         
         self.placeHolderLabel.frame = CGRectMake(leftSpace, self.placeHolderLabel.frame.origin.y, self.placeHolderLabel.frame.size.width-leftSpace, self.placeHolderLabel.frame.size.height);
         
-        self.mainTextField.frame = CGRectMake(leftSpace-2, self.mainTextField.frame.origin.y, self.mainTextField.frame.size.width-leftSpace, self.mainTextField.frame.size.height);
+        self.mainTextView.frame = CGRectMake(leftSpace-2, self.mainTextView.frame.origin.y, self.mainTextView.frame.size.width-leftSpace, self.mainTextView.frame.size.height);
     }else{
         
         [self.placeHolderLabel mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -100,21 +100,21 @@ typedef void(^CustomTextBlock)(NSString *string);
         }];
         
         
-        [self.mainTextField mas_updateConstraints:^(MASConstraintMaker *make) {
+        [self.mainTextView mas_updateConstraints:^(MASConstraintMaker *make) {
             make.leading.equalTo(self.mas_leading).offset(leftSpace-2);
         }];
     }
     
-
+    
 }
 
 - (NSString *)contentString
 {
-    return self.mainTextField.text;
+    return self.mainTextView.text;
 }
 - (void)setContentString:(NSString *)contentString
 {
-    self.mainTextField.text = contentString;
+    self.mainTextView.text = contentString;
     
     if (contentString.length > 0) {
         self.placeHolderLabel.hidden = YES;
@@ -130,6 +130,7 @@ typedef void(^CustomTextBlock)(NSString *string);
         _placeHolderLabel.font = [UIFont systemFontOfSize:14.0];
         [self addSubview:_placeHolderLabel];
         
+        [self sendSubviewToBack:_placeHolderLabel];
         if (self.viewFrame.size.width > 0  && self.viewFrame.size.height > 0 ) {
             _placeHolderLabel.frame = CGRectMake(0, 0, self.viewFrame.size.width, self.viewFrame.size.height);
         }else{
@@ -139,7 +140,7 @@ typedef void(^CustomTextBlock)(NSString *string);
                 make.top.equalTo(self.mas_top).offset(0);//元素顶部约束
                 make.leading.equalTo(self.mas_leading).offset(0);//元素左侧约束
                 make.trailing.equalTo(self.mas_trailing).offset(0);//元素右侧约束
-                make.bottom.equalTo(self.mas_bottom).offset(0);//元素底部约束
+                make.height.mas_equalTo(36);
             }];
         }
         
@@ -191,25 +192,44 @@ typedef void(^CustomTextBlock)(NSString *string);
     return YES;
 }
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
-    if (self.returnBlock) {
-        self.returnBlock();
+    if (![text isEqualToString:@""]) {
+        
+        //输入只要不是删除键，则把自定义的placeHolder隐藏了
+        self.placeHolderLabel.hidden = YES;
+        
     }
+    
+    
+    if ([text isEqualToString:@""] && range.location == 0 && range.length == 1) {
+        
+        //输入删除键后，没有字符了，把自定义的placeHolder显示了
+        self.placeHolderLabel.hidden = NO;
+        
+    }
+    
+    if (self.canInputLength > 0 && textView.text.length == self.canInputLength && ![text isEqualToString:@""]) {
+        //如果限制了输入长度，且原先的文本长度已经达到了限制长度，且输入的的不是删除键，则不允许输入内容
+        return NO;
+    }
+    
     return YES;
 }
 
-- (void)textFieldDidBeginEditing:(UITextField *)textField
+
+
+- (void)textViewDidBeginEditing:(UITextView *)textView
 {
-    if (textField.text.length > 0) {
+    if (textView.text.length > 0) {
         self.placeHolderLabel.hidden = YES;
     }
 }
 
-- (void)textFieldDidEndEditing:(UITextField *)textField
+- (void)textViewDidEndEditing:(UITextView *)textView
 {
     if (self.block) {
-        self.block(textField.text);
+        self.block(textView.text);
     }
 }
 
@@ -234,26 +254,25 @@ typedef void(^CustomTextBlock)(NSString *string);
 {
     _keyboardType = keyboardType;
     
-    self.mainTextField.keyboardType = keyboardType;
+    self.mainTextView.keyboardType = keyboardType;
 }
 
 - (void)setReturnType:(UIReturnKeyType)returnType
 {
     _returnType = returnType;
-    self.mainTextField.returnKeyType = returnType;
+    self.mainTextView.returnKeyType = returnType;
 }
 
 - (void)setTextForUser:(NSString *)textForUser
 {
     _textForUser = textForUser;
     
-    self.mainTextField.text = textForUser;
+    self.mainTextView.text = textForUser;
     
-    if (self.mainTextField.text.length > 0) {
+    if (self.mainTextView.text.length > 0) {
         self.placeHolderLabel.hidden = YES;
     }
 }
-
 
 
 

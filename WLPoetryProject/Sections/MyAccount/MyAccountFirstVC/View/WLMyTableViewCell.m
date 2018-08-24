@@ -61,7 +61,7 @@
     
     [self.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(self.mas_left).offset(space);
+        make.leading.equalTo(self.mas_leading).offset(space);
         make.top.equalTo(self.mas_top).offset(iconTopSpace);
         make.height.mas_equalTo(iconH);
         make.width.mas_equalTo(iconW);
@@ -75,10 +75,10 @@
     
     [self.titelLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(self.iconImageView.mas_right).offset(12);
+        make.leading.equalTo(self.iconImageView.mas_trailing).offset(12);
         make.top.equalTo(self.mas_top).offset(0);
         make.bottom.equalTo(self.mas_bottom).offset(-1);
-        make.right.equalTo(self.mas_right).offset(-50);
+        make.trailing.equalTo(self.mas_trailing).offset(-50);
         
     }];
     
@@ -95,7 +95,7 @@
     [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.top.equalTo(self.mas_top).offset(topSpace);
-        make.right.equalTo(self.mas_right).offset(-space-imageW);
+        make.trailing.equalTo(self.mas_trailing).offset(-space-imageW);
         make.height.mas_equalTo(imageH);
         make.width.mas_equalTo(imageW);
     }];
@@ -106,9 +106,9 @@
     
     [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(self.mas_left).offset(space);
+        make.leading.equalTo(self.mas_leading).offset(space);
         make.bottom.equalTo(self.mas_bottom).offset(-0.7);
-        make.right.equalTo(self.mas_right).offset(0);
+        make.trailing.equalTo(self.mas_trailing).offset(0);
         make.height.mas_equalTo(0.7);
     }];
 }

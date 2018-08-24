@@ -159,10 +159,10 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
     //元素的布局
     [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(self.view.mas_left).offset(0);
+        make.leading.equalTo(self.view.mas_leading).offset(0);
         make.top.equalTo(self.naviView.mas_bottom).offset(0);
         make.bottom.equalTo(self.view.mas_bottom).offset(0);
-        make.right.equalTo(self.view.mas_right).offset(0);
+        make.trailing.equalTo(self.view.mas_trailing).offset(0);
         
     }];
     
@@ -200,7 +200,7 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
         
         make.top.equalTo(self.nameTextField.mas_top).offset(0);
         make.bottom.equalTo(self.nameTextField.mas_bottom).offset(0);
-        make.right.equalTo(self.view.mas_right).offset(-leftSpace);
+        make.trailing.equalTo(self.view.mas_trailing).offset(-leftSpace);
         make.width.mas_equalTo(80);
     }];
     
@@ -219,9 +219,9 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
     CGFloat codeRight = 10;
     [self.getCodeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(self.randomBtn.mas_left).offset(0);
+        make.leading.equalTo(self.randomBtn.mas_leading).offset(0);
         make.top.equalTo(self.nameTextField.mas_top).offset(codeTop);
-        make.right.equalTo(self.nameTextField.mas_right).offset(-codeRight);
+        make.trailing.equalTo(self.nameTextField.mas_trailing).offset(-codeRight);
         make.height.mas_equalTo(codeH);
     }];
     
@@ -237,7 +237,7 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
         
         make.top.equalTo(self.passwordTextField.mas_top).offset(0);
         make.bottom.equalTo(self.passwordTextField.mas_bottom).offset(0);
-        make.right.equalTo(self.view.mas_right).offset(-leftSpace);
+        make.trailing.equalTo(self.view.mas_trailing).offset(-leftSpace);
         make.width.mas_equalTo(100);
     }];
     
@@ -311,9 +311,9 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
     
     [self.loginBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(self.view.mas_left).offset(leftSpace);
+        make.leading.equalTo(self.view.mas_leading).offset(leftSpace);
         make.top.equalTo(self.checkBoxImageView.mas_bottom).offset(topSpace);
-        make.right.equalTo(self.view.mas_right).offset(-leftSpace);
+        make.trailing.equalTo(self.view.mas_trailing).offset(-leftSpace);
         make.height.mas_equalTo(btnHeight);
     }];
     
@@ -334,7 +334,7 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
     [self.contentView addSubview:self.selectImageView];
     [self.selectImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(self.view.mas_left).offset(selectLeft);
+        make.leading.equalTo(self.view.mas_leading).offset(selectLeft);
         make.top.equalTo(self.loginBtn.mas_bottom).offset(selectTop);
         make.height.mas_equalTo(selectH);
         make.width.mas_equalTo(selectH);
@@ -353,7 +353,7 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
     
     [backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(self.selectImageView.mas_right).offset(selectSpace);
+        make.leading.equalTo(self.selectImageView.mas_trailing).offset(selectSpace);
         make.top.equalTo(self.selectImageView.mas_top).offset(0);
         make.height.mas_equalTo(contentH);
         make.width.mas_equalTo(contentW);
@@ -369,7 +369,7 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
     
     [contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(self.selectImageView.mas_right).offset(selectSpace);
+        make.leading.equalTo(self.selectImageView.mas_trailing).offset(selectSpace);
         make.top.equalTo(self.selectImageView.mas_top).offset(0);
         make.height.mas_equalTo(contentH);
         make.width.mas_equalTo(contentW);
@@ -635,10 +635,10 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
     self.errorTipView.hidden = NO;
     [self.contentView mas_remakeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(self.view.mas_left).offset(0);
+        make.leading.equalTo(self.view.mas_leading).offset(0);
         make.top.equalTo(self.errorTipView.mas_bottom).offset(0);
         make.bottom.equalTo(self.view.mas_bottom).offset(0);
-        make.right.equalTo(self.view.mas_right).offset(0);
+        make.trailing.equalTo(self.view.mas_trailing).offset(0);
             
     }];
     
@@ -649,10 +649,10 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
     self.errorTipView.hidden = YES;
     [self.contentView mas_remakeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(self.view.mas_left).offset(0);
+        make.leading.equalTo(self.view.mas_leading).offset(0);
         make.top.equalTo(self.naviView.mas_bottom).offset(0);
         make.bottom.equalTo(self.view.mas_bottom).offset(0);
-        make.right.equalTo(self.view.mas_right).offset(0);
+        make.trailing.equalTo(self.view.mas_trailing).offset(0);
         
     }];
 }
@@ -776,9 +776,9 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
         //元素的布局
         [_errorTipView mas_makeConstraints:^(MASConstraintMaker *make) {
             
-            make.left.equalTo(self.view.mas_left).offset(0);
+            make.leading.equalTo(self.view.mas_leading).offset(0);
             make.top.equalTo(self.naviView.mas_bottom).offset(0);
-            make.right.equalTo(self.view.mas_right).offset(0);
+            make.trailing.equalTo(self.view.mas_trailing).offset(0);
             make.height.mas_equalTo(height+10);
             
         }];
@@ -792,9 +792,9 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
         //元素的布局
         [tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             
-            make.left.equalTo(_errorTipView.mas_left).offset(leftSpace);
+            make.leading.equalTo(_errorTipView.mas_leading).offset(leftSpace);
             make.top.equalTo(_errorTipView.mas_top).offset(5);
-            make.right.equalTo(_errorTipView.mas_right).offset(-rightSpace);
+            make.trailing.equalTo(_errorTipView.mas_trailing).offset(-rightSpace);
             make.height.mas_equalTo(height);
             
         }];
@@ -806,7 +806,7 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
         [closeImage mas_makeConstraints:^(MASConstraintMaker *make) {
             
             make.top.equalTo(_errorTipView.mas_top).offset((height-10)/2);
-            make.right.equalTo(_errorTipView.mas_right).offset(-5);
+            make.trailing.equalTo(_errorTipView.mas_trailing).offset(-5);
             make.width.mas_equalTo(20);
             make.height.mas_equalTo(20);
             
@@ -818,10 +818,10 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
         //元素的布局
         [closeButton mas_makeConstraints:^(MASConstraintMaker *make) {
             
-            make.left.equalTo(tipLabel.mas_right).offset(0);
+            make.leading.equalTo(tipLabel.mas_trailing).offset(0);
             make.top.equalTo(_errorTipView.mas_top).offset(0);
             make.bottom.equalTo(_errorTipView.mas_bottom).offset(-0);
-            make.right.equalTo(_errorTipView.mas_right).offset(0);
+            make.trailing.equalTo(_errorTipView.mas_trailing).offset(0);
             
         }];
         

@@ -9,8 +9,11 @@
 #import <Foundation/Foundation.h>
 #import "AppDelegate.h"
 #import "PoetryModel.h"
+#import "CreationModel.h"
 #import "Poetry+CoreDataClass.h"
 #import "Poetry+CoreDataProperties.h"
+#import "UserCreation+CoreDataClass.h"
+#import "UserCreation+CoreDataProperties.h"
 
 typedef void(^CoreDataResultBlock)(BOOL isSuccessful,NSError *error);
 typedef void(^CoreDataInnerBlock)(BOOL isSuccessful);
@@ -22,32 +25,59 @@ typedef void(^CoreDataInnerBlock)(BOOL isSuccessful);
 //单例初始化
 + (instancetype)shareHelper;
 
+#pragma mark - 诗词
+
+#pragma mark 增加诗词
 //保存诗词信息
 - (void)saveInBackgroundWithPeotryModelArray:(NSArray*)array withResult:(CoreDataResultBlock)block;
+#pragma mark 删除诗词
+//删除全部诗词
+- (void)deleteAllPoetry;
 
+//根据ID 删除诗词的信息
+- (void)deletePoetryWithID:(NSString*)poetryID withResult:(CoreDataResultBlock)block;
+#pragma mark 修改诗词
+//根据ID 更改诗词的信息
+//- (void)updatePoetryWithID:(NSString*)poetryID withNewPoetry:(PoetryModel*)newPoetry withResult:(CoreDataResultBlock)block;
+
+#pragma mark 查询诗词
 //查询全部的诗词信息
 -(NSArray*)fetchAllPoetry;
 
 //查询某个大类的诗词，比如小学一年级的诗词，传1即可
 -(NSArray*)fetchPoetryWithMainClass:(NSString*)mainClass;
 
-//根据来源查询诗词的信息
-- (Poetry*)fetchPoetryWithSource:(NSString*)source;
-
 //根据id来查询诗词
 - (PoetryModel*)fetchPoetryModelWithID:(NSString*)idString;
 
 //- (PoetryModel*)fetchPoetryWithID:(NSString*)idString;
 
-//根据ID 更改诗词的信息
-//- (void)updatePoetryWithID:(NSString*)poetryID withNewPoetry:(PoetryModel*)newPoetry withResult:(CoreDataResultBlock)block;
-
-//删除全部诗词
-- (void)deleteAllPoetry;
-
-//根据ID 删除诗词的信息
-- (void)deletePoetryWithID:(NSString*)poetryID withResult:(CoreDataResultBlock)block;
-
+//根据关键词搜索诗
 - (NSArray*)searchPoetryListWithKeyWord:(NSString*)keyWord;
+
+#pragma mark - 创作
+
+#pragma mark 增加创作
+//保存创作信息
+- (void)saveInBackgroundWithCreationModel:(CreationModel*)model withResult:(CoreDataResultBlock)block;
+
+#pragma mark 删除创作
+//删除全部创作
+- (void)deleteAllCreation;
+
+//根据ID 删除创作
+- (void)deleteCreationWithID:(NSString*)creationID withResult:(CoreDataResultBlock)block;
+
+#pragma mark 修改创作
+//根据ID 更改创作的信息
+- (void)updateCreationWithID:(NSString*)poetryID withNewCreation:(CreationModel*)newCreation withResult:(CoreDataResultBlock)block;
+
+#pragma mark 查询创作
+//查询全部的创作信息
+-(NSArray*)fetchAllCreation;
+
+//根据id来查询创作
+- (CreationModel*)fetchCreationModelWithID:(NSString*)idString;
+
 
 @end

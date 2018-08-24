@@ -55,9 +55,9 @@
     //元素的布局
     [searchBgView mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(self.naviView.mas_left).offset(leftSpace);
+        make.leading.equalTo(self.naviView.mas_leading).offset(leftSpace);
         make.bottom.equalTo(self.naviView.mas_bottom).offset(-8);
-        make.right.equalTo(self.naviView.mas_right).offset(-leftSpace-cancelWidth);
+        make.trailing.equalTo(self.naviView.mas_trailing).offset(-leftSpace-cancelWidth);
         make.height.mas_equalTo(32);
         
     }];
@@ -68,7 +68,7 @@
     //元素的布局
     [searchImage mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(searchBgView.mas_left).offset(6);
+        make.leading.equalTo(searchBgView.mas_leading).offset(6);
         make.top.equalTo(searchBgView.mas_top).offset(6);
         make.width.mas_equalTo(16);
         make.height.mas_equalTo(16);
@@ -84,10 +84,10 @@
     //元素的布局
     [self.searchTextField mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(searchImage.mas_right).offset(4);
+        make.leading.equalTo(searchImage.mas_trailing).offset(4);
         make.top.equalTo(searchBgView.mas_top).offset(0);
         make.bottom.equalTo(searchBgView.mas_bottom).offset(0);
-        make.right.equalTo(searchBgView.mas_right).offset(-5);
+        make.trailing.equalTo(searchBgView.mas_trailing).offset(-5);
         
     }];
     
@@ -99,10 +99,10 @@
     //元素的布局
     [cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(searchBgView.mas_right).offset(10);
+        make.leading.equalTo(searchBgView.mas_trailing).offset(10);
         make.top.equalTo(searchBgView.mas_top).offset(0);
         make.bottom.equalTo(searchBgView.mas_bottom).offset(0);
-        make.right.equalTo(self.naviView.mas_right).offset(-5);
+        make.trailing.equalTo(self.naviView.mas_trailing).offset(-5);
         
     }];
     
@@ -215,10 +215,10 @@
         //元素的布局
         [mainBgView mas_makeConstraints:^(MASConstraintMaker *make) {
             
-            make.left.equalTo(self.view.mas_left).offset(0);
+            make.leading.equalTo(self.view.mas_leading).offset(0);
             make.top.equalTo(self.naviView.mas_bottom).offset(0);
             make.bottom.equalTo(self.view.mas_bottom).offset(0);
-            make.right.equalTo(self.view.mas_right).offset(0);
+            make.trailing.equalTo(self.view.mas_trailing).offset(0);
             
         }];
         
@@ -232,10 +232,10 @@
         //元素的布局
         [_mainTableView mas_makeConstraints:^(MASConstraintMaker *make) {
             
-            make.left.equalTo(self.view.mas_left).offset(0);
+            make.leading.equalTo(self.view.mas_leading).offset(0);
             make.top.equalTo(self.naviView.mas_bottom).offset(0);
             make.bottom.equalTo(self.view.mas_bottom).offset(0);
-            make.right.equalTo(self.view.mas_right).offset(0);
+            make.trailing.equalTo(self.view.mas_trailing).offset(0);
             
         }];
 

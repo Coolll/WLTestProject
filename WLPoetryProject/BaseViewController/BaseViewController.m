@@ -21,10 +21,6 @@ static const CGFloat touchFullOffset = 15;//箭头触摸区域超出的offset �
 @property (nonatomic,strong)MBProgressHUD *progressHUD;
 
 /**
- *  标题
- **/
-@property (nonatomic,strong) UILabel *naviTitleLabel;
-/**
  *  返回按钮
  **/
 @property (nonatomic,strong) UIButton *backButton;
@@ -61,7 +57,7 @@ static const CGFloat touchFullOffset = 15;//箭头触摸区域超出的offset �
     [self.naviView addSubview:self.backButton];
     [self.backButton mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(self.naviView.mas_left).offset(0);
+        make.leading.equalTo(self.naviView.mas_leading).offset(0);
         make.top.equalTo(self.naviView.mas_top).offset(0);
         make.bottom.equalTo(self.naviView.mas_bottom).offset(0);
         make.width.mas_equalTo(50);
@@ -78,7 +74,7 @@ static const CGFloat touchFullOffset = 15;//箭头触摸区域超出的offset �
     //元素的布局
     [self.backImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(self.naviView.mas_left).offset(15);
+        make.leading.equalTo(self.naviView.mas_leading).offset(15);
         make.bottom.equalTo(self.naviView.mas_bottom).offset(-15);
         make.width.mas_equalTo(backW);
         make.height.mas_equalTo(backH);
@@ -143,10 +139,9 @@ static const CGFloat touchFullOffset = 15;//箭头触摸区域超出的offset �
     //元素的布局
     [self.backView mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(self.view.mas_left).offset(leftFullSpace);
+        make.leading.equalTo(self.view.mas_leading).offset(leftFullSpace);
         make.width.mas_equalTo(backFullWidth);
         make.height.mas_equalTo(backFullWidth);
-        
     }];
     
     CGFloat backW = 7;
@@ -158,7 +153,7 @@ static const CGFloat touchFullOffset = 15;//箭头触摸区域超出的offset �
     [self.backView addSubview:backImageView];
     [backImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(self.backView.mas_left).offset((backFullWidth-backW)/2);
+        make.leading.equalTo(self.backView.mas_leading).offset((backFullWidth-backW)/2);
         make.width.mas_equalTo(backW);
         make.height.mas_equalTo(backH);
         
@@ -172,7 +167,7 @@ static const CGFloat touchFullOffset = 15;//箭头触摸区域超出的offset �
     //元素的布局
     [clearBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(self.view.mas_left).offset(leftFullSpace-touchFullOffset);
+        make.leading.equalTo(self.view.mas_leading).offset(leftFullSpace-touchFullOffset);
         make.width.mas_equalTo(backFullWidth+touchFullOffset*2);
         make.height.mas_equalTo(backFullWidth+touchFullOffset*2);
     }];
@@ -483,19 +478,19 @@ static const CGFloat touchFullOffset = 15;//箭头触摸区域超出的offset �
             //元素的布局
             [_naviView mas_makeConstraints:^(MASConstraintMaker *make) {
                 
-                make.left.equalTo(self.view.mas_safeAreaLayoutGuideLeft).offset(0);
+                make.leading.equalTo(self.view.mas_safeAreaLayoutGuideLeft).offset(0);
                 make.top.equalTo(self.view.mas_top).offset(0);
                 make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideTop).offset(44);
-                make.right.equalTo(self.view.mas_right).offset(0);
+                make.trailing.equalTo(self.view.mas_trailing).offset(0);
                 
             }];
         }else{
             //元素的布局
             [_naviView mas_makeConstraints:^(MASConstraintMaker *make) {
                 
-                make.left.equalTo(self.view.mas_left).offset(0);
+                make.leading.equalTo(self.view.mas_leading).offset(0);
                 make.top.equalTo(self.view.mas_top).offset(0);
-                make.right.equalTo(self.view.mas_right).offset(0);
+                make.trailing.equalTo(self.view.mas_trailing).offset(0);
                 make.height.mas_equalTo(64);
                 
             }];

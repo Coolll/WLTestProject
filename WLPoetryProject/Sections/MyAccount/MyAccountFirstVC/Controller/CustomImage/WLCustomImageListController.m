@@ -72,7 +72,7 @@ static const NSInteger cellCount = 3;
     [addImage mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.bottom.equalTo(self.naviView.mas_bottom).offset(-10);
-        make.right.equalTo(self.naviView.mas_right).offset(-25);
+        make.trailing.equalTo(self.naviView.mas_trailing).offset(-25);
         make.width.mas_equalTo(20);
         make.height.mas_equalTo(20);
         
@@ -86,10 +86,10 @@ static const NSInteger cellCount = 3;
     //元素的布局
     [btn mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(addImage.mas_left).offset(-5);
+        make.leading.equalTo(addImage.mas_leading).offset(-5);
         make.top.equalTo(addImage.mas_top).offset(-10);
         make.bottom.equalTo(self.naviView.mas_bottom).offset(0);
-        make.right.equalTo(self.naviView.mas_right).offset(0);
+        make.trailing.equalTo(self.naviView.mas_trailing).offset(0);
         
     }];
 
@@ -101,7 +101,7 @@ static const NSInteger cellCount = 3;
     [self.editImage mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.bottom.equalTo(self.naviView.mas_bottom).offset(-10);
-        make.right.equalTo(btn.mas_left).offset(-10);
+        make.trailing.equalTo(btn.mas_leading).offset(-10);
         make.width.mas_equalTo(20);
         make.height.mas_equalTo(20);
         
@@ -115,10 +115,10 @@ static const NSInteger cellCount = 3;
     //元素的布局
     [self.editBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(self.editImage.mas_left).offset(-10);
+        make.leading.equalTo(self.editImage.mas_leading).offset(-10);
         make.top.equalTo(self.editImage.mas_top).offset(-10);
         make.bottom.equalTo(self.naviView.mas_bottom).offset(0);
-        make.right.equalTo(self.editImage.mas_right).offset(5);
+        make.trailing.equalTo(self.editImage.mas_trailing).offset(5);
         
     }];
 }
@@ -191,7 +191,7 @@ static const NSInteger cellCount = 3;
     //元素的布局
     [self.noImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(self.view.mas_left).offset((PhoneScreen_WIDTH-imageW)/2);
+        make.leading.equalTo(self.view.mas_leading).offset((PhoneScreen_WIDTH-imageW)/2);
         make.top.equalTo(self.view.mas_top).offset((PhoneScreen_HEIGHT-imageH-labelH-64-itemSpace)/2);
         make.width.mas_equalTo(imageW);
         make.height.mas_equalTo(imageH);
@@ -253,7 +253,7 @@ static const NSInteger cellCount = 3;
         [deleteImage mas_makeConstraints:^(MASConstraintMaker *make) {
             
             make.top.equalTo(imageView.mas_top).offset(10);
-            make.right.equalTo(imageView.mas_right).offset(-10);
+            make.trailing.equalTo(imageView.mas_trailing).offset(-10);
             make.width.mas_equalTo(20);
             make.height.mas_equalTo(20);
             
@@ -267,10 +267,10 @@ static const NSInteger cellCount = 3;
         //元素的布局
         [clearBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             
-            make.left.equalTo(deleteImage.mas_left).offset(-10);
+            make.leading.equalTo(deleteImage.mas_leading).offset(-10);
             make.top.equalTo(deleteImage.mas_top).offset(-10);
             make.bottom.equalTo(deleteImage.mas_bottom).offset(10);
-            make.right.equalTo(deleteImage.mas_right).offset(10);
+            make.trailing.equalTo(deleteImage.mas_trailing).offset(10);
             
         }];
     }

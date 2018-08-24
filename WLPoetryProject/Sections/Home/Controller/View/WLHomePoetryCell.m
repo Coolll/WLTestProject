@@ -85,10 +85,10 @@ static const CGFloat nameHeight = 25;//名字、作者等信息的高度
     if (self.isLast) {
         [self.bgView mas_updateConstraints:^(MASConstraintMaker *make) {
             
-            make.left.equalTo(self.mas_left).offset(leftSpace);
+            make.leading.equalTo(self.mas_leading).offset(leftSpace);
             make.top.equalTo(self.mas_top).offset(topSpce*2);
             make.bottom.equalTo(self.mas_bottom).offset(-topSpce*2);
-            make.right.equalTo(self.mas_right).offset(-leftSpace);
+            make.trailing.equalTo(self.mas_trailing).offset(-leftSpace);
             
             
         }];
@@ -98,20 +98,20 @@ static const CGFloat nameHeight = 25;//名字、作者等信息的高度
             //有 题画 诗词 顶部间距减小
             [self.bgView mas_updateConstraints:^(MASConstraintMaker *make) {
                 
-                make.left.equalTo(self.mas_left).offset(leftSpace);
+                make.leading.equalTo(self.mas_leading).offset(leftSpace);
                 make.top.equalTo(self.mas_top).offset(topSpce-10);
                 make.bottom.equalTo(self.mas_bottom).offset(0);
-                make.right.equalTo(self.mas_right).offset(-leftSpace);
+                make.trailing.equalTo(self.mas_trailing).offset(-leftSpace);
                 
                 
             }];
         }else{
             [self.bgView mas_updateConstraints:^(MASConstraintMaker *make) {
                 
-                make.left.equalTo(self.mas_left).offset(leftSpace);
+                make.leading.equalTo(self.mas_leading).offset(leftSpace);
                 make.top.equalTo(self.mas_top).offset(topSpce*2);
                 make.bottom.equalTo(self.mas_bottom).offset(0);
-                make.right.equalTo(self.mas_right).offset(-leftSpace);
+                make.trailing.equalTo(self.mas_trailing).offset(-leftSpace);
                 
                 
             }];
@@ -179,16 +179,16 @@ static const CGFloat nameHeight = 25;//名字、作者等信息的高度
         
         make.leading.equalTo(self.nameLabel.mas_leading).offset(0);
         make.top.equalTo(self.nameLabel.mas_bottom).offset(itemSpace);
-        make.right.equalTo(self.nameLabel.mas_right).offset(0);
+        make.trailing.equalTo(self.nameLabel.mas_trailing).offset(0);
         make.height.mas_equalTo(nameHeight);
     }];
     
     //第一句诗词的布局
     [self.contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(self.nameLabel.mas_left).offset(0);
+        make.leading.equalTo(self.nameLabel.mas_leading).offset(0);
         make.top.equalTo(self.authorLabel.mas_bottom).offset(itemSpace);
-        make.right.equalTo(self.bgView.mas_right).offset(-10);
+        make.trailing.equalTo(self.bgView.mas_trailing).offset(-10);
         
     }];
     

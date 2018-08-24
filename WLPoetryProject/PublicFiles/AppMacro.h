@@ -18,38 +18,6 @@
 #define NavigationColor RGBCOLOR(65, 160, 225, 1.0)
 #define ViewBackgroundColor RGBCOLOR(240, 240, 240, 1.0)
 #define RequestFailed @"请稍后重试"
-//刘 本机的
-//#define WL_BASE_URL(_PATH_) [@"http://192.168.1.151:8080/poker-view-service/" stringByAppendingString:_PATH_]
-//#define WL_H5_URL(_PATH_) [@"http://192.168.1.151/poker-theory/" stringByAppendingString:_PATH_]
-
-//测试的
-
-//http://poker-t.pokershove.com
-//121.196.204.216
-
-//#define WL_BASE_URL(_PATH_) [@"http://pker.pokershove.com/poker-view-service/" stringByAppendingString:_PATH_]
-//#define WL_Mall_RequestURL @"http://pker.pokershove.com/Integral-Service/poker/redirect"
-//#define WL_H5_URL(_PATH_) [@"http://pker.pokershove.com/poker-theory/" stringByAppendingString:_PATH_]
-//#define ImageBaseURL @"http://pker.pokershove.com/"
-//#define UserHeadImageBase @"http://pker.pokershove.com/poker-view-service/"
-
-
-
-//#define WL_BASE_URL(_PATH_) [@"http://121.196.204.216/poker-view-service/" stringByAppendingString:_PATH_]
-//#define WL_Mall_RequestURL @"http://121.196.204.216/Integral-Service/poker/redirect"
-//#define WL_H5_URL(_PATH_) [@"http://121.196.204.216/poker-theory/" stringByAppendingString:_PATH_]
-//#define ImageBaseURL @"http://121.196.204.216/"
-//#define UserHeadImageBase @"http://121.196.204.216/poker-view-service/"
-
-
-//正式
-#define WL_BASE_URL(_PATH_) [@"http://106.14.59.104/poker-view-service/" stringByAppendingString:_PATH_]
-#define WL_Mall_RequestURL @"http://106.14.59.104/Integral-Service/poker/redirect"
-#define WL_H5_URL(_PATH_) [@"http://106.14.59.104/poker-theory/" stringByAppendingString:_PATH_]
-//#define WL_H5_URL(_PATH_) [@"http://www.pokershove.com/poker-theory/" stringByAppendingString:_PATH_]
-
-#define ImageBaseURL @"http://106.14.59.104/"
-#define UserHeadImageBase @"http://106.14.59.104/poker-view-service/"
 
 
 
