@@ -39,6 +39,7 @@
  **/
 @property (nonatomic,strong) NSArray *allPoetryList;
 
+- (void)loadClassImageWithBlock:(void(^)(NSDictionary*dic))block;
 
 
 - (void)loadAllClassImageInfo;

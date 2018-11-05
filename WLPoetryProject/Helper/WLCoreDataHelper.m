@@ -407,7 +407,7 @@
 #pragma mark 增加创作
 - (void)saveInBackgroundWithCreationModel:(CreationModel*)model withResult:(CoreDataResultBlock)block
 {
-    [self saveInBackgroundWithPeotryModelArray:[NSArray arrayWithObject:model] withResult:block];
+    [self saveInBackgroundWithCreationModelArray:[NSArray arrayWithObject:model] withResult:block];
 }
 
 //保存创作信息

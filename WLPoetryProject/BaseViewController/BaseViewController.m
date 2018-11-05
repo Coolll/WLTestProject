@@ -478,7 +478,7 @@ static const CGFloat touchFullOffset = 15;//箭头触摸区域超出的offset �
             //元素的布局
             [_naviView mas_makeConstraints:^(MASConstraintMaker *make) {
                 
-                make.leading.equalTo(self.view.mas_safeAreaLayoutGuideLeft).offset(0);
+                make.leading.equalTo(self.view.mas_safeAreaLayoutGuideLeading).offset(0);
                 make.top.equalTo(self.view.mas_top).offset(0);
                 make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideTop).offset(44);
                 make.trailing.equalTo(self.view.mas_trailing).offset(0);

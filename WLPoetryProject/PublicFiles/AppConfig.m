@@ -69,6 +69,11 @@
 - (void)loadAllClassImageInfo
 {
     
+    [self loadClassImageWithBlock:nil];
+}
+
+- (void)loadClassImageWithBlock:(void(^)(NSDictionary*dic))block
+{
     BmobQuery *query = [BmobQuery queryWithClassName:@"ImageList"];
     
     [query findObjectsInBackgroundWithBlock:^(NSArray *array, NSError *error) {
@@ -84,6 +89,9 @@
                 [self.bgImageInfo setObject:url forKey:className];
             }
             
+            if (block) {
+                block(self.bgImageInfo);
+            }
         }
     }];
 }

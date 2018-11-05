@@ -10,6 +10,7 @@
 #import "WLCustomTextView.h"
 #import "WLNewTextView.h"
 #import "UIButton+WLExtension.h"
+#import "WLCoreDataHelper.h"
 @interface WritePoetryController ()
 /**
  *  标题
@@ -37,8 +38,8 @@
 
 - (void)loadCustomView
 {
-    self.titleTextView.placeHolderString = @"标题";
-    self.nameTextView.placeHolderString = @"姓名";
+    self.titleTextView.placeHolderString = @"诗词名";
+    self.nameTextView.placeHolderString = @"作者";
     self.contentTextView.placeHolderString = @"内容";
     [self loadRightSaveBtn];
 }
@@ -46,23 +47,57 @@
 - (void)loadRightSaveBtn
 {
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [btn addTouchEvent:UIControlEventTouchUpInside withAction:^(UIButton *sender) {
-        
+    [btn addEventWithAction:^(UIButton *sender) {
+        [self saveDraft];
     }];
-    [btn setTitle:@"保存草稿" forState:UIControlStateNormal];
+    [btn setTitle:@"保存" forState:UIControlStateNormal];
     btn.titleLabel.font = [UIFont systemFontOfSize:12.f];
     [self.naviView addSubview:btn];
     
     //元素的布局
     [btn mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.bottom.equalTo(self.naviView.mas_bottom).offset(-15);
+        make.bottom.equalTo(self.naviView.mas_bottom).offset(-10);
         make.trailing.equalTo(self.naviView.mas_trailing).offset(-15);
         make.width.mas_equalTo(60);
         make.height.mas_equalTo(20);
         
     }];
     
+}
+- (void)saveDraft
+{
+    CreationModel *model = [[CreationModel alloc]init];
+    
+    NSString *title = self.titleTextView.contentString;
+    NSString *author = self.nameTextView.contentString;
+    NSString *content = self.contentTextView.contentString;
+    if (title.length == 0) {
+        title = @"无题";
+    }
+    if (author.length == 0) {
+        author = @"佚名";
+    }
+    
+    if (content.length == 0) {
+        [self showHUDWithText:@"内容不可为空"];
+        return;
+    }
+    model.creationTitle = title;
+    model.creationAuthor = author;
+    model.creationContent = content;
+    
+    [[WLCoreDataHelper shareHelper] saveInBackgroundWithCreationModel:model withResult:^(BOOL isSuccessful, NSError *error) {
+        if (isSuccessful) {
+            [self showHUDWithText:@"保存成功"];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self.navigationController popViewControllerAnimated:YES];
+            });
+        }else{
+            [self showHUDWithText:@"请重试"];
+        }
+        
+    }];
 }
 
 #pragma mark - 点击事件

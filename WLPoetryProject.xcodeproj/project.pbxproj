@@ -262,6 +262,9 @@
 		3607C882212F9DC600298C6C /* MyTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3607C881212F9DC600298C6C /* MyTextView.m */; };
 		3607C885212FA20000298C6C /* UIButton+WLExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3607C884212FA20000298C6C /* UIButton+WLExtension.m */; };
 		3607C896212FE3BF00298C6C /* CreationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3607C895212FE3BF00298C6C /* CreationModel.m */; };
+		36521BA521904A8B00425DCC /* reciteIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 36521BA421904A8A00425DCC /* reciteIcon.png */; };
+		36521BA821904BED00425DCC /* RecitePoetryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36521BA721904BED00425DCC /* RecitePoetryController.m */; };
+		36521BAA21904ECF00425DCC /* optionIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 36521BA921904ECE00425DCC /* optionIcon.png */; };
 		36B516F3212EC85500FD0FA8 /* WLNewTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B516F2212EC85500FD0FA8 /* WLNewTextView.m */; };
 /* End PBXBuildFile section */
 
@@ -699,6 +702,10 @@
 		3607C891212FE32700298C6C /* UserCreation+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UserCreation+CoreDataProperties.m"; sourceTree = "<group>"; };
 		3607C894212FE3BF00298C6C /* CreationModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CreationModel.h; sourceTree = "<group>"; };
 		3607C895212FE3BF00298C6C /* CreationModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CreationModel.m; sourceTree = "<group>"; };
+		36521BA421904A8A00425DCC /* reciteIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reciteIcon.png; sourceTree = "<group>"; };
+		36521BA621904BED00425DCC /* RecitePoetryController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecitePoetryController.h; sourceTree = "<group>"; };
+		36521BA721904BED00425DCC /* RecitePoetryController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecitePoetryController.m; sourceTree = "<group>"; };
+		36521BA921904ECE00425DCC /* optionIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = optionIcon.png; sourceTree = "<group>"; };
 		36B516F1212EC85500FD0FA8 /* WLNewTextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLNewTextView.h; sourceTree = "<group>"; };
 		36B516F2212EC85500FD0FA8 /* WLNewTextView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLNewTextView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1620,6 +1627,8 @@
 		07F73BA1208ACD9A00F7D8B3 /* ShareResoure */ = {
 			isa = PBXGroup;
 			children = (
+				36521BA921904ECE00425DCC /* optionIcon.png */,
+				36521BA421904A8A00425DCC /* reciteIcon.png */,
 				0073FD7620EE14A700FED6D6 /* shareIcon.png */,
 				00BBFA1520D65C8B00BB86D9 /* poetryIcon.png */,
 				00F9517520D4FF940039D7C5 /* likePoetry.png */,
@@ -1672,6 +1681,8 @@
 				07642A5D208E141900B084AE /* PoetryDetailViewController.m */,
 				0791165F210CBDA800436964 /* WritePoetryController.h */,
 				07911660210CBDA800436964 /* WritePoetryController.m */,
+				36521BA621904BED00425DCC /* RecitePoetryController.h */,
+				36521BA721904BED00425DCC /* RecitePoetryController.m */,
 				07CFF23D208B0A8900849C20 /* View */,
 				0010F21820F4911500F272EB /* ImagePoetry */,
 			);
@@ -1800,6 +1811,7 @@
 				07F73C74208AE84900F7D8B3 /* tabbarOne.png in Resources */,
 				071609B220A1C15400904C69 /* gradePoetry_empty.json in Resources */,
 				00F9516C20D4D7190039D7C5 /* setting.png in Resources */,
+				36521BAA21904ECF00425DCC /* optionIcon.png in Resources */,
 				00F9517720D4FF940039D7C5 /* likePoetry.png in Resources */,
 				00D4F64320F7467800287FB0 /* homeAuthorBg.png in Resources */,
 				07F73C0A208ACD9A00F7D8B3 /* nav_back@3x.png in Resources */,
@@ -1887,6 +1899,7 @@
 				07F3E31820D2C0FC00E7BAF7 /* poetryBack.jpg in Resources */,
 				0765C6AD207CE47E0085EB3A /* Info.plist in Resources */,
 				07E7C31B20CC1DB7007CA827 /* configureTang.json in Resources */,
+				36521BA521904A8B00425DCC /* reciteIcon.png in Resources */,
 				0785076420B2EFF20030CD98 /* songPoetry_seven.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1930,6 +1943,7 @@
 				07E7C30F20CC090F007CA827 /* WLTypeListCell.m in Sources */,
 				0715FF0820C564790096C60E /* WLSearchController.m in Sources */,
 				00F9516420D4BA590039D7C5 /* WLSettingCell.m in Sources */,
+				36521BA821904BED00425DCC /* RecitePoetryController.m in Sources */,
 				07567B8F207A02EC0018B9E7 /* WLSaveLocalHelper.m in Sources */,
 				0765C702207CE6E20085EB3A /* SDWebImageCompat.m in Sources */,
 				0765C6F9207CE6E20085EB3A /* NSButton+WebCache.m in Sources */,

@@ -9,6 +9,7 @@
 #import "PoetryDetailViewController.h"
 #import "WLPoetryContentCell.h"
 #import <BmobSDK/Bmob.h>
+#import "RecitePoetryController.h"
 static const CGFloat leftSpace = 10;//诗句的左右间距
 static const CGFloat topSpace = 15;//诗句与标题的上间距
 
@@ -255,6 +256,33 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
     }];
     
     
+    UIImageView *reciteImage = [[UIImageView alloc]init];
+    reciteImage.image = [UIImage imageNamed:@"reciteIcon"];
+    [self.view addSubview:reciteImage];
+    //设置UI布局约束
+    [reciteImage mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.equalTo(shareImage.mas_bottom).offset(20);//元素顶部约束
+        make.leading.equalTo(self.likeImage.mas_leading).offset(0);//元素左侧约束
+        make.width.mas_equalTo(20);//元素宽度
+        make.height.mas_equalTo(20);//元素高度
+    }];
+    
+    
+    
+    UIButton *reciteBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    reciteBtn.backgroundColor = [UIColor clearColor];
+    [reciteBtn addTarget:self action:@selector(reciteAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:reciteBtn];
+    //设置UI布局约束
+    [reciteBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.equalTo(reciteImage.mas_top).offset(-10);//元素顶部约束
+        make.trailing.equalTo(reciteImage.mas_trailing).offset(10);//元素右侧约束
+        make.bottom.equalTo(reciteImage.mas_bottom).offset(10);//元素底部约束
+        make.leading.equalTo(reciteImage.mas_leading).offset(-10);
+    }];
+    
 }
 
 #pragma mark - 收藏
@@ -352,6 +380,13 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
     UIGraphicsEndImageContext();
     return image;
     
+}
+
+- (void)reciteAction:(UIButton*)sender
+{
+    NSLog(@"背诵");
+    RecitePoetryController *vc = [[RecitePoetryController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - TableView 代理

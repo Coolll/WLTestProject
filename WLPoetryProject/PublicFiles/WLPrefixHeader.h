@@ -18,5 +18,6 @@
 #import "UserInformation.h"
 #import "WLSaveLocalHelper.h"
 #import "AppConfig.h"
+#import "UIButton+WLExtension.h"
 
 #endif /* WLPrefixHeader_h */

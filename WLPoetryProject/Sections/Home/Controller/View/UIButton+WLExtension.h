@@ -11,6 +11,8 @@
 typedef void(^WLButtonBlock)(UIButton *sender);
 @interface UIButton (WLExtension)
 
+- (void)addEventWithAction:(WLButtonBlock)block;
+
 - (void)addTouchEvent:(UIControlEvents)event withAction:(WLButtonBlock)block;
 
 @end

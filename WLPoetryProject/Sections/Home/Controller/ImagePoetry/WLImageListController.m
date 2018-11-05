@@ -37,13 +37,20 @@ static const NSInteger cellCount = 3;
     self.view.backgroundColor = ViewBackgroundColor;
     self.titleForNavi = @"选择画卷";
     [self loadCustomData];
-    [self loadCustomView];
 }
 
 - (void)loadCustomData
 {
     self.imageArray = [NSMutableArray arrayWithArray:[AppConfig config].bgImageInfo.allValues];
     
+    if (self.imageArray.count == 0) {
+        [[AppConfig config] loadClassImageWithBlock:^(NSDictionary *dic) {
+            [self.imageArray addObjectsFromArray:dic.allValues];
+            [self loadCustomView];
+        }];
+    }else{
+        [self loadCustomView];
+    }
 }
 
 - (void)loadCustomView
@@ -67,6 +74,7 @@ static const NSInteger cellCount = 3;
 {
     return 1;
 }
+
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *imageName = self.imageArray[indexPath.row];
@@ -81,7 +89,6 @@ static const NSInteger cellCount = 3;
     
     UIImageView *imageView = [[UIImageView alloc]init];
     imageView.frame = CGRectMake(0, 0, itemW, itemH);
-//    imageView.image = [UIImage imageNamed:imageName];
     [imageView sd_setImageWithURL:[NSURL URLWithString:imageName]];
     [cell addSubview:imageView];
     

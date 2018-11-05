@@ -88,7 +88,6 @@
 - (void)setIsVertical:(BOOL)isVertical
 {
     
-
     _isVertical = isVertical;
     self.typeView.backgroundColor = ViewBackgroundColor;
     if (isVertical) {
@@ -102,7 +101,6 @@
 - (void)setPoetryString:(NSString *)poetryString
 {
     
-
     _poetryString = poetryString;
     self.searchView.backgroundColor = [UIColor whiteColor];
 
@@ -143,6 +141,7 @@
     if ([self.inputTextView isFirstResponder]) {
         [self.inputTextView resignFirstResponder];
     }
+    
     
     WLImageSearchController *searchVC = [[WLImageSearchController alloc]init];
     searchVC.hidesBottomBarWhenPushed = YES;
@@ -252,6 +251,9 @@
         _inputTextView = [[WLTextView alloc]init];
         _inputTextView.layer.cornerRadius = 4.f;
         _inputTextView.font = [UIFont systemFontOfSize:16.f];
+        _inputTextView.textColor = RGBCOLOR(200, 200, 200, 1.0);
+        _inputTextView.editable = NO;
+        _inputTextView.userInteractionEnabled = NO;
         [self.view addSubview:_inputTextView];
         
         //设置UI布局约束

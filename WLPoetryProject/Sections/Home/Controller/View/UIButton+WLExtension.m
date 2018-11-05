@@ -11,6 +11,15 @@
 @implementation UIButton (WLExtension)
 static const NSString *identifier = @"UIButton_WLExtension";
 
+- (void)addEventWithAction:(WLButtonBlock)block
+{
+    if (block) {
+        [self addTouchEvent:UIControlEventTouchUpInside withAction:block];
+    }else{
+        [self addTouchEvent:UIControlEventTouchUpInside withAction:nil];
+    }
+}
+
 - (void)addTouchEvent:(UIControlEvents)event withAction:(WLButtonBlock)block
 {
     if (block) {

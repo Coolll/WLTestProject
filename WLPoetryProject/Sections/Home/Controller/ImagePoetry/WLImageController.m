@@ -239,6 +239,10 @@ static const CGFloat imageW = 20;
         [self.topArray addObject:[NSString stringWithFormat:@"%f",topSpace]];
         
         topSpace += height+itemSpace;
+        
+        if (topSpace > PhoneScreen_HEIGHT-40) {
+            topSpace = 20;
+        }
     }
     
     
@@ -277,6 +281,10 @@ static const CGFloat imageW = 20;
         [self.topArray addObject:[NSString stringWithFormat:@"%f",topSpace]];
         
         leftSpace += width+itemSpace;
+        
+        if (leftSpace > PhoneScreen_WIDTH-40) {
+            leftSpace = 20;
+        }
     }
     
 }
