@@ -196,47 +196,47 @@
             
         }];
         
-        UIImageView *writeImage = [[UIImageView alloc]init];
-        writeImage.image = [UIImage imageNamed:@"writePoetry"];
-        [headerView addSubview:writeImage];
-        //元素的布局
-        [writeImage mas_makeConstraints:^(MASConstraintMaker *make) {
-            
-            make.top.equalTo(headerView.mas_top).offset(6);
-            make.trailing.equalTo(headerView.mas_trailing).offset(-60);
-            make.width.mas_equalTo(18);
-            make.height.mas_equalTo(18);
-            
-        }];
-        
-        UILabel *writeLabel = [[UILabel alloc]init];
-        writeLabel.text = @"创作";
-        writeLabel.font = [UIFont systemFontOfSize:14.f];
-        writeLabel.textColor = RGBCOLOR(100, 100, 100, 1.0);
-        [headerView addSubview:writeLabel];
-        //元素的布局
-        [writeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            
-            make.leading.equalTo(writeImage.mas_trailing).offset(5);
-            make.top.equalTo(headerView.mas_top).offset(0);
-            make.bottom.equalTo(headerView.mas_bottom).offset(0);
-            make.trailing.equalTo(headerView.mas_trailing).offset(-15);
-            
-        }];
-        
-        UIButton *writeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [writeBtn addTarget:self action:@selector(writePoetryAction:) forControlEvents:UIControlEventTouchUpInside];
-        [headerView addSubview:writeBtn];
-        //元素的布局
-        [writeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            
-            make.leading.equalTo(writeImage.mas_leading).offset(-10);
-            make.top.equalTo(headerView.mas_top).offset(0);
-            make.bottom.equalTo(headerView.mas_bottom).offset(-0);
-            make.trailing.equalTo(headerView.mas_trailing).offset(0);
-           
-            
-        }];
+//        UIImageView *writeImage = [[UIImageView alloc]init];
+//        writeImage.image = [UIImage imageNamed:@"writePoetry"];
+//        [headerView addSubview:writeImage];
+//        //元素的布局
+//        [writeImage mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//            make.top.equalTo(headerView.mas_top).offset(6);
+//            make.trailing.equalTo(headerView.mas_trailing).offset(-60);
+//            make.width.mas_equalTo(18);
+//            make.height.mas_equalTo(18);
+//
+//        }];
+//
+//        UILabel *writeLabel = [[UILabel alloc]init];
+//        writeLabel.text = @"创作";
+//        writeLabel.font = [UIFont systemFontOfSize:14.f];
+//        writeLabel.textColor = RGBCOLOR(100, 100, 100, 1.0);
+//        [headerView addSubview:writeLabel];
+//        //元素的布局
+//        [writeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//            make.leading.equalTo(writeImage.mas_trailing).offset(5);
+//            make.top.equalTo(headerView.mas_top).offset(0);
+//            make.bottom.equalTo(headerView.mas_bottom).offset(0);
+//            make.trailing.equalTo(headerView.mas_trailing).offset(-15);
+//
+//        }];
+//
+//        UIButton *writeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//        [writeBtn addTarget:self action:@selector(writePoetryAction:) forControlEvents:UIControlEventTouchUpInside];
+//        [headerView addSubview:writeBtn];
+//        //元素的布局
+//        [writeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//            make.leading.equalTo(writeImage.mas_leading).offset(-10);
+//            make.top.equalTo(headerView.mas_top).offset(0);
+//            make.bottom.equalTo(headerView.mas_bottom).offset(-0);
+//            make.trailing.equalTo(headerView.mas_trailing).offset(0);
+//
+//
+//        }];
         
         return headerView;
         
@@ -293,7 +293,6 @@
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     NSInteger section = indexPath.section;
     if (section == 0) {
         
@@ -301,7 +300,7 @@
         if (!cell) {
             cell = [[WLImageCell alloc]init];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.backgroundColor = [UIColor clearColor];
+            cell.backgroundColor = RGBCOLOR(246, 246, 246, 1.0);
         }
         [cell touchImageWithBlock:^{
             
@@ -317,9 +316,10 @@
         PoetryModel *model = [self.poetryArray objectAtIndex:indexPath.row];
         WLHomePoetryCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WLHomePoetryCell"];;
         if (!cell) {
-            cell = [[WLHomePoetryCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"WLHomePoetryCell"];
+            cell = [[WLHomePoetryCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"WLHomePoetryCell"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.backgroundColor = [UIColor clearColor];
+            cell.backgroundColor = RGBCOLOR(246, 246, 246, 1.0);
+            NSLog(@"====index:%ld",indexPath.row);
         }
         if (indexPath.row == self.poetryArray.count-1) {
             cell.isLast = YES;

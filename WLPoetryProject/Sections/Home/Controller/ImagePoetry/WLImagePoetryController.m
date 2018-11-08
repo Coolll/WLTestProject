@@ -123,7 +123,7 @@
     
     if (self.inputTextView.text.length == 0) {
         
-        [self showHUDWithText:@"请输入诗词内容"];
+        [self showHUDWithText:@"诗词内容为空"];
         return;
     }
     
@@ -282,7 +282,7 @@
             make.top.equalTo(self.inputTextView.mas_bottom).offset(15);//元素顶部约束
             make.leading.equalTo(self.inputTextView.mas_leading).offset(0);//元素左侧约束
             make.trailing.equalTo(self.inputTextView.mas_trailing).offset(0);//元素右侧约束
-            make.height.mas_equalTo(30);//元素高度
+            make.height.mas_equalTo(50);//元素高度
         }];
 
 
@@ -308,7 +308,7 @@
 
             make.leading.equalTo(_checkBox.mas_trailing).offset(15);
             make.top.equalTo(_typeView.mas_top).offset(0);
-            make.bottom.equalTo(_typeView.mas_bottom).offset(0);
+            make.bottom.equalTo(_typeView.mas_bottom).offset(-20);
             make.trailing.equalTo(_typeView.mas_trailing).offset(0);
 
         }];
@@ -321,10 +321,27 @@
 
             make.leading.equalTo(_typeView.mas_leading).offset(0);
             make.top.equalTo(_typeView.mas_top).offset(0);
-            make.bottom.equalTo(_typeView.mas_bottom).offset(0);
+            make.bottom.equalTo(_typeView.mas_bottom).offset(-20);
             make.trailing.equalTo(_typeView.mas_trailing).offset(0);
 
         }];
+        
+        UILabel *subLabel = [[UILabel alloc]init];
+        subLabel.text = @"完成后，可在题画界面调整诗词的位置喔～";
+        subLabel.font = [UIFont systemFontOfSize:14.f];
+        subLabel.textColor = [UIColor lightGrayColor];
+        [_typeView addSubview:subLabel];
+        //元素的布局
+        [subLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.leading.equalTo(_typeView.mas_leading).offset(0);
+            make.top.equalTo(tipLabel.mas_bottom).offset(0);
+            make.bottom.equalTo(_typeView.mas_bottom).offset(0);
+            make.trailing.equalTo(_typeView.mas_trailing).offset(0);
+           
+            
+        }];
+        
     }
     return _typeView;
 }

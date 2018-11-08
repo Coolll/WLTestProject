@@ -116,11 +116,15 @@ static const NSInteger buttonBaseTag = 2000;
 - (void)loadTabbarView
 {
 
+//    for (UIView *subView in self.tabBar.subviews) {
+//        [subView removeFromSuperview];
+//    }
    //self.tabBar.translucent = NO;//设置为NO之后，tabbar占view的位置了。view的高度为phoneH-49
     UIColor *tabbarColor = RGBCOLOR(240, 245, 250, 1.0);
     self.tabbarView = [[UIView alloc]init];
     self.tabbarView.frame = CGRectMake(0, 0, PhoneScreen_WIDTH, 100);
     self.tabbarView.backgroundColor = tabbarColor;
+    self.tabbarView.opaque = NO;
     [self.tabBar addSubview:self.tabbarView];
         
     //图标个数

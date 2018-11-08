@@ -14,6 +14,7 @@
 #import "WLLikeController.h"
 #import "AboutViewController.h"
 #import "WLCustomImageListController.h"
+#import "WLMyKnownController.h"
 @interface YLAccountViewController ()<UITableViewDelegate,UITableViewDataSource>
 /**
  *  主tableView
@@ -100,8 +101,8 @@
     }
 
     self.canPullData = YES;
-    self.itemsArray = [NSArray arrayWithObjects:@"我的题画",@"我的收藏",@"设置",@"关于", nil];
-    self.imageArray = [NSArray arrayWithObjects:@"customImage",@"like",@"setting",@"about",nil];
+    self.itemsArray = [NSArray arrayWithObjects:@"我的题画",@"我的收藏",@"我的学识",@"设置",@"关于", nil];
+    self.imageArray = [NSArray arrayWithObjects:@"customImage",@"like",@"number",@"setting",@"about",nil];
 }
 
 - (void)refreshData
@@ -180,31 +181,7 @@
     }];
 }
 
-#pragma mark 下拉刷新
-- (void)userRefreshData
-{
-    if (self.canPullData) {
-        NSLog(@"下拉");
-        //防止多次下拉
-        self.canPullData = NO;
-        
-        //用户下拉时，如果
-        if (self.isLoginSuccess) {
-//            [self requestUserInfo];
-        }else{
-            [self.mainTableView.mj_header endRefreshing];
-        }
-        
-        //1秒后可以再次刷新数据
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            self.canPullData = YES;
-            
-        });
-        
-    }
-    
-}
-
+#pragma mark table代理
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -346,6 +323,26 @@
         }
         
         if (indexPath.row == 2) {
+            //我的学识
+            id token = kUserToken;
+            if (!token) {
+                token = @"";
+            }
+            
+            NSString *tokenString = [NSString stringWithFormat:@"%@",token];
+            //如果本地没有token，那么就意味着用户没有登录，不需要去拿收藏列表,该数据为未收藏
+            if (tokenString.length == 0) {
+                [self showHUDWithText:@"请先登录"];
+                return;
+            }
+            
+            
+            WLMyKnownController *likeVC = [[WLMyKnownController alloc]init];
+            likeVC.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:likeVC animated:YES];
+        }
+        
+        if (indexPath.row == 3) {
             //设置
             WLSettingController *vc = [[WLSettingController alloc]init];
             vc.hidesBottomBarWhenPushed = YES;
@@ -355,7 +352,7 @@
             [self.navigationController pushViewController:vc animated:YES];
         }
         
-        if (indexPath.row == 3) {
+        if (indexPath.row == 4) {
             //关于
             AboutViewController *vc = [[AboutViewController alloc]init];
             vc.hidesBottomBarWhenPushed = YES;

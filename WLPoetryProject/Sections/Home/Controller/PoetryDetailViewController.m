@@ -386,6 +386,9 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
 {
     NSLog(@"背诵");
     RecitePoetryController *vc = [[RecitePoetryController alloc]init];
+    vc.dataArray = self.dataArray;
+    vc.dataModel = self.dataModel;
+    [vc loadCustomView];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

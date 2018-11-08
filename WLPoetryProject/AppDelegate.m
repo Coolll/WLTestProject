@@ -33,7 +33,7 @@
 //新浪微博SDK需要在项目Build Settings中的Other Linker Flags添加"-ObjC"
 
 
-#define FIRSTOPENAPP  @"FirstLoadShuangrenduobao"
+#define FIRSTOPENAPP  @"FirstLoadPoetryProject"
 
 @interface AppDelegate ()
 /**
@@ -73,13 +73,16 @@
 
 //    [self loadLaunchImage];
 
-    
-    [self loadLikePoetryList];
-    
-    [self registShareSDK];
-    
-    [[AppConfig config] loadAllClassImageInfo];
+//    dispatch_queue_t queue = dispatch_queue_create(0, 0);
+//    dispatch_async(queue, ^{
+        [self loadLikePoetryList];
+        
+        [self registShareSDK];
+        
+        [[AppConfig config] loadAllClassImageInfo];
 
+//    });
+    
 //    NSString *isFirstLoad = [[NSUserDefaults standardUserDefaults]objectForKey:FIRSTOPENAPP];
 //
 //    if (![isFirstLoad isEqualToString:@"1"]) {
