@@ -9,5 +9,17 @@
 #import "BaseViewController.h"
 
 @interface WLMyKnownController : BaseViewController
+/**
+ *  用户名
+ **/
+@property (nonatomic,copy) NSString *userName;
+/**
+ *  头像
+ **/
+@property (nonatomic,copy) NSString *headImageURL;
+
+
+
+- (void)loadCustomView;
 
 @end

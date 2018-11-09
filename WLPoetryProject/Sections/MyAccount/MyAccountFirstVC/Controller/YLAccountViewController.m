@@ -339,6 +339,9 @@
             
             WLMyKnownController *likeVC = [[WLMyKnownController alloc]init];
             likeVC.hidesBottomBarWhenPushed = YES;
+            likeVC.userName = self.userNameString;
+            likeVC.headImageURL = self.userImageURL;
+            [likeVC loadCustomView];
             [self.navigationController pushViewController:likeVC animated:YES];
         }
         
