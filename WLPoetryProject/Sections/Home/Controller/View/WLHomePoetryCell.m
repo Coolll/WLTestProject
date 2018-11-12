@@ -53,14 +53,6 @@ static const CGFloat nameHeight = 25;//名字、作者等信息的高度
 @end
 @implementation WLHomePoetryCell
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        
-    }
-    return self;
-}
 
 - (void)setDataModel:(PoetryModel *)dataModel
 {

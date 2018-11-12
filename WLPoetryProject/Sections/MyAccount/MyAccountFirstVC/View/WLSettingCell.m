@@ -18,6 +18,11 @@
  *  分割线
  **/
 @property (nonatomic, strong) UIImageView *lineView;
+/**
+ *  左右间距
+ **/
+@property (nonatomic,assign) CGFloat space;
+
 
 
 @end
@@ -35,8 +40,9 @@
     if (self) {
         
         self.viewHeight = frame.size.height;
-        
-        [self loadCustomView];
+        self.space = 22;
+
+//        [self loadCustomView];
         
     }
     return self;
@@ -44,67 +50,14 @@
 
 - (void)loadCustomView
 {
-    CGFloat space = 22;
 
-    
-    self.titleLabel = [[UILabel alloc]init];
-    self.titleLabel.font = [UIFont systemFontOfSize:14.0];
-    self.titleLabel.textAlignment = NSTextAlignmentLeft;
-    [self addSubview:self.titleLabel];
-    
-    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.leading.equalTo(self.mas_leading).offset(space);
-        make.top.equalTo(self.mas_top).offset(0);
-        make.bottom.equalTo(self.mas_bottom).offset(-1);
-        make.trailing.equalTo(self.mas_centerX).offset(0);
-        
-    }];
-    
-    
-    
-    CGFloat imageW = 10;
-    CGFloat imageH = 12;
-    
-    self.rightArrow = [[UIImageView alloc]init];
+    if (self.needRight) {
+        self.rightLabel.textColor = RGBCOLOR(150, 150, 150, 1.0);
+    }
     self.rightArrow.image = [UIImage imageNamed:@"settingArrow"];
-    [self addSubview:self.rightArrow];
-    
-    [self.rightArrow mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.top.equalTo(self.mas_top).offset((self.viewHeight-imageH)/2);
-        make.trailing.equalTo(self.mas_trailing).offset(-space-imageW);
-        make.height.mas_equalTo(imageH);
-        make.width.mas_equalTo(imageW);
-    }];
-    
-    self.rightLabel = [[UILabel alloc]init];
-    self.rightLabel.font = [UIFont systemFontOfSize:14.f];
-    self.rightLabel.textColor = RGBCOLOR(150, 150, 150, 1.0);
-    self.rightLabel.textAlignment = NSTextAlignmentRight;
-    [self addSubview:self.rightLabel];
-    //元素的布局
-    [self.rightLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.leading.equalTo(self.mas_centerX).offset(0);
-        make.top.equalTo(self.mas_top).offset(0);
-        make.bottom.equalTo(self.mas_bottom).offset(0);
-        make.trailing.equalTo(self.rightArrow.mas_leading).offset(-4);
-        
-    }];
-    
-    
-    self.lineView = [[UIImageView alloc]init];
+
     self.lineView.image = [UIImage imageNamed:@"lineImage"];
-    [self addSubview:self.lineView];
     
-    [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.leading.equalTo(self.mas_leading).offset(space);
-        make.bottom.equalTo(self.mas_bottom).offset(-0.7);
-        make.trailing.equalTo(self.mas_trailing).offset(-space);
-        make.height.mas_equalTo(0.7);
-    }];
 }
 
 - (void)setShowLine:(BOOL)showLine
@@ -126,9 +79,92 @@
     }
 }
 
+- (UILabel*)titleLabel
+{
+    if (!_titleLabel) {
+
+        _titleLabel = [[UILabel alloc]init];
+        _titleLabel.font = [UIFont systemFontOfSize:14.0];
+        _titleLabel.textAlignment = NSTextAlignmentLeft;
+        [self addSubview:_titleLabel];
+        
+        [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.leading.equalTo(self.mas_leading).offset(self.space);
+            make.top.equalTo(self.mas_top).offset(0);
+            make.bottom.equalTo(self.mas_bottom).offset(-1);
+            make.trailing.equalTo(self.mas_trailing).offset(-self.space);
+            
+        }];
+    }
+    return _titleLabel;
+}
+
+- (UIImageView*)rightArrow
+{
+    if (!_rightArrow) {
+        
+        CGFloat imageW = 10;
+        CGFloat imageH = 12;
+        
+        _rightArrow = [[UIImageView alloc]init];
+        [self addSubview:_rightArrow];
+        
+        [_rightArrow mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.top.equalTo(self.mas_top).offset((self.viewHeight-imageH)/2);
+            make.trailing.equalTo(self.mas_trailing).offset(-self.space-imageW);
+            make.height.mas_equalTo(imageH);
+            make.width.mas_equalTo(imageW);
+        }];
+    }
+    return _rightArrow;
+}
 
 
+- (UILabel*)rightLabel
+{
+    if (!_rightLabel) {
+        _rightLabel = [[UILabel alloc]init];
+        _rightLabel.font = [UIFont systemFontOfSize:14.f];
+        _rightLabel.textColor = RGBCOLOR(150, 150, 150, 1.0);
+        _rightLabel.textAlignment = NSTextAlignmentRight;
+        [self addSubview:_rightLabel];
+        //元素的布局
+        [_rightLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.leading.equalTo(self.mas_centerX).offset(0);
+            make.top.equalTo(self.mas_top).offset(0);
+            make.bottom.equalTo(self.mas_bottom).offset(0);
+            make.trailing.equalTo(self.rightArrow.mas_leading).offset(-4);
+            
+        }];
+        
+        
+        [_titleLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+            
+            make.trailing.equalTo(self.mas_centerX);
+        }];
+    }
+    return _rightLabel;
+}
 
+- (UIImageView*)lineView
+{
+    if (!_lineView) {
+        _lineView = [[UIImageView alloc]init];
+        [self addSubview:_lineView];
+        
+        [_lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.leading.equalTo(self.mas_leading).offset(self.space);
+            make.bottom.equalTo(self.mas_bottom).offset(-0.7);
+            make.trailing.equalTo(self.mas_trailing).offset(-self.space);
+            make.height.mas_equalTo(0.7);
+        }];
+    }
+    return _lineView;
+}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

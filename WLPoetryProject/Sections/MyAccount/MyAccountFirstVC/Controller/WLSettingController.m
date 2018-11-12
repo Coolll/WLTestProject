@@ -137,6 +137,7 @@
         cell.titleString = self.itemsArray[indexPath.row];
         
         if (indexPath.row == 2) {
+            cell.needRight = YES;
             cell.rightLabel.text = [NSString stringWithFormat:@"共%.2fM",self.countFileSize];
         }
     }else if (indexPath.section == 1){
@@ -154,6 +155,7 @@
         cell.showLine = NO;//退出登录，不需要横线，因为是独立的一行
     }
     
+    [cell loadCustomView];
     return cell;
     
 

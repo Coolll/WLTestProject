@@ -14,6 +14,9 @@
 #import "Poetry+CoreDataProperties.h"
 #import "UserCreation+CoreDataClass.h"
 #import "UserCreation+CoreDataProperties.h"
+#import "UserInfoModel.h"
+#import "UserInfo+CoreDataClass.h"
+#import "UserInfo+CoreDataProperties.h"
 
 typedef void(^CoreDataResultBlock)(BOOL isSuccessful,NSError *error);
 typedef void(^CoreDataInnerBlock)(BOOL isSuccessful);
@@ -78,6 +81,36 @@ typedef void(^CoreDataInnerBlock)(BOOL isSuccessful);
 
 //根据id来查询创作
 - (CreationModel*)fetchCreationModelWithID:(NSString*)idString;
+
+
+#pragma mark - 个人信息
+
+#pragma mark 增加信息
+- (void)saveInBackgroundWithUserInfoModel:(UserInfoModel*)model withResult:(CoreDataResultBlock)block;
+
+//保存个人信息
+- (void)saveInBackgroundWithUserInfoModelArray:(NSArray*)array withResult:(CoreDataResultBlock)block;
+
+- (void)saveUserInfo:(UserInfo*)entity withModel:(UserInfoModel*)model withResult:(CoreDataResultBlock)block;
+
+#pragma mark 删除个人信息
+//删除全部个人信息
+- (void)deleteAllUserInfo;
+//根据ID 删除个人信息
+- (void)deleteInfoWithID:(NSString*)userID withResult:(CoreDataResultBlock)block;
+
+#pragma mark 修改个人信息
+//根据ID 更改个人信息
+- (void)updateUserInfoWithID:(NSString*)userID withNewModel:(UserInfoModel*)model withResult:(CoreDataResultBlock)block;
+
+#pragma mark 查询个人信息
+//查询全部的个人信息
+-(NSArray*)fetchAllInfo;
+//根据ID查个人信息
+- (UserInfo*)fetchUserInfoEntityWithID:(NSString*)idString;
+//根据id来查询个人信息
+- (UserInfoModel*)fetchUserInfoModelWithID:(NSString*)idString;
+
 
 
 @end

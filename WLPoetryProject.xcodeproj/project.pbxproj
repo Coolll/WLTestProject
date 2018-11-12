@@ -36,7 +36,6 @@
 		008191A420FC94C200038D6F /* noImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 008191A320FC94C100038D6F /* noImage.png */; };
 		009A1B2C20E618B900C0A58D /* WLPoetryLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 009A1B2B20E618B900C0A58D /* WLPoetryLabel.m */; };
 		009A1B3220E6208300C0A58D /* WLTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 009A1B3120E6208300C0A58D /* WLTextView.m */; };
-		00A38E2C20DCEDF700D4D653 /* WLImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A38E2B20DCEDF700D4D653 /* WLImageCell.m */; };
 		00BBFA0E20D6291400BB86D9 /* WLFontController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BBFA0D20D6291400BB86D9 /* WLFontController.m */; };
 		00BBFA1120D6524500BB86D9 /* WLFeedbackController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BBFA1020D6524500BB86D9 /* WLFeedbackController.m */; };
 		00BBFA1420D65B8F00BB86D9 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BBFA1320D65B8F00BB86D9 /* AboutViewController.m */; };
@@ -282,6 +281,9 @@
 		36521BAA21904ECF00425DCC /* optionIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 36521BA921904ECE00425DCC /* optionIcon.png */; };
 		367ED9952191691C00E979EE /* triangle.png in Resources */ = {isa = PBXBuildFile; fileRef = 367ED9942191691C00E979EE /* triangle.png */; };
 		36B516F3212EC85500FD0FA8 /* WLNewTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B516F2212EC85500FD0FA8 /* WLNewTextView.m */; };
+		36B5CC4B219927C0009D5861 /* WLImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B5CC49219927BF009D5861 /* WLImageCell.m */; };
+		36B5CC5A2199841D009D5861 /* UserInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B5CC592199841D009D5861 /* UserInfoModel.m */; };
+		36B5CC66219988C7009D5861 /* UserInfo+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B5CC64219988C7009D5861 /* UserInfo+CoreDataProperties.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -362,8 +364,6 @@
 		009A1B2B20E618B900C0A58D /* WLPoetryLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLPoetryLabel.m; sourceTree = "<group>"; };
 		009A1B3020E6208300C0A58D /* WLTextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLTextView.h; sourceTree = "<group>"; };
 		009A1B3120E6208300C0A58D /* WLTextView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLTextView.m; sourceTree = "<group>"; };
-		00A38E2A20DCEDF700D4D653 /* WLImageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLImageCell.h; sourceTree = "<group>"; };
-		00A38E2B20DCEDF700D4D653 /* WLImageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLImageCell.m; sourceTree = "<group>"; };
 		00BBFA0C20D6291400BB86D9 /* WLFontController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLFontController.h; sourceTree = "<group>"; };
 		00BBFA0D20D6291400BB86D9 /* WLFontController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLFontController.m; sourceTree = "<group>"; };
 		00BBFA0F20D6524500BB86D9 /* WLFeedbackController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLFeedbackController.h; sourceTree = "<group>"; };
@@ -745,6 +745,14 @@
 		367ED9942191691C00E979EE /* triangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = triangle.png; sourceTree = "<group>"; };
 		36B516F1212EC85500FD0FA8 /* WLNewTextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLNewTextView.h; sourceTree = "<group>"; };
 		36B516F2212EC85500FD0FA8 /* WLNewTextView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLNewTextView.m; sourceTree = "<group>"; };
+		36B5CC49219927BF009D5861 /* WLImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLImageCell.m; sourceTree = "<group>"; };
+		36B5CC4A219927BF009D5861 /* WLImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLImageCell.h; sourceTree = "<group>"; };
+		36B5CC582199841D009D5861 /* UserInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserInfoModel.h; sourceTree = "<group>"; };
+		36B5CC592199841D009D5861 /* UserInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserInfoModel.m; sourceTree = "<group>"; };
+		36B5CC61219988C7009D5861 /* UserInfo+CoreDataProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UserInfo+CoreDataProperties.h"; sourceTree = "<group>"; };
+		36B5CC62219988C7009D5861 /* UserInfo+CoreDataClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UserInfo+CoreDataClass.h"; sourceTree = "<group>"; };
+		36B5CC63219988C7009D5861 /* UserInfo+CoreDataClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UserInfo+CoreDataClass.m"; sourceTree = "<group>"; };
+		36B5CC64219988C7009D5861 /* UserInfo+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UserInfo+CoreDataProperties.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1405,6 +1413,10 @@
 		07A9229C2086293D00BE5929 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
+				36B5CC61219988C7009D5861 /* UserInfo+CoreDataProperties.h */,
+				36B5CC62219988C7009D5861 /* UserInfo+CoreDataClass.h */,
+				36B5CC63219988C7009D5861 /* UserInfo+CoreDataClass.m */,
+				36B5CC64219988C7009D5861 /* UserInfo+CoreDataProperties.m */,
 				3607C88E212FE32700298C6C /* UserCreation+CoreDataProperties.h */,
 				3607C891212FE32700298C6C /* UserCreation+CoreDataProperties.m */,
 				3607C88F212FE32700298C6C /* UserCreation+CoreDataClass.h */,
@@ -1417,6 +1429,8 @@
 				07A922B020862EB100BE5929 /* PoetryModel.m */,
 				3607C894212FE3BF00298C6C /* CreationModel.h */,
 				3607C895212FE3BF00298C6C /* CreationModel.m */,
+				36B5CC582199841D009D5861 /* UserInfoModel.h */,
+				36B5CC592199841D009D5861 /* UserInfoModel.m */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -1424,12 +1438,12 @@
 		07CFF23D208B0A8900849C20 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				36B5CC4A219927BF009D5861 /* WLImageCell.h */,
+				36B5CC49219927BF009D5861 /* WLImageCell.m */,
 				07CFF23E208B0AEE00849C20 /* WLPoetryListCell.h */,
 				07CFF23F208B0AEE00849C20 /* WLPoetryListCell.m */,
 				079BC503209D42BB00E0DF85 /* WLPoetryContentCell.h */,
 				079BC504209D42BB00E0DF85 /* WLPoetryContentCell.m */,
-				00A38E2A20DCEDF700D4D653 /* WLImageCell.h */,
-				00A38E2B20DCEDF700D4D653 /* WLImageCell.m */,
 				009A1B2A20E618B900C0A58D /* WLPoetryLabel.h */,
 				009A1B2B20E618B900C0A58D /* WLPoetryLabel.m */,
 				009A1B3020E6208300C0A58D /* WLTextView.h */,
@@ -2056,9 +2070,11 @@
 				07567B41207A02EC0018B9E7 /* WLPublicTool.m in Sources */,
 				07567B80207A02EC0018B9E7 /* YLAccountViewController.m in Sources */,
 				07567B1D207A02EB0018B9E7 /* MJRefreshNormalHeader.m in Sources */,
+				36B5CC66219988C7009D5861 /* UserInfo+CoreDataProperties.m in Sources */,
 				0765C6B1207CE47E0085EB3A /* MASLayoutConstraint.m in Sources */,
 				0765C704207CE6E20085EB3A /* SDWebImageDownloaderOperation.m in Sources */,
 				079BC505209D42BB00E0DF85 /* WLPoetryContentCell.m in Sources */,
+				36B5CC5A2199841D009D5861 /* UserInfoModel.m in Sources */,
 				009A1B2C20E618B900C0A58D /* WLPoetryLabel.m in Sources */,
 				0765C709207CE6E20085EB3A /* SDWebImagePrefetcher.m in Sources */,
 				07567B1B207A02EB0018B9E7 /* MJRefreshBackStateFooter.m in Sources */,
@@ -2105,6 +2121,7 @@
 				0765C711207CE6E20085EB3A /* UIImageView+HighlightedWebCache.m in Sources */,
 				0010F22420F4911500F272EB /* WLImageSearchController.m in Sources */,
 				0765C701207CE6E20085EB3A /* SDWebImageCodersManager.m in Sources */,
+				36B5CC4B219927C0009D5861 /* WLImageCell.m in Sources */,
 				00150E8B20EF53DF001BE61D /* Poetry+CoreDataProperties.m in Sources */,
 				07F73C82208AF51D00F7D8B3 /* YLHomeViewController.m in Sources */,
 				0765C700207CE6E20085EB3A /* SDWebImageCoderHelper.m in Sources */,
@@ -2120,7 +2137,6 @@
 				07567B16207A02EB0018B9E7 /* MJRefreshAutoGifFooter.m in Sources */,
 				3607C885212FA20000298C6C /* UIButton+WLExtension.m in Sources */,
 				0795690B20726D0B0097C26D /* main.m in Sources */,
-				00A38E2C20DCEDF700D4D653 /* WLImageCell.m in Sources */,
 				0765C70F207CE6E20085EB3A /* UIImage+MultiFormat.m in Sources */,
 				0765C6F8207CE6E20085EB3A /* MKAnnotationView+WebCache.m in Sources */,
 				07A9229B208628DB00BE5929 /* WLCoreDataHelper.m in Sources */,

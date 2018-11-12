@@ -292,7 +292,7 @@
     }
     
     //更新number为30
-    [bUser setObject:@30 forKey:@"number"];
+//    [bUser setObject:@30 forKey:@"number"];
     [bUser updateInBackgroundWithResultBlock:^(BOOL isSuccessful, NSError *error) {
         NSLog(@"error %@",[error description]);
     }];

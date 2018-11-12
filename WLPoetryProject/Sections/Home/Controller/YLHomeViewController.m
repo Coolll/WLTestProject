@@ -142,9 +142,7 @@
 #pragma mark - 加载视图
 - (void)loadCustomView
 {
-    
     self.mainTableView.backgroundColor = RGBCOLOR(246, 246, 246, 1.0);
-
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -245,6 +243,7 @@
     return nil;
     
 }
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSInteger section = indexPath.section;
@@ -286,8 +285,6 @@
 
     }
     
-    
-    
     return 0.001;
 }
 
@@ -298,7 +295,7 @@
         
         WLImageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WLImageCell"];
         if (!cell) {
-            cell = [[WLImageCell alloc]init];
+            cell = [[WLImageCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"WLImageCell"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.backgroundColor = RGBCOLOR(246, 246, 246, 1.0);
         }
@@ -314,12 +311,13 @@
         
     }else if (section == 1){
         PoetryModel *model = [self.poetryArray objectAtIndex:indexPath.row];
-        WLHomePoetryCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WLHomePoetryCell"];;
+        WLHomePoetryCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WLHomePoetryCell"];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.backgroundColor = RGBCOLOR(246, 246, 246, 1.0);
         if (!cell) {
-            cell = [[WLHomePoetryCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"WLHomePoetryCell"];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.backgroundColor = RGBCOLOR(246, 246, 246, 1.0);
-            NSLog(@"====index:%ld",indexPath.row);
+            cell = [[WLHomePoetryCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"WLHomePoetryCell"];
+            
+            NSLog(@"====index:%ld %@",indexPath.row,cell);
         }
         if (indexPath.row == self.poetryArray.count-1) {
             cell.isLast = YES;
@@ -486,6 +484,7 @@
         _mainTableView.delegate = self;
         _mainTableView.dataSource = self;
         _mainTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        [_mainTableView registerClass:[WLHomePoetryCell class] forCellReuseIdentifier:@"WLHomePoetryCell"];
         [self.view addSubview:_mainTableView];
         
 

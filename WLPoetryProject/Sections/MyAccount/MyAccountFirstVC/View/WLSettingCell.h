@@ -37,6 +37,12 @@
  *  右侧的label
  **/
 @property (nonatomic,strong) UILabel *rightLabel;
+/**
+ *  是否需要右侧的label,默认不需要
+ **/
+@property (nonatomic,assign) BOOL needRight;
+
+- (void)loadCustomView;
 
 
 

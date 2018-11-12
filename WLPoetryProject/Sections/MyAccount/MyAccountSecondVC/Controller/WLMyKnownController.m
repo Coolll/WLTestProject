@@ -45,9 +45,14 @@
  **/
 @property (nonatomic,assign) CGFloat leftSpace;
 /**
- *  数组
+ *  勋章图片数组
  **/
 @property (nonatomic,copy) NSArray *imageArray;
+/**
+ *  勋章颜色数组
+ **/
+@property (nonatomic,copy) NSArray *colorArray;
+
 
 
 @end
@@ -65,6 +70,8 @@
 {
     self.leftSpace = 15;
     self.imageArray = [NSArray arrayWithObjects:@"class_0",@"class_1",@"class_2",@"class_3",@"class_4",@"class_5",@"class_6",@"class_7", nil];
+    self.colorArray = [NSArray arrayWithObjects:RGBCOLOR(33, 33, 33, 1.0),RGBCOLOR(121, 0, 233, 1.0),RGBCOLOR(17, 30, 211, 1.0),RGBCOLOR(16, 89, 146, 1.0),RGBCOLOR(103, 251, 12, 1.0),RGBCOLOR(244, 233, 15, 1.0),RGBCOLOR(242, 136, 18, 1.0),RGBCOLOR(251, 0, 5, 1.0), nil];
+    
 }
 
 - (void)loadCustomView
@@ -79,7 +86,7 @@
 - (void)configureHeadImage
 {
     if (self.headImageURL.length > 0) {
-        [self.headImageView sd_setImageWithURL:[NSURL URLWithString:self.userName] placeholderImage:[UIImage imageNamed:@"headerUnlogin"]];
+        [self.headImageView sd_setImageWithURL:[NSURL URLWithString:self.headImageURL] placeholderImage:[UIImage imageNamed:@"headerUnlogin"]];
         
     }else{
         

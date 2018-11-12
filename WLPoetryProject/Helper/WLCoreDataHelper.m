@@ -563,4 +563,165 @@
 }
 
 
+#pragma mark - 个人信息
+
+#pragma mark 增加信息
+- (void)saveInBackgroundWithUserInfoModel:(UserInfoModel*)model withResult:(CoreDataResultBlock)block
+{
+    [self saveInBackgroundWithCreationModelArray:[NSArray arrayWithObject:model] withResult:block];
+}
+
+//保存个人信息
+- (void)saveInBackgroundWithUserInfoModelArray:(NSArray*)array withResult:(CoreDataResultBlock)block
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        //子线程中的context，父context是mainContext
+        //主线程中的context，父context是backgroundContext
+        //后台context，该context做数据的增删改查
+        
+        
+        for (int i =0 ; i < array.count; i++) {
+            
+            UserInfoModel *model = array[i];
+            
+            UserInfo *creation = [NSEntityDescription insertNewObjectForEntityForName:@"UserInfo" inManagedObjectContext:self.privateContext];
+            [self saveUserInfo:creation withModel:model withResult:block];
+            
+        }
+        
+    });
+}
+
+- (void)saveUserInfo:(UserInfo*)entity withModel:(UserInfoModel*)model withResult:(CoreDataResultBlock)block
+{
+   
+    entity.userName = model.userName;//用户名
+    entity.userPassword = model.userPassword;//密码
+    entity.phoneNumber = model.phoneNumber;//手机号
+    entity.userPoetryClass = model.userPoetryClass;//用户的词汇量等级，1表示基本，8为状元
+    entity.userPoetryStorage = model.userPoetryStorage;//用户的诗词储量
+    entity.likePoetryList = model.likePoetryList;//收藏的诗词列表
+    entity.userSessionToken = model.userSessionToken;//用户的token
+    entity.userHeadImageURL = model.userHeadImageURL;//用户的头像URL
+    __block  NSError *error = nil;
+    
+    //子线程context执行并等待
+    [self.privateContext performBlockAndWait:^{
+        if (![self.privateContext save:&error]) {
+            NSLog(@"privateContext 错误:%@",error);
+            if (block) {
+                block(NO,error);
+            }
+            
+        }else{
+            NSLog(@"成功");
+            if (block) {
+                block(YES,nil);
+            }
+        }
+        
+    }];
+}
+
+#pragma mark 删除个人信息
+//删除全部个人信息
+- (void)deleteAllUserInfo
+{
+    NSArray *infoList = [self fetchAllInfo];
+    
+    for (UserInfo *info in infoList) {
+        [self deleteInfoWithID:info.userID withResult:nil];
+    }
+}
+
+//根据ID 删除个人信息
+- (void)deleteInfoWithID:(NSString*)userID withResult:(CoreDataResultBlock)block
+{
+    UserInfo *info = [self fetchUserInfoEntityWithID:userID];
+    
+    [self.appDelegate.managedObjectContext deleteObject:info];
+    
+    NSError *deleteError;
+    
+    BOOL isDeleteSuccess = [self.appDelegate.managedObjectContext save:&deleteError];
+    if (isDeleteSuccess) {
+        NSLog(@"Delete Success");
+        if (block) {
+            block(YES,nil);
+        }
+    }else{
+        if (block) {
+            block(NO,deleteError);
+        }
+        NSLog(@"Delete failed!%@",deleteError);
+    }
+}
+
+#pragma mark 修改个人信息
+//根据ID 更改个人信息
+- (void)updateUserInfoWithID:(NSString*)userID withNewModel:(UserInfoModel*)model withResult:(CoreDataResultBlock)block{
+    UserInfo *info = [self fetchUserInfoEntityWithID:userID];
+    [self saveUserInfo:info withModel:model withResult:block];
+}
+
+#pragma mark 查询个人信息
+//查询全部的个人信息
+-(NSArray*)fetchAllInfo{
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc]init];
+    NSArray *fetchArray = [self fetchDataWithTableName:@"UserInfo" withRequest:request withPredicate:nil];
+    NSMutableArray *modelArray = [NSMutableArray array];
+    for (UserInfo *entity in fetchArray) {
+        
+        UserInfoModel *model = [self transferInfoModelWithEntity:entity];
+        [modelArray addObject:model];
+    }
+    return modelArray;
+}
+
+//根据ID查个人信息
+- (UserInfo*)fetchUserInfoEntityWithID:(NSString*)idString
+{
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"userID == %@",idString];
+    NSFetchRequest *request = [[NSFetchRequest alloc]init];
+    
+    NSArray *fetchArray = [self fetchDataWithTableName:@"UserInfo" withRequest:request withPredicate:predicate];
+    
+    UserInfo *entity = nil;
+    
+    if (fetchArray.count > 0) {
+        entity = [fetchArray firstObject];
+    }
+    
+    return entity;
+}
+//根据id来查询个人信息
+- (UserInfoModel*)fetchUserInfoModelWithID:(NSString*)idString{
+    
+    return [self transferInfoModelWithEntity:[self fetchUserInfoEntityWithID:idString]];
+}
+
+//将entity转为model
+- (UserInfoModel*)transferInfoModelWithEntity:(UserInfo*)entity
+{
+    UserInfoModel *model = [[UserInfoModel alloc]init];
+    
+    if (!entity) {
+        return model;
+    }
+    
+    model.userName = entity.userName;//用户名
+    model.userPassword = entity.userPassword;//密码
+    model.phoneNumber = entity.phoneNumber;//手机号
+    model.userPoetryClass = entity.userPoetryClass;//用户的词汇量等级，1表示基本，8为状元
+    model.userPoetryStorage = entity.userPoetryStorage;//用户的诗词储量
+    model.likePoetryList = entity.likePoetryList;//收藏的诗词列表
+    model.userSessionToken = entity.userSessionToken;//用户的token
+    model.userHeadImageURL = entity.userHeadImageURL;//用户的头像URL
+    return model;
+}
+
+
 @end
