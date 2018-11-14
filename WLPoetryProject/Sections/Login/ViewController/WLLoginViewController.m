@@ -12,7 +12,8 @@
 #import "WLSaveLocalHelper.h"
 #import "MBProgressHUD.h"
 #import <BmobSDK/Bmob.h>
-
+#import "UserInfoModel.h"
+#import "WLCoreDataHelper.h"
 /*
  #import "Masonry.h"
  #import "UIImageView+WebCache.h"
@@ -126,6 +127,8 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
     [self loadCustomData];
     [self loadCustomView];
     
+    
+   
 }
 
 
@@ -526,9 +529,9 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
     
     NSLog(@"登录");
     
-    [WLSaveLocalHelper saveObject:@"" forKey:LoginTokenKey];
-    [WLSaveLocalHelper saveObject:@"" forKey:LoginUserNameKey];
-    [WLSaveLocalHelper saveObject:@"" forKey:LoginHeadImageKey];
+//    [WLSaveLocalHelper saveObject:@"" forKey:LoginTokenKey];
+//    [WLSaveLocalHelper saveObject:@"" forKey:LoginUserNameKey];
+//    [WLSaveLocalHelper saveObject:@"" forKey:LoginHeadImageKey];
 
 //    MBProgressHUD *hud = [MBProgressHUD HUDForView:[UIApplication sharedApplication].keyWindow];
 //
@@ -593,17 +596,26 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
             
             NSDictionary *dataDic = [self responseDataWithUser:user];
             
-            [WLSaveLocalHelper saveObject:[self notNillValueWithKey:@"token" withDic:dataDic] forKey:LoginTokenKey];
-            [WLSaveLocalHelper saveObject:user.objectId forKey:LoginUserIDKey];
-            [WLSaveLocalHelper saveObject:@"" forKey:LoginHeadImageKey];
+            UserInfoModel *model = [[UserInfoModel alloc]initModelWithDictionary:dataDic];
+            model.isLogin = YES;
+            [[WLCoreDataHelper shareHelper] saveInBackgroundWithUserInfoModel:model withResult:^(BOOL isSuccessful, NSError *error) {
+                
+            }];
+            
+            
+//            [WLSaveLocalHelper saveObject:[self notNillValueWithKey:@"token" withDic:dataDic] forKey:LoginTokenKey];
+            [WLSaveLocalHelper saveObject:user.objectId forKey:LoginUserIDKey];//保存一下ID
+            [WLSaveLocalHelper saveObject:@"1" forKey:LoginStatusKey];//登录成功
+            
+//            [WLSaveLocalHelper saveObject:@"" forKey:LoginHeadImageKey];
             
             //需要记住密码，则保存，不需要，则保存空字符串
             if (self.needSaveAccount) {
-                [WLSaveLocalHelper saveObject:[self notNillValueWithKey:@"userName" withDic:dataDic] forKey:LoginUserNameKey];
-                [WLSaveLocalHelper saveObject:self.passwordTextField.contentString forKey:LoginUserPasswordKey];
+//                [WLSaveLocalHelper saveObject:[self notNillValueWithKey:@"username" withDic:dataDic] forKey:LoginUserNameKey];
+//                [WLSaveLocalHelper saveObject:self.passwordTextField.contentString forKey:LoginUserPasswordKey];
             }else{
-                [WLSaveLocalHelper saveObject:@"" forKey:LoginUserNameKey];
-                [WLSaveLocalHelper saveObject:@"" forKey:LoginUserPasswordKey];
+//                [WLSaveLocalHelper saveObject:@"" forKey:LoginUserNameKey];
+//                [WLSaveLocalHelper saveObject:@"" forKey:LoginUserPasswordKey];
             }
             
             
@@ -629,6 +641,7 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
     }];
 
 }
+
 
 - (void)showErrorTipView
 {
@@ -675,12 +688,41 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
     NSMutableDictionary *dataDic = [NSMutableDictionary dictionary];
     NSString *userName = [NSString stringWithFormat:@"%@",[user objectForKey:@"username"]];
     NSString *userId = [NSString stringWithFormat:@"%@",user.objectId];
+    NSString *phoneNo = [NSString stringWithFormat:@"%@",user.mobilePhoneNumber];
     NSString *sessionToken = [NSString stringWithFormat:@"%@",[user objectForKey:@"sessionToken"]];
-
+    NSString *poetryClass = [NSString stringWithFormat:@"%@",[user objectForKey:@"userPoetryClass"]];
+    NSString *headImage = [NSString stringWithFormat:@"%@",[user objectForKey:@"headImageURL"]];
+    NSString *poetryStorage = [NSString stringWithFormat:@"%@",[user objectForKey:@"userPoetryStorage"]];
+    NSMutableArray *array = [NSMutableArray arrayWithArray:[user objectForKey:@"likePoetryIDList"]];
+    
+    if ([poetryClass isEqualToString:@"(null)"] || poetryClass.length == 0) {
+        poetryClass = @"0";
+        
+        //设置默认诗词等级，从0开始
+        [user setObject:@"0" forKey:@"userPoetryClass"];
+        [user updateInBackgroundWithResultBlock:^(BOOL isSuccessful, NSError *error) {
+            NSLog(@"error %@",[error description]);
+        }];
+    }
+    
+    if ([poetryStorage isEqualToString:@"(null)"] || poetryStorage.length == 0) {
+        poetryStorage = @"0";
+        //设置默认诗词储量，从0开始
+        [user setObject:@"0" forKey:@"userPoetryStorage"];
+        [user updateInBackgroundWithResultBlock:^(BOOL isSuccessful, NSError *error) {
+            NSLog(@"error %@",[error description]);
+        }];
+    }
+    
     [dataDic setObject:userName forKey:@"userName"];
-    [dataDic setObject:userId forKey:@"userId"];
-    [dataDic setObject:self.passwordTextField.contentString forKey:@"password"];
-    [dataDic setObject:sessionToken forKey:@"token"];
+    [dataDic setObject:userId forKey:@"userID"];
+    [dataDic setObject:phoneNo forKey:@"phoneNumber"];
+    [dataDic setObject:self.passwordTextField.contentString forKey:@"userPassword"];
+    [dataDic setObject:sessionToken forKey:@"userSessionToken"];
+    [dataDic setObject:poetryClass forKey:@"userPoetryClass"];
+    [dataDic setObject:headImage forKey:@"userHeadImageURL"];
+    [dataDic setObject:poetryStorage forKey:@"userPoetryStorage"];
+    [dataDic setObject:[array copy] forKey:@"likePoetryList"];
     
     return dataDic;
 }

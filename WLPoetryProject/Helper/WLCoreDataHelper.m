@@ -7,6 +7,7 @@
 //
 
 #import "WLCoreDataHelper.h"
+
 @interface WLCoreDataHelper()
 //方法1中的子线程context
 @property (nonatomic,strong) NSManagedObjectContext *privateContext;
@@ -18,6 +19,11 @@
 @property (nonatomic, strong) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 //数据库模型
 @property (nonatomic, strong) NSManagedObjectModel *managedObjectModel;
+/**
+ *  当前用户的ID
+ **/
+@property (nonatomic,copy) NSString *currentUserID;
+
 
 //方法2中的子线程context
 //@property (nonatomic,strong) NSManagedObjectContext *privateSecondContext;
@@ -181,7 +187,7 @@
 {
     NSArray *poetryList = [self fetchAllPoetry];
     
-    for (Poetry *poetry in poetryList) {
+    for (PoetryModel *poetry in poetryList) {
         [self deletePoetryWithID:poetry.poetryID withResult:nil];
     }
 }
@@ -470,7 +476,7 @@
 {
     NSArray *creationList = [self fetchAllCreation];
     
-    for (UserCreation *creation in creationList) {
+    for (CreationModel *creation in creationList) {
         [self deleteCreationWithID:creation.creationID withResult:nil];
     }
 }
@@ -568,8 +574,17 @@
 #pragma mark 增加信息
 - (void)saveInBackgroundWithUserInfoModel:(UserInfoModel*)model withResult:(CoreDataResultBlock)block
 {
-    [self saveInBackgroundWithCreationModelArray:[NSArray arrayWithObject:model] withResult:block];
+
+    UserInfo *info = [self fetchUserInfoEntityWithID:kUserID];
+
+    if (info) {
+        [self saveUserInfo:info withModel:model withResult:block];
+
+    }else{
+        [self saveInBackgroundWithUserInfoModelArray:[NSArray arrayWithObject:model] withResult:block];
+    }
 }
+
 
 //保存个人信息
 - (void)saveInBackgroundWithUserInfoModelArray:(NSArray*)array withResult:(CoreDataResultBlock)block
@@ -584,7 +599,6 @@
         for (int i =0 ; i < array.count; i++) {
             
             UserInfoModel *model = array[i];
-            
             UserInfo *creation = [NSEntityDescription insertNewObjectForEntityForName:@"UserInfo" inManagedObjectContext:self.privateContext];
             [self saveUserInfo:creation withModel:model withResult:block];
             
@@ -601,9 +615,11 @@
     entity.phoneNumber = model.phoneNumber;//手机号
     entity.userPoetryClass = model.userPoetryClass;//用户的词汇量等级，1表示基本，8为状元
     entity.userPoetryStorage = model.userPoetryStorage;//用户的诗词储量
-    entity.likePoetryList = model.likePoetryList;//收藏的诗词列表
+    entity.likePoetryList = [self transArrayToString:model.likePoetryList];//收藏的诗词列表
     entity.userSessionToken = model.userSessionToken;//用户的token
     entity.userHeadImageURL = model.userHeadImageURL;//用户的头像URL
+    entity.userID = model.userID;
+    entity.isLogin = model.isLogin;
     __block  NSError *error = nil;
     
     //子线程context执行并等待
@@ -630,7 +646,7 @@
 {
     NSArray *infoList = [self fetchAllInfo];
     
-    for (UserInfo *info in infoList) {
+    for (UserInfoModel *info in infoList) {
         [self deleteInfoWithID:info.userID withResult:nil];
     }
 }
@@ -639,7 +655,9 @@
 - (void)deleteInfoWithID:(NSString*)userID withResult:(CoreDataResultBlock)block
 {
     UserInfo *info = [self fetchUserInfoEntityWithID:userID];
-    
+    if (!info) {
+        return;
+    }
     [self.appDelegate.managedObjectContext deleteObject:info];
     
     NSError *deleteError;
@@ -657,8 +675,24 @@
         NSLog(@"Delete failed!%@",deleteError);
     }
 }
+//- (void)loginOutWithUserID:(NSString*)userID
+//{
+//    //退出登录时，把token干掉
+//    UserInfoModel *model = [self transferInfoModelWithEntity:[self fetchUserInfoEntityWithID:userID]];
+//    model.userSessionToken = @"";
+//    [self updateUserInfoWithNewModel:model withResult:nil];
+//}
+
 
 #pragma mark 修改个人信息
+- (void)updateUserInfoWithNewModel:(UserInfoModel*)model withResult:(CoreDataResultBlock)block
+{
+    BmobUser *use = [BmobUser currentUser];
+    self.currentUserID = use.objectId;
+    UserInfo *info = [self fetchUserInfoEntityWithID:self.currentUserID];
+    [self saveUserInfo:info withModel:model withResult:block];
+}
+
 //根据ID 更改个人信息
 - (void)updateUserInfoWithID:(NSString*)userID withNewModel:(UserInfoModel*)model withResult:(CoreDataResultBlock)block{
     UserInfo *info = [self fetchUserInfoEntityWithID:userID];
@@ -666,6 +700,7 @@
 }
 
 #pragma mark 查询个人信息
+
 //查询全部的个人信息
 -(NSArray*)fetchAllInfo{
     
@@ -683,7 +718,6 @@
 //根据ID查个人信息
 - (UserInfo*)fetchUserInfoEntityWithID:(NSString*)idString
 {
-    
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"userID == %@",idString];
     NSFetchRequest *request = [[NSFetchRequest alloc]init];
     
@@ -698,9 +732,9 @@
     return entity;
 }
 //根据id来查询个人信息
-- (UserInfoModel*)fetchUserInfoModelWithID:(NSString*)idString{
-    
-    return [self transferInfoModelWithEntity:[self fetchUserInfoEntityWithID:idString]];
+- (UserInfoModel*)fetchCurrentUserModel
+{
+    return [self transferInfoModelWithEntity:[self fetchUserInfoEntityWithID:kUserID]];
 }
 
 //将entity转为model
@@ -715,12 +749,32 @@
     model.userName = entity.userName;//用户名
     model.userPassword = entity.userPassword;//密码
     model.phoneNumber = entity.phoneNumber;//手机号
-    model.userPoetryClass = entity.userPoetryClass;//用户的词汇量等级，1表示基本，8为状元
+    model.userPoetryClass = entity.userPoetryClass;//用户的词汇量等级，0表示基本，7为状元
     model.userPoetryStorage = entity.userPoetryStorage;//用户的诗词储量
-    model.likePoetryList = entity.likePoetryList;//收藏的诗词列表
+    model.likePoetryList = [self transStringToArray:entity.likePoetryList];//收藏的诗词列表
     model.userSessionToken = entity.userSessionToken;//用户的token
     model.userHeadImageURL = entity.userHeadImageURL;//用户的头像URL
+    model.userID = entity.userID;
+    model.isLogin = entity.isLogin;
     return model;
+}
+
+
+- (NSArray*)transStringToArray:(NSString*)originString
+{
+    return [originString componentsSeparatedByString:@","];
+}
+
+- (NSString*)transArrayToString:(NSArray*)originArray
+{
+    if (![originArray isKindOfClass:[NSArray class]] || originArray.count == 0) {
+        return @"";
+    }
+    NSMutableString *poetryListString = [NSMutableString string];
+    for (NSString *poetrIDString in originArray) {
+        [poetryListString appendFormat:@"%@,",poetrIDString];
+    }
+    return [poetryListString copy];
 }
 
 

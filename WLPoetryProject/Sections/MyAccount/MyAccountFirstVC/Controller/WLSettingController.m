@@ -11,7 +11,7 @@
 #import <BmobSDK/Bmob.h>
 #import "WLFontController.h"
 #import "WLFeedbackController.h"
-
+#import "WLCoreDataHelper.h"
 @interface WLSettingController ()<UITableViewDelegate,UITableViewDataSource>
 /**
  *  数据
@@ -158,7 +158,6 @@
     [cell loadCustomView];
     return cell;
     
-
 }
 
 
@@ -201,10 +200,16 @@
             self.block(NO);
         }
         [self showHUDWithText:@"退出成功"];
-        [WLSaveLocalHelper saveObject:@"" forKey:LoginTokenKey];
-        [WLSaveLocalHelper saveObject:@"" forKey:LoginUserIDKey];
-        [WLSaveLocalHelper saveObject:@"" forKey:LoginHeadImageKey];
+        
+        [WLSaveLocalHelper saveObject:@"0" forKey:LoginStatusKey];//退出
 
+//        [WLSaveLocalHelper saveObject:@"" forKey:LoginTokenKey];
+//        [WLSaveLocalHelper saveObject:@"" forKey:LoginUserIDKey];
+//        [WLSaveLocalHelper saveObject:@"" forKey:LoginHeadImageKey];
+//        kClearUserInfo;
+    
+//        [[WLCoreDataHelper shareHelper] loginOutWithUserID:userID];
+        
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self.navigationController popViewControllerAnimated:YES];
         });

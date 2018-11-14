@@ -10,6 +10,8 @@
 #import "WLPoetryContentCell.h"
 #import <BmobSDK/Bmob.h>
 #import "RecitePoetryController.h"
+#import "WLCoreDataHelper.h"
+
 static const CGFloat leftSpace = 10;//诗句的左右间距
 static const CGFloat topSpace = 15;//诗句与标题的上间距
 

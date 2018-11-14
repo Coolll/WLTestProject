@@ -222,7 +222,7 @@ typedef void(^EditBlock)(void);
     _imageURL = imageURL;
     
     if (imageURL.length > 0 && _isLogin) {
-        [self.headerImageView sd_setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:[UIImage imageNamed:@"headerUnlogin"]];
+        [self.headerImageView sd_setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:[UIImage imageNamed:@"defaultHeader"]];
 
     }else{
         if (self.isLogin) {

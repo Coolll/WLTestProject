@@ -31,7 +31,7 @@
 //新浪微博SDK头文件
 #import "WeiboSDK.h"
 //新浪微博SDK需要在项目Build Settings中的Other Linker Flags添加"-ObjC"
-
+#import "UserInfoModel.h"
 
 #define FIRSTOPENAPP  @"FirstLoadPoetryProject"
 
@@ -91,6 +91,23 @@
 //    }
     
     
+    
+//    NSDictionary *dataDic = @{    @"likePoetryList" : @"",
+//                                  @"phoneNumber" : @"(null)",
+//                                  @"userHeadImageURL" : @"(null)",
+//                                  @"userID" : @"38c9fe47ce",
+//                                  @"userName" : @"751f5180",
+//                                  @"userPassword" : @"12345678",
+//                                  @"userPoetryClass" : @"(null)",
+//                                  @"userPoetryStorage": @"(null)",
+//                                  @"userSessionToken":@"e90fa79c408719b580f87db2873213ee"};
+//
+//    UserInfoModel *model = [[UserInfoModel alloc]initModelWithDictionary:dataDic];
+//    [[WLCoreDataHelper shareHelper] saveInBackgroundWithUserInfoModel:model withResult:^(BOOL isSuccessful, NSError *error) {
+//
+//       UserInfoModel *model = [[WLCoreDataHelper shareHelper]fetchCurrentUserModel];
+//        NSLog(@"model:%@",model);
+//    }];
     
     
     NSLog(@"在DevBranch添加");
@@ -292,7 +309,7 @@
     }
     
     //更新number为30
-//    [bUser setObject:@30 forKey:@"number"];
+    [bUser setObject:@"234" forKey:@"userPoetryStorage"];
     [bUser updateInBackgroundWithResultBlock:^(BOOL isSuccessful, NSError *error) {
         NSLog(@"error %@",[error description]);
     }];

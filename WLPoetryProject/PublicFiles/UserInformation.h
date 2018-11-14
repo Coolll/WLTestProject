@@ -40,6 +40,15 @@
  **/
 @property (nonatomic,copy) NSString *userImgurl;
 /**
+ *  用户的诗词量
+ **/
+@property (nonatomic,copy) NSString *userPoetryStorage;
+/**
+ *  用户的等级
+ **/
+@property (nonatomic,copy) NSString *userPoetryClass;
+
+/**
  *  属性
  **/
 @property (nonatomic,copy) NSString *userIntegral;

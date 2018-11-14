@@ -27,11 +27,12 @@
     self.uid = [NSString stringWithFormat:@"%@",user.objectId];
     self.token = [NSString stringWithFormat:@"%@",[user objectForKey:@"sessionToken"]];
     self.password = [NSString stringWithFormat:@"%@",user.password];
+    self.userImgurl = [NSString stringWithFormat:@"%@",[user objectForKey:@"headImageURL"]];
+    self.userPoetryClass = [NSString stringWithFormat:@"%@",[user objectForKey:@"userPoetryClass"]];
+    self.userPoetryStorage = [NSString stringWithFormat:@"%@",[user objectForKey:@"userPoetryStorage"]];
     
     NSMutableArray *array = [NSMutableArray arrayWithArray:[user objectForKey:@"likePoetryIDList"]];
     self.likePoetryList = [NSMutableArray arrayWithArray:array];
-    
-    
     
 }
 

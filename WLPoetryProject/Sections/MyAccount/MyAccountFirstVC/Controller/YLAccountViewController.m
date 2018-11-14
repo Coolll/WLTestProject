@@ -15,6 +15,8 @@
 #import "AboutViewController.h"
 #import "WLCustomImageListController.h"
 #import "WLMyKnownController.h"
+#import "WLCoreDataHelper.h"
+
 @interface YLAccountViewController ()<UITableViewDelegate,UITableViewDataSource>
 /**
  *  主tableView
@@ -94,7 +96,7 @@
     
     self.userImageURL = userHeadImaeString;
     
-    if (tokenString.length > 0 && nameString.length > 0 ) {
+    if ([kLoginStatus isEqualToString:@"1"]) {
         self.isLoginSuccess = YES;
     }else{
         self.isLoginSuccess = NO;
@@ -126,7 +128,7 @@
     
     self.userImageURL = userHeadImaeString;
     
-    if (tokenString.length > 0 && nameString.length > 0 ) {
+    if ([kLoginStatus isEqualToString:@"1"]) {
         self.isLoginSuccess = YES;
     }else{
         self.isLoginSuccess = NO;
@@ -304,14 +306,14 @@
         
         if (indexPath.row == 1) {
             //我的收藏
-            id token = kUserToken;
-            if (!token) {
-                token = @"";
-            }
-            
-            NSString *tokenString = [NSString stringWithFormat:@"%@",token];
+//            id token = kUserToken;
+//            if (!token) {
+//                token = @"";
+//            }
+//
+//            NSString *tokenString = [NSString stringWithFormat:@"%@",token];
             //如果本地没有token，那么就意味着用户没有登录，不需要去拿收藏列表,该数据为未收藏
-            if (tokenString.length == 0) {
+            if (![kLoginStatus isEqualToString:@"1"]) {
                 [self showHUDWithText:@"请先登录"];
                 return;
             }
@@ -324,14 +326,14 @@
         
         if (indexPath.row == 2) {
             //我的学识
-            id token = kUserToken;
-            if (!token) {
-                token = @"";
-            }
-            
-            NSString *tokenString = [NSString stringWithFormat:@"%@",token];
+//            id token = kUserToken;
+//            if (!token) {
+//                token = @"";
+//            }
+//
+//            NSString *tokenString = [NSString stringWithFormat:@"%@",token];
             //如果本地没有token，那么就意味着用户没有登录，不需要去拿收藏列表,该数据为未收藏
-            if (tokenString.length == 0) {
+            if (![kLoginStatus isEqualToString:@"1"]) {
                 [self showHUDWithText:@"请先登录"];
                 return;
             }
@@ -340,7 +342,7 @@
             WLMyKnownController *likeVC = [[WLMyKnownController alloc]init];
             likeVC.hidesBottomBarWhenPushed = YES;
             likeVC.userName = self.userNameString;
-            likeVC.headImageURL = self.userImageURL;
+            likeVC.headImageURL = [NSString stringWithFormat:@"%@",self.userImageURL];
             [likeVC loadCustomView];
             [self.navigationController pushViewController:likeVC animated:YES];
         }
@@ -388,8 +390,8 @@
     [loginVC loginSuccessWithBlock:^(UserInformation *user) {
         
         
-        self.userNameString = user.userName;
-        self.userImageURL = user.userImgurl;
+        self.userNameString = [NSString stringWithFormat:@"%@",user.userName];
+        self.userImageURL = [NSString stringWithFormat:@"%@",user.userImgurl];
         
         self.isLoginSuccess = YES;
         [self.mainTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];

@@ -24,24 +24,28 @@
 #define HidenKeybory {[[[UIApplication sharedApplication] keyWindow] endEditing:YES];}
 
 //用户的token
-#define kUserToken [WLSaveLocalHelper loadObjectForKey:LoginTokenKey]
-#define LoginTokenKey @"WLUserLoginToken"
+#define kUserToken [[[WLCoreDataHelper shareHelper] fetchCurrentUserModel] fetchToken]
 
 //用户的登录名
-#define kUserName [WLSaveLocalHelper loadObjectForKey:LoginUserNameKey]
-#define LoginUserNameKey @"WLUserLoginUserName"
+#define kUserName [[[WLCoreDataHelper shareHelper] fetchCurrentUserModel] fetchName]
 
 //用户的密码
-#define kUserPassword [WLSaveLocalHelper loadObjectForKey:LoginUserPasswordKey]
-#define LoginUserPasswordKey @"WLUserLoginUserPassword"
+#define kUserPassword [[[WLCoreDataHelper shareHelper] fetchCurrentUserModel] fetchPassword]
 
 //用户的头像
-#define kUserHeadImage [WLSaveLocalHelper loadObjectForKey:LoginHeadImageKey]
-#define LoginHeadImageKey @"WLUserLoginUserHeadImage"
+#define kUserHeadImage [[[WLCoreDataHelper shareHelper] fetchCurrentUserModel] fetchImageURL]
 
 //用户的userId
 #define kUserID [WLSaveLocalHelper loadObjectForKey:LoginUserIDKey]
-#define LoginUserIDKey @"WLUserLoginUserID"
+#define LoginUserIDKey @"CurrentLoginUserID"
+
+//用户的登录状态
+#define kLoginStatus [WLSaveLocalHelper loadObjectForKey:LoginStatusKey]
+#define LoginStatusKey @"UserCurrentLoginStatus"
+
+
+#define kClearUserInfo  [[WLCoreDataHelper shareHelper]clearUserInfo]
+
 
 //用户的本地设置，诸如诗词的字号
 #define kUserConfigure [WLSaveLocalHelper loadObjectForKey:UserPoetryConfigure]
