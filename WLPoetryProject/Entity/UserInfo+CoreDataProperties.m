@@ -2,7 +2,7 @@
 //  UserInfo+CoreDataProperties.m
 //  WLPoetryProject
 //
-//  Created by 变啦 on 2018/11/13.
+//  Created by 变啦 on 2018/11/15.
 //  Copyright © 2018年 龙培. All rights reserved.
 //
 //
@@ -15,6 +15,7 @@
 	return [NSFetchRequest fetchRequestWithEntityName:@"UserInfo"];
 }
 
+@dynamic isLogin;
 @dynamic likePoetryList;
 @dynamic phoneNumber;
 @dynamic userHeadImageURL;
@@ -24,6 +25,6 @@
 @dynamic userPoetryClass;
 @dynamic userPoetryStorage;
 @dynamic userSessionToken;
-@dynamic isLogin;
+@dynamic poetryStorageList;
 
 @end

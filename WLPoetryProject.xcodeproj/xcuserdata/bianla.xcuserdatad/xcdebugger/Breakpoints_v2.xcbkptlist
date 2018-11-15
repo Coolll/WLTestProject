@@ -94,39 +94,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WLPoetryProject/Sections/Home/Controller/PoetryDetailViewController.m"
-            timestampString = "563794921.198548"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "86"
-            endingLineNumber = "86"
-            landmarkName = "-loadLikeData"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "WLPoetryProject/Sections/Home/Controller/PoetryDetailViewController.m"
-            timestampString = "563794921.200883"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "73"
-            endingLineNumber = "73"
-            landmarkName = "-loadLikeData"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "WLPoetryProject/Sections/Home/Controller/PoetryDetailViewController.m"
-            timestampString = "563794921.200936"
+            timestampString = "563964027.3556989"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "295"
@@ -142,7 +110,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WLPoetryProject/Sections/Home/Controller/PoetryDetailViewController.m"
-            timestampString = "563794921.200983"
+            timestampString = "563964027.355762"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "318"
@@ -157,168 +125,8 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "WLPoetryProject/Sections/Login/ViewController/WLLoginViewController.m"
-            timestampString = "563881642.5755531"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "601"
-            endingLineNumber = "601"
-            landmarkName = "-loginAction"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__36-[WLLoginViewController loginAction]_block_invoke"
-                  moduleName = "WLPoetryProject"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/bianla/Documents/MyFile/WLTestProject/WLPoetryProject/Sections/Login/ViewController/WLLoginViewController.m"
-                  timestampString = "563881642.715924"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "601"
-                  endingLineNumber = "601"
-                  offsetFromSymbolStart = "936">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__36-[WLLoginViewController loginAction]_block_invoke_2"
-                  moduleName = "WLPoetryProject"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/bianla/Documents/MyFile/WLTestProject/WLPoetryProject/Sections/Login/ViewController/WLLoginViewController.m"
-                  timestampString = "563881642.718146"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "603"
-                  endingLineNumber = "603"
-                  offsetFromSymbolStart = "65">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "WLPoetryProject/Sections/Login/ViewController/WLLoginViewController.m"
-            timestampString = "563881642.5758801"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "703"
-            endingLineNumber = "703"
-            landmarkName = "-responseDataWithUser:"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[WLLoginViewController responseDataWithUser:]"
-                  moduleName = "WLPoetryProject"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/bianla/Documents/MyFile/WLTestProject/WLPoetryProject/Sections/Login/ViewController/WLLoginViewController.m"
-                  timestampString = "563881642.724016"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "703"
-                  endingLineNumber = "703"
-                  offsetFromSymbolStart = "1131">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__46-[WLLoginViewController responseDataWithUser:]_block_invoke"
-                  moduleName = "WLPoetryProject"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/bianla/Documents/MyFile/WLTestProject/WLPoetryProject/Sections/Login/ViewController/WLLoginViewController.m"
-                  timestampString = "563881642.726355"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "704"
-                  endingLineNumber = "704"
-                  offsetFromSymbolStart = "58">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "WLPoetryProject/Sections/Login/ViewController/WLLoginViewController.m"
-            timestampString = "563881642.575945"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "712"
-            endingLineNumber = "712"
-            landmarkName = "-responseDataWithUser:"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[WLLoginViewController responseDataWithUser:]"
-                  moduleName = "WLPoetryProject"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/bianla/Documents/MyFile/WLTestProject/WLPoetryProject/Sections/Login/ViewController/WLLoginViewController.m"
-                  timestampString = "563881642.73211"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "712"
-                  endingLineNumber = "712"
-                  offsetFromSymbolStart = "1298">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__46-[WLLoginViewController responseDataWithUser:]_block_invoke_2"
-                  moduleName = "WLPoetryProject"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/bianla/Documents/MyFile/WLTestProject/WLPoetryProject/Sections/Login/ViewController/WLLoginViewController.m"
-                  timestampString = "563881642.734532"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "713"
-                  endingLineNumber = "713"
-                  offsetFromSymbolStart = "58">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "WLPoetryProject/Helper/WLCoreDataHelper.m"
-            timestampString = "563881642.576005"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "623"
-            endingLineNumber = "623"
-            landmarkName = "-saveUserInfo:withModel:withResult:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "WLPoetryProject/Helper/WLCoreDataHelper.m"
-            timestampString = "563881642.576225"
+            timestampString = "563968923.76403"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "579"
@@ -334,13 +142,93 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WLPoetryProject/Helper/WLCoreDataHelper.m"
-            timestampString = "563881642.576282"
+            timestampString = "563968923.764132"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "602"
-            endingLineNumber = "602"
-            landmarkName = "-saveInBackgroundWithUserInfoModelArray:withResult:"
+            startingLineNumber = "624"
+            endingLineNumber = "624"
+            landmarkName = "-saveUserInfo:withModel:withResult:"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WLPoetryProject/Helper/WLCoreDataHelper.m"
+            timestampString = "563968923.7641931"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "724"
+            endingLineNumber = "724"
+            landmarkName = "-updateDataWithTable:withKey:withKeyValueEqualTo:withNewValue:forNewKey:withResult:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WLPoetryProject/Helper/WLCoreDataHelper.m"
+            timestampString = "563968923.7642469"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "743"
+            endingLineNumber = "743"
+            landmarkName = "-updateDataWithTable:withKey:withKeyValueEqualTo:withNewValue:forNewKey:withResult:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WLPoetryProject/Sections/Login/ViewController/WLLoginViewController.m"
+            timestampString = "563968923.764302"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "601"
+            endingLineNumber = "601"
+            landmarkName = "-loginAction"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__36-[WLLoginViewController loginAction]_block_invoke"
+                  moduleName = "WLPoetryProject"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bianla/Documents/MyFile/WLTestProject/WLPoetryProject/Sections/Login/ViewController/WLLoginViewController.m"
+                  timestampString = "563968939.9242851"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "601"
+                  endingLineNumber = "601"
+                  offsetFromSymbolStart = "936">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__36-[WLLoginViewController loginAction]_block_invoke_2"
+                  moduleName = "WLPoetryProject"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bianla/Documents/MyFile/WLTestProject/WLPoetryProject/Sections/Login/ViewController/WLLoginViewController.m"
+                  timestampString = "563968939.925969"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "603"
+                  endingLineNumber = "603"
+                  offsetFromSymbolStart = "65">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

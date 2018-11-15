@@ -279,8 +279,8 @@
 		36521BA521904A8B00425DCC /* reciteIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 36521BA421904A8A00425DCC /* reciteIcon.png */; };
 		36521BA821904BED00425DCC /* RecitePoetryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36521BA721904BED00425DCC /* RecitePoetryController.m */; };
 		36521BAA21904ECF00425DCC /* optionIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 36521BA921904ECE00425DCC /* optionIcon.png */; };
-		365245D0219AAFF10008CBDA /* UserInfo+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 365245CE219AAFF10008CBDA /* UserInfo+CoreDataProperties.m */; };
 		367ED9952191691C00E979EE /* triangle.png in Resources */ = {isa = PBXBuildFile; fileRef = 367ED9942191691C00E979EE /* triangle.png */; };
+		369C9E7D219D283500022FEA /* UserInfo+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 369C9E7B219D283500022FEA /* UserInfo+CoreDataProperties.m */; };
 		36B516F3212EC85500FD0FA8 /* WLNewTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B516F2212EC85500FD0FA8 /* WLNewTextView.m */; };
 		36B5CC4B219927C0009D5861 /* WLImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B5CC49219927BF009D5861 /* WLImageCell.m */; };
 		36B5CC5A2199841D009D5861 /* UserInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B5CC592199841D009D5861 /* UserInfoModel.m */; };
@@ -743,11 +743,12 @@
 		36521BA621904BED00425DCC /* RecitePoetryController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecitePoetryController.h; sourceTree = "<group>"; };
 		36521BA721904BED00425DCC /* RecitePoetryController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecitePoetryController.m; sourceTree = "<group>"; };
 		36521BA921904ECE00425DCC /* optionIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = optionIcon.png; sourceTree = "<group>"; };
-		365245CB219AAFF10008CBDA /* UserInfo+CoreDataProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UserInfo+CoreDataProperties.h"; sourceTree = "<group>"; };
-		365245CC219AAFF10008CBDA /* UserInfo+CoreDataClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UserInfo+CoreDataClass.h"; sourceTree = "<group>"; };
-		365245CD219AAFF10008CBDA /* UserInfo+CoreDataClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UserInfo+CoreDataClass.m"; sourceTree = "<group>"; };
-		365245CE219AAFF10008CBDA /* UserInfo+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UserInfo+CoreDataProperties.m"; sourceTree = "<group>"; };
 		367ED9942191691C00E979EE /* triangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = triangle.png; sourceTree = "<group>"; };
+		369C9E78219D283500022FEA /* UserInfo+CoreDataProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UserInfo+CoreDataProperties.h"; sourceTree = "<group>"; };
+		369C9E79219D283500022FEA /* UserInfo+CoreDataClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UserInfo+CoreDataClass.h"; sourceTree = "<group>"; };
+		369C9E7A219D283500022FEA /* UserInfo+CoreDataClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UserInfo+CoreDataClass.m"; sourceTree = "<group>"; };
+		369C9E7B219D283500022FEA /* UserInfo+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UserInfo+CoreDataProperties.m"; sourceTree = "<group>"; };
+		369C9E7E219D62D600022FEA /* WLPoetryProject 1. 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WLPoetryProject 1. 2.xcdatamodel"; sourceTree = "<group>"; };
 		36B516F1212EC85500FD0FA8 /* WLNewTextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLNewTextView.h; sourceTree = "<group>"; };
 		36B516F2212EC85500FD0FA8 /* WLNewTextView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLNewTextView.m; sourceTree = "<group>"; };
 		36B5CC49219927BF009D5861 /* WLImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLImageCell.m; sourceTree = "<group>"; };
@@ -1414,10 +1415,10 @@
 		07A9229C2086293D00BE5929 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
-				365245CB219AAFF10008CBDA /* UserInfo+CoreDataProperties.h */,
-				365245CC219AAFF10008CBDA /* UserInfo+CoreDataClass.h */,
-				365245CD219AAFF10008CBDA /* UserInfo+CoreDataClass.m */,
-				365245CE219AAFF10008CBDA /* UserInfo+CoreDataProperties.m */,
+				369C9E78219D283500022FEA /* UserInfo+CoreDataProperties.h */,
+				369C9E79219D283500022FEA /* UserInfo+CoreDataClass.h */,
+				369C9E7A219D283500022FEA /* UserInfo+CoreDataClass.m */,
+				369C9E7B219D283500022FEA /* UserInfo+CoreDataProperties.m */,
 				3607C88E212FE32700298C6C /* UserCreation+CoreDataProperties.h */,
 				3607C891212FE32700298C6C /* UserCreation+CoreDataProperties.m */,
 				3607C88F212FE32700298C6C /* UserCreation+CoreDataClass.h */,
@@ -2071,7 +2072,7 @@
 				07567B41207A02EC0018B9E7 /* WLPublicTool.m in Sources */,
 				07567B80207A02EC0018B9E7 /* YLAccountViewController.m in Sources */,
 				07567B1D207A02EB0018B9E7 /* MJRefreshNormalHeader.m in Sources */,
-				365245D0219AAFF10008CBDA /* UserInfo+CoreDataProperties.m in Sources */,
+				369C9E7D219D283500022FEA /* UserInfo+CoreDataProperties.m in Sources */,
 				0765C6B1207CE47E0085EB3A /* MASLayoutConstraint.m in Sources */,
 				0765C704207CE6E20085EB3A /* SDWebImageDownloaderOperation.m in Sources */,
 				079BC505209D42BB00E0DF85 /* WLPoetryContentCell.m in Sources */,
@@ -2508,11 +2509,12 @@
 		072170292087843A002A1628 /* WLPoetryProject.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				369C9E7E219D62D600022FEA /* WLPoetryProject 1. 2.xcdatamodel */,
 				3637F2D8219C09F300D1B6E8 /* WLPoetryProject 1.1.xcdatamodel */,
 				00150E7320EF5095001BE61D /* WLPoetryProject 1.0.xcdatamodel */,
 				0721702A2087843A002A1628 /* WLPoetryProject.xcdatamodel */,
 			);
-			currentVersion = 3637F2D8219C09F300D1B6E8 /* WLPoetryProject 1.1.xcdatamodel */;
+			currentVersion = 369C9E7E219D62D600022FEA /* WLPoetryProject 1. 2.xcdatamodel */;
 			path = WLPoetryProject.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

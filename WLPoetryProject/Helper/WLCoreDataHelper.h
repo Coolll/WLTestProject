@@ -99,6 +99,9 @@ typedef void(^CoreDataInnerBlock)(BOOL isSuccessful);
 - (UserInfoModel*)fetchCurrentUserModel;
 
 
+- (void)updateDataWithTable:(NSString*)table withKey:(NSString*)key withKeyValueEqualTo:(NSString*)keyValue withNewValue:(id)newValue forNewKey:(NSString*)newKey withResult:(CoreDataResultBlock)block;
+
+
 
 
 @end

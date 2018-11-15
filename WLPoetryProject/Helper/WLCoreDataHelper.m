@@ -620,8 +620,8 @@
     entity.userHeadImageURL = model.userHeadImageURL;//用户的头像URL
     entity.userID = model.userID;
     entity.isLogin = model.isLogin;
+    entity.poetryStorageList = [self transArrayToString:model.poetryStorageList];
     __block  NSError *error = nil;
-    
     //子线程context执行并等待
     [self.privateContext performBlockAndWait:^{
         if (![self.privateContext save:&error]) {
@@ -687,9 +687,7 @@
 #pragma mark 修改个人信息
 - (void)updateUserInfoWithNewModel:(UserInfoModel*)model withResult:(CoreDataResultBlock)block
 {
-    BmobUser *use = [BmobUser currentUser];
-    self.currentUserID = use.objectId;
-    UserInfo *info = [self fetchUserInfoEntityWithID:self.currentUserID];
+    UserInfo *info = [self fetchUserInfoEntityWithID:kUserID];
     [self saveUserInfo:info withModel:model withResult:block];
 }
 
@@ -698,7 +696,57 @@
     UserInfo *info = [self fetchUserInfoEntityWithID:userID];
     [self saveUserInfo:info withModel:model withResult:block];
 }
+/*
+ table 表的名字
+ key 查询实体的key
+ keyValue 查询实体的value
+ newValue 新设置的值
+ newKey 新设置的值对应的key
+ block 回调
+ 例如：我需要修改UserInfo表中，UserID为1234的人，将他的name改为Kayle
+ table=UserInfo key=UserID keyValue=1234 newValue=Kayle newKey=name
+ */
+- (void)updateDataWithTable:(NSString*)table withKey:(NSString*)key withKeyValueEqualTo:(NSString*)keyValue withNewValue:(id)newValue forNewKey:(NSString*)newKey withResult:(CoreDataResultBlock)block
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"%@ == \"%@\"",key,keyValue]];
+    NSFetchRequest *request = [[NSFetchRequest alloc]init];
+    
+    NSArray *fetchArray = [self fetchDataWithTableName:table withRequest:request withPredicate:predicate];
+    
+    UserInfo *entity = nil;
+    
+    if (fetchArray.count > 0) {
+        entity = [fetchArray firstObject];
+    }
+    if ([newValue isKindOfClass:[NSArray class]]) {
+        NSString *string = [self transArrayToString:newValue];
+//        entity.poetryStorageList = string;
+        [entity setValue:string forKey:newKey];
+    }else{
+        [entity setValue:newValue forKey:newKey];
+//        entity.poetryStorageList = newValue;
 
+    }
+    __block  NSError *error = nil;
+    [self.privateContext save:&error];
+
+    //子线程context执行并等待
+    [self.privateContext performBlockAndWait:^{
+        if (![self.privateContext save:&error]) {
+            NSLog(@"privateContext 错误:%@",error);
+            if (block) {
+                block(NO,error);
+            }
+            
+        }else{
+            NSLog(@"成功");
+            if (block) {
+                block(YES,nil);
+            }
+        }
+        
+    }];
+}
 #pragma mark 查询个人信息
 
 //查询全部的个人信息
@@ -756,13 +804,19 @@
     model.userHeadImageURL = entity.userHeadImageURL;//用户的头像URL
     model.userID = entity.userID;
     model.isLogin = entity.isLogin;
+    model.poetryStorageList = [self transStringToArray:entity.poetryStorageList];
     return model;
 }
 
 
 - (NSArray*)transStringToArray:(NSString*)originString
 {
-    return [originString componentsSeparatedByString:@","];
+    NSMutableArray *array = [NSMutableArray arrayWithArray:[originString componentsSeparatedByString:@","]];
+    //因为一个元素时为"1234,"分割后多出一个元素，即最后一个元素是多余的，移除
+    if (array.count > 0) {
+        [array removeLastObject];
+    }
+    return array;
 }
 
 - (NSString*)transArrayToString:(NSArray*)originArray

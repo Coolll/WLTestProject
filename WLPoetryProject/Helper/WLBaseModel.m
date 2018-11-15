@@ -37,9 +37,7 @@
 
 - (void)setValue:(id)value forKey:(NSString *)key
 {
-    if ([key isEqualToString:@"likePoetryList"]) {
-        
-    }
+    
     //防止value是空
     if ([value isKindOfClass:[NSNull class]] || value == nil ) {
         

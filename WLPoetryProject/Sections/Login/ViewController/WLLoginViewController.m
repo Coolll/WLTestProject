@@ -694,6 +694,8 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
     NSString *headImage = [NSString stringWithFormat:@"%@",[user objectForKey:@"headImageURL"]];
     NSString *poetryStorage = [NSString stringWithFormat:@"%@",[user objectForKey:@"userPoetryStorage"]];
     NSMutableArray *array = [NSMutableArray arrayWithArray:[user objectForKey:@"likePoetryIDList"]];
+    NSMutableArray *storageArray = [NSMutableArray arrayWithArray:[user objectForKey:@"poetryStorageList"]];
+
     
     if ([poetryClass isEqualToString:@"(null)"] || poetryClass.length == 0) {
         poetryClass = @"0";
@@ -723,6 +725,7 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
     [dataDic setObject:headImage forKey:@"userHeadImageURL"];
     [dataDic setObject:poetryStorage forKey:@"userPoetryStorage"];
     [dataDic setObject:[array copy] forKey:@"likePoetryList"];
+    [dataDic setObject:[storageArray copy] forKey:@"poetryStorageList"];
     
     return dataDic;
 }

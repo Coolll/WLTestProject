@@ -83,7 +83,7 @@
    
     
     //柱子的最大高度
-    CGFloat chartMaxH = 240;
+    CGFloat chartMaxH = self.viewH-labelH-20;//最大高度为：视图高度-底部文本高度-20间距（不让柱子顶部抵着线了）
     
     //所有的数值中的最大值
     NSInteger max = self.maxValue;

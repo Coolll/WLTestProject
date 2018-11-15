@@ -11,12 +11,18 @@
 @implementation UserInfoModel
 - (void)setValue:(id)value forKey:(NSString *)key
 {
+    //先调用Super，否则array会被转为字符串
+    [super setValue:value forKey:key];
+
     if ([key isEqualToString:@"likePoetryList"] && [value isKindOfClass:[NSArray class]]) {
         self.likePoetryList = [NSArray arrayWithArray:value];
     }
 
+    if ([key isEqualToString:@"poetryStorageList"] && [value isKindOfClass:[NSArray class]]) {
+        self.poetryStorageList = [NSArray arrayWithArray:value];
+    }
     
-    [super setValue:value forKey:key];
+    
 }
 - (NSString *)fetchName
 {
