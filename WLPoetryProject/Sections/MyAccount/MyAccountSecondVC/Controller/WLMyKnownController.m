@@ -10,13 +10,14 @@
 #import "WLChartView.h"
 #import "UserInfoModel.h"
 #import "WLCoreDataHelper.h"
+#import "WLEvaluateController.h"
 @interface WLMyKnownController ()
 /**
  *  主scroll
  **/
 @property (nonatomic,strong) UIScrollView *mainScrollView;
 /**
- *  👨‍🎓
+ *  头像
  **/
 @property (nonatomic,strong) UIImageView *headImageView;
 
@@ -117,7 +118,6 @@
     self.prizeView.backgroundColor = [UIColor whiteColor];
     
     [self.chartView configureView];
-    NSArray *arr = self.userModel.poetryStorageList;
     
     self.startBtn.backgroundColor = [UIColor lightGrayColor];
 
@@ -135,20 +135,23 @@
 
 - (void)startBtnAction:(UIButton*)sender
 {
-    BmobUser *user = [BmobUser currentUser];
+//    BmobUser *user = [BmobUser currentUser];
+//
+//    NSArray *array = [NSArray arrayWithObject:@"12345"];
+//
+//    [user addObjectsFromArray:[array copy] forKey:@"poetryStorageList"];
+//
+//    [user updateInBackgroundWithResultBlock:^(BOOL isSuccessful, NSError *error) {
+//        NSLog(@"error %@",[error description]);
+//
+//    }];
+//
+//    [[WLCoreDataHelper shareHelper] updateDataWithTable:@"UserInfo" withKey:@"userID" withKeyValueEqualTo:kUserID withNewValue:@[@"12345",@"12345"] forNewKey:@"poetryStorageList" withResult:^(BOOL isSuccessful, NSError *error) {
+//        NSLog(@"isSuccss:%@",isSuccessful?@"YES":@"NO");
+//    }];
     
-    NSArray *array = [NSArray arrayWithObject:@"12345"];
-    
-    [user addObjectsFromArray:[array copy] forKey:@"poetryStorageList"];
-    
-    [user updateInBackgroundWithResultBlock:^(BOOL isSuccessful, NSError *error) {
-        NSLog(@"error %@",[error description]);
-        
-    }];
-    
-    [[WLCoreDataHelper shareHelper] updateDataWithTable:@"UserInfo" withKey:@"userID" withKeyValueEqualTo:kUserID withNewValue:@[@"12345",@"12345"] forNewKey:@"poetryStorageList" withResult:^(BOOL isSuccessful, NSError *error) {
-        NSLog(@"isSuccss:%@",isSuccessful?@"YES":@"NO");
-    }];
+    WLEvaluateController *vc = [[WLEvaluateController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
     
 }
 
@@ -305,7 +308,7 @@
         _chartView.viewW = PhoneScreen_WIDTH;
         _chartView.viewH = 300*rate;
         _chartView.dataArray = @[@"1243",@"4354",@"2234",@"767",@"434",@"5676",@"2454"];
-        _chartView.titleArray = @[@"周一",@"周二",@"周三",@"周四",@"周五",@"周六",@"周日"];
+//        _chartView.titleArray = @[@"周一",@"周二",@"周三",@"周四",@"周五",@"周六",@"周日"];
         _chartView.widthRate = 0.8;
         //        _chartView.widthForChart = 40;
         _chartView.animateTime = 0.35;

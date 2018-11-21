@@ -100,6 +100,9 @@
 
 - (NSArray*)poetrySeperateWithOrigin:(NSString*)originString
 {
+    if (!originString || originString.length==0) {
+        originString = @"";
+    }
     NSMutableArray *dataArray = [NSMutableArray array];
     
     

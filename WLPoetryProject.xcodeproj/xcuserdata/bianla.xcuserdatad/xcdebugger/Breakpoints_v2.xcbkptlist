@@ -20,7 +20,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WLPoetryProject/Sections/MyAccount/MyAccountFirstVC/Controller/WLFontController.m"
-            timestampString = "563356273.325141"
+            timestampString = "564377545.837307"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "211"
@@ -46,7 +46,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WLPoetryProject/Sections/MyAccount/MyAccountFirstVC/Controller/WLFontController.m"
-            timestampString = "563356273.325572"
+            timestampString = "564377545.837393"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "274"
@@ -62,7 +62,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WLPoetryProject/Sections/MyAccount/MyAccountFirstVC/Controller/WLFontController.m"
-            timestampString = "563356273.3259"
+            timestampString = "564377545.837441"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "297"
@@ -78,7 +78,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WLPoetryProject/Sections/MyAccount/MyAccountFirstVC/Controller/WLFontController.m"
-            timestampString = "563356273.326179"
+            timestampString = "564377545.837484"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "318"
@@ -99,22 +99,6 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "295"
             endingLineNumber = "295"
-            landmarkName = "-likeAction:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "WLPoetryProject/Sections/Home/Controller/PoetryDetailViewController.m"
-            timestampString = "563964027.355762"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "318"
-            endingLineNumber = "318"
             landmarkName = "-likeAction:"
             landmarkType = "7">
          </BreakpointContent>
@@ -206,7 +190,7 @@
                   moduleName = "WLPoetryProject"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/bianla/Documents/MyFile/WLTestProject/WLPoetryProject/Sections/Login/ViewController/WLLoginViewController.m"
-                  timestampString = "563968939.9242851"
+                  timestampString = "564486998.0401011"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "601"
@@ -221,7 +205,7 @@
                   moduleName = "WLPoetryProject"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/bianla/Documents/MyFile/WLTestProject/WLPoetryProject/Sections/Login/ViewController/WLLoginViewController.m"
-                  timestampString = "563968939.925969"
+                  timestampString = "564486998.042246"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "603"

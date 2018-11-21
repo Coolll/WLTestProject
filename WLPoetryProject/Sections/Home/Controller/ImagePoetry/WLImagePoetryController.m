@@ -326,15 +326,29 @@
 
         }];
         
+        
+        UIImageView *tipImage = [[UIImageView alloc]init];
+        tipImage.image = [UIImage imageNamed:@"tipImage"];
+        [self.view addSubview:tipImage];
+        //元素的布局
+        [tipImage mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.leading.equalTo(_typeView.mas_leading).offset(0);
+            make.top.equalTo(tipLabel.mas_bottom).offset(0);
+            make.width.mas_equalTo(20);
+            make.height.mas_equalTo(20);
+            
+        }];
+        
         UILabel *subLabel = [[UILabel alloc]init];
-        subLabel.text = @"完成后，可在题画界面调整诗词的位置喔～";
+        subLabel.text = @"完成后，可在题画界面调整诗句的位置喔～";
         subLabel.font = [UIFont systemFontOfSize:14.f];
         subLabel.textColor = [UIColor lightGrayColor];
         [_typeView addSubview:subLabel];
         //元素的布局
         [subLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             
-            make.leading.equalTo(_typeView.mas_leading).offset(0);
+            make.leading.equalTo(tipImage.mas_trailing).offset(5);
             make.top.equalTo(tipLabel.mas_bottom).offset(0);
             make.bottom.equalTo(_typeView.mas_bottom).offset(0);
             make.trailing.equalTo(_typeView.mas_trailing).offset(0);

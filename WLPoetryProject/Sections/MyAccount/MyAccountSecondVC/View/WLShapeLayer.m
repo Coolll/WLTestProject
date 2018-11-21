@@ -22,10 +22,10 @@
     _isSelected = isSelected;
     
     if (isSelected) {
-        self.strokeColor = [UIColor blueColor].CGColor;
+        self.strokeColor = RGBCOLOR(117, 201, 250, 1.0).CGColor;
         self.textLabel.text = self.text;
     }else{
-        self.strokeColor = [UIColor orangeColor].CGColor;
+        self.strokeColor = RGBCOLOR(59, 167, 249, 1.0).CGColor;
         self.textLabel.hidden = YES;
         [self.textLabel removeFromSuperview];
         self.textLabel = nil;

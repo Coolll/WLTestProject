@@ -115,7 +115,7 @@
         layer.lineWidth = chartW;
         layer.strokeStart = 0;
         layer.strokeEnd = 0;
-        layer.strokeColor = [UIColor orangeColor].CGColor;
+        layer.strokeColor = RGBCOLOR(59, 167, 249, 1.0).CGColor;
         layer.path = path.CGPath;
         layer.chartTopY = self.viewH-labelH-chartH;
         layer.chartCenterX = xValue + chartW/2;
