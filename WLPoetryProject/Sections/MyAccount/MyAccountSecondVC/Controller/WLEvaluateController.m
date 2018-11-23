@@ -95,26 +95,36 @@ typedef NS_ENUM(NSInteger , PoetryClass) {
 /**
  *  第一选项
  **/
-@property (nonatomic,strong) UILabel *oneLabel;
+@property (nonatomic,strong) UIButton *oneButton;
 /**
  *  第二选项
  **/
-@property (nonatomic,strong) UILabel *twoLabel;
+@property (nonatomic,strong) UIButton *twoButton;
 
 /**
  *  第三选项
  **/
-@property (nonatomic,strong) UILabel *threeLabel;
+@property (nonatomic,strong) UIButton *threeButton;
 
 /**
  *  无正确选项
  **/
-@property (nonatomic,strong) UILabel *noRightLabel;
+@property (nonatomic,strong) UIButton *noRightButton;
 
 /**
  *  不认识选项
  **/
-@property (nonatomic,strong) UILabel *unknownLabel;
+@property (nonatomic,strong) UIButton *unknownButton;
+
+/**
+ *  展示的题目序数
+ **/
+@property (nonatomic,assign) NSInteger showIndex;
+
+/**
+ *  题目的序数与答案
+ **/
+@property (nonatomic,strong) NSMutableDictionary *answerDic;
 
 
 
@@ -160,6 +170,9 @@ typedef NS_ENUM(NSInteger , PoetryClass) {
     
     //从0开始
     self.indexForQuestion = 0;
+    self.showIndex = 0;
+    
+    self.answerDic = [NSMutableDictionary dictionary];
     
     self.IDInfo = @{@"1000":@"8",
                     @"2000":@"9",
@@ -259,11 +272,75 @@ typedef NS_ENUM(NSInteger , PoetryClass) {
 //把option更新一下
 - (void)updateOptionArray
 {
-    for (NSArray *optionsArray in self.optionEasyArray) {
-        NSString *correctAnswer = [optionsArray objectAtIndex:0];
-        NSString *noSignAnswer = [self loadNoSignContentWithOrigin:correctAnswer];
-    }
+   
+    [self dealOptionArrayWithArray:self.optionEasyArray];
+    [self dealOptionArrayWithArray:self.optionGeneralArray];
+    [self dealOptionArrayWithArray:self.optionDifficultArray];
+    
 }
+
+- (void)dealOptionArrayWithArray:(NSArray*)originArray
+{
+    for (NSMutableArray *optionsArray in originArray) {
+        //从可选项中分别处理
+        if (optionsArray.count ==0 ) {
+            return;
+        }
+        //拿到正确答案
+        NSString *correctAnswer = [optionsArray firstObject];
+        //把正确答案中的符号去掉
+        NSString *noSignAnswer = [self loadNoSignContentWithOrigin:correctAnswer];
+        //数据数组
+        NSArray *dataArray ;
+        //如果答案是3个字，则从三个字的数组中拿,如果答案是四个字，则从四个字的数组中拿
+        if (noSignAnswer.length == 3) {
+            dataArray = self.threeCharArray;
+        }else if (noSignAnswer.length == 4){
+            dataArray = self.fourCharArray;
+        }else if (noSignAnswer.length == 5){
+            dataArray = self.fiveCharArray;
+        }else if (noSignAnswer.length == 7){
+            dataArray = self.sevenCharArray;
+        }else{
+            dataArray = self.otherCharArray;
+        }
+        
+        //子数组，可变。假如答案是5字，则从五字数组中取选项，当取了1个之后，第二次取的时候，五字数组需要移除掉第一次选项，不然的话，可能会出现重复的选项
+        NSMutableArray *subArray = [NSMutableArray arrayWithArray:dataArray];
+        for (int i =0 ; i < 3; i ++) {
+            //获取数据源总共有多少数据
+            NSInteger totalCount = subArray.count;
+            //获取随机数
+            NSInteger index = arc4random()%totalCount;
+            if (index < subArray.count) {
+                //拿到随机的答案
+                NSString *option = [subArray objectAtIndex:index];
+                //选项池中 移除掉对应的答案
+                [subArray removeObjectAtIndex:index];
+                //将选项添加到对应题目的选择中
+                [optionsArray addObject:option];
+            }else if (self.otherCharArray.count > 0 && optionsArray.count < 2){
+                //如果不够选，则从其他的选项池中选 如果一个都没找到，则从其他选项池中选1个
+                NSInteger subIndex = arc4random()%self.otherCharArray.count;
+                NSString *option = [self.otherCharArray objectAtIndex:subIndex];
+                [optionsArray addObject:option];
+            }else if(self.fiveCharArray.count > 0 && optionsArray.count < 3 ){
+                //如果只找到1个，则从五字选项池中选1个
+                NSInteger subIndex = arc4random()%self.fiveCharArray.count;
+                NSString *option = [self.fiveCharArray objectAtIndex:subIndex];
+                [optionsArray addObject:option];
+            }else if (self.sevenCharArray.count > 0 && optionsArray.count < 4){
+                //如果只找到2个，则从七字选项池中选1个
+                NSInteger subIndex = arc4random()%self.sevenCharArray.count;
+                NSString *option = [self.sevenCharArray objectAtIndex:subIndex];
+                [optionsArray addObject:option];
+            }
+        }
+    }
+    
+}
+
+
 //根据诗词中不同行的长度进行分类
 - (void)updateOneLineArrayWithOriginArray:(NSArray*)contentArray
 {
@@ -308,8 +385,8 @@ typedef NS_ENUM(NSInteger , PoetryClass) {
             //空白的内容
             NSMutableString *emptyString = [NSMutableString stringWithString:currentContent];
             //将当前行的所有文本替换掉（最后一个是符号，不替换）
-            for (int i =0 ; i < currentContent.length-1; i++) {
-                [emptyString replaceCharactersInRange:NSMakeRange(i, 1) withString:@"_"];
+            for (NSInteger i =currentContent.length-2 ; i >=0 ; i--) {
+                [emptyString replaceCharactersInRange:NSMakeRange(i, 1) withString:@"__"];
             }
             //获取下一句
             NSString *beforeString = [contentArray objectAtIndex:selIndex-1];
@@ -327,8 +404,8 @@ typedef NS_ENUM(NSInteger , PoetryClass) {
             //空白的内容
             NSMutableString *emptyString = [NSMutableString stringWithString:currentContent];
             //将当前行的所有文本替换掉（最后一个是符号，不替换）
-            for (int i =0 ; i < currentContent.length-1; i++) {
-                [emptyString replaceCharactersInRange:NSMakeRange(i, 1) withString:@"_"];
+            for (NSInteger i =currentContent.length-2 ; i >=0 ; i--) {
+                [emptyString replaceCharactersInRange:NSMakeRange(i, 1) withString:@"__"];
             }
             //获取下一句
             NSString *nextString = [contentArray objectAtIndex:selIndex+1];
@@ -397,8 +474,6 @@ typedef NS_ENUM(NSInteger , PoetryClass) {
         [self.tmpArray removeObjectAtIndex:index];
         
     }
-
-    
     
 }
 
@@ -406,75 +481,127 @@ typedef NS_ENUM(NSInteger , PoetryClass) {
 
 - (void)loadCustomView
 {
-    self.progressView = [[WQLProgressView alloc]init];
-    self.progressView.frameWidth = 100;
-    self.progressView.frameHeight = 100;
-    self.progressView.lineWidth = 10;
-    [self.progressView loadCustomCircle];
-    self.progressView.progress = 0;//需要先构建了layer，才能设置strokend
-    [self.view addSubview:self.progressView];
+    self.progressView.backgroundColor = ViewBackgroundColor;
     
-    //元素的布局
-    [self.progressView mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.leading.equalTo(self.view.mas_leading).offset((PhoneScreen_WIDTH-self.progressView.frameWidth)/2);
-        make.top.equalTo(self.naviView.mas_bottom).offset(20);
-        make.width.mas_equalTo(self.progressView.frameWidth);
-        make.height.mas_equalTo(self.progressView.frameHeight);
-        
-    }];
-    
-    
-//    self.mainScrollView = [[UIScrollView alloc]init];
-//    [self.view addSubview:self.mainScrollView];
-//    //元素的布局
-//    [self.mainScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-//
-//        make.leading.equalTo(self.view.mas_leading).offset(0);
-//        make.top.equalTo(self.progressView.mas_bottom).offset(20);
-//        make.trailing.equalTo(self.view.mas_trailing).offset(0);
-//        make.height.mas_equalTo(100);
-//
-//    }];
-    
-    self.questionLabel = [[UILabel alloc]init];
-    self.questionLabel.numberOfLines = 0;
-    self.questionLabel.font = [UIFont systemFontOfSize:16.f];
-    self.questionLabel.textAlignment = NSTextAlignmentCenter;
-    self.questionLabel.text = [self.easyModelArray firstObject];
-    [self.view addSubview:self.questionLabel];
-    //元素的布局
-    [self.questionLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.leading.equalTo(self.view.mas_leading).offset(20);
-        make.top.equalTo(self.progressView.mas_bottom).offset(30);
-        make.trailing.equalTo(self.view.mas_trailing).offset(-20);
-        make.height.mas_equalTo(80);
-    }];
+//    self.questionLabel.text = [self.easyModelArray firstObject];
+
     [self updateLabelShow];
+    [self.noRightButton setTitle:@"无正确项" forState:UIControlStateNormal];
+    [self.unknownButton setTitle:@"暂不认识" forState:UIControlStateNormal];
     
     [self addTimer];
 }
 
 - (void)updateLabelShow
 {
-    self.indexForQuestion += 1;
     NSInteger index = self.indexForQuestion*2;
+    self.indexForQuestion += 1;
+
     NSInteger simpleCount = self.easyModelArray.count;
     NSInteger generalCount = self.generalModelArray.count;
     NSInteger difficultCount = self.difficultModelArray.count;
     NSInteger random = arc4random()%2;
 
+    NSArray *optionArr;
     if (index+random < simpleCount) {
         NSString *question = [self.easyModelArray objectAtIndex:index+random];
+        if (question.length == 0) {
+            //如果题目内容是空的，则跳过
+            [self updateLabelShow];
+            return;
+        }
         self.questionLabel.text = question;
+
+        optionArr = [self.optionEasyArray objectAtIndex:index+random];
+       
+        
     }else if (index+random-simpleCount < generalCount){
         NSString *question = [self.generalModelArray objectAtIndex:(index+random-simpleCount)];
+        if (question.length == 0) {
+            //如果题目内容是空的，则跳过
+            [self updateLabelShow];
+            return;
+        }
         self.questionLabel.text = question;
+        optionArr = [self.optionGeneralArray objectAtIndex:(index+random-simpleCount)];
+        
     }else if (index+random-simpleCount-generalCount < difficultCount){
         NSString *question = [self.difficultModelArray objectAtIndex:(index+random-simpleCount-generalCount)];
+        if (question.length == 0) {
+            //如果题目内容是空的，则跳过
+            [self updateLabelShow];
+            return;
+        }
         self.questionLabel.text = question;
+        optionArr = [self.optionDifficultArray objectAtIndex:(index+random-simpleCount-generalCount)];
+    }else{
+        [self.timer invalidate];
+        self.questionLabel.text = @"";
     }
+    
+    
+    [self mixedUpArray:optionArr];
+
+
+    
+    [self updateQuestionLabelLineSpace];
+
+}
+
+//把答案混淆一下顺序
+- (void)mixedUpArray:(NSArray*)array
+{
+    NSMutableArray *arr = [NSMutableArray arrayWithArray:array];
+    NSInteger rightBtnIndex = 3;
+    if (arr.count == 0) {
+        return;
+    }
+    
+    //随机获取一个index
+    NSInteger index = arc4random()%arr.count;
+    if (index < arr.count) {
+        //设置对应选项的值
+        [self.oneButton setTitle:[arr objectAtIndex:index] forState:UIControlStateNormal];
+        //移除掉 防止有重复的选项
+        [arr removeObjectAtIndex:index];
+        if (index == 0) {
+            rightBtnIndex = 0;
+        }
+    }
+    
+    NSInteger indexTwo = arc4random()%arr.count;
+    if (indexTwo < arr.count) {
+        //设置对应选项的值
+        [self.twoButton setTitle:[arr objectAtIndex:indexTwo] forState:UIControlStateNormal];
+        [arr removeObjectAtIndex:indexTwo];
+        if (index != 0 && indexTwo == 0) {
+            rightBtnIndex = 1;
+        }
+    }
+    
+    
+    NSInteger indexThree = arc4random()%arr.count;
+    if (indexThree < arr.count) {
+        //设置对应选项的值
+        [self.threeButton setTitle:[arr objectAtIndex:indexThree] forState:UIControlStateNormal];
+        if (index != 0 && indexTwo !=0 && indexThree == 0) {
+            rightBtnIndex = 2;
+        }
+    }
+    
+    [self.answerDic setObject:[NSString stringWithFormat:@"%ld",rightBtnIndex] forKey:[NSString stringWithFormat:@"%ld",self.showIndex]];
+    
+}
+
+- (void)updateQuestionLabelLineSpace
+{
+    NSMutableAttributedString *attString = [[NSMutableAttributedString alloc]initWithString:self.questionLabel.text];
+    NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc]init];
+    [style setLineSpacing:10];
+    [style setAlignment:NSTextAlignmentCenter];
+    [attString addAttribute:NSParagraphStyleAttributeName value:style range:NSMakeRange(0, self.questionLabel.text.length)];
+    self.questionLabel.attributedText = attString;
+    [self.questionLabel sizeToFit];
 }
 
 - (void)addTimer
@@ -489,14 +616,265 @@ typedef NS_ENUM(NSInteger , PoetryClass) {
 {
     if (self.progressView.progress <= 1) {
         self.progressView.progress += 0.04;
+        if (self.progressView.progress == 1) {
+            self.showIndex += 1;
+        }
     }else{
         self.progressView.progress = 0;
         [self updateLabelShow];
     }
 }
 
+- (void)oneButtonAction:(UIButton*)sender
+{
+    NSLog(@"第1选项");
+    NSInteger index = sender.tag-1000;
+    NSInteger correctIndex = [[self.answerDic objectForKey:[NSString stringWithFormat:@"%ld",self.showIndex]]integerValue];
+    if (index == correctIndex) {
+        NSLog(@"正确");
+    }else{
+        NSLog(@"错误");
+    }
+    
+    self.showIndex += 1;
+
+}
+- (void)twoButtonAction:(UIButton*)sender
+{
+    NSLog(@"第2选项");
+    NSInteger index = sender.tag-1000;
+    NSInteger correctIndex = [[self.answerDic objectForKey:[NSString stringWithFormat:@"%ld",self.showIndex]]integerValue];
+    if (index == correctIndex) {
+        NSLog(@"正确");
+    }else{
+        NSLog(@"错误");
+    }
+    
+    self.showIndex += 1;
 
 
+}
+- (void)threeButtonAction:(UIButton*)sender
+{
+    NSLog(@"第3选项");
+    NSInteger index = sender.tag-1000;
+    NSInteger correctIndex = [[self.answerDic objectForKey:[NSString stringWithFormat:@"%ld",self.showIndex]]integerValue];
+    if (index == correctIndex) {
+        NSLog(@"正确");
+    }else{
+        NSLog(@"错误");
+    }
+    
+    self.showIndex += 1;
+
+}
+- (void)noRightButtonAction:(UIButton*)sender
+{
+    NSLog(@"无正确选项");
+    NSInteger index = sender.tag-1000;
+    NSInteger correctIndex = [[self.answerDic objectForKey:[NSString stringWithFormat:@"%ld",self.showIndex]]integerValue];
+    if (index == correctIndex) {
+        NSLog(@"正确");
+    }else{
+        NSLog(@"错误");
+    }
+    self.showIndex += 1;
+
+
+}
+- (void)unknowButtonAction:(UIButton*)sender
+{
+    NSLog(@"不知道选项");
+    self.showIndex += 1;
+
+}
+
+#pragma mark - 属性
+
+- (WQLProgressView *)progressView
+{
+    if (!_progressView) {
+        _progressView = [[WQLProgressView alloc]init];
+        _progressView.frameWidth = 100;
+        _progressView.frameHeight = 100;
+        _progressView.lineWidth = 10;
+        [_progressView loadCustomCircle];
+        _progressView.progress = 0;//需要先构建了layer，才能设置strokend
+        [self.view addSubview:_progressView];
+        
+        //元素的布局
+        [_progressView mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.leading.equalTo(self.view.mas_leading).offset((PhoneScreen_WIDTH-self.progressView.frameWidth)/2);
+            make.top.equalTo(self.naviView.mas_bottom).offset(20);
+            make.width.mas_equalTo(self.progressView.frameWidth);
+            make.height.mas_equalTo(self.progressView.frameHeight);
+            
+        }];
+        
+    }
+    return _progressView;
+}
+- (UILabel *)questionLabel
+{
+    if (!_questionLabel) {
+        _questionLabel = [[UILabel alloc]init];
+        _questionLabel.numberOfLines = 0;
+        _questionLabel.font = [UIFont systemFontOfSize:16.f];
+        _questionLabel.textAlignment = NSTextAlignmentCenter;
+        [self.view addSubview:_questionLabel];
+        //元素的布局
+        [_questionLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.leading.equalTo(self.view.mas_leading).offset(20);
+            make.top.equalTo(self.progressView.mas_bottom).offset(30);
+            make.trailing.equalTo(self.view.mas_trailing).offset(-20);
+            make.height.mas_equalTo(80);
+        }];
+    }
+    return _questionLabel;
+}
+
+
+- (UIButton *)oneButton
+{
+    if (!_oneButton) {
+        _oneButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _oneButton.titleLabel.font = [UIFont systemFontOfSize:16.f];
+        _oneButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+        _oneButton.titleLabel.numberOfLines = 1;
+        _oneButton.layer.cornerRadius = 4.f;
+        _oneButton.clipsToBounds = YES;
+        _oneButton.tag = 1000;
+        _oneButton.backgroundColor = [UIColor whiteColor];
+        [_oneButton setTitleColor:RGBCOLOR(50, 50, 50, 1.0) forState:UIControlStateNormal];
+        
+        [_oneButton addTarget:self action:@selector(oneButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:_oneButton];
+        //元素的布局
+        [_oneButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.leading.equalTo(self.questionLabel.mas_leading).offset(0);
+            make.top.equalTo(self.questionLabel.mas_bottom).offset(40);
+            make.trailing.equalTo(self.questionLabel.mas_trailing).offset(0);
+            make.height.mas_equalTo(40);
+            
+        }];
+    }
+    return _oneButton;
+}
+
+- (UIButton *)twoButton
+{
+    if (!_twoButton) {
+        _twoButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _twoButton.titleLabel.font = [UIFont systemFontOfSize:16.f];
+        _twoButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+        _twoButton.titleLabel.numberOfLines = 1;
+        _twoButton.layer.cornerRadius = 4.f;
+        _twoButton.clipsToBounds = YES;
+        _twoButton.tag = 1001;
+        _twoButton.backgroundColor = [UIColor whiteColor];
+        [_twoButton setTitleColor:RGBCOLOR(50, 50, 50, 1.0) forState:UIControlStateNormal];
+        
+        [_twoButton addTarget:self action:@selector(twoButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:_twoButton];
+        
+        //元素的布局
+        [_twoButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.leading.equalTo(self.questionLabel.mas_leading).offset(0);
+            make.top.equalTo(self.oneButton.mas_bottom).offset(12);
+            make.trailing.equalTo(self.questionLabel.mas_trailing).offset(0);
+            make.height.mas_equalTo(40);
+            
+        }];
+    }
+    return _twoButton;
+}
+- (UIButton *)threeButton
+{
+    if (!_threeButton) {
+        _threeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _threeButton.titleLabel.font = [UIFont systemFontOfSize:16.f];
+        _threeButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+        _threeButton.titleLabel.numberOfLines = 1;
+        _threeButton.layer.cornerRadius = 4.f;
+        _threeButton.clipsToBounds = YES;
+        _threeButton.tag = 1002;
+        _threeButton.backgroundColor = [UIColor whiteColor];
+        [_threeButton setTitleColor:RGBCOLOR(50, 50, 50, 1.0) forState:UIControlStateNormal];
+        
+        [_threeButton addTarget:self action:@selector(threeButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:_threeButton];
+        
+        //元素的布局
+        [_threeButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.leading.equalTo(self.questionLabel.mas_leading).offset(0);
+            make.top.equalTo(self.twoButton.mas_bottom).offset(12);
+            make.trailing.equalTo(self.questionLabel.mas_trailing).offset(0);
+            make.height.mas_equalTo(40);
+            
+        }];
+    }
+    return _threeButton;
+}
+- (UIButton *)noRightButton
+{
+    if (!_noRightButton) {
+        _noRightButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _noRightButton.titleLabel.font = [UIFont systemFontOfSize:16.f];
+        _noRightButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+        _noRightButton.titleLabel.numberOfLines = 1;
+        _noRightButton.layer.cornerRadius = 4.f;
+        _noRightButton.clipsToBounds = YES;
+        _noRightButton.tag = 1003;
+        _noRightButton.backgroundColor = [UIColor whiteColor];
+        [_noRightButton setTitleColor:RGBCOLOR(50, 50, 50, 1.0) forState:UIControlStateNormal];
+        
+        [_noRightButton addTarget:self action:@selector(noRightButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:_noRightButton];
+        //元素的布局
+        [_noRightButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.leading.equalTo(self.questionLabel.mas_leading).offset(0);
+            make.top.equalTo(self.threeButton.mas_bottom).offset(12);
+            make.trailing.equalTo(self.questionLabel.mas_trailing).offset(0);
+            make.height.mas_equalTo(40);
+            
+        }];
+    }
+    return _noRightButton;
+}
+
+- (UIButton *)unknownButton
+{
+    if (!_unknownButton) {
+        _unknownButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _unknownButton.titleLabel.font = [UIFont systemFontOfSize:16.f];
+        _unknownButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+        _unknownButton.titleLabel.numberOfLines = 1;
+        _unknownButton.layer.cornerRadius = 4.f;
+        _unknownButton.clipsToBounds = YES;
+        _unknownButton.tag = 1004;
+        _unknownButton.backgroundColor = [UIColor whiteColor];
+        [_unknownButton setTitleColor:RGBCOLOR(50, 50, 50, 1.0) forState:UIControlStateNormal];
+        [_unknownButton addTarget:self action:@selector(unknowButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:_unknownButton];
+        
+        //元素的布局
+        [_unknownButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.leading.equalTo(self.questionLabel.mas_leading).offset(0);
+            make.top.equalTo(self.noRightButton.mas_bottom).offset(12);
+            make.trailing.equalTo(self.questionLabel.mas_trailing).offset(0);
+            make.height.mas_equalTo(40);
+            
+        }];
+    }
+    return _unknownButton;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

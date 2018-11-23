@@ -44,7 +44,7 @@
     circleLayer.path = drawPath.CGPath;
     circleLayer.strokeStart = 0.0;
     circleLayer.strokeEnd = 0.01;
-    circleLayer.strokeColor = [UIColor orangeColor].CGColor;
+    circleLayer.strokeColor = NavigationColor.CGColor;
     [self.layer addSublayer:circleLayer];
 }
 
@@ -66,14 +66,14 @@
         circleLayer.path = drawPath.CGPath;
         circleLayer.strokeStart = 0.0;
         circleLayer.strokeEnd = progress;
-        circleLayer.strokeColor = [UIColor orangeColor].CGColor;
+        circleLayer.strokeColor = NavigationColor.CGColor;
         circleLayer.fillColor = [UIColor clearColor].CGColor;
     
     }else{
         circleLayer.path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(self.frameWidth/2, self.frameHeight/2) radius:R startAngle:-M_PI_2 endAngle:-M_PI_2 clockwise:YES].CGPath;
         circleLayer.strokeStart = 0.0;
         circleLayer.strokeEnd = 0.0;
-        circleLayer.strokeColor = [UIColor orangeColor].CGColor;
+        circleLayer.strokeColor = [UIColor clearColor].CGColor;
         circleLayer.fillColor = [UIColor clearColor].CGColor;
     }
     
