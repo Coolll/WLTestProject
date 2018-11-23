@@ -7,7 +7,8 @@
 //
 
 #import "WQLProgressView.h"
-@interface WQLProgressView()
+@interface WQLProgressView()<CAAnimationDelegate>
+
 {
     CAShapeLayer *circleLayer;
     
@@ -16,12 +17,16 @@
     CGFloat R;
     
 }
+
+/**
+ *  block
+ **/
+@property (nonatomic,copy) ProgressFinishBlock block;
+
+
 @end
+
 @implementation WQLProgressView
-
-
-
-
 
 - (void)loadCustomCircle
 {
@@ -42,41 +47,78 @@
     
     drawPath = [UIBezierPath bezierPathWithArcCenter:CGPointMake(self.frameWidth/2, self.frameHeight/2) radius:R startAngle:-M_PI_2 endAngle:M_PI*3/2 clockwise:YES];
     circleLayer.path = drawPath.CGPath;
-    circleLayer.strokeStart = 0.0;
-    circleLayer.strokeEnd = 0.01;
+    circleLayer.strokeStart = 0;
+    circleLayer.strokeEnd = 0;
     circleLayer.strokeColor = NavigationColor.CGColor;
     [self.layer addSublayer:circleLayer];
+    
+}
+- (void)finishWithBlock:(ProgressFinishBlock)block
+{
+    if (block) {
+        self.block = block;
+    }
 }
 
-- (void)setProgress:(CGFloat)progress
+- (void)restartCircle
 {
-    _progress = progress;
-    
-    circleLayer.strokeEnd = progress;
-    
-    if (progress == 1) {
-        //duang duang duang 的搞一搞
-//        circleLayer.path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, frameWidth, frameHeight) cornerRadius:R].CGPath;
+    circleLayer.strokeStart = 0;
+    [self doCustomAnimationWithLayer:circleLayer];
+}
+
+
+//- (void)setProgress:(CGFloat)progress
+//{
+//    _progress = progress;
+//
+//    circleLayer.strokeEnd = progress;
+//
+//    if (progress == 1) {
+//        //duang duang duang 的搞一搞
+////        circleLayer.path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, frameWidth, frameHeight) cornerRadius:R].CGPath;
+////        circleLayer.strokeColor = [UIColor clearColor].CGColor;
+////        circleLayer.fillColor = [UIColor greenColor].CGColor;
+//        circleLayer.strokeStart = 0.0;
+//        circleLayer.strokeEnd = 1.0;
+//    }else if(progress < 1){
+//        //这个else仅测试用，实际中，不会出现下载完成后，再出现进度条了
+//        circleLayer.path = drawPath.CGPath;
+//        circleLayer.strokeStart = 0.0;
+//        circleLayer.strokeEnd = progress;
+//        circleLayer.strokeColor = NavigationColor.CGColor;
+//        circleLayer.fillColor = [UIColor clearColor].CGColor;
+//
+//    }else{
+//        circleLayer.path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(self.frameWidth/2, self.frameHeight/2) radius:R startAngle:-M_PI_2 endAngle:-M_PI_2 clockwise:YES].CGPath;
+//        circleLayer.strokeStart = 0.0;
+//        circleLayer.strokeEnd = 0.0;
 //        circleLayer.strokeColor = [UIColor clearColor].CGColor;
-//        circleLayer.fillColor = [UIColor greenColor].CGColor;
-        circleLayer.strokeStart = 0.0;
-        circleLayer.strokeEnd = 1.0;
-    }else if(progress < 1){
-        //这个else仅测试用，实际中，不会出现下载完成后，再出现进度条了
-        circleLayer.path = drawPath.CGPath;
-        circleLayer.strokeStart = 0.0;
-        circleLayer.strokeEnd = progress;
-        circleLayer.strokeColor = NavigationColor.CGColor;
-        circleLayer.fillColor = [UIColor clearColor].CGColor;
-    
-    }else{
-        circleLayer.path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(self.frameWidth/2, self.frameHeight/2) radius:R startAngle:-M_PI_2 endAngle:-M_PI_2 clockwise:YES].CGPath;
-        circleLayer.strokeStart = 0.0;
-        circleLayer.strokeEnd = 0.0;
-        circleLayer.strokeColor = [UIColor clearColor].CGColor;
-        circleLayer.fillColor = [UIColor clearColor].CGColor;
+//        circleLayer.fillColor = [UIColor clearColor].CGColor;
+//    }
+//
+//}
+
+- (void)doCustomAnimationWithLayer:(CAShapeLayer*)layer
+{
+    CABasicAnimation *strokeAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
+    strokeAnimation.fromValue = @(0);
+    strokeAnimation.duration = 5.f;
+    strokeAnimation.delegate = self;
+    strokeAnimation.toValue = @(1);
+    strokeAnimation.autoreverses = NO;
+    strokeAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+    strokeAnimation.removedOnCompletion = YES;
+    [layer addAnimation:strokeAnimation forKey:@"strokeEnd"];
+    layer.strokeEnd = 1;
+}
+
+- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
+{
+    if (flag) {
+        if (self.block) {
+            self.block();
+        }
     }
-    
 }
 
 @end

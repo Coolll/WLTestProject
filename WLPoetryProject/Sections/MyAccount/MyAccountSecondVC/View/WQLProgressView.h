@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+typedef void(^ProgressFinishBlock) (void);
 
 @interface WQLProgressView : UIView
 /**
@@ -30,5 +31,6 @@
 
 
 - (void)loadCustomCircle;
-
+- (void)finishWithBlock:(ProgressFinishBlock)block;
+- (void)restartCircle;
 @end

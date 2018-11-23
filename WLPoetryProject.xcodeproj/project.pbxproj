@@ -284,6 +284,8 @@
 		36521BAA21904ECF00425DCC /* optionIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 36521BA921904ECE00425DCC /* optionIcon.png */; };
 		367ED9952191691C00E979EE /* triangle.png in Resources */ = {isa = PBXBuildFile; fileRef = 367ED9942191691C00E979EE /* triangle.png */; };
 		369C9E7D219D283500022FEA /* UserInfo+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 369C9E7B219D283500022FEA /* UserInfo+CoreDataProperties.m */; };
+		36B3671D21A7E3CD0071C14A /* WLScoreController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B3671C21A7E3CD0071C14A /* WLScoreController.m */; };
+		36B3672021A807B80071C14A /* WLPercentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B3671F21A807B80071C14A /* WLPercentView.m */; };
 		36B516F3212EC85500FD0FA8 /* WLNewTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B516F2212EC85500FD0FA8 /* WLNewTextView.m */; };
 		36B5CC4B219927C0009D5861 /* WLImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B5CC49219927BF009D5861 /* WLImageCell.m */; };
 		36B5CC5A2199841D009D5861 /* UserInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B5CC592199841D009D5861 /* UserInfoModel.m */; };
@@ -757,6 +759,10 @@
 		369C9E7A219D283500022FEA /* UserInfo+CoreDataClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UserInfo+CoreDataClass.m"; sourceTree = "<group>"; };
 		369C9E7B219D283500022FEA /* UserInfo+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UserInfo+CoreDataProperties.m"; sourceTree = "<group>"; };
 		369C9E7E219D62D600022FEA /* WLPoetryProject 1. 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WLPoetryProject 1. 2.xcdatamodel"; sourceTree = "<group>"; };
+		36B3671B21A7E3CD0071C14A /* WLScoreController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLScoreController.h; sourceTree = "<group>"; };
+		36B3671C21A7E3CD0071C14A /* WLScoreController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLScoreController.m; sourceTree = "<group>"; };
+		36B3671E21A807B80071C14A /* WLPercentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLPercentView.h; sourceTree = "<group>"; };
+		36B3671F21A807B80071C14A /* WLPercentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLPercentView.m; sourceTree = "<group>"; };
 		36B516F1212EC85500FD0FA8 /* WLNewTextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLNewTextView.h; sourceTree = "<group>"; };
 		36B516F2212EC85500FD0FA8 /* WLNewTextView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLNewTextView.m; sourceTree = "<group>"; };
 		36B5CC49219927BF009D5861 /* WLImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLImageCell.m; sourceTree = "<group>"; };
@@ -1776,6 +1782,8 @@
 				360E671F21941DA200AD56BF /* WLMyKnownController.m */,
 				3640E931219E5F250077FF1F /* WLEvaluateController.h */,
 				3640E932219E5F250077FF1F /* WLEvaluateController.m */,
+				36B3671B21A7E3CD0071C14A /* WLScoreController.h */,
+				36B3671C21A7E3CD0071C14A /* WLScoreController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1789,6 +1797,8 @@
 				3619788021952AEC000E0138 /* WLChartView.m */,
 				3619788221952AEC000E0138 /* WLShapeLayer.h */,
 				3619788121952AEC000E0138 /* WLShapeLayer.m */,
+				36B3671E21A807B80071C14A /* WLPercentView.h */,
+				36B3671F21A807B80071C14A /* WLPercentView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2110,6 +2120,7 @@
 				07567B8E207A02EC0018B9E7 /* WLRequestHelper.m in Sources */,
 				0765C6FB207CE6E20085EB3A /* NSImage+WebCache.m in Sources */,
 				363054C421A3AA8D0084FD5B /* WQLProgressView.m in Sources */,
+				36B3672021A807B80071C14A /* WLPercentView.m in Sources */,
 				0073FD7520EE021A00FED6D6 /* WLLaunchView.m in Sources */,
 				07567B10207A02EB0018B9E7 /* MyMBProgress.m in Sources */,
 				0765C712207CE6E20085EB3A /* UIImageView+WebCache.m in Sources */,
@@ -2135,6 +2146,7 @@
 				3640E933219E5F250077FF1F /* WLEvaluateController.m in Sources */,
 				36B516F3212EC85500FD0FA8 /* WLNewTextView.m in Sources */,
 				07CFF240208B0AEE00849C20 /* WLPoetryListCell.m in Sources */,
+				36B3671D21A7E3CD0071C14A /* WLScoreController.m in Sources */,
 				07567B8D207A02EC0018B9E7 /* WLBaseModel.m in Sources */,
 				0765C711207CE6E20085EB3A /* UIImageView+HighlightedWebCache.m in Sources */,
 				0010F22420F4911500F272EB /* WLImageSearchController.m in Sources */,

@@ -11,6 +11,9 @@
 #import "PoetryModel.h"
 #import "WLCoreDataHelper.h"
 #import "WLPublicTool.h"
+#import "WLScoreController.h"
+#import "WLPercentView.h"
+
 typedef NS_ENUM(NSInteger , PoetryClass) {
     PoetryClassEasy,
     PoetryClassGeneral,
@@ -36,17 +39,31 @@ typedef NS_ENUM(NSInteger , PoetryClass) {
 @property (nonatomic,strong) NSMutableArray *difficultArray;
 
 /**
- *  简单诗词题目数组
+ *  简单诗词题目数组 确定数据源后不变
  **/
-@property (nonatomic,strong) NSMutableArray *easyModelArray;
+@property (nonatomic,strong) NSMutableArray *easyTextArray;
 /**
- *  一般诗词题目数组
+ *  一般诗词题目数组 确定数据源后不变
  **/
-@property (nonatomic,strong) NSMutableArray *generalModelArray;
+@property (nonatomic,strong) NSMutableArray *generalTextArray;
 /**
- *  困难诗词题目数组
+ *  困难诗词题目数组 确定数据源后不变
  **/
-@property (nonatomic,strong) NSMutableArray *difficultModelArray;
+@property (nonatomic,strong) NSMutableArray *difficultTextArray;
+
+/**
+ *  简单诗词题目数组 每次题目更新都会变，直到获取了所需的量。比如说需要10道简单的题目，则从简单题目中抽完10道，则不再抽了（遇到空的内容，也会干掉）
+ **/
+@property (nonatomic,strong) NSMutableArray *easyLeftArray;
+/**
+ *  一般诗词题目数组 每次题目更新都会变，直到获取了所需的量。比如说需要10道简单的题目，则从简单题目中抽完10道，则不再抽了（遇到空的内容，也会干掉）
+ **/
+@property (nonatomic,strong) NSMutableArray *generalLeftArray;
+/**
+ *  困难诗词题目数组 每次题目更新都会变，直到获取了所需的量。比如说需要10道简单的题目，则从简单题目中抽完10道，则不再抽了（遇到空的内容，也会干掉）
+ **/
+@property (nonatomic,strong) NSMutableArray *difficultLeftArray;
+
 /**
  *  用来暂存数据的数组
  **/
@@ -67,30 +84,15 @@ typedef NS_ENUM(NSInteger , PoetryClass) {
 @property (nonatomic,strong) NSMutableArray *sevenCharArray;
 @property (nonatomic,strong) NSMutableArray *otherCharArray;
 
-
-/**
- *  主scrollView
- **/
-@property (nonatomic,strong) UIScrollView *mainScrollView;
 /**
  *  倒计时的视图
  **/
 @property (nonatomic,strong) WQLProgressView *progressView;
 
 /**
- *  定时器
- **/
-@property (nonatomic,strong) NSTimer *timer;
-
-/**
  *  题目的label
  **/
 @property (nonatomic,strong) UILabel *questionLabel;
-
-/**
- *  当前第几题
- **/
-@property (nonatomic,assign) NSInteger indexForQuestion;
 
 /**
  *  第一选项
@@ -119,15 +121,26 @@ typedef NS_ENUM(NSInteger , PoetryClass) {
 /**
  *  展示的题目序数
  **/
-@property (nonatomic,assign) NSInteger showIndex;
+@property (nonatomic,assign) NSInteger rightIndex;
+/**
+ *  总题数 可设置
+ **/
+@property (nonatomic,assign) NSInteger countForAll;
+/**
+ *  简单/一般/困难 题数
+ **/
+@property (nonatomic,assign) NSInteger countForEasy,countForGeneral,countForDifficult;
+
 
 /**
- *  题目的序数与答案
+ *  正确与错误的个数 总题数
  **/
-@property (nonatomic,strong) NSMutableDictionary *answerDic;
+@property (nonatomic,assign) NSInteger countForRight,countForWrong;
 
-
-
+/**
+ *  答题的进度
+ **/
+@property (nonatomic,strong) WLPercentView *percentView;
 
 
 
@@ -151,9 +164,9 @@ typedef NS_ENUM(NSInteger , PoetryClass) {
     self.difficultArray = [NSMutableArray array];
     
     //获取到的展示数组 “____，低头思故乡。”
-    self.easyModelArray = [NSMutableArray array];
-    self.generalModelArray = [NSMutableArray array];
-    self.difficultModelArray = [NSMutableArray array];
+    self.easyTextArray = [NSMutableArray array];
+    self.generalTextArray = [NSMutableArray array];
+    self.difficultTextArray = [NSMutableArray array];
     
     //展示数组的答案 “举头望明月”
     self.tmpArray = [NSMutableArray array];
@@ -168,11 +181,17 @@ typedef NS_ENUM(NSInteger , PoetryClass) {
     self.sevenCharArray = [NSMutableArray array];
     self.otherCharArray = [NSMutableArray array];
     
-    //从0开始
-    self.indexForQuestion = 0;
-    self.showIndex = 0;
     
-    self.answerDic = [NSMutableDictionary dictionary];
+    //正确的index
+    self.rightIndex = 0;
+    self.countForRight = 0;
+    self.countForWrong = 0;
+    
+    self.countForAll = 30;
+//    self.countForEasy = self.countForAll*0.3;
+//    self.countForDifficult = self.countForAll*0.3;
+//    self.countForGeneral = self.countForAll-self.countForEasy-self.countForDifficult;
+    self.countForEasy = self.countForGeneral = self.countForDifficult = 2;
     
     self.IDInfo = @{@"1000":@"8",
                     @"2000":@"9",
@@ -233,7 +252,7 @@ typedef NS_ENUM(NSInteger , PoetryClass) {
         [self updateOneLineArrayWithOriginArray:contentArray];//将内容进行分类，不同长度的划分到不同长度中。
 
         NSString *showTextString = [self loadNextOrBeforeLineWithContentArray:contentArray withPoetryIndex:i withType:PoetryClassEasy];//获取该诗词的若干句，并做空白处理
-        [self.easyModelArray addObject:showTextString];//将展示的诗词添加到数组中
+        [self.easyTextArray addObject:showTextString];//将展示的诗词添加到数组中
     }
     
     //先获取一般 随机的ID，然后查询到诗词，然后随机挑选诗词中的两句。
@@ -246,7 +265,7 @@ typedef NS_ENUM(NSInteger , PoetryClass) {
         [self updateOneLineArrayWithOriginArray:contentArray];//将内容进行分类，不同长度的划分到不同长度中。
 
         NSString *showTextString = [self loadNextOrBeforeLineWithContentArray:contentArray withPoetryIndex:i withType:PoetryClassGeneral];//获取该诗词的若干句，并做空白处理
-        [self.generalModelArray addObject:showTextString];//将展示的诗词添加到数组中
+        [self.generalTextArray addObject:showTextString];//将展示的诗词添加到数组中
     }
     
     //先获取困难 随机的ID，然后查询到诗词，然后随机挑选诗词中的两句。
@@ -261,18 +280,23 @@ typedef NS_ENUM(NSInteger , PoetryClass) {
         [self updateOneLineArrayWithOriginArray:contentArray];//将内容进行分类，不同长度的划分到不同长度中。
 
         NSString *showTextString = [self loadNextOrBeforeLineWithContentArray:contentArray withPoetryIndex:i withType:PoetryClassDifficult];//获取该诗词的若干句，并做空白处理
-        [self.difficultModelArray addObject:showTextString];//将展示的诗词添加到数组中
+        [self.difficultTextArray addObject:showTextString];//将展示的诗词添加到数组中
     }
+    
+    //可变的内容
+    self.easyLeftArray = [NSMutableArray arrayWithArray:self.easyTextArray];
+    self.generalLeftArray = [NSMutableArray arrayWithArray:self.generalTextArray];
+    self.difficultLeftArray = [NSMutableArray arrayWithArray:self.difficultTextArray];
+    
     
     [self updateOptionArray];
     
     [self loadCustomView];
     
 }
-//把option更新一下
+//把option更新一下，添加3个对应字数的选项
 - (void)updateOptionArray
 {
-   
     [self dealOptionArrayWithArray:self.optionEasyArray];
     [self dealOptionArrayWithArray:self.optionGeneralArray];
     [self dealOptionArrayWithArray:self.optionDifficultArray];
@@ -436,6 +460,7 @@ typedef NS_ENUM(NSInteger , PoetryClass) {
         [self.otherCharArray removeObject:content];
     }
 }
+
 //去除诗句中的符号
 - (NSString*)loadNoSignContentWithOrigin:(NSString*)origin
 {
@@ -450,6 +475,7 @@ typedef NS_ENUM(NSInteger , PoetryClass) {
     return @"";
 }
 
+#pragma mark 根据类型，添加随机ID到对应的数组中
 - (void)updateDataInfoWithBaseID:(NSString*)baseID withCount:(NSString*)count withType:(PoetryClass)type
 {
     
@@ -472,7 +498,6 @@ typedef NS_ENUM(NSInteger , PoetryClass) {
             [self.difficultArray addObject:string];
         }
         [self.tmpArray removeObjectAtIndex:index];
-        
     }
     
 }
@@ -481,73 +506,116 @@ typedef NS_ENUM(NSInteger , PoetryClass) {
 
 - (void)loadCustomView
 {
+    //时间进度
     self.progressView.backgroundColor = ViewBackgroundColor;
+    //从0开始动画
+    [self.progressView restartCircle];
     
-//    self.questionLabel.text = [self.easyModelArray firstObject];
+    self.percentView.progress = 0.0;
+    
+    //完成后 更新可选项，动画重新开始
+    [self.progressView finishWithBlock:^{
+        //动画完成后还没选，则错误项+1
+        self.countForWrong += 1;
+        //更新展示内容
+        [self updateLabelShow];
+        //重新开始
+        [self.progressView restartCircle];
+    }];
 
+    
     [self updateLabelShow];
     [self.noRightButton setTitle:@"无正确项" forState:UIControlStateNormal];
     [self.unknownButton setTitle:@"暂不认识" forState:UIControlStateNormal];
     
-    [self addTimer];
 }
+
+
+#pragma mark - 更新展示的内容
 
 - (void)updateLabelShow
 {
-    NSInteger index = self.indexForQuestion*2;
-    self.indexForQuestion += 1;
-
-    NSInteger simpleCount = self.easyModelArray.count;
-    NSInteger generalCount = self.generalModelArray.count;
-    NSInteger difficultCount = self.difficultModelArray.count;
-    NSInteger random = arc4random()%2;
-
+    //随机值
+    NSInteger random;
+    //选的内容
     NSArray *optionArr;
-    if (index+random < simpleCount) {
-        NSString *question = [self.easyModelArray objectAtIndex:index+random];
+    //如果简单级别的数量没达标，则从简单的内容中获取
+    if (self.countForEasy > 0 && self.easyLeftArray.count > 0) {
+        //随机拿一个Index
+        random = arc4random()%(self.easyLeftArray.count);
+        //获取随机的内容
+        NSString *question = [self.easyLeftArray objectAtIndex:random];
         if (question.length == 0) {
             //如果题目内容是空的，则跳过
+            [self.easyLeftArray removeObjectAtIndex:random];
             [self updateLabelShow];
             return;
         }
+        //设置对应的值
         self.questionLabel.text = question;
+        //需求量减1
+        self.countForEasy -= 1;
+        //找到题目所对应的答案index
+        NSInteger originIndex = [self.easyTextArray indexOfObject:question];
+        //得到可选项
+        optionArr = [self.optionEasyArray objectAtIndex:originIndex];
+    }else if (self.countForGeneral > 0 && self.generalLeftArray.count > 0){
+        //随机拿一个Index
+        random = arc4random()%(self.generalLeftArray.count);
+        //获取随机的内容
+        NSString *question = [self.generalLeftArray objectAtIndex:random];
+        if (question.length == 0) {
+            //如果题目内容是空的，则跳过
+            [self.generalLeftArray removeObjectAtIndex:random];
+            [self updateLabelShow];
+            return;
+        }
+        //设置对应的值
+        self.questionLabel.text = question;
+        //需求量减1
+        self.countForGeneral -= 1;
+        //找到题目所对应的答案index
+        NSInteger originIndex = [self.generalTextArray indexOfObject:question];
+        //得到可选项
+        optionArr = [self.optionGeneralArray objectAtIndex:originIndex];
 
-        optionArr = [self.optionEasyArray objectAtIndex:index+random];
-       
-        
-    }else if (index+random-simpleCount < generalCount){
-        NSString *question = [self.generalModelArray objectAtIndex:(index+random-simpleCount)];
+    }else if (self.countForDifficult > 0 && self.difficultLeftArray.count > 0){
+        //随机拿一个Index
+        random = arc4random()%(self.difficultLeftArray.count);
+        //获取随机的内容
+        NSString *question = [self.difficultLeftArray objectAtIndex:random];
+        [self.difficultLeftArray removeObjectAtIndex:random];
+
         if (question.length == 0) {
             //如果题目内容是空的，则跳过
             [self updateLabelShow];
             return;
         }
+        //设置对应的值
         self.questionLabel.text = question;
-        optionArr = [self.optionGeneralArray objectAtIndex:(index+random-simpleCount)];
+        //需求量减1
+        self.countForDifficult -= 1;
+        //找到题目所对应的答案index
+        NSInteger originIndex = [self.difficultTextArray indexOfObject:question];
+        //得到可选项
+        optionArr = [self.optionDifficultArray objectAtIndex:originIndex];
         
-    }else if (index+random-simpleCount-generalCount < difficultCount){
-        NSString *question = [self.difficultModelArray objectAtIndex:(index+random-simpleCount-generalCount)];
-        if (question.length == 0) {
-            //如果题目内容是空的，则跳过
-            [self updateLabelShow];
-            return;
-        }
-        self.questionLabel.text = question;
-        optionArr = [self.optionDifficultArray objectAtIndex:(index+random-simpleCount-generalCount)];
     }else{
-        [self.timer invalidate];
-        self.questionLabel.text = @"";
+
+        WLScoreController *vc = [[WLScoreController alloc]init];
+        [self.navigationController pushViewController:vc animated:YES];
+        
+        NSLog(@"结束");
     }
     
-    
+    CGFloat percent = (CGFloat)(self.countForRight+self.countForWrong)/(CGFloat)self.countForAll;
+    self.percentView.progress = percent;
     [self mixedUpArray:optionArr];
-
-
+    
     
     [self updateQuestionLabelLineSpace];
-
+    
 }
-
 //把答案混淆一下顺序
 - (void)mixedUpArray:(NSArray*)array
 {
@@ -589,7 +657,7 @@ typedef NS_ENUM(NSInteger , PoetryClass) {
         }
     }
     
-    [self.answerDic setObject:[NSString stringWithFormat:@"%ld",rightBtnIndex] forKey:[NSString stringWithFormat:@"%ld",self.showIndex]];
+    self.rightIndex = rightBtnIndex;
     
 }
 
@@ -601,56 +669,59 @@ typedef NS_ENUM(NSInteger , PoetryClass) {
     [style setAlignment:NSTextAlignmentCenter];
     [attString addAttribute:NSParagraphStyleAttributeName value:style range:NSMakeRange(0, self.questionLabel.text.length)];
     self.questionLabel.attributedText = attString;
-    [self.questionLabel sizeToFit];
-}
 
-- (void)addTimer
-{
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(timerAction:) userInfo:nil repeats:YES];
-    [[NSRunLoop currentRunLoop]addTimer:self.timer forMode:NSRunLoopCommonModes];
-    [self.timer fire];
 }
 
 
-- (void)timerAction:(NSTimer*)timer
+
+- (void)userChooseItem
 {
-    if (self.progressView.progress <= 1) {
-        self.progressView.progress += 0.04;
-        if (self.progressView.progress == 1) {
-            self.showIndex += 1;
-        }
+    [self.progressView restartCircle];
+    
+    
+    self.oneButton.backgroundColor = [UIColor whiteColor];
+    self.twoButton.backgroundColor = [UIColor whiteColor];
+    self.threeButton.backgroundColor = [UIColor whiteColor];
+    self.unknownButton.backgroundColor = [UIColor whiteColor];
+    self.noRightButton.backgroundColor = [UIColor whiteColor];
+    
+    [self updateLabelShow];
+}
+
+- (void)touchAnswerWithIndex:(NSInteger)selIndex
+{
+    if (selIndex == self.rightIndex) {
+        NSLog(@"正确");
+        UIView *view = [self.view viewWithTag:(1000+selIndex)];
+        view.backgroundColor = RGBCOLOR(116, 204, 53, 1.0);
+        self.countForRight += 1;
     }else{
-        self.progressView.progress = 0;
-        [self updateLabelShow];
+        NSLog(@"错误");
+        UIView *view = [self.view viewWithTag:(1000+selIndex)];
+        view.backgroundColor = RGBCOLOR(220, 70, 70, 1.0);
+        self.countForWrong += 1;
     }
+    
+    
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.35 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self userChooseItem];
+    });
 }
-
 - (void)oneButtonAction:(UIButton*)sender
 {
     NSLog(@"第1选项");
     NSInteger index = sender.tag-1000;
-    NSInteger correctIndex = [[self.answerDic objectForKey:[NSString stringWithFormat:@"%ld",self.showIndex]]integerValue];
-    if (index == correctIndex) {
-        NSLog(@"正确");
-    }else{
-        NSLog(@"错误");
-    }
-    
-    self.showIndex += 1;
+    [self touchAnswerWithIndex:index];
 
 }
 - (void)twoButtonAction:(UIButton*)sender
 {
     NSLog(@"第2选项");
     NSInteger index = sender.tag-1000;
-    NSInteger correctIndex = [[self.answerDic objectForKey:[NSString stringWithFormat:@"%ld",self.showIndex]]integerValue];
-    if (index == correctIndex) {
-        NSLog(@"正确");
-    }else{
-        NSLog(@"错误");
-    }
+
     
-    self.showIndex += 1;
+    [self touchAnswerWithIndex:index];
 
 
 }
@@ -658,39 +729,51 @@ typedef NS_ENUM(NSInteger , PoetryClass) {
 {
     NSLog(@"第3选项");
     NSInteger index = sender.tag-1000;
-    NSInteger correctIndex = [[self.answerDic objectForKey:[NSString stringWithFormat:@"%ld",self.showIndex]]integerValue];
-    if (index == correctIndex) {
-        NSLog(@"正确");
-    }else{
-        NSLog(@"错误");
-    }
-    
-    self.showIndex += 1;
+
+    [self touchAnswerWithIndex:index];
+
 
 }
 - (void)noRightButtonAction:(UIButton*)sender
 {
     NSLog(@"无正确选项");
     NSInteger index = sender.tag-1000;
-    NSInteger correctIndex = [[self.answerDic objectForKey:[NSString stringWithFormat:@"%ld",self.showIndex]]integerValue];
-    if (index == correctIndex) {
-        NSLog(@"正确");
-    }else{
-        NSLog(@"错误");
-    }
-    self.showIndex += 1;
 
+    [self touchAnswerWithIndex:index];
 
 }
 - (void)unknowButtonAction:(UIButton*)sender
 {
     NSLog(@"不知道选项");
-    self.showIndex += 1;
+    
+    self.countForWrong += 1;
 
+    [self userChooseItem];
+    
 }
 
 #pragma mark - 属性
-
+- (UIView *)percentView
+{
+    if (!_percentView) {
+        _percentView = [[WLPercentView alloc]init];
+        _percentView.frameWidth = PhoneScreen_WIDTH-40;
+        _percentView.frameHeight = 10;
+        _percentView.progress = 0;
+        [_percentView loadCustomLayer];
+        [self.view addSubview:_percentView];
+        //元素的布局
+        [_percentView mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.leading.equalTo(self.view.mas_leading).offset(20);
+            make.top.equalTo(self.naviView.mas_bottom).offset(10);
+            make.trailing.equalTo(self.view.mas_trailing).offset(-20);
+            make.height.mas_equalTo(10);
+            
+        }];
+    }
+    return _percentView;
+}
 - (WQLProgressView *)progressView
 {
     if (!_progressView) {
@@ -706,7 +789,7 @@ typedef NS_ENUM(NSInteger , PoetryClass) {
         [_progressView mas_makeConstraints:^(MASConstraintMaker *make) {
             
             make.leading.equalTo(self.view.mas_leading).offset((PhoneScreen_WIDTH-self.progressView.frameWidth)/2);
-            make.top.equalTo(self.naviView.mas_bottom).offset(20);
+            make.top.equalTo(self.naviView.mas_bottom).offset(40);
             make.width.mas_equalTo(self.progressView.frameWidth);
             make.height.mas_equalTo(self.progressView.frameHeight);
             
@@ -748,7 +831,6 @@ typedef NS_ENUM(NSInteger , PoetryClass) {
         _oneButton.tag = 1000;
         _oneButton.backgroundColor = [UIColor whiteColor];
         [_oneButton setTitleColor:RGBCOLOR(50, 50, 50, 1.0) forState:UIControlStateNormal];
-        
         [_oneButton addTarget:self action:@selector(oneButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:_oneButton];
         //元素的布局
