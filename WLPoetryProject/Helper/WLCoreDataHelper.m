@@ -728,7 +728,6 @@
 
     }
     __block  NSError *error = nil;
-    [self.privateContext save:&error];
 
     //子线程context执行并等待
     [self.privateContext performBlockAndWait:^{
@@ -812,6 +811,7 @@
 - (NSArray*)transStringToArray:(NSString*)originString
 {
     NSMutableArray *array = [NSMutableArray arrayWithArray:[originString componentsSeparatedByString:@","]];
+    NSLog(@"从数据库拿到的数据：%@",originString);
     //因为一个元素时为"1234,"分割后多出一个元素，即最后一个元素是多余的，移除
     if (array.count > 0) {
         [array removeLastObject];
@@ -824,6 +824,7 @@
     if (![originArray isKindOfClass:[NSArray class]] || originArray.count == 0) {
         return @"";
     }
+    NSLog(@"需要存储的数据：%@",originArray);
     NSMutableString *poetryListString = [NSMutableString string];
     for (NSString *poetrIDString in originArray) {
         [poetryListString appendFormat:@"%@,",poetrIDString];

@@ -7,7 +7,14 @@
 //
 
 #import "BaseViewController.h"
+typedef void(^FinishTestBlock) (NSDictionary *dataDic);
 
 @interface WLEvaluateController : BaseViewController
+
+/**
+ *  结束时的block
+ **/
+@property (nonatomic,copy) FinishTestBlock finishBlock;
+
 
 @end

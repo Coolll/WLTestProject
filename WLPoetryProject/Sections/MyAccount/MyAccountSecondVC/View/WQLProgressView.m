@@ -102,7 +102,7 @@
 {
     CABasicAnimation *strokeAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
     strokeAnimation.fromValue = @(0);
-    strokeAnimation.duration = 5.f;
+    strokeAnimation.duration = 10.f;
     strokeAnimation.delegate = self;
     strokeAnimation.toValue = @(1);
     strokeAnimation.autoreverses = NO;

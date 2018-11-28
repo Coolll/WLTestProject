@@ -67,11 +67,16 @@
 /**
  *  用户信息
  **/
-@property (nonatomic,strong) UserInfoModel *userModel;
+//@property (nonatomic,strong) UserInfoModel *userModel;
 /**
  *  开始测评
  **/
 @property (nonatomic,strong) UIButton *startBtn;
+/**
+ *  原始的词汇量数据
+ **/
+@property (nonatomic,strong) NSMutableArray *storageArray;
+
 
 
 
@@ -95,8 +100,7 @@
     self.titleArray = [NSArray arrayWithObjects:@"童生",@"秀才",@"举人",@"贡士",@"进士",@"探花",@"榜眼",@"状元", nil];
     self.colorArray = [NSArray arrayWithObjects:RGBCOLOR(33, 33, 33, 1.0),RGBCOLOR(121, 0, 233, 1.0),RGBCOLOR(17, 30, 211, 1.0),RGBCOLOR(16, 89, 146, 1.0),RGBCOLOR(103, 251, 12, 1.0),RGBCOLOR(244, 233, 15, 1.0),RGBCOLOR(242, 136, 18, 1.0),RGBCOLOR(251, 0, 5, 1.0), nil];
     
-    self.userModel = [[WLCoreDataHelper shareHelper] fetchCurrentUserModel];
-    
+//    self.userModel = [[WLCoreDataHelper shareHelper] fetchCurrentUserModel];
     
     
 }
@@ -107,16 +111,25 @@
 {
     [self loadCustomData];
 
+    BmobUser *user = [BmobUser currentUser];
+    
+    NSInteger index = [[user objectForKey:@"userPoetryClass"] integerValue];
+    NSString *storage = [NSString stringWithFormat:@"%@",[user objectForKey:@"userPoetryStorage"]];
+    
     self.mainScrollView.backgroundColor = [UIColor whiteColor];
     [self configureHeadImage];
     self.nameLabel.text = self.userName;
     //获取用户的等级
-    NSInteger index = [self.userModel.userPoetryClass integerValue];
     self.classLabel.text = [NSString stringWithFormat:@"Lv%ld %@",index+1,[self.titleArray objectAtIndex:index]];
     self.classLabel.textColor = [self.colorArray objectAtIndex:index];
-    self.numberLabel.text = [NSString stringWithFormat:@"诗词量：%@",self.userModel.userPoetryStorage];
-    self.prizeView.backgroundColor = [UIColor whiteColor];
+    self.numberLabel.text = [NSString stringWithFormat:@"诗词量：%@",storage];
+
+    if (index < self.imageArray.count) {
+        self.prizeView.image = [UIImage imageNamed:[self.imageArray objectAtIndex:index]];
+    }
     
+    self.storageArray = [NSMutableArray arrayWithArray:[user objectForKey:@"poetryStorageList"]];
+    self.chartView.dataArray = _storageArray;
     [self.chartView configureView];
     
     self.startBtn.backgroundColor = [UIColor lightGrayColor];
@@ -128,32 +141,40 @@
     if (self.headImageURL.length > 0) {
         [self.headImageView sd_setImageWithURL:[NSURL URLWithString:self.headImageURL] placeholderImage:[UIImage imageNamed:@"defaultHeader"]];
     }else{
-        
+
         self.headImageView.image = [UIImage imageNamed:@"defaultHeader"];
     }
 }
 
 - (void)startBtnAction:(UIButton*)sender
 {
-//    BmobUser *user = [BmobUser currentUser];
-//
-//    NSArray *array = [NSArray arrayWithObject:@"12345"];
-//
-//    [user addObjectsFromArray:[array copy] forKey:@"poetryStorageList"];
-//
-//    [user updateInBackgroundWithResultBlock:^(BOOL isSuccessful, NSError *error) {
-//        NSLog(@"error %@",[error description]);
-//
-//    }];
-//
-//    [[WLCoreDataHelper shareHelper] updateDataWithTable:@"UserInfo" withKey:@"userID" withKeyValueEqualTo:kUserID withNewValue:@[@"12345",@"12345"] forNewKey:@"poetryStorageList" withResult:^(BOOL isSuccessful, NSError *error) {
-//        NSLog(@"isSuccss:%@",isSuccessful?@"YES":@"NO");
-//    }];
     
     WLEvaluateController *vc = [[WLEvaluateController alloc]init];
+    vc.finishBlock = ^(NSDictionary *dataDic) {
+        [self finishTestWithArray:dataDic];
+    };
     [self.navigationController pushViewController:vc animated:YES];
     
 }
+- (void)finishTestWithArray:(NSDictionary*)dataDic
+{
+    NSString *storage = [dataDic objectForKey:@"userPoetryStorage"];
+    NSString *classString = [dataDic objectForKey:@"userPoetryClass"];
+    NSInteger index = [classString integerValue];
+    [self.storageArray addObject:storage];
+    self.chartView.dataArray = self.storageArray;
+    [self.chartView reloadChartView];
+    
+    //更新用户信息
+    self.classLabel.text = [NSString stringWithFormat:@"Lv%ld %@",index+1,[self.titleArray objectAtIndex:index]];
+    self.classLabel.textColor = [self.colorArray objectAtIndex:index];
+    self.numberLabel.text = [NSString stringWithFormat:@"诗词量：%@",storage];
+    if (index < self.imageArray.count) {
+        self.prizeView.image = [UIImage imageNamed:[self.imageArray objectAtIndex:index]];
+    }
+}
+
+#pragma mark - 属性
 
 - (UIScrollView*)mainScrollView
 {
@@ -274,14 +295,11 @@
         
         
         
-        NSInteger index = [self.userModel.userPoetryClass integerValue];
 
         
 //        for (NSInteger i = index; i >= 0 ; i--) {
 //            UIImageView *image = [[UIImageView alloc]init];
-            if (index < self.imageArray.count) {
-                _prizeView.image = [UIImage imageNamed:[self.imageArray objectAtIndex:index]];
-            }
+        
 //            [_prizeView addSubview:image];
 //
 //            //元素的布局
@@ -307,10 +325,10 @@
         _chartView = [[WLChartView alloc]init];
         _chartView.viewW = PhoneScreen_WIDTH;
         _chartView.viewH = 300*rate;
-        _chartView.dataArray = @[@"1243",@"4354",@"2234",@"767",@"434",@"5676",@"2454"];
+//        _chartView.dataArray = @[@"1243",@"4354",@"2234",@"767",@"434",@"5676",@"2454"];
 //        _chartView.titleArray = @[@"周一",@"周二",@"周三",@"周四",@"周五",@"周六",@"周日"];
-        _chartView.widthRate = 0.8;
-        //        _chartView.widthForChart = 40;
+//        _chartView.widthRate = 0.8;
+        _chartView.widthForChart = 40;
         _chartView.animateTime = 0.35;
         _chartView.leftSpace = 10;
         [self.mainScrollView addSubview:_chartView];
@@ -335,8 +353,8 @@
         //元素的布局
         [_startBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             
-            make.top.equalTo(_chartView.mas_bottom).offset(20);
-            make.centerX.equalTo(self.view.mas_centerX);
+            make.top.equalTo(self.chartView.mas_bottom).offset(20);
+            make.leading.equalTo(self.mainScrollView.mas_leading).offset((PhoneScreen_WIDTH-120)/2);
             make.width.mas_equalTo(120);
             make.height.mas_equalTo(40);
             

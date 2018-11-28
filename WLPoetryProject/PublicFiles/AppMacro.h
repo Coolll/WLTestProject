@@ -54,6 +54,9 @@
 
 #define kNotAlertUserUpdateVersion @"WLNotAlertUserUpdateVersion"
 
+//屏幕的宽高比
+#define kWRate PhoneScreen_WIDTH/414.f
+#define kHRate PhoneScreen_HEIGHT/736.f
 
 #ifdef DEBUG
 #define NSLog(FORMAT, ...) {\

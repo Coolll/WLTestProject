@@ -2,7 +2,7 @@
 //  UserInfo+CoreDataProperties.h
 //  WLPoetryProject
 //
-//  Created by 变啦 on 2018/11/15.
+//  Created by 变啦 on 2018/11/27.
 //  Copyright © 2018年 龙培. All rights reserved.
 //
 //
@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) BOOL isLogin;
 @property (nullable, nonatomic, copy) NSString *likePoetryList;
 @property (nullable, nonatomic, copy) NSString *phoneNumber;
+@property (nullable, nonatomic, copy) NSString *poetryStorageList;
 @property (nullable, nonatomic, copy) NSString *userHeadImageURL;
 @property (nullable, nonatomic, copy) NSString *userID;
 @property (nullable, nonatomic, copy) NSString *userName;
@@ -26,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, copy) NSString *userPoetryClass;
 @property (nullable, nonatomic, copy) NSString *userPoetryStorage;
 @property (nullable, nonatomic, copy) NSString *userSessionToken;
-@property (nullable, nonatomic, copy) NSString *poetryStorageList;
+@property (nullable, nonatomic, copy) NSString *imageURL;
 
 @end
 

@@ -2,7 +2,7 @@
 //  UserInfo+CoreDataProperties.m
 //  WLPoetryProject
 //
-//  Created by 变啦 on 2018/11/15.
+//  Created by 变啦 on 2018/11/27.
 //  Copyright © 2018年 龙培. All rights reserved.
 //
 //
@@ -18,6 +18,7 @@
 @dynamic isLogin;
 @dynamic likePoetryList;
 @dynamic phoneNumber;
+@dynamic poetryStorageList;
 @dynamic userHeadImageURL;
 @dynamic userID;
 @dynamic userName;
@@ -25,6 +26,6 @@
 @dynamic userPoetryClass;
 @dynamic userPoetryStorage;
 @dynamic userSessionToken;
-@dynamic poetryStorageList;
+@dynamic imageURL;
 
 @end

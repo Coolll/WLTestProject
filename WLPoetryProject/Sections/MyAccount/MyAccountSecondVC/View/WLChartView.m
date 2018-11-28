@@ -71,7 +71,12 @@
         chartW = self.widthForChart;
         //微调一下单个元素的宽度 因为有3个柱子时，只有2个空白间隙
         //单元宽度（一个柱子+一个空白的宽度） = [（总宽度-框框外部的30-左右间距）-柱子总共的宽度 ]/空白的个数  +  柱子的宽度
-        itemW = ((self.viewW-30-firstLeft*2)-(chartCount*chartW))/(chartCount-1) + chartW;
+        if (chartCount > 1) {
+            itemW = ((self.viewW-30-firstLeft*2)-(chartCount*chartW))/(chartCount-1) + chartW;
+        }else{
+            //如果只有一个元素，则此时应该调整一下，否则除数无穷大了
+            itemW = self.viewW-30-firstLeft*2;
+        }
         
     }else{
         //如果用户没有设置柱子的的宽度，我们根据比例来算
@@ -125,7 +130,6 @@
         WLShapeLayer *bgLayer = [WLShapeLayer layer];
         bgLayer.fillColor = [UIColor clearColor].CGColor;
         [self.mainView.layer addSublayer:bgLayer];
-        [self.bgLayerArray addObject:bgLayer];
         
         UIBezierPath *bgPath = [UIBezierPath bezierPath];
         [bgPath moveToPoint:CGPointMake(xValue, self.viewH-labelH)];
@@ -134,6 +138,8 @@
         [bgPath addLineToPoint:CGPointMake(xValue+itemW, self.viewH-labelH)];
         [bgPath addLineToPoint:CGPointMake(xValue, self.viewH-labelH)];
         bgLayer.path = bgPath.CGPath;
+        [self.bgLayerArray addObject:bgLayer];
+
         
         
         if (sameCount) {

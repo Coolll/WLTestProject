@@ -282,8 +282,12 @@
 		36521BA521904A8B00425DCC /* reciteIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 36521BA421904A8A00425DCC /* reciteIcon.png */; };
 		36521BA821904BED00425DCC /* RecitePoetryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36521BA721904BED00425DCC /* RecitePoetryController.m */; };
 		36521BAA21904ECF00425DCC /* optionIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 36521BA921904ECE00425DCC /* optionIcon.png */; };
+		3678970421ACDE2E004062D5 /* scoreHeader.png in Resources */ = {isa = PBXBuildFile; fileRef = 3678970221ACDE2E004062D5 /* scoreHeader.png */; };
+		3678970521ACDE2E004062D5 /* scoreCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 3678970321ACDE2E004062D5 /* scoreCircle.png */; };
+		3678970721AD172F004062D5 /* scoreBg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3678970621AD172F004062D5 /* scoreBg.jpg */; };
+		3678970B21AD21C9004062D5 /* scoreCir.png in Resources */ = {isa = PBXBuildFile; fileRef = 3678970A21AD21C9004062D5 /* scoreCir.png */; };
+		3678971221AD3AA8004062D5 /* UserInfo+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 3678971021AD3AA8004062D5 /* UserInfo+CoreDataProperties.m */; };
 		367ED9952191691C00E979EE /* triangle.png in Resources */ = {isa = PBXBuildFile; fileRef = 367ED9942191691C00E979EE /* triangle.png */; };
-		369C9E7D219D283500022FEA /* UserInfo+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 369C9E7B219D283500022FEA /* UserInfo+CoreDataProperties.m */; };
 		36B3671D21A7E3CD0071C14A /* WLScoreController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B3671C21A7E3CD0071C14A /* WLScoreController.m */; };
 		36B3672021A807B80071C14A /* WLPercentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B3671F21A807B80071C14A /* WLPercentView.m */; };
 		36B516F3212EC85500FD0FA8 /* WLNewTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B516F2212EC85500FD0FA8 /* WLNewTextView.m */; };
@@ -753,11 +757,16 @@
 		36521BA621904BED00425DCC /* RecitePoetryController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecitePoetryController.h; sourceTree = "<group>"; };
 		36521BA721904BED00425DCC /* RecitePoetryController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecitePoetryController.m; sourceTree = "<group>"; };
 		36521BA921904ECE00425DCC /* optionIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = optionIcon.png; sourceTree = "<group>"; };
+		3678970221ACDE2E004062D5 /* scoreHeader.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scoreHeader.png; sourceTree = "<group>"; };
+		3678970321ACDE2E004062D5 /* scoreCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scoreCircle.png; sourceTree = "<group>"; };
+		3678970621AD172F004062D5 /* scoreBg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = scoreBg.jpg; sourceTree = "<group>"; };
+		3678970A21AD21C9004062D5 /* scoreCir.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scoreCir.png; sourceTree = "<group>"; };
+		3678970C21AD3A5E004062D5 /* WLPoetryProject 1.3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WLPoetryProject 1.3.xcdatamodel"; sourceTree = "<group>"; };
+		3678970D21AD3AA8004062D5 /* UserInfo+CoreDataProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UserInfo+CoreDataProperties.h"; sourceTree = "<group>"; };
+		3678970E21AD3AA8004062D5 /* UserInfo+CoreDataClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UserInfo+CoreDataClass.h"; sourceTree = "<group>"; };
+		3678970F21AD3AA8004062D5 /* UserInfo+CoreDataClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UserInfo+CoreDataClass.m"; sourceTree = "<group>"; };
+		3678971021AD3AA8004062D5 /* UserInfo+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UserInfo+CoreDataProperties.m"; sourceTree = "<group>"; };
 		367ED9942191691C00E979EE /* triangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = triangle.png; sourceTree = "<group>"; };
-		369C9E78219D283500022FEA /* UserInfo+CoreDataProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UserInfo+CoreDataProperties.h"; sourceTree = "<group>"; };
-		369C9E79219D283500022FEA /* UserInfo+CoreDataClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UserInfo+CoreDataClass.h"; sourceTree = "<group>"; };
-		369C9E7A219D283500022FEA /* UserInfo+CoreDataClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UserInfo+CoreDataClass.m"; sourceTree = "<group>"; };
-		369C9E7B219D283500022FEA /* UserInfo+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UserInfo+CoreDataProperties.m"; sourceTree = "<group>"; };
 		369C9E7E219D62D600022FEA /* WLPoetryProject 1. 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WLPoetryProject 1. 2.xcdatamodel"; sourceTree = "<group>"; };
 		36B3671B21A7E3CD0071C14A /* WLScoreController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLScoreController.h; sourceTree = "<group>"; };
 		36B3671C21A7E3CD0071C14A /* WLScoreController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLScoreController.m; sourceTree = "<group>"; };
@@ -1430,10 +1439,10 @@
 		07A9229C2086293D00BE5929 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
-				369C9E78219D283500022FEA /* UserInfo+CoreDataProperties.h */,
-				369C9E79219D283500022FEA /* UserInfo+CoreDataClass.h */,
-				369C9E7A219D283500022FEA /* UserInfo+CoreDataClass.m */,
-				369C9E7B219D283500022FEA /* UserInfo+CoreDataProperties.m */,
+				3678970D21AD3AA8004062D5 /* UserInfo+CoreDataProperties.h */,
+				3678970E21AD3AA8004062D5 /* UserInfo+CoreDataClass.h */,
+				3678970F21AD3AA8004062D5 /* UserInfo+CoreDataClass.m */,
+				3678971021AD3AA8004062D5 /* UserInfo+CoreDataProperties.m */,
 				3607C88E212FE32700298C6C /* UserCreation+CoreDataProperties.h */,
 				3607C891212FE32700298C6C /* UserCreation+CoreDataProperties.m */,
 				3607C88F212FE32700298C6C /* UserCreation+CoreDataClass.h */,
@@ -1806,6 +1815,10 @@
 		360E6721219442ED00AD56BF /* Number */ = {
 			isa = PBXGroup;
 			children = (
+				3678970A21AD21C9004062D5 /* scoreCir.png */,
+				3678970621AD172F004062D5 /* scoreBg.jpg */,
+				3678970321ACDE2E004062D5 /* scoreCircle.png */,
+				3678970221ACDE2E004062D5 /* scoreHeader.png */,
 				360E6722219442ED00AD56BF /* class_0.png */,
 				360E6723219442ED00AD56BF /* class_1.png */,
 				360E6724219442ED00AD56BF /* class_3.png */,
@@ -1960,6 +1973,7 @@
 				000110A920A44BD2001B2B55 /* gradePoetry_9_one.json in Resources */,
 				000110A820A44BD2001B2B55 /* gradePoetry_7_two.json in Resources */,
 				0785076A20B2EFF20030CD98 /* songPoetry_six.json in Resources */,
+				3678970B21AD21C9004062D5 /* scoreCir.png in Resources */,
 				007C7E2A20F5D57B00F360D6 /* gradePoetry_12.json in Resources */,
 				00FD14C320A95A2D0018D649 /* tangPoetry_five.json in Resources */,
 				07DCF5B320E26D8B00F0D053 /* WeiboSDK.bundle in Resources */,
@@ -2012,8 +2026,10 @@
 				071571FA21038354005C53C4 /* closeTip.png in Resources */,
 				000110AA20A44BD2001B2B55 /* gradePoetry_8_one.json in Resources */,
 				0785076520B2EFF20030CD98 /* songPoetry_three.json in Resources */,
+				3678970521ACDE2E004062D5 /* scoreCircle.png in Resources */,
 				007C7E2420F59EC800F360D6 /* configureGradeJuinor.json in Resources */,
 				07DCF5AC20E26D8A00F0D053 /* ShareSDKUI.bundle in Resources */,
+				3678970421ACDE2E004062D5 /* scoreHeader.png in Resources */,
 				07F3E31720D2C0FC00E7BAF7 /* main_more.png in Resources */,
 				0715FF0A20C56D3D0096C60E /* search_black.png in Resources */,
 				07F73C03208ACD9A00F7D8B3 /* normal_circle@3x.png in Resources */,
@@ -2042,6 +2058,7 @@
 				07E7C31B20CC1DB7007CA827 /* configureTang.json in Resources */,
 				36521BA521904A8B00425DCC /* reciteIcon.png in Resources */,
 				0785076420B2EFF20030CD98 /* songPoetry_seven.json in Resources */,
+				3678970721AD172F004062D5 /* scoreBg.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2096,7 +2113,6 @@
 				07567B41207A02EC0018B9E7 /* WLPublicTool.m in Sources */,
 				07567B80207A02EC0018B9E7 /* YLAccountViewController.m in Sources */,
 				07567B1D207A02EB0018B9E7 /* MJRefreshNormalHeader.m in Sources */,
-				369C9E7D219D283500022FEA /* UserInfo+CoreDataProperties.m in Sources */,
 				0765C6B1207CE47E0085EB3A /* MASLayoutConstraint.m in Sources */,
 				0765C704207CE6E20085EB3A /* SDWebImageDownloaderOperation.m in Sources */,
 				079BC505209D42BB00E0DF85 /* WLPoetryContentCell.m in Sources */,
@@ -2169,6 +2185,7 @@
 				0795690B20726D0B0097C26D /* main.m in Sources */,
 				0765C70F207CE6E20085EB3A /* UIImage+MultiFormat.m in Sources */,
 				0765C6F8207CE6E20085EB3A /* MKAnnotationView+WebCache.m in Sources */,
+				3678971221AD3AA8004062D5 /* UserInfo+CoreDataProperties.m in Sources */,
 				07A9229B208628DB00BE5929 /* WLCoreDataHelper.m in Sources */,
 				3616E7952192971D0014843F /* WLRecitePoetryCell.m in Sources */,
 				07567B19207A02EB0018B9E7 /* MJRefreshBackGifFooter.m in Sources */,
@@ -2537,12 +2554,13 @@
 		072170292087843A002A1628 /* WLPoetryProject.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				3678970C21AD3A5E004062D5 /* WLPoetryProject 1.3.xcdatamodel */,
 				369C9E7E219D62D600022FEA /* WLPoetryProject 1. 2.xcdatamodel */,
 				3637F2D8219C09F300D1B6E8 /* WLPoetryProject 1.1.xcdatamodel */,
 				00150E7320EF5095001BE61D /* WLPoetryProject 1.0.xcdatamodel */,
 				0721702A2087843A002A1628 /* WLPoetryProject.xcdatamodel */,
 			);
-			currentVersion = 369C9E7E219D62D600022FEA /* WLPoetryProject 1. 2.xcdatamodel */;
+			currentVersion = 3678970C21AD3A5E004062D5 /* WLPoetryProject 1.3.xcdatamodel */;
 			path = WLPoetryProject.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

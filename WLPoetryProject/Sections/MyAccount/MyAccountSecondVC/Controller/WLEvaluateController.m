@@ -119,7 +119,7 @@ typedef NS_ENUM(NSInteger , PoetryClass) {
 @property (nonatomic,strong) UIButton *unknownButton;
 
 /**
- *  展示的题目序数
+ *  当前题目的第几项是正确的
  **/
 @property (nonatomic,assign) NSInteger rightIndex;
 /**
@@ -127,9 +127,18 @@ typedef NS_ENUM(NSInteger , PoetryClass) {
  **/
 @property (nonatomic,assign) NSInteger countForAll;
 /**
- *  简单/一般/困难 题数
+ *  简单/一般/困难 题数 随着做题数而减少
  **/
 @property (nonatomic,assign) NSInteger countForEasy,countForGeneral,countForDifficult;
+/**
+ *  简单/一般/困难 题数 不改变
+ **/
+@property (nonatomic,assign) NSInteger originEasyCount,originGeneralCount,originDifficultCount;
+
+/**
+ *  简单/一般/困难 答对的题数
+ **/
+@property (nonatomic,assign) NSInteger rightCountEasy,rightCountGeneral,rightCountDifficult;
 
 
 /**
@@ -142,6 +151,10 @@ typedef NS_ENUM(NSInteger , PoetryClass) {
  **/
 @property (nonatomic,strong) WLPercentView *percentView;
 
+/**
+ *  是否可以答题，处理时间到了的临界点 在时间到了之后，还没做出选择，那么就不允许答题了
+ **/
+@property (nonatomic,assign)  BOOL canAnswer;
 
 
 @end
@@ -153,6 +166,7 @@ typedef NS_ENUM(NSInteger , PoetryClass) {
     self.titleForNavi = @"诗词测评";
     self.view.backgroundColor = ViewBackgroundColor;
     [self loadCustomData];
+    
 }
 #pragma mark - 数据处理
 
@@ -184,15 +198,22 @@ typedef NS_ENUM(NSInteger , PoetryClass) {
     
     //正确的index
     self.rightIndex = 0;
+    //当前正确的数
     self.countForRight = 0;
     self.countForWrong = 0;
     
-    self.countForAll = 30;
-//    self.countForEasy = self.countForAll*0.3;
-//    self.countForDifficult = self.countForAll*0.3;
-//    self.countForGeneral = self.countForAll-self.countForEasy-self.countForDifficult;
-    self.countForEasy = self.countForGeneral = self.countForDifficult = 2;
+    //不同难度的正确数量
+    self.rightCountEasy = 0;
+    self.rightCountGeneral = 0;
+    self.rightCountDifficult = 0;
     
+    self.countForAll = 6;
+//    self.originEasyCount = self.countForEasy = self.countForAll*0.3;
+//    self.originGeneralCount = self.countForDifficult = self.countForAll*0.3;
+//    self.originDifficultCount = self.countForGeneral = self.countForAll-self.countForEasy-self.countForDifficult;
+    self.originEasyCount = self.originGeneralCount = self.originDifficultCount = self.countForEasy = self.countForGeneral = self.countForDifficult = 2;
+    
+    self.canAnswer = YES;//默认可以答题
     self.IDInfo = @{@"1000":@"8",
                     @"2000":@"9",
                     @"3000":@"10",
@@ -515,23 +536,27 @@ typedef NS_ENUM(NSInteger , PoetryClass) {
     
     //完成后 更新可选项，动画重新开始
     [self.progressView finishWithBlock:^{
+        NSLog(@"未选 错误");
         //动画完成后还没选，则错误项+1
         self.countForWrong += 1;
+        NSLog(@"1111");
+        self.canAnswer = NO;
         //更新展示内容
         [self updateLabelShow];
         //重新开始
         [self.progressView restartCircle];
     }];
 
-    
+    NSLog(@"2222");
     [self updateLabelShow];
+
     [self.noRightButton setTitle:@"无正确项" forState:UIControlStateNormal];
     [self.unknownButton setTitle:@"暂不认识" forState:UIControlStateNormal];
     
 }
 
 
-#pragma mark - 更新展示的内容
+#pragma mark - 每次更新题目和答案
 
 - (void)updateLabelShow
 {
@@ -545,9 +570,12 @@ typedef NS_ENUM(NSInteger , PoetryClass) {
         random = arc4random()%(self.easyLeftArray.count);
         //获取随机的内容
         NSString *question = [self.easyLeftArray objectAtIndex:random];
+        //防止出现重复的题目，移除掉
+        [self.easyLeftArray removeObjectAtIndex:random];
+
         if (question.length == 0) {
             //如果题目内容是空的，则跳过
-            [self.easyLeftArray removeObjectAtIndex:random];
+            NSLog(@"3333");
             [self updateLabelShow];
             return;
         }
@@ -564,9 +592,13 @@ typedef NS_ENUM(NSInteger , PoetryClass) {
         random = arc4random()%(self.generalLeftArray.count);
         //获取随机的内容
         NSString *question = [self.generalLeftArray objectAtIndex:random];
+        //防止出现重复的题目，移除掉
+        [self.generalLeftArray removeObjectAtIndex:random];
+
         if (question.length == 0) {
             //如果题目内容是空的，则跳过
-            [self.generalLeftArray removeObjectAtIndex:random];
+            NSLog(@"4444");
+
             [self updateLabelShow];
             return;
         }
@@ -584,10 +616,12 @@ typedef NS_ENUM(NSInteger , PoetryClass) {
         random = arc4random()%(self.difficultLeftArray.count);
         //获取随机的内容
         NSString *question = [self.difficultLeftArray objectAtIndex:random];
+        //防止出现重复的题目，移除掉
         [self.difficultLeftArray removeObjectAtIndex:random];
 
         if (question.length == 0) {
             //如果题目内容是空的，则跳过
+            NSLog(@"5555");
             [self updateLabelShow];
             return;
         }
@@ -602,10 +636,7 @@ typedef NS_ENUM(NSInteger , PoetryClass) {
         
     }else{
 
-        WLScoreController *vc = [[WLScoreController alloc]init];
-        [self.navigationController pushViewController:vc animated:YES];
-        
-        NSLog(@"结束");
+        [self finishAnswer];
     }
     
     CGFloat percent = (CGFloat)(self.countForRight+self.countForWrong)/(CGFloat)self.countForAll;
@@ -614,9 +645,47 @@ typedef NS_ENUM(NSInteger , PoetryClass) {
     
     
     [self updateQuestionLabelLineSpace];
-    
+    self.canAnswer = YES;
 }
-//把答案混淆一下顺序
+
+#pragma mark 结束答题
+- (void)finishAnswer
+{
+    
+    NSLog(@"简单答对：%ld 一般答对：%ld 困难答对：%ld",self.rightCountEasy,self.rightCountGeneral,self.rightCountDifficult);
+    //简单加权为1.5 一般加权为2 困难加权为2.5
+    //获得的分数
+    CGFloat easyPoint = self.rightCountEasy*1.5;
+    CGFloat generalPoint = self.rightCountGeneral*2;
+    CGFloat difficultPoint = self.rightCountDifficult*2.5;
+    
+    //总分数
+    CGFloat easyAll = self.originEasyCount*1.5;
+    CGFloat generalAll = self.originGeneralCount*2;
+    CGFloat difficultAll = self.originDifficultCount*2.5;
+    //转为百分率
+    CGFloat hundredPercent = (easyPoint+generalPoint+difficultPoint)/(easyAll+generalAll+difficultAll);
+    
+    CGFloat realPoint = hundredPercent*100;
+    //防止四舍五入产生超出
+    if (realPoint > 100) {
+        realPoint = 100;
+    }
+    NSString *point = [NSString stringWithFormat:@"%.1f",realPoint];
+    
+    WLScoreController *vc = [[WLScoreController alloc]init];
+    vc.score = realPoint;
+    vc.block = ^(NSDictionary *dataDic) {
+        if (self.finishBlock) {
+            self.finishBlock(dataDic);
+        }
+    };
+    [self.navigationController pushViewController:vc animated:YES];
+    NSLog(@"结束分数：%@",point);
+}
+
+
+#pragma mark 把选项混淆一下
 - (void)mixedUpArray:(NSArray*)array
 {
     NSMutableArray *arr = [NSMutableArray arrayWithArray:array];
@@ -684,9 +753,13 @@ typedef NS_ENUM(NSInteger , PoetryClass) {
     self.threeButton.backgroundColor = [UIColor whiteColor];
     self.unknownButton.backgroundColor = [UIColor whiteColor];
     self.noRightButton.backgroundColor = [UIColor whiteColor];
-    
-    [self updateLabelShow];
+    NSLog(@"6666");
+    if (self.canAnswer) {
+        [self updateLabelShow];
+    }
 }
+
+#pragma mark - 点击了选项按钮
 
 - (void)touchAnswerWithIndex:(NSInteger)selIndex
 {
@@ -695,6 +768,28 @@ typedef NS_ENUM(NSInteger , PoetryClass) {
         UIView *view = [self.view viewWithTag:(1000+selIndex)];
         view.backgroundColor = RGBCOLOR(116, 204, 53, 1.0);
         self.countForRight += 1;
+        
+        if (self.countForEasy>0) {
+            //如果回答的是简单的题目
+            self.rightCountEasy += 1;
+           
+        }else if(self.countForEasy == 0 && self.countForGeneral == self.originGeneralCount){
+            //如果回答的是最后一道简单的题目
+            self.rightCountEasy += 1;
+
+        } else if (self.countForGeneral > 0){
+            //如果回答的是一般的题目
+            self.rightCountGeneral += 1;
+            
+        }else if(self.countForGeneral == 0 && self.countForDifficult == self.originDifficultCount){
+            //如果回答的是最后一道一般的题目
+            self.rightCountGeneral += 1;
+
+        }else {
+            //回答的是困难的题目
+            self.rightCountDifficult += 1;
+        }
+        
     }else{
         NSLog(@"错误");
         UIView *view = [self.view viewWithTag:(1000+selIndex)];
@@ -703,11 +798,13 @@ typedef NS_ENUM(NSInteger , PoetryClass) {
     }
     
     
-    
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.35 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self userChooseItem];
     });
 }
+
+#pragma mark - 5个按钮
+
 - (void)oneButtonAction:(UIButton*)sender
 {
     NSLog(@"第1选项");
@@ -757,18 +854,18 @@ typedef NS_ENUM(NSInteger , PoetryClass) {
 {
     if (!_percentView) {
         _percentView = [[WLPercentView alloc]init];
-        _percentView.frameWidth = PhoneScreen_WIDTH-40;
-        _percentView.frameHeight = 10;
+        _percentView.frameWidth = PhoneScreen_WIDTH;
+        _percentView.frameHeight = 4;
         _percentView.progress = 0;
         [_percentView loadCustomLayer];
         [self.view addSubview:_percentView];
         //元素的布局
         [_percentView mas_makeConstraints:^(MASConstraintMaker *make) {
             
-            make.leading.equalTo(self.view.mas_leading).offset(20);
-            make.top.equalTo(self.naviView.mas_bottom).offset(10);
-            make.trailing.equalTo(self.view.mas_trailing).offset(-20);
-            make.height.mas_equalTo(10);
+            make.leading.equalTo(self.view.mas_leading).offset(0);
+            make.top.equalTo(self.naviView.mas_bottom).offset(0);
+            make.trailing.equalTo(self.view.mas_trailing).offset(0);
+            make.height.mas_equalTo(4);
             
         }];
     }
@@ -778,9 +875,9 @@ typedef NS_ENUM(NSInteger , PoetryClass) {
 {
     if (!_progressView) {
         _progressView = [[WQLProgressView alloc]init];
-        _progressView.frameWidth = 100;
-        _progressView.frameHeight = 100;
-        _progressView.lineWidth = 10;
+        _progressView.frameWidth = 100*kHRate;
+        _progressView.frameHeight = 100*kHRate;
+        _progressView.lineWidth = 10*kHRate;
         [_progressView loadCustomCircle];
         _progressView.progress = 0;//需要先构建了layer，才能设置strokend
         [self.view addSubview:_progressView];
@@ -789,7 +886,7 @@ typedef NS_ENUM(NSInteger , PoetryClass) {
         [_progressView mas_makeConstraints:^(MASConstraintMaker *make) {
             
             make.leading.equalTo(self.view.mas_leading).offset((PhoneScreen_WIDTH-self.progressView.frameWidth)/2);
-            make.top.equalTo(self.naviView.mas_bottom).offset(40);
+            make.top.equalTo(self.naviView.mas_bottom).offset(40*kHRate);
             make.width.mas_equalTo(self.progressView.frameWidth);
             make.height.mas_equalTo(self.progressView.frameHeight);
             
@@ -803,16 +900,16 @@ typedef NS_ENUM(NSInteger , PoetryClass) {
     if (!_questionLabel) {
         _questionLabel = [[UILabel alloc]init];
         _questionLabel.numberOfLines = 0;
-        _questionLabel.font = [UIFont systemFontOfSize:16.f];
+        _questionLabel.font = [UIFont systemFontOfSize:16.f*kHRate];
         _questionLabel.textAlignment = NSTextAlignmentCenter;
         [self.view addSubview:_questionLabel];
         //元素的布局
         [_questionLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             
             make.leading.equalTo(self.view.mas_leading).offset(20);
-            make.top.equalTo(self.progressView.mas_bottom).offset(30);
+            make.top.equalTo(self.progressView.mas_bottom).offset(30*kHRate);
             make.trailing.equalTo(self.view.mas_trailing).offset(-20);
-            make.height.mas_equalTo(80);
+            make.height.mas_equalTo(80*kHRate);
         }];
     }
     return _questionLabel;
@@ -823,7 +920,7 @@ typedef NS_ENUM(NSInteger , PoetryClass) {
 {
     if (!_oneButton) {
         _oneButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _oneButton.titleLabel.font = [UIFont systemFontOfSize:16.f];
+        _oneButton.titleLabel.font = [UIFont systemFontOfSize:16.f*kHRate];
         _oneButton.titleLabel.textAlignment = NSTextAlignmentCenter;
         _oneButton.titleLabel.numberOfLines = 1;
         _oneButton.layer.cornerRadius = 4.f;
@@ -837,9 +934,9 @@ typedef NS_ENUM(NSInteger , PoetryClass) {
         [_oneButton mas_makeConstraints:^(MASConstraintMaker *make) {
             
             make.leading.equalTo(self.questionLabel.mas_leading).offset(0);
-            make.top.equalTo(self.questionLabel.mas_bottom).offset(40);
+            make.top.equalTo(self.questionLabel.mas_bottom).offset(40*kHRate);
             make.trailing.equalTo(self.questionLabel.mas_trailing).offset(0);
-            make.height.mas_equalTo(40);
+            make.height.mas_equalTo(40*kHRate);
             
         }];
     }
@@ -850,7 +947,7 @@ typedef NS_ENUM(NSInteger , PoetryClass) {
 {
     if (!_twoButton) {
         _twoButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _twoButton.titleLabel.font = [UIFont systemFontOfSize:16.f];
+        _twoButton.titleLabel.font = [UIFont systemFontOfSize:16.f*kHRate];
         _twoButton.titleLabel.textAlignment = NSTextAlignmentCenter;
         _twoButton.titleLabel.numberOfLines = 1;
         _twoButton.layer.cornerRadius = 4.f;
@@ -866,9 +963,9 @@ typedef NS_ENUM(NSInteger , PoetryClass) {
         [_twoButton mas_makeConstraints:^(MASConstraintMaker *make) {
             
             make.leading.equalTo(self.questionLabel.mas_leading).offset(0);
-            make.top.equalTo(self.oneButton.mas_bottom).offset(12);
+            make.top.equalTo(self.oneButton.mas_bottom).offset(12*kHRate);
             make.trailing.equalTo(self.questionLabel.mas_trailing).offset(0);
-            make.height.mas_equalTo(40);
+            make.height.mas_equalTo(40*kHRate);
             
         }];
     }
@@ -878,7 +975,7 @@ typedef NS_ENUM(NSInteger , PoetryClass) {
 {
     if (!_threeButton) {
         _threeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _threeButton.titleLabel.font = [UIFont systemFontOfSize:16.f];
+        _threeButton.titleLabel.font = [UIFont systemFontOfSize:16.f*kHRate];
         _threeButton.titleLabel.textAlignment = NSTextAlignmentCenter;
         _threeButton.titleLabel.numberOfLines = 1;
         _threeButton.layer.cornerRadius = 4.f;
@@ -894,9 +991,9 @@ typedef NS_ENUM(NSInteger , PoetryClass) {
         [_threeButton mas_makeConstraints:^(MASConstraintMaker *make) {
             
             make.leading.equalTo(self.questionLabel.mas_leading).offset(0);
-            make.top.equalTo(self.twoButton.mas_bottom).offset(12);
+            make.top.equalTo(self.twoButton.mas_bottom).offset(12*kHRate);
             make.trailing.equalTo(self.questionLabel.mas_trailing).offset(0);
-            make.height.mas_equalTo(40);
+            make.height.mas_equalTo(40*kHRate);
             
         }];
     }
@@ -906,7 +1003,7 @@ typedef NS_ENUM(NSInteger , PoetryClass) {
 {
     if (!_noRightButton) {
         _noRightButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _noRightButton.titleLabel.font = [UIFont systemFontOfSize:16.f];
+        _noRightButton.titleLabel.font = [UIFont systemFontOfSize:16.f*kHRate];
         _noRightButton.titleLabel.textAlignment = NSTextAlignmentCenter;
         _noRightButton.titleLabel.numberOfLines = 1;
         _noRightButton.layer.cornerRadius = 4.f;
@@ -921,9 +1018,9 @@ typedef NS_ENUM(NSInteger , PoetryClass) {
         [_noRightButton mas_makeConstraints:^(MASConstraintMaker *make) {
             
             make.leading.equalTo(self.questionLabel.mas_leading).offset(0);
-            make.top.equalTo(self.threeButton.mas_bottom).offset(12);
+            make.top.equalTo(self.threeButton.mas_bottom).offset(12*kHRate);
             make.trailing.equalTo(self.questionLabel.mas_trailing).offset(0);
-            make.height.mas_equalTo(40);
+            make.height.mas_equalTo(40*kHRate);
             
         }];
     }
@@ -934,7 +1031,7 @@ typedef NS_ENUM(NSInteger , PoetryClass) {
 {
     if (!_unknownButton) {
         _unknownButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _unknownButton.titleLabel.font = [UIFont systemFontOfSize:16.f];
+        _unknownButton.titleLabel.font = [UIFont systemFontOfSize:16.f*kHRate];
         _unknownButton.titleLabel.textAlignment = NSTextAlignmentCenter;
         _unknownButton.titleLabel.numberOfLines = 1;
         _unknownButton.layer.cornerRadius = 4.f;
@@ -949,9 +1046,9 @@ typedef NS_ENUM(NSInteger , PoetryClass) {
         [_unknownButton mas_makeConstraints:^(MASConstraintMaker *make) {
             
             make.leading.equalTo(self.questionLabel.mas_leading).offset(0);
-            make.top.equalTo(self.noRightButton.mas_bottom).offset(12);
+            make.top.equalTo(self.noRightButton.mas_bottom).offset(12*kHRate);
             make.trailing.equalTo(self.questionLabel.mas_trailing).offset(0);
-            make.height.mas_equalTo(40);
+            make.height.mas_equalTo(40*kHRate);
             
         }];
     }
