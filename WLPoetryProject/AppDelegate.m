@@ -309,7 +309,7 @@
     }
     
     //更新number为30
-    [bUser setObject:@"234" forKey:@"userPoetryStorage"];
+//    [bUser setObject:@"234" forKey:@"aweffs"];
     [bUser updateInBackgroundWithResultBlock:^(BOOL isSuccessful, NSError *error) {
         NSLog(@"error %@",[error description]);
     }];

@@ -14,6 +14,8 @@
 #import <BmobSDK/Bmob.h>
 #import "UserInfoModel.h"
 #import "WLCoreDataHelper.h"
+#import "KeyChainHelper.h"
+static NSString *keyInTheKeyChain = @"com.wangqilong.wqlPoetryProject";
 /*
  #import "Masonry.h"
  #import "UIImageView+WebCache.h"
@@ -140,6 +142,7 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
     self.fourNameArray = @[@"梦醒如初",@"夕夏余温",@"空城旧梦",@"浅唱蝶羽",@"流年之殇",@"浮生如梦",@"淡墨文竹",@"陌上烟雨",@"墨羽尘曦",@"雨和潇韵",@"半世流离",@"花开妍沫",@"半夏如烟",@"浅色夏至",@"蔷薇未开",@"踏光琉璃",@"绯色浮华",@"月色殇人",@"来日可期",@"半颗雨韵",@"紫色风铃",@"温风如酒",@"陌路人生",@"孤心木偶",@"笑迎冷风",@"凉城听暖",@"浅冬未晴",@"一顾辗转",@"余音未觉",@"听风而遇",@"南城少年",@"暮雪白头",@"云烟成雨",@"烟雨旧巷",@"清风疏影",@"折扇书生",@"北陌离歌",@"木槿何年",@"归人未归",@"月光倾城",@"清茶煨酒",@"笑靥如故",@"落雪倾城",@"青杉忆笙",@"薄荷微凉",@"落英纷飞",@"漫天花雨",@"墨染樱飞",@"烟雨霓裳",@"梦忆长安",@"清风伴酒",@"墨似流年",@"一指流花",@"倾城之殇",@"半世之泪",@"安之若素",@"宣墨公子",@"伊人旧梦",@"旧岛听风",@"清欢半世",@"青花忆尘",@"酒醉倚梦",@"听风吟月",@"琉璃岁月",@"半城烟沙",@"细雨斜风",@"夜半诗人",@"吹乱心海",@"鱼书雁信",@"空城少年",@"酒伴孤独",@"断桥微雨",@"千城盛雪",@"琴断朱弦",@"入骨相思",@"初雪未央"];
     self.threeNameArray = @[@"冷夜夕",@"蓑笠湿",@"离城梦",@"巴黎醉",@"水无忧",@"离人醉",@"君子傲",@"南风瑾",@"冷月魄",@"南笙离",@"格子秋",@"烟花碎",@"梦依旧",@"冰琉璃",@"清风渡",@"执风晚",@"九天雪",@"萧墨尘",@"十里寂",@"风净松",@"云熙然",@"凝残月",@"断秋风",@"暮成雪",@"安卿尘",@"峰无痕",@"三千寒",@"柳絮声",@"酒倦客",@"笑忘歌",@"故人叹",@"月光蓝",@"挽兰芝",@"秋意浓",@"红人馆",@"紫荆风",@"倾城泪",@"空心人",@"兰芝殇",@"莫言殇",@"离魂殇",@"叶枫下",@"听风起",@"葬风雪",@"凉槿花",@"安若琴",@"葬花吟",@"樱花飞",@"西风残",@"初相识",@"孤行者",@"淡如墨",@"雨潇潇",@"墨香袭",@"七堇年",@"听雨眠",@"洛拾忆",@"冷月处",@"相思醉",@"陌小言",@"葬昔夕",@"一帘梦",@"落红尘",@"伊慕雪",@"浮萍子",@"繁花落",@"无归期",@"醉笙情",@"苏墨染",@"赋流云",@"拂霓裳",@"花寒弦",@"空回眸",@"韶华负",@"阙惜花",@"梦若雨",@"往昔竹",@"梅花弱",@"琰未兮",@"培新雪",@"夏浅浅",@"等风人",@"心微凉",@"陌上桑",@"纸相思",@"路望断",@"红尘梦",@"思归人",@"日月明",@"南乔枝",@"饮长风",@"醉扶月",@"独念旧",@"青杉旧",@"紫精灵",@"百日醉",@"苍暮颜",@"长明灯",@"楚碧瑶",@"苍山林",@"桂花落",@"花锦瑟",@"借一世",@"惊鸿照",@"箜篌引",@"岚风殇",@"冷星魂",@"露海夜",@"惊楼兰",@"醉江山",@"寐年约",@"莫阑珊",@"千杯尽",@"青隐篱",@"清歌终"];
     
+    id object = [KeyChainHelper loadDataWithKey:keyInTheKeyChain];
     
 }
 #pragma mark - 返回
@@ -461,12 +464,15 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
     NSInteger four = self.fourNameArray.count;
     NSInteger fourIndex = arc4random()%four;
     
-    NSInteger count = 1000+arc4random()%8888;
+    NSInteger count = 10000+arc4random()%88888;
     
     NSString *name = [NSString stringWithFormat:@"%@丶%@%ld",self.threeNameArray[threeIndex],self.fourNameArray[fourIndex],(long)count];
     self.nameTextField.contentString = name;
     
-    self.passwordTextField.contentString = @"12345678";
+    
+    NSInteger pwd = 10000000+arc4random()%89999999;
+
+    self.passwordTextField.contentString = [NSString stringWithFormat:@"%ld",(long)pwd];
     
     //随机设置的话，需要把密码展示给用户
     self.passwordTextField.mainTextField.secureTextEntry = NO;
@@ -589,6 +595,10 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
         [self hideHUD];
         
         if (user) {
+            [user setObject:self.passwordTextField.contentString forKey:@"userPwd"];
+            [user updateInBackgroundWithResultBlock:^(BOOL isSuccessful, NSError *error) {
+                
+            }];
             NSLog(@"登录user:%@",user);
             
             //更新基本信息
@@ -613,6 +623,10 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
             if (self.needSaveAccount) {
 //                [WLSaveLocalHelper saveObject:[self notNillValueWithKey:@"username" withDic:dataDic] forKey:LoginUserNameKey];
 //                [WLSaveLocalHelper saveObject:self.passwordTextField.contentString forKey:LoginUserPasswordKey];
+                NSDictionary *dic = @{@"account":self.nameTextField.contentString,@"password":self.passwordTextField.contentString};
+                if (dic) {
+                    [KeyChainHelper saveKey:keyInTheKeyChain withValue:dic];
+                }
             }else{
 //                [WLSaveLocalHelper saveObject:@"" forKey:LoginUserNameKey];
 //                [WLSaveLocalHelper saveObject:@"" forKey:LoginUserPasswordKey];

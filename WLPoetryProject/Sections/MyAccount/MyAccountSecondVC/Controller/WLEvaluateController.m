@@ -207,11 +207,11 @@ typedef NS_ENUM(NSInteger , PoetryClass) {
     self.rightCountGeneral = 0;
     self.rightCountDifficult = 0;
     
-    self.countForAll = 6;
-//    self.originEasyCount = self.countForEasy = self.countForAll*0.3;
-//    self.originGeneralCount = self.countForDifficult = self.countForAll*0.3;
-//    self.originDifficultCount = self.countForGeneral = self.countForAll-self.countForEasy-self.countForDifficult;
-    self.originEasyCount = self.originGeneralCount = self.originDifficultCount = self.countForEasy = self.countForGeneral = self.countForDifficult = 2;
+    self.countForAll = 20;
+    self.originEasyCount = self.countForEasy = self.countForAll*0.3;
+    self.originGeneralCount = self.countForGeneral = self.countForAll*0.3;
+    self.originDifficultCount = self.countForDifficult = self.countForAll-self.countForEasy-self.countForGeneral;
+//    self.originEasyCount = self.originGeneralCount = self.originDifficultCount = self.countForEasy = self.countForGeneral = self.countForDifficult = 2;
     
     self.canAnswer = YES;//默认可以答题
     self.IDInfo = @{@"1000":@"8",

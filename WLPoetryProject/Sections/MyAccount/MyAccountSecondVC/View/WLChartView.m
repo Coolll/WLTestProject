@@ -79,12 +79,19 @@
         }
         
     }else{
+        if (self.widthRate == 0) {
+            self.widthRate = 0.5;
+        }
         //如果用户没有设置柱子的的宽度，我们根据比例来算
         //单元宽度（一个柱子+一个空白的宽度） = （总宽度-框框外部的30-左右间距）/[ 柱子个数*柱子宽度比例  + 空白个数*空白宽度比例 ]
         itemW = (self.viewW-30-firstLeft*2)/((chartCount*self.widthRate)+(chartCount-1)*(1-self.widthRate));
         chartW = itemW * self.widthRate;
     }
     
+    
+    if (self.widthForSpace > 0 && self.widthForSpace + chartW < itemW) {
+        itemW = self.widthForSpace + chartW;
+    }
    
     
     //柱子的最大高度

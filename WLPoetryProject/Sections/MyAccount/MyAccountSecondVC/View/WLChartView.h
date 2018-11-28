@@ -38,6 +38,12 @@
  *  柱状图宽度
  **/
 @property (nonatomic,assign) CGFloat widthForChart;
+/**
+ *  柱状图空白
+ **/
+@property (nonatomic,assign) CGFloat widthForSpace;
+
+
 
 /**
  *  文本的对齐方式

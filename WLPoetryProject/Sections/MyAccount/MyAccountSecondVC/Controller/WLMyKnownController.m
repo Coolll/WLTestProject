@@ -11,6 +11,8 @@
 #import "UserInfoModel.h"
 #import "WLCoreDataHelper.h"
 #import "WLEvaluateController.h"
+#import "WLClassInfoController.h"
+
 @interface WLMyKnownController ()
 /**
  *  主scroll
@@ -64,10 +66,7 @@
  *  勋章颜色数组
  **/
 @property (nonatomic,copy) NSArray *colorArray;
-/**
- *  用户信息
- **/
-//@property (nonatomic,strong) UserInfoModel *userModel;
+
 /**
  *  开始测评
  **/
@@ -77,6 +76,10 @@
  **/
 @property (nonatomic,strong) NSMutableArray *storageArray;
 
+/**
+ *  关于等级
+ **/
+@property (nonatomic,strong) UIImageView *aboutImageView;
 
 
 
@@ -116,14 +119,15 @@
     NSInteger index = [[user objectForKey:@"userPoetryClass"] integerValue];
     NSString *storage = [NSString stringWithFormat:@"%@",[user objectForKey:@"userPoetryStorage"]];
     
-    self.mainScrollView.backgroundColor = [UIColor whiteColor];
+    self.mainScrollView.contentSize = CGSizeMake(PhoneScreen_WIDTH, 185+300*kHRate);
     [self configureHeadImage];
     self.nameLabel.text = self.userName;
     //获取用户的等级
     self.classLabel.text = [NSString stringWithFormat:@"Lv%ld %@",index+1,[self.titleArray objectAtIndex:index]];
     self.classLabel.textColor = [self.colorArray objectAtIndex:index];
     self.numberLabel.text = [NSString stringWithFormat:@"诗词量：%@",storage];
-
+    self.aboutImageView.backgroundColor = ViewBackgroundColor;
+    
     if (index < self.imageArray.count) {
         self.prizeView.image = [UIImage imageNamed:[self.imageArray objectAtIndex:index]];
     }
@@ -174,6 +178,15 @@
     }
 }
 
+- (void)tapTheAboutClass:(UITapGestureRecognizer*)tap
+{
+    NSLog(@"关于");
+    WLClassInfoController *vc = [[WLClassInfoController alloc]init];
+    vc.imageArray = self.imageArray;
+    vc.titleArray = self.titleArray;
+    [vc loadCustomView];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 #pragma mark - 属性
 
 - (UIScrollView*)mainScrollView
@@ -275,6 +288,28 @@
     }
     return _classLabel;
 }
+- (UIImageView *)aboutImageView
+{
+    if (!_aboutImageView) {
+        _aboutImageView = [[UIImageView alloc]init];
+        _aboutImageView.userInteractionEnabled = YES;
+        _aboutImageView.image = [UIImage imageNamed:@"userClassInfo"];
+        [self.mainScrollView addSubview:_aboutImageView];
+        //元素的布局
+        [_aboutImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.leading.equalTo(self.classLabel.mas_trailing).offset(10);
+            make.top.equalTo(self.numberLabel.mas_bottom).offset(3);
+            make.width.mas_equalTo(24);
+            make.height.mas_equalTo(24);
+        }];
+        
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapTheAboutClass:)];
+        [_aboutImageView addGestureRecognizer:tap];
+        
+    }
+    return _aboutImageView;
+}
 
 - (UIImageView*)prizeView
 {
@@ -293,27 +328,7 @@
             
         }];
         
-        
-        
 
-        
-//        for (NSInteger i = index; i >= 0 ; i--) {
-//            UIImageView *image = [[UIImageView alloc]init];
-        
-//            [_prizeView addSubview:image];
-//
-//            //元素的布局
-//            [image mas_makeConstraints:^(MASConstraintMaker *make) {
-//
-//                make.leading.equalTo(titleLabel.mas_trailing).offset(i*30);
-//                make.top.equalTo(_prizeView.mas_top).offset(0);
-//                make.width.mas_equalTo(30);
-//                make.height.mas_equalTo(30);
-//
-//            }];
-//        }
-//
-        
     }
     return _prizeView;
 }
@@ -321,14 +336,14 @@
 - (WLChartView*)chartView
 {
     if (!_chartView) {
-        CGFloat rate = PhoneScreen_WIDTH/375.f;
         _chartView = [[WLChartView alloc]init];
         _chartView.viewW = PhoneScreen_WIDTH;
-        _chartView.viewH = 300*rate;
-//        _chartView.dataArray = @[@"1243",@"4354",@"2234",@"767",@"434",@"5676",@"2454"];
+        _chartView.viewH = 300*kHRate;
+//        _chartView.dataArray = @[@"1243",@"4354",@"2234",@"767",@"434",@"5676",@"2454",@"1243",@"4354",@"2234",@"767",@"434",@"5676",@"2454",@"8888"];
 //        _chartView.titleArray = @[@"周一",@"周二",@"周三",@"周四",@"周五",@"周六",@"周日"];
 //        _chartView.widthRate = 0.8;
-        _chartView.widthForChart = 40;
+        _chartView.widthForChart = 40*kWRate;
+        _chartView.widthForSpace = 20*kWRate;
         _chartView.animateTime = 0.35;
         _chartView.leftSpace = 10;
         [self.mainScrollView addSubview:_chartView];
@@ -337,7 +352,7 @@
             
             make.leading.equalTo(self.mainScrollView.mas_leading).offset(0);
             make.top.equalTo(self.prizeView.mas_bottom).offset(20);
-            make.height.mas_equalTo(300*rate);
+            make.height.mas_equalTo(300*kHRate);
             make.width.mas_equalTo(PhoneScreen_WIDTH);
         }];
     }
@@ -348,7 +363,9 @@
     if (!_startBtn) {
         _startBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [_startBtn addTarget:self action:@selector(startBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-        [_startBtn setTitle:@"开始" forState:UIControlStateNormal];
+        _startBtn.titleLabel.font = [UIFont systemFontOfSize:20.f*kHRate];
+        _startBtn.layer.cornerRadius = 4.f;
+        [_startBtn setTitle:@"开始测评" forState:UIControlStateNormal];
         [self.mainScrollView addSubview:_startBtn];
         //元素的布局
         [_startBtn mas_makeConstraints:^(MASConstraintMaker *make) {

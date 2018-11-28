@@ -185,6 +185,14 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
 
 - (void)loadLikeButton
 {
+    //按钮放在下层
+    UIButton *likeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    likeBtn.backgroundColor = [UIColor whiteColor];
+    likeBtn.layer.cornerRadius = 20.f;
+    likeBtn.alpha = 0.7;
+    [likeBtn addTarget:self action:@selector(likeAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:likeBtn];
+    
     self.likeImage = [[UIImageView alloc]init];
     if (self.isLike) {
         self.likeImage.image = [UIImage imageNamed:@"likePoetry"];
@@ -216,10 +224,6 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
     }
     
     
-    UIButton *likeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    likeBtn.backgroundColor = [UIColor clearColor];
-    [likeBtn addTarget:self action:@selector(likeAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:likeBtn];
     //设置UI布局约束
     [likeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -229,6 +233,13 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
         make.leading.equalTo(self.likeImage.mas_leading).offset(-10);
     }];
     
+    //按钮放下层
+    UIButton *shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    shareBtn.backgroundColor = [UIColor whiteColor];
+    shareBtn.layer.cornerRadius = 20.f;
+    shareBtn.alpha = 0.7;
+    [shareBtn addTarget:self action:@selector(shareAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:shareBtn];
     
     UIImageView *shareImage = [[UIImageView alloc]init];
     shareImage.image = [UIImage imageNamed:@"shareIcon"];
@@ -236,18 +247,14 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
     //设置UI布局约束
     [shareImage mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.top.equalTo(self.likeImage.mas_bottom).offset(20);//元素顶部约束
+        make.top.equalTo(self.likeImage.mas_bottom).offset(30);//元素顶部约束
         make.leading.equalTo(self.likeImage.mas_leading).offset(0);//元素左侧约束
         make.width.mas_equalTo(20);//元素宽度
         make.height.mas_equalTo(20);//元素高度
     }];
     
     
-    
-    UIButton *shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    shareBtn.backgroundColor = [UIColor clearColor];
-    [shareBtn addTarget:self action:@selector(shareAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:shareBtn];
+
     //设置UI布局约束
     [shareBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -257,6 +264,13 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
         make.leading.equalTo(shareImage.mas_leading).offset(-10);
     }];
     
+    //按钮放下层
+    UIButton *reciteBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    reciteBtn.backgroundColor = [UIColor whiteColor];
+    reciteBtn.layer.cornerRadius = 20.f;
+    reciteBtn.alpha = 0.7;
+    [reciteBtn addTarget:self action:@selector(reciteAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:reciteBtn];
     
     UIImageView *reciteImage = [[UIImageView alloc]init];
     reciteImage.image = [UIImage imageNamed:@"reciteIcon"];
@@ -264,7 +278,7 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
     //设置UI布局约束
     [reciteImage mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.top.equalTo(shareImage.mas_bottom).offset(20);//元素顶部约束
+        make.top.equalTo(shareImage.mas_bottom).offset(30);//元素顶部约束
         make.leading.equalTo(self.likeImage.mas_leading).offset(0);//元素左侧约束
         make.width.mas_equalTo(20);//元素宽度
         make.height.mas_equalTo(20);//元素高度
@@ -272,10 +286,7 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
     
     
     
-    UIButton *reciteBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    reciteBtn.backgroundColor = [UIColor clearColor];
-    [reciteBtn addTarget:self action:@selector(reciteAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:reciteBtn];
+   
     //设置UI布局约束
     [reciteBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         

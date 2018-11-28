@@ -49,10 +49,15 @@
     NSString *classString = [NSString stringWithFormat:@"%ld",userClass];
     
     BmobUser *user = [BmobUser currentUser];
+    NSMutableArray *storageArr = [NSMutableArray arrayWithArray:[user objectForKey:@"poetryStorageList"]];
+    if (storageArr.count >= 15) {
+        [storageArr removeObjectAtIndex:0];
+    }
+    [storageArr addObject:countString];
 
-    NSArray *array = [NSArray arrayWithObject:countString];
-
-    [user addObjectsFromArray:[array copy] forKey:@"poetryStorageList"];
+//    NSArray *array = [NSArray arrayWithObject:countString];
+//    [user addObjectsFromArray:[array copy] forKey:@"poetryStorageList"];
+    [user setObject:[storageArr copy] forKey:@"poetryStorageList"];
     [user setObject:countString forKey:@"userPoetryStorage"];
     [user setObject:classString forKey:@"userPoetryClass"];
     [user updateInBackgroundWithResultBlock:^(BOOL isSuccessful, NSError *error) {
@@ -73,7 +78,6 @@
         [self readLocalData];
     }];
 //    [[WLCoreDataHelper shareHelper] updateDataWithTable:@"UserInfo" withKey:@"userID" withKeyValueEqualTo:kUserID withNewValue:[arr copy] forNewKey:@"poetryStorageList" withResult:^(BOOL isSuccessful, NSError *error) {
-//
 //
 //    }];
 }

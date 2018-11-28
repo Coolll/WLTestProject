@@ -98,7 +98,7 @@ typedef void(^EditBlock)(void);
     UITapGestureRecognizer *tapImage = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(changeImageAction:)];
     [self.headerImageView addGestureRecognizer:tapImage];
     
-    CGFloat nameLeft = 41;
+    CGFloat nameLeft = 30*kWRate;
     CGFloat nameH = 20;
     CGFloat nameSpace = 15;
     CGFloat subTitleH = 16;
