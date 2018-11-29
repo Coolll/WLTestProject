@@ -59,12 +59,28 @@ static const CGFloat leftSpace = 10;//诗句的左右间距
     self.sepCount = 3;
     self.heightArray = [NSMutableArray array];
     self.hideArray = [NSMutableArray array];
+    
 }
 - (void)loadCustomView
 {
     [self loadRightBtn];
     [self loadRandomHideData];
     self.mainTableView.backgroundColor = [UIColor whiteColor];
+}
+
+- (void)viewDidLayoutSubviews
+{
+    if (self.heightArray.count > 0) {
+        CGFloat tableHeight = self.mainTableView.frame.size.height;
+        CGFloat totalHeight = 60;
+        for (NSString *heightString in self.heightArray) {
+            CGFloat cellH = [heightString floatValue];
+            totalHeight += cellH;
+        }
+        if (totalHeight < tableHeight) {
+            self.mainTableView.scrollEnabled = NO;
+        }
+    }
 }
 - (void)loadRightBtn
 {
@@ -183,6 +199,7 @@ static const CGFloat leftSpace = 10;//诗句的左右间距
             cell = [[WLPoetryHeadCell alloc]init];
             
         }
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.author = self.dataModel.author;
         cell.name = self.dataModel.name;
         [cell loadCustomView];

@@ -9,6 +9,15 @@
 #import "AboutViewController.h"
 
 @interface AboutViewController ()
+/**
+ *  主scrollView
+ **/
+@property (nonatomic,strong) UIScrollView *mainScrollView;
+/**
+ *  整个内容的高度
+ **/
+@property (nonatomic,assign) CGFloat contentH;
+
 
 @end
 
@@ -23,25 +32,40 @@
 
 - (void)loadCustomView
 {
+    self.mainScrollView = [[UIScrollView alloc]init];
+    self.mainScrollView.backgroundColor = ViewBackgroundColor;
+    [self.view addSubview:self.mainScrollView];
+    //元素的布局
+    [self.mainScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.equalTo(self.naviView.mas_bottom).offset(0);
+        make.leading.equalTo(self.view.mas_leading);
+        make.trailing.equalTo(self.view.mas_trailing);
+        make.bottom.equalTo(self.view.mas_bottom).offset(0);
+        
+    }];
+    
+    
     CGFloat iconWidth = 50;
     UIImageView *iconImageView = [[UIImageView alloc]init];
     iconImageView.image = [UIImage imageNamed:@"poetryIcon"];
     iconImageView.layer.cornerRadius = 4.f;
-    [self.view addSubview:iconImageView];
+    [self.mainScrollView addSubview:iconImageView];
     //设置UI布局约束
     [iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.top.equalTo(self.naviView.mas_bottom).offset(25);//元素顶部约束
+        make.top.equalTo(self.mainScrollView.mas_bottom).offset(25);//元素顶部约束
         make.leading.equalTo(self.view.mas_leading).offset((PhoneScreen_WIDTH-iconWidth)/2);//元素左侧约束
         make.width.mas_equalTo(iconWidth);//元素宽度
         make.height.mas_equalTo(iconWidth);//元素高度
     }];
+    self.contentH = 25+iconWidth;
     
     UILabel *nameLabel = [[UILabel alloc]init];
     nameLabel.textAlignment = NSTextAlignmentCenter;
     nameLabel.text = @"诗词汇";
     nameLabel.font = [UIFont systemFontOfSize:16.f];//字号设置
-    [self.view addSubview:nameLabel];
+    [self.mainScrollView addSubview:nameLabel];
     //设置UI布局约束
     [nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -50,13 +74,14 @@
         make.trailing.equalTo(self.view.mas_trailing).offset(0);//元素右侧约束
         make.height.mas_equalTo(20);//元素高度
     }];
+    self.contentH += 35;
     
     
     UILabel *versionLabel = [[UILabel alloc]init];
     versionLabel.textAlignment = NSTextAlignmentCenter;
     versionLabel.font = [UIFont systemFontOfSize:16.f];//字号设置
     versionLabel.textColor = RGBCOLOR(43, 160, 240, 1.0);
-    [self.view addSubview:versionLabel];
+    [self.mainScrollView addSubview:versionLabel];
     
     NSString *appVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];//1.0.5
     versionLabel.text = [NSString stringWithFormat:@"当前版本 %@",appVersion];
@@ -69,12 +94,13 @@
         make.height.mas_equalTo(20);//元素高度
     }];
     
+    self.contentH += 30;
     
     UILabel *infoLabel = [[UILabel alloc]init];
     infoLabel.font = [UIFont systemFontOfSize:14.f];//字号设置
     NSString *valueString = @"  诗词汇是一款掌上诗词的应用。\n\n  在诗词世界中遨游，你能培养宽广的视野、豁达的胸怀、高雅的气质、谦卑的情操以及淡然的心态。进入诗词的世界中，你将会受益终身。\n\n  在首页的题画模块，可以构建你心目中最美的画卷。如诗如画，生活本该如此。\n\n  已矣乎！寓形宇内复几时？曷不委心任去留？胡为乎遑遑欲何之？富贵非吾愿，帝乡不可期。怀良辰以孤往，或植杖而耘耔。登东皋以舒啸，临清流而赋诗。聊乘化以归尽，乐夫天命复奚疑！";//设置文本
     infoLabel.numberOfLines = 0;
-    [self.view addSubview:infoLabel];
+    [self.mainScrollView addSubview:infoLabel];
     
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc]initWithString:valueString];
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
@@ -95,7 +121,19 @@
         make.trailing.equalTo(self.view.mas_trailing).offset(-15);//元素右侧约束
         make.height.mas_equalTo(height);//元素高度
     }];
+    self.contentH += 10+height;
     
+    self.mainScrollView.contentSize = CGSizeMake(PhoneScreen_WIDTH, self.contentH);
+    self.mainScrollView.scrollEnabled = NO;
+    self.mainScrollView.showsVerticalScrollIndicator = NO;
+    self.mainScrollView.showsHorizontalScrollIndicator = NO;
+}
+
+- (void)viewDidLayoutSubviews
+{
+    if (self.contentH > self.mainScrollView.frame.size.height) {
+        self.mainScrollView.scrollEnabled = YES;
+    }
 }
 #pragma mark - 返回事件
 

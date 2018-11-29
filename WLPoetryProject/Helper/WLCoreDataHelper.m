@@ -322,7 +322,7 @@
     
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"author like %@ || content like %@ || name like %@",word,word,word];
     NSFetchRequest *request = [[NSFetchRequest alloc]init];
-    [request setFetchLimit:10];
+    [request setFetchLimit:30];
     NSArray *fetchArray = [self fetchDataWithTableName:@"Poetry" withRequest:request withPredicate:predicate];
     NSMutableArray *modelArray = [NSMutableArray array];
     for (Poetry *poetry in fetchArray) {

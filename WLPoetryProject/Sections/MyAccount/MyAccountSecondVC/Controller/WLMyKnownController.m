@@ -119,6 +119,9 @@
     NSInteger index = [[user objectForKey:@"userPoetryClass"] integerValue];
     NSString *storage = [NSString stringWithFormat:@"%@",[user objectForKey:@"userPoetryStorage"]];
     
+    if (!storage || [storage isEqualToString:@"(null)"] || [storage isEqualToString:@"<null>"] || [storage isEqualToString:@"null"]) {
+        storage = @"0";
+    }
     self.mainScrollView.contentSize = CGSizeMake(PhoneScreen_WIDTH, 185+300*kHRate);
     [self configureHeadImage];
     self.nameLabel.text = self.userName;
@@ -136,7 +139,7 @@
     self.chartView.dataArray = _storageArray;
     [self.chartView configureView];
     
-    self.startBtn.backgroundColor = [UIColor lightGrayColor];
+    self.startBtn.backgroundColor = RGBCOLOR(40, 190, 50, 1.0);
 
 }
 
