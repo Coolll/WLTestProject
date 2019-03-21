@@ -15,7 +15,10 @@
  **/
 @property (nonatomic,copy) NSString *contentString;
 
-
+/**
+ *  内容label
+ **/
+@property (nonatomic,strong) UILabel *contentLabel;
 
 + (CGFloat)heightForContent:(NSString*)content withWidth:(CGFloat)width;
 

@@ -231,6 +231,7 @@
     }
     return modelArray;
 }
+
 //查询某个大类的诗词，比如小学一年级的诗词，传1即可
 -(NSArray*)fetchPoetryWithMainClass:(NSString*)mainClass
 {
@@ -322,7 +323,7 @@
     
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"author like %@ || content like %@ || name like %@",word,word,word];
     NSFetchRequest *request = [[NSFetchRequest alloc]init];
-    [request setFetchLimit:30];
+    [request setFetchLimit:50];
     NSArray *fetchArray = [self fetchDataWithTableName:@"Poetry" withRequest:request withPredicate:predicate];
     NSMutableArray *modelArray = [NSMutableArray array];
     for (Poetry *poetry in fetchArray) {

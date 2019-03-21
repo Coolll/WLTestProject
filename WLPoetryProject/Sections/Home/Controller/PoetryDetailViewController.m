@@ -47,6 +47,12 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
  *  主图片背景
  **/
 @property (nonatomic, strong) UIImageView *mainImageView;
+/**
+ *  是否需要改为白色的字体
+ **/
+@property (nonatomic,assign) BOOL needWhite;
+
+
 @end
 
 @implementation PoetryDetailViewController
@@ -54,6 +60,14 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    if ([self.dataModel.poetryID isEqualToString:@"27004"]) {
+        //静夜思 背景色为深色，文本改为白色
+        self.needWhite = YES;
+    }else{
+        self.needWhite = NO;
+    }
+    
     self.titleForNavi = self.dataModel.name;
     [self loadMainBackImageView];//背景
     [self addFullTitleLabel];//诗词名字 添加背景之后调用，否则会被背景图遮住
@@ -173,6 +187,11 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
 - (void)loadContentTableView
 {
     self.authorLabel.text = self.dataModel.author;
+    //背景色为深色时，文本颜色为白色
+    if (self.needWhite) {
+        self.titleFullLabel.textColor = [UIColor whiteColor];
+        self.authorLabel.textColor = [UIColor whiteColor];
+    }
     self.mainTable.backgroundColor = [UIColor clearColor];
 }
 
@@ -439,6 +458,10 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
     contentCell.selectionStyle = UITableViewCellSelectionStyleNone;
     contentCell.backgroundColor = [UIColor clearColor];
     contentCell.contentString = self.dataArray[indexPath.row];
+    if (self.needWhite) {
+        contentCell.contentLabel.textColor = [UIColor whiteColor];
+    }
+    
     return contentCell;
 }
 #pragma mark - 点击事件

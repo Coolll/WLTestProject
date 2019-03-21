@@ -8,10 +8,7 @@
 
 #import "WLPoetryContentCell.h"
 @interface WLPoetryContentCell()
-/**
- *  内容label
- **/
-@property (nonatomic,strong) UILabel *contentLabel;
+
 
 
 @end

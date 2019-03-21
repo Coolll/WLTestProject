@@ -79,13 +79,13 @@
         
     }];
 }
+
 - (void)searchButtonAction:(UIButton*)sender
 {
     NSLog(@"搜索");
     WLSearchController *searchVC = [[WLSearchController alloc]init];
     searchVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:searchVC animated:YES];
-
 }
 
 
@@ -101,7 +101,7 @@
     }
     
     
-    self.gradeSectionArray = [NSArray arrayWithObjects:@"小学",@"初中",@"高中", nil];
+    self.gradeSectionArray = [NSArray arrayWithObjects:@"学前",@"小学",@"初中",@"高中", nil];
     self.collectionSectionArray = [NSArray arrayWithObjects:@"唐诗",@"宋词", nil];
 
 }
@@ -337,16 +337,19 @@
 {
     WLTypeListController *vc = [[WLTypeListController alloc]init];
     NSArray *dataArray = nil;
-    
     if (index == 0) {
+        //学前
+        dataArray = [self readConfigureWithFileName:@"configureGradeBaby"];
+        
+    }else if (index == 1) {
         //小学
         dataArray = [self readConfigureWithFileName:@"configureGradePrimary"];
        
-    }else if (index == 1){
+    }else if (index == 2){
         //初中
         dataArray = [self readConfigureWithFileName:@"configureGradeJuinor"];
         
-    }else if (index == 2){
+    }else if (index == 3){
         //高中
         dataArray = [self readConfigureWithFileName:@"configureGradeSenior"];
         
