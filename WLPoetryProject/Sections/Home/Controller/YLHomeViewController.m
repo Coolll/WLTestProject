@@ -56,6 +56,28 @@
     [self loadCustomData];
     
     [self checkLocalData];//加载本地数据
+    [self loadAllImageData];
+}
+
+- (void)loadAllImageData
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        NSMutableArray *arr = [NSMutableArray arrayWithArray:[AppConfig config].bgImageInfo.allValues];
+        
+        if (arr.count == 0) {
+            [[AppConfig config] loadClassImageWithBlock:^(NSDictionary *dic) {
+                [arr addObjectsFromArray:dic.allValues];
+                
+                for (NSString *urlString in arr) {
+                    UIImageView *view = [[UIImageView alloc]init];
+                    [view sd_setImageWithURL:[NSURL URLWithString:urlString]];
+                }
+            }];
+            
+            
+        }
+    });
+    
 }
 
 - (void)loadCustomData
@@ -388,13 +410,12 @@
         
         for (int i = 0; i < jsonStateDic.allKeys.count ;i++) {
             NSString *state = jsonStateDic.allValues[i];
-            int time = 4*i;
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(time * NSEC_PER_SEC)), dispatch_get_global_queue(0, 0), ^{
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                 if (![state isEqualToString:@"1"]) {
                     [self readLocalFileWithName:jsonList[i] withKey:jsonStateDic.allKeys[i]];
                 }
-                
             });
+            
             
         }
         
@@ -407,8 +428,7 @@
         
         for (int i = 0; i < self.jsonStateDic.allValues.count ;i++) {
             NSString *state = self.jsonStateDic.allValues[i];
-            int time = 4*i;
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(time * NSEC_PER_SEC)), dispatch_get_global_queue(0, 0), ^{
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                 if (![state isEqualToString:@"1"]) {
                     [self readLocalFileWithName:jsonList[i] withKey:self.jsonStateDic.allKeys[i]];
                 }

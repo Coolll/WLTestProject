@@ -79,7 +79,7 @@
         
         [self registShareSDK];
         
-        [[AppConfig config] loadAllClassImageInfo];
+//        [[AppConfig config] loadAllClassImageInfo];
 
 //    });
     

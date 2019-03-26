@@ -294,6 +294,7 @@
 		36B516F3212EC85500FD0FA8 /* WLNewTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B516F2212EC85500FD0FA8 /* WLNewTextView.m */; };
 		36B5CC4B219927C0009D5861 /* WLImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B5CC49219927BF009D5861 /* WLImageCell.m */; };
 		36B5CC5A2199841D009D5861 /* UserInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B5CC592199841D009D5861 /* UserInfoModel.m */; };
+		36FBC8602244B648008157F3 /* gradePoetry_14.json in Resources */ = {isa = PBXBuildFile; fileRef = 36FBC85F2244B648008157F3 /* gradePoetry_14.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -784,6 +785,7 @@
 		36B5CC4A219927BF009D5861 /* WLImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLImageCell.h; sourceTree = "<group>"; };
 		36B5CC582199841D009D5861 /* UserInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserInfoModel.h; sourceTree = "<group>"; };
 		36B5CC592199841D009D5861 /* UserInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserInfoModel.m; sourceTree = "<group>"; };
+		36FBC85F2244B648008157F3 /* gradePoetry_14.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = gradePoetry_14.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -923,6 +925,7 @@
 				007C7E2620F5D57A00F360D6 /* gradePoetry_11.json */,
 				007C7E2720F5D57B00F360D6 /* gradePoetry_12.json */,
 				364A869522433CFA0031DC7A /* gradePoetry_13.json */,
+				36FBC85F2244B648008157F3 /* gradePoetry_14.json */,
 				071609A820A1C15400904C69 /* gradePoetry_empty.json */,
 			);
 			path = Grade;
@@ -1951,6 +1954,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				360E672E219442ED00AD56BF /* class_6.png in Resources */,
+				36FBC8602244B648008157F3 /* gradePoetry_14.json in Resources */,
 				007C7E2B20F5D57B00F360D6 /* gradePoetry_10.json in Resources */,
 				07E7C31820CC1DA7007CA827 /* configureSong.json in Resources */,
 				360E671A21941A1B00AD56BF /* number.png in Resources */,
