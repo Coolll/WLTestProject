@@ -84,8 +84,8 @@
             [self.bgImageInfo removeAllObjects];
             for (BmobObject *obc in array) {
                 //图片url作为value，class类别作为key，存储起来
-                NSString *url = [obc objectForKey:@"imageURL"];
-                NSString *className = [obc objectForKey:@"className"];
+                NSString *url = [NSString stringWithFormat:@"%@",[obc objectForKey:@"imageURL"]];
+                NSString *className = [NSString stringWithFormat:@"%@",[obc objectForKey:@"className"]];
                 [self.bgImageInfo setObject:url forKey:className];
             }
             

@@ -280,6 +280,8 @@
 		3635751A21AE7763009524C7 /* userClassInfo.png in Resources */ = {isa = PBXBuildFile; fileRef = 3635751921AE7763009524C7 /* userClassInfo.png */; };
 		3635751D21AE7D2A009524C7 /* WLClassInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3635751C21AE7D2A009524C7 /* WLClassInfoController.m */; };
 		3635752021AE93FD009524C7 /* KeyChainHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3635751E21AE93FD009524C7 /* KeyChainHelper.m */; };
+		36382B02224B5FB1006D094A /* songPoetry_mustRead.json in Resources */ = {isa = PBXBuildFile; fileRef = 36382B00224B5FB0006D094A /* songPoetry_mustRead.json */; };
+		36382B03224B5FB1006D094A /* songPoetry_mustRecite.json in Resources */ = {isa = PBXBuildFile; fileRef = 36382B01224B5FB0006D094A /* songPoetry_mustRecite.json */; };
 		3640E933219E5F250077FF1F /* WLEvaluateController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3640E932219E5F250077FF1F /* WLEvaluateController.m */; };
 		364A869622433CFA0031DC7A /* gradePoetry_13.json in Resources */ = {isa = PBXBuildFile; fileRef = 364A869522433CFA0031DC7A /* gradePoetry_13.json */; };
 		364A869822436E680031DC7A /* configureGradeBaby.json in Resources */ = {isa = PBXBuildFile; fileRef = 364A869722436E680031DC7A /* configureGradeBaby.json */; };
@@ -758,6 +760,8 @@
 		3635751E21AE93FD009524C7 /* KeyChainHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyChainHelper.m; sourceTree = "<group>"; };
 		3635751F21AE93FD009524C7 /* KeyChainHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyChainHelper.h; sourceTree = "<group>"; };
 		3637F2D8219C09F300D1B6E8 /* WLPoetryProject 1.1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WLPoetryProject 1.1.xcdatamodel"; sourceTree = "<group>"; };
+		36382B00224B5FB0006D094A /* songPoetry_mustRead.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = songPoetry_mustRead.json; sourceTree = "<group>"; };
+		36382B01224B5FB0006D094A /* songPoetry_mustRecite.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = songPoetry_mustRecite.json; sourceTree = "<group>"; };
 		3640E931219E5F250077FF1F /* WLEvaluateController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLEvaluateController.h; sourceTree = "<group>"; };
 		3640E932219E5F250077FF1F /* WLEvaluateController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLEvaluateController.m; sourceTree = "<group>"; };
 		364A869522433CFA0031DC7A /* gradePoetry_13.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = gradePoetry_13.json; sourceTree = "<group>"; };
@@ -1383,6 +1387,8 @@
 				0785075D20B2EFF20030CD98 /* songPoetry_eight.json */,
 				0785075920B2EFF20030CD98 /* songPoetry_nine.json */,
 				0785076020B2EFF20030CD98 /* songPoetry_ten.json */,
+				36382B00224B5FB0006D094A /* songPoetry_mustRead.json */,
+				36382B01224B5FB0006D094A /* songPoetry_mustRecite.json */,
 				0785075520B2EDB30030CD98 /* songPoetry_empty.json */,
 			);
 			path = SongPoetry;
@@ -1985,6 +1991,7 @@
 				00F9517020D4D8090039D7C5 /* about@2x.png in Resources */,
 				00DA247620F6FBCB00F97B79 /* bookType.png in Resources */,
 				07E06D9920A06C9300093DCC /* tabbarTwo.png in Resources */,
+				36382B03224B5FB1006D094A /* songPoetry_mustRecite.json in Resources */,
 				00DA247820F720BF00F97B79 /* typeHistory.png in Resources */,
 				000110A920A44BD2001B2B55 /* gradePoetry_9_one.json in Resources */,
 				000110A820A44BD2001B2B55 /* gradePoetry_7_two.json in Resources */,
@@ -2057,6 +2064,7 @@
 				00BBFA1620D65C8B00BB86D9 /* poetryIcon.png in Resources */,
 				3616E7972192B9510014843F /* cover.png in Resources */,
 				0785076920B2EFF20030CD98 /* songPoetry_ten.json in Resources */,
+				36382B02224B5FB1006D094A /* songPoetry_mustRead.json in Resources */,
 				000110AB20A44BD2001B2B55 /* gradePoetry_9_two.json in Resources */,
 				0785075820B2EDB30030CD98 /* songPoetry_one.json in Resources */,
 				07E06D9820A06C9300093DCC /* tabbarTwo_sel.png in Resources */,

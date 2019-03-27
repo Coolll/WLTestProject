@@ -41,6 +41,10 @@
  *  json是否读取的数组
  **/
 @property (nonatomic,strong) NSMutableDictionary *jsonStateDic;
+/**
+ *  图片是否加载的数组
+ **/
+@property (nonatomic,strong) NSMutableDictionary *imageStateDic;
 
 
 
@@ -61,24 +65,69 @@
 
 - (void)loadAllImageData
 {
+    //本地已加载的图片状态
+    self.imageStateDic = [WLSaveLocalHelper loadObjectForKey:@"AllImageStateDic"];
+    //如果不存在，则创建一个
+    if(!self.imageStateDic){
+        [WLSaveLocalHelper saveObject:[NSDictionary dictionary] forKey:@"AllImageStateDic"];
+    }
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-        NSMutableArray *arr = [NSMutableArray arrayWithArray:[AppConfig config].bgImageInfo.allValues];
+        //空数组，用来加载网络上的图片URL
+        NSMutableArray *arr = [NSMutableArray array];
         
-        if (arr.count == 0) {
-            [[AppConfig config] loadClassImageWithBlock:^(NSDictionary *dic) {
-                [arr addObjectsFromArray:dic.allValues];
-                
-                for (NSString *urlString in arr) {
-                    UIImageView *view = [[UIImageView alloc]init];
-                    [view sd_setImageWithURL:[NSURL URLWithString:urlString]];
+        [[AppConfig config] loadClassImageWithBlock:^(NSDictionary *dic) {
+            //添加图片url
+            [arr addObjectsFromArray:dic.allValues];
+            //需要额外加载的图片URL数组
+            NSMutableArray *mutArray = [NSMutableArray array];
+            
+            for (NSInteger i = 0; i<arr.count; i++) {
+                //拿到图片URL
+                NSString *urlString = [arr objectAtIndex:i];
+                //获取本地加载过的状态字符串，如果找到了状态字符串，且为1，则无需再加载
+                NSString *stateString = [NSString stringWithFormat:@"%@",[self.imageStateDic valueForKey:urlString]];
+                if(![stateString isEqualToString:@"1"]){
+                    //如果没有加载过，或者没有成功加载，则需要加载
+                    [mutArray addObject:urlString];
                 }
+                
+            }
+            
+            //如果全部图片都加载过，则返回
+            if(mutArray.count == 0){return;}
+            
+            UIImageView *view = [[UIImageView alloc]init];
+            //递归，加载图片
+            [self loadImageWithArray:mutArray withCurrentIndex:0 withImageView:view withStatusDic:[NSMutableDictionary dictionary]];
+
             }];
             
-            
-        }
     });
     
 }
+
+- (void)loadImageWithArray:(NSArray*)imageArray withCurrentIndex:(NSInteger)index withImageView:(UIImageView*)imageView withStatusDic:(NSMutableDictionary*)dic
+{
+    if(index < imageArray.count){
+        [imageView sd_setImageWithURL:[NSURL URLWithString:[imageArray objectAtIndex:index]] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+            
+            
+            NSDictionary *dict = [WLSaveLocalHelper loadObjectForKey:@"AllImageStateDic"];
+            NSMutableDictionary *mutDic = [NSMutableDictionary dictionaryWithDictionary:dict];
+            if(image){
+                [mutDic setObject:@"1" forKey:imageURL.absoluteString];
+            }else{
+                [mutDic setObject:@"0" forKey:imageURL.absoluteString];
+            }
+            //此张图片完成加载后，保存到本地
+            [WLSaveLocalHelper saveObject:[mutDic copy] forKey:@"AllImageStateDic"];
+
+            [self loadImageWithArray:imageArray withCurrentIndex:(index+1) withImageView:imageView withStatusDic:dic];
+
+        }];
+    }
+}
+
 
 - (void)loadCustomData
 {

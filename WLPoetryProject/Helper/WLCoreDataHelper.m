@@ -130,7 +130,7 @@
             
             
         }else{
-            NSLog(@"成功");
+//            NSLog(@"成功");
             if (block) {
                 block(YES,nil);
             }
