@@ -168,10 +168,23 @@
                     "backImageName" : "",
                     "bgImageURL" : "",
                     "placeHolder" : ""
+                    },{
+                    "name" : "临江仙·梦后楼台高锁",
+                    "author" : "晏几道",
+                    "content" : "梦后楼台高锁，酒醒帘幕低垂。去年春恨却来时。落花人独立，微雨燕双飞。记得小蘋初见，两重心字罗衣。琵琶弦上说相思。当时明月在，曾照彩云归。",
+                    "addtionInfo" : "临江仙：双调小令，唐教坊曲名，后用为词牌。却来：又来，再来。心字罗衣：指衣上的花纹。”心“当是篆体，故可作为图案。彩云：比喻美人。",
+                    "classInfo" : "1213",
+                    "poetryID" : "13",
+                    "source" : "3",
+                    "analysesInfo" : "",
+                    "transferInfo" : "",
+                    "backgroundInfo" : "",
+                    "backImageName" : "",
+                    "bgImageURL" : "",
+                    "placeHolder" : ""
                     }
-    
 	],
     "type" : "poetry_gradeOne",
-    "baseID" : "1000",
-    "mainClass" : "0"
+    "baseID" : "29000",
+    "mainClass" : "32"
 }

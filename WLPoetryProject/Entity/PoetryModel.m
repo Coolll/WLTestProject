@@ -15,12 +15,17 @@
     if ([self.content isKindOfClass:[NSString class]] && self.content.length > 0) {
         
         BOOL isContainEnd = [self.content containsString:@"。"];
-        
+        BOOL isContainExclamation = [self.content containsString:@"！"];
+        BOOL isContainQuery = [self.content containsString:@"？"];
         if (isContainEnd) {
             
             self.firstLineString = [NSString stringWithFormat:@"%@。",[[self.content componentsSeparatedByString:@"。"]firstObject]];
             
-        }else{
+        }else if (isContainQuery){
+            self.firstLineString = [NSString stringWithFormat:@"%@？",[[self.content componentsSeparatedByString:@"？"]firstObject]];
+        }else if (isContainExclamation){
+            self.firstLineString = [NSString stringWithFormat:@"%@！",[[self.content componentsSeparatedByString:@"！"]firstObject]];
+        } else{
             self.firstLineString = @"";
         }
     }

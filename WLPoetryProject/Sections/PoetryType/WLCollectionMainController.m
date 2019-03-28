@@ -102,7 +102,7 @@
     
     
     self.gradeSectionArray = [NSArray arrayWithObjects:@"学前",@"小学",@"初中",@"高中", nil];
-    self.collectionSectionArray = [NSArray arrayWithObjects:@"唐诗",@"宋词", nil];
+    self.collectionSectionArray = [NSArray arrayWithObjects:@"唐诗",@"宋词",@"宋词精选",@"论语", nil];
 
 }
 
@@ -379,6 +379,14 @@
         //宋词
         dataArray = [self readConfigureWithFileName:@"configureSong"];
        
+    }else if (index == 2){
+        //宋词精选
+        dataArray = [self readConfigureWithFileName:@"configureSongGreat"];
+        
+    }else if (index == 3){
+        //论语
+        dataArray = [self readConfigureWithFileName:@"configureLunYu"];
+        
     }
     
     vc.typeDataArray = dataArray;

@@ -218,6 +218,8 @@
             //循环处理了全部诗词
         }
         
+    }else{
+        [dataArray addObject:originString];
     }
     
     

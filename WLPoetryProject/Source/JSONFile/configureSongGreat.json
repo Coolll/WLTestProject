@@ -1,0 +1,16 @@
+{
+  "dataList" : [
+                {
+                "mainTitle" : "宋词精选",
+                "subTitle" : "宋词必背",
+                "jsonName" : "songPoetry_mustRead",
+                "mainClass" : "32"
+                },{
+                "mainTitle" : "宋词精选",
+                "subTitle" : "宋词必读",
+                "jsonName" : "songPoetry_mustRecite",
+                "mainClass" : "33"
+                }
+	]
+    
+}
