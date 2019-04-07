@@ -230,6 +230,8 @@
             WLTypeListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WLTypeListCell"];;
             if (!cell) {
                 cell = [[WLTypeListCell alloc]init];
+                NSLog(@"====index:%ld %@",indexPath.row,cell);
+
             }
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.backgroundColor = [UIColor whiteColor];
@@ -267,6 +269,8 @@
     
     if (!cell) {
         cell = [[WLGradeTypeCell alloc]init];
+        NSLog(@"====index:%ld",indexPath.row);
+
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.backgroundColor = [UIColor whiteColor];
@@ -283,6 +287,8 @@
     WLGradeTypeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WLGradeTypeCell"];
     if (!cell) {
         cell = [[WLGradeTypeCell alloc]init];
+        NSLog(@"====index:%ld",indexPath.row);
+
     }
     cell.booksArray = self.collectionSectionArray;
     [cell clickWithBlock:^(NSInteger index) {

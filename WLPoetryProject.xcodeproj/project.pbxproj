@@ -190,6 +190,8 @@
 		0785076820B2EFF20030CD98 /* songPoetry_four.json in Resources */ = {isa = PBXBuildFile; fileRef = 0785075F20B2EFF20030CD98 /* songPoetry_four.json */; };
 		0785076920B2EFF20030CD98 /* songPoetry_ten.json in Resources */ = {isa = PBXBuildFile; fileRef = 0785076020B2EFF20030CD98 /* songPoetry_ten.json */; };
 		0785076A20B2EFF20030CD98 /* songPoetry_six.json in Resources */ = {isa = PBXBuildFile; fileRef = 0785076120B2EFF20030CD98 /* songPoetry_six.json */; };
+		078DB1E1225722C2007E6EA8 /* WLLunYuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 078DB1E0225722C2007E6EA8 /* WLLunYuController.m */; };
+		078DB1E42257279B007E6EA8 /* WLLunYuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 078DB1E32257279B007E6EA8 /* WLLunYuCell.m */; };
 		0791165C210C709600436964 /* allPoetryListConfigure.json in Resources */ = {isa = PBXBuildFile; fileRef = 0791165B210C709600436964 /* allPoetryListConfigure.json */; };
 		0791165E210CB8FC00436964 /* writePoetry.png in Resources */ = {isa = PBXBuildFile; fileRef = 0791165D210CB8FC00436964 /* writePoetry.png */; };
 		07911661210CBDA800436964 /* WritePoetryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07911660210CBDA800436964 /* WritePoetryController.m */; };
@@ -639,6 +641,10 @@
 		0785075F20B2EFF20030CD98 /* songPoetry_four.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = songPoetry_four.json; sourceTree = "<group>"; };
 		0785076020B2EFF20030CD98 /* songPoetry_ten.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = songPoetry_ten.json; sourceTree = "<group>"; };
 		0785076120B2EFF20030CD98 /* songPoetry_six.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = songPoetry_six.json; sourceTree = "<group>"; };
+		078DB1DF225722C2007E6EA8 /* WLLunYuController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLLunYuController.h; sourceTree = "<group>"; };
+		078DB1E0225722C2007E6EA8 /* WLLunYuController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLLunYuController.m; sourceTree = "<group>"; };
+		078DB1E22257279B007E6EA8 /* WLLunYuCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLLunYuCell.h; sourceTree = "<group>"; };
+		078DB1E32257279B007E6EA8 /* WLLunYuCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLLunYuCell.m; sourceTree = "<group>"; };
 		0791165B210C709600436964 /* allPoetryListConfigure.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = allPoetryListConfigure.json; sourceTree = "<group>"; };
 		0791165D210CB8FC00436964 /* writePoetry.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = writePoetry.png; sourceTree = "<group>"; };
 		0791165F210CBDA800436964 /* WritePoetryController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WritePoetryController.h; sourceTree = "<group>"; };
@@ -1641,6 +1647,8 @@
 				07B6E7AA20A07B2E000998E3 /* WLPoetryListController.m */,
 				0715FF0620C564790096C60E /* WLSearchController.h */,
 				0715FF0720C564790096C60E /* WLSearchController.m */,
+				078DB1DF225722C2007E6EA8 /* WLLunYuController.h */,
+				078DB1E0225722C2007E6EA8 /* WLLunYuController.m */,
 				07E7C30C20CC08E9007CA827 /* View */,
 			);
 			path = PoetryType;
@@ -1666,6 +1674,8 @@
 				0010F22620F4966E00F272EB /* WLBookView.m */,
 				0010F22B20F4A81C00F272EB /* WLGradeTypeCell.h */,
 				0010F22C20F4A81C00F272EB /* WLGradeTypeCell.m */,
+				078DB1E22257279B007E6EA8 /* WLLunYuCell.h */,
+				078DB1E32257279B007E6EA8 /* WLLunYuCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2153,10 +2163,12 @@
 				07E7C30F20CC090F007CA827 /* WLTypeListCell.m in Sources */,
 				0715FF0820C564790096C60E /* WLSearchController.m in Sources */,
 				00F9516420D4BA590039D7C5 /* WLSettingCell.m in Sources */,
+				078DB1E1225722C2007E6EA8 /* WLLunYuController.m in Sources */,
 				36521BA821904BED00425DCC /* RecitePoetryController.m in Sources */,
 				07567B8F207A02EC0018B9E7 /* WLSaveLocalHelper.m in Sources */,
 				0765C702207CE6E20085EB3A /* SDWebImageCompat.m in Sources */,
 				0765C6F9207CE6E20085EB3A /* NSButton+WebCache.m in Sources */,
+				078DB1E42257279B007E6EA8 /* WLLunYuCell.m in Sources */,
 				00469AF320F893770068636F /* WLCustomImageListController.m in Sources */,
 				0765C6FF207CE6E20085EB3A /* SDWebImageCoder.m in Sources */,
 				00D4F64120F743F300287FB0 /* WLHomePoetryCell.m in Sources */,

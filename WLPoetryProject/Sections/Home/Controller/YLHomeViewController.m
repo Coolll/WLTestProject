@@ -27,7 +27,6 @@
  **/
 @property (nonatomic,strong) UIImageView *mainBgView;
 
-
 /**
  *  诗词数据源
  **/
@@ -109,6 +108,7 @@
 - (void)loadImageWithArray:(NSArray*)imageArray withCurrentIndex:(NSInteger)index withImageView:(UIImageView*)imageView withStatusDic:(NSMutableDictionary*)dic
 {
     if(index < imageArray.count){
+        
         [imageView sd_setImageWithURL:[NSURL URLWithString:[imageArray objectAtIndex:index]] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
             
             
@@ -125,6 +125,8 @@
             [self loadImageWithArray:imageArray withCurrentIndex:(index+1) withImageView:imageView withStatusDic:dic];
 
         }];
+    }else{
+        imageView = nil;
     }
 }
 
@@ -469,6 +471,10 @@
         }
         
     }else{
+        
+        //如果诗词内容有更新，则需要把原先的诗词都删了，重新录入
+        NSLog(@"删除全部原有诗词");
+        [[WLCoreDataHelper shareHelper] deleteAllPoetry];
         
         for (int i =0 ; i < jsonList.count; i++) {
             NSString *key = [NSString stringWithFormat:@"%@",jsonList[i]];

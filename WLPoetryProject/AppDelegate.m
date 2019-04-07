@@ -52,18 +52,8 @@
     [Bmob registerWithAppKey:@"40e18dd4c61c975bc10e42abc6293dd1"];
     
 
-    
-//    [self addNewUser];
     [self getCurrentUserState];
-//    [self changePassword];
-//    [self addPoetryData];
-//    [self queryPoetryWithID];
-//        [self queryPoetryData];
-//    [self queryPoetryDataTwo];
-//    [self updateNewDataToPoetry];
-//    [self deleteDataInPoetry];
-   
-//    [self queryPoetryImageData];
+
     self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     
     self.window.backgroundColor = [UIColor whiteColor];
@@ -71,43 +61,11 @@
     [self.window makeKeyAndVisible];
     [self loadCustomTabbar];
 
-//    [self loadLaunchImage];
-
-//    dispatch_queue_t queue = dispatch_queue_create(0, 0);
-//    dispatch_async(queue, ^{
-        [self loadLikePoetryList];
+    [self loadLikePoetryList];
         
-        [self registShareSDK];
+    [self registShareSDK];
         
-//        [[AppConfig config] loadAllClassImageInfo];
 
-//    });
-    
-//    NSString *isFirstLoad = [[NSUserDefaults standardUserDefaults]objectForKey:FIRSTOPENAPP];
-//
-//    if (![isFirstLoad isEqualToString:@"1"]) {
-//        [self loadFirstLoadView];
-//
-//    }
-    
-    
-    
-//    NSDictionary *dataDic = @{    @"likePoetryList" : @"",
-//                                  @"phoneNumber" : @"(null)",
-//                                  @"userHeadImageURL" : @"(null)",
-//                                  @"userID" : @"38c9fe47ce",
-//                                  @"userName" : @"751f5180",
-//                                  @"userPassword" : @"12345678",
-//                                  @"userPoetryClass" : @"(null)",
-//                                  @"userPoetryStorage": @"(null)",
-//                                  @"userSessionToken":@"e90fa79c408719b580f87db2873213ee"};
-//
-//    UserInfoModel *model = [[UserInfoModel alloc]initModelWithDictionary:dataDic];
-//    [[WLCoreDataHelper shareHelper] saveInBackgroundWithUserInfoModel:model withResult:^(BOOL isSuccessful, NSError *error) {
-//
-//       UserInfoModel *model = [[WLCoreDataHelper shareHelper]fetchCurrentUserModel];
-//        NSLog(@"model:%@",model);
-//    }];
     
     
     NSLog(@"在DevBranch添加");
