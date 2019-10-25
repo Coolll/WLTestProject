@@ -57,14 +57,13 @@
 
 - (void)refreshUserWithDictionary:(NSDictionary*)dic
 {
-    self.ubalance = [self notNillValueWithKey:@"ubalance" withDic:dic];
-    self.uid = [self notNillValueWithKey:@"uid" withDic:dic];
-    self.uphone = [self notNillValueWithKey:@"uphone" withDic:dic];
-    self.userCreateTime = [self notNillValueWithKey:@"userCreateTime" withDic:dic];
-    self.userIntegral = [self notNillValueWithKey:@"userIntegral" withDic:dic];
-    self.userName = [self notNillValueWithKey:@"userName" withDic:dic];
-    self.userState = [self notNillValueWithKey:@"userState" withDic:dic];
-    self.userUpdateTime = [self notNillValueWithKey:@"userUpdateTime" withDic:dic];
+    self.userName = [self notNillValueWithKey:@"nick_name" withDic:dic];
+    self.uid = [self notNillValueWithKey:@"user_id" withDic:dic];
+    self.password = [self notNillValueWithKey:@"password" withDic:dic];
+    self.userPoetryClass = [self notNillValueWithKey:@"user_poetry_class" withDic:dic];
+    self.userPoetryStorage = [self notNillValueWithKey:@"poetry_storage" withDic:dic];
+    
+    self.likePoetryList = [NSMutableArray array];
 
 }
 

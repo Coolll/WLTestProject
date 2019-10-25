@@ -1,20 +1,6 @@
 {
   "poetryList" : [
                   {
-                  "name" : "送杜少府之任蜀州",
-                  "author" : "王勃",
-                  "content" : "城阙辅三秦，风烟望五津。与君离别意，同是宦游人。海内存知己，天涯若比邻。无为在歧路，儿女共沾巾。",
-                  "addtionInfo" : "少府：官名。之：到、往。蜀州：今四川崇州。城阙（què ）辅三秦：城阙，即城楼，指唐代京师长安城。辅，护卫。三秦，指长安城附近的关中之地，即今陕西省潼关以西一带。秦朝末年，项羽破秦，把关中分为三区，分别封给三个秦国的降将，所以称三秦。这句是倒装句，意思是京师长安三秦作保护。五津：指岷江的五个渡口白华津、万里津、江首津、涉头津、江南津。这里泛指蜀川。辅三秦：一作“俯西秦”。风烟望五津：“风烟”两字名词用作状语，表示行为的处所。全句意为江边因远望而显得迷茫如啼眼，是说在风烟迷茫之中，遥望蜀州。君：对人的尊称，相当于“您”。同：一作“俱”。宦（huàn）游：出外做官。海内：四海之内，即全国各地。古代人认为我国疆土四周环海，所以称天下为四海之内。天涯：天边，这里比喻极远的地方。比邻：并邻，近邻。无为：无须、不必。歧（qí）路：岔路。古人送行常在大路分岔处告别。沾巾：泪水沾湿衣服和腰带。意思是挥泪告别。",
-                  "classInfo" : "108",
-                  "poetryID" : "12",
-                  "source" : "2",
-                  "analysesInfo" : "",
-                  "transferInfo" : "",
-                  "backgroundInfo" : "",
-                  "backImageName" : "",
-                  "bgImageURL" : "",
-                  "placeHolder" : ""
-                  },{
                   "name" : "题都城南庄",
                   "author" : "崔护",
                   "content" : "去年今日此门中，人面桃花相映红。人面不知何处去，桃花依旧笑春风。",
@@ -26,7 +12,7 @@
                   "backImageName" : "",
                   "bgImageURL" : "",
                   "poetryID" : "100",
-                  "source" : "",
+                  "source" : "2",
                   "placeHolder" : ""
                   },{
                   "name" : "绝句·古木阴中系短篷",
@@ -40,7 +26,7 @@
                   "backImageName" : "",
                   "bgImageURL" : "",
                   "poetryID" : "101",
-                  "source" : "",
+                  "source" : "1",
                   "placeHolder" : ""
                   },{
                   "name" : "清平调·其一",
@@ -48,7 +34,7 @@
                   "content" : "云想衣裳花想容，春风拂槛露华浓。若非群玉山头见，会向瑶台月下逢。",
                   "addtionInfo" : "“云想”句：见云之灿烂想其衣之华艳，见花之艳丽想美人之容貌照人。实际上是以云喻衣，以花喻人。槛：栏杆；露华浓：牡丹花沾着晶莹的露珠更显得颜色艳丽。“若非……会向……”：相当于“不是……就是……”的意思。群玉：山名，传说中西王母所住之地。全句形容贵妃貌美惊人，怀疑她不是群玉山头所见的飘飘仙子，就是瑶台殿前月光照耀下的神女。",
                   "classInfo" : "75",
-                  "poetryID" : "13010",
+                  "poetryID" : "102",
                   "source" : "2",
                   "analysesInfo" : "",
                   "transferInfo" : "",
@@ -67,8 +53,8 @@
                   "backgroundInfo" : "",
                   "backImageName" : "",
                   "bgImageURL" : "",
-                  "poetryID" : "102",
-                  "source" : "",
+                  "poetryID" : "103",
+                  "source" : "1",
                   "placeHolder" : ""
                   },{
                   "name" : "八六子·倚危亭",
@@ -76,7 +62,7 @@
                   "content" : "倚危亭。恨如芳草，萋萋刬尽还生。念柳外青骢别后，水边红袂分时，怆然暗惊。无端天与娉婷。夜月一帘幽梦，春风十里柔情。怎奈向、欢娱渐随流水，素弦声断，翠绡香减，那堪片片飞花弄晚，蒙蒙残雨笼晴。正销凝。黄鹂又啼数声。",
                   "addtionInfo" : "刬（chǎn）：同“铲”。青骢（cōng）：毛色青白相间的马。袂（mèi）红：红袖，指女子，情人。娉（pīng）婷：美貌，指美人。怎奈向：即怎奈、如何。销凝：消魂凝恨。黄鹂：又名黄莺。",
                   "classInfo" : "7",
-                  "poetryID" : "18012",
+                  "poetryID" : "104",
                   "source" : "3",
                   "analysesInfo" : "",
                   "transferInfo" : "",
@@ -95,8 +81,8 @@
                   "backgroundInfo" : "",
                   "backImageName" : "",
                   "bgImageURL" : "",
-                  "poetryID" : "103",
-                  "source" : "",
+                  "poetryID" : "105",
+                  "source" : "2",
                   "placeHolder" : ""
                   },{
                   "name" : "春宵",
@@ -109,22 +95,8 @@
                   "backgroundInfo" : "",
                   "backImageName" : "",
                   "bgImageURL" : "",
-                  "poetryID" : "104",
-                  "source" : "",
-                  "placeHolder" : ""
-                  },{
-                  "name" : "绝句二首",
-                  "author" : "杜甫",
-                  "content" : "迟日江山丽，春风花草香。泥融飞燕子，沙暖睡鸳鸯。江碧鸟逾白，山青花欲燃。今春看又过，何日是归年。",
-                  "addtionInfo" : "迟日：春天日渐长，所以说迟日。泥融：这里指泥土滋润、湿润。鸳鸯：一种水鸟，雄鸟与雌鸟常双双出没。花欲燃：花红似火。",
-                  "classInfo" : "1",
-                  "analysesInfo" : "",
-                  "transferInfo" : "",
-                  "backgroundInfo" : "",
-                  "backImageName" : "",
-                  "bgImageURL" : "",
-                  "poetryID" : "105",
-                  "source" : "",
+                  "poetryID" : "106",
+                  "source" : "12",
                   "placeHolder" : ""
                   },{
                   "name" : "惠崇春江晚景二首",
@@ -137,8 +109,8 @@
                   "backgroundInfo" : "",
                   "backImageName" : "",
                   "bgImageURL" : "",
-                  "poetryID" : "106",
-                  "source" : "",
+                  "poetryID" : "107",
+                  "source" : "1",
                   "placeHolder" : ""
                   },{
                   "name" : "浪淘沙令·帘外雨潺潺",
@@ -146,27 +118,13 @@
                   "content" : "帘外雨潺潺，春意阑珊。罗衾不耐五更寒。梦里不知身是客，一晌贪欢。独自莫凭栏，无限江山，别时容易见时难。流水落花春去也，天上人间。",
                   "addtionInfo" : "潺潺：形容雨声。阑珊：衰残。罗衾（qīn）：绸被子。不耐：受不了。身是客：指被拘汴京，形同囚徒。一晌（shǎng）：一会儿，片刻。贪欢：指贪恋梦境中的欢乐。凭栏：靠着栏杆。江山：指南唐河山。",
                   "classInfo" : "85",
-                  "poetryID" : "15016",
+                  "poetryID" : "108",
                   "source" : "3",
                   "analysesInfo" : "",
                   "transferInfo" : "",
                   "backgroundInfo" : "",
                   "backImageName" : "",
                   "bgImageURL" : "",
-                  "placeHolder" : ""
-                  },{
-                  "name" : "早春呈水部张十八员外",
-                  "author" : "韩愈",
-                  "content" : "天街小雨润如酥，草色遥看近却无。最是一年春好处，绝胜烟柳满皇都。",
-                  "addtionInfo" : "呈：恭敬地送给。水部张十八员外：指张籍（766—830年）唐代诗人。在同族兄弟中排行第十八，曾任水部员外郎。天街：京城街道。润如酥：细腻如酥。酥，动物的油，这里形容春雨的细腻。最是：正是。处：时。绝胜：远远胜过。皇都：帝都，这里指长安。",
-                  "classInfo" : "1",
-                  "analysesInfo" : "",
-                  "transferInfo" : "",
-                  "backgroundInfo" : "",
-                  "backImageName" : "",
-                  "bgImageURL" : "",
-                  "poetryID" : "8515",
-                  "source" : "12",
                   "placeHolder" : ""
                   }
 	],

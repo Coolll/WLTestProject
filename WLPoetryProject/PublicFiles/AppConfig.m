@@ -82,11 +82,15 @@
             
             //如果请求到数据 则移除全部的key
             [self.bgImageInfo removeAllObjects];
-            for (BmobObject *obc in array) {
+            for (int i = 0;i<array.count;i++) {
+                BmobObject *obc = array[i];
+
                 //图片url作为value，class类别作为key，存储起来
                 NSString *url = [NSString stringWithFormat:@"%@",[obc objectForKey:@"imageURL"]];
                 NSString *className = [NSString stringWithFormat:@"%@",[obc objectForKey:@"className"]];
                 [self.bgImageInfo setObject:url forKey:className];
+                NSLog(@"index为:%d className为：%@ 个数：%d",i,className,self.bgImageInfo.allKeys.count);
+
             }
             
             if (block) {
@@ -123,6 +127,7 @@
             }
         }
         
+        [poetryListArray addObject:@"recommendPoetry"];
         _allPoetryList = [poetryListArray copy];
     }
     return _allPoetryList;

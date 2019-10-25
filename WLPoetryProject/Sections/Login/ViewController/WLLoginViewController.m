@@ -11,10 +11,11 @@
 #import "WLUserAgreementView.h"
 #import "WLSaveLocalHelper.h"
 #import "MBProgressHUD.h"
-#import <BmobSDK/Bmob.h>
+
 #import "UserInfoModel.h"
 #import "WLCoreDataHelper.h"
 #import "KeyChainHelper.h"
+#import "NetworkHelper.h"
 static NSString *keyInTheKeyChain = @"com.wangqilong.wqlPoetryProject";
 /*
  #import "Masonry.h"
@@ -464,7 +465,7 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
     NSInteger four = self.fourNameArray.count;
     NSInteger fourIndex = arc4random()%four;
     
-    NSInteger count = 10000+arc4random()%88888;
+    NSInteger count = 1000+arc4random()%8888;
     
     NSString *name = [NSString stringWithFormat:@"%@丶%@%ld",self.threeNameArray[threeIndex],self.fourNameArray[fourIndex],(long)count];
     self.nameTextField.contentString = name;
@@ -520,7 +521,7 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
 - (void)buttonAction:(UIButton*)sender
 {
     HidenKeybory;
-//    self.nameTextField.contentString = @"刘备";
+
     if (self.nameTextField.contentString.length == 0) {
         
         [self showHUDWithText:@"用户名不可为空"];
@@ -535,55 +536,88 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
     
     NSLog(@"登录");
     
-//    [WLSaveLocalHelper saveObject:@"" forKey:LoginTokenKey];
-//    [WLSaveLocalHelper saveObject:@"" forKey:LoginUserNameKey];
-//    [WLSaveLocalHelper saveObject:@"" forKey:LoginHeadImageKey];
-
-//    MBProgressHUD *hud = [MBProgressHUD HUDForView:[UIApplication sharedApplication].keyWindow];
-//
-//    if (!hud) {
-//        hud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
-//
-//        hud.label.text = @"正在处理...";
-//    }
     
     [self showLoadingHUDWithText:@"校验账户信息..."];
 
     [self registerAction];
    
     
-    
-    
 }
 
 - (void)registerAction
 {
-    //登录
-    BmobUser *bUser = [[BmobUser alloc]init];
-    [bUser setUsername:self.nameTextField.contentString];//区分大小写
-    [bUser setPassword:self.passwordTextField.contentString];
-//    [bUser setObject:@"" forKey:@"totalCount"];
-//    [bUser setObject:@"" forKey:@"currentCount"];
-//    [bUser setObject:@"" forKey:@"address"];
-//    [bUser setObject:@"" forKey:@"accountValue"];
-    [bUser signUpInBackgroundWithBlock:^(BOOL isSuccessful, NSError *error) {
+    [[NetworkHelper shareHelper] loginWithUserName:self.nameTextField.contentString password:self.passwordTextField.contentString withCompletion:^(BOOL success, NSDictionary *dic, NSError *error) {
         
         [self hideHUD];
-
-        if (isSuccessful) {
-            NSLog(@"用户成功注册");
-            [self loginAction];
-            [self showHUDWithText:@"注册成功，自动登录..."];
-
-        }else{
-            NSLog(@"注册失败");
-            if (error.code == 202) {
-                //用户已注册
-                [self loginAction];
-                [self showHUDWithText:@"账户自动登录..."];
+        if (success) {
+            
+            //更新基本信息
+            [[UserInformation shareUser] refreshUserWithDictionary:[dic objectForKey:@"data"]];
+            
+            
+            UserInfoModel *model = [[UserInfoModel alloc]initModelWithDictionary:dataDic];
+            model.isLogin = YES;
+            [[WLCoreDataHelper shareHelper] saveInBackgroundWithUserInfoModel:model withResult:^(BOOL isSuccessful, NSError *error) {
+                
+            }];
+            
+            
+            //            [WLSaveLocalHelper saveObject:[self notNillValueWithKey:@"token" withDic:dataDic] forKey:LoginTokenKey];
+            [WLSaveLocalHelper saveObject:user.objectId forKey:LoginUserIDKey];//保存一下ID
+            [WLSaveLocalHelper saveObject:@"1" forKey:LoginStatusKey];//登录成功
+            
+            //            [WLSaveLocalHelper saveObject:@"" forKey:LoginHeadImageKey];
+            
+            //需要记住密码，则保存，不需要，则保存空字符串
+            if (self.needSaveAccount) {
+                //                [WLSaveLocalHelper saveObject:[self notNillValueWithKey:@"username" withDic:dataDic] forKey:LoginUserNameKey];
+                //                [WLSaveLocalHelper saveObject:self.passwordTextField.contentString forKey:LoginUserPasswordKey];
+                NSDictionary *dic = @{@"account":self.nameTextField.contentString,@"password":self.passwordTextField.contentString};
+                if (dic) {
+                    [KeyChainHelper saveKey:keyInTheKeyChain withValue:dic];
+                }
+            }else{
+                //                [WLSaveLocalHelper saveObject:@"" forKey:LoginUserNameKey];
+                //                [WLSaveLocalHelper saveObject:@"" forKey:LoginUserPasswordKey];
             }
+            
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                if (self.successBlock) {
+                    self.successBlock([UserInformation shareUser]);
+                }
+                
+                [self.navigationController popViewControllerAnimated:YES];
+                
+            });
         }
+
     }];
+    
+//    //登录
+//    BmobUser *bUser = [[BmobUser alloc]init];
+//    [bUser setUsername:self.nameTextField.contentString];//区分大小写
+//    [bUser setPassword:self.passwordTextField.contentString];
+//
+//    [bUser signUpInBackgroundWithBlock:^(BOOL isSuccessful, NSError *error) {
+//
+//        [self hideHUD];
+//
+//        if (isSuccessful) {
+//            NSLog(@"用户成功注册");
+//            [self loginAction];
+//            [self showHUDWithText:@"注册成功，自动登录..."];
+//
+//        }else{
+//            NSLog(@"注册失败");
+//            if (error.code == 202) {
+//                //用户已注册
+//                [self loginAction];
+//                [self showHUDWithText:@"账户自动登录..."];
+//            }
+//        }
+//    }];
 }
 
 - (void)loginAction
