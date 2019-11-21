@@ -9,7 +9,6 @@
 #import "WLMyKnownController.h"
 #import "WLChartView.h"
 #import "UserInfoModel.h"
-#import "WLCoreDataHelper.h"
 #import "WLEvaluateController.h"
 #import "WLClassInfoController.h"
 
@@ -80,6 +79,16 @@
  *  关于等级
  **/
 @property (nonatomic,strong) UIImageView *aboutImageView;
+/**
+ *  等级
+ **/
+@property (nonatomic,assign) NSInteger index;
+/**
+ *  诗词储存量
+ **/
+@property (nonatomic,copy) NSString *storage;
+
+
 
 
 
@@ -94,6 +103,8 @@
     [super viewDidLoad];
     self.titleForNavi = @"我的学识";
     self.view.backgroundColor = ViewBackgroundColor;
+    [self loadCustomData];
+
 }
 
 - (void)loadCustomData
@@ -103,41 +114,83 @@
     self.titleArray = [NSArray arrayWithObjects:@"童生",@"秀才",@"举人",@"贡士",@"进士",@"探花",@"榜眼",@"状元", nil];
     self.colorArray = [NSArray arrayWithObjects:RGBCOLOR(33, 33, 33, 1.0),RGBCOLOR(121, 0, 233, 1.0),RGBCOLOR(17, 30, 211, 1.0),RGBCOLOR(16, 89, 146, 1.0),RGBCOLOR(103, 251, 12, 1.0),RGBCOLOR(244, 233, 15, 1.0),RGBCOLOR(242, 136, 18, 1.0),RGBCOLOR(251, 0, 5, 1.0), nil];
     
-//    self.userModel = [[WLCoreDataHelper shareHelper] fetchCurrentUserModel];
+    
+    
+    [[NetworkHelper shareHelper]requestUserChallengeInfo:kUserID withCompletion:^(BOOL success, NSDictionary *dic, NSError *error) {
+        if (success) {
+            
+            NSString *code = [NSString stringWithFormat:@"%@",[dic objectForKey:@"retCode"]];
+            if (![code isEqualToString:@"1000"]) {
+                NSString *tipMessage = [dic objectForKey:@"message"];
+                [self showHUDWithText:tipMessage];
+                return ;
+            }
+            NSArray *dataArray = [dic objectForKey:@"data"];
+            NSMutableArray *poetryArray = [NSMutableArray array];
+            for (int i = 0 ;i < dataArray.count;i++) {
+                NSDictionary *info = [dataArray objectAtIndex:i];
+                [poetryArray addObject:[info objectForKey:@"storage"]];
+                
+                if (i == poetryArray.count-1) {
+                    self.index = [[info objectForKey:@"poetry_class"] integerValue];
+                    self.storage = [NSString stringWithFormat:@"%@",[info objectForKey:@"storage"]];
+                }
+            }
+            
+            self.storageArray = [NSMutableArray arrayWithArray:[poetryArray copy]];
+            [self configureView];
+            
+        }else{
+            
+            [self showHUDWithText:@"请求失败，请稍后重试"];
+        }
+    }];
+}
+
+- (void)configureView
+{
+    self.chartView.dataArray = _storageArray;
+    [self.chartView configureView];
+    
+    //获取用户的等级
+    self.classLabel.text = [NSString stringWithFormat:@"Lv%ld %@",self.index+1,[self.titleArray objectAtIndex:self.index]];
+    self.classLabel.textColor = [self.colorArray objectAtIndex:self.index];
+    self.numberLabel.text = [NSString stringWithFormat:@"诗词量：%@",self.storage];
+    self.aboutImageView.backgroundColor = ViewBackgroundColor;
+    
+    if (self.index < self.imageArray.count) {
+        self.prizeView.image = [UIImage imageNamed:[self.imageArray objectAtIndex:self.index]];
+    }
     
     
 }
 
 
-
 - (void)loadCustomView
 {
-    [self loadCustomData];
 
-    BmobUser *user = [BmobUser currentUser];
     
-    NSInteger index = [[user objectForKey:@"userPoetryClass"] integerValue];
-    NSString *storage = [NSString stringWithFormat:@"%@",[user objectForKey:@"userPoetryStorage"]];
-    
-    if (!storage || [storage isEqualToString:@"(null)"] || [storage isEqualToString:@"<null>"] || [storage isEqualToString:@"null"]) {
-        storage = @"0";
+    if (!self.storage || [self.storage isEqualToString:@"(null)"] || [self.storage isEqualToString:@"<null>"] || [self.storage isEqualToString:@"null"]) {
+        self.storage = @"0";
     }
     self.mainScrollView.contentSize = CGSizeMake(PhoneScreen_WIDTH, 185+300*kHRate);
     [self configureHeadImage];
     self.nameLabel.text = self.userName;
-    //获取用户的等级
-    self.classLabel.text = [NSString stringWithFormat:@"Lv%ld %@",index+1,[self.titleArray objectAtIndex:index]];
-    self.classLabel.textColor = [self.colorArray objectAtIndex:index];
-    self.numberLabel.text = [NSString stringWithFormat:@"诗词量：%@",storage];
-    self.aboutImageView.backgroundColor = ViewBackgroundColor;
+//    //获取用户的等级
+//    self.classLabel.text = [NSString stringWithFormat:@"Lv%ld %@",self.index+1,[self.titleArray objectAtIndex:self.index]];
+//    self.classLabel.textColor = [self.colorArray objectAtIndex:self.index];
+//    self.numberLabel.text = [NSString stringWithFormat:@"诗词量：%@",self.storage];
+//    self.aboutImageView.backgroundColor = ViewBackgroundColor;
+//
+//    if (self.index < self.imageArray.count) {
+//        self.prizeView.image = [UIImage imageNamed:[self.imageArray objectAtIndex:self.index]];
+//    }
+//
+   
     
-    if (index < self.imageArray.count) {
-        self.prizeView.image = [UIImage imageNamed:[self.imageArray objectAtIndex:index]];
-    }
-    
-    self.storageArray = [NSMutableArray arrayWithArray:[user objectForKey:@"poetryStorageList"]];
-    self.chartView.dataArray = _storageArray;
-    [self.chartView configureView];
+//    self.storageArray = [NSMutableArray arrayWithArray:[user objectForKey:@"poetryStorageList"]];
+//    self.chartView.dataArray = _storageArray;
+//    [self.chartView configureView];
     
     self.startBtn.backgroundColor = RGBCOLOR(40, 190, 50, 1.0);
 

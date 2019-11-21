@@ -16,6 +16,20 @@
 
 + (void)saveCustomImageWithName:(NSString*)imageName;
 + (void)deleteCustomImageWithName:(NSString*)imageName;
+
 + (NSArray*)loadCustomImageArray;
+
+
++ (void)saveUserInfo:(NSDictionary*)userInfo;
++ (void)deleteUserInfo;
++ (NSString*)fetchUserID;
++ (NSString*)fetchUserToken;
++ (NSString*)fetchUserName;
++ (NSString*)fetchUserPassword;
++ (NSString*)fetchUserHeadImage;
+
++ (void)saveLikeList:(NSArray*)array;
++ (NSArray*)fetchLikeList;
+
 
 @end

@@ -15,6 +15,7 @@
 @property (nullable, nonatomic, copy) NSString *content;//内容
 @property (nullable, nonatomic, copy) NSString *firstLineString;//第一行的内容
 @property (nullable, nonatomic, copy) NSString *backImageName;//背景图片名
+@property (nullable, nonatomic, copy) NSString *backImageURL;//背景图片URL
 @property (nullable, nonatomic, copy) NSString *isLike;//是否收藏
 @property (nullable, nonatomic, copy) NSString *isRecited;//是否背诵
 @property (nullable, nonatomic, copy) NSString *isShowed;//是否随机展示了
@@ -31,9 +32,21 @@
 @property (nullable, nonatomic, copy) NSString *mainClassExplain;//主分类，1为小学一年级
 @property (nullable, nonatomic, copy) NSString *myPropertyForOne;//新增的一个属性
 /**
+ *  喜欢数
+ **/
+@property (nonatomic,assign) NSInteger likes;
+/**
+ *  是文本颜色
+ **/
+@property (nonatomic,assign) NSInteger textColor;
+
+/**
  *  文本的高度
  **/
 @property (nonatomic,assign) CGFloat heightForCell;
 
+
+- (instancetype)initPoetryWithDictionary:(NSDictionary*)dic;
+- (void)loadFirstLineString;
 
 @end

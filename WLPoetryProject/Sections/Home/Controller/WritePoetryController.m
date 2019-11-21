@@ -10,7 +10,6 @@
 #import "WLCustomTextView.h"
 #import "WLNewTextView.h"
 #import "UIButton+WLExtension.h"
-#import "WLCoreDataHelper.h"
 @interface WritePoetryController ()
 /**
  *  标题
@@ -67,37 +66,8 @@
 }
 - (void)saveDraft
 {
-    CreationModel *model = [[CreationModel alloc]init];
-    
-    NSString *title = self.titleTextView.contentString;
-    NSString *author = self.nameTextView.contentString;
-    NSString *content = self.contentTextView.contentString;
-    if (title.length == 0) {
-        title = @"无题";
-    }
-    if (author.length == 0) {
-        author = @"佚名";
-    }
-    
-    if (content.length == 0) {
-        [self showHUDWithText:@"内容不可为空"];
-        return;
-    }
-    model.creationTitle = title;
-    model.creationAuthor = author;
-    model.creationContent = content;
-    
-    [[WLCoreDataHelper shareHelper] saveInBackgroundWithCreationModel:model withResult:^(BOOL isSuccessful, NSError *error) {
-        if (isSuccessful) {
-            [self showHUDWithText:@"保存成功"];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [self.navigationController popViewControllerAnimated:YES];
-            });
-        }else{
-            [self showHUDWithText:@"请重试"];
-        }
+   
         
-    }];
 }
 
 #pragma mark - 点击事件

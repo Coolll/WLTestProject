@@ -67,9 +67,11 @@
 
 
 
-- (void)requestPostWithBody:(NSDictionary*)body withUrlString:(NSString*)urlString withCompletion:(nullable BaseResultBlock)block
+- (void)requestPostWithBody:(NSDictionary*)body withUrlString:(NSString*)path withCompletion:(nullable BaseResultBlock)block
 {
     
+    NSString *urlString = [NSString stringWithFormat:@"%@%@",BaseURL,path];
+
     //1 获取URL
     NSURL *url = [NSURL URLWithString:urlString];
     //构建请求参数
@@ -98,6 +100,7 @@
                 if (block) {
                     block(YES, dic, nil);
                 }
+                
             }
             
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

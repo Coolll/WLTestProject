@@ -12,27 +12,40 @@
 #import "WLTypeListCell.h"
 #import "WLGradeTypeCell.h"
 #import "WLTypeListController.h"
-
+#import "PoetryConfigureModel.h"
+#import "WLLunYuController.h"
 @interface WLCollectionMainController ()<UITableViewDelegate,UITableViewDataSource>
 /**
  *  诗词列表
  **/
 @property (nonatomic,strong) UITableView *mainTableView;
 
-/**
- *  年级 诗词数据源
- **/
-@property (nonatomic,copy) NSArray *gradeSectionArray;
-
-/**
- *  诗集 诗词数据源
- **/
-@property (nonatomic,copy) NSArray *collectionSectionArray;
 
 /**
  *  近期阅读的 诗词数据源
  **/
 @property (nonatomic,strong) NSMutableArray *recentSectionArray;
+
+/**
+ *  第一模块的诗词
+ **/
+@property (nonatomic,strong) NSMutableArray *sectionOneArray;
+/**
+ *  第二模块的诗词
+ **/
+@property (nonatomic,strong) NSMutableArray *sectionTwoArray;
+
+/**
+ *  第一模块的分类个数
+ **/
+@property (nonatomic,strong) NSMutableArray *sectionOneBooksTitleArray;
+
+/**
+ *  第二模块的分类个数
+ **/
+@property (nonatomic,strong) NSMutableArray *sectionTwoBooksTitleArray;
+
+
 
 @end
 
@@ -44,7 +57,6 @@
     self.view.backgroundColor = ViewBackgroundColor;
     self.titleForNavi = @"诗词分类";
     [self loadCustomData];
-    [self loadCustomView];
     [self loadSearchView];
 }
 
@@ -92,6 +104,8 @@
 - (void)loadCustomData
 {
     self.recentSectionArray = [NSMutableArray array];
+    self.sectionOneArray = [NSMutableArray array];
+    self.sectionTwoArray = [NSMutableArray array];
 
     NSArray *recentList = [WLSaveLocalHelper loadObjectForKey:@"recentSelectTypeInfo"];
     if (!recentList) {
@@ -101,12 +115,59 @@
     }
     
     
-    self.gradeSectionArray = [NSArray arrayWithObjects:@"学前",@"小学",@"初中",@"高中", nil];
-    self.collectionSectionArray = [NSArray arrayWithObjects:@"唐诗",@"宋词",@"宋词精选",@"论语", nil];
+    [[NetworkHelper shareHelper]requestPoetryConfigureWithCompletion:^(BOOL success, NSDictionary *dic, NSError *error) {
+        if (success) {
+            
+            NSString *code = [NSString stringWithFormat:@"%@",[dic objectForKey:@"retCode"]];
+            if (![code isEqualToString:@"1000"]) {
+                NSString *tipMessage = [dic objectForKey:@"message"];
+                [self showHUDWithText:tipMessage];
+                return ;
+            }
+            [self dealConfigureData:dic];
+            
+            
+        }else{
+            
+            [self showHUDWithText:@"请求失败，请稍后重试"];
+        }
+    }];
+    
+    
 
 }
 
+- (void)dealConfigureData:(NSDictionary*)dic{
+    NSArray *confDicArray = [dic objectForKey:@"data"];
+    
+    self.sectionOneBooksTitleArray = [NSMutableArray array];
+    self.sectionTwoBooksTitleArray = [NSMutableArray array];
+    
+    NSInteger sectionOneCount = self.sectionOneBooksTitleArray.count;
+    NSInteger sectionTwoCount = self.sectionTwoBooksTitleArray.count;
+    
+    for (NSDictionary *confDic in confDicArray) {
+        PoetryConfigureModel *model = [[PoetryConfigureModel alloc]initModelWithDictionary:confDic];
+        if (model.tableSection == 0) {
+            if (model.tableIndex+1 > sectionOneCount) {
+                sectionOneCount = model.tableIndex+1;
+                [self.sectionOneBooksTitleArray addObject:model.mainTitle];
+            }
+            [self.sectionOneArray addObject:model];
+            
+        }else if (model.tableSection == 1){
+            if (model.tableIndex+1 > sectionTwoCount) {
+                sectionTwoCount = model.tableIndex+1;
+                [self.sectionTwoBooksTitleArray addObject:model.mainTitle];
+            }
+            [self.sectionTwoArray addObject:model];
+        }
+    }
+    
+    
+    [self loadCustomView];
 
+}
 
 #pragma mark - 加载视图
 - (void)loadCustomView
@@ -174,17 +235,40 @@
         if (section ==0) {
             sectionLabel.text = @"近期浏览";
         }else if (section == 1){
-            sectionLabel.text = @"年级";
+            if (self.sectionOneArray.count > 0) {
+                PoetryConfigureModel *model = [self.sectionOneArray firstObject];
+                sectionLabel.text = model.sectionTitle;
+            }else{
+                sectionLabel.text = @"";
+            }
         }else if (section == 2){
-            sectionLabel.text = @"诗集";
+            if (self.sectionTwoArray.count > 0) {
+                PoetryConfigureModel *model = [self.sectionTwoArray firstObject];
+                sectionLabel.text = model.sectionTitle;
+            }else{
+                sectionLabel.text = @"";
+            }
+            
         }
         
     }else{
         //如果无近期阅读记录，则年级、诗集
         if (section == 0){
-            sectionLabel.text = @"年级";
+            if (self.sectionOneArray.count > 0) {
+                PoetryConfigureModel *model = [self.sectionOneArray firstObject];
+                sectionLabel.text = model.sectionTitle;
+            }else{
+                sectionLabel.text = @"";
+            }
+            
         }else if (section == 1){
-            sectionLabel.text = @"诗集";
+            if (self.sectionTwoArray.count > 0) {
+                PoetryConfigureModel *model = [self.sectionTwoArray firstObject];
+                sectionLabel.text = model.sectionTitle;
+            }else{
+                sectionLabel.text = @"";
+            }
+            
         }
         
     }
@@ -200,15 +284,15 @@
         if (indexPath.section == 0) {
             return 60;
         }else if(indexPath.section == 1){
-            return [WLGradeTypeCell heightForTypeCellWithCount:self.gradeSectionArray.count];
+            return [WLGradeTypeCell heightForTypeCellWithCount:self.sectionOneBooksTitleArray.count];
         }else if (indexPath.section == 2){
-            return [WLGradeTypeCell  heightForTypeCellWithCount:self.collectionSectionArray.count];
+            return [WLGradeTypeCell  heightForTypeCellWithCount:self.sectionTwoBooksTitleArray.count];
         }
     }else{
         if(indexPath.section == 0){
-            return [WLGradeTypeCell heightForTypeCellWithCount:self.gradeSectionArray.count];
+            return [WLGradeTypeCell heightForTypeCellWithCount:self.sectionOneBooksTitleArray.count];
         }else if (indexPath.section == 1){
-            return [WLGradeTypeCell  heightForTypeCellWithCount:self.collectionSectionArray.count];
+            return [WLGradeTypeCell  heightForTypeCellWithCount:self.sectionTwoBooksTitleArray.count];
         }
     }
     
@@ -230,11 +314,20 @@
             WLTypeListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WLTypeListCell"];;
             if (!cell) {
                 cell = [[WLTypeListCell alloc]init];
+                NSLog(@"====index:%ld %@",indexPath.row,cell);
             }
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.backgroundColor = [UIColor whiteColor];
             cell.imageName = @"typeHistory";
-            cell.typeString = [self.recentSectionArray[indexPath.row] objectForKey:@"subTitle"];
+            NSDictionary *historyInfo = self.recentSectionArray[indexPath.row];
+            NSString *mainTitle = [historyInfo objectForKey:@"mainTitle"];
+            NSString *subTitle = [historyInfo objectForKey:@"subTitle"];
+            NSString *mainClass = [historyInfo objectForKey:@"mainClass"];
+            if ([mainClass isEqualToString:@"34"]||[mainClass isEqualToString:@"35"]||[mainClass isEqualToString:@"36"]) {
+                cell.typeString = [NSString stringWithFormat:@"%@",subTitle];
+            }else{
+                cell.typeString = [NSString stringWithFormat:@"%@·%@",mainTitle,subTitle];
+            }
             cell.needLine = NO;
             return cell;
         }else if (section == 1){
@@ -253,7 +346,6 @@
             return [self cellForGradeAtIndexPath:indexPath withTable:tableView];
         }else if (section == 1){
             return [self cellForCollectionAtIndexPath:indexPath withTable:tableView];
-
         }
         
     }
@@ -267,12 +359,14 @@
     
     if (!cell) {
         cell = [[WLGradeTypeCell alloc]init];
+        NSLog(@"====index:%ld",indexPath.row);
+
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.backgroundColor = [UIColor whiteColor];
-    cell.booksArray = self.gradeSectionArray;
+    cell.booksArray = [self.sectionOneBooksTitleArray copy];
     [cell clickWithBlock:^(NSInteger index) {
-        [self clickGradeWithIndex:index];
+        [self clickSectionOneWithIndex:index];
     }];
     [cell loadCustomView];
     return cell;
@@ -283,10 +377,12 @@
     WLGradeTypeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WLGradeTypeCell"];
     if (!cell) {
         cell = [[WLGradeTypeCell alloc]init];
+        NSLog(@"====index:%ld",indexPath.row);
+
     }
-    cell.booksArray = self.collectionSectionArray;
+    cell.booksArray = [self.sectionTwoBooksTitleArray copy];
     [cell clickWithBlock:^(NSInteger index) {
-        [self clickCollectionWithIndex:index];
+        [self clickSectionTwoWithIndex:index];
     }];
     [cell loadCustomView];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -305,12 +401,27 @@
         //近期、年级、唐诗、宋词
         if (section == 0) {
             typeInfo = self.recentSectionArray[indexPath.row];
-            listVC.titleForNavi = [typeInfo objectForKey:@"subTitle"];
-            listVC.jsonName = [typeInfo objectForKey:@"jsonName"];
-            listVC.mainClass = [typeInfo objectForKey:@"mainClass"];
-            [listVC loadCustomData];
-            listVC.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:listVC animated:YES];
+            
+            NSString *mainClass = [typeInfo objectForKey:@"mainClass"];
+            if ([mainClass isEqualToString:@"34"]||[mainClass isEqualToString:@"35"]||[mainClass isEqualToString:@"36"]) {
+                //论语进入的界面和普通界面不一样
+                WLLunYuController *vc = [[WLLunYuController alloc]init];
+                vc.titleForNavi =[typeInfo objectForKey:@"subTitle"];
+                vc.mainClass = mainClass;
+                [vc loadCustomData];
+                vc.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:vc animated:YES];
+                
+            }else{
+                //普通的诗词界面
+                listVC.titleForNavi = [typeInfo objectForKey:@"subTitle"];
+                listVC.mainClass = mainClass;
+                [listVC loadCustomData];
+                listVC.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:listVC animated:YES];
+                
+            }
+            
 
         }else if (section == 1){
 
@@ -333,29 +444,17 @@
 }
 
 
-- (void)clickGradeWithIndex:(NSInteger)index
+- (void)clickSectionOneWithIndex:(NSInteger)index
 {
     WLTypeListController *vc = [[WLTypeListController alloc]init];
-    NSArray *dataArray = nil;
-    if (index == 0) {
-        //学前
-        dataArray = [self readConfigureWithFileName:@"configureGradeBaby"];
-        
-    }else if (index == 1) {
-        //小学
-        dataArray = [self readConfigureWithFileName:@"configureGradePrimary"];
-       
-    }else if (index == 2){
-        //初中
-        dataArray = [self readConfigureWithFileName:@"configureGradeJuinor"];
-        
-    }else if (index == 3){
-        //高中
-        dataArray = [self readConfigureWithFileName:@"configureGradeSenior"];
-        
+    NSMutableArray *confDataArray = [NSMutableArray array];
+    for (PoetryConfigureModel *model in self.sectionOneArray) {
+        if (model.tableIndex == index) {
+            [confDataArray addObject:model];
+        }
     }
     
-    vc.typeDataArray = dataArray;
+    vc.typeDataArray = confDataArray;
     [vc loadCustomView];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
@@ -367,29 +466,17 @@
     }];
 }
 
-- (void)clickCollectionWithIndex:(NSInteger)index
+- (void)clickSectionTwoWithIndex:(NSInteger)index
 {
     WLTypeListController *vc = [[WLTypeListController alloc]init];
-    NSArray *dataArray = nil;
-    if (index == 0) {
-        //唐诗
-        dataArray = [self readConfigureWithFileName:@"configureTang"];
-        
-    }else if (index == 1){
-        //宋词
-        dataArray = [self readConfigureWithFileName:@"configureSong"];
-       
-    }else if (index == 2){
-        //宋词精选
-        dataArray = [self readConfigureWithFileName:@"configureSongGreat"];
-        
-    }else if (index == 3){
-        //论语
-        dataArray = [self readConfigureWithFileName:@"configureLunYu"];
-        
+    NSMutableArray *confDataArray = [NSMutableArray array];
+    for (PoetryConfigureModel *model in self.sectionTwoArray) {
+        if (model.tableIndex == index) {
+            [confDataArray addObject:model];
+        }
     }
     
-    vc.typeDataArray = dataArray;
+    vc.typeDataArray = confDataArray;
     [vc loadCustomView];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];

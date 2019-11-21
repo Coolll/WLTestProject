@@ -9,6 +9,38 @@
 #import "UserInfoModel.h"
 
 @implementation UserInfoModel
+
+- (instancetype)initUserWithDictionary:(NSDictionary*)dic
+{
+    self = [super init];
+    if (self) {
+        self.userName = [self notNillValueWithKey:@"nick_name" withDic:dic];
+        self.userPassword = [self notNillValueWithKey:@"password" withDic:dic];
+        self.userPoetryClass = [self notNillValueWithKey:@"user_poetry_class" withDic:dic];
+        self.userPoetryStorage = [self notNillValueWithKey:@"poetry_storage" withDic:dic];
+        self.userSessionToken = [self notNillValueWithKey:@"user_token" withDic:dic];
+        self.userID = [self notNillValueWithKey:@"user_id" withDic:dic];
+        self.email = [self notNillValueWithKey:@"email" withDic:dic];
+        self.userHeadImageURL = [self notNillValueWithKey:@"head_image" withDic:dic];
+    }
+    return self;
+}
+
+- (NSString*)notNillValueWithKey:(NSString*)key withDic:(NSDictionary*)dic
+{
+    id object = [dic objectForKey:key];
+    
+    if (object) {
+        
+        NSString *string = [NSString stringWithFormat:@"%@",object];
+        return string;
+    }
+    
+    return @"";
+    
+}
+
+
 - (void)setValue:(id)value forKey:(NSString *)key
 {
     //先调用Super，否则array会被转为字符串

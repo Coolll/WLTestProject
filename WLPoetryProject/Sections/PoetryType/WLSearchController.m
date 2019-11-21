@@ -7,8 +7,7 @@
 //
 
 #import "WLSearchController.h"
-#import "WLCoreDataHelper.h"
-#import "WLPoetryListCell.h"
+#import "SearchPoetryCell.h"
 #import "PoetryDetailViewController.h"
 
 @interface WLSearchController ()<UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource>
@@ -25,7 +24,7 @@
 /**
  *  诗词数据源
  **/
-@property (nonatomic,strong) NSArray *poetryArray;
+@property (nonatomic,strong) NSMutableArray *poetryArray;
 /**
  *  高度数组
  **/
@@ -39,6 +38,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     self.naviColor = RGBCOLOR(250, 250, 250, 1.0);
+    self.poetryArray = [NSMutableArray array];
     [self removeAllNaviItems];
     
     [self loadCustomNavi];
@@ -109,6 +109,8 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self.searchTextField becomeFirstResponder];
     });
+    
+    
 }
 
 
@@ -124,8 +126,32 @@
 }
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    self.poetryArray = [[WLCoreDataHelper shareHelper] searchPoetryListWithKeyWord:textField.text];
-    [self loadCustomView];
+    [[NetworkHelper shareHelper] requestPoetryWithKeyword:textField.text withCompletion:^(BOOL success, NSDictionary *dic, NSError *error) {
+        if (success) {
+            NSString *codeString = [NSString stringWithFormat:@"%@",[dic objectForKey:@"retCode"]];
+            if ([codeString isEqualToString:@"1000"]) {
+                NSArray *dataArr = [dic objectForKey:@"data"];
+                for (NSDictionary *poetryDic in dataArr) {
+                    PoetryModel *model = [[PoetryModel alloc]initPoetryWithDictionary:poetryDic];
+                    [model loadFirstLineString];
+                    [self.poetryArray addObject:model];
+                }
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self loadCustomView];
+                });
+                
+            }else{
+                NSString *tipMessage = [dic objectForKey:@"message"];
+                [self showHUDWithText:tipMessage];
+                return ;
+            }
+        }else{
+            [self showHUDWithText:@"请求失败，请重试"];
+        }
+       
+    }];
+    
     [self.searchTextField resignFirstResponder];
     return NO;
 }
@@ -167,7 +193,7 @@
         return [[self.heightArray objectAtIndex:indexPath.row] floatValue];
     }else{
         if (self.poetryArray.count > indexPath.row) {
-            return [WLPoetryListCell heightForFirstLine:[self.poetryArray objectAtIndex:indexPath.row]];
+            return [SearchPoetryCell heightForFirstLine:[self.poetryArray objectAtIndex:indexPath.row]];
         }
     }
     
@@ -179,12 +205,16 @@
     
     PoetryModel *model = [self.poetryArray objectAtIndex:indexPath.row];
     
-    
-    WLPoetryListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WLPoetryListCell"];;
+    SearchPoetryCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SearchPoetryCell"];;
     if (!cell) {
-        cell = [[WLPoetryListCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"WLPoetryListCell"];
+        cell = [[SearchPoetryCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"SearchPoetryCell"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.backgroundColor = [UIColor clearColor];
+    }
+    if (indexPath.row == self.poetryArray.count-1) {
+        cell.isLast = YES;
+    }else{
+        cell.isLast = NO;
     }
     
     cell.dataModel = model;

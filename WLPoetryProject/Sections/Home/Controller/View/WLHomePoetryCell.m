@@ -74,42 +74,42 @@ static const CGFloat nameHeight = 25;//名字、作者等信息的高度
 - (void)dealBgViewLayout
 {
     //元素的布局
-    if (self.isLast) {
-        [self.bgView mas_updateConstraints:^(MASConstraintMaker *make) {
-            
-            make.leading.equalTo(self.mas_leading).offset(leftSpace);
-            make.top.equalTo(self.mas_top).offset(topSpce*2);
-            make.bottom.equalTo(self.mas_bottom).offset(-topSpce*2);
-            make.trailing.equalTo(self.mas_trailing).offset(-leftSpace);
-            
-            
-        }];
-    }else{
-        
-        if (self.isFirst) {
-            //有 题画 诗词 顶部间距减小
+//    if (self.isLast) {
+//        [self.bgView mas_updateConstraints:^(MASConstraintMaker *make) {
+//
+//            make.leading.equalTo(self.mas_leading).offset(leftSpace);
+//            make.top.equalTo(self.mas_top).offset(0);
+//            make.bottom.equalTo(self.mas_bottom).offset(-topSpce*2);
+//            make.trailing.equalTo(self.mas_trailing).offset(-leftSpace);
+//
+//
+//        }];
+//    }else{
+//
+//        if (self.isFirst) {
+//            //有 题画 诗词 顶部间距减小
+//            [self.bgView mas_updateConstraints:^(MASConstraintMaker *make) {
+//
+//                make.leading.equalTo(self.mas_leading).offset(leftSpace);
+//                make.top.equalTo(self.mas_top).offset(topSpce-10);
+//                make.bottom.equalTo(self.mas_bottom).offset(0);
+//                make.trailing.equalTo(self.mas_trailing).offset(-leftSpace);
+//
+//
+//            }];
+//        }else{
             [self.bgView mas_updateConstraints:^(MASConstraintMaker *make) {
                 
                 make.leading.equalTo(self.mas_leading).offset(leftSpace);
-                make.top.equalTo(self.mas_top).offset(topSpce-10);
+                make.top.equalTo(self.mas_top).offset(0);
                 make.bottom.equalTo(self.mas_bottom).offset(0);
                 make.trailing.equalTo(self.mas_trailing).offset(-leftSpace);
                 
                 
             }];
-        }else{
-            [self.bgView mas_updateConstraints:^(MASConstraintMaker *make) {
-                
-                make.leading.equalTo(self.mas_leading).offset(leftSpace);
-                make.top.equalTo(self.mas_top).offset(topSpce*2);
-                make.bottom.equalTo(self.mas_bottom).offset(0);
-                make.trailing.equalTo(self.mas_trailing).offset(-leftSpace);
-                
-                
-            }];
-        }
-        
-    }
+//        }
+    
+//    }
     
 }
 
@@ -117,8 +117,6 @@ static const CGFloat nameHeight = 25;//名字、作者等信息的高度
 {
     self.bgView.backgroundColor = [UIColor whiteColor];
     
-    
-
     self.nameLabel.textColor = RGBCOLOR(60, 60, 60, 1.0);
     
     self.authorLabel.textColor = RGBCOLOR(40, 40, 40, 1.0);
@@ -211,7 +209,7 @@ static const CGFloat nameHeight = 25;//名字、作者等信息的高度
      */
     NSString *firstLine = model.firstLineString;
     
-    CGFloat otherHeight = topSpce*2+lineWidth*2+itemSpace*4+nameHeight*2;
+    CGFloat otherHeight = lineWidth*2+itemSpace*4+nameHeight*2;
     CGFloat firstLineHeight = [WLPublicTool heightForTextString:firstLine width:(PhoneScreen_WIDTH-leftSpace*2-lineWidth*2-itemSpace*2) fontSize:16.f]+2;
     
     return otherHeight+firstLineHeight;//5为文本与底部横线的距离

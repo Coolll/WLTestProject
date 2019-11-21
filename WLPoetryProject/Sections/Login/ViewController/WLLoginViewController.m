@@ -13,7 +13,6 @@
 #import "MBProgressHUD.h"
 
 #import "UserInfoModel.h"
-#import "WLCoreDataHelper.h"
 #import "KeyChainHelper.h"
 #import "NetworkHelper.h"
 static NSString *keyInTheKeyChain = @"com.wangqilong.wqlPoetryProject";
@@ -551,34 +550,31 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
         [self hideHUD];
         if (success) {
             
+            NSString *code = [NSString stringWithFormat:@"%@",[dic objectForKey:@"retCode"]];
+            if (![code isEqualToString:@"1000"]) {
+                NSString *tipMessage = [dic objectForKey:@"message"];
+                [self showHUDWithText:tipMessage];
+                return ;
+            }
+            
+            NSDictionary *dataDic = [dic objectForKey:@"data"];
+            //保存登录信息到本地
+            [WLSaveLocalHelper saveUserInfo:dataDic];
             //更新基本信息
-            [[UserInformation shareUser] refreshUserWithDictionary:[dic objectForKey:@"data"]];
+            [[UserInformation shareUser] refreshUserWithDictionary:dataDic];
             
             
-            UserInfoModel *model = [[UserInfoModel alloc]initModelWithDictionary:dataDic];
-            model.isLogin = YES;
-            [[WLCoreDataHelper shareHelper] saveInBackgroundWithUserInfoModel:model withResult:^(BOOL isSuccessful, NSError *error) {
-                
-            }];
-            
-            
-            //            [WLSaveLocalHelper saveObject:[self notNillValueWithKey:@"token" withDic:dataDic] forKey:LoginTokenKey];
-            [WLSaveLocalHelper saveObject:user.objectId forKey:LoginUserIDKey];//保存一下ID
+
+        
             [WLSaveLocalHelper saveObject:@"1" forKey:LoginStatusKey];//登录成功
             
-            //            [WLSaveLocalHelper saveObject:@"" forKey:LoginHeadImageKey];
             
             //需要记住密码，则保存，不需要，则保存空字符串
             if (self.needSaveAccount) {
-                //                [WLSaveLocalHelper saveObject:[self notNillValueWithKey:@"username" withDic:dataDic] forKey:LoginUserNameKey];
-                //                [WLSaveLocalHelper saveObject:self.passwordTextField.contentString forKey:LoginUserPasswordKey];
                 NSDictionary *dic = @{@"account":self.nameTextField.contentString,@"password":self.passwordTextField.contentString};
                 if (dic) {
                     [KeyChainHelper saveKey:keyInTheKeyChain withValue:dic];
                 }
-            }else{
-                //                [WLSaveLocalHelper saveObject:@"" forKey:LoginUserNameKey];
-                //                [WLSaveLocalHelper saveObject:@"" forKey:LoginUserPasswordKey];
             }
             
             
@@ -587,7 +583,6 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
                 if (self.successBlock) {
                     self.successBlock([UserInformation shareUser]);
                 }
-                
                 [self.navigationController popViewControllerAnimated:YES];
                 
             });
@@ -595,100 +590,8 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
 
     }];
     
-//    //登录
-//    BmobUser *bUser = [[BmobUser alloc]init];
-//    [bUser setUsername:self.nameTextField.contentString];//区分大小写
-//    [bUser setPassword:self.passwordTextField.contentString];
-//
-//    [bUser signUpInBackgroundWithBlock:^(BOOL isSuccessful, NSError *error) {
-//
-//        [self hideHUD];
-//
-//        if (isSuccessful) {
-//            NSLog(@"用户成功注册");
-//            [self loginAction];
-//            [self showHUDWithText:@"注册成功，自动登录..."];
-//
-//        }else{
-//            NSLog(@"注册失败");
-//            if (error.code == 202) {
-//                //用户已注册
-//                [self loginAction];
-//                [self showHUDWithText:@"账户自动登录..."];
-//            }
-//        }
-//    }];
 }
 
-- (void)loginAction
-{
-    NSLog(@"开始登录");
-    
-    [BmobUser loginInbackgroundWithAccount:self.nameTextField.contentString andPassword:self.passwordTextField.contentString block:^(BmobUser *user, NSError *error) {
-        
-        [self hideHUD];
-        
-        if (user) {
-            [user setObject:self.passwordTextField.contentString forKey:@"userPwd"];
-            [user updateInBackgroundWithResultBlock:^(BOOL isSuccessful, NSError *error) {
-                
-            }];
-            NSLog(@"登录user:%@",user);
-            
-            //更新基本信息
-            [[UserInformation shareUser] refreshUserInfoWithUser:user];
-            
-            NSDictionary *dataDic = [self responseDataWithUser:user];
-            
-            UserInfoModel *model = [[UserInfoModel alloc]initModelWithDictionary:dataDic];
-            model.isLogin = YES;
-            [[WLCoreDataHelper shareHelper] saveInBackgroundWithUserInfoModel:model withResult:^(BOOL isSuccessful, NSError *error) {
-                
-            }];
-            
-            
-//            [WLSaveLocalHelper saveObject:[self notNillValueWithKey:@"token" withDic:dataDic] forKey:LoginTokenKey];
-            [WLSaveLocalHelper saveObject:user.objectId forKey:LoginUserIDKey];//保存一下ID
-            [WLSaveLocalHelper saveObject:@"1" forKey:LoginStatusKey];//登录成功
-            
-//            [WLSaveLocalHelper saveObject:@"" forKey:LoginHeadImageKey];
-            
-            //需要记住密码，则保存，不需要，则保存空字符串
-            if (self.needSaveAccount) {
-//                [WLSaveLocalHelper saveObject:[self notNillValueWithKey:@"username" withDic:dataDic] forKey:LoginUserNameKey];
-//                [WLSaveLocalHelper saveObject:self.passwordTextField.contentString forKey:LoginUserPasswordKey];
-                NSDictionary *dic = @{@"account":self.nameTextField.contentString,@"password":self.passwordTextField.contentString};
-                if (dic) {
-                    [KeyChainHelper saveKey:keyInTheKeyChain withValue:dic];
-                }
-            }else{
-//                [WLSaveLocalHelper saveObject:@"" forKey:LoginUserNameKey];
-//                [WLSaveLocalHelper saveObject:@"" forKey:LoginUserPasswordKey];
-            }
-            
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                
-                if (self.successBlock) {
-                    self.successBlock([UserInformation shareUser]);
-                }
-                
-                [self.navigationController popViewControllerAnimated:YES];
-                
-            });
-            
-        }else{
-            NSLog(@"登录error:%@",error);
-            if (error.code == 101) {
-                [self showHUDWithText:@"账号或密码错误"];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self showErrorTipView];
-                });
-            }
-        }
-    }];
-
-}
 
 
 - (void)showErrorTipView
@@ -731,52 +634,6 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
     
 }
 
-- (NSDictionary*)responseDataWithUser:(BmobUser*)user
-{
-    NSMutableDictionary *dataDic = [NSMutableDictionary dictionary];
-    NSString *userName = [NSString stringWithFormat:@"%@",[user objectForKey:@"username"]];
-    NSString *userId = [NSString stringWithFormat:@"%@",user.objectId];
-    NSString *phoneNo = [NSString stringWithFormat:@"%@",user.mobilePhoneNumber];
-    NSString *sessionToken = [NSString stringWithFormat:@"%@",[user objectForKey:@"sessionToken"]];
-    NSString *poetryClass = [NSString stringWithFormat:@"%@",[user objectForKey:@"userPoetryClass"]];
-    NSString *headImage = [NSString stringWithFormat:@"%@",[user objectForKey:@"headImageURL"]];
-    NSString *poetryStorage = [NSString stringWithFormat:@"%@",[user objectForKey:@"userPoetryStorage"]];
-    NSMutableArray *array = [NSMutableArray arrayWithArray:[user objectForKey:@"likePoetryIDList"]];
-    NSMutableArray *storageArray = [NSMutableArray arrayWithArray:[user objectForKey:@"poetryStorageList"]];
-
-    
-    if ([poetryClass isEqualToString:@"(null)"] || poetryClass.length == 0) {
-        poetryClass = @"0";
-        
-        //设置默认诗词等级，从0开始
-        [user setObject:@"0" forKey:@"userPoetryClass"];
-        [user updateInBackgroundWithResultBlock:^(BOOL isSuccessful, NSError *error) {
-            NSLog(@"error %@",[error description]);
-        }];
-    }
-    
-    if ([poetryStorage isEqualToString:@"(null)"] || poetryStorage.length == 0) {
-        poetryStorage = @"0";
-        //设置默认诗词储量，从0开始
-        [user setObject:@"0" forKey:@"userPoetryStorage"];
-        [user updateInBackgroundWithResultBlock:^(BOOL isSuccessful, NSError *error) {
-            NSLog(@"error %@",[error description]);
-        }];
-    }
-    
-    [dataDic setObject:userName forKey:@"userName"];
-    [dataDic setObject:userId forKey:@"userID"];
-    [dataDic setObject:phoneNo forKey:@"phoneNumber"];
-    [dataDic setObject:self.passwordTextField.contentString forKey:@"userPassword"];
-    [dataDic setObject:sessionToken forKey:@"userSessionToken"];
-    [dataDic setObject:poetryClass forKey:@"userPoetryClass"];
-    [dataDic setObject:headImage forKey:@"userHeadImageURL"];
-    [dataDic setObject:poetryStorage forKey:@"userPoetryStorage"];
-    [dataDic setObject:[array copy] forKey:@"likePoetryList"];
-    [dataDic setObject:[storageArray copy] forKey:@"poetryStorageList"];
-    
-    return dataDic;
-}
 
 
 #pragma mark - 底部的勾选图片点击

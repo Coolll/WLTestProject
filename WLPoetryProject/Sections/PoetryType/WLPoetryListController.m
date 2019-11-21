@@ -7,7 +7,6 @@
 //
 
 #import "WLPoetryListController.h"
-#import "WLCoreDataHelper.h"
 #import "PoetryModel.h"
 #import "WLPoetryListCell.h"
 #import "PoetryDetailViewController.h"
@@ -21,7 +20,12 @@
 /**
  *  诗词数据源
  **/
-@property (nonatomic,strong) NSArray *poetryArray;
+@property (nonatomic,strong) NSMutableArray *poetryArray;
+/**
+ *  是否已存入数据库的标示dic，如果首页没存入该数据，则需要把该数据读取出来，然后写入数据库。如果不修改标示，则首页会再次写入，导致本地数据库数据重复。
+ **/
+@property (nonatomic,strong) NSMutableDictionary *jsonStateDic;
+
 
 
 
@@ -39,57 +43,38 @@
 
 - (void)loadCustomData
 {
+    self.poetryArray = [NSMutableArray array];
     
-    self.poetryArray = [NSArray arrayWithArray:[[WLCoreDataHelper shareHelper] fetchPoetryWithMainClass:self.mainClass]];
-    
-    if (self.poetryArray.count == 0) {
-        //从本地读取文件
-        NSData *JSONData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:self.jsonName ofType:@"json"]];
-        //转为dic
-        NSDictionary *poetryDic = [NSJSONSerialization JSONObjectWithData:JSONData options:NSJSONReadingAllowFragments error:nil];
-        NSInteger baseId = [[NSString stringWithFormat:@"%@",[poetryDic objectForKey:@"baseID"]]integerValue];
+    [[NetworkHelper shareHelper]requestPoetryWithMainClass:self.mainClass withCompletion:^(BOOL success, NSDictionary *dic, NSError *error) {
         
-        //获取到诗词列表
-        NSArray *poetryArr = [poetryDic objectForKey:@"poetryList"];
-        NSString *poetryMainClass = [poetryDic objectForKey:@"mainClass"];
-        
-        NSMutableArray *modelArray = [NSMutableArray array];
-        //将诗词model化
-        for (int i = 0; i<poetryArr.count; i++) {
-            NSDictionary *itemDic = [poetryArr objectAtIndex:i];
-            PoetryModel *model = [[PoetryModel alloc]initModelWithDictionary:itemDic];
-            model.mainClass = poetryMainClass;
-            model.poetryID = [NSString stringWithFormat:@"%ld",(long)([model.poetryID integerValue]+baseId)];
-            [modelArray addObject:model];
-        }
-
-        
-        //存储到本地数据库
-        [[WLCoreDataHelper shareHelper]saveInBackgroundWithPeotryModelArray:modelArray withResult:^(BOOL isSuccessful, NSError *error) {
-            if (isSuccessful) {
-                //存储成功后读取然后展示
-                [self fetchPoetryAndShowView];
-                
+        if (success) {
+            
+            NSString *code = [NSString stringWithFormat:@"%@",[dic objectForKey:@"retCode"]];
+            if (![code isEqualToString:@"1000"]) {
+                NSString *tipMessage = [dic objectForKey:@"message"];
+                [self showHUDWithText:tipMessage];
+                return ;
             }
-        }];
-    }else{
-        
-        //直接展示数据
-        [self loadCustomView];
+            
+            NSArray *dataArr = [dic objectForKey:@"data"];
+            for (NSDictionary *poetryDic in dataArr) {
+                PoetryModel *model = [[PoetryModel alloc]initPoetryWithDictionary:poetryDic];
+                [self.poetryArray addObject:model];
+            }
 
-    }
-    
-    
-    
-}
-
-- (void)fetchPoetryAndShowView
-{
-    dispatch_async(dispatch_get_main_queue(), ^{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //直接展示数据
+                [self loadCustomView];
+            });
+            
+        }else{
+            [self showHUDWithText:@"请求失败，请稍后重试"];
+        }
         
-        self.poetryArray = [NSArray arrayWithArray:[[WLCoreDataHelper shareHelper] fetchPoetryWithMainClass:self.mainClass]];
-        [self loadCustomView];
-    });
+    }];
+    
+  
+    
     
 }
 
@@ -98,8 +83,6 @@
 #pragma mark - 加载视图
 - (void)loadCustomView
 {
-
-    
     self.mainTableView = [[UITableView alloc]init];
     self.mainTableView.delegate = self;
     self.mainTableView.dataSource = self;
@@ -167,7 +150,6 @@
                 NSLog(@"row:%ld 高度：%f",indexPath.row,cellHeight);
                 return cellHeight;
             }
-            
             
         }
     

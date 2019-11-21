@@ -73,7 +73,6 @@
 		071609AD20A1C15400904C69 /* gradePoetry_5.json in Resources */ = {isa = PBXBuildFile; fileRef = 071609A320A1C15400904C69 /* gradePoetry_5.json */; };
 		071609AE20A1C15400904C69 /* gradePoetry_6.json in Resources */ = {isa = PBXBuildFile; fileRef = 071609A420A1C15400904C69 /* gradePoetry_6.json */; };
 		071609B220A1C15400904C69 /* gradePoetry_empty.json in Resources */ = {isa = PBXBuildFile; fileRef = 071609A820A1C15400904C69 /* gradePoetry_empty.json */; };
-		07195C40208A3ABF00F791CE /* BmobSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07195C3F208A3ABF00F791CE /* BmobSDK.framework */; };
 		07195C42208A3AEE00F791CE /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07195C41208A3AEE00F791CE /* CoreLocation.framework */; };
 		07195C44208A3AF700F791CE /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07195C43208A3AF700F791CE /* Security.framework */; };
 		07195C46208A3AFD00F791CE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07195C45208A3AFD00F791CE /* CoreGraphics.framework */; };
@@ -88,7 +87,6 @@
 		07195C56208A3CDD00F791CE /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07195C55208A3CDD00F791CE /* Photos.framework */; };
 		0721702B2087843A002A1628 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 072170272087843A002A1628 /* Info.plist */; };
 		0721702C2087843A002A1628 /* README.strings in Resources */ = {isa = PBXBuildFile; fileRef = 072170282087843A002A1628 /* README.strings */; };
-		0721702D2087843A002A1628 /* WLPoetryProject.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 072170292087843A002A1628 /* WLPoetryProject.xcdatamodeld */; };
 		073864F420E12D8B0005BE61 /* poetryContent.png in Resources */ = {isa = PBXBuildFile; fileRef = 073864F320E12D8B0005BE61 /* poetryContent.png */; };
 		073D7F6C20A7E259002BCEA7 /* tangPoetry_one.json in Resources */ = {isa = PBXBuildFile; fileRef = 073D7F6B20A7E259002BCEA7 /* tangPoetry_one.json */; };
 		07567A9D207A02EB0018B9E7 /* BaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 075678D1207A02EA0018B9E7 /* BaseNavigationController.m */; };
@@ -190,6 +188,8 @@
 		0785076820B2EFF20030CD98 /* songPoetry_four.json in Resources */ = {isa = PBXBuildFile; fileRef = 0785075F20B2EFF20030CD98 /* songPoetry_four.json */; };
 		0785076920B2EFF20030CD98 /* songPoetry_ten.json in Resources */ = {isa = PBXBuildFile; fileRef = 0785076020B2EFF20030CD98 /* songPoetry_ten.json */; };
 		0785076A20B2EFF20030CD98 /* songPoetry_six.json in Resources */ = {isa = PBXBuildFile; fileRef = 0785076120B2EFF20030CD98 /* songPoetry_six.json */; };
+		078DB1E1225722C2007E6EA8 /* WLLunYuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 078DB1E0225722C2007E6EA8 /* WLLunYuController.m */; };
+		078DB1E42257279B007E6EA8 /* WLLunYuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 078DB1E32257279B007E6EA8 /* WLLunYuCell.m */; };
 		0791165C210C709600436964 /* allPoetryListConfigure.json in Resources */ = {isa = PBXBuildFile; fileRef = 0791165B210C709600436964 /* allPoetryListConfigure.json */; };
 		0791165E210CB8FC00436964 /* writePoetry.png in Resources */ = {isa = PBXBuildFile; fileRef = 0791165D210CB8FC00436964 /* writePoetry.png */; };
 		07911661210CBDA800436964 /* WritePoetryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07911660210CBDA800436964 /* WritePoetryController.m */; };
@@ -202,7 +202,6 @@
 		0795692020726D0B0097C26D /* WLPoetryProjectUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0795691F20726D0B0097C26D /* WLPoetryProjectUITests.m */; };
 		079BC505209D42BB00E0DF85 /* WLPoetryContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 079BC504209D42BB00E0DF85 /* WLPoetryContentCell.m */; };
 		079BC508209EEF6800E0DF85 /* AppConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 079BC507209EEF6800E0DF85 /* AppConfig.m */; };
-		07A9229B208628DB00BE5929 /* WLCoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A9229A208628DB00BE5929 /* WLCoreDataHelper.m */; };
 		07A922B120862EB100BE5929 /* PoetryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A922B020862EB100BE5929 /* PoetryModel.m */; };
 		07B6E7AB20A07B2E000998E3 /* WLPoetryListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07B6E7AA20A07B2E000998E3 /* WLPoetryListController.m */; };
 		07CFF240208B0AEE00849C20 /* WLPoetryListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 07CFF23F208B0AEE00849C20 /* WLPoetryListCell.m */; };
@@ -259,6 +258,10 @@
 		3607C882212F9DC600298C6C /* MyTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3607C881212F9DC600298C6C /* MyTextView.m */; };
 		3607C885212FA20000298C6C /* UIButton+WLExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3607C884212FA20000298C6C /* UIButton+WLExtension.m */; };
 		3607C896212FE3BF00298C6C /* CreationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3607C895212FE3BF00298C6C /* CreationModel.m */; };
+		360A2AA0237EA7670033F2F0 /* PoetryConfigureModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 360A2A9F237EA7670033F2F0 /* PoetryConfigureModel.m */; };
+		360CF12D2368132600F04C6B /* BackupHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 360CF12C2368132600F04C6B /* BackupHelper.m */; };
+		360CF13A236969CE00F04C6B /* AESCipher.m in Sources */ = {isa = PBXBuildFile; fileRef = 360CF139236969CE00F04C6B /* AESCipher.m */; };
+		360CF14023698DF800F04C6B /* RSAEncryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 360CF13E23698DF800F04C6B /* RSAEncryptor.m */; };
 		360E67182194121A00AD56BF /* WLPoetryHeadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 360E67172194121A00AD56BF /* WLPoetryHeadCell.m */; };
 		360E671A21941A1B00AD56BF /* number.png in Resources */ = {isa = PBXBuildFile; fileRef = 360E671921941A1B00AD56BF /* number.png */; };
 		360E672021941DA200AD56BF /* WLMyKnownController.m in Sources */ = {isa = PBXBuildFile; fileRef = 360E671F21941DA200AD56BF /* WLMyKnownController.m */; };
@@ -304,6 +307,7 @@
 		36C3A873224CADFB00A57F70 /* LunYu_two.json in Resources */ = {isa = PBXBuildFile; fileRef = 36C3A871224CADFB00A57F70 /* LunYu_two.json */; };
 		36C3A879224CB4D100A57F70 /* LunYu_three.json in Resources */ = {isa = PBXBuildFile; fileRef = 36C3A877224CB4D100A57F70 /* LunYu_three.json */; };
 		36FBC8602244B648008157F3 /* gradePoetry_14.json in Resources */ = {isa = PBXBuildFile; fileRef = 36FBC85F2244B648008157F3 /* gradePoetry_14.json */; };
+		36FD8D542383D01100497438 /* SearchPoetryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 36FD8D532383D01100497438 /* SearchPoetryCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -357,7 +361,6 @@
 		0010F22920F4996500F272EB /* WLTypeListController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLTypeListController.m; sourceTree = "<group>"; };
 		0010F22B20F4A81C00F272EB /* WLGradeTypeCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLGradeTypeCell.h; sourceTree = "<group>"; };
 		0010F22C20F4A81C00F272EB /* WLGradeTypeCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLGradeTypeCell.m; sourceTree = "<group>"; };
-		00150E7320EF5095001BE61D /* WLPoetryProject 1.0.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WLPoetryProject 1.0.xcdatamodel"; sourceTree = "<group>"; };
 		00150E8620EF53DF001BE61D /* Poetry+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Poetry+CoreDataProperties.h"; sourceTree = "<group>"; };
 		00150E8720EF53DF001BE61D /* Poetry+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Poetry+CoreDataClass.m"; sourceTree = "<group>"; };
 		00150E8820EF53DF001BE61D /* Poetry+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Poetry+CoreDataProperties.m"; sourceTree = "<group>"; };
@@ -434,7 +437,6 @@
 		071609A320A1C15400904C69 /* gradePoetry_5.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = gradePoetry_5.json; sourceTree = "<group>"; };
 		071609A420A1C15400904C69 /* gradePoetry_6.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = gradePoetry_6.json; sourceTree = "<group>"; };
 		071609A820A1C15400904C69 /* gradePoetry_empty.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = gradePoetry_empty.json; sourceTree = "<group>"; };
-		07195C3F208A3ABF00F791CE /* BmobSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BmobSDK.framework; sourceTree = "<group>"; };
 		07195C41208A3AEE00F791CE /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		07195C43208A3AF700F791CE /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		07195C45208A3AFD00F791CE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -447,7 +449,6 @@
 		07195C55208A3CDD00F791CE /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		072170272087843A002A1628 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		072170282087843A002A1628 /* README.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = README.strings; sourceTree = "<group>"; };
-		0721702A2087843A002A1628 /* WLPoetryProject.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WLPoetryProject.xcdatamodel; sourceTree = "<group>"; };
 		073864F320E12D8B0005BE61 /* poetryContent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = poetryContent.png; sourceTree = "<group>"; };
 		073D7F6B20A7E259002BCEA7 /* tangPoetry_one.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tangPoetry_one.json; sourceTree = "<group>"; };
 		075678D0207A02EA0018B9E7 /* BaseNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseNavigationController.h; sourceTree = "<group>"; };
@@ -641,6 +642,10 @@
 		0785075F20B2EFF20030CD98 /* songPoetry_four.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = songPoetry_four.json; sourceTree = "<group>"; };
 		0785076020B2EFF20030CD98 /* songPoetry_ten.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = songPoetry_ten.json; sourceTree = "<group>"; };
 		0785076120B2EFF20030CD98 /* songPoetry_six.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = songPoetry_six.json; sourceTree = "<group>"; };
+		078DB1DF225722C2007E6EA8 /* WLLunYuController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLLunYuController.h; sourceTree = "<group>"; };
+		078DB1E0225722C2007E6EA8 /* WLLunYuController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLLunYuController.m; sourceTree = "<group>"; };
+		078DB1E22257279B007E6EA8 /* WLLunYuCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLLunYuCell.h; sourceTree = "<group>"; };
+		078DB1E32257279B007E6EA8 /* WLLunYuCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLLunYuCell.m; sourceTree = "<group>"; };
 		0791165B210C709600436964 /* allPoetryListConfigure.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = allPoetryListConfigure.json; sourceTree = "<group>"; };
 		0791165D210CB8FC00436964 /* writePoetry.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = writePoetry.png; sourceTree = "<group>"; };
 		0791165F210CBDA800436964 /* WritePoetryController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WritePoetryController.h; sourceTree = "<group>"; };
@@ -662,8 +667,6 @@
 		079BC504209D42BB00E0DF85 /* WLPoetryContentCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLPoetryContentCell.m; sourceTree = "<group>"; };
 		079BC506209EEF6800E0DF85 /* AppConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppConfig.h; sourceTree = "<group>"; };
 		079BC507209EEF6800E0DF85 /* AppConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppConfig.m; sourceTree = "<group>"; };
-		07A92299208628DB00BE5929 /* WLCoreDataHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLCoreDataHelper.h; sourceTree = "<group>"; };
-		07A9229A208628DB00BE5929 /* WLCoreDataHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLCoreDataHelper.m; sourceTree = "<group>"; };
 		07A922AF20862EB100BE5929 /* PoetryModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PoetryModel.h; sourceTree = "<group>"; };
 		07A922B020862EB100BE5929 /* PoetryModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PoetryModel.m; sourceTree = "<group>"; };
 		07B6E7A920A07B2E000998E3 /* WLPoetryListController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLPoetryListController.h; sourceTree = "<group>"; };
@@ -737,6 +740,14 @@
 		3607C891212FE32700298C6C /* UserCreation+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UserCreation+CoreDataProperties.m"; sourceTree = "<group>"; };
 		3607C894212FE3BF00298C6C /* CreationModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CreationModel.h; sourceTree = "<group>"; };
 		3607C895212FE3BF00298C6C /* CreationModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CreationModel.m; sourceTree = "<group>"; };
+		360A2A9E237EA7670033F2F0 /* PoetryConfigureModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PoetryConfigureModel.h; sourceTree = "<group>"; };
+		360A2A9F237EA7670033F2F0 /* PoetryConfigureModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PoetryConfigureModel.m; sourceTree = "<group>"; };
+		360CF12B2368132600F04C6B /* BackupHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BackupHelper.h; sourceTree = "<group>"; };
+		360CF12C2368132600F04C6B /* BackupHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BackupHelper.m; sourceTree = "<group>"; };
+		360CF138236969CE00F04C6B /* AESCipher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AESCipher.h; sourceTree = "<group>"; };
+		360CF139236969CE00F04C6B /* AESCipher.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AESCipher.m; sourceTree = "<group>"; };
+		360CF13E23698DF800F04C6B /* RSAEncryptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSAEncryptor.m; sourceTree = "<group>"; };
+		360CF13F23698DF800F04C6B /* RSAEncryptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSAEncryptor.h; sourceTree = "<group>"; };
 		360E67162194121A00AD56BF /* WLPoetryHeadCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLPoetryHeadCell.h; sourceTree = "<group>"; };
 		360E67172194121A00AD56BF /* WLPoetryHeadCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLPoetryHeadCell.m; sourceTree = "<group>"; };
 		360E671921941A1B00AD56BF /* number.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = number.png; sourceTree = "<group>"; };
@@ -766,7 +777,6 @@
 		3635751C21AE7D2A009524C7 /* WLClassInfoController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLClassInfoController.m; sourceTree = "<group>"; };
 		3635751E21AE93FD009524C7 /* KeyChainHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyChainHelper.m; sourceTree = "<group>"; };
 		3635751F21AE93FD009524C7 /* KeyChainHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyChainHelper.h; sourceTree = "<group>"; };
-		3637F2D8219C09F300D1B6E8 /* WLPoetryProject 1.1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WLPoetryProject 1.1.xcdatamodel"; sourceTree = "<group>"; };
 		36382B00224B5FB0006D094A /* songPoetry_mustRead.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = songPoetry_mustRead.json; sourceTree = "<group>"; };
 		36382B01224B5FB0006D094A /* songPoetry_mustRecite.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = songPoetry_mustRecite.json; sourceTree = "<group>"; };
 		3640E931219E5F250077FF1F /* WLEvaluateController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLEvaluateController.h; sourceTree = "<group>"; };
@@ -783,13 +793,11 @@
 		3677ED532361868900C2A15F /* BaseNetwork.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseNetwork.m; sourceTree = "<group>"; };
 		3678970621AD172F004062D5 /* scoreBg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = scoreBg.jpg; sourceTree = "<group>"; };
 		3678970A21AD21C9004062D5 /* scoreCir.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scoreCir.png; sourceTree = "<group>"; };
-		3678970C21AD3A5E004062D5 /* WLPoetryProject 1.3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WLPoetryProject 1.3.xcdatamodel"; sourceTree = "<group>"; };
 		3678970D21AD3AA8004062D5 /* UserInfo+CoreDataProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UserInfo+CoreDataProperties.h"; sourceTree = "<group>"; };
 		3678970E21AD3AA8004062D5 /* UserInfo+CoreDataClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UserInfo+CoreDataClass.h"; sourceTree = "<group>"; };
 		3678970F21AD3AA8004062D5 /* UserInfo+CoreDataClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UserInfo+CoreDataClass.m"; sourceTree = "<group>"; };
 		3678971021AD3AA8004062D5 /* UserInfo+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UserInfo+CoreDataProperties.m"; sourceTree = "<group>"; };
 		367ED9942191691C00E979EE /* triangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = triangle.png; sourceTree = "<group>"; };
-		369C9E7E219D62D600022FEA /* WLPoetryProject 1. 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WLPoetryProject 1. 2.xcdatamodel"; sourceTree = "<group>"; };
 		36B3671B21A7E3CD0071C14A /* WLScoreController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLScoreController.h; sourceTree = "<group>"; };
 		36B3671C21A7E3CD0071C14A /* WLScoreController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLScoreController.m; sourceTree = "<group>"; };
 		36B3671E21A807B80071C14A /* WLPercentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLPercentView.h; sourceTree = "<group>"; };
@@ -806,6 +814,8 @@
 		36C3A871224CADFB00A57F70 /* LunYu_two.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LunYu_two.json; sourceTree = "<group>"; };
 		36C3A877224CB4D100A57F70 /* LunYu_three.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LunYu_three.json; sourceTree = "<group>"; };
 		36FBC85F2244B648008157F3 /* gradePoetry_14.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = gradePoetry_14.json; sourceTree = "<group>"; };
+		36FD8D522383D01100497438 /* SearchPoetryCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchPoetryCell.h; sourceTree = "<group>"; };
+		36FD8D532383D01100497438 /* SearchPoetryCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchPoetryCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -841,7 +851,6 @@
 				07195C44208A3AF700F791CE /* Security.framework in Frameworks */,
 				07195C42208A3AEE00F791CE /* CoreLocation.framework in Frameworks */,
 				07DCF5B120E26D8B00F0D053 /* TencentOpenAPI.framework in Frameworks */,
-				07195C40208A3ABF00F791CE /* BmobSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -951,19 +960,10 @@
 			path = Grade;
 			sourceTree = "<group>";
 		};
-		07195C3E208A3ABF00F791CE /* Baas */ = {
-			isa = PBXGroup;
-			children = (
-				07195C3F208A3ABF00F791CE /* BmobSDK.framework */,
-			);
-			path = Baas;
-			sourceTree = "<group>";
-		};
 		072170262087843A002A1628 /* Other */ = {
 			isa = PBXGroup;
 			children = (
 				072170282087843A002A1628 /* README.strings */,
-				072170292087843A002A1628 /* WLPoetryProject.xcdatamodeld */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -1281,16 +1281,17 @@
 		07567A94207A02EB0018B9E7 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				360CF12E236843A500F04C6B /* security */,
 				07567A97207A02EB0018B9E7 /* WLBaseModel.h */,
 				07567A98207A02EB0018B9E7 /* WLBaseModel.m */,
 				07567A99207A02EB0018B9E7 /* WLRequestHelper.h */,
 				07567A9A207A02EB0018B9E7 /* WLRequestHelper.m */,
 				07567A9B207A02EB0018B9E7 /* WLSaveLocalHelper.h */,
 				07567A9C207A02EB0018B9E7 /* WLSaveLocalHelper.m */,
-				07A92299208628DB00BE5929 /* WLCoreDataHelper.h */,
-				07A9229A208628DB00BE5929 /* WLCoreDataHelper.m */,
 				3635751F21AE93FD009524C7 /* KeyChainHelper.h */,
 				3635751E21AE93FD009524C7 /* KeyChainHelper.m */,
+				360CF12B2368132600F04C6B /* BackupHelper.h */,
+				360CF12C2368132600F04C6B /* BackupHelper.m */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -1445,7 +1446,6 @@
 				07567A94207A02EB0018B9E7 /* Helper */,
 				075679D3207A02EB0018B9E7 /* PublicFiles */,
 				075678D8207A02EB0018B9E7 /* Source */,
-				07195C3E208A3ABF00F791CE /* Baas */,
 				07A9229C2086293D00BE5929 /* Entity */,
 				072170262087843A002A1628 /* Other */,
 				0756793D207A02EB0018B9E7 /* ThirdPartClass */,
@@ -1497,6 +1497,8 @@
 				3607C895212FE3BF00298C6C /* CreationModel.m */,
 				36B5CC582199841D009D5861 /* UserInfoModel.h */,
 				36B5CC592199841D009D5861 /* UserInfoModel.m */,
+				360A2A9E237EA7670033F2F0 /* PoetryConfigureModel.h */,
+				360A2A9F237EA7670033F2F0 /* PoetryConfigureModel.m */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -1651,6 +1653,8 @@
 				07B6E7AA20A07B2E000998E3 /* WLPoetryListController.m */,
 				0715FF0620C564790096C60E /* WLSearchController.h */,
 				0715FF0720C564790096C60E /* WLSearchController.m */,
+				078DB1DF225722C2007E6EA8 /* WLLunYuController.h */,
+				078DB1E0225722C2007E6EA8 /* WLLunYuController.m */,
 				07E7C30C20CC08E9007CA827 /* View */,
 			);
 			path = PoetryType;
@@ -1676,6 +1680,10 @@
 				0010F22620F4966E00F272EB /* WLBookView.m */,
 				0010F22B20F4A81C00F272EB /* WLGradeTypeCell.h */,
 				0010F22C20F4A81C00F272EB /* WLGradeTypeCell.m */,
+				078DB1E22257279B007E6EA8 /* WLLunYuCell.h */,
+				078DB1E32257279B007E6EA8 /* WLLunYuCell.m */,
+				36FD8D522383D01100497438 /* SearchPoetryCell.h */,
+				36FD8D532383D01100497438 /* SearchPoetryCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1818,6 +1826,17 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		360CF12E236843A500F04C6B /* security */ = {
+			isa = PBXGroup;
+			children = (
+				360CF13F23698DF800F04C6B /* RSAEncryptor.h */,
+				360CF13E23698DF800F04C6B /* RSAEncryptor.m */,
+				360CF138236969CE00F04C6B /* AESCipher.h */,
+				360CF139236969CE00F04C6B /* AESCipher.m */,
+			);
+			path = security;
+			sourceTree = "<group>";
+		};
 		360E671B21941C8E00AD56BF /* MyAccountSecondVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -1953,7 +1972,7 @@
 				TargetAttributes = {
 					079568F420726D0B0097C26D = {
 						CreatedOnToolsVersion = 9.2;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 					0795690F20726D0B0097C26D = {
 						CreatedOnToolsVersion = 9.2;
@@ -2156,6 +2175,7 @@
 				00BBFA0E20D6291400BB86D9 /* WLFontController.m in Sources */,
 				0765C6B7207CE47E0085EB3A /* ViewController+MASAdditions.m in Sources */,
 				0765C70C207CE6E20085EB3A /* UIButton+WebCache.m in Sources */,
+				360CF12D2368132600F04C6B /* BackupHelper.m in Sources */,
 				0765C6B0207CE47E0085EB3A /* MASConstraintMaker.m in Sources */,
 				07567B81207A02EC0018B9E7 /* WLMyHeaderTableViewCell.m in Sources */,
 				07567B7D207A02EC0018B9E7 /* WLTextField.m in Sources */,
@@ -2163,11 +2183,14 @@
 				07E7C30F20CC090F007CA827 /* WLTypeListCell.m in Sources */,
 				0715FF0820C564790096C60E /* WLSearchController.m in Sources */,
 				00F9516420D4BA590039D7C5 /* WLSettingCell.m in Sources */,
+				078DB1E1225722C2007E6EA8 /* WLLunYuController.m in Sources */,
 				36521BA821904BED00425DCC /* RecitePoetryController.m in Sources */,
 				07567B8F207A02EC0018B9E7 /* WLSaveLocalHelper.m in Sources */,
 				3677ED512361854E00C2A15F /* NetworkHelper.m in Sources */,
 				0765C702207CE6E20085EB3A /* SDWebImageCompat.m in Sources */,
+				360CF13A236969CE00F04C6B /* AESCipher.m in Sources */,
 				0765C6F9207CE6E20085EB3A /* NSButton+WebCache.m in Sources */,
+				078DB1E42257279B007E6EA8 /* WLLunYuCell.m in Sources */,
 				00469AF320F893770068636F /* WLCustomImageListController.m in Sources */,
 				0765C6FF207CE6E20085EB3A /* SDWebImageCoder.m in Sources */,
 				00D4F64120F743F300287FB0 /* WLHomePoetryCell.m in Sources */,
@@ -2179,9 +2202,11 @@
 				07567B1D207A02EB0018B9E7 /* MJRefreshNormalHeader.m in Sources */,
 				0765C6B1207CE47E0085EB3A /* MASLayoutConstraint.m in Sources */,
 				0765C704207CE6E20085EB3A /* SDWebImageDownloaderOperation.m in Sources */,
+				36FD8D542383D01100497438 /* SearchPoetryCell.m in Sources */,
 				079BC505209D42BB00E0DF85 /* WLPoetryContentCell.m in Sources */,
 				36B5CC5A2199841D009D5861 /* UserInfoModel.m in Sources */,
 				009A1B2C20E618B900C0A58D /* WLPoetryLabel.m in Sources */,
+				360CF14023698DF800F04C6B /* RSAEncryptor.m in Sources */,
 				0765C709207CE6E20085EB3A /* SDWebImagePrefetcher.m in Sources */,
 				07567B1B207A02EB0018B9E7 /* MJRefreshBackStateFooter.m in Sources */,
 				0765C6B6207CE47E0085EB3A /* View+MASAdditions.m in Sources */,
@@ -2232,6 +2257,7 @@
 				0765C711207CE6E20085EB3A /* UIImageView+HighlightedWebCache.m in Sources */,
 				0010F22420F4911500F272EB /* WLImageSearchController.m in Sources */,
 				0765C701207CE6E20085EB3A /* SDWebImageCodersManager.m in Sources */,
+				360A2AA0237EA7670033F2F0 /* PoetryConfigureModel.m in Sources */,
 				36B5CC4B219927C0009D5861 /* WLImageCell.m in Sources */,
 				07F73C82208AF51D00F7D8B3 /* YLHomeViewController.m in Sources */,
 				0765C700207CE6E20085EB3A /* SDWebImageCoderHelper.m in Sources */,
@@ -2250,7 +2276,6 @@
 				0795690B20726D0B0097C26D /* main.m in Sources */,
 				0765C70F207CE6E20085EB3A /* UIImage+MultiFormat.m in Sources */,
 				0765C6F8207CE6E20085EB3A /* MKAnnotationView+WebCache.m in Sources */,
-				07A9229B208628DB00BE5929 /* WLCoreDataHelper.m in Sources */,
 				3616E7952192971D0014843F /* WLRecitePoetryCell.m in Sources */,
 				07567B19207A02EB0018B9E7 /* MJRefreshBackGifFooter.m in Sources */,
 				07567B1C207A02EB0018B9E7 /* MJRefreshGifHeader.m in Sources */,
@@ -2262,7 +2287,6 @@
 				0765C6FE207CE6E20085EB3A /* SDImageCacheConfig.m in Sources */,
 				003EBE1920D0F04500DD7815 /* LaunchController.m in Sources */,
 				0010F22720F4966E00F272EB /* WLBookView.m in Sources */,
-				0721702D2087843A002A1628 /* WLPoetryProject.xcdatamodeld in Sources */,
 				3607C896212FE3BF00298C6C /* CreationModel.m in Sources */,
 				00469AF620F8938D0068636F /* WLShowImageController.m in Sources */,
 				0765C70E207CE6E20085EB3A /* UIImage+GIF.m in Sources */,
@@ -2445,8 +2469,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer: QILONG WANG (YMCYH9M6N8)";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = EQK7HQ2C5P;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2471,8 +2495,8 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wangqilong.wqlPoetryProject;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "dd982f4a-eedc-4091-b4a8-3b0ab16f7deb";
+				PROVISIONING_PROFILE_SPECIFIER = poetryDev;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -2482,9 +2506,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: QILONG WANG (EQK7HQ2C5P)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: QILONG WANG (EQK7HQ2C5P)";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = EQK7HQ2C5P;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2509,8 +2533,8 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wangqilong.wqlPoetryProject;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "ba002daf-3295-448e-a73e-43577bef4d6c";
+				PROVISIONING_PROFILE_SPECIFIER = poetryDistribution;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -2613,23 +2637,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		072170292087843A002A1628 /* WLPoetryProject.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				3678970C21AD3A5E004062D5 /* WLPoetryProject 1.3.xcdatamodel */,
-				369C9E7E219D62D600022FEA /* WLPoetryProject 1. 2.xcdatamodel */,
-				3637F2D8219C09F300D1B6E8 /* WLPoetryProject 1.1.xcdatamodel */,
-				00150E7320EF5095001BE61D /* WLPoetryProject 1.0.xcdatamodel */,
-				0721702A2087843A002A1628 /* WLPoetryProject.xcdatamodel */,
-			);
-			currentVersion = 3678970C21AD3A5E004062D5 /* WLPoetryProject 1.3.xcdatamodel */;
-			path = WLPoetryProject.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 079568ED20726D0B0097C26D /* Project object */;
 }

@@ -9,7 +9,7 @@
 #import "BaseViewController.h"
 #import "PoetryModel.h"
 
-typedef void(^LikeBlock) (BOOL isLike);
+typedef void(^LikeBlock) (BOOL isLike,NSString *poetryID);
 
 @interface PoetryDetailViewController : BaseViewController
 /**

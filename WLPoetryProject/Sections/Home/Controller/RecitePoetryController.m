@@ -135,7 +135,6 @@ static const CGFloat leftSpace = 10;//诗句的左右间距
 - (void)optionBtnAction:(UIButton*)sender
 {
     NSInteger index = sender.tag-1000;
-    NSLog(@"index:%ld",index);
     self.optionView.hidden = YES;
     self.isOpen = NO;
     if (index == 0) {

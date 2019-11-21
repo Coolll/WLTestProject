@@ -7,7 +7,6 @@
 //
 
 #import "WLFeedbackController.h"
-#import <BmobSDK/Bmob.h>
 @interface WLFeedbackController ()
 /**
  *  输入框
@@ -126,19 +125,23 @@
         return;
     }
     
-    BmobObject *feedback = [BmobObject objectWithClassName:@"FeedBackList"];
-    [feedback setObject:self.inputTextView.text forKey:@"feedbackContent"];
-    [feedback setObject:[NSString stringWithFormat:@"%@",self.contactTextView.text] forKey:@"feedbackContact"];
-    
-    [feedback saveInBackgroundWithResultBlock:^(BOOL isSuccessful, NSError *error) {
-        if (isSuccessful) {
-            NSLog(@"成功");
+    [[NetworkHelper shareHelper] addOneFeedbackWithUserID:kUserID content:self.inputTextView.text contact:self.contactTextView.text withCompletion:^(BOOL success, NSDictionary *dic, NSError *error) {
+        if (success) {
+            
+            NSString *code = [NSString stringWithFormat:@"%@",[dic objectForKey:@"retCode"]];
+            if (![code isEqualToString:@"1000"]) {
+                NSString *tipMessage = [dic objectForKey:@"message"];
+                [self showHUDWithText:tipMessage];
+                return ;
+            }
+            
             [self showHUDWithText:@"提交成功"];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self.navigationController popViewControllerAnimated:YES];
             });
         }else{
-            NSLog(@"失败");
+            
+            [self showHUDWithText:@"请求失败，请稍后重试"];
         }
     }];
 

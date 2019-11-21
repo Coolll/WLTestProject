@@ -23,7 +23,7 @@
     
     if (isSelected) {
         self.strokeColor = RGBCOLOR(117, 201, 250, 1.0).CGColor;
-        self.textLabel.text = self.text;
+        self.textLabel.text = [NSString stringWithFormat:@"%@",self.text];
     }else{
         self.strokeColor = RGBCOLOR(59, 167, 249, 1.0).CGColor;
         self.textLabel.hidden = YES;

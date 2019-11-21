@@ -8,9 +8,9 @@
 
 #import "PoetryDetailViewController.h"
 #import "WLPoetryContentCell.h"
-#import <BmobSDK/Bmob.h>
+
 #import "RecitePoetryController.h"
-#import "WLCoreDataHelper.h"
+
 
 static const CGFloat leftSpace = 10;//诗句的左右间距
 static const CGFloat topSpace = 15;//诗句与标题的上间距
@@ -61,7 +61,7 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     
-    if ([self.dataModel.poetryID isEqualToString:@"27004"]) {
+    if (self.dataModel.textColor == 1 ) {
         //静夜思 背景色为深色，文本改为白色
         self.needWhite = YES;
     }else{
@@ -76,12 +76,64 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
     
     [self addBackButtonForFullScreen];//返回按钮，需要最后添加
     
-    [self loadLikeData];
+    
     
 }
 
-- (void)loadLikeData
+- (void)viewWillDisappear:(BOOL)animated
 {
+    [super viewWillDisappear:animated];
+    
+    if (self.likeBlock) {
+        //点击收藏/取消收藏后，我的收藏列表的数据需要更新
+        self.likeBlock(self.isLike,self.dataModel.poetryID);
+    }
+    
+    NSArray *userLikeList = [WLSaveLocalHelper fetchLikeList];
+
+    if (self.isLike) {
+        if (userLikeList.count == 0) {
+            [WLSaveLocalHelper saveLikeList:[NSArray arrayWithObject:self.dataModel.poetryID]];
+        }
+        
+        BOOL isContain = NO;
+        for (NSString *poetryID in userLikeList) {
+            NSString *poetryIDString = [NSString stringWithFormat:@"%@",poetryID];
+            //已经收藏了的诗词
+            if ([poetryIDString isEqualToString:self.dataModel.poetryID]) {
+                isContain = YES;
+            }
+        }
+        
+        if (!isContain) {
+            NSMutableArray *array = [NSMutableArray arrayWithArray:userLikeList];
+            [array insertObject:self.dataModel.poetryID atIndex:0];
+            [WLSaveLocalHelper saveLikeList:[array copy]];
+        }
+    }else{
+        
+        //原来喜欢 现在不喜欢了，要移除掉
+        BOOL isContain = NO;
+        for (NSString *poetryID in userLikeList) {
+            NSString *poetryIDString = [NSString stringWithFormat:@"%@",poetryID];
+            //已经收藏了的诗词
+            if ([poetryIDString isEqualToString:self.dataModel.poetryID]) {
+                isContain = YES;
+            }
+        }
+        
+        if (isContain) {
+            NSMutableArray *array = [NSMutableArray arrayWithArray:userLikeList];
+            [array removeObject:self.dataModel.poetryID];
+            [WLSaveLocalHelper saveLikeList:[array copy]];
+            
+        }
+    }
+}
+
+- (void)setDataModel:(PoetryModel *)dataModel
+{
+    _dataModel = dataModel;
     
     id token = kUserToken;
     if (!token) {
@@ -96,35 +148,79 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
         return;
     }
     
+//    id userId = kUserID;
+//    if (!userId) {
+//        userId = @"";
+//    }
+//    NSString *userIdString = [NSString stringWithFormat:@"%@",userId];
     
-    BmobUser *user = [BmobUser currentUser];
+    NSArray *userLikeList = [WLSaveLocalHelper fetchLikeList];
+    if (userLikeList.count == 0) {
+        self.isLike = NO;
+        [self loadLikeButton];
+        return;
+    }
     
-    if (user) {
-        
-        NSMutableArray *array = [NSMutableArray arrayWithArray:[user objectForKey:@"likePoetryIDList"]];
-        
-        if (array.count == 0) {
-            self.isLike = NO;
+    BOOL isContain = NO;
+    for (NSNumber *poetryID in userLikeList) {
+        NSString *poetryIdString = [NSString stringWithFormat:@"%@",poetryID];
+        //已经收藏了的诗词
+        if ([poetryIdString isEqualToString:self.dataModel.poetryID]) {
+            self.isLike = YES;
             [self loadLikeButton];
             return;
         }
-        
-        BOOL isContain = NO;
-        for (NSString *poetryIdString in array) {
-            //已经收藏了的诗词
-            if ([poetryIdString isEqualToString:self.dataModel.poetryID]) {
-                self.isLike = YES;
-                [self loadLikeButton];
-                return;
-            }
-        }
-        
-        if (!isContain) {
-            self.isLike = NO;
-            [self loadLikeButton];
-        }
-        
     }
+    
+    if (!isContain) {
+        self.isLike = NO;
+        [self loadLikeButton];
+    }
+    
+
+//    [[NetworkHelper shareHelper] requestUserAllLikes:userIdString withCompletion:^(BOOL success, NSDictionary *dic, NSError *error) {
+//
+//        if (success) {
+//
+//            NSString *code = [NSString stringWithFormat:@"%@",[dic objectForKey:@"retCode"]];
+//            if (![code isEqualToString:@"1000"]) {
+//                NSString *tipMessage = [dic objectForKey:@"message"];
+//                [self showHUDWithText:tipMessage];
+//                return;
+//            }
+//
+//            NSArray *dataArr = [dic objectForKey:@"data"];
+//            if (dataArr.count == 0) {
+//                self.isLike = NO;
+//                [self loadLikeButton];
+//                return;
+//            }
+//
+//            BOOL isContain = NO;
+//            for (NSNumber *poetryID in dataArr) {
+//                NSString *poetryIdString = [NSString stringWithFormat:@"%@",poetryID];
+//                //已经收藏了的诗词
+//                if ([poetryIdString isEqualToString:self.dataModel.poetryID]) {
+//                    self.isLike = YES;
+//                    [self loadLikeButton];
+//                    return;
+//                }
+//            }
+//
+//            if (!isContain) {
+//                self.isLike = NO;
+//                [self loadLikeButton];
+//            }
+//        }else{
+//            //如果网络请求失败，则默认没有
+//            self.isLike = NO;
+//            [self loadLikeButton];
+//        }
+//
+//    }];
+    
+    
+   
     
     
 }
@@ -140,20 +236,7 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
 
 }
 
-- (void)queryPoetryImageData
-{
-    BmobQuery *query = [BmobQuery queryWithClassName:@"ImageList"];
-    
-    [query findObjectsInBackgroundWithBlock:^(NSArray *array, NSError *error) {
-        
-        if (array.count > 0) {
-            BmobObject *obc = [array firstObject];
-            NSString *url = [obc objectForKey:@"imageURL"];
-            NSLog(@"imageURL:%@",url);
-            [self.mainImageView sd_setImageWithURL:[NSURL URLWithString:url]];
-        }
-    }];
-}
+
 
 
 - (void)loadMainBackImageView
@@ -162,13 +245,12 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
     self.mainImageView = [[UIImageView alloc]init];
     [self.view addSubview:self.mainImageView];
     
-    NSString *imageName = [NSString stringWithFormat:@"%@",[[AppConfig config].bgImageInfo objectForKey:self.dataModel.classInfo]];
-    if (imageName.length > 0 && ![imageName isEqualToString:@"(null)"]) {
-//        self.mainImageView.image = [UIImage imageNamed:imageName];
+    NSString *imageName = self.dataModel.backImageURL;
+    if (imageName.length > 0 && ![imageName isEqualToString:@"<null>"] && ![imageName isEqualToString:@"(null)"]) {
+
         [self.mainImageView sd_setImageWithURL:[NSURL URLWithString:imageName]];
     }else{
         self.mainImageView.image = [UIImage imageNamed:@"poetryBack.jpg"];
-
     }
     
     
@@ -333,52 +415,69 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
         return;
     }
     
-    
     NSString *userId = kUserID;
     if (!userId || userId.length == 0) {
         userId = @"";
     }
     NSString *userIDString = [NSString stringWithFormat:@"%@",userId];
     
-    BmobUser *user = [BmobUser currentUser];
-    
-    NSString *userBmobId = user.objectId;
-//    NSMutableArray *array = [NSMutableArray arrayWithArray:[user objectForKey:@"likePoetryIDList"]];
-    NSArray *array = [NSArray arrayWithObject:self.dataModel.poetryID];
-    if ([userBmobId isEqualToString:userIDString]) {
-        
-        if (self.isLike) {
-            //如果之前是喜欢，点击按钮，则移除
-//            [array removeObject:self.dataModel.poetryID];
-            [user removeObjectsInArray:[array copy] forKey:@"likePoetryIDList"];
-
-
-        }else{
-            //如果之前未喜欢，点击按钮，则收藏
-//            [array addObject:self.dataModel.poetryID];
-            [user addObjectsFromArray:[array copy] forKey:@"likePoetryIDList"];
-
-        }
-        
-        [user updateInBackgroundWithResultBlock:^(BOOL isSuccessful, NSError *error) {
-            NSLog(@"error %@",[error description]);
-            if (isSuccessful) {
-                self.isLike = !self.isLike;
-                
-                if (self.isLike) {
-                    self.likeImage.image = [UIImage imageNamed:@"likePoetry"];
+    if (self.isLike) {
+        //如果之前是喜欢，点击按钮，则移除
+        [[NetworkHelper shareHelper] dislikePoetry:userIDString poetryId:self.dataModel.poetryID withCompletion:^(BOOL success, NSDictionary *dic, NSError *error) {
+            if (success) {
+                NSString *codeString = [NSString stringWithFormat:@"%@",[dic objectForKey:@"retCode"]];
+                if ([codeString isEqualToString:@"1000"]) {
+                    self.isLike = !self.isLike;
+                    
+                    if (self.isLike) {
+                        self.likeImage.image = [UIImage imageNamed:@"likePoetry"];
+                    }else{
+                        self.likeImage.image = [UIImage imageNamed:@"unlikePoetry"];
+                    }
+                    
+                    
                 }else{
-                    self.likeImage.image = [UIImage imageNamed:@"unlikePoetry"];
+                    
+                    NSString *tipMessage = [dic objectForKey:@"message"];
+                    [self showHUDWithText:tipMessage];
                 }
                 
-                //点击收藏/取消收藏后，我的收藏列表的数据需要更新
-                if (self.likeBlock) {
-                    self.likeBlock(self.isLike);
-                }
+            }else{
+                [self showHUDWithText:@"请求失败，请稍后重试"];
                 
             }
         }];
+
+        
+    }else{
+        //如果之前未喜欢，点击按钮，则收藏
+        [[NetworkHelper shareHelper] likePoetry:userIDString poetryId:self.dataModel.poetryID withCompletion:^(BOOL success, NSDictionary *dic, NSError *error) {
+            if (success) {
+                NSString *codeString = [NSString stringWithFormat:@"%@",[dic objectForKey:@"retCode"]];
+                if ([codeString isEqualToString:@"1000"]) {
+                    self.isLike = !self.isLike;
+                    
+                    if (self.isLike) {
+                        self.likeImage.image = [UIImage imageNamed:@"likePoetry"];
+                    }else{
+                        self.likeImage.image = [UIImage imageNamed:@"unlikePoetry"];
+                    }
+                    
+                    
+                }else{
+                    
+                    NSString *tipMessage = [dic objectForKey:@"message"];
+                    [self showHUDWithText:tipMessage];
+                }
+                
+            }else{
+                [self showHUDWithText:@"请求失败，请稍后重试"];
+
+            }
+        }];
     }
+    
+
     
 }
 

@@ -7,7 +7,7 @@
 //
 
 #import "AppConfig.h"
-
+#import "NetworkHelper.h"
 @implementation AppConfig
 + (AppConfig *)config
 {
@@ -69,35 +69,55 @@
 - (void)loadAllClassImageInfo
 {
     
-    [self loadClassImageWithBlock:nil];
+    [self loadAllBgImageWithBlock:nil];
 }
 
-- (void)loadClassImageWithBlock:(void(^)(NSDictionary*dic))block
+
+- (void)loadAllBgImageWithBlock:(void(^)(NSDictionary*dic,NSError *error))block
 {
-    BmobQuery *query = [BmobQuery queryWithClassName:@"ImageList"];
-    
-    [query findObjectsInBackgroundWithBlock:^(NSArray *array, NSError *error) {
+    [[NetworkHelper shareHelper] requestAllBgImagesWithCompletion:^(BOOL success, NSDictionary *dic, NSError *error) {
         
-        if (array.count > 0) {
+        if (success) {
             
-            //如果请求到数据 则移除全部的key
-            [self.bgImageInfo removeAllObjects];
-            for (int i = 0;i<array.count;i++) {
-                BmobObject *obc = array[i];
-
-                //图片url作为value，class类别作为key，存储起来
-                NSString *url = [NSString stringWithFormat:@"%@",[obc objectForKey:@"imageURL"]];
-                NSString *className = [NSString stringWithFormat:@"%@",[obc objectForKey:@"className"]];
-                [self.bgImageInfo setObject:url forKey:className];
-                NSLog(@"index为:%d className为：%@ 个数：%d",i,className,self.bgImageInfo.allKeys.count);
-
+            NSString *code = [NSString stringWithFormat:@"%@",[dic objectForKey:@"retCode"]];
+            if (![code isEqualToString:@"1000"]) {
+                NSString *tipMessage = [dic objectForKey:@"message"];
+                if (block) {
+                    block(nil,[NSError errorWithDomain:NSURLErrorDomain code:[code integerValue] userInfo:@{NSLocalizedDescriptionKey:tipMessage}]);
+                }
+                return ;
             }
+            
+            NSArray *array = [dic objectForKey:@"data"];
+            if (array.count > 0) {
+                
+                //如果请求到数据 则移除全部的key
+                [self.bgImageInfo removeAllObjects];
+                for (int i = 0;i<array.count;i++) {
+                    NSDictionary *imgDic = array[i];
+                    
+                    //图片url作为value，class类别作为key，存储起来
+                    NSString *url = [NSString stringWithFormat:@"%@",[imgDic objectForKey:@"image_url"]];
+                    NSString *className = [NSString stringWithFormat:@"%@",[imgDic objectForKey:@"class_info"]];
+                    [self.bgImageInfo setObject:url forKey:className];
+                    
+                }
+                
+                if (block) {
+                    block(self.bgImageInfo,nil);
+                }
+            }
+            
+        }else{
             
             if (block) {
-                block(self.bgImageInfo);
+                block(nil,[NSError errorWithDomain:NSURLErrorDomain code:500 userInfo:@{NSLocalizedDescriptionKey:@"请求失败，请重试"}]);
             }
+            
         }
+        
     }];
+    
 }
 
 - (NSMutableDictionary*)bgImageInfo

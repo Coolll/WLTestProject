@@ -8,10 +8,9 @@
 
 #import "WLSettingController.h"
 #import "WLSettingCell.h"
-#import <BmobSDK/Bmob.h>
 #import "WLFontController.h"
 #import "WLFeedbackController.h"
-#import "WLCoreDataHelper.h"
+
 @interface WLSettingController ()<UITableViewDelegate,UITableViewDataSource>
 /**
  *  数据
@@ -195,24 +194,39 @@
     
     if (indexPath.section == 1) {
         //退出登录
-        [BmobUser logout];
-        if (self.block) {
-            self.block(NO);
-        }
-        [self showHUDWithText:@"退出成功"];
         
-        [WLSaveLocalHelper saveObject:@"0" forKey:LoginStatusKey];//退出
+        [[NetworkHelper shareHelper] logoutWithUserID:kUserID withCompletion:^(BOOL success, NSDictionary *dic, NSError *error) {
+            if (success) {
+                
+                NSString *code = [NSString stringWithFormat:@"%@",[dic objectForKey:@"retCode"]];
+                if (![code isEqualToString:@"1000"]) {
+                    NSString *tipMessage = [dic objectForKey:@"message"];
+                    [self showHUDWithText:tipMessage];
+                    return ;
+                }
+                
+                if (self.block) {
+                    self.block(NO);
+                }
+                [self showHUDWithText:@"退出成功"];
+                [WLSaveLocalHelper deleteUserInfo];
+                [WLSaveLocalHelper saveObject:@"0" forKey:LoginStatusKey];//退出
 
-//        [WLSaveLocalHelper saveObject:@"" forKey:LoginTokenKey];
-//        [WLSaveLocalHelper saveObject:@"" forKey:LoginUserIDKey];
-//        [WLSaveLocalHelper saveObject:@"" forKey:LoginHeadImageKey];
-//        kClearUserInfo;
-    
-//        [[WLCoreDataHelper shareHelper] loginOutWithUserID:userID];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [self.navigationController popViewControllerAnimated:YES];
+                });
+                
+            }else{
+                
+                [self showHUDWithText:@"请求失败，请稍后重试"];
+            }
+            
+        }];
+       
         
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self.navigationController popViewControllerAnimated:YES];
-        });
+
+        
+       
     }
     
 }

@@ -44,7 +44,7 @@ static const NSInteger cellCount = 3;
     self.imageArray = [NSMutableArray arrayWithArray:[AppConfig config].bgImageInfo.allValues];
     
     if (self.imageArray.count == 0) {
-        [[AppConfig config] loadClassImageWithBlock:^(NSDictionary *dic) {
+        [[AppConfig config] loadAllBgImageWithBlock:^(NSDictionary *dic,NSError *error) {
             [self.imageArray addObjectsFromArray:dic.allValues];
             [self loadCustomView];
         }];

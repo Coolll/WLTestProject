@@ -9,7 +9,8 @@
 #import "WLTypeListController.h"
 #import "WLPoetryListController.h"
 #import "WLTypeListCell.h"
-
+#import "WLLunYuController.h"
+#import "PoetryConfigureModel.h"
 @interface WLTypeListController ()<UITableViewDelegate,UITableViewDataSource>
 /**
  *  诗词列表
@@ -44,16 +45,14 @@
     _typeDataArray = typeDataArray;
     
     if (typeDataArray && typeDataArray.count > 0) {
-        NSDictionary *typeInfo = self.typeDataArray[0];
-        NSString *title = [NSString stringWithFormat:@"%@",[typeInfo objectForKey:@"mainTitle"]];
-        self.titleForNavi = title;
+        PoetryConfigureModel *model = [typeDataArray firstObject];
+        self.titleForNavi = model.mainTitle;
     }
 }
 
 - (void)loadCustomData
 {
     
-
 }
 
 
@@ -123,7 +122,8 @@
     if (self.typeDataArray && self.typeDataArray.count > 0) {
         
         if (indexPath.row < self.typeDataArray.count) {
-            cell.typeString = [self.typeDataArray[indexPath.row] objectForKey:@"subTitle"];
+            PoetryConfigureModel *model = [self.typeDataArray objectAtIndex:indexPath.row];
+            cell.typeString = model.subTitle;
         }
         
         if (indexPath.row == self.typeDataArray.count-1) {
@@ -140,20 +140,32 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     WLPoetryListController *listVC = [[WLPoetryListController alloc]init];
-    NSDictionary *typeInfo = [NSDictionary dictionary];
+    PoetryConfigureModel *model = [[PoetryConfigureModel alloc]init];
     
     if (self.typeDataArray && self.typeDataArray.count > indexPath.row) {
-        typeInfo = self.typeDataArray[indexPath.row];
+        model = self.typeDataArray[indexPath.row];
         
     }
-    
-    listVC.titleForNavi = [typeInfo objectForKey:@"subTitle"];
-    listVC.jsonName = [typeInfo objectForKey:@"jsonName"];
-    listVC.mainClass = [typeInfo objectForKey:@"mainClass"];
-    [listVC loadCustomData];
-    listVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:listVC animated:YES];
-    
+    NSString *mainClass = model.mainClass;
+    if ([mainClass isEqualToString:@"34"]||[mainClass isEqualToString:@"35"]||[mainClass isEqualToString:@"36"]) {
+        //论语进入的界面和普通界面不一样
+        WLLunYuController *vc = [[WLLunYuController alloc]init];
+        vc.titleForNavi = model.subTitle;
+        vc.mainClass = mainClass;
+        [vc loadCustomData];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+        
+    }else{
+        //普通的诗词界面
+        listVC.titleForNavi = model.subTitle;
+        listVC.mainClass = mainClass;
+        [listVC loadCustomData];
+        listVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:listVC animated:YES];
+        
+    }
+    NSDictionary *typeInfo = [NSDictionary dictionaryWithObjectsAndKeys:model.mainTitle,@"mainTitle",model.subTitle,@"subTitle",model.mainClass,@"mainClass", nil];
     
     NSArray *lastReadList = [NSArray arrayWithObject:typeInfo];
     

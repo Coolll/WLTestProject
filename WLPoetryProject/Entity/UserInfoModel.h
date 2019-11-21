@@ -29,8 +29,14 @@
  *  是否登陆
  **/
 @property (nonatomic,assign) BOOL isLogin;
+/**
+ *  邮箱
+ **/
+@property (nonatomic,copy) NSString *email;
 
 
+
+- (instancetype)initUserWithDictionary:(NSDictionary*)dic;
 
 - (NSString*)fetchName;
 - (NSString*)fetchPassword;

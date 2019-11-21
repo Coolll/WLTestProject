@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-#import <BmobSDK/Bmob.h>
 @interface UserInformation : NSObject
 
 /**
@@ -84,7 +83,6 @@
 
 - (void)refreshUserWithDictionary:(NSDictionary*)dic;
 
-- (void)refreshUserInfoWithUser:(BmobUser*)user;
 
 
 @end

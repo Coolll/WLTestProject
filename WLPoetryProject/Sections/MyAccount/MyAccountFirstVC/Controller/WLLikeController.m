@@ -8,7 +8,6 @@
 
 #import "WLLikeController.h"
 #import "PoetryModel.h"
-#import "WLCoreDataHelper.h"
 #import "WLPoetryListCell.h"
 #import "PoetryDetailViewController.h"
 @interface WLLikeController ()<UITableViewDataSource,UITableViewDelegate>
@@ -48,23 +47,38 @@
 
     self.modelArray = [NSMutableArray array];
     
-    BmobUser *user = [BmobUser currentUser];
-    
-    if (user) {
+    [[NetworkHelper shareHelper] requestUserAllCollections:kUserID from:0 count:10 withCompletion:^(BOOL success, NSDictionary *dic, NSError *error) {
+        if (success) {
+            
+            NSString *code = [NSString stringWithFormat:@"%@",[dic objectForKey:@"retCode"]];
+            if (![code isEqualToString:@"1000"]) {
+                NSString *tipMessage = [dic objectForKey:@"message"];
+                [self showHUDWithText:tipMessage];
+                return ;
+            }
+            
+            NSArray *dataArray = [dic objectForKey:@"data"];
+            if (dataArray.count == 0) {
+                [self loadEmptyLikeView];
+                return;
+            }else{
+                self.noLabel.hidden = YES;
+            }
+            
+            for (NSDictionary *subDic in dataArray) {
+                PoetryModel *model = [[PoetryModel alloc]initPoetryWithDictionary:[subDic objectForKey:@"poetryEntity"]];
+                [self.modelArray addObject:model];
+            }
+            [self loadCustomView];
+
         
-        NSMutableArray *array = [NSMutableArray arrayWithArray:[user objectForKey:@"likePoetryIDList"]];
-        
-        if (array.count == 0) {
-            [self loadEmptyLikeView];
-            return;
+
         }else{
-            self.noLabel.hidden = YES;
+            
+            [self showHUDWithText:@"请求失败，请稍后重试"];
         }
-        
-        [self fetchPoetryWithIdArray:array];
-        
-        
-    }
+    }];
+
     
 }
 
@@ -87,18 +101,7 @@
     }];
 }
 
-- (void)fetchPoetryWithIdArray:(NSArray*)array
-{
-    for (NSString *idString in array) {
-        
-        PoetryModel *model = [[WLCoreDataHelper shareHelper] fetchPoetryModelWithID:idString];
-        [self.modelArray addObject:model];
-    }
-    
-    [self loadCustomView];
 
-    
-}
 
 
 #pragma mark - 加载视图
@@ -198,13 +201,28 @@
         PoetryDetailViewController *detailVC = [[PoetryDetailViewController alloc]init];
         detailVC.dataModel = self.modelArray[indexPath.row];
         
-        [detailVC clickLikeWithBlock:^(BOOL isLike){
+        [detailVC clickLikeWithBlock:^(BOOL isLike,NSString *poetryID){
             
             
             //可能需要删除
             if (!isLike) {
-                [self.modelArray removeObjectAtIndex:indexPath.row];
-                [self.mainTableView reloadData];
+                for (PoetryModel *model in self.modelArray) {
+                    //如果取消了收藏
+                    if ([model.poetryID isEqualToString:poetryID]) {
+                        //移除掉
+                        [self.modelArray removeObjectAtIndex:indexPath.row];
+                        [self.mainTableView reloadData];
+
+                        //如果仅有一条，取消收藏了，则清空界面，否则刷新界面
+                        if (self.modelArray.count == 0) {
+                            [self loadEmptyLikeView];
+                        }
+                        
+                        return ;
+                    }
+                }
+                
+                
             }
         }];
         detailVC.hidesBottomBarWhenPushed = YES;

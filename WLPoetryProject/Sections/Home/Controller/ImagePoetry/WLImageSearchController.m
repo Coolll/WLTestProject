@@ -7,7 +7,6 @@
 //
 
 #import "WLImageSearchController.h"
-#import "WLCoreDataHelper.h"
 #import "WLPoetryListCell.h"
 #import "PoetryDetailViewController.h"
 
@@ -25,7 +24,7 @@
 /**
  *  诗词数据源
  **/
-@property (nonatomic,strong) NSArray *poetryArray;
+@property (nonatomic,strong) NSMutableArray *poetryArray;
 
 /**
  *  高度数组
@@ -45,6 +44,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     self.naviColor = RGBCOLOR(250, 250, 250, 1.0);
+    self.poetryArray = [NSMutableArray array];
     [self removeAllNaviItems];
     
     [self loadCustomNavi];
@@ -130,8 +130,31 @@
 }
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    self.poetryArray = [[WLCoreDataHelper shareHelper] searchPoetryListWithKeyWord:textField.text];
-    [self loadCustomView];
+    [[NetworkHelper shareHelper] requestPoetryWithKeyword:textField.text withCompletion:^(BOOL success, NSDictionary *dic, NSError *error) {
+        if (success) {
+            NSString *codeString = [NSString stringWithFormat:@"%@",[dic objectForKey:@"retCode"]];
+            if ([codeString isEqualToString:@"1000"]) {
+                NSArray *dataArr = [dic objectForKey:@"data"];
+                for (NSDictionary *poetryDic in dataArr) {
+                    PoetryModel *model = [[PoetryModel alloc]initPoetryWithDictionary:poetryDic];
+                    [model loadFirstLineString];
+                    [self.poetryArray addObject:model];
+                }
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self loadCustomView];
+                });
+                
+            }else{
+                NSString *tipMessage = [dic objectForKey:@"message"];
+                [self showHUDWithText:tipMessage];
+                return ;
+            }
+        }else{
+            [self showHUDWithText:@"请求失败，请重试"];
+        }
+        
+    }];
     [self.searchTextField resignFirstResponder];
     return NO;
 }

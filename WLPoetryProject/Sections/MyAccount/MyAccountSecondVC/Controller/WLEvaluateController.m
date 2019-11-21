@@ -9,7 +9,6 @@
 #import "WLEvaluateController.h"
 #import "WQLProgressView.h"
 #import "PoetryModel.h"
-#import "WLCoreDataHelper.h"
 #import "WLPublicTool.h"
 #import "WLScoreController.h"
 #import "WLPercentView.h"
@@ -25,18 +24,18 @@ typedef NS_ENUM(NSInteger , PoetryClass) {
  *  ID与count数据
  **/
 @property (nonatomic,copy) NSDictionary *IDInfo;
-/**
- *  简单诗词ID数组
- **/
-@property (nonatomic,strong) NSMutableArray *easyArray;
-/**
- *  一般诗词ID数组
- **/
-@property (nonatomic,strong) NSMutableArray *generalArray;
-/**
- *  困难诗词ID数组
- **/
-@property (nonatomic,strong) NSMutableArray *difficultArray;
+///**
+// *  简单诗词ID数组
+// **/
+//@property (nonatomic,strong) NSMutableArray *easyArray;
+///**
+// *  一般诗词ID数组
+// **/
+//@property (nonatomic,strong) NSMutableArray *generalArray;
+///**
+// *  困难诗词ID数组
+// **/
+//@property (nonatomic,strong) NSMutableArray *difficultArray;
 
 /**
  *  简单诗词题目数组 确定数据源后不变
@@ -173,9 +172,9 @@ typedef NS_ENUM(NSInteger , PoetryClass) {
 - (void)loadCustomData
 {
     //原始的ID数组
-    self.easyArray = [NSMutableArray array];
-    self.generalArray = [NSMutableArray array];
-    self.difficultArray = [NSMutableArray array];
+//    self.easyArray = [NSMutableArray array];
+//    self.generalArray = [NSMutableArray array];
+//    self.difficultArray = [NSMutableArray array];
     
     //获取到的展示数组 “____，低头思故乡。”
     self.easyTextArray = [NSMutableArray array];
@@ -214,92 +213,122 @@ typedef NS_ENUM(NSInteger , PoetryClass) {
 //    self.originEasyCount = self.originGeneralCount = self.originDifficultCount = self.countForEasy = self.countForGeneral = self.countForDifficult = 2;
     
     self.canAnswer = YES;//默认可以答题
-    self.IDInfo = @{@"1000":@"8",
-                    @"2000":@"9",
-                    @"3000":@"10",
-                    @"4000":@"11",
-                    @"5000":@"8",
-                    @"6000":@"15",
-                    @"7000":@"13",
-                    @"7500":@"11",
-                    @"8000":@"17",
-                    @"8500":@"16",
-                    @"9000":@"11",
-                    @"9500":@"11",
-                    @"10000":@"26",
-                    @"10500":@"42",
-                    @"11000":@"70",
-                    @"11500":@"46",
-                    @"12000":@"31",
-                    @"12500":@"23",
-                    @"13000":@"40",
-                    @"14000":@"27",
-                    @"15000":@"23",
-                    @"16000":@"27",
-                    @"17000":@"31",
-                    @"18000":@"32",
-                    @"19000":@"36",
-                    @"20000":@"25",
-                    @"21000":@"26",
-                    @"22000":@"26",
-                    @"23000":@"20",
-                    @"24000":@"12",
-                    @"25000":@"4",
-                    @"26000":@"4"
-                    };
-    
-    
-    for (NSString *baseID in self.IDInfo.allKeys) {
-        NSString *count = [self.IDInfo objectForKey:baseID];
-        NSInteger baseIDValue = [baseID integerValue];
-        //分类
-        if (baseIDValue < 6000) {
-            [self updateDataInfoWithBaseID:baseID withCount:count withType:PoetryClassEasy];
-        }else if (baseIDValue > 6000 && baseIDValue <10000){
-            [self updateDataInfoWithBaseID:baseID withCount:count withType:PoetryClassGeneral];
-        }else if (baseIDValue > 10000 && baseIDValue <26000){
-            [self updateDataInfoWithBaseID:baseID withCount:count withType:PoetryClassDifficult];
+//    self.IDInfo = @{@"1000":@"8",
+//                    @"2000":@"9",
+//                    @"3000":@"10",
+//                    @"4000":@"11",
+//                    @"5000":@"8",
+//                    @"6000":@"15",
+//                    @"7000":@"13",
+//                    @"7500":@"11",
+//                    @"8000":@"17",
+//                    @"8500":@"16",
+//                    @"9000":@"11",
+//                    @"9500":@"11",
+//                    @"10000":@"26",
+//                    @"10500":@"42",
+//                    @"11000":@"70",
+//                    @"11500":@"46",
+//                    @"12000":@"31",
+//                    @"12500":@"23",
+//                    @"13000":@"40",
+//                    @"14000":@"27",
+//                    @"15000":@"23",
+//                    @"16000":@"27",
+//                    @"17000":@"31",
+//                    @"18000":@"32",
+//                    @"19000":@"36",
+//                    @"20000":@"25",
+//                    @"21000":@"26",
+//                    @"22000":@"26",
+//                    @"23000":@"20",
+//                    @"24000":@"12",
+//                    @"25000":@"4",
+//                    @"26000":@"4"
+//                    };
+//
+//
+//    for (NSString *baseID in self.IDInfo.allKeys) {
+//        NSString *count = [self.IDInfo objectForKey:baseID];
+//        NSInteger baseIDValue = [baseID integerValue];
+//        //分类
+//        if (baseIDValue < 6000) {
+//            [self updateDataInfoWithBaseID:baseID withCount:count withType:PoetryClassEasy];
+//        }else if (baseIDValue > 6000 && baseIDValue <10000){
+//            [self updateDataInfoWithBaseID:baseID withCount:count withType:PoetryClassGeneral];
+//        }else if (baseIDValue > 10000 && baseIDValue <26000){
+//            [self updateDataInfoWithBaseID:baseID withCount:count withType:PoetryClassDifficult];
+//        }
+//    }
+//
+    [[NetworkHelper shareHelper]requestEvaluatePoetryWithCompletion:^(BOOL success, NSDictionary *dic, NSError *error) {
+        if (success) {
+            
+            NSString *code = [NSString stringWithFormat:@"%@",[dic objectForKey:@"retCode"]];
+            if (![code isEqualToString:@"1000"]) {
+                NSString *tipMessage = [dic objectForKey:@"message"];
+                [self showHUDWithText:tipMessage];
+                return ;
+            }
+            
+            [self dealRequestData:dic];
+            
+        }else{
+            
+            [self showHUDWithText:@"请求失败，请稍后重试"];
         }
-    }
+    }];
+    
+   
+    
+}
+
+- (void)dealRequestData:(NSDictionary*)dataDic
+{
+    NSDictionary *myDataDic = [dataDic objectForKey:@"data"];
+    
+    NSArray *easyArray = [myDataDic objectForKey:@"easy"];
+    NSArray *generalArray = [myDataDic objectForKey:@"general"];
+    NSArray *difficultArray = [myDataDic objectForKey:@"difficult"];
     
     //先获取简单 随机的ID，然后查询到诗词，然后随机挑选诗词中的两句。
-    for (int i = 0;i< self.easyArray.count;i++) {
+    for (int i = 0;i< easyArray.count;i++) {
         NSMutableArray *array = [NSMutableArray array];//创建一个数组
         [self.optionEasyArray addObject:array];//将该数组添加到选项数组中
-        
-        NSString *idString = [self.easyArray objectAtIndex:i];//获取当前随机的诗词ID
-        PoetryModel *model = [[WLCoreDataHelper shareHelper] fetchPoetryModelWithID:idString];//根据ID获取到诗词Model
+        NSDictionary *contentDic = [easyArray objectAtIndex:i];
+        PoetryModel *model = [[PoetryModel alloc]initPoetryWithDictionary:contentDic];//根据ID获取到诗词Model
         NSArray *contentArray = [[WLPublicTool shareTool] poetrySeperateWithOrigin:model.content];//将诗词内容分割为数组
         [self updateOneLineArrayWithOriginArray:contentArray];//将内容进行分类，不同长度的划分到不同长度中。
-
+        
         NSString *showTextString = [self loadNextOrBeforeLineWithContentArray:contentArray withPoetryIndex:i withType:PoetryClassEasy];//获取该诗词的若干句，并做空白处理
         [self.easyTextArray addObject:showTextString];//将展示的诗词添加到数组中
     }
     
     //先获取一般 随机的ID，然后查询到诗词，然后随机挑选诗词中的两句。
-    for (int i = 0;i< self.generalArray.count;i++) {
+    for (int i = 0;i< generalArray.count;i++) {
         NSMutableArray *array = [NSMutableArray array];//创建一个数组
         [self.optionGeneralArray addObject:array];//将该数组添加到选项数组中
-        NSString *idString = [self.generalArray objectAtIndex:i];//获取当前随机的诗词ID
-        PoetryModel *model = [[WLCoreDataHelper shareHelper] fetchPoetryModelWithID:idString];//根据ID获取到诗词Model
+        
+        NSDictionary *contentDic = [generalArray objectAtIndex:i];
+
+        PoetryModel *model = [[PoetryModel alloc]initPoetryWithDictionary:contentDic];//根据ID获取到诗词Model
         NSArray *contentArray = [[WLPublicTool shareTool] poetrySeperateWithOrigin:model.content];//将诗词内容分割为数组
         [self updateOneLineArrayWithOriginArray:contentArray];//将内容进行分类，不同长度的划分到不同长度中。
-
+        
         NSString *showTextString = [self loadNextOrBeforeLineWithContentArray:contentArray withPoetryIndex:i withType:PoetryClassGeneral];//获取该诗词的若干句，并做空白处理
         [self.generalTextArray addObject:showTextString];//将展示的诗词添加到数组中
     }
     
     //先获取困难 随机的ID，然后查询到诗词，然后随机挑选诗词中的两句。
-    for (int i = 0;i< self.difficultArray.count;i++) {
+    for (int i = 0;i<difficultArray.count;i++) {
         NSMutableArray *array = [NSMutableArray array];//创建一个数组
         [self.optionDifficultArray addObject:array];//将该数组添加到选项数组中
         
-        NSString *idString = [self.difficultArray objectAtIndex:i];//获取当前随机的诗词ID
-        PoetryModel *model = [[WLCoreDataHelper shareHelper] fetchPoetryModelWithID:idString];//根据ID获取到诗词Model
-    
+        NSDictionary *contentDic = [difficultArray objectAtIndex:i];
+        PoetryModel *model = [[PoetryModel alloc]initPoetryWithDictionary:contentDic];//根据ID获取到诗词Model
         NSArray *contentArray = [[WLPublicTool shareTool] poetrySeperateWithOrigin:model.content];//将诗词内容分割为数组
         [self updateOneLineArrayWithOriginArray:contentArray];//将内容进行分类，不同长度的划分到不同长度中。
-
+        
         NSString *showTextString = [self loadNextOrBeforeLineWithContentArray:contentArray withPoetryIndex:i withType:PoetryClassDifficult];//获取该诗词的若干句，并做空白处理
         [self.difficultTextArray addObject:showTextString];//将展示的诗词添加到数组中
     }
@@ -313,7 +342,6 @@ typedef NS_ENUM(NSInteger , PoetryClass) {
     [self updateOptionArray];
     
     [self loadCustomView];
-    
 }
 //把option更新一下，添加3个对应字数的选项
 - (void)updateOptionArray
@@ -356,7 +384,7 @@ typedef NS_ENUM(NSInteger , PoetryClass) {
             //获取数据源总共有多少数据
             NSInteger totalCount = subArray.count;
             //获取随机数
-            NSInteger index = arc4random()%totalCount;
+            NSInteger index = arc4random()%(totalCount+1);
             if (index < subArray.count) {
                 //拿到随机的答案
                 NSString *option = [subArray objectAtIndex:index];
@@ -496,32 +524,32 @@ typedef NS_ENUM(NSInteger , PoetryClass) {
     return @"";
 }
 
-#pragma mark 根据类型，添加随机ID到对应的数组中
-- (void)updateDataInfoWithBaseID:(NSString*)baseID withCount:(NSString*)count withType:(PoetryClass)type
-{
-    
-    NSInteger baseIndex = [baseID integerValue];
-    NSInteger countValue = [count integerValue];
-    [self.tmpArray removeAllObjects];
-    
-    for (int i = 1; i<= countValue; i++) {
-        [self.tmpArray addObject:[NSString stringWithFormat:@"%ld",baseIndex+i]];
-    }
-    
-    for (int i = 0; i< 3; i++) {
-        NSInteger index = arc4random()%(self.tmpArray.count);
-        NSString *string = [self.tmpArray objectAtIndex:index];
-        if (type == PoetryClassEasy) {
-            [self.easyArray addObject:string];
-        }else if (type == PoetryClassGeneral){
-            [self.generalArray addObject:string];
-        }else if (type == PoetryClassDifficult){
-            [self.difficultArray addObject:string];
-        }
-        [self.tmpArray removeObjectAtIndex:index];
-    }
-    
-}
+//#pragma mark 根据类型，添加随机ID到对应的数组中
+//- (void)updateDataInfoWithBaseID:(NSString*)baseID withCount:(NSString*)count withType:(PoetryClass)type
+//{
+//
+//    NSInteger baseIndex = [baseID integerValue];
+//    NSInteger countValue = [count integerValue];
+//    [self.tmpArray removeAllObjects];
+//
+//    for (int i = 1; i<= countValue; i++) {
+//        [self.tmpArray addObject:[NSString stringWithFormat:@"%ld",baseIndex+i]];
+//    }
+//
+//    for (int i = 0; i< 3; i++) {
+//        NSInteger index = arc4random()%(self.tmpArray.count);
+//        NSString *string = [self.tmpArray objectAtIndex:index];
+//        if (type == PoetryClassEasy) {
+//            [self.easyArray addObject:string];
+//        }else if (type == PoetryClassGeneral){
+//            [self.generalArray addObject:string];
+//        }else if (type == PoetryClassDifficult){
+//            [self.difficultArray addObject:string];
+//        }
+//        [self.tmpArray removeObjectAtIndex:index];
+//    }
+//
+//}
 
 #pragma mark - 视图
 

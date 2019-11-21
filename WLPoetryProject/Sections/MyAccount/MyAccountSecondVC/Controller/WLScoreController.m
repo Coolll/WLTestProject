@@ -8,7 +8,6 @@
 
 #import "WLScoreController.h"
 #import "WLMyKnownController.h"
-#import "WLCoreDataHelper.h"
 
 @interface WLScoreController ()
 /**
@@ -44,42 +43,31 @@
 - (void)loadCustomData
 {
     self.userCount = [self loadUserRealCount];
-    NSInteger userClass = [self configureUserClass];
+//    NSInteger userClass = [self configureUserClass];
     NSString *countString = [NSString stringWithFormat:@"%ld",self.userCount];
-    NSString *classString = [NSString stringWithFormat:@"%ld",userClass];
     
-    BmobUser *user = [BmobUser currentUser];
-    NSMutableArray *storageArr = [NSMutableArray arrayWithArray:[user objectForKey:@"poetryStorageList"]];
-    if (storageArr.count >= 15) {
-        [storageArr removeObjectAtIndex:0];
-    }
-    [storageArr addObject:countString];
-
-//    NSArray *array = [NSArray arrayWithObject:countString];
-//    [user addObjectsFromArray:[array copy] forKey:@"poetryStorageList"];
-    [user setObject:[storageArr copy] forKey:@"poetryStorageList"];
-    [user setObject:countString forKey:@"userPoetryStorage"];
-    [user setObject:classString forKey:@"userPoetryClass"];
-    [user updateInBackgroundWithResultBlock:^(BOOL isSuccessful, NSError *error) {
-        NSLog(@"error %@",[error description]);
-        if (self.block) {
-            self.block(@{@"userPoetryStorage":countString,
-                         @"userPoetryClass":classString});
+    [[NetworkHelper shareHelper] addUserChallengeRecord:kUserID storage:self.userCount withCompletion:^(BOOL success, NSDictionary *dic, NSError *error) {
+        if (success) {
+            
+            NSString *code = [NSString stringWithFormat:@"%@",[dic objectForKey:@"retCode"]];
+            if (![code isEqualToString:@"1000"]) {
+                NSString *tipMessage = [dic objectForKey:@"message"];
+                [self showHUDWithText:tipMessage];
+                return ;
+            }
+            
+            NSDictionary *dataDic = [dic objectForKey:@"data"];
+            if (self.block) {
+                self.block(@{@"userPoetryStorage":countString,
+                             @"userPoetryClass":[NSString stringWithFormat:@"%@",[dataDic objectForKey:@"poetry_class"]]});
+            }
+            
+        }else{
+            
+            [self showHUDWithText:@"请求失败，请稍后重试"];
         }
     }];
-    
-    
-    UserInfoModel *model = [[WLCoreDataHelper shareHelper] fetchCurrentUserModel];
-    NSMutableArray *arr = [NSMutableArray arrayWithArray:model.poetryStorageList];
-    [arr addObject:countString];
-    model.poetryStorageList = arr;
-    [[WLCoreDataHelper shareHelper] updateUserInfoWithNewModel:model withResult:^(BOOL isSuccessful, NSError *error) {
-        NSLog(@"isSuccss:%@",isSuccessful?@"YES":@"NO");
-        [self readLocalData];
-    }];
-//    [[WLCoreDataHelper shareHelper] updateDataWithTable:@"UserInfo" withKey:@"userID" withKeyValueEqualTo:kUserID withNewValue:[arr copy] forNewKey:@"poetryStorageList" withResult:^(BOOL isSuccessful, NSError *error) {
-//
-//    }];
+
 }
 #pragma mark 级别 从0开始，童生
 
@@ -106,11 +94,7 @@
     return 0;
 }
 
-- (void)readLocalData
-{
-    UserInfoModel *model = [[WLCoreDataHelper shareHelper] fetchCurrentUserModel];
-    NSLog(@"完成存储后：%@",model.poetryStorageList);
-}
+
 
 - (void)loadCustomView
 {

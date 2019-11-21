@@ -9,6 +9,20 @@
 #ifndef AppMacro_h
 #define AppMacro_h
 
+
+///环境
+#ifdef DEBUG
+//#define BaseURL @"http://192.168.2.133:8080/"//测试渠道
+#define BaseURL @"https://www.wqldeveloper.com/poetry/"//测试渠道
+
+#else
+
+///生产环境
+#define BaseURL @"https://www.wqldeveloper.com/poetry/"//正式环境
+
+#endif
+
+
 #define PhoneScreen_HEIGHT [UIScreen mainScreen].bounds.size.height
 #define PhoneScreen_WIDTH [UIScreen mainScreen].bounds.size.width
 #define RGBCOLOR(r,g,b,_alpha) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:_alpha]
@@ -21,30 +35,29 @@
 
 
 
+
 #define HidenKeybory {[[[UIApplication sharedApplication] keyWindow] endEditing:YES];}
 
 //用户的token
-#define kUserToken [[[WLCoreDataHelper shareHelper] fetchCurrentUserModel] fetchToken]
+#define kUserToken [WLSaveLocalHelper fetchUserToken]
 
 //用户的登录名
-#define kUserName [[[WLCoreDataHelper shareHelper] fetchCurrentUserModel] fetchName]
+#define kUserName [WLSaveLocalHelper fetchUserName]
 
 //用户的密码
-#define kUserPassword [[[WLCoreDataHelper shareHelper] fetchCurrentUserModel] fetchPassword]
+#define kUserPassword [WLSaveLocalHelper fetchUserPassword]
 
 //用户的头像
-#define kUserHeadImage [[[WLCoreDataHelper shareHelper] fetchCurrentUserModel] fetchImageURL]
+#define kUserHeadImage [WLSaveLocalHelper fetchUserHeadImage]
 
 //用户的userId
-#define kUserID [WLSaveLocalHelper loadObjectForKey:LoginUserIDKey]
-#define LoginUserIDKey @"CurrentLoginUserID"
+#define kUserID [WLSaveLocalHelper fetchUserID]
 
 //用户的登录状态
 #define kLoginStatus [WLSaveLocalHelper loadObjectForKey:LoginStatusKey]
 #define LoginStatusKey @"UserCurrentLoginStatus"
 
 
-#define kClearUserInfo  [[WLCoreDataHelper shareHelper]clearUserInfo]
 
 
 //用户的本地设置，诸如诗词的字号

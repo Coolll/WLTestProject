@@ -15,7 +15,7 @@
 #import "AboutViewController.h"
 #import "WLCustomImageListController.h"
 #import "WLMyKnownController.h"
-#import "WLCoreDataHelper.h"
+
 
 @interface YLAccountViewController ()<UITableViewDelegate,UITableViewDataSource>
 /**
@@ -306,12 +306,6 @@
         
         if (indexPath.row == 1) {
             //我的收藏
-//            id token = kUserToken;
-//            if (!token) {
-//                token = @"";
-//            }
-//
-//            NSString *tokenString = [NSString stringWithFormat:@"%@",token];
             //如果本地没有token，那么就意味着用户没有登录，不需要去拿收藏列表,该数据为未收藏
             if (![kLoginStatus isEqualToString:@"1"]) {
                 [self showHUDWithText:@"请先登录"];
@@ -326,12 +320,6 @@
         
         if (indexPath.row == 2) {
             //我的学识
-//            id token = kUserToken;
-//            if (!token) {
-//                token = @"";
-//            }
-//
-//            NSString *tokenString = [NSString stringWithFormat:@"%@",token];
             //如果本地没有token，那么就意味着用户没有登录，不需要去拿收藏列表,该数据为未收藏
             if (![kLoginStatus isEqualToString:@"1"]) {
                 [self showHUDWithText:@"请先登录"];
