@@ -12,7 +12,7 @@
 
 ///环境
 #ifdef DEBUG
-//#define BaseURL @"http://192.168.2.133:8080/"//测试渠道
+//#define BaseURL @"http://192.168.0.123:8080/"//测试渠道
 #define BaseURL @"https://www.wqldeveloper.com/poetry/"//测试渠道
 
 #else
