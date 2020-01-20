@@ -204,6 +204,8 @@
 		079BC508209EEF6800E0DF85 /* AppConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 079BC507209EEF6800E0DF85 /* AppConfig.m */; };
 		07A922B120862EB100BE5929 /* PoetryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A922B020862EB100BE5929 /* PoetryModel.m */; };
 		07B6E7AB20A07B2E000998E3 /* WLPoetryListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07B6E7AA20A07B2E000998E3 /* WLPoetryListController.m */; };
+		07CE6D4A23909BDB005384B9 /* FHL_one.json in Resources */ = {isa = PBXBuildFile; fileRef = 07CE6D4823909BDB005384B9 /* FHL_one.json */; };
+		07CE6D4B23909BDB005384B9 /* FHL_empty.json in Resources */ = {isa = PBXBuildFile; fileRef = 07CE6D4923909BDB005384B9 /* FHL_empty.json */; };
 		07CFF240208B0AEE00849C20 /* WLPoetryListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 07CFF23F208B0AEE00849C20 /* WLPoetryListCell.m */; };
 		07DCF5A920E26D8A00F0D053 /* MOBFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07DCF58C20E26D8A00F0D053 /* MOBFoundation.framework */; };
 		07DCF5AA20E26D8A00F0D053 /* ShareSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07DCF58E20E26D8A00F0D053 /* ShareSDK.framework */; };
@@ -671,6 +673,8 @@
 		07A922B020862EB100BE5929 /* PoetryModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PoetryModel.m; sourceTree = "<group>"; };
 		07B6E7A920A07B2E000998E3 /* WLPoetryListController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLPoetryListController.h; sourceTree = "<group>"; };
 		07B6E7AA20A07B2E000998E3 /* WLPoetryListController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLPoetryListController.m; sourceTree = "<group>"; };
+		07CE6D4823909BDB005384B9 /* FHL_one.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FHL_one.json; sourceTree = "<group>"; };
+		07CE6D4923909BDB005384B9 /* FHL_empty.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FHL_empty.json; sourceTree = "<group>"; };
 		07CFF23E208B0AEE00849C20 /* WLPoetryListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLPoetryListCell.h; sourceTree = "<group>"; };
 		07CFF23F208B0AEE00849C20 /* WLPoetryListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLPoetryListCell.m; sourceTree = "<group>"; };
 		07DCF58C20E26D8A00F0D053 /* MOBFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MOBFoundation.framework; sourceTree = "<group>"; };
@@ -1503,6 +1507,15 @@
 			path = Entity;
 			sourceTree = "<group>";
 		};
+		07CE6D4723909BDB005384B9 /* FHL */ = {
+			isa = PBXGroup;
+			children = (
+				07CE6D4823909BDB005384B9 /* FHL_one.json */,
+				07CE6D4923909BDB005384B9 /* FHL_empty.json */,
+			);
+			path = FHL;
+			sourceTree = "<group>";
+		};
 		07CFF23D208B0A8900849C20 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -1791,6 +1804,7 @@
 		07F73C60208ACDC100F7D8B3 /* JSONFile */ = {
 			isa = PBXGroup;
 			children = (
+				07CE6D4723909BDB005384B9 /* FHL */,
 				36C3A86B224CA03000A57F70 /* LY */,
 				0785075420B2EDB30030CD98 /* SongPoetry */,
 				073D7F6820A7E23D002BCEA7 /* TangPoetry */,
@@ -2070,6 +2084,7 @@
 				360E672A219442ED00AD56BF /* class_0.png in Resources */,
 				07F3E31420D2C0FC00E7BAF7 /* clearNavi.png in Resources */,
 				3635751A21AE7763009524C7 /* userClassInfo.png in Resources */,
+				07CE6D4A23909BDB005384B9 /* FHL_one.json in Resources */,
 				07F3E31120D2C0FC00E7BAF7 /* myArrow.png in Resources */,
 				00FD14C020A95A2D0018D649 /* tangPoetry_six.json in Resources */,
 				0073FD7720EE14A800FED6D6 /* shareIcon.png in Resources */,
@@ -2105,6 +2120,7 @@
 				071571FA21038354005C53C4 /* closeTip.png in Resources */,
 				000110AA20A44BD2001B2B55 /* gradePoetry_8_one.json in Resources */,
 				0785076520B2EFF20030CD98 /* songPoetry_three.json in Resources */,
+				07CE6D4B23909BDB005384B9 /* FHL_empty.json in Resources */,
 				007C7E2420F59EC800F360D6 /* configureGradeJuinor.json in Resources */,
 				07DCF5AC20E26D8A00F0D053 /* ShareSDKUI.bundle in Resources */,
 				07F3E31720D2C0FC00E7BAF7 /* main_more.png in Resources */,

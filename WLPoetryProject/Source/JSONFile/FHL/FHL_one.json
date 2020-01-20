@@ -1,0 +1,36 @@
+{
+    "poetryList" : [
+                    {
+                    "name" : "守岁",
+                    "author" : "唐·李世民",
+                    "content" : "暮景斜芳殿，年华丽绮宫。寒辞去冬雪，暖带入春风。阶馥舒梅素，盘花卷烛红。共欢新故岁，迎送一宵中。",
+                    "addtionInfo" : "",
+                    "classInfo" : "18",
+                    "poetryID" : "1",
+                    "source" : "19",
+                    "analysesInfo" : "唐贞观年间，国家繁荣昌盛。太阳西下，华丽的唐宫宫殿内金碧辉煌，处处流光溢彩。在这样的氛围下，冬之寒岁即将过去，而暖意融融的春天马上就要到了。良宵共守，举国上下都沉浸在一片欢乐之中。",
+                    "transferInfo" : "",
+                    "backgroundInfo" : "",
+                    "backImageName" : "",
+                    "bgImageURL" : "",
+                    "placeHolder" : ""
+                    },{
+                        "name" : "<##>",
+                        "author" : "<##>",
+                        "content" : "<##>",
+                        "addtionInfo" : "<##>",
+                        "classInfo" : "<##>",
+                        "poetryID" : "<##>",
+                        "source" : "19",
+                        "analysesInfo" : "",
+                        "transferInfo" : "",
+                        "backgroundInfo" : "",
+                        "backImageName" : "",
+                        "bgImageURL" : "",
+                        "placeHolder" : ""
+                    }
+    
+	],
+    "baseID" : "26000",
+    "mainClass" : "0"
+}
