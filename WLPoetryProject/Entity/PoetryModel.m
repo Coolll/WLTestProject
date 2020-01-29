@@ -49,7 +49,7 @@
         self.sourceExplain = [self notNillValueWithKey:@"source_explain" withDic:dic];
         self.transferInfo = [self notNillValueWithKey:@"transfer_info" withDic:dic];
         self.likes = [self intValueWithKey:@"likes" withDic:dic];
-        self.textColor = [self intValueWithKey:@"text_color" withDic:dic];
+        self.textColor = [self notNillValueWithKey:@"text_color" withDic:dic];
         self.backImageURL = [self notNillValueWithKey:@"image_url" withDic:dic];
         [self loadFirstLineString];
 

@@ -35,6 +35,28 @@
  *  选择的block
  **/
 @property (nonatomic, copy) WLImageSelBlock selBlock;
+/**
+ *  page
+ **/
+@property (nonatomic,assign) NSInteger currentPage;
+/**
+ *  搜索的关键词
+ **/
+@property (nonatomic,copy) NSString *keywordString;
+/**
+ *  首次创建
+ **/
+@property (nonatomic,assign) BOOL isFirstLoad;
+
+/**
+ *  是否正在网络请求
+ **/
+@property (nonatomic,assign) BOOL isRequesting;
+/**
+ *  是否还有诗词
+ **/
+@property (nonatomic,assign) BOOL hasNext;
+
 
 @end
 
@@ -48,6 +70,13 @@
     [self removeAllNaviItems];
     
     [self loadCustomNavi];
+    [self loadCustomData];
+}
+
+- (void)loadCustomData{
+    self.isFirstLoad = YES;
+    self.isRequesting = NO;
+    self.hasNext = YES;
 }
 
 - (void)loadCustomNavi
@@ -130,7 +159,9 @@
 }
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    [[NetworkHelper shareHelper] requestPoetryWithKeyword:textField.text withCompletion:^(BOOL success, NSDictionary *dic, NSError *error) {
+    self.currentPage = 0;
+    self.keywordString = textField.text;
+    [[NetworkHelper shareHelper] requestPoetryWithKeyword:textField.text withPage:self.currentPage withCompletion:^(BOOL success, NSDictionary *dic, NSError *error) {
         if (success) {
             NSString *codeString = [NSString stringWithFormat:@"%@",[dic objectForKey:@"retCode"]];
             if ([codeString isEqualToString:@"1000"]) {
@@ -139,7 +170,14 @@
                     PoetryModel *model = [[PoetryModel alloc]initPoetryWithDictionary:poetryDic];
                     [model loadFirstLineString];
                     [self.poetryArray addObject:model];
+                    self.currentPage += 1;
                 }
+                if (dataArr.count == 10) {
+                    self.hasNext = YES;
+                }else{
+                    self.hasNext = NO;
+                }
+                self.isRequesting = NO;
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self loadCustomView];
@@ -166,8 +204,114 @@
     self.mainTableView.backgroundColor = RGBCOLOR(246, 246, 246, 1.0);
 
     [self.mainTableView reloadData];
+    if (self.isFirstLoad) {
+        [self loadTableHeaderAndFooter];
+        self.isFirstLoad = NO;
+    }
+}
+
+- (void)loadTableHeaderAndFooter
+{
+    self.mainTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(refreshHomeData)];
+    self.mainTableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
+}
+
+- (void)refreshHomeData{
+    NSLog(@"刷新数据了");
+    if (self.isRequesting) {
+        return;
+    }
+    NSLog(@"刷新数据了");
+    self.currentPage = 0;
+    self.isRequesting = YES;
+    [[NetworkHelper shareHelper] requestPoetryWithKeyword:self.keywordString withPage:self.currentPage withCompletion:^(BOOL success, NSDictionary *dic, NSError *error) {
+        self.isRequesting = NO;
+        [self.mainTableView.mj_header endRefreshing];
+
+        if (success) {
+            NSString *codeString = [NSString stringWithFormat:@"%@",[dic objectForKey:@"retCode"]];
+            if ([codeString isEqualToString:@"1000"]) {
+                [self.poetryArray removeAllObjects];
+
+                NSArray *dataArr = [dic objectForKey:@"data"];
+                for (NSDictionary *poetryDic in dataArr) {
+                    PoetryModel *model = [[PoetryModel alloc]initPoetryWithDictionary:poetryDic];
+                    [model loadFirstLineString];
+                    [self.poetryArray addObject:model];
+                }
+                if (dataArr.count == 10) {
+                    self.hasNext = YES;
+                }else{
+                    self.hasNext = NO;
+                }
+                self.currentPage += 1;
+
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self loadCustomView];
+                });
+                
+            }else{
+                NSString *tipMessage = [dic objectForKey:@"message"];
+                [self showHUDWithText:tipMessage];
+                return ;
+            }
+        }else{
+            [self showHUDWithText:@"请求失败，请重试"];
+        }
+       
+    }];
 
 }
+
+- (void)loadMoreData{
+    NSLog(@"加载更多");
+    if (self.isRequesting) {
+        return;
+    }
+    if (!self.hasNext) {
+        [self showHUDWithText:@"无更多数据了"];
+        [self.mainTableView.mj_footer endRefreshing];
+        return;
+    }
+
+    self.isRequesting = YES;
+
+    [[NetworkHelper shareHelper] requestPoetryWithKeyword:self.keywordString withPage:self.currentPage withCompletion:^(BOOL success, NSDictionary *dic, NSError *error) {
+        self.isRequesting = NO;
+        [self.mainTableView.mj_footer endRefreshing];
+
+        if (success) {
+            NSString *codeString = [NSString stringWithFormat:@"%@",[dic objectForKey:@"retCode"]];
+            if ([codeString isEqualToString:@"1000"]) {
+                NSArray *dataArr = [dic objectForKey:@"data"];
+                for (NSDictionary *poetryDic in dataArr) {
+                    PoetryModel *model = [[PoetryModel alloc]initPoetryWithDictionary:poetryDic];
+                    [model loadFirstLineString];
+                    [self.poetryArray addObject:model];
+                }
+                if (dataArr.count == 10) {
+                    self.hasNext = YES;
+                }else{
+                    self.hasNext = NO;
+                }
+                self.currentPage += 1;
+
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self loadCustomView];
+                });
+                
+            }else{
+                NSString *tipMessage = [dic objectForKey:@"message"];
+                [self showHUDWithText:tipMessage];
+                return ;
+            }
+        }else{
+            [self showHUDWithText:@"请求失败，请重试"];
+        }
+       
+    }];
+}
+
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -281,25 +425,15 @@
 - (UITableView*)mainTableView
 {
     if (!_mainTableView) {
-        
-//        UIImageView *mainBgView = [[UIImageView alloc]init];
-//        mainBgView.image = [UIImage imageNamed:@"searchBg.jpg"];
-//        [self.view addSubview:mainBgView];
-        //元素的布局
-//        [mainBgView mas_makeConstraints:^(MASConstraintMaker *make) {
-//
-//            make.leading.equalTo(self.view.mas_leading).offset(0);
-//            make.top.equalTo(self.naviView.mas_bottom).offset(0);
-//            make.bottom.equalTo(self.view.mas_bottom).offset(0);
-//            make.trailing.equalTo(self.view.mas_trailing).offset(0);
-//
-//        }];
-        
+                
         _mainTableView = [[UITableView alloc]init];
         _mainTableView.delegate = self;
         _mainTableView.dataSource = self;
         _mainTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _mainTableView.backgroundColor = [UIColor clearColor];
+        _mainTableView.estimatedRowHeight = 0;
+        _mainTableView.estimatedSectionFooterHeight = 0;
+        _mainTableView.estimatedSectionHeaderHeight = 0;
         [self.view addSubview:_mainTableView];
         
         //元素的布局

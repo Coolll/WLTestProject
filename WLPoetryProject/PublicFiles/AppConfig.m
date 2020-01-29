@@ -73,7 +73,7 @@
 }
 
 
-- (void)loadAllBgImageWithBlock:(void(^)(NSDictionary*dic,NSError *error))block
+- (void)loadAllBgImageWithBlock:(void(^)(NSDictionary*thumbDic, NSDictionary*originDic,NSError *error))block
 {
     [[NetworkHelper shareHelper] requestAllBgImagesWithCompletion:^(BOOL success, NSDictionary *dic, NSError *error) {
         
@@ -83,7 +83,7 @@
             if (![code isEqualToString:@"1000"]) {
                 NSString *tipMessage = [dic objectForKey:@"message"];
                 if (block) {
-                    block(nil,[NSError errorWithDomain:NSURLErrorDomain code:[code integerValue] userInfo:@{NSLocalizedDescriptionKey:tipMessage}]);
+                    block(nil,nil,[NSError errorWithDomain:NSURLErrorDomain code:[code integerValue] userInfo:@{NSLocalizedDescriptionKey:tipMessage}]);
                 }
                 return ;
             }
@@ -93,25 +93,32 @@
                 
                 //如果请求到数据 则移除全部的key
                 [self.bgImageInfo removeAllObjects];
-                for (int i = 0;i<array.count;i++) {
+                for (int i = 0 ; i<array.count ; i++) {
                     NSDictionary *imgDic = array[i];
                     
                     //图片url作为value，class类别作为key，存储起来
-                    NSString *url = [NSString stringWithFormat:@"%@",[imgDic objectForKey:@"image_url"]];
+                    NSString *baseUrl = [NSString stringWithFormat:@"%@",[imgDic objectForKey:@"image_base_url"]];
+                    NSString *imagePath = [NSString stringWithFormat:@"%@",[imgDic objectForKey:@"thumb_url"]];
+                    NSString *originPath = [NSString stringWithFormat:@"%@",[imgDic objectForKey:@"origin_url"]];
+
+                    NSString *url = [NSString stringWithFormat:@"%@%@",baseUrl,imagePath];
+                    NSString *originUrl = [NSString stringWithFormat:@"%@%@",baseUrl,originPath];
+
                     NSString *className = [NSString stringWithFormat:@"%@",[imgDic objectForKey:@"class_info"]];
                     [self.bgImageInfo setObject:url forKey:className];
-                    
+                    [self.bgOriginImageInfo setObject:originUrl forKey:className];
+
                 }
                 
                 if (block) {
-                    block(self.bgImageInfo,nil);
+                    block(self.bgImageInfo,self.bgOriginImageInfo,nil);
                 }
             }
             
         }else{
             
             if (block) {
-                block(nil,[NSError errorWithDomain:NSURLErrorDomain code:500 userInfo:@{NSLocalizedDescriptionKey:@"请求失败，请重试"}]);
+                block(nil,nil,[NSError errorWithDomain:NSURLErrorDomain code:500 userInfo:@{NSLocalizedDescriptionKey:@"请求失败，请重试"}]);
             }
             
         }
@@ -127,6 +134,14 @@
     }
     return _bgImageInfo;
 }
+- (NSMutableDictionary*)bgOriginImageInfo
+{
+    if (!_bgOriginImageInfo) {
+        _bgOriginImageInfo = [NSMutableDictionary dictionary];
+    }
+    return _bgOriginImageInfo;
+}
+
 
 - (NSArray*)allPoetryList
 {

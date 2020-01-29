@@ -102,50 +102,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "B896F8E2-6CEE-4660-A673-E10B804A3443"
+            uuid = "7929A941-EC44-4CA3-8E0B-2D32775606FB"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "WLPoetryProject/Helper/WLSaveLocalHelper.m"
-            timestampString = "596013871.489329"
+            filePath = "WLPoetryProject/Sections/Home/Controller/YLHomeViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "83"
-            endingLineNumber = "83"
-            landmarkName = "+deleteUserInfo"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "BCF46B0D-4D05-465C-89C7-E1BF492FDB9B"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "WLPoetryProject/Sections/Home/Controller/PoetryDetailViewController.m"
-            timestampString = "596013871.489385"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "158"
-            endingLineNumber = "158"
-            landmarkName = "-setDataModel:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "9AB95CF0-9BB0-4028-ACB1-26E25B9BD779"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "WLPoetryProject/PublicFiles/NetworkHelper.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "71"
-            endingLineNumber = "71"
-            landmarkName = "-logoutWithUserID:withCompletion:"
+            startingLineNumber = "202"
+            endingLineNumber = "202"
+            landmarkName = "-requestHomeTopImage"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

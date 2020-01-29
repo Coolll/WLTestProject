@@ -46,6 +46,9 @@ NS_ASSUME_NONNULL_BEGIN
 //获取全部的背景图片
 - (void)requestAllBgImagesWithCompletion:(RequestResultBlock)block;
 
+//获取首页的题画图片
+- (void)requestHomeTopImageWithCompletion:(RequestResultBlock)block;
+
 //获取全部的诗词配置
 - (void)requestPoetryConfigureWithCompletion:(RequestResultBlock)block;
 
@@ -53,7 +56,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)requestPoetryWithMainClass:(NSString*)mainClass withCompletion:(RequestResultBlock)block;
 
 //根据关键词来获取对应的全部诗词
-- (void)requestPoetryWithKeyword:(NSString*)keyword withCompletion:(RequestResultBlock)block;
+- (void)requestPoetryWithKeyword:(NSString*)keyword withPage:(NSInteger)page withCompletion:(RequestResultBlock)block;
 
 //新增一条挑战记录
 - (void)addUserChallengeRecord:(NSString*)userId storage:(NSInteger)storage withCompletion:(RequestResultBlock)block;

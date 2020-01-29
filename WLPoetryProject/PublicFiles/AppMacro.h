@@ -12,7 +12,7 @@
 
 ///环境
 #ifdef DEBUG
-//#define BaseURL @"http://192.168.0.123:8080/"//测试渠道
+//#define BaseURL @"http://192.168.1.23:8080/"//测试渠道
 #define BaseURL @"https://www.wqldeveloper.com/poetry/"//测试渠道
 
 #else
@@ -32,6 +32,7 @@
 #define NavigationColor RGBCOLOR(65, 160, 225, 1.0)
 #define ViewBackgroundColor RGBCOLOR(240, 240, 240, 1.0)
 #define RequestFailed @"请稍后重试"
+#define kStringIsEmpty(str) ([str isKindOfClass:[NSNull class]] || [[NSString stringWithFormat:@"%@",str] isEqualToString: @"(null)"]|| [[NSString stringWithFormat:@"%@",str] isEqualToString: @"<null>"] ||[[NSString stringWithFormat:@"%@",str] isEqualToString: @""]|| str == nil || [[NSString stringWithFormat:@"%@",str] length] < 1 ? YES : NO )
 
 
 

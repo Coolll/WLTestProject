@@ -142,6 +142,14 @@
     [self.baseNetwork requestPostWithBody:param withUrlString:@"api/poetry/loadAllImages" withCompletion:block];
 }
 
+//获取首页的题画图片
+- (void)requestHomeTopImageWithCompletion:(RequestResultBlock)block
+{
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    NSDictionary *param = [self operationForParam:dic];
+    [self.baseNetwork requestPostWithBody:param withUrlString:@"api/poetry/loadHomeTopImage" withCompletion:block];
+}
+
 //获取全部的诗词配置
 - (void)requestPoetryConfigureWithCompletion:(RequestResultBlock)block{
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
@@ -162,10 +170,11 @@
 
 
 //根据关键词来获取对应的全部诗词
-- (void)requestPoetryWithKeyword:(NSString*)keyword withCompletion:(RequestResultBlock)block
+- (void)requestPoetryWithKeyword:(NSString*)keyword withPage:(NSInteger)page withCompletion:(RequestResultBlock)block
 {
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     [dic setObject:keyword forKey:@"keyword"];
+    [dic setObject:[NSNumber numberWithInteger:page] forKey:@"page"];
     NSDictionary *param = [self operationForParam:dic];
     
     [self.baseNetwork requestPostWithBody:param withUrlString:@"api/poetry/loadPoetryWithKeyword" withCompletion:block];

@@ -38,8 +38,7 @@
 /**
  *  是文本颜色
  **/
-@property (nonatomic,assign) NSInteger textColor;
-
+@property (nonatomic,copy) NSString *textColor;
 /**
  *  文本的高度
  **/

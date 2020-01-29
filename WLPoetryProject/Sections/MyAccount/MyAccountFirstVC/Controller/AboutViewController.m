@@ -48,7 +48,7 @@
     
     CGFloat iconWidth = 50;
     UIImageView *iconImageView = [[UIImageView alloc]init];
-    iconImageView.image = [UIImage imageNamed:@"poetryIcon"];
+    iconImageView.image = [UIImage imageNamed:@"AppIcon"];
     iconImageView.layer.cornerRadius = 4.f;
     [self.mainScrollView addSubview:iconImageView];
     //设置UI布局约束

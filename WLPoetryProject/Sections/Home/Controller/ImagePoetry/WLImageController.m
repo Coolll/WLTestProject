@@ -112,7 +112,7 @@ static const CGFloat imageW = 20;
 {
     //诗词主背景
     self.mainImageView = [[UIImageView alloc]init];
-    self.mainImageView.contentMode = UIViewContentModeScaleAspectFill;
+    self.mainImageView.contentMode = UIViewContentModeScaleToFill;
     if ([self.imageName isKindOfClass:[NSString class]] && self.imageName.length > 0) {
 //        self.mainImageView.image = [UIImage imageNamed:self.imageName];
         [self.mainImageView sd_setImageWithURL:[NSURL URLWithString:self.imageName]];

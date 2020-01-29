@@ -49,6 +49,12 @@
  *  network
  **/
 @property (nonatomic,strong) NetworkHelper *networkHelper;
+/**
+ *  首页的题画背景URL
+ **/
+@property (nonatomic,copy) NSString *topImageURL;
+
+
 
 
 @end
@@ -64,7 +70,7 @@
 
     [self loadCustomData];
 //    [self checkLocalData];//加载本地数据
-//    [self loadAllImageData];
+    [self checkNetworkAndDealImage];
     
 //    [[BackupHelper shareInstance] uploadAllPoetry];//备份诗词
 //    [self uploadAllImages];
@@ -78,21 +84,34 @@
 
 
 #pragma mark - 图片处理
+- (void)checkNetworkAndDealImage{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        if ([WLRequestHelper defaultHelper].isWIFI) {
+            NSLog(@"WIFI，可以预下载");
+            [self loadAllImageData];
+        }else{
+            NSLog(@"非WIFI，结束了");
 
+        }
+    });
+   
+}
 - (void)loadAllImageData
 {
+    
     //本地已加载的图片状态
     self.imageStateDic = [WLSaveLocalHelper loadObjectForKey:@"AllImageStateDic"];
     //如果不存在，则创建一个
     if(!self.imageStateDic){
         [WLSaveLocalHelper saveObject:[NSDictionary dictionary] forKey:@"AllImageStateDic"];
     }
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         //空数组，用来加载网络上的图片URL
         NSMutableArray *arr = [NSMutableArray array];
         
-        [[AppConfig config] loadAllBgImageWithBlock:^(NSDictionary *dic,NSError *error) {
+        [[AppConfig config] loadAllBgImageWithBlock:^(NSDictionary *dic,NSDictionary *originDic,NSError *error) {
             //添加图片url
+            [arr addObjectsFromArray:originDic.allValues];
             [arr addObjectsFromArray:dic.allValues];
             //需要额外加载的图片URL数组
             NSMutableArray *mutArray = [NSMutableArray array];
@@ -114,7 +133,7 @@
             
             UIImageView *view = [[UIImageView alloc]init];
             //递归，加载图片
-            [self loadImageWithArray:mutArray withCurrentIndex:0 withImageView:view withStatusDic:[NSMutableDictionary dictionary]];
+            [self loadImageWithArray:mutArray withCurrentIndex:0 withImageView:view];
 
             }];
             
@@ -122,13 +141,14 @@
     
 }
 
-- (void)loadImageWithArray:(NSArray*)imageArray withCurrentIndex:(NSInteger)index withImageView:(UIImageView*)imageView withStatusDic:(NSMutableDictionary*)dic
+- (void)loadImageWithArray:(NSArray*)imageArray withCurrentIndex:(NSInteger)index withImageView:(UIImageView*)imageView
 {
     if(index < imageArray.count){
         
         [imageView sd_setImageWithURL:[NSURL URLWithString:[imageArray objectAtIndex:index]] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
             
-            
+            NSLog(@"完成加载url:%@",imageURL.absoluteString);
+
             NSDictionary *dict = [WLSaveLocalHelper loadObjectForKey:@"AllImageStateDic"];
             NSMutableDictionary *mutDic = [NSMutableDictionary dictionaryWithDictionary:dict];
             if(image){
@@ -139,7 +159,7 @@
             //此张图片完成加载后，保存到本地
             [WLSaveLocalHelper saveObject:[mutDic copy] forKey:@"AllImageStateDic"];
 
-            [self loadImageWithArray:imageArray withCurrentIndex:(index+1) withImageView:imageView withStatusDic:dic];
+            [self loadImageWithArray:imageArray withCurrentIndex:(index+1) withImageView:imageView];
 
         }];
     }else{
@@ -154,20 +174,56 @@
     
     self.poetryArray = [NSMutableArray array];
     
+    
+    [self dealHomeTopImage];
+    
+}
+
+- (void)dealHomeTopImage{
+    NSString *localImageURL = [WLSaveLocalHelper loadObjectForKey:@"HomeTopImageURLString"];
+    if (kStringIsEmpty(localImageURL)) {
+        self.topImageURL = @"";
+    }else{
+        self.topImageURL = [NSString stringWithFormat:@"%@",localImageURL];
+    }
+    
+    [self requestHomeHotPoetry];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self requestHomeTopImage];
+    });
+}
+
+- (void)requestHomeTopImage{
+    [[NetworkHelper shareHelper] requestHomeTopImageWithCompletion:^(BOOL success, NSDictionary *dic, NSError *error) {
+        NSString *codeString = [NSString stringWithFormat:@"%@",[dic objectForKey:@"retCode"]];
+        if ([codeString isEqualToString:@"1000"]) {
+            NSArray *dataArr = [dic objectForKey:@"data"];
+            if (dataArr.count > 0) {
+                NSDictionary *dic = [dataArr firstObject];
+                NSString *baseUrl = [dic objectForKey:@"image_base_url"];
+                NSString *path = [dic objectForKey:@"origin_url"];
+                self.topImageURL = [NSString stringWithFormat:@"%@%@",baseUrl,path];
+                [WLSaveLocalHelper saveObject:[self.topImageURL copy] forKey:@"HomeTopImageURLString"];
+            }
+        }
+    }];
+}
+
+- (void)requestHomeHotPoetry{
     [self.networkHelper requestHotPoetry:0 count:10 withCompletion:^(BOOL success, NSDictionary *dic, NSError *error) {
         
-        NSLog(@"热门诗词：%@",dic);
+//        NSLog(@"热门诗词：%@",dic);
         NSString *codeString = [NSString stringWithFormat:@"%@",[dic objectForKey:@"retCode"]];
         if ([codeString isEqualToString:@"1000"]) {
             NSArray *dataArr = [dic objectForKey:@"data"];
             for (NSDictionary *poetryDic in dataArr) {
                 PoetryModel *model = [[PoetryModel alloc]initPoetryWithDictionary:poetryDic];
-            
                 [self.poetryArray addObject:model];
             }
             
             dispatch_async(dispatch_get_main_queue(), ^{
-                    [self loadCustomView];
+                [self loadCustomView];
             });
             
         }else{
@@ -195,13 +251,8 @@
         }
         
     }];
-    
-    
-    
+
 }
-
-
-
 
 #pragma mark - 加载视图
 - (void)loadCustomView
@@ -222,7 +273,7 @@
         
         [self.mainTableView.mj_header endRefreshing];
         
-        NSLog(@"热门诗词：%@",dic);
+//        NSLog(@"热门诗词：%@",dic);
         NSString *codeString = [NSString stringWithFormat:@"%@",[dic objectForKey:@"retCode"]];
         if ([codeString isEqualToString:@"1000"]) {
             [self.poetryArray removeAllObjects];
@@ -249,7 +300,7 @@
         
         [self.mainTableView.mj_footer endRefreshing];
         
-        NSLog(@"热门诗词：%@",dic);
+//        NSLog(@"热门诗词：%@",dic);
         NSString *codeString = [NSString stringWithFormat:@"%@",[dic objectForKey:@"retCode"]];
         if ([codeString isEqualToString:@"1000"]) {
             NSArray *dataArr = [dic objectForKey:@"data"];
@@ -376,6 +427,7 @@
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.backgroundColor = RGBCOLOR(246, 246, 246, 1.0);
         }
+        cell.imageURL = self.topImageURL;
         [cell touchImageWithBlock:^{
             
             dispatch_async(dispatch_get_main_queue(), ^{

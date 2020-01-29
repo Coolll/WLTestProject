@@ -114,10 +114,15 @@
         self.recentSectionArray = [recentList mutableCopy];
     }
     
+    [self requestPoetryConfigureData];
+
+}
+
+- (void)requestPoetryConfigureData{
     
     [[NetworkHelper shareHelper]requestPoetryConfigureWithCompletion:^(BOOL success, NSDictionary *dic, NSError *error) {
         if (success) {
-            
+
             NSString *code = [NSString stringWithFormat:@"%@",[dic objectForKey:@"retCode"]];
             if (![code isEqualToString:@"1000"]) {
                 NSString *tipMessage = [dic objectForKey:@"message"];
@@ -128,13 +133,18 @@
             
             
         }else{
-            
-            [self showHUDWithText:@"请求失败，请稍后重试"];
+            if (!self.retryBtn) {
+                [self loadEmptyView];
+            }
         }
     }];
-    
-    
 
+}
+
+- (void)retryRequest
+{
+    [super retryRequest];
+    [self requestPoetryConfigureData];
 }
 
 - (void)dealConfigureData:(NSDictionary*)dic{
@@ -142,6 +152,8 @@
     
     self.sectionOneBooksTitleArray = [NSMutableArray array];
     self.sectionTwoBooksTitleArray = [NSMutableArray array];
+    [self.sectionOneArray removeAllObjects];
+    [self.sectionTwoArray removeAllObjects];
     
     NSInteger sectionOneCount = self.sectionOneBooksTitleArray.count;
     NSInteger sectionTwoCount = self.sectionTwoBooksTitleArray.count;
@@ -314,7 +326,6 @@
             WLTypeListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WLTypeListCell"];;
             if (!cell) {
                 cell = [[WLTypeListCell alloc]init];
-                NSLog(@"====index:%ld %@",indexPath.row,cell);
             }
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.backgroundColor = [UIColor whiteColor];
@@ -359,7 +370,6 @@
     
     if (!cell) {
         cell = [[WLGradeTypeCell alloc]init];
-        NSLog(@"====index:%ld",indexPath.row);
 
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -377,7 +387,6 @@
     WLGradeTypeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WLGradeTypeCell"];
     if (!cell) {
         cell = [[WLGradeTypeCell alloc]init];
-        NSLog(@"====index:%ld",indexPath.row);
 
     }
     cell.booksArray = [self.sectionTwoBooksTitleArray copy];

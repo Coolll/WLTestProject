@@ -23,7 +23,10 @@ static const NSInteger cellCount = 3;
  *  图片数组
  **/
 @property (nonatomic, strong) NSMutableArray *imageArray;
-
+/**
+ *  原始图片数组
+ **/
+@property (nonatomic, strong) NSMutableArray *originImageArray;
 /**
  *  保存图片的block
  **/
@@ -42,10 +45,12 @@ static const NSInteger cellCount = 3;
 - (void)loadCustomData
 {
     self.imageArray = [NSMutableArray arrayWithArray:[AppConfig config].bgImageInfo.allValues];
-    
+    self.originImageArray = [NSMutableArray arrayWithArray:[AppConfig config].bgOriginImageInfo.allValues];
+
     if (self.imageArray.count == 0) {
-        [[AppConfig config] loadAllBgImageWithBlock:^(NSDictionary *dic,NSError *error) {
+        [[AppConfig config] loadAllBgImageWithBlock:^(NSDictionary *dic,NSDictionary *originDic,NSError *error) {
             [self.imageArray addObjectsFromArray:dic.allValues];
+            [self.originImageArray addObjectsFromArray:originDic.allValues];
             [self loadCustomView];
         }];
     }else{
@@ -97,7 +102,7 @@ static const NSInteger cellCount = 3;
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *imageName = self.imageArray[indexPath.row];
+    NSString *imageName = self.originImageArray[indexPath.row];
 
     WLImageController *vc = [[WLImageController alloc]init];
     vc.imageName = imageName;

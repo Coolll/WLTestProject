@@ -43,7 +43,15 @@ typedef void(^AlertBlock)(BOOL sure);
  *  全屏 返回按钮
  **/
 @property (nonatomic,strong) UIView *backView;
+/**
+ *  重试按钮
+ **/
+@property (nonatomic,strong) UIButton *retryBtn;
 
+/**
+ *  是否有网络
+ **/
+@property (nonatomic,assign) BOOL canReachNetwork;
 
 
 
@@ -75,5 +83,10 @@ typedef void(^AlertBlock)(BOOL sure);
 //保存图片到本地的相册
 - (void)saveImage:(UIImage*)image withCollectionName:(NSString*)name withCompletion:(SaveImageCompletionBlock)block;
 
+//请求失败，则展示空的view
+- (void)loadEmptyView;
+
+//重新请求
+- (void)retryRequest;
 
 @end

@@ -30,6 +30,11 @@ static const CGFloat touchFullOffset = 15;//箭头触摸区域超出的offset �
  **/
 @property (nonatomic,strong) UIImageView *backImageView;
 
+/**
+ *  请求失败时的提示文本
+ **/
+@property (nonatomic,strong) UILabel *requestFailedTipLabel;
+
 
 
 @end
@@ -40,6 +45,8 @@ static const CGFloat touchFullOffset = 15;//箭头触摸区域超出的offset �
     [super viewDidLoad];
 
     [self loadCustomNavi];
+    
+    [[WLRequestHelper defaultHelper] checkNetwork];
 }
 
 
@@ -258,6 +265,82 @@ static const CGFloat touchFullOffset = 15;//箭头触摸区域超出的offset �
     });
  
     
+}
+
+#pragma mark - 请求失败的处理
+
+//请求失败，则展示空的view
+- (void)loadEmptyView{
+    
+    CGFloat iconW = 20;
+    CGFloat space = 10;
+    CGFloat textW = 120;
+    CGFloat btnH = 40;
+    CGFloat leftSpace = (PhoneScreen_WIDTH-iconW-space-textW)/2;
+    CGFloat topSpace = (PhoneScreen_HEIGHT-iconW-space-btnH)/2;
+    UIImageView *iconImageView = [[UIImageView alloc]init];
+    iconImageView.image = [UIImage imageNamed:@"request_failed"];
+    [self.view addSubview:iconImageView];
+    //元素的布局
+    [iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(self.view.mas_leading).offset(leftSpace);
+        make.top.equalTo(self.view.mas_top).offset(topSpace);
+        make.width.mas_equalTo(iconW);
+        make.height.mas_equalTo(iconW);
+    }];
+    
+    self.requestFailedTipLabel = [[UILabel alloc]init];
+    self.requestFailedTipLabel.textAlignment = NSTextAlignmentCenter;
+    if ([WLRequestHelper defaultHelper].canReachNetwork) {
+        self.requestFailedTipLabel.text = @"网络请求失败";
+    }else{
+        self.requestFailedTipLabel.text = @"请您检查网络";
+    }
+    [self.view addSubview:self.requestFailedTipLabel];
+    //元素的布局
+    [self.requestFailedTipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(iconImageView.mas_trailing).offset(space);
+        make.centerY.equalTo(iconImageView.mas_centerY);
+        make.width.mas_equalTo(textW);
+        make.height.mas_equalTo(iconW);
+    }];
+    
+    self.retryBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.retryBtn.layer.borderColor = RGBCOLOR(53, 53, 53, 1.0).CGColor;
+    self.retryBtn.layer.borderWidth = 1.0f;
+    self.retryBtn.layer.cornerRadius = btnH/2;
+    [self.retryBtn setTitle:@"重试" forState:UIControlStateNormal];
+    [self.retryBtn setTitleColor:RGBCOLOR(53, 53, 53, 1.0) forState:UIControlStateNormal];
+    [self.retryBtn addTarget:self action:@selector(retryRequest) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.retryBtn];
+    //元素的布局
+    [self.retryBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(iconImageView.mas_leading).offset(0);
+        make.trailing.equalTo(self.requestFailedTipLabel.mas_trailing).offset(0);
+        make.top.equalTo(iconImageView.mas_bottom).offset(space);
+        make.height.mas_equalTo(btnH);
+    }];
+}
+
+//重新请求
+- (void)retryRequest{
+    NSLog(@"重新请求");
+    [self.retryBtn setTitleColor:RGBCOLOR(150, 150, 150, 1) forState:UIControlStateNormal];
+    self.retryBtn.layer.borderColor = RGBCOLOR(180, 180, 180, 1).CGColor;
+    self.retryBtn.userInteractionEnabled = NO;
+
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        if ([WLRequestHelper defaultHelper].canReachNetwork) {
+            self.requestFailedTipLabel.text = @"网络请求失败";
+        }else{
+            self.requestFailedTipLabel.text = @"请您检查网络";
+        }
+
+        [self.retryBtn setTitleColor:RGBCOLOR(53, 53, 53, 1) forState:UIControlStateNormal];
+        self.retryBtn.layer.borderColor = RGBCOLOR(53, 53, 53, 1).CGColor;
+        self.retryBtn.userInteractionEnabled = YES;
+    });
+
 }
 
 #pragma mark - 分享

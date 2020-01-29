@@ -33,6 +33,10 @@
  *  诗词类别与诗词背景图片的对应info
  **/
 @property (nonatomic,strong) NSMutableDictionary *bgImageInfo;
+/**
+ *  诗词类别与诗词背景图片的对应info
+ **/
+@property (nonatomic,strong) NSMutableDictionary *bgOriginImageInfo;
 
 /**
  *  全部的诗词数据
@@ -41,7 +45,7 @@
 
 //- (void)loadClassImageWithBlock:(void(^)(NSDictionary*dic))block;
 
-- (void)loadAllBgImageWithBlock:(void(^)(NSDictionary*dic,NSError *error))block;
+- (void)loadAllBgImageWithBlock:(void(^)(NSDictionary*thumbDic, NSDictionary*originDic,NSError *error))block;
 
 - (void)loadAllClassImageInfo;
 

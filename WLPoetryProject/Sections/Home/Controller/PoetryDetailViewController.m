@@ -48,9 +48,14 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
  **/
 @property (nonatomic, strong) UIImageView *mainImageView;
 /**
- *  是否需要改为白色的字体
+ *  是否需要使用默认文本颜色
  **/
-@property (nonatomic,assign) BOOL needWhite;
+@property (nonatomic,assign) BOOL needUseDefaultColor;
+/**
+ *  文本颜色
+ **/
+@property (nonatomic,strong) UIColor *contentTextColor;
+
 
 
 @end
@@ -61,11 +66,22 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     
-    if (self.dataModel.textColor == 1 ) {
+    if (kStringIsEmpty(self.dataModel.textColor)) {
         //静夜思 背景色为深色，文本改为白色
-        self.needWhite = YES;
+        self.needUseDefaultColor = YES;
     }else{
-        self.needWhite = NO;
+        NSString *string = self.dataModel.textColor;
+        NSArray *array = [string componentsSeparatedByString:@","];
+        if (array.count == 4) {
+            NSInteger red = [[array objectAtIndex:0] integerValue];
+            NSInteger green = [[array objectAtIndex:1] integerValue];
+            NSInteger blue = [[array objectAtIndex:2] integerValue];
+            CGFloat alpha = [[array objectAtIndex:3] floatValue];
+            self.contentTextColor = RGBCOLOR(red, green, blue, alpha);
+            self.needUseDefaultColor = NO;
+        }else{
+            self.needUseDefaultColor = YES;
+        }
     }
     
     self.titleForNavi = self.dataModel.name;
@@ -244,7 +260,8 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
     //诗词主背景
     self.mainImageView = [[UIImageView alloc]init];
     [self.view addSubview:self.mainImageView];
-    
+    self.mainImageView.contentMode = UIViewContentModeScaleToFill;
+    self.mainImageView.backgroundColor = RGBCOLOR(243, 238, 214, 1.0);
     NSString *imageName = self.dataModel.backImageURL;
     if (imageName.length > 0 && ![imageName isEqualToString:@"<null>"] && ![imageName isEqualToString:@"(null)"]) {
 
@@ -270,9 +287,14 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
 {
     self.authorLabel.text = self.dataModel.author;
     //背景色为深色时，文本颜色为白色
-    if (self.needWhite) {
-        self.titleFullLabel.textColor = [UIColor whiteColor];
-        self.authorLabel.textColor = [UIColor whiteColor];
+    if (!self.needUseDefaultColor) {
+        if (self.contentTextColor) {
+            self.titleFullLabel.textColor = self.contentTextColor;
+            self.authorLabel.textColor = self.contentTextColor;
+        }else{
+            self.titleFullLabel.textColor = [UIColor whiteColor];
+            self.authorLabel.textColor = [UIColor whiteColor];
+        }
     }
     self.mainTable.backgroundColor = [UIColor clearColor];
 }
@@ -557,8 +579,12 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
     contentCell.selectionStyle = UITableViewCellSelectionStyleNone;
     contentCell.backgroundColor = [UIColor clearColor];
     contentCell.contentString = self.dataArray[indexPath.row];
-    if (self.needWhite) {
-        contentCell.contentLabel.textColor = [UIColor whiteColor];
+    if (!self.needUseDefaultColor) {
+        if (self.contentTextColor) {
+            contentCell.contentLabel.textColor = self.contentTextColor;
+        }else{
+            contentCell.contentLabel.textColor = [UIColor whiteColor];
+        }
     }
     
     return contentCell;

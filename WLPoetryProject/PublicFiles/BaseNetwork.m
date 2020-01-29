@@ -95,7 +95,7 @@
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             if ([responseObject isKindOfClass:[NSDictionary class]]) {
                 NSDictionary *dic = (NSDictionary*)responseObject;
-                NSLog(@"dic内容:%@",dic);
+//                NSLog(@"dic内容:%@",dic);
 
                 if (block) {
                     block(YES, dic, nil);

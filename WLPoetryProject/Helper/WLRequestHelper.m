@@ -19,59 +19,29 @@
     return helper;
 }
 
-- (id)dealWithOriginData:(NSDictionary*)dataDic
-{
-    /*
-     {
-     code = 1000;
-     data =     {
-     obj =         (
-     {
-     bid = 2;
-     createTime = 1502422764000;
-     imageUrl = "/1/1/1.img";
-     modelSource = 2;
-     redirtType = 2;
-     redirtUrl = 1;
-     state = 0;
-     title = 12346;
-     updateTime = 1502422765000;
-     }
-     );
-     };
-     msg = success;
-     }
+- (void)checkNetwork{
+    AFNetworkReachabilityManager *manager = [AFNetworkReachabilityManager sharedManager];
+    [manager startMonitoring];
 
-     */
-    
-    if ([dataDic isKindOfClass:[NSDictionary class]]) {
-        
-        
-        NSString *codeString = [NSString stringWithFormat:@"%@",[dataDic objectForKey:@"code"]];
-        
-        if ([codeString isEqualToString:@"1000"]) {
-            
-            NSDictionary *data = dataDic[@"data"];
-            
-            NSArray *imageArray = [NSArray arrayWithArray:data[@"obj"]];
-            
-            return imageArray;
-            
-        }else{
-            
-            NSString *errorString = [NSString stringWithFormat:@"%@",[dataDic objectForKey:@"msg"]];
+    [manager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        if (status == AFNetworkReachabilityStatusNotReachable) {
+            NSLog(@"网络不可用");
 
-            return errorString;
+            self.canReachNetwork = NO;
+        }else if (status == AFNetworkReachabilityStatusReachableViaWWAN || status == AFNetworkReachabilityStatusReachableViaWiFi){
+            self.canReachNetwork = YES;
+            if (status == AFNetworkReachabilityStatusReachableViaWiFi) {
+                NSLog(@"WIFI网络");
+
+                self.isWIFI = YES;
+            }else{
+                NSLog(@"4G网络");
+                self.isWIFI = NO;
+            }
         }
-        
-       
-        
-       
-    }
-
-    
-    return nil;
+    }];
 }
+
 
 
 @end

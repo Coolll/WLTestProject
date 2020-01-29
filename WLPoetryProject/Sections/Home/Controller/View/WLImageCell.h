@@ -10,6 +10,11 @@
 typedef void(^ImageCellTouchBlock) (void);
 
 @interface WLImageCell : UITableViewCell
+/**
+ *  图片url
+ **/
+@property (nonatomic,copy) NSString *imageURL;
+
 
 - (void)touchImageWithBlock:(ImageCellTouchBlock)block;
 

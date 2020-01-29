@@ -45,7 +45,11 @@
     self.topImageView = [[UIImageView alloc]init];
     self.topImageView.layer.cornerRadius = 8.f;
     self.topImageView.clipsToBounds = YES;
-    self.topImageView.image = [UIImage imageNamed:@"topImage.jpg"];
+    if (kStringIsEmpty(self.imageURL)) {
+        self.topImageView.image = [UIImage imageNamed:@"topImage.jpg"];
+    }else{
+        [self.topImageView sd_setImageWithURL:[NSURL URLWithString:self.imageURL] placeholderImage:[UIImage imageNamed:@"topImage.jpg"]];
+    }
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(touchImageAction:)];
     [self.topImageView addGestureRecognizer:tap];

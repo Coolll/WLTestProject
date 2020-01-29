@@ -428,7 +428,7 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
     //是否需要展示密码
     id localShowPwd = [WLSaveLocalHelper loadObjectForKey:@"needShowPassword"];
     if (!localShowPwd) {
-        localShowPwd = @"1";
+        localShowPwd = @"0";
     }
     NSString *showPwd = [NSString stringWithFormat:@"%@",localShowPwd];
     if ([showPwd isEqualToString:@"1"]) {
@@ -466,7 +466,7 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
     
     NSInteger count = 1000+arc4random()%8888;
     
-    NSString *name = [NSString stringWithFormat:@"%@丶%@%ld",self.threeNameArray[threeIndex],self.fourNameArray[fourIndex],(long)count];
+    NSString *name = [NSString stringWithFormat:@"%@-%@%ld",self.threeNameArray[threeIndex],self.fourNameArray[fourIndex],(long)count];
     self.nameTextField.contentString = name;
     
     
