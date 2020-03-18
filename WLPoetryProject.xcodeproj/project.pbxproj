@@ -279,6 +279,7 @@
 		3616E7972192B9510014843F /* cover.png in Resources */ = {isa = PBXBuildFile; fileRef = 3616E7962192B9500014843F /* cover.png */; };
 		3619788421952AED000E0138 /* WLChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3619788021952AEC000E0138 /* WLChartView.m */; };
 		3619788521952AED000E0138 /* WLShapeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3619788121952AEC000E0138 /* WLShapeLayer.m */; };
+		361D3DDD241F580200950337 /* tangPoetry_three.json in Resources */ = {isa = PBXBuildFile; fileRef = 00FD14BB20A95A2C0018D649 /* tangPoetry_three.json */; };
 		3628243621B5252200191B97 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3628243521B5252200191B97 /* libsqlite3.0.tbd */; };
 		363054C421A3AA8D0084FD5B /* WQLProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 363054C221A3AA8D0084FD5B /* WQLProgressView.m */; };
 		363054C621A3B61E0084FD5B /* tipImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 363054C521A3B61E0084FD5B /* tipImage.png */; };
@@ -2163,6 +2164,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				361D3DDD241F580200950337 /* tangPoetry_three.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -155,12 +155,13 @@
 {
     self.currentPage = 0;
     self.keywordString = textField.text;
-    NSLog(@"开始请求page:%ld",self.currentPage);
 
     [[NetworkHelper shareHelper] requestPoetryWithKeyword:textField.text withPage:self.currentPage withCompletion:^(BOOL success, NSDictionary *dic, NSError *error) {
         if (success) {
             NSString *codeString = [NSString stringWithFormat:@"%@",[dic objectForKey:@"retCode"]];
             if ([codeString isEqualToString:@"1000"]) {
+                //清空原数据
+                [self.poetryArray removeAllObjects];
                 NSArray *dataArr = [dic objectForKey:@"data"];
                 for (NSDictionary *poetryDic in dataArr) {
                     PoetryModel *model = [[PoetryModel alloc]initPoetryWithDictionary:poetryDic];
