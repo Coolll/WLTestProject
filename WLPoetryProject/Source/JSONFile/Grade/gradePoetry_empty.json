@@ -8,12 +8,13 @@
                     "classInfo" : "<##>",
                     "poetryID" : "<##>",
                     "source" : "<##>",
-                    "analysesInfo" : "",
-                    "transferInfo" : "",
-                    "backgroundInfo" : "",
+                    "analysesInfo" : "<##>",
+                    "transferInfo" : "<##>",
+                    "backgroundInfo" : "<##>",
                     "backImageName" : "",
                     "bgImageURL" : "",
-                    "placeHolder" : ""
+                    "placeHolder" : "",
+                    "likes":"<##>"
                     }
     
 	],

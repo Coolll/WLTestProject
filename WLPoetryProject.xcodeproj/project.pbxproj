@@ -275,6 +275,7 @@
 		360E672F219442ED00AD56BF /* class_7.png in Resources */ = {isa = PBXBuildFile; fileRef = 360E6727219442ED00AD56BF /* class_7.png */; };
 		360E6730219442ED00AD56BF /* class_5.png in Resources */ = {isa = PBXBuildFile; fileRef = 360E6728219442ED00AD56BF /* class_5.png */; };
 		360E6731219442ED00AD56BF /* class_4.png in Resources */ = {isa = PBXBuildFile; fileRef = 360E6729219442ED00AD56BF /* class_4.png */; };
+		360FE91D244E9BFE00983D3C /* recommendPoetryTwo.json in Resources */ = {isa = PBXBuildFile; fileRef = 360FE91C244E9BFE00983D3C /* recommendPoetryTwo.json */; };
 		3616E7952192971D0014843F /* WLRecitePoetryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3616E7942192971D0014843F /* WLRecitePoetryCell.m */; };
 		3616E7972192B9510014843F /* cover.png in Resources */ = {isa = PBXBuildFile; fileRef = 3616E7962192B9500014843F /* cover.png */; };
 		3619788421952AED000E0138 /* WLChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3619788021952AEC000E0138 /* WLChartView.m */; };
@@ -766,6 +767,7 @@
 		360E6727219442ED00AD56BF /* class_7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = class_7.png; sourceTree = "<group>"; };
 		360E6728219442ED00AD56BF /* class_5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = class_5.png; sourceTree = "<group>"; };
 		360E6729219442ED00AD56BF /* class_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = class_4.png; sourceTree = "<group>"; };
+		360FE91C244E9BFE00983D3C /* recommendPoetryTwo.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = recommendPoetryTwo.json; sourceTree = "<group>"; };
 		3616E7932192971D0014843F /* WLRecitePoetryCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLRecitePoetryCell.h; sourceTree = "<group>"; };
 		3616E7942192971D0014843F /* WLRecitePoetryCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLRecitePoetryCell.m; sourceTree = "<group>"; };
 		3616E7962192B9500014843F /* cover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cover.png; sourceTree = "<group>"; };
@@ -1811,6 +1813,7 @@
 				073D7F6820A7E23D002BCEA7 /* TangPoetry */,
 				0716099E20A1C15400904C69 /* Grade */,
 				07F73C61208ACDC100F7D8B3 /* recommendPoetry.json */,
+				360FE91C244E9BFE00983D3C /* recommendPoetryTwo.json */,
 				007C7E2220F59EC700F360D6 /* configureGradeJuinor.json */,
 				364A869722436E680031DC7A /* configureGradeBaby.json */,
 				007C7E2320F59EC800F360D6 /* configureGradePrimary.json */,
@@ -2132,6 +2135,7 @@
 				0795690520726D0B0097C26D /* Assets.xcassets in Resources */,
 				360E672B219442ED00AD56BF /* class_1.png in Resources */,
 				0795690020726D0B0097C26D /* Main.storyboard in Resources */,
+				360FE91D244E9BFE00983D3C /* recommendPoetryTwo.json in Resources */,
 				071609AA20A1C15400904C69 /* gradePoetry_2.json in Resources */,
 				00BBFA1620D65C8B00BB86D9 /* poetryIcon.png in Resources */,
 				3616E7972192B9510014843F /* cover.png in Resources */,
