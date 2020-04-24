@@ -93,8 +93,9 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
     [self addBackButtonForFullScreen];//返回按钮，需要最后添加
     
     
-    
 }
+
+
 
 - (void)viewWillDisappear:(BOOL)animated
 {
@@ -248,10 +249,30 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
     
     self.dataArray = [[WLPublicTool shareTool] poetrySeperateWithOrigin:self.dataModel.content];
     
+    [self loadPoetryAnalysesInfo];
+    
     [self loadContentTableView];
+    
+    
 
 }
-
+- (void)loadPoetryAnalysesInfo{
+    [[NetworkHelper shareHelper] loadAnalysesWithPoetryId:self.dataModel.poetryID withCompletion:^(BOOL success, NSDictionary *dic, NSError *error) {
+        NSLog(@"鉴赏信息:%@",dic);
+        
+        if (success) {
+            NSString *codeString = [NSString stringWithFormat:@"%@",[dic objectForKey:@"retCode"]];
+            if ([codeString isEqualToString:@"1000"]) {
+                NSDictionary *dataDic = [dic objectForKey:@"data"];
+                self.dataModel.addtionInfo = [dataDic objectForKey:@"addition_info"];
+                self.dataModel.analysesInfo = [dataDic objectForKey:@"analyses_info"];
+                self.dataModel.backgroundInfo = [dataDic objectForKey:@"background_info"];
+                self.dataModel.transferInfo = [dataDic objectForKey:@"transfer_info"];
+            }
+        }
+        
+    }];
+}
 
 
 

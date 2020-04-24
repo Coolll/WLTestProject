@@ -72,6 +72,8 @@
 //    [self checkLocalData];//加载本地数据
     [self checkNetworkAndDealImage];
     
+//    [[BackupHelper shareInstance] updateAllPoetry];//更新诗词
+
 //    [[BackupHelper shareInstance] uploadAllPoetry];//备份诗词
 //    [self uploadAllImages];
     

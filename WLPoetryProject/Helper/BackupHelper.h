@@ -11,6 +11,7 @@
 @interface BackupHelper : NSObject
 + (BackupHelper *)shareInstance;
 - (void)uploadAllImages;
+- (void)updateAllPoetry;
 - (void)uploadAllPoetry;
 
 @end

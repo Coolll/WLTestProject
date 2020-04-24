@@ -25,6 +25,9 @@ NS_ASSUME_NONNULL_BEGIN
 //上传背景图片info
 - (void)uploadImage:(NSDictionary*)param;
 
+//更新诗词info
+- (void)updatePoetry:(NSDictionary*)param;
+
 //上传诗词info
 - (void)uploadPoetry:(NSDictionary*)param;
 
@@ -69,6 +72,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 //新增一条反馈
 - (void)addOneFeedbackWithUserID:(NSString*)userId content:(NSString*)content contact:(NSString*)contact withCompletion:(RequestResultBlock)block;
+
+//获取诗词的鉴赏信息
+- (void)loadAnalysesWithPoetryId:(NSString*)poetryIDString withCompletion:(RequestResultBlock)block;
 
 @end
 

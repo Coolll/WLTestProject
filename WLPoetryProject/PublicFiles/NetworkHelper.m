@@ -48,6 +48,13 @@
     [self.baseNetwork requestPostWithBody:param withUrlString:@"api/poetry/insert" withCompletion:NULL];
 
 }
+//更新诗词
+- (void)updatePoetry:(NSDictionary*)param
+{
+
+    [self.baseNetwork requestPostWithBody:param withUrlString:@"api/poetry/update" withCompletion:NULL];
+
+}
 
 //登录
 - (void)loginWithUserName:(NSString*)userName password:(NSString*)pwd withCompletion:(RequestResultBlock)block
@@ -208,6 +215,17 @@
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     NSDictionary *param = [self operationForParam:dic];
     [self.baseNetwork requestPostWithBody:param withUrlString:@"api/poetry/loadEvaluatePoetry" withCompletion:block];
+}
+
+//获取诗词的鉴赏信息
+- (void)loadAnalysesWithPoetryId:(NSString*)poetryIDString withCompletion:(RequestResultBlock)block{
+    NSInteger poetryID = [poetryIDString integerValue];
+    
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    [dic setObject:[NSNumber numberWithInteger:poetryID] forKey:@"poetry_id"];
+    NSDictionary *param = [self operationForParam:dic];
+    [self.baseNetwork requestPostWithBody:param withUrlString:@"api/poetry/loadPoetryAnalysesInfo" withCompletion:block];
+
 }
 
 //新增一条反馈信息

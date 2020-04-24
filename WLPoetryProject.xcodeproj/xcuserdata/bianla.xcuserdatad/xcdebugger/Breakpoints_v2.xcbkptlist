@@ -102,34 +102,80 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "913264A6-C90B-463E-A5D7-06EA200B6B0B"
-            shouldBeEnabled = "Yes"
+            uuid = "73FBDE57-9F15-4DF9-86BA-76B6035ABCFB"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WLPoetryProject/Sections/Home/Controller/PoetryDetailViewController.m"
-            timestampString = "0"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "69"
-            endingLineNumber = "69"
-            landmarkName = "-viewDidLoad"
+            startingLineNumber = "261"
+            endingLineNumber = "261"
+            landmarkName = "-loadPoetryAnalysesInfo"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "73FBDE57-9F15-4DF9-86BA-76B6035ABCFB - 6f417ca8f250da45"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__52-[PoetryDetailViewController loadPoetryAnalysesInfo]_block_invoke"
+                  moduleName = "WLPoetryProject"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bianla/Documents/MyFile/WLTestProject/WLPoetryProject/Sections/Home/Controller/PoetryDetailViewController.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "261"
+                  endingLineNumber = "261"
+                  offsetFromSymbolStart = "100">
+               </Location>
+               <Location
+                  uuid = "73FBDE57-9F15-4DF9-86BA-76B6035ABCFB - 6f417ca8f250da45"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__52-[PoetryDetailViewController loadPoetryAnalysesInfo]_block_invoke"
+                  moduleName = "WLPoetryProject"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bianla/Documents/MyFile/WLTestProject/WLPoetryProject/Sections/Home/Controller/PoetryDetailViewController.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "261"
+                  endingLineNumber = "261"
+                  offsetFromSymbolStart = "676">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A927D709-EAA9-4F09-904A-FD1BF6B5CE8F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WLPoetryProject/Sections/PoetryType/WLLunYuController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
+            landmarkName = "-loadCustomData"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "97A606B3-E373-470B-BB5C-27D8668552C7"
+            uuid = "7FE4496A-CCC3-4207-BC9E-24F30C8C54F5"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "WLPoetryProject/Sections/Home/Controller/PoetryDetailViewController.m"
-            timestampString = "0"
+            filePath = "WLPoetryProject/Sections/Home/Controller/YLHomeViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "251"
-            endingLineNumber = "251"
-            landmarkName = "-loadCustomData"
+            startingLineNumber = "116"
+            endingLineNumber = "116"
+            landmarkName = "-loadAllImageData"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -163,6 +163,8 @@
         }
         
         [poetryListArray addObject:@"recommendPoetry"];
+        [poetryListArray addObject:@"recommendPoetryTwo"];
+
         _allPoetryList = [poetryListArray copy];
     }
     return _allPoetryList;

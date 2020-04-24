@@ -15,6 +15,12 @@
  *  network
  **/
 @property (nonatomic,strong) NetworkHelper *networkHelper;
+/**
+ *  诗词的条数
+ **/
+@property (nonatomic,assign) NSInteger poetryCount;
+
+
 @end
 @implementation BackupHelper
 + (BackupHelper *)shareInstance{
@@ -50,6 +56,55 @@
 
 #pragma mark - 将本地json上传到服务器
 
+- (void)updateAllPoetry{
+    NSArray *jsonList = [NSArray array];
+    jsonList = [AppConfig config].allPoetryList;
+   
+    [self updatePoetryWithFileArray:jsonList withCurrentJsonIndex:0 withCurrentIndex:0];
+}
+
+
+- (void)updatePoetryWithFileArray:(NSArray*)jsonList withCurrentJsonIndex:(NSInteger)currentJsonIndex withCurrentIndex:(NSInteger)currentIndex{
+    if (currentJsonIndex >= jsonList.count) {
+        return;
+    }
+    NSString *jsonName = [jsonList objectAtIndex:currentJsonIndex];
+
+    NSArray *poetryModelArray = [self readLocalFileWithName:jsonName];
+    NSLog(@"jsonName:%@ count:%ld",jsonName,poetryModelArray.count);
+
+    if (currentIndex < poetryModelArray.count) {
+        PoetryModel *model = poetryModelArray[currentIndex];
+        NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+        [dic setObject:model.poetryID forKey:@"poetry_id"];
+        [dic setObject:model.name forKey:@"name"];
+        [dic setObject:model.author forKey:@"author"];
+        [dic setObject:model.content forKey:@"content"];
+        [dic setObject:model.addtionInfo forKey:@"addition_info"];
+        [dic setObject:model.classInfo forKey:@"class_info"];
+        [dic setObject:model.classInfoExplain forKey:@"class_info_explain"];
+        [dic setObject:model.mainClass forKey:@"main_class"];
+        [dic setObject:model.mainClassExplain forKey:@"main_class_explain"];
+        [dic setObject:model.source forKey:@"source"];
+        [dic setObject:model.sourceExplain forKey:@"source_explain"];
+        [dic setObject:model.transferInfo forKey:@"transfer_info"];
+        [dic setObject:model.analysesInfo forKey:@"analyses_info"];
+        [dic setObject:model.backgroundInfo forKey:@"background_info"];
+        [dic setObject:[NSNumber numberWithInteger:model.likes] forKey:@"likes"];
+
+
+        [self.networkHelper updatePoetry:dic];
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self updatePoetryWithFileArray:jsonList withCurrentJsonIndex:currentJsonIndex withCurrentIndex:(currentIndex+1)];
+        });
+    }else{
+        [self updatePoetryWithFileArray:jsonList withCurrentJsonIndex:(currentJsonIndex+1) withCurrentIndex:0];
+    }
+
+}
+
+
 - (void)uploadAllPoetry{
     NSArray *jsonList = [NSArray array];
     jsonList = [AppConfig config].allPoetryList;
@@ -72,7 +127,6 @@
                 [dic setObject:model.classInfo forKey:@"class_info"];
                 if (model.classInfo.length > 8) {
                     NSLog(@"诗词:%@",model.poetryID);
-                    
                 }
                 [dic setObject:model.classInfoExplain forKey:@"class_info_explain"];
                 [dic setObject:model.mainClass forKey:@"main_class"];
@@ -82,7 +136,6 @@
                 [dic setObject:model.transferInfo forKey:@"transfer_info"];
                 [dic setObject:[NSNumber numberWithInteger:model.likes] forKey:@"likes"];
                 [self.networkHelper uploadPoetry:dic];
-            
             }
         
         });
@@ -265,7 +318,35 @@
     else if([classInfo isEqualToString:@"1312"]){return @"声声慢";}
     else if([classInfo isEqualToString:@"1313"]){return @"满江红";}
     else if([classInfo isEqualToString:@"1314"]){return @"破阵子";}
-    
+    else if([classInfo isEqualToString:@"1400"]){return @"论语";}
+    else if([classInfo isEqualToString:@"1501"]){return @"登科后";}
+    else if([classInfo isEqualToString:@"1502"]){return @"离思 其四";}
+    else if([classInfo isEqualToString:@"1503"]){return @"逢雪宿芙蓉山";}
+    else if([classInfo isEqualToString:@"1504"]){return @"白头吟";}
+    else if([classInfo isEqualToString:@"1505"]){return @"山园小梅";}
+    else if([classInfo isEqualToString:@"1506"]){return @"寒菊";}
+    else if([classInfo isEqualToString:@"1507"]){return @"雪梅";}
+    else if([classInfo isEqualToString:@"1508"]){return @"登乐游原";}
+    else if([classInfo isEqualToString:@"1509"]){return @"春日";}
+    else if([classInfo isEqualToString:@"1510"]){return @"清平乐 六盘山";}
+    else if([classInfo isEqualToString:@"1511"]){return @"望江南 超然台作";}
+    else if([classInfo isEqualToString:@"1512"]){return @"赠花卿";}
+    else if([classInfo isEqualToString:@"1513"]){return @"陋室铭";}
+    else if([classInfo isEqualToString:@"1514"]){return @"浪淘沙";}
+    else if([classInfo isEqualToString:@"1515"]){return @"南陵别儿童入京";}
+    else if([classInfo isEqualToString:@"1516"]){return @"木兰花·拟古决绝词柬友";}
+    else if([classInfo isEqualToString:@"1517"]){return @"冬夜读书示子聿";}
+    else if([classInfo isEqualToString:@"1518"]){return @"山亭夏日";}
+    else if([classInfo isEqualToString:@"1519"]){return @"上堂开示颂";}
+    else if([classInfo isEqualToString:@"1520"]){return @"浣溪沙·细雨斜风作晓寒";}
+    else if([classInfo isEqualToString:@"1521"]){return @"题菊花";}
+    else if([classInfo isEqualToString:@"1522"]){return @"春江花月夜";}
+    else if([classInfo isEqualToString:@"1523"]){return @"蝶恋花·阅尽天涯离别苦";}
+    else if([classInfo isEqualToString:@"1524"]){return @"春雪";}
+    else if([classInfo isEqualToString:@"1525"]){return @"采桑子·而今才道当时错";}
+    else if([classInfo isEqualToString:@"1526"]){return @"南歌子词二首";}
+//    else if([classInfo isEqualToString:@"<##>"]){return @"<##>";}
+
     return @"";
 }
 
@@ -312,7 +393,6 @@
     else if ([mainClass isEqualToString:@"36"]){return @"论语-卷三";}
     else if ([mainClass isEqualToString:@"99"]){return @"推荐";}
     
-    
     return @"";
     
 }
@@ -333,6 +413,8 @@
     else if ([source isEqualToString:@"16"]){return @"楚辞";}
     else if ([source isEqualToString:@"17"]){return @"学前必背诗词";}
     else if ([source isEqualToString:@"18"]){return @"学前必读诗词";}
+    else if ([source isEqualToString:@"19"]){return @"飞花令";}
+    else if ([source isEqualToString:@"20"]){return @"经典诗词";}
     else if ([source isEqualToString:@"100"]){return @"学而篇";}
     else if ([source isEqualToString:@"101"]){return @"为政篇";}
     else if ([source isEqualToString:@"102"]){return @"八佾篇";}
@@ -373,6 +455,8 @@
     else if ([source isEqualToString:@"16"]){return [self randomNumberBetween:5 to:50];}
     else if ([source isEqualToString:@"17"]){return [self randomNumberBetween:5 to:200];}
     else if ([source isEqualToString:@"18"]){return [self randomNumberBetween:5 to:100];}
+    else if ([source isEqualToString:@"19"]){return [self randomNumberBetween:5 to:100];}
+    else if ([source isEqualToString:@"20"]){return [self randomNumberBetween:500 to:620];}
     else if ([source isEqualToString:@"100"]){return [self randomNumberBetween:1 to:99];}
     else if ([source isEqualToString:@"101"]){return [self randomNumberBetween:1 to:99];}
     else if ([source isEqualToString:@"102"]){return [self randomNumberBetween:1 to:99];}
@@ -426,7 +510,12 @@
         model.mainClassExplain = [self dealMainClassExplain:model.mainClass];
         model.sourceExplain = [self dealSourceExplain:model.source];
         model.classInfoExplain = [self dealPoetryClassInfoExplain:model.classInfo];
-        model.likes = [self dealLikesWithSource:model.source];
+        NSString *likes = [itemDic objectForKey:@"likes"];
+        if (!likes || likes.length == 0) {
+            model.likes = [self dealLikesWithSource:model.source];
+        }else{
+            model.likes = [likes integerValue];
+        }
         [modelArray addObject:model];
     }
     
