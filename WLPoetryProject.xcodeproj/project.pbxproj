@@ -310,6 +310,9 @@
 		36C3A872224CADFB00A57F70 /* LunYu_one.json in Resources */ = {isa = PBXBuildFile; fileRef = 36C3A870224CADFB00A57F70 /* LunYu_one.json */; };
 		36C3A873224CADFB00A57F70 /* LunYu_two.json in Resources */ = {isa = PBXBuildFile; fileRef = 36C3A871224CADFB00A57F70 /* LunYu_two.json */; };
 		36C3A879224CB4D100A57F70 /* LunYu_three.json in Resources */ = {isa = PBXBuildFile; fileRef = 36C3A877224CB4D100A57F70 /* LunYu_three.json */; };
+		36F93F262457C953004BB5F9 /* analyses.png in Resources */ = {isa = PBXBuildFile; fileRef = 36F93F252457C953004BB5F9 /* analyses.png */; };
+		36F93F292457CB1E004BB5F9 /* WLAnalysesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 36F93F282457CB1E004BB5F9 /* WLAnalysesView.m */; };
+		36F93F2B245814DA004BB5F9 /* analyses_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 36F93F2A245814DA004BB5F9 /* analyses_selected.png */; };
 		36FBC8602244B648008157F3 /* gradePoetry_14.json in Resources */ = {isa = PBXBuildFile; fileRef = 36FBC85F2244B648008157F3 /* gradePoetry_14.json */; };
 		36FD8D542383D01100497438 /* SearchPoetryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 36FD8D532383D01100497438 /* SearchPoetryCell.m */; };
 /* End PBXBuildFile section */
@@ -820,6 +823,10 @@
 		36C3A870224CADFB00A57F70 /* LunYu_one.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LunYu_one.json; sourceTree = "<group>"; };
 		36C3A871224CADFB00A57F70 /* LunYu_two.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LunYu_two.json; sourceTree = "<group>"; };
 		36C3A877224CB4D100A57F70 /* LunYu_three.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LunYu_three.json; sourceTree = "<group>"; };
+		36F93F252457C953004BB5F9 /* analyses.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = analyses.png; sourceTree = "<group>"; };
+		36F93F272457CB1E004BB5F9 /* WLAnalysesView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLAnalysesView.h; sourceTree = "<group>"; };
+		36F93F282457CB1E004BB5F9 /* WLAnalysesView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLAnalysesView.m; sourceTree = "<group>"; };
+		36F93F2A245814DA004BB5F9 /* analyses_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = analyses_selected.png; sourceTree = "<group>"; };
 		36FBC85F2244B648008157F3 /* gradePoetry_14.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = gradePoetry_14.json; sourceTree = "<group>"; };
 		36FD8D522383D01100497438 /* SearchPoetryCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchPoetryCell.h; sourceTree = "<group>"; };
 		36FD8D532383D01100497438 /* SearchPoetryCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchPoetryCell.m; sourceTree = "<group>"; };
@@ -1540,6 +1547,8 @@
 				3616E7942192971D0014843F /* WLRecitePoetryCell.m */,
 				360E67162194121A00AD56BF /* WLPoetryHeadCell.h */,
 				360E67172194121A00AD56BF /* WLPoetryHeadCell.m */,
+				36F93F272457CB1E004BB5F9 /* WLAnalysesView.h */,
+				36F93F282457CB1E004BB5F9 /* WLAnalysesView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1775,6 +1784,8 @@
 		07F73BA1208ACD9A00F7D8B3 /* ShareResoure */ = {
 			isa = PBXGroup;
 			children = (
+				36F93F2A245814DA004BB5F9 /* analyses_selected.png */,
+				36F93F252457C953004BB5F9 /* analyses.png */,
 				367ED9942191691C00E979EE /* triangle.png */,
 				36521BA921904ECE00425DCC /* optionIcon.png */,
 				36521BA421904A8A00425DCC /* reciteIcon.png */,
@@ -2056,6 +2067,7 @@
 				367ED9952191691C00E979EE /* triangle.png in Resources */,
 				00D4F64320F7467800287FB0 /* homeAuthorBg.png in Resources */,
 				07F73C0A208ACD9A00F7D8B3 /* nav_back@3x.png in Resources */,
+				36F93F262457C953004BB5F9 /* analyses.png in Resources */,
 				0721702C2087843A002A1628 /* README.strings in Resources */,
 				0795690820726D0B0097C26D /* LaunchScreen.storyboard in Resources */,
 				07F3E30B20D2C0FC00E7BAF7 /* defaultHeader.png in Resources */,
@@ -2138,6 +2150,7 @@
 				360FE91D244E9BFE00983D3C /* recommendPoetryTwo.json in Resources */,
 				071609AA20A1C15400904C69 /* gradePoetry_2.json in Resources */,
 				00BBFA1620D65C8B00BB86D9 /* poetryIcon.png in Resources */,
+				36F93F2B245814DA004BB5F9 /* analyses_selected.png in Resources */,
 				3616E7972192B9510014843F /* cover.png in Resources */,
 				0785076920B2EFF20030CD98 /* songPoetry_ten.json in Resources */,
 				36382B02224B5FB1006D094A /* songPoetry_mustRead.json in Resources */,
@@ -2319,6 +2332,7 @@
 				0010F22120F4911500F272EB /* WLImagePoetryController.m in Sources */,
 				0765C6B4207CE47E0085EB3A /* NSArray+MASAdditions.m in Sources */,
 				07567B11207A02EB0018B9E7 /* MJRefreshAutoFooter.m in Sources */,
+				36F93F292457CB1E004BB5F9 /* WLAnalysesView.m in Sources */,
 				07567B1A207A02EB0018B9E7 /* MJRefreshBackNormalFooter.m in Sources */,
 				07567B40207A02EC0018B9E7 /* UserInformation.m in Sources */,
 				0765C6AF207CE47E0085EB3A /* MASConstraint.m in Sources */,

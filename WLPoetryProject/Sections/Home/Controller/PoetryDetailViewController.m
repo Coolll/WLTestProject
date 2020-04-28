@@ -10,7 +10,7 @@
 #import "WLPoetryContentCell.h"
 
 #import "RecitePoetryController.h"
-
+#import "WLAnalysesView.h"
 
 static const CGFloat leftSpace = 10;//诗句的左右间距
 static const CGFloat topSpace = 15;//诗句与标题的上间距
@@ -55,6 +55,19 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
  *  文本颜色
  **/
 @property (nonatomic,strong) UIColor *contentTextColor;
+
+/**
+ *  分析view
+ **/
+@property (nonatomic,strong) WLAnalysesView *analysesView;
+/**
+ *  当前是否展示分析视图
+ **/
+@property (nonatomic,assign) BOOL isShowAnalyseView;
+/**
+ *  鉴赏的image
+ **/
+@property (nonatomic,strong) UIImageView *analysesImage;
 
 
 
@@ -164,13 +177,7 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
         [self loadLikeButton];
         return;
     }
-    
-//    id userId = kUserID;
-//    if (!userId) {
-//        userId = @"";
-//    }
-//    NSString *userIdString = [NSString stringWithFormat:@"%@",userId];
-    
+        
     NSArray *userLikeList = [WLSaveLocalHelper fetchLikeList];
     if (userLikeList.count == 0) {
         self.isLike = NO;
@@ -194,52 +201,6 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
         [self loadLikeButton];
     }
     
-
-//    [[NetworkHelper shareHelper] requestUserAllLikes:userIdString withCompletion:^(BOOL success, NSDictionary *dic, NSError *error) {
-//
-//        if (success) {
-//
-//            NSString *code = [NSString stringWithFormat:@"%@",[dic objectForKey:@"retCode"]];
-//            if (![code isEqualToString:@"1000"]) {
-//                NSString *tipMessage = [dic objectForKey:@"message"];
-//                [self showHUDWithText:tipMessage];
-//                return;
-//            }
-//
-//            NSArray *dataArr = [dic objectForKey:@"data"];
-//            if (dataArr.count == 0) {
-//                self.isLike = NO;
-//                [self loadLikeButton];
-//                return;
-//            }
-//
-//            BOOL isContain = NO;
-//            for (NSNumber *poetryID in dataArr) {
-//                NSString *poetryIdString = [NSString stringWithFormat:@"%@",poetryID];
-//                //已经收藏了的诗词
-//                if ([poetryIdString isEqualToString:self.dataModel.poetryID]) {
-//                    self.isLike = YES;
-//                    [self loadLikeButton];
-//                    return;
-//                }
-//            }
-//
-//            if (!isContain) {
-//                self.isLike = NO;
-//                [self loadLikeButton];
-//            }
-//        }else{
-//            //如果网络请求失败，则默认没有
-//            self.isLike = NO;
-//            [self loadLikeButton];
-//        }
-//
-//    }];
-    
-    
-   
-    
-    
 }
 #pragma mark - 初始化数据和视图
 
@@ -249,12 +210,12 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
     
     self.dataArray = [[WLPublicTool shareTool] poetrySeperateWithOrigin:self.dataModel.content];
     
+    self.isShowAnalyseView = NO;
+    
     [self loadPoetryAnalysesInfo];
     
     [self loadContentTableView];
     
-    
-
 }
 - (void)loadPoetryAnalysesInfo{
     [[NetworkHelper shareHelper] loadAnalysesWithPoetryId:self.dataModel.poetryID withCompletion:^(BOOL success, NSDictionary *dic, NSError *error) {
@@ -281,7 +242,7 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
     //诗词主背景
     self.mainImageView = [[UIImageView alloc]init];
     [self.view addSubview:self.mainImageView];
-    self.mainImageView.contentMode = UIViewContentModeScaleToFill;
+    self.mainImageView.contentMode = UIViewContentModeScaleAspectFill;
     self.mainImageView.backgroundColor = RGBCOLOR(243, 238, 214, 1.0);
     NSString *imageName = self.dataModel.backImageURL;
     if (imageName.length > 0 && ![imageName isEqualToString:@"<null>"] && ![imageName isEqualToString:@"(null)"]) {
@@ -299,7 +260,6 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
         make.top.equalTo(self.view.mas_top).offset(0);
         make.bottom.equalTo(self.view.mas_bottom).offset(0);
         make.trailing.equalTo(self.view.mas_trailing).offset(0);
-
     }];
     
 }
@@ -397,7 +357,6 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
         make.height.mas_equalTo(20);//元素高度
     }];
     
-    
 
     //设置UI布局约束
     [shareBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -408,7 +367,7 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
         make.leading.equalTo(shareImage.mas_leading).offset(-10);
     }];
     
-    //按钮放下层
+    //背诵按钮
     UIButton *reciteBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     reciteBtn.backgroundColor = [UIColor whiteColor];
     reciteBtn.layer.cornerRadius = 20.f;
@@ -427,18 +386,43 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
         make.width.mas_equalTo(20);//元素宽度
         make.height.mas_equalTo(20);//元素高度
     }];
-    
-    
-    
    
     //设置UI布局约束
     [reciteBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        
         make.top.equalTo(reciteImage.mas_top).offset(-10);//元素顶部约束
         make.trailing.equalTo(reciteImage.mas_trailing).offset(10);//元素右侧约束
         make.bottom.equalTo(reciteImage.mas_bottom).offset(10);//元素底部约束
         make.leading.equalTo(reciteImage.mas_leading).offset(-10);
     }];
+    
+     //赏析按钮
+     UIButton *analysesBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+     analysesBtn.backgroundColor = [UIColor whiteColor];
+     analysesBtn.layer.cornerRadius = 20.f;
+     analysesBtn.alpha = 0.7;
+     [analysesBtn addTarget:self action:@selector(analysesAction:) forControlEvents:UIControlEventTouchUpInside];
+     [self.view addSubview:analysesBtn];
+     
+     self.analysesImage = [[UIImageView alloc]init];
+     self.analysesImage.image = [UIImage imageNamed:@"analyses"];
+     [self.view addSubview:self.analysesImage];
+     //设置UI布局约束
+     [self.analysesImage mas_makeConstraints:^(MASConstraintMaker *make) {
+         
+         make.top.equalTo(reciteImage.mas_bottom).offset(30);//元素顶部约束
+         make.leading.equalTo(self.likeImage.mas_leading).offset(0);//元素左侧约束
+         make.width.mas_equalTo(20);//元素宽度
+         make.height.mas_equalTo(20);//元素高度
+     }];
+    
+     //设置UI布局约束
+     [analysesBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+         make.top.equalTo(self.analysesImage.mas_top).offset(-10);//元素顶部约束
+         make.trailing.equalTo(self.analysesImage.mas_trailing).offset(10);//元素右侧约束
+         make.bottom.equalTo(self.analysesImage.mas_bottom).offset(10);//元素底部约束
+         make.leading.equalTo(self.analysesImage.mas_leading).offset(-10);
+     }];
+
     
 }
 
@@ -566,6 +550,93 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+- (void)analysesAction:(UIButton*)sender{
+    NSLog(@"赏析");
+    
+    if (self.isShowAnalyseView) {
+        [self hideAnalyseView];
+        self.analysesImage.image = [UIImage imageNamed:@"analyses"];
+    }else{
+        if (self.dataModel.analysesInfo.length > 0 || self.dataModel.addtionInfo.length > 0 || self.dataModel.transferInfo.length > 0 || self.dataModel.backgroundInfo.length > 0) {
+            [self loadAnalyseView];
+        }else{
+            [self requestAnalysesInfo];
+        }
+
+    }
+
+}
+
+- (void)requestAnalysesInfo{
+    [[NetworkHelper shareHelper] loadAnalysesWithPoetryId:self.dataModel.poetryID withCompletion:^(BOOL success, NSDictionary *dic, NSError *error) {
+        NSLog(@"鉴赏信息:%@",dic);
+        
+        if (success) {
+            NSString *codeString = [NSString stringWithFormat:@"%@",[dic objectForKey:@"retCode"]];
+            if ([codeString isEqualToString:@"1000"]) {
+                NSDictionary *dataDic = [dic objectForKey:@"data"];
+                self.dataModel.addtionInfo = [dataDic objectForKey:@"addition_info"];
+                self.dataModel.analysesInfo = [dataDic objectForKey:@"analyses_info"];
+                self.dataModel.backgroundInfo = [dataDic objectForKey:@"background_info"];
+                self.dataModel.transferInfo = [dataDic objectForKey:@"transfer_info"];
+                [self loadAnalyseView];
+            }else{
+                [self showHUDWithText:@"网络请求失败，请稍后重试"];
+            }
+        }
+        
+    }];
+}
+
+- (void)loadAnalyseView{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (!self.analysesView) {
+            self.analysesView = [[WLAnalysesView alloc]init];
+            self.analysesView.analysesInfo = self.dataModel.analysesInfo;
+            self.analysesView.additionInfo = self.dataModel.addtionInfo;
+            self.analysesView.transferInfo = self.dataModel.transferInfo;
+            self.analysesView.backgroundInfo = self.dataModel.backgroundInfo;
+            [self.analysesView configureView];
+            [self.view addSubview:self.analysesView];
+        }
+        
+        [UIView animateWithDuration:0.35 animations:^{
+            self.analysesView.transform = CGAffineTransformMakeTranslation(0, -PhoneScreen_HEIGHT/2);
+        } completion:^(BOOL finished) {
+            
+            [self.mainTable mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.leading.equalTo(self.view.mas_leading).offset(leftSpace);
+                make.top.equalTo(self.authorLabel.mas_bottom).offset(topSpace);
+                make.bottom.equalTo(self.view.mas_centerY);
+                make.trailing.equalTo(self.view.mas_trailing).offset(-leftSpace);
+            }];
+
+        }];
+        
+        self.isShowAnalyseView = YES;
+        self.analysesImage.image = [UIImage imageNamed:@"analyses_selected"];
+
+    });
+}
+
+- (void)hideAnalyseView{
+        
+    [UIView animateWithDuration:0.35 animations:^{
+        self.analysesView.transform = CGAffineTransformIdentity;
+    }];
+    self.isShowAnalyseView = NO;
+    self.analysesImage.image = [UIImage imageNamed:@"analyses"];
+    
+    [self.mainTable mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(self.view.mas_leading).offset(leftSpace);
+        make.top.equalTo(self.authorLabel.mas_bottom).offset(topSpace);
+        make.bottom.equalTo(self.view.mas_bottom).offset(-topSpace);
+        make.trailing.equalTo(self.view.mas_trailing).offset(-leftSpace);
+    }];
+
+
+
+}
 #pragma mark - TableView 代理
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -609,6 +680,13 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
     }
     
     return contentCell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    
+    [self hideAnalyseView];
 }
 #pragma mark - 点击事件
 
