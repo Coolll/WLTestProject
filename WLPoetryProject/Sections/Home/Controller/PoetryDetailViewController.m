@@ -15,7 +15,7 @@
 static const CGFloat leftSpace = 10;//诗句的左右间距
 static const CGFloat topSpace = 15;//诗句与标题的上间距
 
-@interface PoetryDetailViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface PoetryDetailViewController ()<UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate>
 
 /**
  *  诗词内容table
@@ -77,9 +77,12 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+//    self.view.backgroundColor = [UIColor whiteColor];
+    //背景图暂时取消 会影响滑动，微微有点卡顿
+    self.view.backgroundColor = RGBCOLOR(243, 238, 214, 1.0);
     
-    if (kStringIsEmpty(self.dataModel.textColor)) {
+    
+    /*if (kStringIsEmpty(self.dataModel.textColor)) {
         //静夜思 背景色为深色，文本改为白色
         self.needUseDefaultColor = YES;
     }else{
@@ -95,10 +98,11 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
         }else{
             self.needUseDefaultColor = YES;
         }
-    }
-    
+    }*/
+    //无背景图时，不要改变颜色了
+    self.needUseDefaultColor = YES;
     self.titleForNavi = self.dataModel.name;
-    [self loadMainBackImageView];//背景
+    //[self loadMainBackImageView];//背景
     [self addFullTitleLabel];//诗词名字 添加背景之后调用，否则会被背景图遮住
 
     [self loadCustomData];//加载数据
@@ -264,6 +268,7 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
     
 }
 
+
 - (void)loadContentTableView
 {
     self.authorLabel.text = self.dataModel.author;
@@ -277,7 +282,8 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
             self.authorLabel.textColor = [UIColor whiteColor];
         }
     }
-    self.mainTable.backgroundColor = [UIColor clearColor];
+//    self.mainTable.backgroundColor = [UIColor clearColor];
+    self.mainTable.backgroundColor = RGBCOLOR(243, 238, 214, 1.0);
 }
 
 - (void)clickLikeWithBlock:(LikeBlock)block
@@ -666,7 +672,9 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
             NSString *content = self.dataArray[indexPath.row];
             cellHeight = [WLPoetryContentCell heightForContent:content withWidth:(PhoneScreen_WIDTH-2*leftSpace-20)];
         }
-        contentCell = [[WLPoetryContentCell alloc]initWithFrame:CGRectMake(0, 0, PhoneScreen_WIDTH-2*leftSpace-20, cellHeight)];
+//        contentCell = [[WLPoetryContentCell alloc]initWithFrame:CGRectMake(0, 0, PhoneScreen_WIDTH-2*leftSpace-20, cellHeight)];
+        contentCell = [[WLPoetryContentCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"WLPoetryContentCell"];
+        contentCell.frame = CGRectMake(0, 0, PhoneScreen_WIDTH-2*leftSpace-20, cellHeight);
     }
     contentCell.selectionStyle = UITableViewCellSelectionStyleNone;
     contentCell.backgroundColor = [UIColor clearColor];
@@ -688,11 +696,21 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
     
     [self hideAnalyseView];
 }
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    if ([touch.view isKindOfClass:[UITableView class]]) {
+        return YES;
+    }
+    
+    return  NO;
+}
 #pragma mark - 点击事件
 
 - (void)backAction:(UIButton *)sender
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.navigationController popViewControllerAnimated:YES];
+    });
 }
 
 
@@ -717,6 +735,11 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
             make.trailing.equalTo(self.view.mas_trailing).offset(-leftSpace);
             
         }];
+        
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hideAnalyseView)];
+        tap.delegate = self;
+        [_mainTable addGestureRecognizer:tap];
+
     }
     return _mainTable;
 }

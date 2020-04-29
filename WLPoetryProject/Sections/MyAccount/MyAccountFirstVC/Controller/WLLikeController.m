@@ -67,6 +67,9 @@
             
             for (NSDictionary *subDic in dataArray) {
                 PoetryModel *model = [[PoetryModel alloc]initPoetryWithDictionary:[subDic objectForKey:@"poetryEntity"]];
+                NSDictionary *imageDic = [subDic objectForKey:@"imageEntity"];
+                NSString *url = [NSString stringWithFormat:@"%@%@",[imageDic objectForKey:@"image_base_url"],[imageDic objectForKey:@"origin_url"]];
+                model.backImageURL = [url copy];
                 [self.modelArray addObject:model];
             }
             [self loadCustomView];
