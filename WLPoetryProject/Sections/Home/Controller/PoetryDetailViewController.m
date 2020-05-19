@@ -77,12 +77,12 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor whiteColor];
     //背景图暂时取消 会影响滑动，微微有点卡顿
     self.view.backgroundColor = RGBCOLOR(243, 238, 214, 1.0);
     
     
-    /*if (kStringIsEmpty(self.dataModel.textColor)) {
+    if (kStringIsEmpty(self.dataModel.textColor)) {
         //静夜思 背景色为深色，文本改为白色
         self.needUseDefaultColor = YES;
     }else{
@@ -98,11 +98,11 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
         }else{
             self.needUseDefaultColor = YES;
         }
-    }*/
+    }
     //无背景图时，不要改变颜色了
     self.needUseDefaultColor = YES;
     self.titleForNavi = self.dataModel.name;
-    //[self loadMainBackImageView];//背景
+    [self loadMainBackImageView];//背景
     [self addFullTitleLabel];//诗词名字 添加背景之后调用，否则会被背景图遮住
 
     [self loadCustomData];//加载数据
@@ -116,8 +116,8 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+    self.mainImageView.contentMode  = UIViewContentModeScaleToFill;
     [super viewWillDisappear:animated];
-    
     if (self.likeBlock) {
         //点击收藏/取消收藏后，我的收藏列表的数据需要更新
         self.likeBlock(self.isLike,self.dataModel.poetryID);
@@ -282,8 +282,8 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
             self.authorLabel.textColor = [UIColor whiteColor];
         }
     }
-//    self.mainTable.backgroundColor = [UIColor clearColor];
-    self.mainTable.backgroundColor = RGBCOLOR(243, 238, 214, 1.0);
+    self.mainTable.backgroundColor = [UIColor clearColor];
+//    self.mainTable.backgroundColor = RGBCOLOR(243, 238, 214, 1.0);
 }
 
 - (void)clickLikeWithBlock:(LikeBlock)block

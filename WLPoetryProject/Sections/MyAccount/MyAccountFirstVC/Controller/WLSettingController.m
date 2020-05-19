@@ -194,6 +194,11 @@
     
     if (indexPath.section == 1) {
         //退出登录
+        NSString *userId = [NSString stringWithFormat:@"%@",kUserID];
+        if (userId.length == 0 || [userId isEqualToString:@"0"]) {
+            [self showHUDWithText:@"您尚未登录~"];
+            return;
+        }
         
         [[NetworkHelper shareHelper] logoutWithUserID:kUserID withCompletion:^(BOOL success, NSDictionary *dic, NSError *error) {
             if (success) {
