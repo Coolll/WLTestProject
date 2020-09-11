@@ -7,6 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+typedef void(^BgImageBlock)(NSDictionary*thumbDic, NSDictionary*originDic,NSError *error);
+
+typedef void(^HeadImageRequestBlock)(NSArray *originArray,NSArray *thumbArray,NSError *error);
 
 @interface AppConfig : NSObject
 
@@ -45,7 +48,9 @@
 
 //- (void)loadClassImageWithBlock:(void(^)(NSDictionary*dic))block;
 
-- (void)loadAllBgImageWithBlock:(void(^)(NSDictionary*thumbDic, NSDictionary*originDic,NSError *error))block;
+- (void)loadAllBgImageWithBlock:(BgImageBlock)block;
+
+- (void)loadAllHeadImageWithBlock:(HeadImageRequestBlock)block;
 
 - (void)loadAllClassImageInfo;
 

@@ -8,6 +8,21 @@
 
 #import "AppConfig.h"
 #import "NetworkHelper.h"
+
+@interface AppConfig()
+/**
+ *  背景图的回调
+ **/
+@property (nonatomic,copy) BgImageBlock bgImageBlock;
+
+/**
+ *  头像的回调
+ **/
+@property (nonatomic,copy) HeadImageRequestBlock headImageBlock;
+
+
+@end
+
 @implementation AppConfig
 + (AppConfig *)config
 {
@@ -72,18 +87,25 @@
     [self loadAllBgImageWithBlock:nil];
 }
 
-
-- (void)loadAllBgImageWithBlock:(void(^)(NSDictionary*thumbDic, NSDictionary*originDic,NSError *error))block
+//网络请求全部的背景图片
+- (void)loadAllBgImageWithBlock:(BgImageBlock)block
 {
+    if (block) {
+        self.bgImageBlock = block;
+    }
+    
+    __weak __typeof(self)weakSelf = self;
+    
     [[NetworkHelper shareHelper] requestAllBgImagesWithCompletion:^(BOOL success, NSDictionary *dic, NSError *error) {
         
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
+
         if (success) {
-            
             NSString *code = [NSString stringWithFormat:@"%@",[dic objectForKey:@"retCode"]];
             if (![code isEqualToString:@"1000"]) {
                 NSString *tipMessage = [dic objectForKey:@"message"];
-                if (block) {
-                    block(nil,nil,[NSError errorWithDomain:NSURLErrorDomain code:[code integerValue] userInfo:@{NSLocalizedDescriptionKey:tipMessage}]);
+                if (strongSelf.bgImageBlock) {
+                    strongSelf.bgImageBlock(nil,nil,[NSError errorWithDomain:NSURLErrorDomain code:[code integerValue] userInfo:@{NSLocalizedDescriptionKey:tipMessage}]);
                 }
                 return ;
             }
@@ -92,7 +114,7 @@
             if (array.count > 0) {
                 
                 //如果请求到数据 则移除全部的key
-                [self.bgImageInfo removeAllObjects];
+                [strongSelf.bgImageInfo removeAllObjects];
                 for (int i = 0 ; i<array.count ; i++) {
                     NSDictionary *imgDic = array[i];
                     
@@ -105,20 +127,83 @@
                     NSString *originUrl = [NSString stringWithFormat:@"%@%@",baseUrl,originPath];
 
                     NSString *className = [NSString stringWithFormat:@"%@",[imgDic objectForKey:@"class_info"]];
-                    [self.bgImageInfo setObject:url forKey:className];
-                    [self.bgOriginImageInfo setObject:originUrl forKey:className];
+                    [strongSelf.bgImageInfo setObject:url forKey:className];
+                    [strongSelf.bgOriginImageInfo setObject:originUrl forKey:className];
 
                 }
                 
-                if (block) {
-                    block(self.bgImageInfo,self.bgOriginImageInfo,nil);
+                if (strongSelf.bgImageBlock) {
+                    strongSelf.bgImageBlock(strongSelf.bgImageInfo,strongSelf.bgOriginImageInfo,nil);
                 }
             }
             
         }else{
             
-            if (block) {
-                block(nil,nil,[NSError errorWithDomain:NSURLErrorDomain code:500 userInfo:@{NSLocalizedDescriptionKey:@"请求失败，请重试"}]);
+            if (strongSelf.bgImageBlock) {
+                strongSelf.bgImageBlock(nil,nil,[NSError errorWithDomain:NSURLErrorDomain code:500 userInfo:@{NSLocalizedDescriptionKey:@"请求失败，请重试"}]);
+            }
+            
+        }
+        
+    }];
+    
+}
+
+//网络请求全部的头像
+- (void)loadAllHeadImageWithBlock:(HeadImageRequestBlock)block
+{
+    if (block) {
+        self.headImageBlock = block;
+    }
+    
+    __weak __typeof(self)weakSelf = self;
+    [[NetworkHelper shareHelper] requestAllHeadImagesWithCompletion:^(BOOL success, NSDictionary *dic, NSError *error) {
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
+        
+        if (success) {
+            NSString *code = [NSString stringWithFormat:@"%@",[dic objectForKey:@"retCode"]];
+            if (![code isEqualToString:@"1000"]) {
+                NSString *tipMessage = [dic objectForKey:@"message"];
+                if (strongSelf.headImageBlock) {
+                    strongSelf.headImageBlock(nil,nil,[NSError errorWithDomain:NSURLErrorDomain code:[code integerValue] userInfo:@{NSLocalizedDescriptionKey:tipMessage}]);
+                }
+                return ;
+            }
+            
+            
+            NSArray *array = [dic objectForKey:@"data"];
+            if (array.count > 0) {
+                //如果请求到数据 则移除全部的key
+                NSMutableArray *originArr = [NSMutableArray array];
+                NSMutableArray *thumbArr = [NSMutableArray array];
+                
+                for (int i = 0 ; i<array.count ; i++) {
+                    NSDictionary *imgDic = array[i];
+                    
+                    //图片url作为value，class类别作为key，存储起来
+                    NSString *baseUrl = [NSString stringWithFormat:@"%@",[imgDic objectForKey:@"head_image_base_url"]];
+                    NSString *thumbPath = [NSString stringWithFormat:@"%@",[imgDic objectForKey:@"thumb_url"]];
+                    NSString *originPath = [NSString stringWithFormat:@"%@",[imgDic objectForKey:@"origin_url"]];
+                    
+                    NSString *thumbUrl = [NSString stringWithFormat:@"%@%@",baseUrl,thumbPath];
+                    NSString *originUrl = [NSString stringWithFormat:@"%@%@",baseUrl,originPath];
+                    
+                    [originArr addObject:originUrl];
+                    [thumbArr addObject:thumbUrl];
+                    
+                    
+                    
+                }
+                
+                if (strongSelf.headImageBlock) {
+                    strongSelf.headImageBlock(originArr,thumbArr,nil);
+                }
+            }
+            
+        }else{
+            
+            if (strongSelf.headImageBlock) {
+                strongSelf.headImageBlock(nil,nil,[NSError errorWithDomain:NSURLErrorDomain code:500 userInfo:@{NSLocalizedDescriptionKey:@"请求失败，请重试"}]);
             }
             
         }

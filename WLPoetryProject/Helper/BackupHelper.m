@@ -63,6 +63,36 @@
     [self updatePoetryWithFileArray:jsonList withCurrentJsonIndex:0 withCurrentIndex:0];
 }
 
+- (void)updateRecommendPoetryThree{
+    NSArray *poetryModelArray = [self readLocalFileWithName:@"recommendPoetryThree"];
+
+    for (int i = 0; i < poetryModelArray.count; i++) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(i * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            PoetryModel *model = poetryModelArray[i];
+            NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+            [dic setObject:model.poetryID forKey:@"poetry_id"];
+            [dic setObject:model.name forKey:@"name"];
+            [dic setObject:model.author forKey:@"author"];
+            [dic setObject:model.content forKey:@"content"];
+            [dic setObject:model.addtionInfo forKey:@"addition_info"];
+            [dic setObject:model.classInfo forKey:@"class_info"];
+            [dic setObject:model.classInfoExplain forKey:@"class_info_explain"];
+            [dic setObject:model.mainClass forKey:@"main_class"];
+            [dic setObject:model.mainClassExplain forKey:@"main_class_explain"];
+            [dic setObject:model.source forKey:@"source"];
+            [dic setObject:model.sourceExplain forKey:@"source_explain"];
+            [dic setObject:model.transferInfo forKey:@"transfer_info"];
+            [dic setObject:model.analysesInfo forKey:@"analyses_info"];
+            [dic setObject:model.backgroundInfo forKey:@"background_info"];
+            [dic setObject:[NSNumber numberWithInteger:model.likes] forKey:@"likes"];
+
+            [self.networkHelper updateOrInsertPoetry:dic];
+
+        });
+    }
+}
+
+
 
 - (void)updatePoetryWithFileArray:(NSArray*)jsonList withCurrentJsonIndex:(NSInteger)currentJsonIndex withCurrentIndex:(NSInteger)currentIndex{
     if (currentJsonIndex >= jsonList.count) {
@@ -345,6 +375,9 @@
     else if([classInfo isEqualToString:@"1524"]){return @"春雪";}
     else if([classInfo isEqualToString:@"1525"]){return @"采桑子·而今才道当时错";}
     else if([classInfo isEqualToString:@"1526"]){return @"南歌子词二首";}
+    else if([classInfo isEqualToString:@"1527"]){return @"临江仙·送钱穆父";}
+    else if([classInfo isEqualToString:@"1528"]){return @"寄黄几复";}
+    else if([classInfo isEqualToString:@"1529"]){return @"宿骆氏亭寄怀崔雍崔衮";}
 //    else if([classInfo isEqualToString:@"<##>"]){return @"<##>";}
 
     return @"";
@@ -398,7 +431,7 @@
 }
 
 - (NSString*)dealSourceExplain:(NSString*)source{
-    //1为古诗三百首 2为唐诗三百首 3为宋词三百首 4诗经 10为早教古诗100首 11为小学古诗 12初中古诗 13近代诗词 14高中古诗 15高中文言 16楚辞 17学前必背诗词 18学前必读诗词
+    //1为古诗三百首 2为唐诗三百首 3为宋词三百首 4诗经 10为早教古诗100首 11为小学古诗 12初中古诗 13近代诗词 14高中古诗 15高中文言 16楚辞 17学前必背诗词 18学前必读诗词 20经典诗词 21唐诗 22宋词 23宋诗
     //source 论语 100学而篇 101为政篇 102八佾篇 103里仁篇 104公冶长篇 105雍也篇 106述而篇 107泰伯篇 108子罕篇 109乡党篇 110先进篇 111颜渊篇 112子路篇 113宪问篇 114卫灵公篇 115季氏篇 116阳货篇 117微子篇 118子张篇 119尧曰篇
     if ([source isEqualToString:@"1"]) {return @"古诗三百首";}
     else if ([source isEqualToString:@"2"]){return @"唐诗三百首";}
@@ -415,6 +448,9 @@
     else if ([source isEqualToString:@"18"]){return @"学前必读诗词";}
     else if ([source isEqualToString:@"19"]){return @"飞花令";}
     else if ([source isEqualToString:@"20"]){return @"经典诗词";}
+    else if ([source isEqualToString:@"21"]){return @"唐诗";}
+    else if ([source isEqualToString:@"22"]){return @"宋词";}
+    else if ([source isEqualToString:@"23"]){return @"宋诗";}
     else if ([source isEqualToString:@"100"]){return @"学而篇";}
     else if ([source isEqualToString:@"101"]){return @"为政篇";}
     else if ([source isEqualToString:@"102"]){return @"八佾篇";}

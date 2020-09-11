@@ -120,21 +120,24 @@
 
 - (void)requestPoetryConfigureData{
     
+    __weak __typeof(self)weakSelf = self;
     [[NetworkHelper shareHelper]requestPoetryConfigureWithCompletion:^(BOOL success, NSDictionary *dic, NSError *error) {
+        
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
         if (success) {
 
             NSString *code = [NSString stringWithFormat:@"%@",[dic objectForKey:@"retCode"]];
             if (![code isEqualToString:@"1000"]) {
                 NSString *tipMessage = [dic objectForKey:@"message"];
-                [self showHUDWithText:tipMessage];
+                [strongSelf showHUDWithText:tipMessage];
                 return ;
             }
-            [self dealConfigureData:dic];
+            [strongSelf dealConfigureData:dic];
             
             
         }else{
-            if (!self.retryBtn) {
-                [self loadEmptyView];
+            if (!strongSelf.retryBtn) {
+                [strongSelf loadEmptyView];
             }
         }
     }];
@@ -148,32 +151,35 @@
 }
 
 - (void)dealConfigureData:(NSDictionary*)dic{
-    NSArray *confDicArray = [dic objectForKey:@"data"];
-    
-    self.sectionOneBooksTitleArray = [NSMutableArray array];
-    self.sectionTwoBooksTitleArray = [NSMutableArray array];
-    [self.sectionOneArray removeAllObjects];
-    [self.sectionTwoArray removeAllObjects];
-    
-    NSInteger sectionOneCount = self.sectionOneBooksTitleArray.count;
-    NSInteger sectionTwoCount = self.sectionTwoBooksTitleArray.count;
-    
-    for (NSDictionary *confDic in confDicArray) {
-        PoetryConfigureModel *model = [[PoetryConfigureModel alloc]initModelWithDictionary:confDic];
-        if (model.tableSection == 0) {
-            if (model.tableIndex+1 > sectionOneCount) {
-                sectionOneCount = model.tableIndex+1;
-                [self.sectionOneBooksTitleArray addObject:model.mainTitle];
+    @autoreleasepool {
+        NSArray *confDicArray = [dic objectForKey:@"data"];
+        
+        self.sectionOneBooksTitleArray = [NSMutableArray array];
+        self.sectionTwoBooksTitleArray = [NSMutableArray array];
+        [self.sectionOneArray removeAllObjects];
+        [self.sectionTwoArray removeAllObjects];
+        
+        NSInteger sectionOneCount = self.sectionOneBooksTitleArray.count;
+        NSInteger sectionTwoCount = self.sectionTwoBooksTitleArray.count;
+        
+        for (NSDictionary *confDic in confDicArray) {
+            PoetryConfigureModel *model = [[PoetryConfigureModel alloc]initModelWithDictionary:confDic];
+            if (model.tableSection == 0) {
+                if (model.tableIndex+1 > sectionOneCount) {
+                    sectionOneCount = model.tableIndex+1;
+                    [self.sectionOneBooksTitleArray addObject:model.mainTitle];
+                }
+                [self.sectionOneArray addObject:model];
+                
+            }else if (model.tableSection == 1){
+                if (model.tableIndex+1 > sectionTwoCount) {
+                    sectionTwoCount = model.tableIndex+1;
+                    [self.sectionTwoBooksTitleArray addObject:model.mainTitle];
+                }
+                [self.sectionTwoArray addObject:model];
             }
-            [self.sectionOneArray addObject:model];
-            
-        }else if (model.tableSection == 1){
-            if (model.tableIndex+1 > sectionTwoCount) {
-                sectionTwoCount = model.tableIndex+1;
-                [self.sectionTwoBooksTitleArray addObject:model.mainTitle];
-            }
-            [self.sectionTwoArray addObject:model];
         }
+
     }
     
     

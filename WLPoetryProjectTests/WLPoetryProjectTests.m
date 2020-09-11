@@ -7,7 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
-
+#import "NetworkHelper.h"
 @interface WLPoetryProjectTests : XCTestCase
 
 @end
@@ -17,6 +17,21 @@
 - (void)setUp {
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
+}
+
+- (void)testLogin{
+    NSString *userName = @"刘备";
+    NSString *password = @"12345678";
+    XCTestExpectation *expectation = [self expectationWithDescription:@"登录接口测试"];
+    [[NetworkHelper shareHelper] loginWithUserName:userName password:password withCompletion:^(BOOL success, NSDictionary *dic, NSError *error) {
+        [expectation fulfill];
+        XCTAssertTrue(success,"未能 成功请求");
+        XCTAssertNotNil(dic,"请求内容为空");
+    }];
+    
+    [self waitForExpectationsWithTimeout:10 handler:^(NSError * _Nullable error) {
+        NSLog(@"请求失败了");
+    }];
 }
 
 - (void)tearDown {

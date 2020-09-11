@@ -222,17 +222,20 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
     
 }
 - (void)loadPoetryAnalysesInfo{
+    
+    __weak __typeof(self)weakSelf = self;
     [[NetworkHelper shareHelper] loadAnalysesWithPoetryId:self.dataModel.poetryID withCompletion:^(BOOL success, NSDictionary *dic, NSError *error) {
         NSLog(@"鉴赏信息:%@",dic);
-        
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
+
         if (success) {
             NSString *codeString = [NSString stringWithFormat:@"%@",[dic objectForKey:@"retCode"]];
             if ([codeString isEqualToString:@"1000"]) {
                 NSDictionary *dataDic = [dic objectForKey:@"data"];
-                self.dataModel.addtionInfo = [dataDic objectForKey:@"addition_info"];
-                self.dataModel.analysesInfo = [dataDic objectForKey:@"analyses_info"];
-                self.dataModel.backgroundInfo = [dataDic objectForKey:@"background_info"];
-                self.dataModel.transferInfo = [dataDic objectForKey:@"transfer_info"];
+                strongSelf.dataModel.addtionInfo = [dataDic objectForKey:@"addition_info"];
+                strongSelf.dataModel.analysesInfo = [dataDic objectForKey:@"analyses_info"];
+                strongSelf.dataModel.backgroundInfo = [dataDic objectForKey:@"background_info"];
+                strongSelf.dataModel.transferInfo = [dataDic objectForKey:@"transfer_info"];
             }
         }
         
@@ -453,30 +456,33 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
         userId = @"";
     }
     NSString *userIDString = [NSString stringWithFormat:@"%@",userId];
-    
+    __weak __typeof(self)weakSelf = self;
+
+
     if (self.isLike) {
         //如果之前是喜欢，点击按钮，则移除
         [[NetworkHelper shareHelper] dislikePoetry:userIDString poetryId:self.dataModel.poetryID withCompletion:^(BOOL success, NSDictionary *dic, NSError *error) {
+            __strong __typeof(weakSelf)strongSelf = weakSelf;
+
             if (success) {
                 NSString *codeString = [NSString stringWithFormat:@"%@",[dic objectForKey:@"retCode"]];
                 if ([codeString isEqualToString:@"1000"]) {
-                    self.isLike = !self.isLike;
+                    strongSelf.isLike = !strongSelf.isLike;
                     
-                    if (self.isLike) {
-                        self.likeImage.image = [UIImage imageNamed:@"likePoetry"];
+                    if (strongSelf.isLike) {
+                        strongSelf.likeImage.image = [UIImage imageNamed:@"likePoetry"];
                     }else{
-                        self.likeImage.image = [UIImage imageNamed:@"unlikePoetry"];
+                        strongSelf.likeImage.image = [UIImage imageNamed:@"unlikePoetry"];
                     }
-                    
                     
                 }else{
                     
                     NSString *tipMessage = [dic objectForKey:@"message"];
-                    [self showHUDWithText:tipMessage];
+                    [strongSelf showHUDWithText:tipMessage];
                 }
                 
             }else{
-                [self showHUDWithText:@"请求失败，请稍后重试"];
+                [strongSelf showHUDWithText:@"请求失败，请稍后重试"];
                 
             }
         }];
@@ -485,31 +491,31 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
     }else{
         //如果之前未喜欢，点击按钮，则收藏
         [[NetworkHelper shareHelper] likePoetry:userIDString poetryId:self.dataModel.poetryID withCompletion:^(BOOL success, NSDictionary *dic, NSError *error) {
+            
+            __strong __typeof(weakSelf)strongSelf = weakSelf;
             if (success) {
                 NSString *codeString = [NSString stringWithFormat:@"%@",[dic objectForKey:@"retCode"]];
                 if ([codeString isEqualToString:@"1000"]) {
-                    self.isLike = !self.isLike;
+                    strongSelf.isLike = !strongSelf.isLike;
                     
-                    if (self.isLike) {
-                        self.likeImage.image = [UIImage imageNamed:@"likePoetry"];
+                    if (strongSelf.isLike) {
+                        strongSelf.likeImage.image = [UIImage imageNamed:@"likePoetry"];
                     }else{
-                        self.likeImage.image = [UIImage imageNamed:@"unlikePoetry"];
+                        strongSelf.likeImage.image = [UIImage imageNamed:@"unlikePoetry"];
                     }
                     
                     
                 }else{
                     
                     NSString *tipMessage = [dic objectForKey:@"message"];
-                    [self showHUDWithText:tipMessage];
+                    [strongSelf showHUDWithText:tipMessage];
                 }
                 
             }else{
-                [self showHUDWithText:@"请求失败，请稍后重试"];
-
+                [strongSelf showHUDWithText:@"请求失败，请稍后重试"];
             }
         }];
     }
-    
 
     
 }
@@ -574,20 +580,22 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
 }
 
 - (void)requestAnalysesInfo{
+    __weak __typeof(self)weakSelf = self;
     [[NetworkHelper shareHelper] loadAnalysesWithPoetryId:self.dataModel.poetryID withCompletion:^(BOOL success, NSDictionary *dic, NSError *error) {
         NSLog(@"鉴赏信息:%@",dic);
-        
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
+
         if (success) {
             NSString *codeString = [NSString stringWithFormat:@"%@",[dic objectForKey:@"retCode"]];
             if ([codeString isEqualToString:@"1000"]) {
                 NSDictionary *dataDic = [dic objectForKey:@"data"];
-                self.dataModel.addtionInfo = [dataDic objectForKey:@"addition_info"];
-                self.dataModel.analysesInfo = [dataDic objectForKey:@"analyses_info"];
-                self.dataModel.backgroundInfo = [dataDic objectForKey:@"background_info"];
-                self.dataModel.transferInfo = [dataDic objectForKey:@"transfer_info"];
-                [self loadAnalyseView];
+                strongSelf.dataModel.addtionInfo = [dataDic objectForKey:@"addition_info"];
+                strongSelf.dataModel.analysesInfo = [dataDic objectForKey:@"analyses_info"];
+                strongSelf.dataModel.backgroundInfo = [dataDic objectForKey:@"background_info"];
+                strongSelf.dataModel.transferInfo = [dataDic objectForKey:@"transfer_info"];
+                [strongSelf loadAnalyseView];
             }else{
-                [self showHUDWithText:@"网络请求失败，请稍后重试"];
+                [strongSelf showHUDWithText:@"网络请求失败，请稍后重试"];
             }
         }
         
@@ -765,5 +773,9 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
     return _authorLabel;
 }
 
+- (void)dealloc{
+    NSLog(@"detail dealloc");
+
+}
 
 @end

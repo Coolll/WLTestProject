@@ -7,11 +7,33 @@
 //
 
 #import <Foundation/Foundation.h>
+/*
+ 
+ {
+ "name" : "<##>",
+ "author" : "<##>",
+ "content" : "<##>",
+ "addtionInfo" : "<##>",
+ "classInfo" : "<##>",
+ "poetryID" : "<##>",
+ "source" : "<##>",
+ "analysesInfo" : "<##>",
+ "transferInfo" : "<##>",
+ "backgroundInfo" : "<##>",
+ "backImageName" : "",
+ "bgImageURL" : "",
+ "placeHolder" : "",
+ "likes":"<##>"
+ },
+ */
 
 @interface BackupHelper : NSObject
 + (BackupHelper *)shareInstance;
 - (void)uploadAllImages;
 - (void)updateAllPoetry;
 - (void)uploadAllPoetry;
+
+- (void)updateRecommendPoetryThree;
+
 
 @end

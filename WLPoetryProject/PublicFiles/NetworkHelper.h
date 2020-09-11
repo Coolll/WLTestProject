@@ -27,6 +27,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 //更新诗词info
 - (void)updatePoetry:(NSDictionary*)param;
+//存在时更新，不存在时新增诗词
+- (void)updateOrInsertPoetry:(NSDictionary*)param;
 
 //上传诗词info
 - (void)uploadPoetry:(NSDictionary*)param;
@@ -48,6 +50,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 //获取全部的背景图片
 - (void)requestAllBgImagesWithCompletion:(RequestResultBlock)block;
+
+//获取全部的头像图片
+- (void)requestAllHeadImagesWithCompletion:(RequestResultBlock)block;
 
 //获取首页的题画图片
 - (void)requestHomeTopImageWithCompletion:(RequestResultBlock)block;

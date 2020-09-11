@@ -56,6 +56,14 @@
 
 }
 
+//存在更新，不存在新增 诗词
+- (void)updateOrInsertPoetry:(NSDictionary*)param
+{
+
+    [self.baseNetwork requestPostWithBody:param withUrlString:@"api/poetry/updateOrInsert" withCompletion:NULL];
+
+}
+
 //登录
 - (void)loginWithUserName:(NSString*)userName password:(NSString*)pwd withCompletion:(RequestResultBlock)block
 {
@@ -148,6 +156,16 @@
     
     [self.baseNetwork requestPostWithBody:param withUrlString:@"api/poetry/loadAllImages" withCompletion:block];
 }
+
+//获取全部的头像图片
+- (void)requestAllHeadImagesWithCompletion:(RequestResultBlock)block
+{
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    NSDictionary *param = [self operationForParam:dic];
+    
+    [self.baseNetwork requestPostWithBody:param withUrlString:@"api/poetry/loadAllHeadImages" withCompletion:block];
+}
+
 
 //获取首页的题画图片
 - (void)requestHomeTopImageWithCompletion:(RequestResultBlock)block

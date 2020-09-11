@@ -15,6 +15,7 @@
 #import "AboutViewController.h"
 #import "WLCustomImageListController.h"
 #import "WLMyKnownController.h"
+#import "WLHeaderImageController.h"
 
 
 @interface YLAccountViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -396,6 +397,10 @@
     
     if (!isLogin) {
         [self loginAction];
+    }else{
+        WLHeaderImageController *vc = [[WLHeaderImageController alloc]init];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 

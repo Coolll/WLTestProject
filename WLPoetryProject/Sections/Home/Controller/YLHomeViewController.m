@@ -72,7 +72,7 @@
 //    [self checkLocalData];//加载本地数据
     [self checkNetworkAndDealImage];
     
-//    [[BackupHelper shareInstance] updateAllPoetry];//更新诗词
+//    [[BackupHelper shareInstance] updateRecommendPoetryThree];//更新诗词
 
 //    [[BackupHelper shareInstance] uploadAllPoetry];//备份诗词
 //    [self uploadAllImages];
@@ -110,6 +110,7 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         //空数组，用来加载网络上的图片URL
         NSMutableArray *arr = [NSMutableArray array];
+        __weak __typeof(self)weakSelf = self;
         
         [[AppConfig config] loadAllBgImageWithBlock:^(NSDictionary *dic,NSDictionary *originDic,NSError *error) {
             //添加图片url
@@ -122,7 +123,7 @@
                 //拿到图片URL
                 NSString *urlString = [arr objectAtIndex:i];
                 //获取本地加载过的状态字符串，如果找到了状态字符串，且为1，则无需再加载
-                NSString *stateString = [NSString stringWithFormat:@"%@",[self.imageStateDic valueForKey:urlString]];
+                NSString *stateString = [NSString stringWithFormat:@"%@",[weakSelf.imageStateDic valueForKey:urlString]];
                 if(![stateString isEqualToString:@"1"]){
                     //如果没有加载过，或者没有成功加载，则需要加载
                     [mutArray addObject:urlString];
@@ -135,7 +136,7 @@
             
             UIImageView *view = [[UIImageView alloc]init];
             //递归，加载图片
-            [self loadImageWithArray:mutArray withCurrentIndex:0 withImageView:view];
+            [weakSelf loadImageWithArray:mutArray withCurrentIndex:0 withImageView:view];
 
             }];
             
@@ -197,7 +198,10 @@
 }
 
 - (void)requestHomeTopImage{
+    __weak __typeof(self)weakSelf = self;
     [[NetworkHelper shareHelper] requestHomeTopImageWithCompletion:^(BOOL success, NSDictionary *dic, NSError *error) {
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
+
         NSString *codeString = [NSString stringWithFormat:@"%@",[dic objectForKey:@"retCode"]];
         if ([codeString isEqualToString:@"1000"]) {
             NSArray *dataArr = [dic objectForKey:@"data"];
@@ -205,27 +209,28 @@
                 NSDictionary *dic = [dataArr firstObject];
                 NSString *baseUrl = [dic objectForKey:@"image_base_url"];
                 NSString *path = [dic objectForKey:@"origin_url"];
-                self.topImageURL = [NSString stringWithFormat:@"%@%@",baseUrl,path];
-                [WLSaveLocalHelper saveObject:[self.topImageURL copy] forKey:@"HomeTopImageURLString"];
+                strongSelf.topImageURL = [NSString stringWithFormat:@"%@%@",baseUrl,path];
+                [WLSaveLocalHelper saveObject:[strongSelf.topImageURL copy] forKey:@"HomeTopImageURLString"];
             }
         }
     }];
 }
 
 - (void)requestHomeHotPoetry{
+    __weak __typeof(self)weakSelf = self;
     [self.networkHelper requestHotPoetry:0 count:10 withCompletion:^(BOOL success, NSDictionary *dic, NSError *error) {
         
-//        NSLog(@"热门诗词：%@",dic);
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
         NSString *codeString = [NSString stringWithFormat:@"%@",[dic objectForKey:@"retCode"]];
         if ([codeString isEqualToString:@"1000"]) {
             NSArray *dataArr = [dic objectForKey:@"data"];
             for (NSDictionary *poetryDic in dataArr) {
                 PoetryModel *model = [[PoetryModel alloc]initPoetryWithDictionary:poetryDic];
-                [self.poetryArray addObject:model];
+                [strongSelf.poetryArray addObject:model];
             }
             
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self loadCustomView];
+                [strongSelf loadCustomView];
             });
             
         }else{
@@ -243,11 +248,11 @@
                 PoetryModel *model = [[PoetryModel alloc]initModelWithDictionary:itemDic];
                 model.mainClass = poetryMainClass;
                 [model loadFirstLineString];
-                [self.poetryArray addObject:model];
+                [strongSelf.poetryArray addObject:model];
             }
             
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self loadCustomView];
+                [strongSelf loadCustomView];
             });
             
         }
@@ -271,23 +276,24 @@
 
 - (void)refreshHomeData{
     NSLog(@"刷新数据了");
+    __weak __typeof(self)weakSelf = self;
     [self.networkHelper requestHotPoetry:0 count:10 withCompletion:^(BOOL success, NSDictionary *dic, NSError *error) {
-        
-        [self.mainTableView.mj_header endRefreshing];
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
+        [strongSelf.mainTableView.mj_header endRefreshing];
         
 //        NSLog(@"热门诗词：%@",dic);
         NSString *codeString = [NSString stringWithFormat:@"%@",[dic objectForKey:@"retCode"]];
         if ([codeString isEqualToString:@"1000"]) {
-            [self.poetryArray removeAllObjects];
+            [strongSelf.poetryArray removeAllObjects];
             NSArray *dataArr = [dic objectForKey:@"data"];
             for (NSDictionary *poetryDic in dataArr) {
                 PoetryModel *model = [[PoetryModel alloc]initPoetryWithDictionary:poetryDic];
                 [model loadFirstLineString];
-                [self.poetryArray addObject:model];
+                [strongSelf.poetryArray addObject:model];
             }
             
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self.mainTableView reloadData];
+                [strongSelf.mainTableView reloadData];
             });
             
         }
@@ -298,9 +304,11 @@
 - (void)loadMoreData{
     NSLog(@"加载更多");
     NSInteger count = self.poetryArray.count;
+    __weak __typeof(self)weakSelf = self;
+    
     [self.networkHelper requestHotPoetry:count count:10 withCompletion:^(BOOL success, NSDictionary *dic, NSError *error) {
         
-        [self.mainTableView.mj_footer endRefreshing];
+        [weakSelf.mainTableView.mj_footer endRefreshing];
         
 //        NSLog(@"热门诗词：%@",dic);
         NSString *codeString = [NSString stringWithFormat:@"%@",[dic objectForKey:@"retCode"]];
@@ -308,16 +316,18 @@
             NSArray *dataArr = [dic objectForKey:@"data"];
             for (NSDictionary *poetryDic in dataArr) {
                 PoetryModel *model = [[PoetryModel alloc]initPoetryWithDictionary:poetryDic];
-                [self.poetryArray addObject:model];
+                [weakSelf.poetryArray addObject:model];
             }
             
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self.mainTableView reloadData];
+                [weakSelf.mainTableView reloadData];
             });
             
         }
     }];
 }
+
+#pragma mark - table代理
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -394,25 +404,25 @@
     }else{
         
         //如果有缓存的高度，则不计算了
-    
+        
         PoetryModel *model = [self.poetryArray objectAtIndex:(section-1)];
-    
+        
         if (model.heightForCell > 0) {
             return model.heightForCell;
         }
-    
-//        if (indexPath.row == self.poetryArray.count-1) {
-//            //最后一行需要调整一下间距
-//            CGFloat cellHeight = [WLHomePoetryCell heightForFirstLine:[self.poetryArray objectAtIndex:(section-1)]];
-//            model.heightForCell = cellHeight;
-//            return cellHeight;
-//        }else{
-            CGFloat cellHeight = [WLHomePoetryCell heightForFirstLine:[self.poetryArray objectAtIndex:(section-1)]];
-            model.heightForCell = cellHeight;
-            return cellHeight;
-//        }
-    
-
+        
+        //        if (indexPath.row == self.poetryArray.count-1) {
+        //            //最后一行需要调整一下间距
+        //            CGFloat cellHeight = [WLHomePoetryCell heightForFirstLine:[self.poetryArray objectAtIndex:(section-1)]];
+        //            model.heightForCell = cellHeight;
+        //            return cellHeight;
+        //        }else{
+        CGFloat cellHeight = [WLHomePoetryCell heightForFirstLine:[self.poetryArray objectAtIndex:(section-1)]];
+        model.heightForCell = cellHeight;
+        return cellHeight;
+        //        }
+        
+        
     }
     
     return 0.001;
@@ -473,7 +483,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSInteger section = indexPath.section;
-
+    
     if (section != 0) {
         //选中诗词的时候，跳转到详情
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -485,7 +495,7 @@
             [self.navigationController pushViewController:detailVC animated:YES];
         }
     }
-   
+    
 }
 #pragma mark - 点击事件
 - (void)writePoetryAction:(UIButton*)sender

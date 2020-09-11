@@ -61,6 +61,7 @@
 		00FD14C320A95A2D0018D649 /* tangPoetry_five.json in Resources */ = {isa = PBXBuildFile; fileRef = 00FD14BD20A95A2D0018D649 /* tangPoetry_five.json */; };
 		00FD14C420A95A2D0018D649 /* tangPoetry_seven.json in Resources */ = {isa = PBXBuildFile; fileRef = 00FD14BE20A95A2D0018D649 /* tangPoetry_seven.json */; };
 		00FD14C520A95A2D0018D649 /* tangPoetry_four.json in Resources */ = {isa = PBXBuildFile; fileRef = 00FD14BF20A95A2D0018D649 /* tangPoetry_four.json */; };
+		0714ED8E2492566700CBBE8E /* WLHeadImageSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0714ED8D2492566700CBBE8E /* WLHeadImageSelectCell.m */; };
 		071571F72103564E005C53C4 /* hidePassword.png in Resources */ = {isa = PBXBuildFile; fileRef = 071571F52103564D005C53C4 /* hidePassword.png */; };
 		071571F82103564E005C53C4 /* showPassword.png in Resources */ = {isa = PBXBuildFile; fileRef = 071571F62103564E005C53C4 /* showPassword.png */; };
 		071571FA21038354005C53C4 /* closeTip.png in Resources */ = {isa = PBXBuildFile; fileRef = 071571F921038354005C53C4 /* closeTip.png */; };
@@ -89,6 +90,7 @@
 		0721702C2087843A002A1628 /* README.strings in Resources */ = {isa = PBXBuildFile; fileRef = 072170282087843A002A1628 /* README.strings */; };
 		073864F420E12D8B0005BE61 /* poetryContent.png in Resources */ = {isa = PBXBuildFile; fileRef = 073864F320E12D8B0005BE61 /* poetryContent.png */; };
 		073D7F6C20A7E259002BCEA7 /* tangPoetry_one.json in Resources */ = {isa = PBXBuildFile; fileRef = 073D7F6B20A7E259002BCEA7 /* tangPoetry_one.json */; };
+		074623CB250B620C0053F51E /* recommendPoetryThree.json in Resources */ = {isa = PBXBuildFile; fileRef = 074623CA250B620C0053F51E /* recommendPoetryThree.json */; };
 		07567A9D207A02EB0018B9E7 /* BaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 075678D1207A02EA0018B9E7 /* BaseNavigationController.m */; };
 		07567A9E207A02EB0018B9E7 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 075678D3207A02EA0018B9E7 /* BaseViewController.m */; };
 		07567AA0207A02EB0018B9E7 /* YLTabbarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 075678D7207A02EA0018B9E7 /* YLTabbarController.m */; };
@@ -233,6 +235,7 @@
 		07E7C30F20CC090F007CA827 /* WLTypeListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 07E7C30E20CC090F007CA827 /* WLTypeListCell.m */; };
 		07E7C31820CC1DA7007CA827 /* configureSong.json in Resources */ = {isa = PBXBuildFile; fileRef = 07E7C31620CC1DA7007CA827 /* configureSong.json */; };
 		07E7C31B20CC1DB7007CA827 /* configureTang.json in Resources */ = {isa = PBXBuildFile; fileRef = 07E7C31A20CC1DB7007CA827 /* configureTang.json */; };
+		07EB7356248E3DC000B71D53 /* WLHeaderImageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07EB7355248E3DC000B71D53 /* WLHeaderImageController.m */; };
 		07F3E30B20D2C0FC00E7BAF7 /* defaultHeader.png in Resources */ = {isa = PBXBuildFile; fileRef = 07F3E2F820D2C0FB00E7BAF7 /* defaultHeader.png */; };
 		07F3E30C20D2C0FC00E7BAF7 /* editImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 07F3E2F920D2C0FB00E7BAF7 /* editImage.png */; };
 		07F3E30D20D2C0FC00E7BAF7 /* headerUnlogin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07F3E2FA20D2C0FB00E7BAF7 /* headerUnlogin@2x.png */; };
@@ -431,6 +434,8 @@
 		070F3DD8207E333700EE3000 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		070F3DDA207E333E00EE3000 /* libobjc.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libobjc.tbd; path = usr/lib/libobjc.tbd; sourceTree = SDKROOT; };
 		070F3DDC207E334700EE3000 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		0714ED8C2492566700CBBE8E /* WLHeadImageSelectCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLHeadImageSelectCell.h; sourceTree = "<group>"; };
+		0714ED8D2492566700CBBE8E /* WLHeadImageSelectCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLHeadImageSelectCell.m; sourceTree = "<group>"; };
 		071571F52103564D005C53C4 /* hidePassword.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hidePassword.png; sourceTree = "<group>"; };
 		071571F62103564E005C53C4 /* showPassword.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = showPassword.png; sourceTree = "<group>"; };
 		071571F921038354005C53C4 /* closeTip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = closeTip.png; sourceTree = "<group>"; };
@@ -458,6 +463,7 @@
 		072170282087843A002A1628 /* README.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = README.strings; sourceTree = "<group>"; };
 		073864F320E12D8B0005BE61 /* poetryContent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = poetryContent.png; sourceTree = "<group>"; };
 		073D7F6B20A7E259002BCEA7 /* tangPoetry_one.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tangPoetry_one.json; sourceTree = "<group>"; };
+		074623CA250B620C0053F51E /* recommendPoetryThree.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = recommendPoetryThree.json; sourceTree = "<group>"; };
 		075678D0207A02EA0018B9E7 /* BaseNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseNavigationController.h; sourceTree = "<group>"; };
 		075678D1207A02EA0018B9E7 /* BaseNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseNavigationController.m; sourceTree = "<group>"; };
 		075678D2207A02EA0018B9E7 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
@@ -714,6 +720,8 @@
 		07E7C30E20CC090F007CA827 /* WLTypeListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLTypeListCell.m; sourceTree = "<group>"; };
 		07E7C31620CC1DA7007CA827 /* configureSong.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = configureSong.json; sourceTree = "<group>"; };
 		07E7C31A20CC1DB7007CA827 /* configureTang.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = configureTang.json; sourceTree = "<group>"; };
+		07EB7354248E3DC000B71D53 /* WLHeaderImageController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLHeaderImageController.h; sourceTree = "<group>"; };
+		07EB7355248E3DC000B71D53 /* WLHeaderImageController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLHeaderImageController.m; sourceTree = "<group>"; };
 		07F3E2F820D2C0FB00E7BAF7 /* defaultHeader.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = defaultHeader.png; sourceTree = "<group>"; };
 		07F3E2F920D2C0FB00E7BAF7 /* editImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = editImage.png; sourceTree = "<group>"; };
 		07F3E2FA20D2C0FB00E7BAF7 /* headerUnlogin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "headerUnlogin@2x.png"; sourceTree = "<group>"; };
@@ -1825,6 +1833,7 @@
 				0716099E20A1C15400904C69 /* Grade */,
 				07F73C61208ACDC100F7D8B3 /* recommendPoetry.json */,
 				360FE91C244E9BFE00983D3C /* recommendPoetryTwo.json */,
+				074623CA250B620C0053F51E /* recommendPoetryThree.json */,
 				007C7E2220F59EC700F360D6 /* configureGradeJuinor.json */,
 				364A869722436E680031DC7A /* configureGradeBaby.json */,
 				007C7E2320F59EC800F360D6 /* configureGradePrimary.json */,
@@ -1886,6 +1895,8 @@
 				36B3671C21A7E3CD0071C14A /* WLScoreController.m */,
 				3635751B21AE7D2A009524C7 /* WLClassInfoController.h */,
 				3635751C21AE7D2A009524C7 /* WLClassInfoController.m */,
+				07EB7354248E3DC000B71D53 /* WLHeaderImageController.h */,
+				07EB7355248E3DC000B71D53 /* WLHeaderImageController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1901,6 +1912,8 @@
 				3619788121952AEC000E0138 /* WLShapeLayer.m */,
 				36B3671E21A807B80071C14A /* WLPercentView.h */,
 				36B3671F21A807B80071C14A /* WLPercentView.m */,
+				0714ED8C2492566700CBBE8E /* WLHeadImageSelectCell.h */,
+				0714ED8D2492566700CBBE8E /* WLHeadImageSelectCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2100,6 +2113,7 @@
 				360E672A219442ED00AD56BF /* class_0.png in Resources */,
 				07F3E31420D2C0FC00E7BAF7 /* clearNavi.png in Resources */,
 				3635751A21AE7763009524C7 /* userClassInfo.png in Resources */,
+				074623CB250B620C0053F51E /* recommendPoetryThree.json in Resources */,
 				07CE6D4A23909BDB005384B9 /* FHL_one.json in Resources */,
 				07F3E31120D2C0FC00E7BAF7 /* myArrow.png in Resources */,
 				00FD14C020A95A2D0018D649 /* tangPoetry_six.json in Resources */,
@@ -2270,6 +2284,7 @@
 				07567B02207A02EB0018B9E7 /* AFURLResponseSerialization.m in Sources */,
 				360E672021941DA200AD56BF /* WLMyKnownController.m in Sources */,
 				0010F22320F4911500F272EB /* WLImageListController.m in Sources */,
+				07EB7356248E3DC000B71D53 /* WLHeaderImageController.m in Sources */,
 				07567B12207A02EB0018B9E7 /* MJRefreshBackFooter.m in Sources */,
 				07567B18207A02EB0018B9E7 /* MJRefreshAutoStateFooter.m in Sources */,
 				0765C706207CE6E20085EB3A /* SDWebImageGIFCoder.m in Sources */,
@@ -2294,6 +2309,7 @@
 				0765C701207CE6E20085EB3A /* SDWebImageCodersManager.m in Sources */,
 				360A2AA0237EA7670033F2F0 /* PoetryConfigureModel.m in Sources */,
 				36B5CC4B219927C0009D5861 /* WLImageCell.m in Sources */,
+				0714ED8E2492566700CBBE8E /* WLHeadImageSelectCell.m in Sources */,
 				07F73C82208AF51D00F7D8B3 /* YLHomeViewController.m in Sources */,
 				0765C700207CE6E20085EB3A /* SDWebImageCoderHelper.m in Sources */,
 				360E67182194121A00AD56BF /* WLPoetryHeadCell.m in Sources */,
