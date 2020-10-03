@@ -253,8 +253,10 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
     self.mainImageView.backgroundColor = RGBCOLOR(243, 238, 214, 1.0);
     NSString *imageName = self.dataModel.backImageURL;
     if (imageName.length > 0 && ![imageName isEqualToString:@"<null>"] && ![imageName isEqualToString:@"(null)"]) {
+        //这里暂时取消动态化的图片
+        self.mainImageView.image = [UIImage imageNamed:@"poetryBack.jpg"];
 
-        [self.mainImageView sd_setImageWithURL:[NSURL URLWithString:imageName]];
+//        [self.mainImageView sd_setImageWithURL:[NSURL URLWithString:imageName]];
     }else{
         self.mainImageView.image = [UIImage imageNamed:@"poetryBack.jpg"];
     }
@@ -569,7 +571,10 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
         [self hideAnalyseView];
         self.analysesImage.image = [UIImage imageNamed:@"analyses"];
     }else{
-        if (self.dataModel.analysesInfo.length > 0 || self.dataModel.addtionInfo.length > 0 || self.dataModel.transferInfo.length > 0 || self.dataModel.backgroundInfo.length > 0) {
+        
+//        if (self.dataModel.analysesInfo.length > 0 || self.dataModel.addtionInfo.length > 0 || self.dataModel.transferInfo.length > 0 || self.dataModel.backgroundInfo.length > 0) {
+        if (kStringIsEmpty(self.dataModel.analysesInfo) || kStringIsEmpty(self.dataModel.addtionInfo) || kStringIsEmpty(self.dataModel.transferInfo) || kStringIsEmpty(self.dataModel.backgroundInfo)) {
+            
             [self loadAnalyseView];
         }else{
             [self requestAnalysesInfo];

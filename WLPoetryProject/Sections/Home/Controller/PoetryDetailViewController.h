@@ -13,6 +13,14 @@ typedef void(^LikeBlock) (BOOL isLike,NSString *poetryID);
 
 @interface PoetryDetailViewController : BaseViewController
 /**
+ *  数据源
+ **/
+@property (nonatomic,strong) NSMutableArray *dataModelArray;
+/**
+ *  第几个index
+ **/
+@property (nonatomic,assign) NSInteger index;
+/**
  *  数据
  **/
 @property (nonatomic,strong) PoetryModel *dataModel;

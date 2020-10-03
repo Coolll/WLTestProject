@@ -49,7 +49,7 @@
     self.password = [self notNillValueWithKey:@"password" withDic:dic];
     self.userPoetryClass = [self notNillValueWithKey:@"user_poetry_class" withDic:dic];
     self.userPoetryStorage = [self notNillValueWithKey:@"poetry_storage" withDic:dic];
-    
+    self.userImgurl = [self notNillValueWithKey:@"head_image" withDic:dic];
     self.likePoetryList = [NSMutableArray array];
 
 }

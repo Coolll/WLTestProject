@@ -77,6 +77,16 @@ typedef void(^EditBlock)(void);
     return self;
 }
 
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+{
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+        self.frame = CGRectMake(0, 0, PhoneScreen_WIDTH, 125);
+        [self loadCustomViewWithFrame:CGRectMake(0, 0, PhoneScreen_WIDTH, 125)];
+    }
+    return self;
+}
+
 - (void)loadCustomViewWithFrame:(CGRect)frame
 {
     self.backgroundColor = NavigationColor;
@@ -93,7 +103,7 @@ typedef void(^EditBlock)(void);
     self.headerImageView.clipsToBounds = YES;
     self.headerImageView.backgroundColor = [UIColor whiteColor];
     self.headerImageView.userInteractionEnabled = YES;
-    [self addSubview:self.headerImageView];
+    [self.contentView addSubview:self.headerImageView];
     
     UITapGestureRecognizer *tapImage = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(changeImageAction:)];
     [self.headerImageView addGestureRecognizer:tapImage];
@@ -110,7 +120,7 @@ typedef void(^EditBlock)(void);
     self.nameLabel.textColor = [UIColor whiteColor];
     self.nameLabel.font = [UIFont systemFontOfSize:16.0];
     self.nameLabel.userInteractionEnabled = YES;
-    [self addSubview:self.nameLabel];
+    [self.contentView addSubview:self.nameLabel];
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(loginAction:)];
     [self.nameLabel addGestureRecognizer:tap];
@@ -123,7 +133,7 @@ typedef void(^EditBlock)(void);
     self.subTitleLabel.text = @"极速登录，即可收藏诗词";
     self.subTitleLabel.textColor = [UIColor whiteColor];
     self.subTitleLabel.userInteractionEnabled = YES;
-    [self addSubview:self.subTitleLabel];
+    [self.contentView addSubview:self.subTitleLabel];
     
     UITapGestureRecognizer *subTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(loginAction:)];
     [self.subTitleLabel addGestureRecognizer:subTap];

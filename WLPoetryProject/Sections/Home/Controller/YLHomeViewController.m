@@ -71,8 +71,8 @@
     [self loadCustomData];
 //    [self checkLocalData];//加载本地数据
     [self checkNetworkAndDealImage];
-    
-//    [[BackupHelper shareInstance] updateRecommendPoetryThree];//更新诗词
+
+    //[[BackupHelper shareInstance] updateRecommendPoetryThree];//更新热门诗词
 
 //    [[BackupHelper shareInstance] uploadAllPoetry];//备份诗词
 //    [self uploadAllImages];
@@ -90,10 +90,9 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         if ([WLRequestHelper defaultHelper].isWIFI) {
             NSLog(@"WIFI，可以预下载");
-            [self loadAllImageData];
+            //[self loadAllImageData];
         }else{
             NSLog(@"非WIFI，结束了");
-
         }
     });
    
@@ -148,7 +147,7 @@
 {
     if(index < imageArray.count){
         
-        [imageView sd_setImageWithURL:[NSURL URLWithString:[imageArray objectAtIndex:index]] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+        [imageView sd_setImageWithURL:[NSURL URLWithString:[imageArray objectAtIndex:index]] placeholderImage:nil options:SDWebImageLowPriority completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
             
             NSLog(@"完成加载url:%@",imageURL.absoluteString);
 
@@ -490,6 +489,7 @@
         if ((indexPath.section-1) < self.poetryArray.count) {
             
             PoetryDetailViewController *detailVC = [[PoetryDetailViewController alloc]init];
+            detailVC.dataModelArray = self.poetryArray;
             detailVC.dataModel = self.poetryArray[(indexPath.section-1)];
             detailVC.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:detailVC animated:YES];

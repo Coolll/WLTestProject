@@ -10,21 +10,21 @@
 /*
  
  {
- "name" : "<##>",
- "author" : "<##>",
- "content" : "<##>",
- "addtionInfo" : "<##>",
- "classInfo" : "<##>",
- "poetryID" : "<##>",
- "source" : "<##>",
- "analysesInfo" : "<##>",
- "transferInfo" : "<##>",
- "backgroundInfo" : "<##>",
- "backImageName" : "",
- "bgImageURL" : "",
- "placeHolder" : "",
- "likes":"<##>"
- },
+"name" : "<##>",
+"author" : "<##>·<##>",
+"content" : "<##>",
+"transferInfo" : "<##>",
+"addtionInfo" : "<##>",
+"analysesInfo" : "<##>",
+"backgroundInfo" : "<##>",
+"classInfo" : "<##>",
+"poetryID" : "<##>",
+"source" : "<##>",
+"backImageName" : "",
+"bgImageURL" : "",
+"placeHolder" : "",
+"likes":"<##>"
+},
  */
 
 @interface BackupHelper : NSObject

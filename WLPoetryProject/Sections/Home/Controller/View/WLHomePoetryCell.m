@@ -67,7 +67,20 @@ static const CGFloat nameHeight = 25;//名字、作者等信息的高度
     self.authorLabel.text = dataModel.author;
     self.contentLabel.text = dataModel.firstLineString;
     if (dataModel.author.length > 0) {
-        self.authorLastName.text = [dataModel.author substringToIndex:1];
+        if ([dataModel.author containsString:@"·"]) {
+            NSArray *array = [dataModel.author componentsSeparatedByString:@"·"];
+            if (array.count == 2) {
+                NSString *name = [array lastObject];
+                if (name.length > 0) {
+                    self.authorLastName.text = [name substringToIndex:1];
+                }
+            }else{
+                self.authorLastName.text = [dataModel.author substringToIndex:1];
+            }
+
+        }else{
+            self.authorLastName.text = [dataModel.author substringToIndex:1];
+        }
     }
 }
 

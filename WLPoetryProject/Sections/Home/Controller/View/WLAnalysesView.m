@@ -138,11 +138,16 @@
 - (void)loadAdditionLabel{
     self.additionLabel = [[UILabel alloc]init];
     self.additionLabel.numberOfLines = 0;
-    NSMutableString *additionString = [NSMutableString stringWithString:self.additionInfo];
-    if (additionString.length == 0) {
-        additionString = [@"暂无" mutableCopy];
+    NSMutableString *dataString = [NSMutableString string];
+    
+    if (self.additionInfo && [self.additionInfo isKindOfClass:[NSString class]] && self.additionInfo.length > 0) {
+        dataString = [NSMutableString stringWithString:[NSString stringWithFormat:@"%@",self.additionInfo]];
     }
-    NSString *showAdditionOne = [additionString stringByReplacingOccurrencesOfString:@"？" withString:@"？\n"];
+    
+    if (kStringIsEmpty(dataString)) {
+        dataString = [@"暂无" mutableCopy];
+    }
+    NSString *showAdditionOne = [dataString stringByReplacingOccurrencesOfString:@"？" withString:@"？\n"];
     NSString *showAdditionTwo = [showAdditionOne stringByReplacingOccurrencesOfString:@"！" withString:@"！\n"];
     NSString *showAdditionThree = [showAdditionTwo stringByReplacingOccurrencesOfString:@"。" withString:@"。\n"];
     self.additionLabel.text = [NSString stringWithFormat:@"注释\n%@",showAdditionThree];
@@ -160,11 +165,17 @@
 - (void)loadTransferLabel{
     self.transferLabel = [[UILabel alloc]init];
     self.transferLabel.numberOfLines = 0;
-    NSMutableString *additionString = [NSMutableString stringWithString:self.transferInfo];
-    if (additionString.length == 0) {
-        additionString = [@"暂无" mutableCopy];
+    NSMutableString *dataString = [NSMutableString string];
+    
+    if (self.transferInfo && [self.transferInfo isKindOfClass:[NSString class]] && self.transferInfo.length > 0) {
+        dataString = [NSMutableString stringWithString:[NSString stringWithFormat:@"%@",self.transferInfo]];
     }
-    NSString *showText = [additionString stringByReplacingOccurrencesOfString:@"。" withString:@"。\n"];
+    
+    if (kStringIsEmpty(dataString)) {
+        dataString = [@"暂无" mutableCopy];
+    }
+
+    NSString *showText = [dataString stringByReplacingOccurrencesOfString:@"。" withString:@"。\n"];
     self.transferLabel.text = [NSString stringWithFormat:@"译文\n%@",showText];
     [self updateTitleWithLabel:self.transferLabel withCount:2 needChangeParagraph:YES];
     [self.mainScroll addSubview:self.transferLabel];
@@ -179,11 +190,17 @@
 - (void)loadAnalysesLabel{
     self.analysesLabel = [[UILabel alloc]init];
     self.analysesLabel.numberOfLines = 0;
-    NSMutableString *additionString = [NSMutableString stringWithString:self.analysesInfo];
-    if (additionString.length == 0) {
-        additionString = [@"暂无" mutableCopy];
+    NSMutableString *dataString = [NSMutableString string];
+    
+    if (self.analysesInfo && [self.analysesInfo isKindOfClass:[NSString class]] && self.analysesInfo.length > 0) {
+        dataString = [NSMutableString stringWithString:[NSString stringWithFormat:@"%@",self.analysesInfo]];
     }
-    NSString *showText = [additionString stringByReplacingOccurrencesOfString:@"&&&" withString:@"\n"];
+    
+    if (kStringIsEmpty(dataString)) {
+        dataString = [@"暂无" mutableCopy];
+    }
+    
+    NSString *showText = [dataString stringByReplacingOccurrencesOfString:@"&&&" withString:@"\n"];
     self.analysesLabel.text = [NSString stringWithFormat:@"鉴赏\n%@",showText];
     [self updateTitleWithLabel:self.analysesLabel withCount:2 needChangeParagraph:YES];
     [self.mainScroll addSubview:self.analysesLabel];
@@ -198,11 +215,17 @@
 - (void)loadBackgroundLabel{
     self.backgroundLabel = [[UILabel alloc]init];
     self.backgroundLabel.numberOfLines = 0;
-    NSMutableString *additionString = [NSMutableString stringWithString:self.backgroundInfo];
-    if (additionString.length == 0) {
-        additionString = [@"暂无" mutableCopy];
+    NSMutableString *dataString = [NSMutableString string];
+    
+    if (self.backgroundInfo && [self.backgroundInfo isKindOfClass:[NSString class]] && self.backgroundInfo.length > 0) {
+        dataString = [NSMutableString stringWithString:[NSString stringWithFormat:@"%@",self.backgroundInfo]];
     }
-    NSString *showText = [additionString stringByReplacingOccurrencesOfString:@"&&&" withString:@"\n"];
+    
+    if (kStringIsEmpty(dataString)) {
+        dataString = [@"暂无" mutableCopy];
+    }
+    
+    NSString *showText = [dataString stringByReplacingOccurrencesOfString:@"&&&" withString:@"\n"];
     self.backgroundLabel.text = [NSString stringWithFormat:@"背景\n%@",showText];
     [self updateTitleWithLabel:self.backgroundLabel withCount:2 needChangeParagraph:YES];
     [self.mainScroll addSubview:self.backgroundLabel];

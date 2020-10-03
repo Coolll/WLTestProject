@@ -38,7 +38,6 @@
 		00BBFA0E20D6291400BB86D9 /* WLFontController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BBFA0D20D6291400BB86D9 /* WLFontController.m */; };
 		00BBFA1120D6524500BB86D9 /* WLFeedbackController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BBFA1020D6524500BB86D9 /* WLFeedbackController.m */; };
 		00BBFA1420D65B8F00BB86D9 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BBFA1320D65B8F00BB86D9 /* AboutViewController.m */; };
-		00BBFA1620D65C8B00BB86D9 /* poetryIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 00BBFA1520D65C8B00BB86D9 /* poetryIcon.png */; };
 		00D4F64120F743F300287FB0 /* WLHomePoetryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D4F64020F743F300287FB0 /* WLHomePoetryCell.m */; };
 		00D4F64320F7467800287FB0 /* homeAuthorBg.png in Resources */ = {isa = PBXBuildFile; fileRef = 00D4F64220F7467800287FB0 /* homeAuthorBg.png */; };
 		00DA247620F6FBCB00F97B79 /* bookType.png in Resources */ = {isa = PBXBuildFile; fileRef = 00DA247520F6FBCA00F97B79 /* bookType.png */; };
@@ -403,7 +402,6 @@
 		00BBFA1020D6524500BB86D9 /* WLFeedbackController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLFeedbackController.m; sourceTree = "<group>"; };
 		00BBFA1220D65B8F00BB86D9 /* AboutViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
 		00BBFA1320D65B8F00BB86D9 /* AboutViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
-		00BBFA1520D65C8B00BB86D9 /* poetryIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = poetryIcon.png; sourceTree = "<group>"; };
 		00D4F63F20F743F300287FB0 /* WLHomePoetryCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLHomePoetryCell.h; sourceTree = "<group>"; };
 		00D4F64020F743F300287FB0 /* WLHomePoetryCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLHomePoetryCell.m; sourceTree = "<group>"; };
 		00D4F64220F7467800287FB0 /* homeAuthorBg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = homeAuthorBg.png; sourceTree = "<group>"; };
@@ -1798,7 +1796,6 @@
 				36521BA921904ECE00425DCC /* optionIcon.png */,
 				36521BA421904A8A00425DCC /* reciteIcon.png */,
 				0073FD7620EE14A700FED6D6 /* shareIcon.png */,
-				00BBFA1520D65C8B00BB86D9 /* poetryIcon.png */,
 				00F9517520D4FF940039D7C5 /* likePoetry.png */,
 				00F9517620D4FF940039D7C5 /* unlikePoetry.png */,
 				07D37FFE20CD5E2200CF2A6E /* PoetryBgImages */,
@@ -2163,7 +2160,6 @@
 				0795690020726D0B0097C26D /* Main.storyboard in Resources */,
 				360FE91D244E9BFE00983D3C /* recommendPoetryTwo.json in Resources */,
 				071609AA20A1C15400904C69 /* gradePoetry_2.json in Resources */,
-				00BBFA1620D65C8B00BB86D9 /* poetryIcon.png in Resources */,
 				36F93F2B245814DA004BB5F9 /* analyses_selected.png in Resources */,
 				3616E7972192B9510014843F /* cover.png in Resources */,
 				0785076920B2EFF20030CD98 /* songPoetry_ten.json in Resources */,
@@ -2521,9 +2517,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: QILONG WANG (YMCYH9M6N8)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1.3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = EQK7HQ2C5P;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2545,7 +2541,7 @@
 					"$(PROJECT_DIR)/WLPoetryProject/ThirdPartClass/SDK/ShareSDK/Support/PlatformSDK/SinaWeiboSDK",
 					"$(PROJECT_DIR)/WLPoetryProject/ThirdPartClass/SDK/ShareSDK/Support/PlatformSDK/WeChatSDK",
 				);
-				MARKETING_VERSION = 1.4.0;
+				MARKETING_VERSION = 1.4.1;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wangqilong.wqlPoetryProject;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2563,7 +2559,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: QILONG WANG (EQK7HQ2C5P)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: QILONG WANG (EQK7HQ2C5P)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1.3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = EQK7HQ2C5P;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2585,7 +2581,7 @@
 					"$(PROJECT_DIR)/WLPoetryProject/ThirdPartClass/SDK/ShareSDK/Support/PlatformSDK/SinaWeiboSDK",
 					"$(PROJECT_DIR)/WLPoetryProject/ThirdPartClass/SDK/ShareSDK/Support/PlatformSDK/WeChatSDK",
 				);
-				MARKETING_VERSION = 1.4.0;
+				MARKETING_VERSION = 1.4.1;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wangqilong.wqlPoetryProject;
 				PRODUCT_NAME = "$(TARGET_NAME)";

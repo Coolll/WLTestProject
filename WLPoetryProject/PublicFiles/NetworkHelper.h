@@ -81,6 +81,8 @@ NS_ASSUME_NONNULL_BEGIN
 //获取诗词的鉴赏信息
 - (void)loadAnalysesWithPoetryId:(NSString*)poetryIDString withCompletion:(RequestResultBlock)block;
 
+- (void)updateUserHeadImage:(NSString*)headImageUrl withCompletion:(RequestResultBlock)block;
+
 @end
 
 NS_ASSUME_NONNULL_END

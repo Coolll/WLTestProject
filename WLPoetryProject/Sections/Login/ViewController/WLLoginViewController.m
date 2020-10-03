@@ -565,7 +565,6 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
             
             
 
-        
             [WLSaveLocalHelper saveObject:@"1" forKey:LoginStatusKey];//登录成功
             
             

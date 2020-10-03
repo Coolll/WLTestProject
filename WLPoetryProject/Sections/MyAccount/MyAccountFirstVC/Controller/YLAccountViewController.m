@@ -55,8 +55,6 @@
 @property (nonatomic,copy) NSString *userImageURL;
 
 
-
-
 @end
 
 @implementation YLAccountViewController
@@ -229,7 +227,7 @@
         
         if (!cell) {
             
-            cell = [[WLMyHeaderTableViewCell alloc]initWithFrame:CGRectMake(0, 0, PhoneScreen_WIDTH, 125)];
+            cell = [[WLMyHeaderTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"WLMyAccountHeaderTableViewCell"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
         
@@ -399,9 +397,20 @@
         [self loginAction];
     }else{
         WLHeaderImageController *vc = [[WLHeaderImageController alloc]init];
+        __weak typeof(self) weakSelf = self;
+        [vc finishSettingWithBlock:^(BOOL isFinished, NSString *imageUrl) {
+            [weakSelf finishEditHeadImage:imageUrl];
+        }];
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }
+}
+
+- (void)finishEditHeadImage:(NSString*)headImageUrl{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.userImageURL = [NSString stringWithFormat:@"%@",headImageUrl];
+        [self.mainTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+    });
 }
 
 

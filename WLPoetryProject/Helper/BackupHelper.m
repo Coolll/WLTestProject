@@ -451,6 +451,7 @@
     else if ([source isEqualToString:@"21"]){return @"唐诗";}
     else if ([source isEqualToString:@"22"]){return @"宋词";}
     else if ([source isEqualToString:@"23"]){return @"宋诗";}
+    else if ([source isEqualToString:@"99"]){return @"其他";}
     else if ([source isEqualToString:@"100"]){return @"学而篇";}
     else if ([source isEqualToString:@"101"]){return @"为政篇";}
     else if ([source isEqualToString:@"102"]){return @"八佾篇";}

@@ -265,6 +265,20 @@
     [self.baseNetwork requestPostWithBody:param withUrlString:@"api/service/addFeedback" withCompletion:block];
 }
 
+- (void)updateUserHeadImage:(NSString*)headImageUrl withCompletion:(RequestResultBlock)block{
+    
+    NSInteger userIdValue = [kUserID integerValue];
+    
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    [dic setObject:[NSNumber numberWithInteger:userIdValue] forKey:@"user_id"];
+    [dic setObject:headImageUrl forKey:@"headImageUrl"];
+
+    NSDictionary *param = [self operationForParam:dic];
+    
+    [self.baseNetwork requestPostWithBody:param withUrlString:@"api/user/update/headImage" withCompletion:block];
+
+}
+
 
 - (NSDictionary*)operationForParam:(NSDictionary*)originDic
 {
