@@ -305,7 +305,7 @@
     NSInteger count = self.poetryArray.count;
     __weak __typeof(self)weakSelf = self;
     
-    [self.networkHelper requestHotPoetry:count count:10 withCompletion:^(BOOL success, NSDictionary *dic, NSError *error) {
+    [self.networkHelper requestHotPoetry:(count+1) count:10 withCompletion:^(BOOL success, NSDictionary *dic, NSError *error) {
         
         [weakSelf.mainTableView.mj_footer endRefreshing];
         

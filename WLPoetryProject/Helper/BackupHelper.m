@@ -64,10 +64,12 @@
 }
 
 - (void)updateRecommendPoetryThree{
-    NSArray *poetryModelArray = [self readLocalFileWithName:@"recommendPoetryThree"];
+    NSArray *poetryModelArray = [self readLocalFileWithName:@"recommendPoetryFour"];
 
-    for (int i = 0; i < poetryModelArray.count; i++) {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(i * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    NSInteger time = 0;
+    for (NSInteger i = poetryModelArray.count-1; i >= 0; i--) {
+        time +=2 ;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(time * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             PoetryModel *model = poetryModelArray[i];
             NSMutableDictionary *dic = [NSMutableDictionary dictionary];
             [dic setObject:model.poetryID forKey:@"poetry_id"];
@@ -285,6 +287,7 @@
     else if([classInfo isEqualToString:@"108"]){return @"送别";}
     else if([classInfo isEqualToString:@"109"]){return @"饮酒";}
     else if([classInfo isEqualToString:@"110"]){return @"春景";}
+    else if([classInfo isEqualToString:@"111"]){return @"自然风光";}
     else if([classInfo isEqualToString:@"1001"]){return @"山村咏怀";}
     else if([classInfo isEqualToString:@"1002"]){return @"咏鹅";}
     else if([classInfo isEqualToString:@"1003"]){return @"春晓";}
@@ -451,6 +454,9 @@
     else if ([source isEqualToString:@"21"]){return @"唐诗";}
     else if ([source isEqualToString:@"22"]){return @"宋词";}
     else if ([source isEqualToString:@"23"]){return @"宋诗";}
+    else if ([source isEqualToString:@"24"]){return @"元曲";}
+    else if ([source isEqualToString:@"25"]){return @"清代诗词";}
+    else if ([source isEqualToString:@"26"]){return @"明诗";}
     else if ([source isEqualToString:@"99"]){return @"其他";}
     else if ([source isEqualToString:@"100"]){return @"学而篇";}
     else if ([source isEqualToString:@"101"]){return @"为政篇";}

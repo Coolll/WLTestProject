@@ -10,7 +10,7 @@
 #import "WLSettingCell.h"
 #import "WLFontController.h"
 #import "WLFeedbackController.h"
-
+#import "WLReadImageController.h"
 @interface WLSettingController ()<UITableViewDelegate,UITableViewDataSource>
 /**
  *  数据
@@ -48,7 +48,7 @@
 
 - (void)loadCustomData
 {
-    self.itemsArray = [NSArray arrayWithObjects:@"权限设置",@"字体大小",@"空间清理",@"意见反馈", nil];
+    self.itemsArray = [NSArray arrayWithObjects:@"权限设置",@"阅读文本设置",@"阅读背景设置",@"空间清理",@"意见反馈", nil];
     self.imageArray = [NSArray arrayWithObjects:@"help",@"setting",@"about",@"contact",nil];
     self.countFileSize = [self countTheDisk];
 }
@@ -135,7 +135,7 @@
     if (indexPath.section == 0 && indexPath.row < self.itemsArray.count) {
         cell.titleString = self.itemsArray[indexPath.row];
         
-        if (indexPath.row == 2) {
+        if (indexPath.row == 3) {
             cell.needRight = YES;
             cell.rightLabel.text = [NSString stringWithFormat:@"共%.2fM",self.countFileSize];
         }
@@ -183,12 +183,16 @@
             [self.navigationController pushViewController:fontVC animated:YES];
             
         }else if(indexPath.row == 2){
+            //阅读背景设置
+            [self setUpTheReadBackground];
+        }else if (indexPath.row == 3){
             //空间清理
             [self cleanTheDisk];
-        }else if (indexPath.row == 3){
+        }else if (indexPath.row == 4){
             //意见反馈
             WLFeedbackController *feedVc = [[WLFeedbackController alloc]init];
             [self.navigationController pushViewController:feedVc animated:YES];
+
         }
     }
     
@@ -228,11 +232,15 @@
         }];
        
         
-
         
        
     }
     
+}
+
+- (void)setUpTheReadBackground{
+    WLReadImageController *vc = [[WLReadImageController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark 清除缓存

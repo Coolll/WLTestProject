@@ -331,7 +331,7 @@
             //近期
             WLTypeListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WLTypeListCell"];;
             if (!cell) {
-                cell = [[WLTypeListCell alloc]init];
+                cell = [[WLTypeListCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"WLTypeListCell"];
             }
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.backgroundColor = [UIColor whiteColor];
@@ -375,7 +375,7 @@
     WLGradeTypeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WLGradeTypeCell"];
     
     if (!cell) {
-        cell = [[WLGradeTypeCell alloc]init];
+        cell = [[WLGradeTypeCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"WLGradeTypeCell"];
 
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -392,7 +392,7 @@
 {
     WLGradeTypeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WLGradeTypeCell"];
     if (!cell) {
-        cell = [[WLGradeTypeCell alloc]init];
+        cell = [[WLGradeTypeCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"WLGradeTypeCell"];
 
     }
     cell.booksArray = [self.sectionTwoBooksTitleArray copy];

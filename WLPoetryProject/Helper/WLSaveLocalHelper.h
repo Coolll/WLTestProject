@@ -31,5 +31,10 @@
 + (void)saveLikeList:(NSArray*)array;
 + (NSArray*)fetchLikeList;
 
++ (void)saveReadImageURLOrBackgroundRGB:(NSString*)imageURL;
++ (NSString*)fetchReadImageURLOrRGB;
+
++ (void)saveReadTextRGB:(NSString*)rgb;
++ (NSString*)fetchReadTextRGB;
 
 @end

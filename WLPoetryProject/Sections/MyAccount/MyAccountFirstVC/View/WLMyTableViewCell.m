@@ -84,7 +84,7 @@
     
     
     
-    CGFloat imageW = 10;
+    CGFloat imageW = 6;
     CGFloat imageH = 12;
     CGFloat topSpace = (self.frame.size.height-imageH)/2;
     

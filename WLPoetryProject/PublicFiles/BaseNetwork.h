@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-typedef void (^BaseResultBlock) (BOOL success,NSDictionary *dic,NSError *error);
+typedef void (^BaseResultBlock) (BOOL success,NSDictionary * _Nullable dic,NSError *error);
 
 NS_ASSUME_NONNULL_BEGIN
 

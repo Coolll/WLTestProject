@@ -48,10 +48,6 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
  **/
 @property (nonatomic, strong) UIImageView *mainImageView;
 /**
- *  是否需要使用默认文本颜色
- **/
-@property (nonatomic,assign) BOOL needUseDefaultColor;
-/**
  *  文本颜色
  **/
 @property (nonatomic,strong) UIColor *contentTextColor;
@@ -81,26 +77,8 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
     //背景图暂时取消 会影响滑动，微微有点卡顿
     self.view.backgroundColor = RGBCOLOR(243, 238, 214, 1.0);
     
+    [self dealTextColor];
     
-    if (kStringIsEmpty(self.dataModel.textColor)) {
-        //静夜思 背景色为深色，文本改为白色
-        self.needUseDefaultColor = YES;
-    }else{
-        NSString *string = self.dataModel.textColor;
-        NSArray *array = [string componentsSeparatedByString:@","];
-        if (array.count == 4) {
-            NSInteger red = [[array objectAtIndex:0] integerValue];
-            NSInteger green = [[array objectAtIndex:1] integerValue];
-            NSInteger blue = [[array objectAtIndex:2] integerValue];
-            CGFloat alpha = [[array objectAtIndex:3] floatValue];
-            self.contentTextColor = RGBCOLOR(red, green, blue, alpha);
-            self.needUseDefaultColor = NO;
-        }else{
-            self.needUseDefaultColor = YES;
-        }
-    }
-    //无背景图时，不要改变颜色了
-    self.needUseDefaultColor = YES;
     self.titleForNavi = self.dataModel.name;
     [self loadMainBackImageView];//背景
     [self addFullTitleLabel];//诗词名字 添加背景之后调用，否则会被背景图遮住
@@ -112,7 +90,23 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
     
 }
 
+- (void)dealTextColor{
+    NSString *colorConfig = [WLSaveLocalHelper fetchReadTextRGB];
+    self.contentTextColor = RGBCOLOR(60, 60, 120, 1.0);
+    
+    if (kStringIsEmpty(colorConfig)) {
 
+    }else{
+        NSArray *array = [colorConfig componentsSeparatedByString:@","];
+        if (array.count == 3) {
+            NSInteger red = [[array objectAtIndex:0] integerValue];
+            NSInteger green = [[array objectAtIndex:1] integerValue];
+            NSInteger blue = [[array objectAtIndex:2] integerValue];
+            self.contentTextColor = RGBCOLOR(red, green, blue, 1);
+        }
+    }
+
+}
 
 - (void)viewWillDisappear:(BOOL)animated
 {
@@ -251,12 +245,26 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
     [self.view addSubview:self.mainImageView];
     self.mainImageView.contentMode = UIViewContentModeScaleAspectFill;
     self.mainImageView.backgroundColor = RGBCOLOR(243, 238, 214, 1.0);
-    NSString *imageName = self.dataModel.backImageURL;
+//    NSString *imageName = self.dataModel.backImageURL;
+    NSString *imageName = [WLSaveLocalHelper fetchReadImageURLOrRGB];
+
     if (imageName.length > 0 && ![imageName isEqualToString:@"<null>"] && ![imageName isEqualToString:@"(null)"]) {
         //这里暂时取消动态化的图片
-        self.mainImageView.image = [UIImage imageNamed:@"poetryBack.jpg"];
-
-//        [self.mainImageView sd_setImageWithURL:[NSURL URLWithString:imageName]];
+        if ([imageName hasPrefix:@"http"] || [imageName hasPrefix:@"https"]) {
+            [self.mainImageView sd_setImageWithURL:[NSURL URLWithString:imageName]];
+        }else if ([imageName containsString:@","]){
+            NSArray *array = [imageName componentsSeparatedByString:@","];
+            if (array.count == 3) {
+                NSInteger red = [[array objectAtIndex:0] integerValue];
+                NSInteger green = [[array objectAtIndex:1] integerValue];
+                NSInteger blue = [[array objectAtIndex:2] integerValue];
+                self.mainImageView.backgroundColor = RGBCOLOR(red, green, blue, 1);
+            }else{
+                self.mainImageView.image = [UIImage imageNamed:@"poetryBack.jpg"];
+            }
+        }else{
+            self.mainImageView.image = [UIImage imageNamed:@"poetryBack.jpg"];
+        }
     }else{
         self.mainImageView.image = [UIImage imageNamed:@"poetryBack.jpg"];
     }
@@ -277,16 +285,15 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
 - (void)loadContentTableView
 {
     self.authorLabel.text = self.dataModel.author;
-    //背景色为深色时，文本颜色为白色
-    if (!self.needUseDefaultColor) {
-        if (self.contentTextColor) {
-            self.titleFullLabel.textColor = self.contentTextColor;
-            self.authorLabel.textColor = self.contentTextColor;
-        }else{
-            self.titleFullLabel.textColor = [UIColor whiteColor];
-            self.authorLabel.textColor = [UIColor whiteColor];
-        }
+    
+    if (self.contentTextColor) {
+        self.titleFullLabel.textColor = self.contentTextColor;
+        self.authorLabel.textColor = self.contentTextColor;
+    }else{
+        self.titleFullLabel.textColor = RGBCOLOR(60, 60, 120, 1);
+        self.authorLabel.textColor = RGBCOLOR(60, 60, 120, 1);
     }
+    
     self.mainTable.backgroundColor = [UIColor clearColor];
 //    self.mainTable.backgroundColor = RGBCOLOR(243, 238, 214, 1.0);
 }
@@ -685,20 +692,13 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
             NSString *content = self.dataArray[indexPath.row];
             cellHeight = [WLPoetryContentCell heightForContent:content withWidth:(PhoneScreen_WIDTH-2*leftSpace-20)];
         }
-//        contentCell = [[WLPoetryContentCell alloc]initWithFrame:CGRectMake(0, 0, PhoneScreen_WIDTH-2*leftSpace-20, cellHeight)];
         contentCell = [[WLPoetryContentCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"WLPoetryContentCell"];
         contentCell.frame = CGRectMake(0, 0, PhoneScreen_WIDTH-2*leftSpace-20, cellHeight);
     }
     contentCell.selectionStyle = UITableViewCellSelectionStyleNone;
     contentCell.backgroundColor = [UIColor clearColor];
     contentCell.contentString = self.dataArray[indexPath.row];
-    if (!self.needUseDefaultColor) {
-        if (self.contentTextColor) {
-            contentCell.contentLabel.textColor = self.contentTextColor;
-        }else{
-            contentCell.contentLabel.textColor = [UIColor whiteColor];
-        }
-    }
+    contentCell.contentLabel.textColor = self.contentTextColor;
     
     return contentCell;
 }

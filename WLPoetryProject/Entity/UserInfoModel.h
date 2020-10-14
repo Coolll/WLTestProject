@@ -19,7 +19,7 @@
 /**
  *  历史的诗词量
  **/
-@property (nonatomic,copy) NSArray *poetryStorageList;
+@property (nonatomic,copy) NSArray * _Nullable poetryStorageList;
 
 
 @property (nullable, nonatomic, copy) NSString *userSessionToken;//用户的token
@@ -32,17 +32,17 @@
 /**
  *  邮箱
  **/
-@property (nonatomic,copy) NSString *email;
+@property (nonatomic,copy) NSString * _Nullable email;
 
 
 
 - (instancetype)initUserWithDictionary:(NSDictionary*)dic;
 
-- (NSString*)fetchName;
-- (NSString*)fetchPassword;
-- (NSString*)fetchToken;
-- (NSString*)fetchImageURL;
-- (NSString*)fetchUserID;
+- (NSString*_Nullable)fetchName;
+- (NSString*_Nullable)fetchPassword;
+- (NSString*_Nullable)fetchToken;
+- (NSString*_Nullable)fetchImageURL;
+- (NSString*_Nullable)fetchUserID;
 - (BOOL)fetchLoginStatus;
 
 @end

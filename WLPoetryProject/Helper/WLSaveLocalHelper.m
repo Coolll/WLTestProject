@@ -174,5 +174,36 @@
     return [NSArray array];
 }
 
++ (void)saveReadImageURLOrBackgroundRGB:(NSString*)imageURL{
+    if (imageURL && [imageURL isKindOfClass:[NSString class]]) {
+        [self saveObject:[imageURL copy] forKey:@"WLUserReadImageURLOrBackgroundRGB"];
+    }else{
+        [self saveObject:@"" forKey:@"WLUserReadImageURLOrBackgroundRGB"];
+    }
 
+}
++ (NSString*)fetchReadImageURLOrRGB{
+    id localObject = [self loadObjectForKey:@"WLUserReadImageURLOrBackgroundRGB"];
+    if (localObject && [localObject isKindOfClass:[NSString class]]) {
+        
+        return [NSString stringWithFormat:@"%@",localObject];
+    }
+    return @"";
+}
+
++ (void)saveReadTextRGB:(NSString*)rgb{
+    if (rgb && [rgb isKindOfClass:[NSString class]]) {
+        [self saveObject:[rgb copy] forKey:@"WLUserReadTextRGB"];
+    }else{
+        [self saveObject:@"" forKey:@"WLUserReadTextRGB"];
+    }
+
+}
++ (NSString*)fetchReadTextRGB{
+    id localObject = [self loadObjectForKey:@"WLUserReadTextRGB"];
+    if (localObject && [localObject isKindOfClass:[NSString class]]) {
+        return [NSString stringWithFormat:@"%@",localObject];
+    }
+    return @"";
+}
 @end

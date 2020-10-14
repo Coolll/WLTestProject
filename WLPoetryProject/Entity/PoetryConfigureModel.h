@@ -19,6 +19,6 @@
 @property (nullable, nonatomic, copy) NSString *subTitle;
 @property (nullable, nonatomic, copy) NSString *sectionTitle;
 
-- (instancetype)initModelWithDictionary:(NSDictionary*)dic;
+- (instancetype)initModelWithDictionary:(NSDictionary*_Nullable)dic;
 
 @end

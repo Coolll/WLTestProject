@@ -73,6 +73,7 @@
 		071609AD20A1C15400904C69 /* gradePoetry_5.json in Resources */ = {isa = PBXBuildFile; fileRef = 071609A320A1C15400904C69 /* gradePoetry_5.json */; };
 		071609AE20A1C15400904C69 /* gradePoetry_6.json in Resources */ = {isa = PBXBuildFile; fileRef = 071609A420A1C15400904C69 /* gradePoetry_6.json */; };
 		071609B220A1C15400904C69 /* gradePoetry_empty.json in Resources */ = {isa = PBXBuildFile; fileRef = 071609A820A1C15400904C69 /* gradePoetry_empty.json */; };
+		0716E0962536A3BA00780A9D /* WLColorPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0716E0952536A3BA00780A9D /* WLColorPickerView.m */; };
 		07195C42208A3AEE00F791CE /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07195C41208A3AEE00F791CE /* CoreLocation.framework */; };
 		07195C44208A3AF700F791CE /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07195C43208A3AF700F791CE /* Security.framework */; };
 		07195C46208A3AFD00F791CE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07195C45208A3AFD00F791CE /* CoreGraphics.framework */; };
@@ -89,7 +90,6 @@
 		0721702C2087843A002A1628 /* README.strings in Resources */ = {isa = PBXBuildFile; fileRef = 072170282087843A002A1628 /* README.strings */; };
 		073864F420E12D8B0005BE61 /* poetryContent.png in Resources */ = {isa = PBXBuildFile; fileRef = 073864F320E12D8B0005BE61 /* poetryContent.png */; };
 		073D7F6C20A7E259002BCEA7 /* tangPoetry_one.json in Resources */ = {isa = PBXBuildFile; fileRef = 073D7F6B20A7E259002BCEA7 /* tangPoetry_one.json */; };
-		074623CB250B620C0053F51E /* recommendPoetryThree.json in Resources */ = {isa = PBXBuildFile; fileRef = 074623CA250B620C0053F51E /* recommendPoetryThree.json */; };
 		07567A9D207A02EB0018B9E7 /* BaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 075678D1207A02EA0018B9E7 /* BaseNavigationController.m */; };
 		07567A9E207A02EB0018B9E7 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 075678D3207A02EA0018B9E7 /* BaseViewController.m */; };
 		07567AA0207A02EB0018B9E7 /* YLTabbarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 075678D7207A02EA0018B9E7 /* YLTabbarController.m */; };
@@ -178,6 +178,16 @@
 		0765C712207CE6E20085EB3A /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0765C6F2207CE6E20085EB3A /* UIImageView+WebCache.m */; };
 		0765C713207CE6E20085EB3A /* UIView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0765C6F4207CE6E20085EB3A /* UIView+WebCache.m */; };
 		0765C714207CE6E20085EB3A /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0765C6F6207CE6E20085EB3A /* UIView+WebCacheOperation.m */; };
+		076D28E825318B8D00AB90E0 /* recommendPoetryThree.json in Resources */ = {isa = PBXBuildFile; fileRef = 076D28E525318B8D00AB90E0 /* recommendPoetryThree.json */; };
+		076D28E925318B8D00AB90E0 /* recommendPoetryTwo.json in Resources */ = {isa = PBXBuildFile; fileRef = 076D28E625318B8D00AB90E0 /* recommendPoetryTwo.json */; };
+		076D28EA25318B8D00AB90E0 /* recommendPoetry.json in Resources */ = {isa = PBXBuildFile; fileRef = 076D28E725318B8D00AB90E0 /* recommendPoetry.json */; };
+		076D28EC25318BAE00AB90E0 /* recommendPoetryFour.json in Resources */ = {isa = PBXBuildFile; fileRef = 076D28EB25318BAE00AB90E0 /* recommendPoetryFour.json */; };
+		076D28F42531B65D00AB90E0 /* scorePaper.png in Resources */ = {isa = PBXBuildFile; fileRef = 076D28EE2531B65D00AB90E0 /* scorePaper.png */; };
+		076D28F52531B65D00AB90E0 /* scoreHat.png in Resources */ = {isa = PBXBuildFile; fileRef = 076D28EF2531B65D00AB90E0 /* scoreHat.png */; };
+		076D28F62531B65D00AB90E0 /* scoreTop.png in Resources */ = {isa = PBXBuildFile; fileRef = 076D28F02531B65D00AB90E0 /* scoreTop.png */; };
+		076D28F72531B65D00AB90E0 /* scoreClothes.png in Resources */ = {isa = PBXBuildFile; fileRef = 076D28F12531B65D00AB90E0 /* scoreClothes.png */; };
+		076D28F82531B65D00AB90E0 /* scoreCelebrate.png in Resources */ = {isa = PBXBuildFile; fileRef = 076D28F22531B65D00AB90E0 /* scoreCelebrate.png */; };
+		076D28F92531B65D00AB90E0 /* scoreLine.png in Resources */ = {isa = PBXBuildFile; fileRef = 076D28F32531B65D00AB90E0 /* scoreLine.png */; };
 		0785075720B2EDB30030CD98 /* songPoetry_empty.json in Resources */ = {isa = PBXBuildFile; fileRef = 0785075520B2EDB30030CD98 /* songPoetry_empty.json */; };
 		0785075820B2EDB30030CD98 /* songPoetry_one.json in Resources */ = {isa = PBXBuildFile; fileRef = 0785075620B2EDB30030CD98 /* songPoetry_one.json */; };
 		0785076220B2EFF20030CD98 /* songPoetry_nine.json in Resources */ = {isa = PBXBuildFile; fileRef = 0785075920B2EFF20030CD98 /* songPoetry_nine.json */; };
@@ -203,6 +213,11 @@
 		0795692020726D0B0097C26D /* WLPoetryProjectUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0795691F20726D0B0097C26D /* WLPoetryProjectUITests.m */; };
 		079BC505209D42BB00E0DF85 /* WLPoetryContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 079BC504209D42BB00E0DF85 /* WLPoetryContentCell.m */; };
 		079BC508209EEF6800E0DF85 /* AppConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 079BC507209EEF6800E0DF85 /* AppConfig.m */; };
+		07A73D9625358AEC0028344B /* WLReadImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A73D9525358AEC0028344B /* WLReadImageCell.m */; };
+		07A73DA42535985B0028344B /* WLReadImageListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A73D9E2535985B0028344B /* WLReadImageListController.m */; };
+		07A73DA52535985B0028344B /* WLReadImageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A73DA22535985B0028344B /* WLReadImageController.m */; };
+		07A73DA62535985B0028344B /* WLReadImageColorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A73DA32535985B0028344B /* WLReadImageColorController.m */; };
+		07A73DA925359B1E0028344B /* WLReadImagePreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A73DA825359B1E0028344B /* WLReadImagePreviewController.m */; };
 		07A922B120862EB100BE5929 /* PoetryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A922B020862EB100BE5929 /* PoetryModel.m */; };
 		07B6E7AB20A07B2E000998E3 /* WLPoetryListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07B6E7AA20A07B2E000998E3 /* WLPoetryListController.m */; };
 		07CE6D4A23909BDB005384B9 /* FHL_one.json in Resources */ = {isa = PBXBuildFile; fileRef = 07CE6D4823909BDB005384B9 /* FHL_one.json */; };
@@ -253,7 +268,6 @@
 		07F73C0A208ACD9A00F7D8B3 /* nav_back@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07F73BA6208ACD9A00F7D8B3 /* nav_back@3x.png */; };
 		07F73C0B208ACD9A00F7D8B3 /* tabbarLine@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07F73BA8208ACD9A00F7D8B3 /* tabbarLine@2x.png */; };
 		07F73C0C208ACD9A00F7D8B3 /* tabbarLine@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07F73BA9208ACD9A00F7D8B3 /* tabbarLine@3x.png */; };
-		07F73C62208ACDC100F7D8B3 /* recommendPoetry.json in Resources */ = {isa = PBXBuildFile; fileRef = 07F73C61208ACDC100F7D8B3 /* recommendPoetry.json */; };
 		07F73C6B208AE21000F7D8B3 /* tabbarOne_sel.png in Resources */ = {isa = PBXBuildFile; fileRef = 07F73C67208AE21000F7D8B3 /* tabbarOne_sel.png */; };
 		07F73C74208AE84900F7D8B3 /* tabbarOne.png in Resources */ = {isa = PBXBuildFile; fileRef = 07F73C71208AE84900F7D8B3 /* tabbarOne.png */; };
 		07F73C75208AE84900F7D8B3 /* tabbarThree.png in Resources */ = {isa = PBXBuildFile; fileRef = 07F73C72208AE84900F7D8B3 /* tabbarThree.png */; };
@@ -277,7 +291,6 @@
 		360E672F219442ED00AD56BF /* class_7.png in Resources */ = {isa = PBXBuildFile; fileRef = 360E6727219442ED00AD56BF /* class_7.png */; };
 		360E6730219442ED00AD56BF /* class_5.png in Resources */ = {isa = PBXBuildFile; fileRef = 360E6728219442ED00AD56BF /* class_5.png */; };
 		360E6731219442ED00AD56BF /* class_4.png in Resources */ = {isa = PBXBuildFile; fileRef = 360E6729219442ED00AD56BF /* class_4.png */; };
-		360FE91D244E9BFE00983D3C /* recommendPoetryTwo.json in Resources */ = {isa = PBXBuildFile; fileRef = 360FE91C244E9BFE00983D3C /* recommendPoetryTwo.json */; };
 		3616E7952192971D0014843F /* WLRecitePoetryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3616E7942192971D0014843F /* WLRecitePoetryCell.m */; };
 		3616E7972192B9510014843F /* cover.png in Resources */ = {isa = PBXBuildFile; fileRef = 3616E7962192B9500014843F /* cover.png */; };
 		3619788421952AED000E0138 /* WLChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3619788021952AEC000E0138 /* WLChartView.m */; };
@@ -299,7 +312,6 @@
 		36521BAA21904ECF00425DCC /* optionIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 36521BA921904ECE00425DCC /* optionIcon.png */; };
 		3677ED512361854E00C2A15F /* NetworkHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3677ED502361854E00C2A15F /* NetworkHelper.m */; };
 		3677ED542361868900C2A15F /* BaseNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 3677ED532361868900C2A15F /* BaseNetwork.m */; };
-		3678970721AD172F004062D5 /* scoreBg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3678970621AD172F004062D5 /* scoreBg.jpg */; };
 		3678970B21AD21C9004062D5 /* scoreCir.png in Resources */ = {isa = PBXBuildFile; fileRef = 3678970A21AD21C9004062D5 /* scoreCir.png */; };
 		367ED9952191691C00E979EE /* triangle.png in Resources */ = {isa = PBXBuildFile; fileRef = 367ED9942191691C00E979EE /* triangle.png */; };
 		36B3671D21A7E3CD0071C14A /* WLScoreController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B3671C21A7E3CD0071C14A /* WLScoreController.m */; };
@@ -447,6 +459,8 @@
 		071609A320A1C15400904C69 /* gradePoetry_5.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = gradePoetry_5.json; sourceTree = "<group>"; };
 		071609A420A1C15400904C69 /* gradePoetry_6.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = gradePoetry_6.json; sourceTree = "<group>"; };
 		071609A820A1C15400904C69 /* gradePoetry_empty.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = gradePoetry_empty.json; sourceTree = "<group>"; };
+		0716E0942536A3BA00780A9D /* WLColorPickerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLColorPickerView.h; sourceTree = "<group>"; };
+		0716E0952536A3BA00780A9D /* WLColorPickerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLColorPickerView.m; sourceTree = "<group>"; };
 		07195C41208A3AEE00F791CE /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		07195C43208A3AF700F791CE /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		07195C45208A3AFD00F791CE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -461,7 +475,6 @@
 		072170282087843A002A1628 /* README.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = README.strings; sourceTree = "<group>"; };
 		073864F320E12D8B0005BE61 /* poetryContent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = poetryContent.png; sourceTree = "<group>"; };
 		073D7F6B20A7E259002BCEA7 /* tangPoetry_one.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tangPoetry_one.json; sourceTree = "<group>"; };
-		074623CA250B620C0053F51E /* recommendPoetryThree.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = recommendPoetryThree.json; sourceTree = "<group>"; };
 		075678D0207A02EA0018B9E7 /* BaseNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseNavigationController.h; sourceTree = "<group>"; };
 		075678D1207A02EA0018B9E7 /* BaseNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseNavigationController.m; sourceTree = "<group>"; };
 		075678D2207A02EA0018B9E7 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
@@ -642,6 +655,16 @@
 		0765C6F4207CE6E20085EB3A /* UIView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCache.m"; sourceTree = "<group>"; };
 		0765C6F5207CE6E20085EB3A /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		0765C6F6207CE6E20085EB3A /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
+		076D28E525318B8D00AB90E0 /* recommendPoetryThree.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = recommendPoetryThree.json; sourceTree = "<group>"; };
+		076D28E625318B8D00AB90E0 /* recommendPoetryTwo.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = recommendPoetryTwo.json; sourceTree = "<group>"; };
+		076D28E725318B8D00AB90E0 /* recommendPoetry.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = recommendPoetry.json; sourceTree = "<group>"; };
+		076D28EB25318BAE00AB90E0 /* recommendPoetryFour.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = recommendPoetryFour.json; sourceTree = "<group>"; };
+		076D28EE2531B65D00AB90E0 /* scorePaper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scorePaper.png; sourceTree = "<group>"; };
+		076D28EF2531B65D00AB90E0 /* scoreHat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scoreHat.png; sourceTree = "<group>"; };
+		076D28F02531B65D00AB90E0 /* scoreTop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scoreTop.png; sourceTree = "<group>"; };
+		076D28F12531B65D00AB90E0 /* scoreClothes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scoreClothes.png; sourceTree = "<group>"; };
+		076D28F22531B65D00AB90E0 /* scoreCelebrate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scoreCelebrate.png; sourceTree = "<group>"; };
+		076D28F32531B65D00AB90E0 /* scoreLine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scoreLine.png; sourceTree = "<group>"; };
 		0785075520B2EDB30030CD98 /* songPoetry_empty.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = songPoetry_empty.json; sourceTree = "<group>"; };
 		0785075620B2EDB30030CD98 /* songPoetry_one.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = songPoetry_one.json; sourceTree = "<group>"; };
 		0785075920B2EFF20030CD98 /* songPoetry_nine.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = songPoetry_nine.json; sourceTree = "<group>"; };
@@ -678,6 +701,16 @@
 		079BC504209D42BB00E0DF85 /* WLPoetryContentCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLPoetryContentCell.m; sourceTree = "<group>"; };
 		079BC506209EEF6800E0DF85 /* AppConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppConfig.h; sourceTree = "<group>"; };
 		079BC507209EEF6800E0DF85 /* AppConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppConfig.m; sourceTree = "<group>"; };
+		07A73D9425358AEC0028344B /* WLReadImageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLReadImageCell.h; sourceTree = "<group>"; };
+		07A73D9525358AEC0028344B /* WLReadImageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLReadImageCell.m; sourceTree = "<group>"; };
+		07A73D9E2535985B0028344B /* WLReadImageListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLReadImageListController.m; sourceTree = "<group>"; };
+		07A73D9F2535985B0028344B /* WLReadImageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLReadImageController.h; sourceTree = "<group>"; };
+		07A73DA02535985B0028344B /* WLReadImageColorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLReadImageColorController.h; sourceTree = "<group>"; };
+		07A73DA12535985B0028344B /* WLReadImageListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLReadImageListController.h; sourceTree = "<group>"; };
+		07A73DA22535985B0028344B /* WLReadImageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLReadImageController.m; sourceTree = "<group>"; };
+		07A73DA32535985B0028344B /* WLReadImageColorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLReadImageColorController.m; sourceTree = "<group>"; };
+		07A73DA725359B1E0028344B /* WLReadImagePreviewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLReadImagePreviewController.h; sourceTree = "<group>"; };
+		07A73DA825359B1E0028344B /* WLReadImagePreviewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLReadImagePreviewController.m; sourceTree = "<group>"; };
 		07A922AF20862EB100BE5929 /* PoetryModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PoetryModel.h; sourceTree = "<group>"; };
 		07A922B020862EB100BE5929 /* PoetryModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PoetryModel.m; sourceTree = "<group>"; };
 		07B6E7A920A07B2E000998E3 /* WLPoetryListController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLPoetryListController.h; sourceTree = "<group>"; };
@@ -738,7 +771,6 @@
 		07F73BA6208ACD9A00F7D8B3 /* nav_back@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav_back@3x.png"; sourceTree = "<group>"; };
 		07F73BA8208ACD9A00F7D8B3 /* tabbarLine@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbarLine@2x.png"; sourceTree = "<group>"; };
 		07F73BA9208ACD9A00F7D8B3 /* tabbarLine@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbarLine@3x.png"; sourceTree = "<group>"; };
-		07F73C61208ACDC100F7D8B3 /* recommendPoetry.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = recommendPoetry.json; sourceTree = "<group>"; };
 		07F73C67208AE21000F7D8B3 /* tabbarOne_sel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbarOne_sel.png; sourceTree = "<group>"; };
 		07F73C71208AE84900F7D8B3 /* tabbarOne.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbarOne.png; sourceTree = "<group>"; };
 		07F73C72208AE84900F7D8B3 /* tabbarThree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbarThree.png; sourceTree = "<group>"; };
@@ -776,7 +808,6 @@
 		360E6727219442ED00AD56BF /* class_7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = class_7.png; sourceTree = "<group>"; };
 		360E6728219442ED00AD56BF /* class_5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = class_5.png; sourceTree = "<group>"; };
 		360E6729219442ED00AD56BF /* class_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = class_4.png; sourceTree = "<group>"; };
-		360FE91C244E9BFE00983D3C /* recommendPoetryTwo.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = recommendPoetryTwo.json; sourceTree = "<group>"; };
 		3616E7932192971D0014843F /* WLRecitePoetryCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLRecitePoetryCell.h; sourceTree = "<group>"; };
 		3616E7942192971D0014843F /* WLRecitePoetryCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLRecitePoetryCell.m; sourceTree = "<group>"; };
 		3616E7962192B9500014843F /* cover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cover.png; sourceTree = "<group>"; };
@@ -807,7 +838,6 @@
 		3677ED502361854E00C2A15F /* NetworkHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NetworkHelper.m; sourceTree = "<group>"; };
 		3677ED522361868900C2A15F /* BaseNetwork.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseNetwork.h; sourceTree = "<group>"; };
 		3677ED532361868900C2A15F /* BaseNetwork.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseNetwork.m; sourceTree = "<group>"; };
-		3678970621AD172F004062D5 /* scoreBg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = scoreBg.jpg; sourceTree = "<group>"; };
 		3678970A21AD21C9004062D5 /* scoreCir.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scoreCir.png; sourceTree = "<group>"; };
 		3678970D21AD3AA8004062D5 /* UserInfo+CoreDataProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UserInfo+CoreDataProperties.h"; sourceTree = "<group>"; };
 		3678970E21AD3AA8004062D5 /* UserInfo+CoreDataClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UserInfo+CoreDataClass.h"; sourceTree = "<group>"; };
@@ -1294,6 +1324,8 @@
 				07567A78207A02EB0018B9E7 /* WLMyTableViewCell.m */,
 				00F9516220D4BA590039D7C5 /* WLSettingCell.h */,
 				00F9516320D4BA590039D7C5 /* WLSettingCell.m */,
+				0716E0942536A3BA00780A9D /* WLColorPickerView.h */,
+				0716E0952536A3BA00780A9D /* WLColorPickerView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1415,6 +1447,30 @@
 			path = SDWebImage;
 			sourceTree = "<group>";
 		};
+		076D28E425318B8D00AB90E0 /* recommend */ = {
+			isa = PBXGroup;
+			children = (
+				076D28EB25318BAE00AB90E0 /* recommendPoetryFour.json */,
+				076D28E525318B8D00AB90E0 /* recommendPoetryThree.json */,
+				076D28E625318B8D00AB90E0 /* recommendPoetryTwo.json */,
+				076D28E725318B8D00AB90E0 /* recommendPoetry.json */,
+			);
+			path = recommend;
+			sourceTree = "<group>";
+		};
+		076D28ED2531B65D00AB90E0 /* ScoreBg */ = {
+			isa = PBXGroup;
+			children = (
+				076D28EE2531B65D00AB90E0 /* scorePaper.png */,
+				076D28EF2531B65D00AB90E0 /* scoreHat.png */,
+				076D28F02531B65D00AB90E0 /* scoreTop.png */,
+				076D28F12531B65D00AB90E0 /* scoreClothes.png */,
+				076D28F22531B65D00AB90E0 /* scoreCelebrate.png */,
+				076D28F32531B65D00AB90E0 /* scoreLine.png */,
+			);
+			path = ScoreBg;
+			sourceTree = "<group>";
+		};
 		0785075420B2EDB30030CD98 /* SongPoetry */ = {
 			isa = PBXGroup;
 			children = (
@@ -1494,6 +1550,21 @@
 				0795692120726D0B0097C26D /* Info.plist */,
 			);
 			path = WLPoetryProjectUITests;
+			sourceTree = "<group>";
+		};
+		07A73D9D2535985B0028344B /* ReadImage */ = {
+			isa = PBXGroup;
+			children = (
+				07A73D9F2535985B0028344B /* WLReadImageController.h */,
+				07A73DA22535985B0028344B /* WLReadImageController.m */,
+				07A73DA12535985B0028344B /* WLReadImageListController.h */,
+				07A73D9E2535985B0028344B /* WLReadImageListController.m */,
+				07A73DA02535985B0028344B /* WLReadImageColorController.h */,
+				07A73DA32535985B0028344B /* WLReadImageColorController.m */,
+				07A73DA725359B1E0028344B /* WLReadImagePreviewController.h */,
+				07A73DA825359B1E0028344B /* WLReadImagePreviewController.m */,
+			);
+			path = ReadImage;
 			sourceTree = "<group>";
 		};
 		07A9229C2086293D00BE5929 /* Entity */ = {
@@ -1823,14 +1894,12 @@
 		07F73C60208ACDC100F7D8B3 /* JSONFile */ = {
 			isa = PBXGroup;
 			children = (
+				076D28E425318B8D00AB90E0 /* recommend */,
 				07CE6D4723909BDB005384B9 /* FHL */,
 				36C3A86B224CA03000A57F70 /* LY */,
 				0785075420B2EDB30030CD98 /* SongPoetry */,
 				073D7F6820A7E23D002BCEA7 /* TangPoetry */,
 				0716099E20A1C15400904C69 /* Grade */,
-				07F73C61208ACDC100F7D8B3 /* recommendPoetry.json */,
-				360FE91C244E9BFE00983D3C /* recommendPoetryTwo.json */,
-				074623CA250B620C0053F51E /* recommendPoetryThree.json */,
 				007C7E2220F59EC700F360D6 /* configureGradeJuinor.json */,
 				364A869722436E680031DC7A /* configureGradeBaby.json */,
 				007C7E2320F59EC800F360D6 /* configureGradePrimary.json */,
@@ -1884,6 +1953,7 @@
 		360E671C21941C8E00AD56BF /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				07A73D9D2535985B0028344B /* ReadImage */,
 				360E671E21941DA200AD56BF /* WLMyKnownController.h */,
 				360E671F21941DA200AD56BF /* WLMyKnownController.m */,
 				3640E931219E5F250077FF1F /* WLEvaluateController.h */,
@@ -1911,6 +1981,8 @@
 				36B3671F21A807B80071C14A /* WLPercentView.m */,
 				0714ED8C2492566700CBBE8E /* WLHeadImageSelectCell.h */,
 				0714ED8D2492566700CBBE8E /* WLHeadImageSelectCell.m */,
+				07A73D9425358AEC0028344B /* WLReadImageCell.h */,
+				07A73D9525358AEC0028344B /* WLReadImageCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1918,9 +1990,9 @@
 		360E6721219442ED00AD56BF /* Number */ = {
 			isa = PBXGroup;
 			children = (
+				076D28ED2531B65D00AB90E0 /* ScoreBg */,
 				3635751921AE7763009524C7 /* userClassInfo.png */,
 				3678970A21AD21C9004062D5 /* scoreCir.png */,
-				3678970621AD172F004062D5 /* scoreBg.jpg */,
 				360E6722219442ED00AD56BF /* class_0.png */,
 				360E6723219442ED00AD56BF /* class_1.png */,
 				360E6724219442ED00AD56BF /* class_3.png */,
@@ -2072,6 +2144,7 @@
 				00F9516C20D4D7190039D7C5 /* setting.png in Resources */,
 				360E672F219442ED00AD56BF /* class_7.png in Resources */,
 				36521BAA21904ECF00425DCC /* optionIcon.png in Resources */,
+				076D28E925318B8D00AB90E0 /* recommendPoetryTwo.json in Resources */,
 				363054C621A3B61E0084FD5B /* tipImage.png in Resources */,
 				00F9517720D4FF940039D7C5 /* likePoetry.png in Resources */,
 				367ED9952191691C00E979EE /* triangle.png in Resources */,
@@ -2097,6 +2170,7 @@
 				00F9516F20D4D8090039D7C5 /* like@2x.png in Resources */,
 				36C3A873224CADFB00A57F70 /* LunYu_two.json in Resources */,
 				360E6730219442ED00AD56BF /* class_5.png in Resources */,
+				076D28F52531B65D00AB90E0 /* scoreHat.png in Resources */,
 				360E672D219442ED00AD56BF /* class_2.png in Resources */,
 				07F3E30E20D2C0FC00E7BAF7 /* headerUnlogin@3x.png in Resources */,
 				071609A920A1C15400904C69 /* gradePoetry_1.json in Resources */,
@@ -2110,13 +2184,13 @@
 				360E672A219442ED00AD56BF /* class_0.png in Resources */,
 				07F3E31420D2C0FC00E7BAF7 /* clearNavi.png in Resources */,
 				3635751A21AE7763009524C7 /* userClassInfo.png in Resources */,
-				074623CB250B620C0053F51E /* recommendPoetryThree.json in Resources */,
 				07CE6D4A23909BDB005384B9 /* FHL_one.json in Resources */,
 				07F3E31120D2C0FC00E7BAF7 /* myArrow.png in Resources */,
 				00FD14C020A95A2D0018D649 /* tangPoetry_six.json in Resources */,
 				0073FD7720EE14A800FED6D6 /* shareIcon.png in Resources */,
 				00F9517820D4FF940039D7C5 /* unlikePoetry.png in Resources */,
 				00FD14C120A95A2D0018D649 /* tangPoetry_three.json in Resources */,
+				076D28F42531B65D00AB90E0 /* scorePaper.png in Resources */,
 				00469AF820F89A200068636F /* customImage.png in Resources */,
 				00F9517420D4EA650039D7C5 /* check_box_sel.png in Resources */,
 				075A97C721047D2600CBAFD7 /* addImage.png in Resources */,
@@ -2127,6 +2201,7 @@
 				07F73C76208AE84900F7D8B3 /* tabbarThree_sel.png in Resources */,
 				07DCF5B520E26D8B00F0D053 /* README.txt in Resources */,
 				00FD14C220A95A2D0018D649 /* tangPoetry_two.json in Resources */,
+				076D28EC25318BAE00AB90E0 /* recommendPoetryFour.json in Resources */,
 				071571F82103564E005C53C4 /* showPassword.png in Resources */,
 				07F73C09208ACD9A00F7D8B3 /* nav_back@2x.png in Resources */,
 				07F3E30C20D2C0FC00E7BAF7 /* editImage.png in Resources */,
@@ -2144,10 +2219,13 @@
 				07DCF5B620E26D8B00F0D053 /* ShareSDK.bundle in Resources */,
 				364A869622433CFA0031DC7A /* gradePoetry_13.json in Resources */,
 				00F9516620D4D1D80039D7C5 /* settingArrow.png in Resources */,
+				076D28F72531B65D00AB90E0 /* scoreClothes.png in Resources */,
 				071571FA21038354005C53C4 /* closeTip.png in Resources */,
 				000110AA20A44BD2001B2B55 /* gradePoetry_8_one.json in Resources */,
+				076D28F92531B65D00AB90E0 /* scoreLine.png in Resources */,
 				0785076520B2EFF20030CD98 /* songPoetry_three.json in Resources */,
 				07CE6D4B23909BDB005384B9 /* FHL_empty.json in Resources */,
+				076D28F62531B65D00AB90E0 /* scoreTop.png in Resources */,
 				007C7E2420F59EC800F360D6 /* configureGradeJuinor.json in Resources */,
 				07DCF5AC20E26D8A00F0D053 /* ShareSDKUI.bundle in Resources */,
 				07F3E31720D2C0FC00E7BAF7 /* main_more.png in Resources */,
@@ -2157,8 +2235,8 @@
 				07F73C0C208ACD9A00F7D8B3 /* tabbarLine@3x.png in Resources */,
 				0795690520726D0B0097C26D /* Assets.xcassets in Resources */,
 				360E672B219442ED00AD56BF /* class_1.png in Resources */,
+				076D28EA25318B8D00AB90E0 /* recommendPoetry.json in Resources */,
 				0795690020726D0B0097C26D /* Main.storyboard in Resources */,
-				360FE91D244E9BFE00983D3C /* recommendPoetryTwo.json in Resources */,
 				071609AA20A1C15400904C69 /* gradePoetry_2.json in Resources */,
 				36F93F2B245814DA004BB5F9 /* analyses_selected.png in Resources */,
 				3616E7972192B9510014843F /* cover.png in Resources */,
@@ -2166,6 +2244,7 @@
 				36382B02224B5FB1006D094A /* songPoetry_mustRead.json in Resources */,
 				36C3A86F224CA19300A57F70 /* configureLunYu.json in Resources */,
 				000110AB20A44BD2001B2B55 /* gradePoetry_9_two.json in Resources */,
+				076D28E825318B8D00AB90E0 /* recommendPoetryThree.json in Resources */,
 				36C3A879224CB4D100A57F70 /* LunYu_three.json in Resources */,
 				0785075820B2EDB30030CD98 /* songPoetry_one.json in Resources */,
 				07E06D9820A06C9300093DCC /* tabbarTwo_sel.png in Resources */,
@@ -2176,14 +2255,13 @@
 				071609AD20A1C15400904C69 /* gradePoetry_5.json in Resources */,
 				07F3E31620D2C0FC00E7BAF7 /* lineImage@3x.png in Resources */,
 				071609AE20A1C15400904C69 /* gradePoetry_6.json in Resources */,
-				07F73C62208ACDC100F7D8B3 /* recommendPoetry.json in Resources */,
+				076D28F82531B65D00AB90E0 /* scoreCelebrate.png in Resources */,
 				07F3E31820D2C0FC00E7BAF7 /* poetryBack.jpg in Resources */,
 				0765C6AD207CE47E0085EB3A /* Info.plist in Resources */,
 				07E7C31B20CC1DB7007CA827 /* configureTang.json in Resources */,
 				364A869822436E680031DC7A /* configureGradeBaby.json in Resources */,
 				36521BA521904A8B00425DCC /* reciteIcon.png in Resources */,
 				0785076420B2EFF20030CD98 /* songPoetry_seven.json in Resources */,
-				3678970721AD172F004062D5 /* scoreBg.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2210,6 +2288,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				07567B21207A02EC0018B9E7 /* NSBundle+MJRefresh.m in Sources */,
+				07A73DA42535985B0028344B /* WLReadImageListController.m in Sources */,
 				0765C707207CE6E20085EB3A /* SDWebImageImageIOCoder.m in Sources */,
 				07567B20207A02EC0018B9E7 /* MJRefreshConst.m in Sources */,
 				00BBFA1120D6524500BB86D9 /* WLFeedbackController.m in Sources */,
@@ -2227,6 +2306,7 @@
 				07567B7F207A02EC0018B9E7 /* WLLoginViewController.m in Sources */,
 				07E7C30F20CC090F007CA827 /* WLTypeListCell.m in Sources */,
 				0715FF0820C564790096C60E /* WLSearchController.m in Sources */,
+				0716E0962536A3BA00780A9D /* WLColorPickerView.m in Sources */,
 				00F9516420D4BA590039D7C5 /* WLSettingCell.m in Sources */,
 				078DB1E1225722C2007E6EA8 /* WLLunYuController.m in Sources */,
 				36521BA821904BED00425DCC /* RecitePoetryController.m in Sources */,
@@ -2252,6 +2332,7 @@
 				36B5CC5A2199841D009D5861 /* UserInfoModel.m in Sources */,
 				009A1B2C20E618B900C0A58D /* WLPoetryLabel.m in Sources */,
 				360CF14023698DF800F04C6B /* RSAEncryptor.m in Sources */,
+				07A73D9625358AEC0028344B /* WLReadImageCell.m in Sources */,
 				0765C709207CE6E20085EB3A /* SDWebImagePrefetcher.m in Sources */,
 				07567B1B207A02EB0018B9E7 /* MJRefreshBackStateFooter.m in Sources */,
 				0765C6B6207CE47E0085EB3A /* View+MASAdditions.m in Sources */,
@@ -2296,6 +2377,7 @@
 				0765C705207CE6E20085EB3A /* SDWebImageFrame.m in Sources */,
 				07567AA0207A02EB0018B9E7 /* YLTabbarController.m in Sources */,
 				3640E933219E5F250077FF1F /* WLEvaluateController.m in Sources */,
+				07A73DA62535985B0028344B /* WLReadImageColorController.m in Sources */,
 				36B516F3212EC85500FD0FA8 /* WLNewTextView.m in Sources */,
 				07CFF240208B0AEE00849C20 /* WLPoetryListCell.m in Sources */,
 				36B3671D21A7E3CD0071C14A /* WLScoreController.m in Sources */,
@@ -2323,6 +2405,7 @@
 				0795690B20726D0B0097C26D /* main.m in Sources */,
 				0765C70F207CE6E20085EB3A /* UIImage+MultiFormat.m in Sources */,
 				0765C6F8207CE6E20085EB3A /* MKAnnotationView+WebCache.m in Sources */,
+				07A73DA52535985B0028344B /* WLReadImageController.m in Sources */,
 				3616E7952192971D0014843F /* WLRecitePoetryCell.m in Sources */,
 				07567B19207A02EB0018B9E7 /* MJRefreshBackGifFooter.m in Sources */,
 				07567B1C207A02EB0018B9E7 /* MJRefreshGifHeader.m in Sources */,
@@ -2338,6 +2421,7 @@
 				00469AF620F8938D0068636F /* WLShowImageController.m in Sources */,
 				0765C70E207CE6E20085EB3A /* UIImage+GIF.m in Sources */,
 				3619788521952AED000E0138 /* WLShapeLayer.m in Sources */,
+				07A73DA925359B1E0028344B /* WLReadImagePreviewController.m in Sources */,
 				07567B7C207A02EC0018B9E7 /* WLCustomTextView.m in Sources */,
 				07911661210CBDA800436964 /* WritePoetryController.m in Sources */,
 				0765C708207CE6E20085EB3A /* SDWebImageManager.m in Sources */,
@@ -2523,7 +2607,6 @@
 				DEVELOPMENT_TEAM = EQK7HQ2C5P;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/WLPoetryProject/Baas",
 					"$(PROJECT_DIR)/WLPoetryProject/ThirdPartClass/SDK/Required",
 					"$(PROJECT_DIR)/WLPoetryProject/ThirdPartClass/SDK/ShareSDK",
 					"$(PROJECT_DIR)/WLPoetryProject/ThirdPartClass/SDK/ShareSDK/Support/Optional",
@@ -2541,7 +2624,7 @@
 					"$(PROJECT_DIR)/WLPoetryProject/ThirdPartClass/SDK/ShareSDK/Support/PlatformSDK/SinaWeiboSDK",
 					"$(PROJECT_DIR)/WLPoetryProject/ThirdPartClass/SDK/ShareSDK/Support/PlatformSDK/WeChatSDK",
 				);
-				MARKETING_VERSION = 1.4.1;
+				MARKETING_VERSION = 1.4.2;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wangqilong.wqlPoetryProject;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2563,7 +2646,6 @@
 				DEVELOPMENT_TEAM = EQK7HQ2C5P;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/WLPoetryProject/Baas",
 					"$(PROJECT_DIR)/WLPoetryProject/ThirdPartClass/SDK/Required",
 					"$(PROJECT_DIR)/WLPoetryProject/ThirdPartClass/SDK/ShareSDK",
 					"$(PROJECT_DIR)/WLPoetryProject/ThirdPartClass/SDK/ShareSDK/Support/Optional",
@@ -2581,7 +2663,7 @@
 					"$(PROJECT_DIR)/WLPoetryProject/ThirdPartClass/SDK/ShareSDK/Support/PlatformSDK/SinaWeiboSDK",
 					"$(PROJECT_DIR)/WLPoetryProject/ThirdPartClass/SDK/ShareSDK/Support/PlatformSDK/WeChatSDK",
 				);
-				MARKETING_VERSION = 1.4.1;
+				MARKETING_VERSION = 1.4.2;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wangqilong.wqlPoetryProject;
 				PRODUCT_NAME = "$(TARGET_NAME)";

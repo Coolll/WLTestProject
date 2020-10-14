@@ -87,7 +87,7 @@
     [self loadAllBgImageWithBlock:nil];
 }
 
-//网络请求全部的背景图片
+//网络请求全部的题画背景图片
 - (void)loadAllBgImageWithBlock:(BgImageBlock)block
 {
     if (block) {

@@ -38,14 +38,14 @@
 /**
  *  是文本颜色
  **/
-@property (nonatomic,copy) NSString *textColor;
+@property (nonatomic,copy) NSString * _Nullable textColor;
 /**
  *  文本的高度
  **/
 @property (nonatomic,assign) CGFloat heightForCell;
 
 
-- (instancetype)initPoetryWithDictionary:(NSDictionary*)dic;
+- (instancetype )initPoetryWithDictionary:(NSDictionary*_Nullable)dic;
 - (void)loadFirstLineString;
 
 @end

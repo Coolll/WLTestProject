@@ -542,9 +542,9 @@ static const CGFloat touchFullOffset = 15;//箭头触摸区域超出的offset �
         //元素的布局
         [_naviTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.bottom.equalTo(self.naviView.mas_bottom).offset(-10);
-            make.width.mas_equalTo(PhoneScreen_WIDTH-100);
+            make.width.mas_equalTo(PhoneScreen_WIDTH-80);
             make.height.mas_equalTo(25);
-            make.centerX.equalTo(self.naviView.mas_centerX);
+            make.leading.equalTo(self.naviView.mas_leading).offset(40);
         }];
     }
     return _naviTitleLabel;

@@ -12,23 +12,36 @@
 
 - (void)loadFirstLineString
 {
+    self.firstLineString = @"";
     if ([self.content isKindOfClass:[NSString class]] && self.content.length > 0) {
-        
-        BOOL isContainEnd = [self.content containsString:@"。"];
-        BOOL isContainExclamation = [self.content containsString:@"！"];
-        BOOL isContainQuery = [self.content containsString:@"？"];
-        if (isContainEnd) {
-            
-            self.firstLineString = [NSString stringWithFormat:@"%@。",[[self.content componentsSeparatedByString:@"。"]firstObject]];
-            
-        }else if (isContainQuery){
-            self.firstLineString = [NSString stringWithFormat:@"%@？",[[self.content componentsSeparatedByString:@"？"]firstObject]];
-        }else if (isContainExclamation){
-            self.firstLineString = [NSString stringWithFormat:@"%@！",[[self.content componentsSeparatedByString:@"！"]firstObject]];
-        } else{
-            self.firstLineString = @"";
+        NSArray *arr = [self lookingForString:@"\\w*[。？！]" inString:self.content];
+        if (arr.count > 0) {
+            NSRange range = [[arr firstObject] rangeValue];
+            NSInteger location = range.location;
+            NSInteger length = range.length;
+            if (self.content.length > (location+length)) {
+                NSString *string = [self.content substringWithRange:NSMakeRange(0, (location+length))];
+                self.firstLineString = string;
+            }
         }
     }
+}
+- (NSArray*)lookingForString:(NSString*)subString inString:(NSString*)mainString
+{
+    NSString *pattenString = subString;
+    
+    NSRegularExpression *regular = [[NSRegularExpression alloc] initWithPattern:pattenString options:NSRegularExpressionCaseInsensitive error:nil];
+    
+    NSArray *items = [regular matchesInString:mainString options:NSMatchingReportProgress range:NSMakeRange(0, mainString.length)];
+    
+    NSMutableArray *arr = [[NSMutableArray alloc] init];
+    
+    for (NSTextCheckingResult*res in items) {
+        NSValue *value = [NSValue valueWithRange:res.range];
+        [arr addObject:value];
+    }
+    
+    return [arr copy];
 }
 
 - (instancetype)initPoetryWithDictionary:(NSDictionary*)dic

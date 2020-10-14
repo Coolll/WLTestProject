@@ -7,7 +7,7 @@
 //
 
 #import "BaseViewController.h"
-typedef void(^HeaderImageBlock) (BOOL isFinished,NSString *imageUrl);
+typedef void(^HeaderImageBlock) (BOOL isFinished,NSString * _Nullable imageUrl);
 
 NS_ASSUME_NONNULL_BEGIN
 
