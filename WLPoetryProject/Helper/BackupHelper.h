@@ -25,6 +25,20 @@
 "placeHolder" : "",
 "likes":"<##>"
 },
+
+ {
+"name" : "<##>",
+"author" : "<##>·<##>",
+"content" : "<##>",
+"transferInfo" : "<##>",
+"addtionInfo" : "<##>",
+"analysesInfo" : "<##>",
+"backgroundInfo" : "<##>",
+"classInfo" : "<##>",
+"poetryID" : "<##>",
+"source" : "<##>",
+"likes":"<##>"
+},
  */
 
 @interface BackupHelper : NSObject
@@ -33,7 +47,7 @@
 - (void)updateAllPoetry;
 - (void)uploadAllPoetry;
 
-- (void)updateRecommendPoetryThree;
+- (void)updateRecommendPoetry;
 
 
 @end

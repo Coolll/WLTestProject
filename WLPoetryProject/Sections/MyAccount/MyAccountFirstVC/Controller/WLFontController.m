@@ -306,6 +306,11 @@
         make.height.mas_equalTo(120);//元素高度
     }];
     
+    //颜色赋予初始值
+    self.poetryTitleLabel.textColor = self.textColor;
+    self.poetryAuthorLabel.textColor = self.textColor;
+    self.poetryContentLabel.textColor = self.textColor;
+
     
     UIButton *sureBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [sureBtn setTitle:@"确定" forState:UIControlStateNormal];
@@ -431,7 +436,9 @@
     return _pickerView;
 }
 
-
+- (void)dealloc{
+    NSLog(@"WLFontController dealloc");
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

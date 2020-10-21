@@ -28,6 +28,7 @@
     if (self) {
         self.viewWidth = frame.size.width;
         self.viewHeight = frame.size.height;
+        self.userInteractionEnabled = YES;
     }
     return self;
 }

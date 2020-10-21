@@ -63,12 +63,12 @@
     [self updatePoetryWithFileArray:jsonList withCurrentJsonIndex:0 withCurrentIndex:0];
 }
 
-- (void)updateRecommendPoetryThree{
-    NSArray *poetryModelArray = [self readLocalFileWithName:@"recommendPoetryFour"];
+- (void)updateRecommendPoetry{
+    NSArray *poetryModelArray = [self readLocalFileWithName:@"recommendPoetryFive"];
 
     NSInteger time = 0;
     for (NSInteger i = poetryModelArray.count-1; i >= 0; i--) {
-        time +=2 ;
+        time +=3 ;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(time * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             PoetryModel *model = poetryModelArray[i];
             NSMutableDictionary *dic = [NSMutableDictionary dictionary];
@@ -288,6 +288,9 @@
     else if([classInfo isEqualToString:@"109"]){return @"饮酒";}
     else if([classInfo isEqualToString:@"110"]){return @"春景";}
     else if([classInfo isEqualToString:@"111"]){return @"自然风光";}
+    else if([classInfo isEqualToString:@"112"]){return @"安慰他人";}
+    else if([classInfo isEqualToString:@"113"]){return @"轻松愉悦";}
+    else if([classInfo isEqualToString:@"114"]){return @"潇洒飘逸";}
     else if([classInfo isEqualToString:@"1001"]){return @"山村咏怀";}
     else if([classInfo isEqualToString:@"1002"]){return @"咏鹅";}
     else if([classInfo isEqualToString:@"1003"]){return @"春晓";}

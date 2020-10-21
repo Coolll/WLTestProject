@@ -289,6 +289,10 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (void)dealloc{
+    NSLog(@"WLSettingController dealloc");
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

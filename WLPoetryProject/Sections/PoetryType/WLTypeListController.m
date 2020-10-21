@@ -125,6 +125,7 @@
             PoetryConfigureModel *model = [self.typeDataArray objectAtIndex:indexPath.row];
             cell.typeString = model.subTitle;
         }
+        cell.imageName = @"";
         
         if (indexPath.row == self.typeDataArray.count-1) {
             cell.needLine = NO;

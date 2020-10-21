@@ -133,7 +133,7 @@
         
     }];
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.7 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self.searchTextField becomeFirstResponder];
     });
     
@@ -155,6 +155,11 @@
 {
     self.currentPage = 0;
     self.keywordString = textField.text;
+    self.hasNext = YES;
+    
+    if (!self.mainTableView.mj_footer) {
+        self.mainTableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
+    }
 
     [[NetworkHelper shareHelper] requestPoetryWithKeyword:textField.text withPage:self.currentPage withCompletion:^(BOOL success, NSDictionary *dic, NSError *error) {
         if (success) {
@@ -169,7 +174,8 @@
                     [self.poetryArray addObject:model];
                 }
                 self.currentPage += 1;
-                
+                [self removeRepeatItem];//数据去重
+
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self loadCustomView];
                 });
@@ -202,6 +208,11 @@
     NSLog(@"刷新数据了");
     self.currentPage = 0;
     self.isRequesting = YES;
+    self.hasNext = YES;
+    if (!self.mainTableView.mj_footer) {
+        self.mainTableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
+    }
+
     [[NetworkHelper shareHelper] requestPoetryWithKeyword:self.keywordString withPage:self.currentPage withCompletion:^(BOOL success, NSDictionary *dic, NSError *error) {
         self.isRequesting = NO;
         [self.mainTableView.mj_header endRefreshing];
@@ -216,12 +227,13 @@
                     [model loadFirstLineString];
                     [self.poetryArray addObject:model];
                 }
-                if (dataArr.count == 10) {
-                    self.hasNext = YES;
-                }else{
+                if (dataArr.count == 0) {
                     self.hasNext = NO;
+                }else{
+                    self.hasNext = YES;
                 }
                 self.currentPage += 1;
+                [self removeRepeatItem];//数据去重
 
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self loadCustomView];
@@ -248,7 +260,11 @@
     if (!self.hasNext) {
         [self showHUDWithText:@"无更多数据了"];
         [self.mainTableView.mj_footer endRefreshing];
+        [self.mainTableView.mj_footer removeFromSuperview];
+        self.mainTableView.mj_footer = nil;
         return;
+    }else{
+        self.mainTableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
     }
     self.isRequesting = YES;
     NSLog(@"加载更多page:%ld",self.currentPage);
@@ -266,12 +282,13 @@
                     [model loadFirstLineString];
                     [self.poetryArray addObject:model];
                 }
-                if (dataArr.count == 10) {
-                    self.hasNext = YES;
-                }else{
+                if (dataArr.count == 0) {
                     self.hasNext = NO;
+                }else{
+                    self.hasNext = YES;
                 }
                 self.currentPage += 1;
+                [self removeRepeatItem];//数据去重
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self loadCustomView];
@@ -289,6 +306,34 @@
     }];
 }
 
+- (void)removeRepeatItem{
+    if (self.poetryArray.count == 0 ) {
+        return;
+    }
+    NSMutableArray *array = [NSMutableArray array];
+    
+    for (int i = 0; i < self.poetryArray.count; i++) {
+        PoetryModel *model = [self.poetryArray objectAtIndex:i];
+        if (![self checkRepeatWithIndex:i withName:model.name]) {
+            [array addObject:model];
+        }
+    }
+    
+    self.poetryArray = [array mutableCopy];
+}
+
+- (BOOL)checkRepeatWithIndex:(NSInteger)index withName:(NSString*)name{
+    if (index == 0) {
+        return NO;
+    }
+    for (NSInteger j = 0 ; j < index; j++) {
+        PoetryModel *nextModel = [self.poetryArray objectAtIndex:j];
+        if ([name isEqualToString:nextModel.name]) {
+            return YES;
+        }
+    }
+    return NO;
+}
 
 #pragma mark - 加载视图
 - (void)loadCustomView
@@ -406,6 +451,9 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+- (void)dealloc{
+    NSLog(@"WLSearchController dealloc");
 }
 
 /*

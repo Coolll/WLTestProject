@@ -57,6 +57,7 @@ static const NSInteger cellCount = 3;
     
     [self.colorArray addObject:@"250,249,222"];
     [self.colorArray addObject:@"255,242,226"];
+    [self.colorArray addObject:@"250,250,250"];
     [self.colorArray addObject:@"253,230,224"];
     [self.colorArray addObject:@"227,237,205"];
     [self.colorArray addObject:@"220,226,241"];
@@ -81,6 +82,13 @@ static const NSInteger cellCount = 3;
     [self.colorArray addObject:@"234,234,239"];
     [self.colorArray addObject:@"64,84,84"];
     [self.colorArray addObject:@"86,97,114"];
+    [self.colorArray addObject:@"255,246,230"];
+    [self.colorArray addObject:@"213,206,205"];
+    [self.colorArray addObject:@"222,207,175"];
+    [self.colorArray addObject:@"220,195,198"];
+    [self.colorArray addObject:@"197,198,202"];
+    [self.colorArray addObject:@"204,204,204"];
+    [self.colorArray addObject:@"8,12,16"];
 
     [self loadCustomView];
 }

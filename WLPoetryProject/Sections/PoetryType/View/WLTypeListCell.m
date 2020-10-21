@@ -12,9 +12,24 @@
  *  分割线
  **/
 @property (nonatomic, strong) UIView *lineView;
+/**
+ *  图片
+ **/
+@property (nonatomic,strong) UIImageView *mainImageView;
+/**
+ *  文案
+ **/
+@property (nonatomic,strong) UILabel *mainContentLabel;
 @end
 @implementation WLTypeListCell
 
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+        [self loadCustomView];
+    }
+    return self;
+}
 - (void)awakeFromNib {
     [super awakeFromNib];
     _needLine = YES;
@@ -23,7 +38,8 @@
 - (void)setTypeString:(NSString *)typeString
 {
     _typeString = typeString;
-    [self loadCustomView];
+
+    self.mainContentLabel.text = _typeString;
 }
 
 - (void)setNeedLine:(BOOL)needLine
@@ -34,57 +50,50 @@
     }
 }
 
-- (void)loadCustomView
-{
-    UIImageView *mainImageView = [[UIImageView alloc]init];
-    [self.contentView addSubview:mainImageView];
-
-    if (self.imageName && [self.imageName isKindOfClass:[NSString class]] && self.imageName.length > 0) {
-        mainImageView.image = [UIImage imageNamed:self.imageName];
-        
+- (void)setImageName:(NSString *)imageName{
+    _imageName = imageName;
+    if (_imageName && [_imageName isKindOfClass:[NSString class]] && _imageName.length > 0) {
+        self.mainImageView.image = [UIImage imageNamed:_imageName];
         //元素的布局
-        [mainImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            
+        [self.mainImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.leading.equalTo(self.contentView.mas_leading).offset(15);
             make.top.equalTo(self.contentView.mas_top).offset(20);
             make.width.mas_equalTo(20);
             make.height.mas_equalTo(20);
-            
         }];
     }else{
-        mainImageView.image = [UIImage imageNamed:@"bookType"];
-        
+        self.mainImageView.image = [UIImage imageNamed:@"bookType"];
         CGFloat imageW = 30;
-        
         //元素的布局
-        [mainImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            
+        [self.mainImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.leading.equalTo(self.contentView.mas_leading).offset(15);
             make.top.equalTo(self.contentView.mas_top).offset(15);
             make.width.mas_equalTo(imageW);
             make.height.mas_equalTo(imageW);
-            
         }];
         
     }
+
+}
+
+
+- (void)loadCustomView
+{
+    
+    self.mainImageView = [[UIImageView alloc]init];
+    [self.contentView addSubview:self.mainImageView];
     
     
-    
-    
-    
-    
-    UILabel *contentLabel = [[UILabel alloc]init];
-    contentLabel.text = _typeString;
-    contentLabel.font = [UIFont systemFontOfSize:14.f];//字号设置
-    [self.contentView addSubview:contentLabel];
+    self.mainContentLabel = [[UILabel alloc]init];
+    self.mainContentLabel.text = _typeString;
+    self.mainContentLabel.font = [UIFont systemFontOfSize:14.f];//字号设置
+    [self.contentView addSubview:self.mainContentLabel];
     //元素的布局
-    [contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.leading.equalTo(mainImageView.mas_trailing).offset(20);
-        make.top.equalTo(mainImageView.mas_top).offset(0);
-        make.bottom.equalTo(mainImageView.mas_bottom).offset(0);
+    [self.mainContentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(self.mainImageView.mas_trailing).offset(20);
+        make.top.equalTo(self.mainImageView.mas_top).offset(0);
+        make.bottom.equalTo(self.mainImageView.mas_bottom).offset(0);
         make.trailing.equalTo(self.contentView.mas_trailing).offset(-15);
-        
     }];
     
 
@@ -96,7 +105,7 @@
     [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.top.equalTo(self.contentView.mas_bottom).offset(-1);//元素顶部约束
-        make.leading.equalTo(mainImageView.mas_leading).offset(0);//元素左侧约束
+        make.leading.equalTo(self.mainImageView.mas_leading).offset(0);//元素左侧约束
         make.trailing.equalTo(self.contentView.mas_trailing).offset(0);//元素右侧约束
         make.height.mas_equalTo(1);//元素高度
     }];

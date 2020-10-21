@@ -79,7 +79,7 @@
             }
         }];
         [view loadCustomView];
-        [self addSubview:view];
+        [self.contentView addSubview:view];//放在contentView上，才会响应点击事件，否则可能会被cell:didSelectRow拦截了
         
     }
 }
