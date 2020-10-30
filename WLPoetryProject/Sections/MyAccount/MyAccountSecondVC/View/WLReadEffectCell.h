@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
-typedef void(^ReadImageEffectBlock)(BOOL on);
-@interface WLReadImageCell : UITableViewCell
+
+@interface WLReadEffectCell : UITableViewCell
 
 /**
  *  标题
@@ -29,19 +29,9 @@ typedef void(^ReadImageEffectBlock)(BOOL on);
  **/
 @property (nonatomic, strong) UIImageView *rightArrow;
 
-/**
- *  是否需要开关
- **/
-@property (nonatomic,assign) BOOL needSwitch;
-/**
- *  开关状态
- **/
-@property (nonatomic,assign) BOOL switchOpen;
-
-
 - (void)loadCustomView;
 
-- (void)updateWithSwitchBlock:(ReadImageEffectBlock)block;
 @end
 
 NS_ASSUME_NONNULL_END
+

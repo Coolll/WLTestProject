@@ -64,7 +64,7 @@
 }
 
 - (void)updateRecommendPoetry{
-    NSArray *poetryModelArray = [self readLocalFileWithName:@"recommendPoetryFive"];
+    NSArray *poetryModelArray = [self readLocalFileWithName:@"recommendPoetrySix"];
 
     NSInteger time = 0;
     for (NSInteger i = poetryModelArray.count-1; i >= 0; i--) {
@@ -291,6 +291,9 @@
     else if([classInfo isEqualToString:@"112"]){return @"安慰他人";}
     else if([classInfo isEqualToString:@"113"]){return @"轻松愉悦";}
     else if([classInfo isEqualToString:@"114"]){return @"潇洒飘逸";}
+    else if([classInfo isEqualToString:@"115"]){return @"豪情壮志";}
+    else if([classInfo isEqualToString:@"116"]){return @"孤寂";}
+    else if([classInfo isEqualToString:@"117"]){return @"豪迈不羁";}
     else if([classInfo isEqualToString:@"1001"]){return @"山村咏怀";}
     else if([classInfo isEqualToString:@"1002"]){return @"咏鹅";}
     else if([classInfo isEqualToString:@"1003"]){return @"春晓";}

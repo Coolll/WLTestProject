@@ -148,7 +148,11 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
 #pragma mark - 返回
 - (void)backAction:(UIButton*)sender
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    if ([self.showType isEqualToString:@"present"]) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }else{
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 #pragma mark - 加载视图
@@ -464,7 +468,7 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
     NSInteger four = self.fourNameArray.count;
     NSInteger fourIndex = arc4random()%four;
     
-    NSInteger count = 1000+arc4random()%8888;
+    NSInteger count = 100+arc4random()%888;
     
     NSString *name = [NSString stringWithFormat:@"%@-%@%ld",self.threeNameArray[threeIndex],self.fourNameArray[fourIndex],(long)count];
     self.nameTextField.contentString = name;

@@ -144,6 +144,7 @@
 		075A97C721047D2600CBAFD7 /* addImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 075A97C621047D2600CBAFD7 /* addImage.png */; };
 		075AFEB220E525BA005ADDB9 /* searchInList.png in Resources */ = {isa = PBXBuildFile; fileRef = 075AFEB120E525B9005ADDB9 /* searchInList.png */; };
 		07603EA420FCCC510074A5CB /* deleteImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 07603EA320FCCC510074A5CB /* deleteImage.png */; };
+		0763B90F254900C90051868B /* recommendPoetrySix.json in Resources */ = {isa = PBXBuildFile; fileRef = 0763B90E254900C90051868B /* recommendPoetrySix.json */; };
 		07642A5E208E141900B084AE /* PoetryDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07642A5D208E141900B084AE /* PoetryDetailViewController.m */; };
 		0765C6AD207CE47E0085EB3A /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0765C693207CE47E0085EB3A /* Info.plist */; };
 		0765C6AE207CE47E0085EB3A /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 0765C695207CE47E0085EB3A /* MASCompositeConstraint.m */; };
@@ -277,6 +278,10 @@
 		07F73C75208AE84900F7D8B3 /* tabbarThree.png in Resources */ = {isa = PBXBuildFile; fileRef = 07F73C72208AE84900F7D8B3 /* tabbarThree.png */; };
 		07F73C76208AE84900F7D8B3 /* tabbarThree_sel.png in Resources */ = {isa = PBXBuildFile; fileRef = 07F73C73208AE84900F7D8B3 /* tabbarThree_sel.png */; };
 		07F73C82208AF51D00F7D8B3 /* YLHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07F73C81208AF51D00F7D8B3 /* YLHomeViewController.m */; };
+		07FEFC7B254AA9EF00C95B56 /* WLReadImageEffectController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07FEFC7A254AA9EF00C95B56 /* WLReadImageEffectController.m */; };
+		07FEFC7E254AB1E200C95B56 /* WLReadEffectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 07FEFC7D254AB1E200C95B56 /* WLReadEffectCell.m */; };
+		07FEFC81254AB55200C95B56 /* WLReadEffectPreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07FEFC80254AB55200C95B56 /* WLReadEffectPreviewController.m */; };
+		07FEFC88254AC49900C95B56 /* WLReadEffectCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 07FEFC87254AC49900C95B56 /* WLReadEffectCenter.m */; };
 		3607C882212F9DC600298C6C /* MyTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3607C881212F9DC600298C6C /* MyTextView.m */; };
 		3607C885212FA20000298C6C /* UIButton+WLExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3607C884212FA20000298C6C /* UIButton+WLExtension.m */; };
 		3607C896212FE3BF00298C6C /* CreationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3607C895212FE3BF00298C6C /* CreationModel.m */; };
@@ -576,6 +581,7 @@
 		075A97C621047D2600CBAFD7 /* addImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addImage.png; sourceTree = "<group>"; };
 		075AFEB120E525B9005ADDB9 /* searchInList.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = searchInList.png; sourceTree = "<group>"; };
 		07603EA320FCCC510074A5CB /* deleteImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = deleteImage.png; sourceTree = "<group>"; };
+		0763B90E254900C90051868B /* recommendPoetrySix.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = recommendPoetrySix.json; sourceTree = "<group>"; };
 		07642A5C208E141900B084AE /* PoetryDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PoetryDetailViewController.h; sourceTree = "<group>"; };
 		07642A5D208E141900B084AE /* PoetryDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PoetryDetailViewController.m; sourceTree = "<group>"; };
 		0765C693207CE47E0085EB3A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -782,6 +788,14 @@
 		07F73C73208AE84900F7D8B3 /* tabbarThree_sel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbarThree_sel.png; sourceTree = "<group>"; };
 		07F73C80208AF51D00F7D8B3 /* YLHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLHomeViewController.h; sourceTree = "<group>"; };
 		07F73C81208AF51D00F7D8B3 /* YLHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLHomeViewController.m; sourceTree = "<group>"; };
+		07FEFC79254AA9EF00C95B56 /* WLReadImageEffectController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLReadImageEffectController.h; sourceTree = "<group>"; };
+		07FEFC7A254AA9EF00C95B56 /* WLReadImageEffectController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLReadImageEffectController.m; sourceTree = "<group>"; };
+		07FEFC7C254AB1E200C95B56 /* WLReadEffectCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLReadEffectCell.h; sourceTree = "<group>"; };
+		07FEFC7D254AB1E200C95B56 /* WLReadEffectCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLReadEffectCell.m; sourceTree = "<group>"; };
+		07FEFC7F254AB55200C95B56 /* WLReadEffectPreviewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLReadEffectPreviewController.h; sourceTree = "<group>"; };
+		07FEFC80254AB55200C95B56 /* WLReadEffectPreviewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLReadEffectPreviewController.m; sourceTree = "<group>"; };
+		07FEFC86254AC49900C95B56 /* WLReadEffectCenter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLReadEffectCenter.h; sourceTree = "<group>"; };
+		07FEFC87254AC49900C95B56 /* WLReadEffectCenter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLReadEffectCenter.m; sourceTree = "<group>"; };
 		3607C880212F9DC600298C6C /* MyTextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyTextView.h; sourceTree = "<group>"; };
 		3607C881212F9DC600298C6C /* MyTextView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyTextView.m; sourceTree = "<group>"; };
 		3607C883212FA20000298C6C /* UIButton+WLExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIButton+WLExtension.h"; sourceTree = "<group>"; };
@@ -1468,6 +1482,7 @@
 		076D28E425318B8D00AB90E0 /* recommend */ = {
 			isa = PBXGroup;
 			children = (
+				0763B90E254900C90051868B /* recommendPoetrySix.json */,
 				0710D653253D771000865398 /* recommendPoetryFive.json */,
 				076D28EB25318BAE00AB90E0 /* recommendPoetryFour.json */,
 				076D28E525318B8D00AB90E0 /* recommendPoetryThree.json */,
@@ -1574,14 +1589,19 @@
 		07A73D9D2535985B0028344B /* ReadImage */ = {
 			isa = PBXGroup;
 			children = (
+				07FEFC85254AC48700C95B56 /* Efffet */,
 				07A73D9F2535985B0028344B /* WLReadImageController.h */,
 				07A73DA22535985B0028344B /* WLReadImageController.m */,
 				07A73DA12535985B0028344B /* WLReadImageListController.h */,
 				07A73D9E2535985B0028344B /* WLReadImageListController.m */,
 				07A73DA02535985B0028344B /* WLReadImageColorController.h */,
 				07A73DA32535985B0028344B /* WLReadImageColorController.m */,
+				07FEFC79254AA9EF00C95B56 /* WLReadImageEffectController.h */,
+				07FEFC7A254AA9EF00C95B56 /* WLReadImageEffectController.m */,
 				07A73DA725359B1E0028344B /* WLReadImagePreviewController.h */,
 				07A73DA825359B1E0028344B /* WLReadImagePreviewController.m */,
+				07FEFC7F254AB55200C95B56 /* WLReadEffectPreviewController.h */,
+				07FEFC80254AB55200C95B56 /* WLReadEffectPreviewController.m */,
 			);
 			path = ReadImage;
 			sourceTree = "<group>";
@@ -1941,6 +1961,15 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		07FEFC85254AC48700C95B56 /* Efffet */ = {
+			isa = PBXGroup;
+			children = (
+				07FEFC86254AC49900C95B56 /* WLReadEffectCenter.h */,
+				07FEFC87254AC49900C95B56 /* WLReadEffectCenter.m */,
+			);
+			path = Efffet;
+			sourceTree = "<group>";
+		};
 		360CF12E236843A500F04C6B /* security */ = {
 			isa = PBXGroup;
 			children = (
@@ -1994,6 +2023,8 @@
 				0714ED8D2492566700CBBE8E /* WLHeadImageSelectCell.m */,
 				07A73D9425358AEC0028344B /* WLReadImageCell.h */,
 				07A73D9525358AEC0028344B /* WLReadImageCell.m */,
+				07FEFC7C254AB1E200C95B56 /* WLReadEffectCell.h */,
+				07FEFC7D254AB1E200C95B56 /* WLReadEffectCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2165,6 +2196,7 @@
 				0795690820726D0B0097C26D /* LaunchScreen.storyboard in Resources */,
 				07F3E30B20D2C0FC00E7BAF7 /* defaultHeader.png in Resources */,
 				00F9517020D4D8090039D7C5 /* about@2x.png in Resources */,
+				0763B90F254900C90051868B /* recommendPoetrySix.json in Resources */,
 				00DA247620F6FBCB00F97B79 /* bookType.png in Resources */,
 				07E06D9920A06C9300093DCC /* tabbarTwo.png in Resources */,
 				36382B03224B5FB1006D094A /* songPoetry_mustRecite.json in Resources */,
@@ -2302,6 +2334,7 @@
 				07567B21207A02EC0018B9E7 /* NSBundle+MJRefresh.m in Sources */,
 				07A73DA42535985B0028344B /* WLReadImageListController.m in Sources */,
 				0765C707207CE6E20085EB3A /* SDWebImageImageIOCoder.m in Sources */,
+				07FEFC88254AC49900C95B56 /* WLReadEffectCenter.m in Sources */,
 				07567B20207A02EC0018B9E7 /* MJRefreshConst.m in Sources */,
 				00BBFA1120D6524500BB86D9 /* WLFeedbackController.m in Sources */,
 				003EBE1620D0F00A00DD7815 /* LeadViewController.m in Sources */,
@@ -2323,6 +2356,7 @@
 				078DB1E1225722C2007E6EA8 /* WLLunYuController.m in Sources */,
 				36521BA821904BED00425DCC /* RecitePoetryController.m in Sources */,
 				07567B8F207A02EC0018B9E7 /* WLSaveLocalHelper.m in Sources */,
+				07FEFC81254AB55200C95B56 /* WLReadEffectPreviewController.m in Sources */,
 				3677ED512361854E00C2A15F /* NetworkHelper.m in Sources */,
 				0765C702207CE6E20085EB3A /* SDWebImageCompat.m in Sources */,
 				360CF13A236969CE00F04C6B /* AESCipher.m in Sources */,
@@ -2336,6 +2370,7 @@
 				0765C713207CE6E20085EB3A /* UIView+WebCache.m in Sources */,
 				07567B41207A02EC0018B9E7 /* WLPublicTool.m in Sources */,
 				07567B80207A02EC0018B9E7 /* YLAccountViewController.m in Sources */,
+				07FEFC7E254AB1E200C95B56 /* WLReadEffectCell.m in Sources */,
 				07567B1D207A02EB0018B9E7 /* MJRefreshNormalHeader.m in Sources */,
 				0765C6B1207CE47E0085EB3A /* MASLayoutConstraint.m in Sources */,
 				0765C704207CE6E20085EB3A /* SDWebImageDownloaderOperation.m in Sources */,
@@ -2366,6 +2401,7 @@
 				36B3672021A807B80071C14A /* WLPercentView.m in Sources */,
 				0073FD7520EE021A00FED6D6 /* WLLaunchView.m in Sources */,
 				07567B10207A02EB0018B9E7 /* MyMBProgress.m in Sources */,
+				07FEFC7B254AA9EF00C95B56 /* WLReadImageEffectController.m in Sources */,
 				0765C712207CE6E20085EB3A /* UIImageView+WebCache.m in Sources */,
 				0765C70A207CE6E20085EB3A /* SDWebImageTransition.m in Sources */,
 				07567A9E207A02EB0018B9E7 /* BaseViewController.m in Sources */,
@@ -2636,7 +2672,7 @@
 					"$(PROJECT_DIR)/WLPoetryProject/ThirdPartClass/SDK/ShareSDK/Support/PlatformSDK/SinaWeiboSDK",
 					"$(PROJECT_DIR)/WLPoetryProject/ThirdPartClass/SDK/ShareSDK/Support/PlatformSDK/WeChatSDK",
 				);
-				MARKETING_VERSION = 1.4.3;
+				MARKETING_VERSION = 1.4.4;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wangqilong.wqlPoetryProject;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2675,7 +2711,7 @@
 					"$(PROJECT_DIR)/WLPoetryProject/ThirdPartClass/SDK/ShareSDK/Support/PlatformSDK/SinaWeiboSDK",
 					"$(PROJECT_DIR)/WLPoetryProject/ThirdPartClass/SDK/ShareSDK/Support/PlatformSDK/WeChatSDK",
 				);
-				MARKETING_VERSION = 1.4.3;
+				MARKETING_VERSION = 1.4.4;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wangqilong.wqlPoetryProject;
 				PRODUCT_NAME = "$(TARGET_NAME)";

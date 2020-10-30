@@ -11,7 +11,8 @@
 
 #import "RecitePoetryController.h"
 #import "WLAnalysesView.h"
-
+#import "WLLoginViewController.h"
+#import "WLReadEffectCenter.h"
 static const CGFloat leftSpace = 10;//诗句的左右间距
 static const CGFloat topSpace = 15;//诗句与标题的上间距
 
@@ -81,6 +82,8 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
     
     self.titleForNavi = self.dataModel.name;
     [self loadMainBackImageView];//背景
+    [self loadReadEffect];//特效
+    
     [self addFullTitleLabel];//诗词名字 添加背景之后调用，否则会被背景图遮住
 
     [self loadCustomData];//加载数据
@@ -88,6 +91,18 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
     [self addBackButtonForFullScreen];//返回按钮，需要最后添加
     
     
+}
+
+- (void)loadReadEffect{
+    BOOL openEffect = [WLSaveLocalHelper fetchReadEffectOpen];
+    if (openEffect) {
+        NSString *effectType = [WLSaveLocalHelper fetchReadEffectType];
+        if ([effectType isEqualToString:@"snow"]) {
+            [[WLReadEffectCenter shareCenter] loadSnowEffectWithSuperView:self.view];
+        }else if ([effectType isEqualToString:@"flower"]){
+            [[WLReadEffectCenter shareCenter] loadFlowerEffectWithSuperView:self.view];
+        }
+    }
 }
 
 - (void)dealTextColor{
@@ -456,7 +471,7 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
     NSString *tokenString = [NSString stringWithFormat:@"%@",token];
     //如果本地没有token，那么就意味着用户没有登录，无法进行收藏
     if (tokenString.length == 0) {
-        [self showHUDWithText:@"您尚未登录，请登录后重试"];
+        [self presentToLogin];
         return;
     }
     
@@ -578,8 +593,13 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
         [self hideAnalyseView];
         self.analysesImage.image = [UIImage imageNamed:@"analyses"];
     }else{
-        
-//        if (self.dataModel.analysesInfo.length > 0 || self.dataModel.addtionInfo.length > 0 || self.dataModel.transferInfo.length > 0 || self.dataModel.backgroundInfo.length > 0) {
+        //如果本地没有token，那么就意味着用户没有登录
+        if (![kLoginStatus isEqualToString:@"1"]) {
+            [self presentToLogin];
+            return;
+        }
+
+
         if (kStringIsEmpty(self.dataModel.analysesInfo) || kStringIsEmpty(self.dataModel.addtionInfo) || kStringIsEmpty(self.dataModel.transferInfo) || kStringIsEmpty(self.dataModel.backgroundInfo)) {
             
             [self loadAnalyseView];
@@ -612,6 +632,14 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
         }
         
     }];
+}
+
+- (void)presentToLogin{
+    WLLoginViewController *vc = [[WLLoginViewController alloc]init];
+    vc.showType = @"present";
+    vc.modalPresentationStyle = UIModalPresentationFullScreen;
+    [self presentViewController:vc animated:YES completion:nil];
+
 }
 
 - (void)loadAnalyseView{

@@ -6,12 +6,10 @@
 //  Copyright © 2020 龙培. All rights reserved.
 //
 
-#import "WLReadImageController.h"
-#import "WLReadImageCell.h"
-#import "WLReadImageListController.h"
-#import "WLReadImageColorController.h"
 #import "WLReadImageEffectController.h"
-@interface WLReadImageController ()<UITableViewDelegate,UITableViewDataSource>
+#import "WLReadEffectCell.h"
+#import "WLReadEffectPreviewController.h"
+@interface WLReadImageEffectController ()<UITableViewDelegate,UITableViewDataSource>
 /**
  *  数据
  **/
@@ -31,23 +29,18 @@
 @property (nonatomic,assign) BOOL openEffect;
 @end
 
-@implementation WLReadImageController
+@implementation WLReadImageEffectController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = ViewBackgroundColor;
-    self.titleForNavi = @"阅读背景";
+    self.titleForNavi = @"阅读特效";
     [self loadCustomData];
     [self loadCustomView];
 }
 - (void)loadCustomData
 {
-    self.openEffect = [WLSaveLocalHelper fetchReadEffectOpen];
-    if (self.openEffect) {
-        self.itemsArray = [NSArray arrayWithObjects:@"选择图片背景",@"选择纯色背景",@"特效开关",@"选择特效", nil];
-    }else{
-        self.itemsArray = [NSArray arrayWithObjects:@"选择图片背景",@"选择纯色背景",@"特效开关", nil];
-    }
+    self.itemsArray = [NSArray arrayWithObjects:@"雪花",@"花瓣", nil];
 }
 
 #pragma mark - 加载视图
@@ -84,7 +77,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -117,10 +110,10 @@
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    WLReadImageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WLReadImageCell"];
+    WLReadEffectCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WLReadEffectCell"];
     
     if (!cell) {
-        cell = [[WLReadImageCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"WLReadImageCell"];
+        cell = [[WLReadEffectCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"WLReadEffectCell"];
         cell.frame = CGRectMake(0, 0, PhoneScreen_WIDTH, 50);
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
@@ -128,20 +121,6 @@
     if (indexPath.section == 0 && indexPath.row < self.itemsArray.count) {
         cell.titleString = self.itemsArray[indexPath.row];
         cell.rightArrow.hidden = NO;//正常情况下，需要右侧箭头
-
-        //第三行是特效开关
-        if (indexPath.row == 2) {
-            cell.needSwitch = YES;
-            cell.switchOpen = self.openEffect;
-            cell.rightArrow.hidden = YES;//有了开关，就不要箭头了
-            __weak typeof(self) weakSelf = self;
-            [cell updateWithSwitchBlock:^(BOOL on) {
-                [weakSelf dealEffectChange:on];
-            }];
-        }
-    }else if (indexPath.section == 1){
-        
-        cell.titleString = @"恢复默认背景";
     }
     
     if (indexPath.row == self.itemsArray.count-1) {
@@ -149,12 +128,7 @@
     }else{
         cell.showLine = YES;
     }
-    
-    if (indexPath.section == 1 && indexPath.row == 0) {
-        cell.showLine = NO;//恢复默认背景图，不需要横线，因为是独立的一行
-        cell.rightArrow.hidden = YES;
-    }
-    
+   
     [cell loadCustomView];
     return cell;
     
@@ -165,43 +139,19 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.row == 0 && indexPath.section == 0) {
-        NSLog(@"选择背景图");
-        [self chooseImage];
+        NSLog(@"雪花");
+        [self chooseEffect:@"snow"];
     }else if (indexPath.row == 1 && indexPath.section == 0){
-        NSLog(@"设置背景色");
-        [self chooseColor];
-    }else if (indexPath.row == 3 && indexPath.section == 0){
-        NSLog(@"设置特效");
-        [self chooseEffect];
-    }else if (indexPath.row == 0 && indexPath.section == 1){
-        NSLog(@"恢复默认");
-        [self resetImage];
+        NSLog(@"樱花");
+        [self chooseEffect:@"flower"];
     }
 }
 
-- (void)dealEffectChange:(BOOL)open{
-    self.openEffect = open;
-    [WLSaveLocalHelper saveReadEffectOpen:open];
-    
-    if (open) {
-        self.itemsArray = [NSArray arrayWithObjects:@"选择图片背景",@"选择纯色背景",@"特效开关",@"选择特效", nil];
-    }else{
-        self.itemsArray = [NSArray arrayWithObjects:@"选择图片背景",@"选择纯色背景",@"特效开关", nil];
-    }
-    
-    [self.mainTableView reloadData];
-}
-- (void)chooseImage{
-    WLReadImageListController *vc = [[WLReadImageListController alloc]init];
-    [self.navigationController pushViewController:vc animated:YES];
-}
 
-- (void)chooseColor{
-    WLReadImageColorController *vc = [[WLReadImageColorController alloc]init];
-    [self.navigationController pushViewController:vc animated:YES];
-}
-- (void)chooseEffect{
-    WLReadImageEffectController *vc = [[WLReadImageEffectController alloc]init];
+- (void)chooseEffect:(NSString*)type{
+    WLReadEffectPreviewController *vc = [[WLReadEffectPreviewController alloc]init];
+    vc.effectType = type;
+    [vc configureUI];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -237,3 +187,4 @@
 */
 
 @end
+

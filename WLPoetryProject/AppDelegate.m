@@ -58,7 +58,7 @@
     [self.window makeKeyAndVisible];
     [self loadCustomTabbar];
 
-    
+    [self recordOpenApp];
     [self registShareSDK];
         
 
@@ -177,6 +177,15 @@
     
 }
 
+- (void)recordOpenApp{
+    id userId = kUserID;
+    if (!userId || ![userId isKindOfClass:[NSString class]] || kStringIsEmpty(userId)) {
+        return;
+    }
+    [[NetworkHelper shareHelper] updateUserOpenAppWithCompletion:^(BOOL success, NSDictionary * _Nullable dic, NSError * _Nullable error) {
+        
+    }];
+}
 
 - (void)getCurrentUserLikeLists
 {

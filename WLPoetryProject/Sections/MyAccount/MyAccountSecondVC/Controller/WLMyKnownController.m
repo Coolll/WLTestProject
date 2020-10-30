@@ -107,15 +107,20 @@
 
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self requestUserStorage];
+}
+
 - (void)loadCustomData
 {
     self.leftSpace = 15;
     self.imageArray = [NSArray arrayWithObjects:@"class_0",@"class_1",@"class_2",@"class_3",@"class_4",@"class_5",@"class_6",@"class_7", nil];
     self.titleArray = [NSArray arrayWithObjects:@"童生",@"秀才",@"举人",@"贡士",@"进士",@"探花",@"榜眼",@"状元", nil];
     self.colorArray = [NSArray arrayWithObjects:RGBCOLOR(33, 33, 33, 1.0),RGBCOLOR(121, 0, 233, 1.0),RGBCOLOR(17, 30, 211, 1.0),RGBCOLOR(16, 89, 146, 1.0),RGBCOLOR(103, 251, 12, 1.0),RGBCOLOR(244, 233, 15, 1.0),RGBCOLOR(242, 136, 18, 1.0),RGBCOLOR(251, 0, 5, 1.0), nil];
-    
-    
-    
+}
+
+- (void)requestUserStorage{
     [[NetworkHelper shareHelper]requestUserChallengeInfo:kUserID withCompletion:^(BOOL success, NSDictionary *dic, NSError *error) {
         if (success) {
             
@@ -131,7 +136,7 @@
                 NSDictionary *info = [dataArray objectAtIndex:i];
                 [poetryArray addObject:[info objectForKey:@"storage"]];
                 
-                if (i == poetryArray.count-1) {
+                if (i == 0) {
                     self.index = [[info objectForKey:@"poetry_class"] integerValue];
                     self.storage = [NSString stringWithFormat:@"%@",[info objectForKey:@"storage"]];
                 }

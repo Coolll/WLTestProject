@@ -278,6 +278,18 @@
     [self.baseNetwork requestPostWithBody:param withUrlString:@"api/user/update/headImage" withCompletion:block];
 
 }
+- (void)updateUserOpenAppWithCompletion:(RequestResultBlock)block{
+    
+    NSInteger userIdValue = [kUserID integerValue];
+    
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    [dic setObject:[NSNumber numberWithInteger:userIdValue] forKey:@"user_id"];
+
+    NSDictionary *param = [self operationForParam:dic];
+    
+    [self.baseNetwork requestPostWithBody:param withUrlString:@"api/user/update/openAppTime" withCompletion:block];
+
+}
 
 
 - (NSDictionary*)operationForParam:(NSDictionary*)originDic

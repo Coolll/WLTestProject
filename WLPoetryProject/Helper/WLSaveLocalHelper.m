@@ -206,4 +206,40 @@
     }
     return @"";
 }
+
+//阅读特效
++ (void)saveReadEffectOpen:(BOOL)needEffect{
+    if (needEffect) {
+        [self saveObject:@"1" forKey:@"WLUserReadNeedEffect"];
+    }else{
+        [self saveObject:@"0" forKey:@"WLUserReadNeedEffect"];
+    }
+
+}
++ (BOOL)fetchReadEffectOpen{
+    id localObject = [self loadObjectForKey:@"WLUserReadNeedEffect"];
+    if (localObject && [localObject isKindOfClass:[NSString class]]) {
+        if ([localObject isEqualToString:@"1"]) {
+            return YES;
+        }
+    }
+    return NO;
+
+}
+//保存阅读特效类型
++ (void)saveReadEffectType:(NSString*)type{
+    if (type && [type isKindOfClass:[NSString class]]) {
+        [self saveObject:[type copy] forKey:@"WLUserReadEffectType"];
+    }else{
+        [self saveObject:@"" forKey:@"WLUserReadEffectType"];
+    }
+
+}
++ (NSString*)fetchReadEffectType{
+    id localObject = [self loadObjectForKey:@"WLUserReadEffectType"];
+    if (localObject && [localObject isKindOfClass:[NSString class]]) {
+        return [NSString stringWithFormat:@"%@",localObject];
+    }
+    return @"";
+}
 @end
