@@ -70,9 +70,9 @@
 
     [self loadCustomData];
 //    [self checkLocalData];//加载本地数据
-    [self checkNetworkAndDealImage];
+//    [self checkNetworkAndDealImage];
 
-    //[[BackupHelper shareInstance] updateRecommendPoetry];//更新热门诗词
+    [[BackupHelper shareInstance] updateRecommendPoetry];//更新热门诗词
 
 //    [[BackupHelper shareInstance] uploadAllPoetry];//备份诗词
 //    [self uploadAllImages];

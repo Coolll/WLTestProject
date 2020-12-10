@@ -101,6 +101,10 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
             [[WLReadEffectCenter shareCenter] loadSnowEffectWithSuperView:self.view];
         }else if ([effectType isEqualToString:@"flower"]){
             [[WLReadEffectCenter shareCenter] loadFlowerEffectWithSuperView:self.view];
+        }else if ([effectType isEqualToString:@"mapleLeaf"]){
+            [[WLReadEffectCenter shareCenter] loadMapleLeafEffectWithSuperView:self.view];
+        }else if ([effectType isEqualToString:@"plum"]){
+            [[WLReadEffectCenter shareCenter] loadEffectWithSuperView:self.view withType:WLEffectTypePlum];
         }
     }
 }
@@ -469,9 +473,10 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
     }
     
     NSString *tokenString = [NSString stringWithFormat:@"%@",token];
-    //如果本地没有token，那么就意味着用户没有登录，无法进行收藏
-    if (tokenString.length == 0) {
-        [self presentToLogin];
+    //如果本地登录状态不是1，那么就意味着用户没有登录，无法进行收藏
+    if (![kLoginStatus isEqualToString:@"1"]) {
+//        [self presentToLogin];
+        [self showHUDWithText:@"登录后即可收藏～"];
         return;
     }
     
@@ -595,7 +600,8 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
     }else{
         //如果本地没有token，那么就意味着用户没有登录
         if (![kLoginStatus isEqualToString:@"1"]) {
-            [self presentToLogin];
+//            [self presentToLogin];
+            [self showHUDWithText:@"登录后即可查看～"];
             return;
         }
 

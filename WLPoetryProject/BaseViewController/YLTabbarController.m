@@ -218,14 +218,6 @@ static const NSInteger buttonBaseTag = 2000;
     //切换视图
     if (index < self.viewControllers.count) {
         self.selectedIndex = index;
-        
-//        //当用户未登录，进入积分商城中登录，再返回扑客说的时候，需要更新数据，否则扑客说为未登录状态
-//        if (index == 1) {
-//            
-//            BaseNavigationController *navi = self.viewControllers[index];\
-//            YLAccountViewController *vc = navi.viewControllers.firstObject;
-//            [vc refreshData];
-//        }
     }
     
 

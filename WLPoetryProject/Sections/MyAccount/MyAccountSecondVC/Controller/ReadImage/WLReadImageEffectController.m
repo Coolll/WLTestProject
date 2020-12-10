@@ -40,7 +40,7 @@
 }
 - (void)loadCustomData
 {
-    self.itemsArray = [NSArray arrayWithObjects:@"雪花",@"花瓣", nil];
+    self.itemsArray = [NSArray arrayWithObjects:@"雪花",@"樱花",@"枫叶",@"梅花", nil];
 }
 
 #pragma mark - 加载视图
@@ -144,6 +144,12 @@
     }else if (indexPath.row == 1 && indexPath.section == 0){
         NSLog(@"樱花");
         [self chooseEffect:@"flower"];
+    }else if (indexPath.row == 2 && indexPath.section == 0){
+        NSLog(@"枫叶");
+        [self chooseEffect:@"mapleLeaf"];
+    }else if (indexPath.row == 3 && indexPath.section == 0){
+        NSLog(@"梅花");
+        [self chooseEffect:@"plum"];
     }
 }
 

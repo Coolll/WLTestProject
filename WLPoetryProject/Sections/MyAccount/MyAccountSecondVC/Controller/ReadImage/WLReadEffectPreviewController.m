@@ -105,6 +105,10 @@
         [[WLReadEffectCenter shareCenter] loadSnowEffectWithSuperView:self.view];
     }else if ([self.effectType isEqualToString:@"flower"]) {
         [[WLReadEffectCenter shareCenter] loadFlowerEffectWithSuperView:self.view];
+    }else if ([self.effectType isEqualToString:@"mapleLeaf"]) {
+        [[WLReadEffectCenter shareCenter] loadMapleLeafEffectWithSuperView:self.view];
+    }else if ([self.effectType isEqualToString:@"plum"]) {
+        [[WLReadEffectCenter shareCenter] loadEffectWithSuperView:self.view withType:WLEffectTypePlum];
     }
 }
 

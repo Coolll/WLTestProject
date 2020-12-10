@@ -586,7 +586,11 @@ typedef void(^LoginSuccessBlock)(UserInformation *user);
                 if (self.successBlock) {
                     self.successBlock([UserInformation shareUser]);
                 }
-                [self.navigationController popViewControllerAnimated:YES];
+                if ([self.showType isEqualToString:@"present"]) {
+                    [self dismissViewControllerAnimated:YES completion:nil];
+                }else{
+                    [self.navigationController popViewControllerAnimated:YES];
+                }
                 
             });
         }
