@@ -109,6 +109,8 @@
         [[WLReadEffectCenter shareCenter] loadMapleLeafEffectWithSuperView:self.view];
     }else if ([self.effectType isEqualToString:@"plum"]) {
         [[WLReadEffectCenter shareCenter] loadEffectWithSuperView:self.view withType:WLEffectTypePlum];
+    }else if ([self.effectType isEqualToString:@"rain"]) {
+        [[WLReadEffectCenter shareCenter] loadEffectWithSuperView:self.view withType:WLEffectTypeRain];
     }
 }
 

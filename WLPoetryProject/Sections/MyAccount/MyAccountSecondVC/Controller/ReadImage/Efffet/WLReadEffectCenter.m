@@ -193,6 +193,44 @@
     emitter.emitterPosition = CGPointMake(PhoneScreen_WIDTH/2, 0);
     //发射layer的产生速率
     emitter.birthRate = 3.0;
+
+    
+    if (type == WLEffectTypeRain) {
+        //发射源的尺寸
+        emitter.emitterSize = CGSizeMake(PhoneScreen_WIDTH/2, 10);
+        //创建爱心形状的粒子
+        CAEmitterCell *cell = [[CAEmitterCell alloc]init];
+        //粒子要展现的图片
+        cell.contents = (__bridge id)[self loadImageWithType:type].CGImage;
+        //粒子产生的速率
+        cell.birthRate = 0.2;
+        //粒子的存在时间
+        cell.lifetime = 5.0;
+        //粒子的存在时间的波动范围
+        cell.lifetimeRange = 1;
+        cell.color = RGBCOLOR(255, 255, 255, 1).CGColor;
+        //粒子的透明度的变化速度
+        cell.alphaSpeed = -0.2;
+        //粒子运动的速度
+        cell.velocity = 120;
+        //粒子运动速度波动范围
+        cell.velocityRange = 10;
+        //发射的范围，为一弧度值，大于0的话，就会以发射源为顶点，emissionRange角为顶角，创建一个圆锥，粒子会在该圆锥中发射
+        cell.emissionRange = 0;
+        //粒子的经度，xy平面上，与x轴的夹角
+        cell.emissionLongitude = -M_PI;
+        //粒子的旋转速度（周）
+        cell.spin = 0;
+        //粒子的旋转速度可波动范围
+        cell.spinRange = 0;
+        //粒子的缩放
+        cell.scale = 0.65;
+        //粒子的缩放波动范围
+        cell.scaleRange = 0;
+        emitter.emitterCells = @[cell];
+
+        return;
+    }
     //创建爱心形状的粒子
     CAEmitterCell *cell = [[CAEmitterCell alloc]init];
     //粒子要展现的图片
@@ -229,6 +267,8 @@
 - (UIImage*)loadImageWithType:(WLEffectType)type{
     if (type == WLEffectTypePlum) {
         return [UIImage imageNamed:@"effect_plum"];
+    }else if (type == WLEffectTypeRain){
+        return [UIImage imageNamed:@"effect_rain"];
     }
     return nil;
 }
