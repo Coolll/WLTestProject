@@ -111,6 +111,8 @@
         [[WLReadEffectCenter shareCenter] loadEffectWithSuperView:self.view withType:WLEffectTypePlum];
     }else if ([self.effectType isEqualToString:@"rain"]) {
         [[WLReadEffectCenter shareCenter] loadEffectWithSuperView:self.view withType:WLEffectTypeRain];
+    }else if ([self.effectType isEqualToString:@"meteor"]) {
+        [[WLReadEffectCenter shareCenter] loadEffectWithSuperView:self.view withType:WLEffectTypeMeteor];
     }
 }
 

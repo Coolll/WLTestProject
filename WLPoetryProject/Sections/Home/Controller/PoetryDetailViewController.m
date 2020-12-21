@@ -107,6 +107,8 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
             [[WLReadEffectCenter shareCenter] loadEffectWithSuperView:self.view withType:WLEffectTypePlum];
         }else if ([effectType isEqualToString:@"rain"]) {
             [[WLReadEffectCenter shareCenter] loadEffectWithSuperView:self.view withType:WLEffectTypeRain];
+        }else if ([effectType isEqualToString:@"meteor"]) {
+            [[WLReadEffectCenter shareCenter] loadEffectWithSuperView:self.view withType:WLEffectTypeMeteor];
         }
     }
 }

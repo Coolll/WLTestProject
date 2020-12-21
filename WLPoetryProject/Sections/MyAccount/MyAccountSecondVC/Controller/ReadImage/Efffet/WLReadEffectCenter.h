@@ -9,7 +9,8 @@
 #import <Foundation/Foundation.h>
 typedef NS_ENUM(NSInteger,WLEffectType) {
     WLEffectTypePlum,//梅花
-    WLEffectTypeRain
+    WLEffectTypeRain,//细雨
+    WLEffectTypeMeteor//流星雨
 };
 NS_ASSUME_NONNULL_BEGIN
 

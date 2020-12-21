@@ -219,7 +219,109 @@
         }
         
     }else{
-        [dataArray addObject:originString];
+        
+       
+        NSArray *arr = [originString componentsSeparatedByString:@"，"];
+        for (NSString *content in arr) {
+            //如果是诗句末尾的句号，则会拆分多出来一个空的字符，判断处理一下
+            if (content.length > 0) {
+                
+                NSString *fullString = content;
+                                
+                NSArray *partArr = [self dealPartWithOrigin:fullString];
+                
+                //上一步的数据源
+                NSMutableArray *exclamationArr = [NSMutableArray arrayWithArray:partArr];
+                //如果包含符号
+                if (isContainExclamation) {
+                    //把数据移除
+                    [exclamationArr removeAllObjects];
+                    //遍历原数据
+                    for (NSString *subString in partArr) {
+                        //按符号分割
+                        NSArray *exclamationArray = [self dealExclamationWithOrigin:subString];
+                        for (NSString *separateString in exclamationArray) {
+                            //分割后的添加到目标数组中
+                            [exclamationArr addObject:separateString];
+                        }
+                    }
+                }
+                
+                //上一步的数据源
+                NSMutableArray *questionArr = [NSMutableArray arrayWithArray:exclamationArr];
+                //如果包含符号
+                if (isContainQuestion) {
+                    //把数据移除
+                    [questionArr removeAllObjects];
+                    //遍历原数据
+                    for (NSString *subString in exclamationArr) {
+                        //按符号分割
+                        NSArray *questionArray = [self dealQuestionWithOrigin:subString];
+                        for (NSString *separateString in questionArray) {
+                            //分割后的添加到目标数组中
+                            [questionArr addObject:separateString];
+                        }
+                    }
+                }
+                
+                //上一步的数据源
+                NSMutableArray *colonArr = [NSMutableArray arrayWithArray:questionArr];
+                //如果包含符号
+                if (isContainColon) {
+                    //把数据移除
+                    [colonArr removeAllObjects];
+                    //遍历原数据
+                    for (NSString *subString in questionArr) {
+                        //按符号分割
+                        NSArray *colonArray = [self dealColonWithOrigin:subString];
+                        for (NSString *separateString in colonArray) {
+                            //分割后的添加到目标数组中
+                            [colonArr addObject:separateString];
+                        }
+                    }
+                }
+                
+                //上一步的数据源
+                NSMutableArray *semicolonArr = [NSMutableArray arrayWithArray:colonArr];
+                //如果包含符号
+                if (isContainSemicolon) {
+                    //把数据移除
+                    [semicolonArr removeAllObjects];
+                    //遍历原数据
+                    for (NSString *subString in colonArr) {
+                        //按符号分割
+                        NSArray *semicolonArray = [self dealSemicolonWithOrigin:subString];
+                        for (NSString *separateString in semicolonArray) {
+                            //分割后的添加到目标数组中
+                            [semicolonArr addObject:separateString];
+                        }
+                    }
+                }
+                
+                NSString *needAdd = @"";
+                for (NSString *subString in semicolonArr) {
+                    needAdd = subString;
+                    //取最后一个字符
+                    NSString *contentLastChar = [needAdd substringFromIndex:needAdd.length-1];
+                    if ([contentLastChar isEqualToString:@"？"] || [contentLastChar isEqualToString:@"！"] || [contentLastChar isEqualToString:@"："] || [contentLastChar isEqualToString:@"；"]) {
+                        //如果是问号或者感叹号结尾，则不处理
+                        needAdd = subString;
+                    }else{
+                        //把逗号补上
+                        needAdd = [NSString stringWithFormat:@"%@，",subString];
+                    }
+
+                    [dataArray addObject:needAdd];
+                }
+                
+                
+                //非空诗句添加到数组中
+            }
+            
+            //循环处理了全部诗词
+        }
+
+//        [dataArray addObject:originString];
     }
     
     
@@ -237,7 +339,9 @@
 - (NSArray*)dealPartWithOrigin:(NSString*)contentString
 {
     NSMutableArray *arr = [NSMutableArray array];
-    
+    if (kStringIsEmpty(contentString)) {
+        return arr;
+    }
     if (contentString.length < 8) {
         //如果诗句少于8个字，则直接添加该诗句，不处理逗号
         [arr addObject:contentString];

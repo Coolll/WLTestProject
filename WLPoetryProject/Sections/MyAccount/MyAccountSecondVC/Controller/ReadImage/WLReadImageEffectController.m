@@ -40,7 +40,7 @@
 }
 - (void)loadCustomData
 {
-    self.itemsArray = [NSArray arrayWithObjects:@"雪花",@"樱花",@"枫叶",@"梅花",@"细雨", nil];
+    self.itemsArray = [NSArray arrayWithObjects:@"雪花",@"樱花",@"枫叶",@"梅花",@"细雨",@"流星", nil];
 }
 
 #pragma mark - 加载视图
@@ -151,8 +151,11 @@
         NSLog(@"梅花");
         [self chooseEffect:@"plum"];
     }else if (indexPath.row == 4 && indexPath.section == 0){
-        NSLog(@"梅花");
+        NSLog(@"细雨");
         [self chooseEffect:@"rain"];
+    }else if (indexPath.row == 5 && indexPath.section == 0){
+        NSLog(@"流星");
+        [self chooseEffect:@"meteor"];
     }
 }
 

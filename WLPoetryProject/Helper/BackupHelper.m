@@ -297,6 +297,8 @@
     else if([classInfo isEqualToString:@"118"]){return @"孤芳自赏";}
     else if([classInfo isEqualToString:@"119"]){return @"得意";}
     else if([classInfo isEqualToString:@"120"]){return @"勉励";}
+    else if([classInfo isEqualToString:@"121"]){return @"高风亮节";}
+    else if([classInfo isEqualToString:@"122"]){return @"批判";}
     else if([classInfo isEqualToString:@"1001"]){return @"山村咏怀";}
     else if([classInfo isEqualToString:@"1002"]){return @"咏鹅";}
     else if([classInfo isEqualToString:@"1003"]){return @"春晓";}
@@ -467,6 +469,7 @@
     else if ([source isEqualToString:@"25"]){return @"清代诗词";}
     else if ([source isEqualToString:@"26"]){return @"明诗";}
     else if ([source isEqualToString:@"27"]){return @"古代词";}
+    else if ([source isEqualToString:@"28"]){return @"明词";}
     else if ([source isEqualToString:@"99"]){return @"其他";}
     else if ([source isEqualToString:@"100"]){return @"学而篇";}
     else if ([source isEqualToString:@"101"]){return @"为政篇";}

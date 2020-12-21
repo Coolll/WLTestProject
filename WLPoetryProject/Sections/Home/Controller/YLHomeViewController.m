@@ -53,9 +53,27 @@
  *  首页的题画背景URL
  **/
 @property (nonatomic,copy) NSString *topImageURL;
+/**
+ *  完成的page
+ **/
+@property (nonatomic,assign) NSInteger finishLoadingCount;
+/**
+ *  是否正在网络请求，避免上拉时重复请求
+ **/
+@property (nonatomic,assign) BOOL isBackgroundRequesting;
+/**
+ *  page
+ **/
+@property (nonatomic,assign) NSInteger currentCount;
+/**
+ *  是否还有
+ **/
+@property (nonatomic,assign) BOOL hasNext;
 
-
-
+/**
+ *  当前的高度
+ **/
+@property (nonatomic,assign) CGFloat currentTableHeight;
 
 @end
 
@@ -72,7 +90,7 @@
 //    [self checkLocalData];//加载本地数据
 //    [self checkNetworkAndDealImage];
 
-    [[BackupHelper shareInstance] updateRecommendPoetry];//更新热门诗词
+//    [[BackupHelper shareInstance] updateRecommendPoetry];//更新热门诗词
 
 //    [[BackupHelper shareInstance] uploadAllPoetry];//备份诗词
 //    [self uploadAllImages];
@@ -176,6 +194,7 @@
     
     self.poetryArray = [NSMutableArray array];
     
+    self.hasNext = YES;
     
     [self dealHomeTopImage];
     
@@ -217,7 +236,7 @@
 
 - (void)requestHomeHotPoetry{
     __weak __typeof(self)weakSelf = self;
-    [self.networkHelper requestHotPoetry:0 count:10 withCompletion:^(BOOL success, NSDictionary *dic, NSError *error) {
+    [self.networkHelper requestHotPoetry:0 count:15 withCompletion:^(BOOL success, NSDictionary *dic, NSError *error) {
         
         __strong __typeof(weakSelf)strongSelf = weakSelf;
         NSString *codeString = [NSString stringWithFormat:@"%@",[dic objectForKey:@"retCode"]];
@@ -227,9 +246,13 @@
                 PoetryModel *model = [[PoetryModel alloc]initPoetryWithDictionary:poetryDic];
                 [strongSelf.poetryArray addObject:model];
             }
-            
+            if (dataArr && [dataArr isKindOfClass:[NSArray class]] && dataArr.count > 0 ) {
+                strongSelf.hasNext = YES;
+            }
+
             dispatch_async(dispatch_get_main_queue(), ^{
                 [strongSelf loadCustomView];
+                [weakSelf calculateCurrentTableAllHeight];
             });
             
         }else{
@@ -270,13 +293,13 @@
 - (void)loadTableHeaderAndFooter
 {
     self.mainTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(refreshHomeData)];
-    self.mainTableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
+//    self.mainTableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
 }
 
 - (void)refreshHomeData{
     NSLog(@"刷新数据了");
     __weak __typeof(self)weakSelf = self;
-    [self.networkHelper requestHotPoetry:0 count:10 withCompletion:^(BOOL success, NSDictionary *dic, NSError *error) {
+    [self.networkHelper requestHotPoetry:0 count:15 withCompletion:^(BOOL success, NSDictionary *dic, NSError *error) {
         __strong __typeof(weakSelf)strongSelf = weakSelf;
         [strongSelf.mainTableView.mj_header endRefreshing];
         
@@ -292,7 +315,11 @@
             }
             
             dispatch_async(dispatch_get_main_queue(), ^{
+                weakSelf.currentCount = weakSelf.poetryArray.count;
+                weakSelf.finishLoadingCount = weakSelf.poetryArray.count;
                 [strongSelf.mainTableView reloadData];
+                [weakSelf calculateCurrentTableAllHeight];
+
             });
             
         }
@@ -301,31 +328,90 @@
 }
 
 - (void)loadMoreData{
+    if (self.isBackgroundRequesting) {
+        //正在请求新的数据，则不需要再次请求
+        return;
+    }
+    if (self.finishLoadingCount >= (self.currentCount+1)) {
+        //已经完成了下一页的数据请求，则不请求了
+        return;
+    }
+    
+    if (!self.hasNext) {
+        //已经没有数据了，不请求了
+        return;
+    }
+    self.isBackgroundRequesting = YES;
+    NSLog(@"加载更多:%ld",self.currentCount);
+    
+    //展示更多数据
+//    self.currentCount = self.finishLoadingCount+1;
+    
+    [self requestHotPoetryMoreData];
+}
+
+
+- (void)requestHotPoetryMoreData{
     NSLog(@"加载更多");
     NSInteger count = self.poetryArray.count;
     __weak __typeof(self)weakSelf = self;
     
-    [self.networkHelper requestHotPoetry:(count+1) count:10 withCompletion:^(BOOL success, NSDictionary *dic, NSError *error) {
+    [self.networkHelper requestHotPoetry:(count+1) count:15 withCompletion:^(BOOL success, NSDictionary *dic, NSError *error) {
         
-        [weakSelf.mainTableView.mj_footer endRefreshing];
-        
-//        NSLog(@"热门诗词：%@",dic);
+        weakSelf.isBackgroundRequesting = NO;
         NSString *codeString = [NSString stringWithFormat:@"%@",[dic objectForKey:@"retCode"]];
         if ([codeString isEqualToString:@"1000"]) {
             NSArray *dataArr = [dic objectForKey:@"data"];
+            NSMutableArray *lastArray = [NSMutableArray array];
+            if (weakSelf.poetryArray.count >= 8) {
+                for (int i = 8; i > 0; i--) {
+                    PoetryModel *lastModel = [weakSelf.poetryArray objectAtIndex:(weakSelf.poetryArray.count-i)];
+                    [lastArray addObject:lastModel];
+
+                }
+            }
             for (NSDictionary *poetryDic in dataArr) {
                 PoetryModel *model = [[PoetryModel alloc]initPoetryWithDictionary:poetryDic];
-                [weakSelf.poetryArray addObject:model];
+                BOOL contain = NO;
+                for (PoetryModel *lastModel in lastArray) {
+                    if ([lastModel.poetryID isEqualToString:model.poetryID]) {
+                        contain = YES;
+                        break;
+                    }
+                }
+                if (!contain) {
+                    [weakSelf.poetryArray addObject:model];
+                }
             }
             
+            if (dataArr && [dataArr isKindOfClass:[NSArray class]] && dataArr.count > 0 ) {
+                self.hasNext = YES;
+            }
             dispatch_async(dispatch_get_main_queue(), ^{
+                weakSelf.currentCount = weakSelf.poetryArray.count;
+                weakSelf.finishLoadingCount = weakSelf.poetryArray.count;
                 [weakSelf.mainTableView reloadData];
+                [weakSelf calculateCurrentTableAllHeight];
             });
             
         }
     }];
 }
 
+- (void)calculateCurrentTableAllHeight{
+    self.currentTableHeight = 0;
+    for (PoetryModel *model in self.poetryArray) {
+        if (model.heightForCell > 0) {
+            //如果有缓存的高度，则不计算了
+            self.currentTableHeight += model.heightForCell;
+        }else{
+            CGFloat cellHeight = [WLHomePoetryCell heightForFirstLine:model];
+            model.heightForCell = cellHeight;
+            self.currentTableHeight += cellHeight;
+        }
+    }
+
+}
 #pragma mark - table代理
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -405,22 +491,13 @@
         //如果有缓存的高度，则不计算了
         
         PoetryModel *model = [self.poetryArray objectAtIndex:(section-1)];
-        
         if (model.heightForCell > 0) {
             return model.heightForCell;
         }
         
-        //        if (indexPath.row == self.poetryArray.count-1) {
-        //            //最后一行需要调整一下间距
-        //            CGFloat cellHeight = [WLHomePoetryCell heightForFirstLine:[self.poetryArray objectAtIndex:(section-1)]];
-        //            model.heightForCell = cellHeight;
-        //            return cellHeight;
-        //        }else{
         CGFloat cellHeight = [WLHomePoetryCell heightForFirstLine:[self.poetryArray objectAtIndex:(section-1)]];
         model.heightForCell = cellHeight;
         return cellHeight;
-        //        }
-        
         
     }
     
@@ -496,6 +573,21 @@
         }
     }
     
+}
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    
+    if (self.currentTableHeight == 0) {
+        [self calculateCurrentTableAllHeight];
+    }
+        
+
+    CGFloat leftH = self.currentTableHeight-PhoneScreen_HEIGHT-scrollView.contentOffset.y+64;
+    
+    if (leftH < PhoneScreen_HEIGHT/2) {
+        NSLog(@"需要加载");
+        [self loadMoreData];
+    }
+
 }
 #pragma mark - 点击事件
 - (void)writePoetryAction:(UIButton*)sender
