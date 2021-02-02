@@ -227,6 +227,13 @@
 		07A73DA925359B1E0028344B /* WLReadImagePreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A73DA825359B1E0028344B /* WLReadImagePreviewController.m */; };
 		07A922B120862EB100BE5929 /* PoetryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A922B020862EB100BE5929 /* PoetryModel.m */; };
 		07B6E7AB20A07B2E000998E3 /* WLPoetryListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07B6E7AA20A07B2E000998E3 /* WLPoetryListController.m */; };
+		07BC83AE25C9597E00EE8443 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07BC83AD25C9597E00EE8443 /* WidgetKit.framework */; };
+		07BC83B025C9597E00EE8443 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07BC83AF25C9597E00EE8443 /* SwiftUI.framework */; };
+		07BC83B325C9597E00EE8443 /* widgetProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BC83B225C9597E00EE8443 /* widgetProject.swift */; };
+		07BC83B625C9598000EE8443 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07BC83B525C9598000EE8443 /* Assets.xcassets */; };
+		07BC83B825C9598000EE8443 /* widgetProject.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 07BC83B425C9597E00EE8443 /* widgetProject.intentdefinition */; };
+		07BC83B925C9598000EE8443 /* widgetProject.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 07BC83B425C9597E00EE8443 /* widgetProject.intentdefinition */; };
+		07BC83BC25C9598000EE8443 /* widgetProjectExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 07BC83AC25C9597E00EE8443 /* widgetProjectExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		07CE6D4A23909BDB005384B9 /* FHL_one.json in Resources */ = {isa = PBXBuildFile; fileRef = 07CE6D4823909BDB005384B9 /* FHL_one.json */; };
 		07CE6D4B23909BDB005384B9 /* FHL_empty.json in Resources */ = {isa = PBXBuildFile; fileRef = 07CE6D4923909BDB005384B9 /* FHL_empty.json */; };
 		07CFF240208B0AEE00849C20 /* WLPoetryListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 07CFF23F208B0AEE00849C20 /* WLPoetryListCell.m */; };
@@ -352,6 +359,13 @@
 			remoteGlobalIDString = 079568F420726D0B0097C26D;
 			remoteInfo = WLPoetryProject;
 		};
+		07BC83BA25C9598000EE8443 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 079568ED20726D0B0097C26D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 07BC83AB25C9597E00EE8443;
+			remoteInfo = widgetProjectExtension;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -363,6 +377,17 @@
 			files = (
 			);
 			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		07BC83BD25C9598000EE8443 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				07BC83BC25C9598000EE8443 /* widgetProjectExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -728,6 +753,13 @@
 		07A922B020862EB100BE5929 /* PoetryModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PoetryModel.m; sourceTree = "<group>"; };
 		07B6E7A920A07B2E000998E3 /* WLPoetryListController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLPoetryListController.h; sourceTree = "<group>"; };
 		07B6E7AA20A07B2E000998E3 /* WLPoetryListController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLPoetryListController.m; sourceTree = "<group>"; };
+		07BC83AC25C9597E00EE8443 /* widgetProjectExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = widgetProjectExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		07BC83AD25C9597E00EE8443 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		07BC83AF25C9597E00EE8443 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		07BC83B225C9597E00EE8443 /* widgetProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = widgetProject.swift; sourceTree = "<group>"; };
+		07BC83B425C9597E00EE8443 /* widgetProject.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = widgetProject.intentdefinition; sourceTree = "<group>"; };
+		07BC83B525C9598000EE8443 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		07BC83B725C9598000EE8443 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		07CE6D4823909BDB005384B9 /* FHL_one.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FHL_one.json; sourceTree = "<group>"; };
 		07CE6D4923909BDB005384B9 /* FHL_empty.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FHL_empty.json; sourceTree = "<group>"; };
 		07CFF23E208B0AEE00849C20 /* WLPoetryListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLPoetryListCell.h; sourceTree = "<group>"; };
@@ -934,6 +966,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		07BC83A925C9597E00EE8443 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				07BC83B025C9597E00EE8443 /* SwiftUI.framework in Frameworks */,
+				07BC83AE25C9597E00EE8443 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -997,6 +1038,8 @@
 				070F3DDA207E333E00EE3000 /* libobjc.tbd */,
 				070F3DD8207E333700EE3000 /* libz.tbd */,
 				070F3DD6207E333000EE3000 /* libsqlite3.tbd */,
+				07BC83AD25C9597E00EE8443 /* WidgetKit.framework */,
+				07BC83AF25C9597E00EE8443 /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1531,6 +1574,7 @@
 				079568F720726D0B0097C26D /* WLPoetryProject */,
 				0795691320726D0B0097C26D /* WLPoetryProjectTests */,
 				0795691E20726D0B0097C26D /* WLPoetryProjectUITests */,
+				07BC83B125C9597E00EE8443 /* widgetProject */,
 				079568F620726D0B0097C26D /* Products */,
 				070F3DD5207E333000EE3000 /* Frameworks */,
 			);
@@ -1542,6 +1586,7 @@
 				079568F520726D0B0097C26D /* WLPoetryProject.app */,
 				0795691020726D0B0097C26D /* WLPoetryProjectTests.xctest */,
 				0795691B20726D0B0097C26D /* WLPoetryProjectUITests.xctest */,
+				07BC83AC25C9597E00EE8443 /* widgetProjectExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1631,6 +1676,17 @@
 				360A2A9F237EA7670033F2F0 /* PoetryConfigureModel.m */,
 			);
 			path = Entity;
+			sourceTree = "<group>";
+		};
+		07BC83B125C9597E00EE8443 /* widgetProject */ = {
+			isa = PBXGroup;
+			children = (
+				07BC83B225C9597E00EE8443 /* widgetProject.swift */,
+				07BC83B425C9597E00EE8443 /* widgetProject.intentdefinition */,
+				07BC83B525C9598000EE8443 /* Assets.xcassets */,
+				07BC83B725C9598000EE8443 /* Info.plist */,
+			);
+			path = widgetProject;
 			sourceTree = "<group>";
 		};
 		07CE6D4723909BDB005384B9 /* FHL */ = {
@@ -2068,10 +2124,12 @@
 				079568F220726D0B0097C26D /* Frameworks */,
 				079568F320726D0B0097C26D /* Resources */,
 				070F3DD4207E32EE00EE3000 /* Embed Frameworks */,
+				07BC83BD25C9598000EE8443 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				07BC83BB25C9598000EE8443 /* PBXTargetDependency */,
 			);
 			name = WLPoetryProject;
 			productName = WLPoetryProject;
@@ -2114,12 +2172,31 @@
 			productReference = 0795691B20726D0B0097C26D /* WLPoetryProjectUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		07BC83AB25C9597E00EE8443 /* widgetProjectExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 07BC83C025C9598000EE8443 /* Build configuration list for PBXNativeTarget "widgetProjectExtension" */;
+			buildPhases = (
+				07BC83A825C9597E00EE8443 /* Sources */,
+				07BC83A925C9597E00EE8443 /* Frameworks */,
+				07BC83AA25C9597E00EE8443 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = widgetProjectExtension;
+			productName = widgetProjectExtension;
+			productReference = 07BC83AC25C9597E00EE8443 /* widgetProjectExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		079568ED20726D0B0097C26D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				DefaultBuildSystemTypeForWorkspace = Original;
+				LastSwiftUpdateCheck = 1240;
 				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = "龙培";
 				TargetAttributes = {
@@ -2136,6 +2213,10 @@
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 079568F420726D0B0097C26D;
+					};
+					07BC83AB25C9597E00EE8443 = {
+						CreatedOnToolsVersion = 12.4;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -2155,6 +2236,7 @@
 				079568F420726D0B0097C26D /* WLPoetryProject */,
 				0795690F20726D0B0097C26D /* WLPoetryProjectTests */,
 				0795691A20726D0B0097C26D /* WLPoetryProjectUITests */,
+				07BC83AB25C9597E00EE8443 /* widgetProjectExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -2324,6 +2406,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		07BC83AA25C9597E00EE8443 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				07BC83B625C9598000EE8443 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -2397,6 +2487,7 @@
 				07567B17207A02EB0018B9E7 /* MJRefreshAutoNormalFooter.m in Sources */,
 				07567B8E207A02EC0018B9E7 /* WLRequestHelper.m in Sources */,
 				0765C6FB207CE6E20085EB3A /* NSImage+WebCache.m in Sources */,
+				07BC83B925C9598000EE8443 /* widgetProject.intentdefinition in Sources */,
 				363054C421A3AA8D0084FD5B /* WQLProgressView.m in Sources */,
 				36B3672021A807B80071C14A /* WLPercentView.m in Sources */,
 				0073FD7520EE021A00FED6D6 /* WLLaunchView.m in Sources */,
@@ -2505,6 +2596,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		07BC83A825C9597E00EE8443 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				07BC83B825C9598000EE8443 /* widgetProject.intentdefinition in Sources */,
+				07BC83B325C9597E00EE8443 /* widgetProject.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -2517,6 +2617,11 @@
 			isa = PBXTargetDependency;
 			target = 079568F420726D0B0097C26D /* WLPoetryProject */;
 			targetProxy = 0795691C20726D0B0097C26D /* PBXContainerItemProxy */;
+		};
+		07BC83BB25C9598000EE8443 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 07BC83AB25C9597E00EE8443 /* widgetProjectExtension */;
+			targetProxy = 07BC83BA25C9598000EE8443 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -2647,6 +2752,7 @@
 		0795692520726D0B0097C26D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: wangqilong wang (YMCYH9M6N8)";
@@ -2685,6 +2791,7 @@
 		0795692620726D0B0097C26D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: QILONG WANG (EQK7HQ2C5P)";
@@ -2779,6 +2886,60 @@
 			};
 			name = Release;
 		};
+		07BC83BE25C9598000EE8443 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: wangqilong wang (YMCYH9M6N8)";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = EQK7HQ2C5P;
+				INFOPLIST_FILE = widgetProject/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wangqilong.wqlPoetryProject.widgetProject;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = WLPoetryWidgetDev;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		07BC83BF25C9598000EE8443 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: QILONG WANG (EQK7HQ2C5P)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: QILONG WANG (EQK7HQ2C5P)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = EQK7HQ2C5P;
+				INFOPLIST_FILE = widgetProject/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wangqilong.wqlPoetryProject.widgetProject;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -2814,6 +2975,15 @@
 			buildConfigurations = (
 				0795692B20726D0B0097C26D /* Debug */,
 				0795692C20726D0B0097C26D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		07BC83C025C9598000EE8443 /* Build configuration list for PBXNativeTarget "widgetProjectExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				07BC83BE25C9598000EE8443 /* Debug */,
+				07BC83BF25C9598000EE8443 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
