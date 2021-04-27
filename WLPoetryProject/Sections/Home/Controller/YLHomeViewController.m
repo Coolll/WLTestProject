@@ -242,10 +242,15 @@
         NSString *codeString = [NSString stringWithFormat:@"%@",[dic objectForKey:@"retCode"]];
         if ([codeString isEqualToString:@"1000"]) {
             NSArray *dataArr = [dic objectForKey:@"data"];
-            for (NSDictionary *poetryDic in dataArr) {
+            NSMutableDictionary *indexDic = [NSMutableDictionary dictionary];
+            NSMutableArray *randomArr = [NSMutableArray array];
+           NSMutableArray *finalArr = [self loadRandomItemWithOriginArr:[dataArr mutableCopy] withRandomArr:randomArr];
+            
+            for (NSDictionary *poetryDic in finalArr) {
                 PoetryModel *model = [[PoetryModel alloc]initPoetryWithDictionary:poetryDic];
                 [strongSelf.poetryArray addObject:model];
             }
+            indexDic = nil;
             if (dataArr && [dataArr isKindOfClass:[NSArray class]] && dataArr.count > 0 ) {
                 strongSelf.hasNext = YES;
             }
@@ -308,7 +313,19 @@
         if ([codeString isEqualToString:@"1000"]) {
             [strongSelf.poetryArray removeAllObjects];
             NSArray *dataArr = [dic objectForKey:@"data"];
-            for (NSDictionary *poetryDic in dataArr) {
+            NSMutableArray *randomArr = [NSMutableArray array];
+           NSMutableArray *finalArr = [self loadRandomItemWithOriginArr:[dataArr mutableCopy] withRandomArr:randomArr];
+            
+//            for (int i =0 ;i <indexDic.allKeys.count;i++) {
+//                NSInteger index = [[indexDic objectForKey:[indexDic.allKeys objectAtIndex:i]] integerValue];
+//                NSDictionary *poetryDic = [dataArr objectAtIndex:index];
+//                PoetryModel *model = [[PoetryModel alloc]initPoetryWithDictionary:poetryDic];
+//                [model loadFirstLineString];
+//                [strongSelf.poetryArray addObject:model];
+//                poetryDic = nil;
+//            }
+
+            for (NSDictionary *poetryDic in finalArr) {
                 PoetryModel *model = [[PoetryModel alloc]initPoetryWithDictionary:poetryDic];
                 [model loadFirstLineString];
                 [strongSelf.poetryArray addObject:model];
@@ -325,6 +342,18 @@
         }
     }];
     
+}
+
+
+- (NSMutableArray*)loadRandomItemWithOriginArr:(NSMutableArray*)originArr withRandomArr:(NSMutableArray*)mutArr {
+    if (originArr.count == 0) {
+        return mutArr;
+    }else{
+        NSInteger random = arc4random()%(originArr.count);
+        [mutArr addObject:[originArr objectAtIndex:random]];
+        [originArr removeObjectAtIndex:random];
+        return [self loadRandomItemWithOriginArr:originArr withRandomArr:mutArr];
+    }
 }
 
 - (void)loadMoreData{
@@ -362,27 +391,59 @@
         NSString *codeString = [NSString stringWithFormat:@"%@",[dic objectForKey:@"retCode"]];
         if ([codeString isEqualToString:@"1000"]) {
             NSArray *dataArr = [dic objectForKey:@"data"];
-            NSMutableArray *lastArray = [NSMutableArray array];
-            if (weakSelf.poetryArray.count >= 8) {
-                for (int i = 8; i > 0; i--) {
-                    PoetryModel *lastModel = [weakSelf.poetryArray objectAtIndex:(weakSelf.poetryArray.count-i)];
-                    [lastArray addObject:lastModel];
+//            NSMutableArray *lastArray = [NSMutableArray array];
+//            if (weakSelf.poetryArray.count >= 8) {
+//                for (int i = 8; i > 0; i--) {
+//                    PoetryModel *lastModel = [weakSelf.poetryArray objectAtIndex:(weakSelf.poetryArray.count-i)];
+//                    [lastArray addObject:lastModel];
+//
+//                }
+//            }
+            
+//            NSMutableDictionary *indexDic = [NSMutableDictionary dictionary];
+//            for (int a = 0; a < dataArr.count; a++) {
+//                [indexDic setValue:[NSString stringWithFormat:@"%d",a] forKey:[NSString stringWithFormat:@"%d",a]];
+//            }
+            NSMutableArray *randomArr = [NSMutableArray array];
 
-                }
-            }
-            for (NSDictionary *poetryDic in dataArr) {
-                PoetryModel *model = [[PoetryModel alloc]initPoetryWithDictionary:poetryDic];
-                BOOL contain = NO;
-                for (PoetryModel *lastModel in lastArray) {
-                    if ([lastModel.poetryID isEqualToString:model.poetryID]) {
-                        contain = YES;
-                        break;
-                    }
-                }
-                if (!contain) {
-                    [weakSelf.poetryArray addObject:model];
-                }
-            }
+            NSMutableArray *finalArr = [self loadRandomItemWithOriginArr:[dataArr mutableCopy] withRandomArr:randomArr];
+             
+             for (NSDictionary *poetryDic in finalArr) {
+                 PoetryModel *model = [[PoetryModel alloc]initPoetryWithDictionary:poetryDic];
+                 [model loadFirstLineString];
+                 [weakSelf.poetryArray addObject:model];
+             }
+//                NSInteger index = [[indexDic objectForKey:[indexDic.allKeys objectAtIndex:i]] integerValue];
+//                NSDictionary *poetryDic = [dataArr objectAtIndex:index];
+//                PoetryModel *model = [[PoetryModel alloc]initPoetryWithDictionary:poetryDic];
+//                [model loadFirstLineString];
+//                BOOL contain = NO;
+//                for (PoetryModel *lastModel in lastArray) {
+//                    if ([lastModel.poetryID isEqualToString:model.poetryID]) {
+//                        contain = YES;
+//                        break;
+//                    }
+//                }
+//                if (!contain) {
+//                    [weakSelf.poetryArray addObject:model];
+//                }
+
+//                poetryDic = nil;
+//            }
+
+//            for (NSDictionary *poetryDic in dataArr) {
+//                PoetryModel *model = [[PoetryModel alloc]initPoetryWithDictionary:poetryDic];
+//                BOOL contain = NO;
+//                for (PoetryModel *lastModel in lastArray) {
+//                    if ([lastModel.poetryID isEqualToString:model.poetryID]) {
+//                        contain = YES;
+//                        break;
+//                    }
+//                }
+//                if (!contain) {
+//                    [weakSelf.poetryArray addObject:model];
+//                }
+//            }
             
             if (dataArr && [dataArr isKindOfClass:[NSArray class]] && dataArr.count > 0 ) {
                 self.hasNext = YES;

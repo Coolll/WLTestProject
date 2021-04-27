@@ -64,7 +64,7 @@
 }
 
 - (void)updateRecommendPoetry{
-    NSArray *poetryModelArray = [self readLocalFileWithName:@"recommendPoetrySix"];
+    NSArray *poetryModelArray = [self readLocalFileWithName:@"recommendPoetrySeven"];
 
     NSInteger time = 0;
     for (NSInteger i = poetryModelArray.count-1; i >= 0; i--) {

@@ -220,6 +220,7 @@
 		0795692020726D0B0097C26D /* WLPoetryProjectUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0795691F20726D0B0097C26D /* WLPoetryProjectUITests.m */; };
 		079BC505209D42BB00E0DF85 /* WLPoetryContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 079BC504209D42BB00E0DF85 /* WLPoetryContentCell.m */; };
 		079BC508209EEF6800E0DF85 /* AppConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 079BC507209EEF6800E0DF85 /* AppConfig.m */; };
+		079C3CF326330530003FEB2D /* recommendPoetrySeven.json in Resources */ = {isa = PBXBuildFile; fileRef = 079C3CF22633052F003FEB2D /* recommendPoetrySeven.json */; };
 		07A73D9625358AEC0028344B /* WLReadImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A73D9525358AEC0028344B /* WLReadImageCell.m */; };
 		07A73DA42535985B0028344B /* WLReadImageListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A73D9E2535985B0028344B /* WLReadImageListController.m */; };
 		07A73DA52535985B0028344B /* WLReadImageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A73DA22535985B0028344B /* WLReadImageController.m */; };
@@ -714,6 +715,7 @@
 		079BC504209D42BB00E0DF85 /* WLPoetryContentCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLPoetryContentCell.m; sourceTree = "<group>"; };
 		079BC506209EEF6800E0DF85 /* AppConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppConfig.h; sourceTree = "<group>"; };
 		079BC507209EEF6800E0DF85 /* AppConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppConfig.m; sourceTree = "<group>"; };
+		079C3CF22633052F003FEB2D /* recommendPoetrySeven.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = recommendPoetrySeven.json; sourceTree = "<group>"; };
 		07A73D9425358AEC0028344B /* WLReadImageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLReadImageCell.h; sourceTree = "<group>"; };
 		07A73D9525358AEC0028344B /* WLReadImageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLReadImageCell.m; sourceTree = "<group>"; };
 		07A73D9E2535985B0028344B /* WLReadImageListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLReadImageListController.m; sourceTree = "<group>"; };
@@ -1482,6 +1484,7 @@
 		076D28E425318B8D00AB90E0 /* recommend */ = {
 			isa = PBXGroup;
 			children = (
+				079C3CF22633052F003FEB2D /* recommendPoetrySeven.json */,
 				0763B90E254900C90051868B /* recommendPoetrySix.json */,
 				0710D653253D771000865398 /* recommendPoetryFive.json */,
 				076D28EB25318BAE00AB90E0 /* recommendPoetryFour.json */,
@@ -2226,6 +2229,7 @@
 				07F3E31420D2C0FC00E7BAF7 /* clearNavi.png in Resources */,
 				3635751A21AE7763009524C7 /* userClassInfo.png in Resources */,
 				0716E0A22537E0AF00780A9D /* configureLunYu.json in Resources */,
+				079C3CF326330530003FEB2D /* recommendPoetrySeven.json in Resources */,
 				0716E0A12537E0AF00780A9D /* configureSongGreat.json in Resources */,
 				07CE6D4A23909BDB005384B9 /* FHL_one.json in Resources */,
 				07F3E31120D2C0FC00E7BAF7 /* myArrow.png in Resources */,
@@ -2672,7 +2676,7 @@
 					"$(PROJECT_DIR)/WLPoetryProject/ThirdPartClass/SDK/ShareSDK/Support/PlatformSDK/SinaWeiboSDK",
 					"$(PROJECT_DIR)/WLPoetryProject/ThirdPartClass/SDK/ShareSDK/Support/PlatformSDK/WeChatSDK",
 				);
-				MARKETING_VERSION = 1.4.6;
+				MARKETING_VERSION = 1.4.7;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wangqilong.wqlPoetryProject;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2711,7 +2715,7 @@
 					"$(PROJECT_DIR)/WLPoetryProject/ThirdPartClass/SDK/ShareSDK/Support/PlatformSDK/SinaWeiboSDK",
 					"$(PROJECT_DIR)/WLPoetryProject/ThirdPartClass/SDK/ShareSDK/Support/PlatformSDK/WeChatSDK",
 				);
-				MARKETING_VERSION = 1.4.6;
+				MARKETING_VERSION = 1.4.7;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wangqilong.wqlPoetryProject;
 				PRODUCT_NAME = "$(TARGET_NAME)";

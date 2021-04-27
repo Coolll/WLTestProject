@@ -610,11 +610,10 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
         }
 
 
-        if (kStringIsEmpty(self.dataModel.analysesInfo) || kStringIsEmpty(self.dataModel.addtionInfo) || kStringIsEmpty(self.dataModel.transferInfo) || kStringIsEmpty(self.dataModel.backgroundInfo)) {
-            
-            [self loadAnalyseView];
-        }else{
+        if (kStringIsEmpty(self.dataModel.analysesInfo) && kStringIsEmpty(self.dataModel.addtionInfo) && kStringIsEmpty(self.dataModel.transferInfo) && kStringIsEmpty(self.dataModel.backgroundInfo)) {
             [self requestAnalysesInfo];
+        }else{
+            [self loadAnalyseView];
         }
 
     }
