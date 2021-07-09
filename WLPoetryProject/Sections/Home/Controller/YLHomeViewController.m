@@ -74,7 +74,10 @@
  *  当前的高度
  **/
 @property (nonatomic,assign) CGFloat currentTableHeight;
-
+/**
+ *  背景色
+ **/
+@property (nonatomic,strong) UIColor *bgColor;
 @end
 
 @implementation YLHomeViewController
@@ -90,7 +93,7 @@
 //    [self checkLocalData];//加载本地数据
 //    [self checkNetworkAndDealImage];
 
-    [[BackupHelper shareInstance] updateRecommendPoetry];//更新热门诗词
+//    [[BackupHelper shareInstance] updateRecommendPoetry];//更新热门诗词
 
 //    [[BackupHelper shareInstance] uploadAllPoetry];//备份诗词
 //    [self uploadAllImages];
@@ -198,6 +201,7 @@
     
     [self dealHomeTopImage];
     
+    self.bgColor = RGBCOLOR(242, 246, 242, 1);
 }
 
 - (void)dealHomeTopImage{
@@ -291,7 +295,7 @@
 #pragma mark - 加载视图
 - (void)loadCustomView
 {
-    self.mainTableView.backgroundColor = RGBCOLOR(246, 246, 246, 1.0);
+    self.mainTableView.backgroundColor = self.bgColor;
     [self loadTableHeaderAndFooter];
 }
 
@@ -505,7 +509,7 @@
     if (section == 1) {
         //第二个section为热门诗词
         UIView *headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, PhoneScreen_WIDTH, 30)];
-        headerView.backgroundColor = RGBCOLOR(246, 246, 246, 1.0);
+        headerView.backgroundColor = self.bgColor;
         
         UILabel *poetryTipLabel = [[UILabel alloc]init];
         poetryTipLabel.text = @"热门·诗词";
@@ -528,7 +532,7 @@
     
     if (section != 0) {
         UIView *headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, PhoneScreen_WIDTH, 30)];
-        headerView.backgroundColor = RGBCOLOR(246, 246, 246, 1.0);
+        headerView.backgroundColor = self.bgColor;
         return headerView;
     }
     
@@ -542,7 +546,7 @@
     if (section == 0) {
         //图片的高度
         CGFloat imageW = PhoneScreen_WIDTH-30;
-        CGFloat imageH = imageW/2.88;//图片的比例是750：260
+        CGFloat imageH = imageW/2.74;//图片的比例是1920：700
         //10 20 5 image 5 20
         return imageH+40;
         
@@ -574,7 +578,7 @@
         if (!cell) {
             cell = [[WLImageCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"WLImageCell"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.backgroundColor = RGBCOLOR(246, 246, 246, 1.0);
+            cell.backgroundColor = self.bgColor;
         }
         cell.imageURL = self.topImageURL;
         [cell touchImageWithBlock:^{
@@ -590,11 +594,13 @@
     }else {
         PoetryModel *model = [self.poetryArray objectAtIndex:(section-1)];
         WLHomePoetryCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WLHomePoetryCell"];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.backgroundColor = RGBCOLOR(246, 246, 246, 1.0);
+        NSLog(@"=====cell:%@",cell);
         if (!cell) {
             cell = [[WLHomePoetryCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"WLHomePoetryCell"];
-            
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.contentView.backgroundColor = self.bgColor;
+            cell.backgroundColor = self.bgColor;
+
             NSLog(@"====index:%ld %@",indexPath.section,cell);
         }
         if (indexPath.section == self.poetryArray.count) {
@@ -700,7 +706,7 @@
         _mainTableView.estimatedRowHeight = 0;
         _mainTableView.estimatedSectionFooterHeight = 0;
         _mainTableView.estimatedSectionHeaderHeight = 0;
-        [_mainTableView registerClass:[WLHomePoetryCell class] forCellReuseIdentifier:@"WLHomePoetryCell"];
+//        [_mainTableView registerClass:[WLHomePoetryCell class] forCellReuseIdentifier:@"WLHomePoetryCell"];
         [self.view addSubview:_mainTableView];
         
 

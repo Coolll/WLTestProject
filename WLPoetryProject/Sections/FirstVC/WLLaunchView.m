@@ -136,10 +136,9 @@
 
 - (void)skipAction:(UIButton*)sender
 {
-//    [self dismissViewControllerAnimated:NO completion:nil];
-//    AppDelegate *delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-//    [delegate loadCustomTabbar];
-
+    NSLog(@"跳过=====");
+    [self.timer invalidate];
+    self.timer = nil;
     [UIView animateWithDuration:0.3 animations:^{
         self.alpha = 0;
     } completion:^(BOOL finished) {
@@ -147,6 +146,9 @@
     }];
 }
 
-
+- (void)dealloc
+{
+    NSLog(@"销毁launch");
+}
 
 @end

@@ -20,8 +20,6 @@
 		0010F22720F4966E00F272EB /* WLBookView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0010F22620F4966E00F272EB /* WLBookView.m */; };
 		0010F22A20F4996500F272EB /* WLTypeListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0010F22920F4996500F272EB /* WLTypeListController.m */; };
 		0010F22D20F4A81C00F272EB /* WLGradeTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0010F22C20F4A81C00F272EB /* WLGradeTypeCell.m */; };
-		003EBE1620D0F00A00DD7815 /* LeadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 003EBE1520D0F00A00DD7815 /* LeadViewController.m */; };
-		003EBE1920D0F04500DD7815 /* LaunchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 003EBE1820D0F04500DD7815 /* LaunchController.m */; };
 		00469AF320F893770068636F /* WLCustomImageListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00469AF220F893770068636F /* WLCustomImageListController.m */; };
 		00469AF620F8938D0068636F /* WLShowImageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00469AF520F8938D0068636F /* WLShowImageController.m */; };
 		00469AF820F89A200068636F /* customImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 00469AF720F89A200068636F /* customImage.png */; };
@@ -209,6 +207,7 @@
 		0785076A20B2EFF20030CD98 /* songPoetry_six.json in Resources */ = {isa = PBXBuildFile; fileRef = 0785076120B2EFF20030CD98 /* songPoetry_six.json */; };
 		078DB1E1225722C2007E6EA8 /* WLLunYuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 078DB1E0225722C2007E6EA8 /* WLLunYuController.m */; };
 		078DB1E42257279B007E6EA8 /* WLLunYuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 078DB1E32257279B007E6EA8 /* WLLunYuCell.m */; };
+		0790AE2F2696CBD4001E98A0 /* WLAuthorBgView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0790AE2E2696CBD4001E98A0 /* WLAuthorBgView.m */; };
 		0791165E210CB8FC00436964 /* writePoetry.png in Resources */ = {isa = PBXBuildFile; fileRef = 0791165D210CB8FC00436964 /* writePoetry.png */; };
 		07911661210CBDA800436964 /* WritePoetryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07911660210CBDA800436964 /* WritePoetryController.m */; };
 		079568FA20726D0B0097C26D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 079568F920726D0B0097C26D /* AppDelegate.m */; };
@@ -393,10 +392,6 @@
 		00150E8720EF53DF001BE61D /* Poetry+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Poetry+CoreDataClass.m"; sourceTree = "<group>"; };
 		00150E8820EF53DF001BE61D /* Poetry+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Poetry+CoreDataProperties.m"; sourceTree = "<group>"; };
 		00150E8920EF53DF001BE61D /* Poetry+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Poetry+CoreDataClass.h"; sourceTree = "<group>"; };
-		003EBE1420D0F00A00DD7815 /* LeadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeadViewController.h; sourceTree = "<group>"; };
-		003EBE1520D0F00A00DD7815 /* LeadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeadViewController.m; sourceTree = "<group>"; };
-		003EBE1720D0F04500DD7815 /* LaunchController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LaunchController.h; sourceTree = "<group>"; };
-		003EBE1820D0F04500DD7815 /* LaunchController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LaunchController.m; sourceTree = "<group>"; };
 		00469AF120F893770068636F /* WLCustomImageListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLCustomImageListController.h; sourceTree = "<group>"; };
 		00469AF220F893770068636F /* WLCustomImageListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLCustomImageListController.m; sourceTree = "<group>"; };
 		00469AF420F8938D0068636F /* WLShowImageController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLShowImageController.h; sourceTree = "<group>"; };
@@ -695,6 +690,8 @@
 		078DB1E0225722C2007E6EA8 /* WLLunYuController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLLunYuController.m; sourceTree = "<group>"; };
 		078DB1E22257279B007E6EA8 /* WLLunYuCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLLunYuCell.h; sourceTree = "<group>"; };
 		078DB1E32257279B007E6EA8 /* WLLunYuCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLLunYuCell.m; sourceTree = "<group>"; };
+		0790AE2D2696CBD4001E98A0 /* WLAuthorBgView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLAuthorBgView.h; sourceTree = "<group>"; };
+		0790AE2E2696CBD4001E98A0 /* WLAuthorBgView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLAuthorBgView.m; sourceTree = "<group>"; };
 		0791165D210CB8FC00436964 /* writePoetry.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = writePoetry.png; sourceTree = "<group>"; };
 		0791165F210CBDA800436964 /* WritePoetryController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WritePoetryController.h; sourceTree = "<group>"; };
 		07911660210CBDA800436964 /* WritePoetryController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WritePoetryController.m; sourceTree = "<group>"; };
@@ -957,10 +954,6 @@
 		003EBE1320D0F00A00DD7815 /* FirstVC */ = {
 			isa = PBXGroup;
 			children = (
-				003EBE1420D0F00A00DD7815 /* LeadViewController.h */,
-				003EBE1520D0F00A00DD7815 /* LeadViewController.m */,
-				003EBE1720D0F04500DD7815 /* LaunchController.h */,
-				003EBE1820D0F04500DD7815 /* LaunchController.m */,
 				0073FD7320EE021A00FED6D6 /* WLLaunchView.h */,
 				0073FD7420EE021A00FED6D6 /* WLLaunchView.m */,
 			);
@@ -1668,6 +1661,8 @@
 				360E67172194121A00AD56BF /* WLPoetryHeadCell.m */,
 				36F93F272457CB1E004BB5F9 /* WLAnalysesView.h */,
 				36F93F282457CB1E004BB5F9 /* WLAnalysesView.m */,
+				0790AE2D2696CBD4001E98A0 /* WLAuthorBgView.h */,
+				0790AE2E2696CBD4001E98A0 /* WLAuthorBgView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2341,7 +2336,6 @@
 				07FEFC88254AC49900C95B56 /* WLReadEffectCenter.m in Sources */,
 				07567B20207A02EC0018B9E7 /* MJRefreshConst.m in Sources */,
 				00BBFA1120D6524500BB86D9 /* WLFeedbackController.m in Sources */,
-				003EBE1620D0F00A00DD7815 /* LeadViewController.m in Sources */,
 				0010F22220F4911500F272EB /* WLImageController.m in Sources */,
 				00F9516120D4B2A10039D7C5 /* WLSettingController.m in Sources */,
 				0765C6B2207CE47E0085EB3A /* MASViewAttribute.m in Sources */,
@@ -2428,6 +2422,7 @@
 				079568FA20726D0B0097C26D /* AppDelegate.m in Sources */,
 				0765C705207CE6E20085EB3A /* SDWebImageFrame.m in Sources */,
 				07567AA0207A02EB0018B9E7 /* YLTabbarController.m in Sources */,
+				0790AE2F2696CBD4001E98A0 /* WLAuthorBgView.m in Sources */,
 				3640E933219E5F250077FF1F /* WLEvaluateController.m in Sources */,
 				07A73DA62535985B0028344B /* WLReadImageColorController.m in Sources */,
 				36B516F3212EC85500FD0FA8 /* WLNewTextView.m in Sources */,
@@ -2467,7 +2462,6 @@
 				009A1B3220E6208300C0A58D /* WLTextView.m in Sources */,
 				0765C6FA207CE6E20085EB3A /* NSData+ImageContentType.m in Sources */,
 				0765C6FE207CE6E20085EB3A /* SDImageCacheConfig.m in Sources */,
-				003EBE1920D0F04500DD7815 /* LaunchController.m in Sources */,
 				0010F22720F4966E00F272EB /* WLBookView.m in Sources */,
 				3607C896212FE3BF00298C6C /* CreationModel.m in Sources */,
 				00469AF620F8938D0068636F /* WLShowImageController.m in Sources */,

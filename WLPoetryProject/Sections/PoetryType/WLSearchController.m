@@ -157,12 +157,10 @@
     self.keywordString = textField.text;
     self.hasNext = YES;
     
-    if (!self.mainTableView.mj_footer) {
-        self.mainTableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
-    }
 
     [[NetworkHelper shareHelper] requestPoetryWithKeyword:textField.text withPage:self.currentPage withCompletion:^(BOOL success, NSDictionary *dic, NSError *error) {
         if (success) {
+
             NSString *codeString = [NSString stringWithFormat:@"%@",[dic objectForKey:@"retCode"]];
             if ([codeString isEqualToString:@"1000"]) {
                 //清空原数据
@@ -177,6 +175,10 @@
                 [self removeRepeatItem];//数据去重
 
                 dispatch_async(dispatch_get_main_queue(), ^{
+                    if (!self.mainTableView.mj_footer) {
+                        self.mainTableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
+                    }
+
                     [self loadCustomView];
                 });
                 
@@ -271,7 +273,6 @@
 
     [[NetworkHelper shareHelper] requestPoetryWithKeyword:self.keywordString withPage:self.currentPage withCompletion:^(BOOL success, NSDictionary *dic, NSError *error) {
         self.isRequesting = NO;
-        [self.mainTableView.mj_footer endRefreshing];
 
         if (success) {
             NSString *codeString = [NSString stringWithFormat:@"%@",[dic objectForKey:@"retCode"]];
@@ -292,6 +293,8 @@
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self loadCustomView];
+                    [self.mainTableView.mj_footer endRefreshing];
+
                 });
                 
             }else{
@@ -358,16 +361,6 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
-{
-    return 0.01;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    return 0.01;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

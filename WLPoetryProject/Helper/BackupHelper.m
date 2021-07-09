@@ -471,6 +471,8 @@
     else if ([source isEqualToString:@"26"]){return @"明诗";}
     else if ([source isEqualToString:@"27"]){return @"古代词";}
     else if ([source isEqualToString:@"28"]){return @"明词";}
+    else if ([source isEqualToString:@"29"]){return @"元诗";}
+    else if ([source isEqualToString:@"30"]){return @"古体诗";}
     else if ([source isEqualToString:@"99"]){return @"其他";}
     else if ([source isEqualToString:@"100"]){return @"学而篇";}
     else if ([source isEqualToString:@"101"]){return @"为政篇";}

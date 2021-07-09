@@ -7,6 +7,8 @@
 //
 
 #import "WLHomePoetryCell.h"
+#import "WLAuthorBgView.h"
+
 static const CGFloat lineWidth = 2;//四条线的lineW
 static const CGFloat leftSpace = 15;//左右线条距离父视图的左右距离
 static const CGFloat topSpce = 15;//上下线条距离父视图的底部距离
@@ -24,6 +26,10 @@ static const CGFloat nameHeight = 25;//名字、作者等信息的高度
  *  诗词的作者
  **/
 @property (nonatomic, strong) UIImageView *authorImageView;
+/**
+ *  诗词作者的背景
+ **/
+@property (nonatomic,strong) WLAuthorBgView *authorBgView;
 /**
  *  作者的姓
  **/
@@ -113,10 +119,10 @@ static const CGFloat nameHeight = 25;//名字、作者等信息的高度
 //        }else{
             [self.bgView mas_updateConstraints:^(MASConstraintMaker *make) {
                 
-                make.leading.equalTo(self.mas_leading).offset(leftSpace);
+                make.leading.equalTo(self.contentView.mas_leading).offset(leftSpace);
                 make.top.equalTo(self.mas_top).offset(0);
                 make.bottom.equalTo(self.mas_bottom).offset(0);
-                make.trailing.equalTo(self.mas_trailing).offset(-leftSpace);
+                make.trailing.equalTo(self.contentView.mas_trailing).offset(-leftSpace);
                 
                 
             }];
@@ -134,7 +140,9 @@ static const CGFloat nameHeight = 25;//名字、作者等信息的高度
     
     self.authorLabel.textColor = RGBCOLOR(40, 40, 40, 1.0);
     
-    self.authorImageView.image = [UIImage imageNamed:@"homeAuthorBg"];
+//    self.authorImageView.image = [UIImage imageNamed:@"homeAuthorBg"];
+    self.authorBgView.mainColor = [UIColor blackColor];
+    [self.authorBgView configureColorView];
     
     self.authorLastName.numberOfLines = 1;
     
@@ -149,21 +157,22 @@ static const CGFloat nameHeight = 25;//名字、作者等信息的高度
 {
     
     //设置UI布局约束
-    [self.authorImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.top.equalTo(self.bgView.mas_top).offset(10);//元素顶部约束
-        make.trailing.equalTo(self.bgView.mas_trailing).offset(-10);//元素右侧侧约束
-        make.width.mas_equalTo(40);//元素宽度
-        make.height.mas_equalTo(40);//元素高度
-    }];
+    
+//    [self.authorImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//        make.top.equalTo(self.bgView.mas_top).offset(10);//元素顶部约束
+//        make.trailing.equalTo(self.bgView.mas_trailing).offset(-10);//元素右侧侧约束
+//        make.width.mas_equalTo(40);//元素宽度
+//        make.height.mas_equalTo(40);//元素高度
+//    }];
     
     //设置UI布局约束
     [self.authorLastName mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.top.equalTo(self.authorImageView.mas_top).offset(8);//元素顶部约束
-        make.leading.equalTo(self.authorImageView.mas_leading).offset(8);//元素左侧约束
-        make.trailing.equalTo(self.authorImageView.mas_trailing).offset(-8);//元素右侧约束
-        make.bottom.equalTo(self.authorImageView.mas_bottom).offset(-8);//元素底部约束
+        make.top.equalTo(self.authorBgView.mas_top).offset(8);//元素顶部约束
+        make.leading.equalTo(self.authorBgView.mas_leading).offset(8);//元素左侧约束
+        make.trailing.equalTo(self.authorBgView.mas_trailing).offset(-8);//元素右侧约束
+        make.bottom.equalTo(self.authorBgView.mas_bottom).offset(-8);//元素底部约束
         
     }];
     
@@ -172,7 +181,7 @@ static const CGFloat nameHeight = 25;//名字、作者等信息的高度
         
         make.leading.equalTo(self.bgView.mas_leading).offset(itemSpace);
         make.top.equalTo(self.bgView.mas_top).offset(itemSpace);
-        make.trailing.equalTo(self.authorImageView.mas_leading).offset(-itemSpace);
+        make.trailing.equalTo(self.authorBgView.mas_leading).offset(-itemSpace);
         make.height.mas_equalTo(nameHeight);
         
     }];
@@ -233,7 +242,7 @@ static const CGFloat nameHeight = 25;//名字、作者等信息的高度
     if (!_bgView) {
         _bgView = [[UIView alloc]init];
         _bgView.layer.cornerRadius = 4.f;
-        [self addSubview:_bgView];
+        [self.contentView addSubview:_bgView];
     }
     return _bgView;
 }
@@ -269,6 +278,13 @@ static const CGFloat nameHeight = 25;//名字、作者等信息的高度
     return _authorImageView;
 }
 
+- (WLAuthorBgView *)authorBgView{
+    if (!_authorBgView) {
+        _authorBgView = [[WLAuthorBgView alloc]initWithFrame:CGRectMake(PhoneScreen_WIDTH-leftSpace*2-10-40, 10, 40, 40)];
+        [self.bgView addSubview:_authorBgView];
+    }
+    return _authorBgView;
+}
 - (UILabel*)authorLastName
 {
     if (!_authorLastName) {

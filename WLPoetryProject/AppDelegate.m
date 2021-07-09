@@ -8,12 +8,10 @@
 
 #import "AppDelegate.h"
 #import "YLTabbarController.h"
-#import "LeadViewController.h"
 #import "BaseNavigationController.h"
 #import "YLHomeViewController.h"
 #import "PoetryModel.h"
 #import "WLSaveLocalHelper.h"
-#import "LaunchController.h"
 #import "WLLaunchView.h"
 
 #import <ShareSDK/ShareSDK.h>
@@ -173,7 +171,7 @@
     
     self.window.rootViewController = self.tabbarVC;
     
-    [self loadLaunchImage];
+//    [self loadLaunchImage];
     
 }
 
