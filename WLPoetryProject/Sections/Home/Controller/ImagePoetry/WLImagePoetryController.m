@@ -10,7 +10,7 @@
 #import "WLImageSearchController.h"
 #import "PoetryModel.h"
 #import "WLTextView.h"
-
+#import "WLImagePoetrySelectController.h"
 @interface WLImagePoetryController ()
 /**
  *  内容view
@@ -44,8 +44,14 @@
  *  排版的勾选框
  **/
 @property (nonatomic,strong) UIImageView *checkBox;
-
-
+/**
+ *  编辑搜索后的内容
+ **/
+@property (nonatomic,strong) UIButton *editContentBtn;
+/**
+ *  原文案，编辑后的文案
+ **/
+@property (nonatomic,copy) NSString *originText,*editText;
 @end
 
 @implementation WLImagePoetryController
@@ -142,7 +148,6 @@
         [self.inputTextView resignFirstResponder];
     }
     
-    
     WLImageSearchController *searchVC = [[WLImageSearchController alloc]init];
     searchVC.hidesBottomBarWhenPushed = YES;
     [searchVC selectPoetryWithBlock:^(PoetryModel *model) {
@@ -154,16 +159,36 @@
 
 - (void)finishEditContentWithBlock:(ImagePoetryFinishBlock)block
 {
-    
     if (block) {
         self.finishBlock = block;
     }
+}
+
+- (void)editContentAction:(UIButton*)sender{
+    WLImagePoetrySelectController *vc = [[WLImagePoetrySelectController alloc]init];
+    vc.contentString = self.inputTextView.text;
+    [vc loadPoetrySelectBlock:^(NSString *finialString) {
+        self.editText = finialString;
+        self.inputTextView.text = finialString;
+    }];
+    
+    vc.originString = self.originText;//原文案
+    vc.contentString = self.editText;//编辑后的文案
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - 从搜素的结果中选中后
 - (void)selSearchPoetry:(PoetryModel*)model
 {
     self.inputTextView.text = model.content;
+    self.originText = model.content;
+    self.editText = model.content;
+    
+    if (self.inputTextView.text.length > 0) {
+        self.editContentBtn.hidden = NO;
+    }else{
+        self.editContentBtn.hidden = YES;
+    }
 }
 
 #pragma mark - 点击排版按钮
@@ -253,7 +278,7 @@
         _inputTextView.font = [UIFont systemFontOfSize:16.f];
         _inputTextView.textColor = RGBCOLOR(200, 200, 200, 1.0);
         _inputTextView.editable = NO;
-        _inputTextView.userInteractionEnabled = NO;
+//        _inputTextView.userInteractionEnabled = NO;
         [self.view addSubview:_inputTextView];
         
         //设置UI布局约束
@@ -264,6 +289,26 @@
             make.trailing.equalTo(self.naviView.mas_trailing).offset(-15);//元素右侧约束
             make.height.mas_equalTo(160);//元素高度
         }];
+        
+        _editContentBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_editContentBtn addTarget:self action:@selector(editContentAction:) forControlEvents:UIControlEventTouchUpInside];
+        _editContentBtn.layer.cornerRadius = 20;
+        _editContentBtn.layer.borderColor = NavigationColor.CGColor;
+        _editContentBtn.layer.borderWidth = 2;
+        [self.view addSubview:_editContentBtn];
+        _editContentBtn.hidden = YES;
+        //元素的布局
+        [_editContentBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.trailing.equalTo(_inputTextView.mas_trailing).offset(-12);
+            make.bottom.equalTo(_inputTextView.mas_bottom).offset(-12);
+            make.width.mas_equalTo(40);
+            make.height.mas_equalTo(40);
+        }];
+        
+        UIImageView *image = [[UIImageView alloc]init];
+        image.frame = CGRectMake(12, 12, 16, 16);
+        image.image = [UIImage imageNamed:@"editPoetryList"];
+        [_editContentBtn addSubview:image];
     }
     return _inputTextView;
 }

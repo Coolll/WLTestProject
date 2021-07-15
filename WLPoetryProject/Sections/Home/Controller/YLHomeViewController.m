@@ -90,104 +90,9 @@
     self.networkHelper = [NetworkHelper shareHelper];
 
     [self loadCustomData];
-//    [self checkLocalData];//加载本地数据
-//    [self checkNetworkAndDealImage];
 
-//    [[BackupHelper shareInstance] updateRecommendPoetry];//更新热门诗词
+    [[BackupHelper shareInstance] updateRecommendPoetry];//更新热门诗词
 
-//    [[BackupHelper shareInstance] uploadAllPoetry];//备份诗词
-//    [self uploadAllImages];
-    
- 
-    
-
-    
-
-}
-
-
-#pragma mark - 图片处理
-- (void)checkNetworkAndDealImage{
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        if ([WLRequestHelper defaultHelper].isWIFI) {
-            NSLog(@"WIFI，可以预下载");
-            //[self loadAllImageData];
-        }else{
-            NSLog(@"非WIFI，结束了");
-        }
-    });
-   
-}
-- (void)loadAllImageData
-{
-    
-    //本地已加载的图片状态
-    self.imageStateDic = [WLSaveLocalHelper loadObjectForKey:@"AllImageStateDic"];
-    //如果不存在，则创建一个
-    if(!self.imageStateDic){
-        [WLSaveLocalHelper saveObject:[NSDictionary dictionary] forKey:@"AllImageStateDic"];
-    }
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        //空数组，用来加载网络上的图片URL
-        NSMutableArray *arr = [NSMutableArray array];
-        __weak __typeof(self)weakSelf = self;
-        
-        [[AppConfig config] loadAllBgImageWithBlock:^(NSDictionary *dic,NSDictionary *originDic,NSError *error) {
-            //添加图片url
-            [arr addObjectsFromArray:originDic.allValues];
-            [arr addObjectsFromArray:dic.allValues];
-            //需要额外加载的图片URL数组
-            NSMutableArray *mutArray = [NSMutableArray array];
-            
-            for (NSInteger i = 0; i<arr.count; i++) {
-                //拿到图片URL
-                NSString *urlString = [arr objectAtIndex:i];
-                //获取本地加载过的状态字符串，如果找到了状态字符串，且为1，则无需再加载
-                NSString *stateString = [NSString stringWithFormat:@"%@",[weakSelf.imageStateDic valueForKey:urlString]];
-                if(![stateString isEqualToString:@"1"]){
-                    //如果没有加载过，或者没有成功加载，则需要加载
-                    [mutArray addObject:urlString];
-                }
-                
-            }
-            
-            //如果全部图片都加载过，则返回
-            if(mutArray.count == 0){return;}
-            
-            UIImageView *view = [[UIImageView alloc]init];
-            //递归，加载图片
-            [weakSelf loadImageWithArray:mutArray withCurrentIndex:0 withImageView:view];
-
-            }];
-            
-    });
-    
-}
-
-- (void)loadImageWithArray:(NSArray*)imageArray withCurrentIndex:(NSInteger)index withImageView:(UIImageView*)imageView
-{
-    if(index < imageArray.count){
-        
-        [imageView sd_setImageWithURL:[NSURL URLWithString:[imageArray objectAtIndex:index]] placeholderImage:nil options:SDWebImageLowPriority completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
-            
-            NSLog(@"完成加载url:%@",imageURL.absoluteString);
-
-            NSDictionary *dict = [WLSaveLocalHelper loadObjectForKey:@"AllImageStateDic"];
-            NSMutableDictionary *mutDic = [NSMutableDictionary dictionaryWithDictionary:dict];
-            if(image){
-                [mutDic setObject:@"1" forKey:imageURL.absoluteString];
-            }else{
-                [mutDic setObject:@"0" forKey:imageURL.absoluteString];
-            }
-            //此张图片完成加载后，保存到本地
-            [WLSaveLocalHelper saveObject:[mutDic copy] forKey:@"AllImageStateDic"];
-
-            [self loadImageWithArray:imageArray withCurrentIndex:(index+1) withImageView:imageView];
-
-        }];
-    }else{
-        imageView = nil;
-    }
 }
 
 
@@ -240,13 +145,12 @@
 
 - (void)requestHomeHotPoetry{
     __weak __typeof(self)weakSelf = self;
-    [self.networkHelper requestHotPoetry:0 count:15 withCompletion:^(BOOL success, NSDictionary *dic, NSError *error) {
+    [self.networkHelper requestHotPoetry:0 count:20 withCompletion:^(BOOL success, NSDictionary *dic, NSError *error) {
         
         __strong __typeof(weakSelf)strongSelf = weakSelf;
         NSString *codeString = [NSString stringWithFormat:@"%@",[dic objectForKey:@"retCode"]];
         if ([codeString isEqualToString:@"1000"]) {
             NSArray *dataArr = [dic objectForKey:@"data"];
-            NSMutableDictionary *indexDic = [NSMutableDictionary dictionary];
             NSMutableArray *randomArr = [NSMutableArray array];
            NSMutableArray *finalArr = [self loadRandomItemWithOriginArr:[dataArr mutableCopy] withRandomArr:randomArr];
             
@@ -254,7 +158,6 @@
                 PoetryModel *model = [[PoetryModel alloc]initPoetryWithDictionary:poetryDic];
                 [strongSelf.poetryArray addObject:model];
             }
-            indexDic = nil;
             if (dataArr && [dataArr isKindOfClass:[NSArray class]] && dataArr.count > 0 ) {
                 strongSelf.hasNext = YES;
             }
@@ -302,17 +205,15 @@
 - (void)loadTableHeaderAndFooter
 {
     self.mainTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(refreshHomeData)];
-//    self.mainTableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
 }
 
 - (void)refreshHomeData{
     NSLog(@"刷新数据了");
     __weak __typeof(self)weakSelf = self;
-    [self.networkHelper requestHotPoetry:0 count:15 withCompletion:^(BOOL success, NSDictionary *dic, NSError *error) {
+    [self.networkHelper requestHotPoetry:0 count:20 withCompletion:^(BOOL success, NSDictionary *dic, NSError *error) {
         __strong __typeof(weakSelf)strongSelf = weakSelf;
         [strongSelf.mainTableView.mj_header endRefreshing];
         
-//        NSLog(@"热门诗词：%@",dic);
         NSString *codeString = [NSString stringWithFormat:@"%@",[dic objectForKey:@"retCode"]];
         if ([codeString isEqualToString:@"1000"]) {
             [strongSelf.poetryArray removeAllObjects];
@@ -320,15 +221,6 @@
             NSMutableArray *randomArr = [NSMutableArray array];
            NSMutableArray *finalArr = [self loadRandomItemWithOriginArr:[dataArr mutableCopy] withRandomArr:randomArr];
             
-//            for (int i =0 ;i <indexDic.allKeys.count;i++) {
-//                NSInteger index = [[indexDic objectForKey:[indexDic.allKeys objectAtIndex:i]] integerValue];
-//                NSDictionary *poetryDic = [dataArr objectAtIndex:index];
-//                PoetryModel *model = [[PoetryModel alloc]initPoetryWithDictionary:poetryDic];
-//                [model loadFirstLineString];
-//                [strongSelf.poetryArray addObject:model];
-//                poetryDic = nil;
-//            }
-
             for (NSDictionary *poetryDic in finalArr) {
                 PoetryModel *model = [[PoetryModel alloc]initPoetryWithDictionary:poetryDic];
                 [model loadFirstLineString];
@@ -376,10 +268,7 @@
     }
     self.isBackgroundRequesting = YES;
     NSLog(@"加载更多:%ld",self.currentCount);
-    
-    //展示更多数据
-//    self.currentCount = self.finishLoadingCount+1;
-    
+        
     [self requestHotPoetryMoreData];
 }
 
@@ -389,25 +278,12 @@
     NSInteger count = self.poetryArray.count;
     __weak __typeof(self)weakSelf = self;
     
-    [self.networkHelper requestHotPoetry:(count+1) count:15 withCompletion:^(BOOL success, NSDictionary *dic, NSError *error) {
+    [self.networkHelper requestHotPoetry:(count+1) count:20 withCompletion:^(BOOL success, NSDictionary *dic, NSError *error) {
         
         weakSelf.isBackgroundRequesting = NO;
         NSString *codeString = [NSString stringWithFormat:@"%@",[dic objectForKey:@"retCode"]];
         if ([codeString isEqualToString:@"1000"]) {
             NSArray *dataArr = [dic objectForKey:@"data"];
-//            NSMutableArray *lastArray = [NSMutableArray array];
-//            if (weakSelf.poetryArray.count >= 8) {
-//                for (int i = 8; i > 0; i--) {
-//                    PoetryModel *lastModel = [weakSelf.poetryArray objectAtIndex:(weakSelf.poetryArray.count-i)];
-//                    [lastArray addObject:lastModel];
-//
-//                }
-//            }
-            
-//            NSMutableDictionary *indexDic = [NSMutableDictionary dictionary];
-//            for (int a = 0; a < dataArr.count; a++) {
-//                [indexDic setValue:[NSString stringWithFormat:@"%d",a] forKey:[NSString stringWithFormat:@"%d",a]];
-//            }
             NSMutableArray *randomArr = [NSMutableArray array];
 
             NSMutableArray *finalArr = [self loadRandomItemWithOriginArr:[dataArr mutableCopy] withRandomArr:randomArr];
@@ -417,38 +293,6 @@
                  [model loadFirstLineString];
                  [weakSelf.poetryArray addObject:model];
              }
-//                NSInteger index = [[indexDic objectForKey:[indexDic.allKeys objectAtIndex:i]] integerValue];
-//                NSDictionary *poetryDic = [dataArr objectAtIndex:index];
-//                PoetryModel *model = [[PoetryModel alloc]initPoetryWithDictionary:poetryDic];
-//                [model loadFirstLineString];
-//                BOOL contain = NO;
-//                for (PoetryModel *lastModel in lastArray) {
-//                    if ([lastModel.poetryID isEqualToString:model.poetryID]) {
-//                        contain = YES;
-//                        break;
-//                    }
-//                }
-//                if (!contain) {
-//                    [weakSelf.poetryArray addObject:model];
-//                }
-
-//                poetryDic = nil;
-//            }
-
-//            for (NSDictionary *poetryDic in dataArr) {
-//                PoetryModel *model = [[PoetryModel alloc]initPoetryWithDictionary:poetryDic];
-//                BOOL contain = NO;
-//                for (PoetryModel *lastModel in lastArray) {
-//                    if ([lastModel.poetryID isEqualToString:model.poetryID]) {
-//                        contain = YES;
-//                        break;
-//                    }
-//                }
-//                if (!contain) {
-//                    [weakSelf.poetryArray addObject:model];
-//                }
-//            }
-            
             if (dataArr && [dataArr isKindOfClass:[NSArray class]] && dataArr.count > 0 ) {
                 self.hasNext = YES;
             }

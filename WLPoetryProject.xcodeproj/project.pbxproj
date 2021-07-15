@@ -205,6 +205,12 @@
 		0785076820B2EFF20030CD98 /* songPoetry_four.json in Resources */ = {isa = PBXBuildFile; fileRef = 0785075F20B2EFF20030CD98 /* songPoetry_four.json */; };
 		0785076920B2EFF20030CD98 /* songPoetry_ten.json in Resources */ = {isa = PBXBuildFile; fileRef = 0785076020B2EFF20030CD98 /* songPoetry_ten.json */; };
 		0785076A20B2EFF20030CD98 /* songPoetry_six.json in Resources */ = {isa = PBXBuildFile; fileRef = 0785076120B2EFF20030CD98 /* songPoetry_six.json */; };
+		0787D952269FCDE50072D178 /* editPoetryList.png in Resources */ = {isa = PBXBuildFile; fileRef = 0787D951269FCDE50072D178 /* editPoetryList.png */; };
+		0787D955269FD8440072D178 /* WLImagePoetrySelectController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0787D954269FD8440072D178 /* WLImagePoetrySelectController.m */; };
+		0787D95A269FDCA50072D178 /* WLPoetrySelectModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0787D959269FDCA50072D178 /* WLPoetrySelectModel.m */; };
+		0787D95D269FE07E0072D178 /* WLPoetrySelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0787D95C269FE07E0072D178 /* WLPoetrySelectCell.m */; };
+		0787D95F269FE9D70072D178 /* selectPoetryContent.png in Resources */ = {isa = PBXBuildFile; fileRef = 0787D95E269FE9D70072D178 /* selectPoetryContent.png */; };
+		0787D96126A004AD0072D178 /* unselectPoetryContent.png in Resources */ = {isa = PBXBuildFile; fileRef = 0787D96026A004AD0072D178 /* unselectPoetryContent.png */; };
 		078DB1E1225722C2007E6EA8 /* WLLunYuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 078DB1E0225722C2007E6EA8 /* WLLunYuController.m */; };
 		078DB1E42257279B007E6EA8 /* WLLunYuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 078DB1E32257279B007E6EA8 /* WLLunYuCell.m */; };
 		0790AE2F2696CBD4001E98A0 /* WLAuthorBgView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0790AE2E2696CBD4001E98A0 /* WLAuthorBgView.m */; };
@@ -686,6 +692,15 @@
 		0785075F20B2EFF20030CD98 /* songPoetry_four.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = songPoetry_four.json; sourceTree = "<group>"; };
 		0785076020B2EFF20030CD98 /* songPoetry_ten.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = songPoetry_ten.json; sourceTree = "<group>"; };
 		0785076120B2EFF20030CD98 /* songPoetry_six.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = songPoetry_six.json; sourceTree = "<group>"; };
+		0787D951269FCDE50072D178 /* editPoetryList.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = editPoetryList.png; sourceTree = "<group>"; };
+		0787D953269FD8440072D178 /* WLImagePoetrySelectController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLImagePoetrySelectController.h; sourceTree = "<group>"; };
+		0787D954269FD8440072D178 /* WLImagePoetrySelectController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLImagePoetrySelectController.m; sourceTree = "<group>"; };
+		0787D958269FDCA50072D178 /* WLPoetrySelectModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLPoetrySelectModel.h; sourceTree = "<group>"; };
+		0787D959269FDCA50072D178 /* WLPoetrySelectModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLPoetrySelectModel.m; sourceTree = "<group>"; };
+		0787D95B269FE07E0072D178 /* WLPoetrySelectCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLPoetrySelectCell.h; sourceTree = "<group>"; };
+		0787D95C269FE07E0072D178 /* WLPoetrySelectCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLPoetrySelectCell.m; sourceTree = "<group>"; };
+		0787D95E269FE9D70072D178 /* selectPoetryContent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = selectPoetryContent.png; sourceTree = "<group>"; };
+		0787D96026A004AD0072D178 /* unselectPoetryContent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unselectPoetryContent.png; sourceTree = "<group>"; };
 		078DB1DF225722C2007E6EA8 /* WLLunYuController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLLunYuController.h; sourceTree = "<group>"; };
 		078DB1E0225722C2007E6EA8 /* WLLunYuController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLLunYuController.m; sourceTree = "<group>"; };
 		078DB1E22257279B007E6EA8 /* WLLunYuCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLLunYuCell.h; sourceTree = "<group>"; };
@@ -939,6 +954,8 @@
 		0010F21820F4911500F272EB /* ImagePoetry */ = {
 			isa = PBXGroup;
 			children = (
+				0787D956269FDC940072D178 /* Model */,
+				0787D957269FDC940072D178 /* View */,
 				0010F21920F4911500F272EB /* WLImageListController.h */,
 				0010F21E20F4911500F272EB /* WLImageListController.m */,
 				0010F21F20F4911500F272EB /* WLImageController.h */,
@@ -947,6 +964,8 @@
 				0010F21A20F4911500F272EB /* WLImagePoetryController.m */,
 				0010F21C20F4911500F272EB /* WLImageSearchController.h */,
 				0010F22020F4911500F272EB /* WLImageSearchController.m */,
+				0787D953269FD8440072D178 /* WLImagePoetrySelectController.h */,
+				0787D954269FD8440072D178 /* WLImagePoetrySelectController.m */,
 			);
 			path = ImagePoetry;
 			sourceTree = "<group>";
@@ -1048,6 +1067,9 @@
 		073864F220E12D8B0005BE61 /* ForImage */ = {
 			isa = PBXGroup;
 			children = (
+				0787D96026A004AD0072D178 /* unselectPoetryContent.png */,
+				0787D95E269FE9D70072D178 /* selectPoetryContent.png */,
+				0787D951269FCDE50072D178 /* editPoetryList.png */,
 				363054C521A3B61E0084FD5B /* tipImage.png */,
 				075AFEB120E525B9005ADDB9 /* searchInList.png */,
 				073864F320E12D8B0005BE61 /* poetryContent.png */,
@@ -1519,6 +1541,24 @@
 				0785075520B2EDB30030CD98 /* songPoetry_empty.json */,
 			);
 			path = SongPoetry;
+			sourceTree = "<group>";
+		};
+		0787D956269FDC940072D178 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0787D958269FDCA50072D178 /* WLPoetrySelectModel.h */,
+				0787D959269FDCA50072D178 /* WLPoetrySelectModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		0787D957269FDC940072D178 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0787D95B269FE07E0072D178 /* WLPoetrySelectCell.h */,
+				0787D95C269FE07E0072D178 /* WLPoetrySelectCell.m */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		079568EC20726D0B0097C26D = {
@@ -2215,11 +2255,13 @@
 				07F3E30E20D2C0FC00E7BAF7 /* headerUnlogin@3x.png in Resources */,
 				071609A920A1C15400904C69 /* gradePoetry_1.json in Resources */,
 				360E6731219442ED00AD56BF /* class_4.png in Resources */,
+				0787D96126A004AD0072D178 /* unselectPoetryContent.png in Resources */,
 				07567B1F207A02EC0018B9E7 /* MJRefresh.bundle in Resources */,
 				07F73C0B208ACD9A00F7D8B3 /* tabbarLine@2x.png in Resources */,
 				07F3E31520D2C0FC00E7BAF7 /* lineImage@2x.png in Resources */,
 				07F3E30D20D2C0FC00E7BAF7 /* headerUnlogin@2x.png in Resources */,
 				07F73C02208ACD9A00F7D8B3 /* normal_circle@2x.png in Resources */,
+				0787D952269FCDE50072D178 /* editPoetryList.png in Resources */,
 				360E672A219442ED00AD56BF /* class_0.png in Resources */,
 				07F3E31420D2C0FC00E7BAF7 /* clearNavi.png in Resources */,
 				3635751A21AE7763009524C7 /* userClassInfo.png in Resources */,
@@ -2264,6 +2306,7 @@
 				00F9516620D4D1D80039D7C5 /* settingArrow.png in Resources */,
 				076D28F72531B65D00AB90E0 /* scoreClothes.png in Resources */,
 				071571FA21038354005C53C4 /* closeTip.png in Resources */,
+				0787D95F269FE9D70072D178 /* selectPoetryContent.png in Resources */,
 				0716E0A32537E0AF00780A9D /* configureSong.json in Resources */,
 				000110AA20A44BD2001B2B55 /* gradePoetry_8_one.json in Resources */,
 				0716E0A92537E0AF00780A9D /* configureTang.json in Resources */,
@@ -2347,6 +2390,7 @@
 				07567B81207A02EC0018B9E7 /* WLMyHeaderTableViewCell.m in Sources */,
 				07567B7D207A02EC0018B9E7 /* WLTextField.m in Sources */,
 				07567B7F207A02EC0018B9E7 /* WLLoginViewController.m in Sources */,
+				0787D95D269FE07E0072D178 /* WLPoetrySelectCell.m in Sources */,
 				07E7C30F20CC090F007CA827 /* WLTypeListCell.m in Sources */,
 				0715FF0820C564790096C60E /* WLSearchController.m in Sources */,
 				0716E0962536A3BA00780A9D /* WLColorPickerView.m in Sources */,
@@ -2401,6 +2445,7 @@
 				07567B10207A02EB0018B9E7 /* MyMBProgress.m in Sources */,
 				07FEFC7B254AA9EF00C95B56 /* WLReadImageEffectController.m in Sources */,
 				0765C712207CE6E20085EB3A /* UIImageView+WebCache.m in Sources */,
+				0787D95A269FDCA50072D178 /* WLPoetrySelectModel.m in Sources */,
 				0765C70A207CE6E20085EB3A /* SDWebImageTransition.m in Sources */,
 				07567A9E207A02EB0018B9E7 /* BaseViewController.m in Sources */,
 				0765C714207CE6E20085EB3A /* UIView+WebCacheOperation.m in Sources */,
@@ -2452,6 +2497,7 @@
 				0795690B20726D0B0097C26D /* main.m in Sources */,
 				0765C70F207CE6E20085EB3A /* UIImage+MultiFormat.m in Sources */,
 				0765C6F8207CE6E20085EB3A /* MKAnnotationView+WebCache.m in Sources */,
+				0787D955269FD8440072D178 /* WLImagePoetrySelectController.m in Sources */,
 				07A73DA52535985B0028344B /* WLReadImageController.m in Sources */,
 				3616E7952192971D0014843F /* WLRecitePoetryCell.m in Sources */,
 				07567B19207A02EB0018B9E7 /* MJRefreshBackGifFooter.m in Sources */,

@@ -38,6 +38,10 @@
  **/
 @property (nonatomic,copy) NSString *keywordString;
 /**
+ *  上次的关键词，如果和当前不一样，要清空数据重新加载
+ **/
+@property (nonatomic,copy) NSString *lastWord;
+/**
  *  首次创建
  **/
 @property (nonatomic,assign) BOOL isFirstLoad;
@@ -49,7 +53,6 @@
  *  是否还有诗词
  **/
 @property (nonatomic,assign) BOOL hasNext;
-
 
 
 @end

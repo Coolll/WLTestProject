@@ -318,7 +318,6 @@ static const CGFloat topSpace = 15;//诗句与标题的上间距
     }
     
     self.mainTable.backgroundColor = [UIColor clearColor];
-//    self.mainTable.backgroundColor = RGBCOLOR(243, 238, 214, 1.0);
 }
 
 - (void)clickLikeWithBlock:(LikeBlock)block
